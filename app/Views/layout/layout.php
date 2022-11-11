@@ -10,14 +10,13 @@
         <link rel="shortcut icon" href="assets/images/favicon.ico">
 
 		<!-- App css -->
-		<link href="https://coderthemes.com/codefox/layouts/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
-		<link href="https://coderthemes.com/codefox/layouts/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+        <?= link_tag('css/bootstrap.min.css'); ?>
+        <?= link_tag('css/app.min.css'); ?> 
 
-		<link href="https://coderthemes.com/codefox/layouts/assets/css/bootstrap-dark.min.css" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
-		<link href="https://coderthemes.com/codefox/layouts/assets/css/app-dark.min.css" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
+         
 
 		<!-- icons -->
-		<link href="https://coderthemes.com/codefox/layouts/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <?= link_tag('css/icons.min.css'); ?>
 
     </head>
 
@@ -26,123 +25,111 @@
 
         <!-- Begin page -->
         <div id="wrapper">
-
             <!-- Topbar Start -->
-<div class="navbar-custom">
-    <div class="container-fluid">
-        <ul class="list-unstyled topnav-menu float-end mb-0"> 
-    
-            <li class="dropdown d-inline-block d-lg-none">
-                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                    <i class="fe-search noti-icon"></i>
-                </a>
-                <div class="dropdown-menu dropdown-lg dropdown-menu-end p-0">
-                    <form class="p-3">
-                        <input type="text" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
-                    </form>
-                </div>
-            </li>
-    
-            <li class="dropdown d-none d-lg-inline-block">
-                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="fullscreen" href="#">
-                    <i class="fe-maximize noti-icon"></i>
-                </a>
-            </li>
-     
-             
-            <li class="dropdown notification-list topbar-dropdown">
-                <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                    <img src="https://coderthemes.com/codefox/layouts/assets/images/users/user-1.jpg" alt="user-image" class="rounded-circle">
-                    <span class="pro-user-name ms-1">
-                        <?= auth()->user()->username; ?> <i class="mdi mdi-chevron-down"></i> 
-                    </span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
-                    <!-- item-->
-                    <div class="dropdown-header noti-title">
-                        <h6 class="text-overflow m-0">Welcome <?= auth()->user()->username; ?>!</h6>
+            <div class="navbar-custom">
+                <div class="container-fluid">
+                    <ul class="list-unstyled topnav-menu float-end mb-0">  
+                
+                        <li class="dropdown d-none d-lg-inline-block">
+                            <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="fullscreen" href="#">
+                                <i class="fe-maximize noti-icon"></i>
+                            </a>
+                        </li>
+                
+                        
+                        <li class="dropdown notification-list topbar-dropdown">
+                            <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <img src="https://coderthemes.com/codefox/layouts/assets/images/users/user-1.jpg" alt="user-image" class="rounded-circle">
+                                <span class="pro-user-name ms-1">
+                                    <?= auth()->user()->username; ?> <i class="mdi mdi-chevron-down"></i> 
+                                </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
+                                <!-- item-->
+                                <div class="dropdown-header noti-title">
+                                    <h6 class="text-overflow m-0">Welcome <?= auth()->user()->username; ?>!</h6>
+                                </div>
+                
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="fe-user"></i>
+                                    <span>My Account</span>
+                                </a>
+                
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="fe-settings"></i>
+                                    <span>Settings</span>
+                                </a>
+                
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="fe-lock"></i>
+                                    <span>Lock Screen</span>
+                                </a>
+                
+                                <div class="dropdown-divider"></div>
+                
+                                <!-- item-->
+                                <a href="<?= base_url('logout') ?>" class="dropdown-item notify-item">
+                                    <i class="fe-log-out"></i>
+                                    <span>Logout</span>
+                                </a>
+                
+                            </div>
+                        </li>
+                
+                
+                    </ul>
+                
+                    <!-- LOGO -->
+                    <div class="logo-box">
+                        <a href="/" class="logo logo-dark text-center">
+                            <span class="logo-sm">
+                                <img src="https://coderthemes.com/codefox/layouts/assets/images/logo-sm.png" alt="" height="22">
+                                <!-- <span class="logo-lg-text-light">Codefox</span> -->
+                            </span>
+                            <span class="logo-lg">
+                                <img src="https://coderthemes.com/codefox/layouts/assets/images/logo-dark.png" alt="" height="20">
+                                <!-- <span class="logo-lg-text-light">U</span> -->
+                            </span>
+                        </a>
+                
+                        <a href="/" class="logo logo-light text-center">
+                            <span class="logo-sm">
+                                <img src="https://coderthemes.com/codefox/layouts/assets/images/logo-sm.png" alt="" height="22">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="https://coderthemes.com/codefox/layouts/assets/images/logo-light.png" alt="" height="20">
+                            </span>
+                        </a>
                     </div>
-    
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="fe-user"></i>
-                        <span>My Account</span>
-                    </a>
-    
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="fe-settings"></i>
-                        <span>Settings</span>
-                    </a>
-    
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="fe-lock"></i>
-                        <span>Lock Screen</span>
-                    </a>
-    
-                    <div class="dropdown-divider"></div>
-    
-                    <!-- item-->
-                    <a href="<?php echo base_url('logout') ?>" class="dropdown-item notify-item">
-                        <i class="fe-log-out"></i>
-                        <span>Logout</span>
-                    </a>
-    
-                </div>
-            </li>
-     
-    
-        </ul>
-    
-        <!-- LOGO -->
-        <div class="logo-box">
-            <a href="index.html" class="logo logo-dark text-center">
-                <span class="logo-sm">
-                    <img src="https://coderthemes.com/codefox/layouts/assets/images/logo-sm.png" alt="" height="22">
-                    <!-- <span class="logo-lg-text-light">Codefox</span> -->
-                </span>
-                <span class="logo-lg">
-                    <img src="assets/images/logo-dark.png" alt="" height="20">
-                    <!-- <span class="logo-lg-text-light">U</span> -->
-                </span>
-            </a>
-    
-            <a href="index.html" class="logo logo-light text-center">
-                <span class="logo-sm">
-                    <img src="https://coderthemes.com/codefox/layouts/assets/images/logo-sm.png" alt="" height="22">
-                </span>
-                <span class="logo-lg">
-                    <img src="https://coderthemes.com/codefox/layouts/assets/images/logo-light.png" alt="" height="20">
-                </span>
-            </a>
-        </div>
-    
-        <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
-            <li>
-                <button class="button-menu-mobile waves-effect waves-light">
-                    <i class="fe-menu"></i>
-                </button>
-            </li>
+                
+                    <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
+                        <li>
+                            <button class="button-menu-mobile waves-effect waves-light">
+                                <i class="fe-menu"></i>
+                            </button>
+                        </li>
 
-            <li>
-                <!-- Mobile menu toggle (Horizontal Layout)-->
-                <a class="navbar-toggle nav-link" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
-                    <div class="lines">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </a>
-                <!-- End mobile menu toggle-->
-            </li>   
-             
-     
-        </ul>
-        <div class="clearfix"></div>
-    </div>
-</div>
-<!-- end Topbar -->
+                        <li>
+                            <!-- Mobile menu toggle (Horizontal Layout)-->
+                            <a class="navbar-toggle nav-link" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
+                                <div class="lines">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </a>
+                            <!-- End mobile menu toggle-->
+                        </li>   
+                        
+                
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <!-- end Topbar -->
 
             <!-- ========== Left Sidebar Start ========== -->
             <div class="left-side-menu">
@@ -216,15 +203,8 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-6">
-                                <script>document.write(new Date().getFullYear())</script> &copy; Codefox theme by <a href="">Coderthemes</a> 
-                            </div>
-                            <div class="col-md-6">
-                                <div class="text-md-end footer-links d-none d-sm-block">
-                                    <a href="javascript:void(0);">About Us</a>
-                                    <a href="javascript:void(0);">Help</a>
-                                    <a href="javascript:void(0);">Contact Us</a>
-                                </div>
-                            </div>
+                                <script>document.write(new Date().getFullYear())</script> &copy; MIS DIVISION 
+                            </div> 
                         </div>
                     </div>
                 </footer>
@@ -243,10 +223,10 @@
  
 
         <!-- Vendor js -->
-        <script src="https://coderthemes.com/codefox/layouts/assets/js/vendor.min.js"></script>
+        <?= script_tag('js/vendor.min.js'); ?>
 
         <!-- App js-->
-        <script src="https://coderthemes.com/codefox/layouts/assets/js/app.min.js"></script>
+        <?= script_tag('js/app.min.js'); ?>
         
     </body>
 </html>
