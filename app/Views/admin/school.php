@@ -17,7 +17,8 @@
                 <table id="school-table" class="table table-striped dt-responsive nowrap w-100">
                     <thead>
                         <tr> 
-                            <th>School Name</th> 
+                            <th>Action</th>
+                            <th>#</th> 
                             <th>School Name</th> 
                             <th>Manager</th>
                         </tr>
