@@ -17,8 +17,7 @@
                 <table id="school-table" class="table table-striped dt-responsive nowrap w-100">
                     <thead>
                         <tr> 
-                            <th>Action</th>
-                            <th>#</th> 
+                            <th>Action</th> 
                             <th>School Name</th> 
                             <th>Manager</th>
                         </tr>
@@ -38,16 +37,22 @@
                 </div>
                 <form id="add-new-school-form"> 
                     <div class="modal-body ">
-                        <div class="row">
-                            <div class="col-md-12"> 
-                                <label for="field-1" class="form-label">School Name</label>
-                                <input type="text" class="form-control"  placeholder="School Name"> 
-                            </div> 
+                        <div class="form-group">
+                            <label for="field-1" class="form-label">School Name</label>
+                            <input type="text" class="form-control"  placeholder="School Name" required> 
+                        </div> 
+                        <div class="form-group">
+                            <label for="field-1" class="form-label">Manager</label>
+                            <select class="form-control" name="" id="" required>
+                                <option>Select</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option> 
+                            </select>
                         </div> 
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-info waves-effect waves-light">Save  changes</button>
+                        <button type="submit" class="btn btn-info waves-effect waves-light">Save  changes</button>
                     </div>
                 </form>
             </div>
