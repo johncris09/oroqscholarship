@@ -17,7 +17,7 @@
                 <table id="strand-table" class="table table-striped dt-responsive nowrap w-100">
                     <thead>
                         <tr> 
-                            <th>ID</th> 
+                            <th>Action</th> 
                             <th>Strand</th> 
                             <th>Manager</th>
                         </tr>

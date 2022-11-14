@@ -311,7 +311,34 @@
                             { data: 'ID' },  
                             { data: 'Strand' },  
                             { data: 'Manager' },  
-                        ],   
+                        ], 
+                        columnDefs: [
+                            {
+                                targets  : 0,
+                                title    : 'Actions',
+                                orderable: false,
+                                render   : function(data, type, row, meta) { 
+                                    var action = '';
+                                
+                                    action =  '\
+                                            <div class="btn-group">\
+                                                <button type="button" class="btn dropdown-toggle text-primary" data-bs-toggle="dropdown" aria-expanded="false"> <i class="mdi mdi-cog"></i>  <i class="mdi mdi-chevron-down"></i> </button>\
+                                                <div class="dropdown-menu">\
+                                                    <a class="dropdown-item text-warning" href="#">\
+                                                        <i class="mdi mdi-grease-pencil"></i>\
+                                                        <span class="nav-text">Edit Details</span>\
+                                                    </a>\
+                                                    <a class="dropdown-item text-danger" href="#">\
+                                                        <i class="mdi mdi-grease-pencil"></i>\
+                                                        <span class="nav-text">Delete</span>\
+                                                    </a>\
+                                                </div>\
+                                            </div>\
+                                        '; 
+                                        return action;
+                                    }, 
+                            },  
+                        ],  
                     }); 
 
                 });
