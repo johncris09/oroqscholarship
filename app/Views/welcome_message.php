@@ -1,6 +1,6 @@
 <?= $this->extend('layout/layout') ?>
 
-<?= $this->section('title') ?>asdfasd<?= $this->endSection() ?>
+<?= $this->section('title') ?>Home<?= $this->endSection() ?>
 
 
 <?= $this->section('main') ?>

@@ -7,7 +7,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="assets/images/favicon.ico">
+        <link rel="shortcut icon" href="<?= 'img/favicon.ico' ?>">
+
+        
+        <!-- third party css -->
+        <?= link_tag('assets/datatables.net-bs5/css/dataTables.bootstrap5.min.css'); ?>
+        <?= link_tag('assets/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css'); ?>
+        <?= link_tag('assets/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css'); ?>
+        <?= link_tag('assets/datatables.net-select-bs5/css//select.bootstrap5.min.css'); ?>
+        <!-- third party css end -->
+
 
 		<!-- App css -->
         <?= link_tag('css/bootstrap.min.css'); ?>
@@ -39,7 +48,7 @@
                         
                         <li class="dropdown notification-list topbar-dropdown">
                             <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="https://coderthemes.com/codefox/layouts/assets/images/users/user-1.jpg" alt="user-image" class="rounded-circle">
+                                <img src="<?=base_url()?>/img/user.png" alt="user-image" class="rounded-circle">
                                 <span class="pro-user-name ms-1">
                                     <?= auth()->user()->username; ?> <i class="mdi mdi-chevron-down"></i> 
                                 </span>
@@ -83,25 +92,14 @@
                     </ul>
                 
                     <!-- LOGO -->
-                    <div class="logo-box">
-                        <a href="/" class="logo logo-dark text-center">
-                            <span class="logo-sm">
-                                <img src="https://coderthemes.com/codefox/layouts/assets/images/logo-sm.png" alt="" height="22">
-                                <!-- <span class="logo-lg-text-light">Codefox</span> -->
-                            </span>
-                            <span class="logo-lg">
-                                <img src="https://coderthemes.com/codefox/layouts/assets/images/logo-dark.png" alt="" height="20">
-                                <!-- <span class="logo-lg-text-light">U</span> -->
-                            </span>
-                        </a>
-                
+                    <div class="logo-box"> 
                         <a href="/" class="logo logo-light text-center">
                             <span class="logo-sm">
-                                <img src="https://coderthemes.com/codefox/layouts/assets/images/logo-sm.png" alt="" height="22">
+                                <img src="<?=base_url()?>/img/logo-sm.png" alt="" height="40">
                             </span>
                             <span class="logo-lg">
-                                <img src="https://coderthemes.com/codefox/layouts/assets/images/logo-light.png" alt="" height="20">
-                            </span>
+                                <img src="<?=base_url()?>/img/logo-light.png" alt="" height="35">  
+                            </span> 
                         </a>
                     </div>
                 
@@ -146,6 +144,18 @@
                                 <a href="/"> 
                                     <i class="fe-airplay"></i>
                                     <span> Dashboard </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/strand"> 
+                                    <i class="mdi mdi-book-outline"></i>
+                                    <span> Strand </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/school"> 
+                                    <i class="mdi mdi-school-outline"></i>
+                                    <span> School </span>
                                 </a>
                             </li>
      
@@ -219,14 +229,66 @@
 
         </div>
         <!-- END wrapper -->
- 
- 
+        
+        <script>
+            var BASE_URL = "<?= base_url(); ?>";
+        </script>
 
         <!-- Vendor js -->
         <?= script_tag('js/vendor.min.js'); ?>
 
         <!-- App js-->
         <?= script_tag('js/app.min.js'); ?>
+        
+        <!-- third party js -->
+        <?= script_tag('assets/datatables.net/js/jquery.dataTables.min.js'); ?> 
+        <?= script_tag('assets/datatables.net-bs5/js/dataTables.bootstrap5.min.js'); ?>
+        <?= script_tag('assets/datatables.net-responsive/js/dataTables.responsive.min.js'); ?>
+        <?= script_tag('assets/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js'); ?>
+        <?= script_tag('assets/datatables.net-buttons/js/dataTables.buttons.min.js'); ?>
+        <?= script_tag('assets/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js'); ?>
+        <?= script_tag('assets/datatables.net-buttons/js/buttons.html5.min.js'); ?>
+        <?= script_tag('assets/datatables.net-buttons/js/buttons.flash.min.js'); ?>
+        <?= script_tag('assets/datatables.net-buttons/js/buttons.print.min.js'); ?>
+        <?= script_tag('assets/datatables.net-keytable/js/dataTables.keyTable.min.js'); ?>
+        <?= script_tag('assets/datatables.net-select/js/dataTables.select.min.js'); ?>
+        <?= script_tag('assets/pdfmake/build/pdfmake.min.js'); ?>
+        <?= script_tag('assets/pdfmake/build/vfs_fonts.js'); ?>
+        <!-- third party js ends -->
+
+        <script>
+                $(document).ready(function() {
+                    $('#school-table').DataTable({
+                        "scrollY": 450,
+                        "scrollX": true, 
+                        deferRender: true, 
+                        ajax: {
+                            url: 'school/get_all',  
+                        },
+                        columns: [ 
+                            { data: 'ID' },  
+                            { data: 'SchoolName' },  
+                            { data: 'Manager' },  
+                        ], 
+                    }); 
+
+                    
+                    $('#strand-table').DataTable({
+                        "scrollY": 450,
+                        "scrollX": true, 
+                        deferRender: true, 
+                        ajax: {
+                            url: 'strand/get_all',  
+                        }, 
+                        columns: [ 
+                            { data: 'ID' },  
+                            { data: 'Strand' },  
+                            { data: 'Manager' },  
+                        ],   
+                    }); 
+
+                });
+        </script>
         
     </body>
 </html>

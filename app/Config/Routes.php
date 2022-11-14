@@ -37,7 +37,25 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index', ["filter" => "auth"]);
 
-service('auth')->routes($routes);
+
+$routes->get('strand', 'StrandController::index', ["filter" => "auth"]);
+$routes->get('strand/add', 'StrandController::add', ["filter" => "auth"]); 
+
+$routes->group('school',  function($routes) {
+    $routes->get('/', 'SchoolController::index', ["filter" => "auth"]); 
+    $routes->get('add', 'SchoolController::add', ["filter" => "auth"]);  
+    $routes->get('get_all', 'SchoolController::get_all', ["filter" => "auth"]);  
+});
+
+
+$routes->group('strand',  function($routes) {
+    $routes->get('/', 'StrandController::index');
+    $routes->get('add', 'StrandController::add');
+    $routes->get('get_all', 'StrandController::get_all', ["filter" => "auth"]);  
+});
+
+
+service('auth')->routes($routes); 
 
 /*
  * --------------------------------------------------------------------
