@@ -266,8 +266,7 @@
                             url: 'school/get_all',  
                         },
                         columns: [ 
-                            { data: 'ID' }, 
-                            { data: 'ID' },   
+                            { data: 'ID' },  
                             { data: 'SchoolName' },  
                             { data: 'Manager' },  
                         ], 
