@@ -64,7 +64,7 @@ class Auth extends ShieldAuth
      */
     public array $actions = [
         'register' => 'CodeIgniter\Shield\Authentication\Actions\EmailActivator',
-        'login'    => 'CodeIgniter\Shield\Authentication\Actions\Email2FA',
+        'login'    =>   null,
     ];
 
     /**
