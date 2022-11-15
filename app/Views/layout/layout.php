@@ -15,7 +15,7 @@
         <?= link_tag('assets/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css'); ?>
         <?= link_tag('assets/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css'); ?>
         <?= link_tag('assets/datatables.net-select-bs5/css//select.bootstrap5.min.css'); ?>
-        <!-- third party css end -->
+        <?= link_tag('assets/sweetalert2/sweetalert2.min.css'); ?>  
 
 
 		<!-- App css -->
@@ -146,6 +146,128 @@
                                     <span> Dashboard </span>
                                 </a>
                             </li>
+                            
+                            <li class="menu-title mt-2">Senior High School</li> 
+                            <li>
+                                <a href="#"> 
+                                    <i class="mdi mdi-book-plus-outline"></i>
+                                    <span> Scholar Registration </span>
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a href="#shsmanage" data-bs-toggle="collapse">
+                                    <i class="mdi mdi-cog-sync-outline"></i>
+                                    <span> Manage </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="shsmanage">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="#">Approved Pending Application</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Delete/Edit Application</a>
+                                        </li> 
+                                    </ul>
+                                </div>
+                            </li> 
+                            <li>
+                                <a href="#"> 
+                                    <i class="mdi mdi-chart-bar"></i>
+                                    <span> Generate Report </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#"> 
+                                    <i class="mdi mdi-magnify"></i>
+                                    <span> Search </span>
+                                </a>
+                            </li>
+
+
+                            <li class="menu-title">College</li>
+                            <li>
+                                <a href="#"> 
+                                    <i class="mdi mdi-book-plus-outline"></i>
+                                    <span> Scholar Registration </span>
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a href="#cmanage" data-bs-toggle="collapse">
+                                    <i class="mdi mdi-cog-sync-outline"></i>
+                                    <span> Manage </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="cmanage">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="#">Approved Pending Application</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Delete/Edit Application</a>
+                                        </li> 
+                                    </ul>
+                                </div>
+                            </li> 
+                            <li>
+                                <a href="#"> 
+                                    <i class="mdi mdi-chart-bar"></i>
+                                    <span> Generate Report </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#"> 
+                                    <i class="mdi mdi-magnify"></i>
+                                    <span> Search </span>
+                                </a>
+                            </li>
+                            <li class="menu-title">TVET</li>
+                            <li>
+                                <a href="#"> 
+                                    <i class="mdi mdi-book-plus-outline"></i>
+                                    <span> Scholar Registration </span>
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a href="#tvetmanage" data-bs-toggle="collapse">
+                                    <i class="mdi mdi-cog-sync-outline"></i>
+                                    <span> Manage </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="tvetmanage">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="#">Approved Pending Application</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Delete/Edit Application</a>
+                                        </li> 
+                                    </ul>
+                                </div>
+                            </li> 
+                            <li>
+                                <a href="#"> 
+                                    <i class="mdi mdi-chart-bar"></i>
+                                    <span> Generate Report </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#"> 
+                                    <i class="mdi mdi-magnify"></i>
+                                    <span> Search </span>
+                                </a>
+                            </li>
+                            
+                            <li class="menu-title mt-4">Utilities</li>
+                            <li>
+                                <a href="#"> 
+                                    <i class="mdi mdi-book-outline"></i>
+                                    <span> Course </span>
+                                </a>
+                            </li>
                             <li>
                                 <a href="/strand"> 
                                     <i class="mdi mdi-book-outline"></i>
@@ -158,6 +280,19 @@
                                     <span> School </span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="/user"> 
+                                    <i class="mdi mdi-account-circle-outline"></i>
+                                    <span> User </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/authlogin"> 
+                                    <i class="mdi mdi-web"></i>
+                                    <span> Auth Login </span>
+                                </a>
+                            </li>
+                            
      
                         </ul>
 
@@ -253,15 +388,12 @@
         <?= script_tag('assets/datatables.net-keytable/js/dataTables.keyTable.min.js'); ?>
         <?= script_tag('assets/datatables.net-select/js/dataTables.select.min.js'); ?>
         <?= script_tag('assets/pdfmake/build/pdfmake.min.js'); ?>
-        <?= script_tag('assets/pdfmake/build/vfs_fonts.js'); ?>
+        <?= script_tag('assets/pdfmake/build/vfs_fonts.js'); ?>  
+        <?= script_tag('assets/sweetalert2/sweetalert2.all.min.js'); ?>    
+        <?= script_tag('assets/moment.js/moment.js'); ?>    
+ 
+        <?= $this->renderSection('pageScript') ?> 
 
-        <?= $this->renderSection('schooljs') ?>
-        <?= $this->renderSection('strandjs') ?>
-
-        <!-- third party js ends -->
-
-
-        
         
     </body>
 </html>
