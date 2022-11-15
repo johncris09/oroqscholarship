@@ -53,9 +53,13 @@ $routes->group('school',  function($routes) {
 
 
 $routes->group('strand',  function($routes) {
-    $routes->get('/', 'StrandController::index');
-    $routes->get('add', 'StrandController::add'); 
+    $routes->get('/', 'StrandController::index', ["filter" => "auth"]); 
+    $routes->get('add', 'StrandController::add', ["filter" => "auth"]);  
     $routes->get('get_all', 'StrandController::get_all', ["filter" => "auth"]);  
+    $routes->get('get/(:num)', 'StrandController::get/$1');  
+    $routes->post('delete/(:num)', 'StrandController::delete/$1');   
+    $routes->post('insert', 'StrandController::insert');   
+    $routes->post('update', 'StrandController::update');   
 });
 
 

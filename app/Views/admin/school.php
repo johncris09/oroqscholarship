@@ -137,8 +137,8 @@
                                         </div>\
                                     </div>\
                                 '; 
-                                return action;
-                            }, 
+                            return action;
+                        }, 
                     },  
                 ],
             });  

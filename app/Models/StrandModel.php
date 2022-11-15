@@ -14,7 +14,7 @@ class StrandModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['Strand', 'Manager'];
 
     // Dates
     protected $useTimestamps = false;
