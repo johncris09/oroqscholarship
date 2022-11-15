@@ -39,11 +39,11 @@
                     <div class="modal-body ">
                         <div class="form-group">
                             <label for="field-1" class="form-label">School Name</label>
-                            <input type="text" class="form-control"  placeholder="School Name" required> 
+                            <input type="text" name="school_name" class="form-control"  placeholder="School Name" required> 
                         </div> 
                         <div class="form-group">
                             <label for="field-1" class="form-label">Manager</label>
-                            <select class="form-control" name="" id="" required>
+                            <select class="form-control" name="manager" id="" required>
                                 <option>Select</option>
                                 <option value="Active">Active</option>
                                 <option value="Inactive">Inactive</option> 
@@ -102,7 +102,7 @@
 
     <script>
         $(document).ready(function() {
-            $('#school-table').DataTable({
+            var table = $('#school-table').DataTable({
                 "scrollY": 450,
                 "scrollX": true, 
                 deferRender: true, 
@@ -142,6 +142,30 @@
                     },  
                 ],
             });  
+
+            
+            $(document).on('submit', '#add-new-school-form', function(e){ 
+                e.preventDefault();    
+                var _this = $(this)
+                $.ajax({
+                    url:  'school/insert',
+                    method: "post", 
+                    data: $("#add-new-school-form").serialize(),
+                    dataType: "json", 
+                    success: function (data) { 
+                        if(data.response){ 
+                            table.ajax.reload()
+                            $("#add-new-school-form")[0].reset()
+                        }else{ 
+                            
+                        }
+                    },
+                    error: function (xhr, status, error) { 
+                        console.info(xhr.responseText);
+                    }
+                }); 
+
+            }); 
 
 
             $(document).on('click', '#edit-school-button', function(e){ 

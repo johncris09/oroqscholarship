@@ -46,6 +46,7 @@ $routes->group('school',  function($routes) {
     $routes->get('add', 'SchoolController::add', ["filter" => "auth"]);  
     $routes->get('get_all', 'SchoolController::get_all', ["filter" => "auth"]);  
     $routes->get('get/(:num)', 'SchoolController::get/$1');   
+    $routes->post('insert', 'SchoolController::insert');   
 });
 
 
