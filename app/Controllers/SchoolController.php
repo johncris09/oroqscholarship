@@ -62,6 +62,33 @@ class SchoolController extends BaseController
     }
 
     
+    public function update()
+    {   
+
+        $school = new SchoolModel();   
+        
+        $id = $_POST['id'];
+        try{  
+            $data = [
+                'SchoolName' => $_POST['school_name'],
+                'Manager' => $_POST['manager'], 
+            ]; 
+
+            $school->update($id, $data);
+            $res = [
+                "response" =>  true,
+                "message" =>  "Data updated successfully", 
+            ];
+
+        } catch (\Exception $e) {  
+            $res = [
+                "response" =>  false,
+                "message" =>   $e->getMessage() , 
+            ]; 
+        } 
+        echo Json_encode($res);
+    }
+
 
 
     

@@ -189,6 +189,30 @@
 
             }); 
 
+            
+            $(document).on('submit', '#update-school-form', function(e){ 
+                e.preventDefault();    
+                var _this = $(this)
+                $.ajax({
+                    url:  'school/update',
+                    method: "post", 
+                    data: $("#update-school-form").serialize(),
+                    dataType: "json", 
+                    success: function (data) { 
+                        if(data.response){ 
+                            table.ajax.reload() 
+                        }else{ 
+                            
+                        }
+                    },
+                    error: function (xhr, status, error) { 
+                        console.info(xhr.responseText);
+                    }
+                }); 
+
+            }); 
+            
+
 
         });
     </script>
