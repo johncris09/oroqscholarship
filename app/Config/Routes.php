@@ -20,7 +20,7 @@ $routes->setDefaultNamespace('App\Controllers');
 $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
-$routes->set404Override();
+$routes->set404Override(); 
 // The Auto Routing (Legacy) is very dangerous. It is easy to create vulnerable apps
 // where controller filters or CSRF protection are bypassed.
 // If you don't want to define all routes, please use the Auto Routing (Improved).
@@ -45,12 +45,13 @@ $routes->group('school',  function($routes) {
     $routes->get('/', 'SchoolController::index', ["filter" => "auth"]); 
     $routes->get('add', 'SchoolController::add', ["filter" => "auth"]);  
     $routes->get('get_all', 'SchoolController::get_all', ["filter" => "auth"]);  
+    $routes->get('get/(:num)', 'SchoolController::get/$1');   
 });
 
 
 $routes->group('strand',  function($routes) {
     $routes->get('/', 'StrandController::index');
-    $routes->get('add', 'StrandController::add');
+    $routes->get('add', 'StrandController::add'); 
     $routes->get('get_all', 'StrandController::get_all', ["filter" => "auth"]);  
 });
 

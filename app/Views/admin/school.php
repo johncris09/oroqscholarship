@@ -27,7 +27,7 @@
         </div> <!-- end card -->
     </div><!-- end col-->
 
-    <!-- Center modal content -->
+    <!-- add modal form -->
     <div class="modal fade" id="add-new-school-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -60,10 +60,45 @@
     </div>
 
     
+    <!-- edit modal form -->
+    <div class="modal fade" id="edit-school-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add New</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="update-school-form"> 
+                    <div class="modal-body ">
+                        <input type="hidden" name="id">
+                        <div class="form-group">
+                            <label for="field-1" class="form-label">School Name</label>
+                            <input type="text" class="form-control" name="school_name"  placeholder="School Name" required> 
+                        </div> 
+                        <div class="form-group">
+                            <label for="field-1" class="form-label">Manager</label>
+                            <select class="form-control" name="manager" id="" required>
+                                <option value="">Select</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option> 
+                            </select>
+                        </div> 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-info waves-effect waves-light">Save  changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    
 
 <?= $this->endSection() ?>
 
-<?= $this->section('schooljs') ?>
+<?= $this->section('pageScript') ?>
 
     <script>
         $(document).ready(function() {
@@ -84,14 +119,14 @@
                         targets  : 0,
                         title    : 'Actions',
                         orderable: false,
-                        render   : function(data, type, row, meta) { 
+                        render   : function(data, type, row, meta) {  
                             var action = '';
                         
                             action =  '\
                                     <div class="btn-group">\
                                         <button type="button" class="btn dropdown-toggle text-primary" data-bs-toggle="dropdown" aria-expanded="false"> <i class="mdi mdi-cog"></i>  <i class="mdi mdi-chevron-down"></i> </button>\
                                         <div class="dropdown-menu">\
-                                            <a class="dropdown-item text-warning" href="#">\
+                                            <a data-id="'+row.ID+'" class="dropdown-item text-warning" href="#" id="edit-school-button">\
                                                 <i class="mdi mdi-grease-pencil"></i>\
                                                 <span class="nav-text">Edit Details</span>\
                                             </a>\
@@ -107,6 +142,29 @@
                     },  
                 ],
             });  
+
+
+            $(document).on('click', '#edit-school-button', function(e){ 
+                e.preventDefault(); 
+                $('#edit-school-modal').modal('show') 
+
+                var id = $(this).data('id')
+                $.ajax({
+                    url:  'school/get/' + id,
+                    method: "get",
+                    dataType: "json", 
+                    success: function (data) { 
+                        $('#update-school-form input[name="id"]').val(data.ID)
+                        $('#update-school-form input[name="school_name"]').val(data.SchoolName)
+                        $('#update-school-form select[name="manager"]').val(data.Manager)
+                    },
+                    error: function (xhr, status, error) { 
+                        console.info(xhr.responseText);
+                    }
+                }); 
+
+            }); 
+
 
         });
     </script>

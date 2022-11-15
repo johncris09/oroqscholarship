@@ -27,4 +27,14 @@ class SchoolController extends BaseController
         echo Json_encode($data);
         
     }
+
+    
+    
+    public function get($id)
+    {  
+        $school = new SchoolModel();   
+        $data = $school->find($id);
+        echo Json_encode($data);
+    }
+
 }
