@@ -90,6 +90,27 @@ class SchoolController extends BaseController
     }
 
 
+    public function delete($id)
+    {   
+
+        $school = new SchoolModel();  
+        
+        try{  
+                        
+            $school->delete($id); 
+            $res = [
+                "response" =>  true,
+                "message" =>  "Data deleted successfully", 
+            ];
+
+        } catch (\Exception $e) {  
+            $res = [
+                "response" =>  false,
+                "message" =>   $e->getMessage() , 
+            ]; 
+        }  
+        echo Json_encode($res);
+    }
 
     
 

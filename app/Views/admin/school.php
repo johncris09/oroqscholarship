@@ -130,7 +130,7 @@
                                                 <i class="mdi mdi-grease-pencil"></i>\
                                                 <span class="nav-text">Edit Details</span>\
                                             </a>\
-                                            <a class="dropdown-item text-danger" href="#">\
+                                            <a data-id="'+row.ID+'" class="dropdown-item text-danger" href="#" id="delete-school-button">\
                                                 <i class="mdi mdi-grease-pencil"></i>\
                                                 <span class="nav-text">Delete</span>\
                                             </a>\
@@ -230,6 +230,54 @@
                 }); 
 
             }); 
+
+            
+
+            $(document).on('click', '#delete-school-button', function(e){ 
+                e.preventDefault();  
+
+                var id = $(this).data('id')
+                
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: !0,
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel!",
+                    confirmButtonClass: "btn btn-success mt-2",
+                    cancelButtonClass: "btn btn-danger ms-2 mt-2",
+                    buttonsStyling: !1
+                }).then(function(e) { 
+                    if(e.value){ 
+                        $.ajax({
+                            url:  'school/delete/' + id,
+                            method: "post",  
+                            dataType: "json", 
+                            success: function (data) {  
+                                if(data.response){ 
+                                    Swal.fire({
+                                        title:"Good job!",
+                                        text: data.message,
+                                        icon:"success"
+                                    })
+                                    table.ajax.reload() 
+                                }else{ 
+                                    Swal.fire({
+                                        title:"Update Error!",
+                                        text: data.message,
+                                        icon:"error"
+                                    }) 
+                                }
+                            },
+                            error: function (xhr, status, error) { 
+                                console.info(xhr.responseText);
+                            }
+                        });  
+                     
+                    }
+                }) 
+            });  
              
         });
     </script>
