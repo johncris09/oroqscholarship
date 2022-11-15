@@ -37,4 +37,33 @@ class SchoolController extends BaseController
         echo Json_encode($data);
     }
 
+    public function insert()
+    {   
+
+        $school = new SchoolModel();   
+        try{ 
+            $data = [
+                'SchoolName' => $_POST['school_name'],
+                'Manager' => $_POST['manager'], 
+            ];
+
+            $res =  $school->save($data); 
+            $res = [
+                "response" =>  true,
+                "message" =>  "Data inserted successfully", 
+            ];
+        } catch (\Exception $e) {  
+            $res = [
+                "response" =>  false,
+                "message" =>   $e->getMessage() , 
+            ]; 
+        } 
+        echo Json_encode($res);
+    }
+
+    
+
+
+    
+
 }
