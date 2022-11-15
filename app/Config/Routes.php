@@ -38,8 +38,6 @@ $routes->set404Override();
 $routes->get('/', 'Home::index', ["filter" => "auth"]);
 
 
-$routes->get('strand', 'StrandController::index', ["filter" => "auth"]);
-$routes->get('strand/add', 'StrandController::add', ["filter" => "auth"]); 
 
 $routes->group('school',  function($routes) {
     $routes->get('/', 'SchoolController::index', ["filter" => "auth"]); 
@@ -60,6 +58,13 @@ $routes->group('strand',  function($routes) {
     $routes->post('delete/(:num)', 'StrandController::delete/$1');   
     $routes->post('insert', 'StrandController::insert');   
     $routes->post('update', 'StrandController::update');   
+});
+
+
+
+$routes->group('user',  function($routes) {
+    $routes->get('/', 'UserController::index', ["filter" => "auth"]);  
+    $routes->get('get_all', 'UserController::get_all', ["filter" => "auth"]);   
 });
 
 
