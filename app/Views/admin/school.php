@@ -13,7 +13,7 @@
                 </div>
                 <h4 class="header-title"><?= $page_title; ?></h4>  
             </div>
-            <div class="card-body"> 
+            <div class="card-body">  
                 <table id="school-table" class="table table-striped dt-responsive nowrap w-100">
                     <thead>
                         <tr> 
@@ -44,7 +44,7 @@
                         <div class="form-group">
                             <label for="field-1" class="form-label">Manager</label>
                             <select class="form-control" name="manager" id="" required>
-                                <option>Select</option>
+                                <option value="">Select</option>
                                 <option value="Active">Active</option>
                                 <option value="Inactive">Inactive</option> 
                             </select>
@@ -152,12 +152,22 @@
                     method: "post", 
                     data: $("#add-new-school-form").serialize(),
                     dataType: "json", 
-                    success: function (data) { 
+                    success: function (data) {  
                         if(data.response){ 
+                            Swal.fire({
+                                title:"Good job!",
+                                text: data.message,
+                                icon:"success"
+                            })
+
                             table.ajax.reload()
                             $("#add-new-school-form")[0].reset()
-                        }else{ 
-                            
+                        }else{  
+                            Swal.fire({
+                                title:"Insert Error!",
+                                text: data.message,
+                                icon:"error"
+                            }) 
                         }
                     },
                     error: function (xhr, status, error) { 
@@ -200,9 +210,18 @@
                     dataType: "json", 
                     success: function (data) { 
                         if(data.response){ 
+                            Swal.fire({
+                                title:"Good job!",
+                                text: data.message,
+                                icon:"success"
+                            })
                             table.ajax.reload() 
                         }else{ 
-                            
+                            Swal.fire({
+                                title:"Update Error!",
+                                text: data.message,
+                                icon:"error"
+                            }) 
                         }
                     },
                     error: function (xhr, status, error) { 
@@ -211,11 +230,11 @@
                 }); 
 
             }); 
-            
-
-
+             
         });
     </script>
+ 
+ 
 
 <?= $this->endSection() ?>
 
