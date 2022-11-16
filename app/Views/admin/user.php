@@ -22,6 +22,7 @@
                             <th>Middle Name</th> 
                             <th>Last Name</th> 
                             <th>Username</th> 
+                            <th>Email</th> 
                             <th>Role Type</th> 
                             <th>Created At</th>
                             <th>Active</th>
@@ -147,6 +148,39 @@
 
 
     
+    
+    <!-- edit modal form -->
+    <div class="modal fade" id="change-password-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Details</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <form id="update-password-form" class="parsley-examples"> 
+                    <div class="modal-body ">
+                        <input type="hidden" name="id"  class="form-control" required   />
+                        <div class="form-group">
+                            <label for=" " class="form-label">Password</label>
+                            <input type="password" name="password" id="change-password" required data-parsley-type="alphanum" data-parsley-length="[8, 40]"  class="form-control"  placeholder="Password"  > 
+                        </div> 
+                        <div class="form-group">
+                            <label for=" " class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" required data-parsley-equalto="#change-password" placeholder="Re-Type Password" />
+                        </div>      
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-info waves-effect waves-light">Save  changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    
 
 <?= $this->endSection() ?>
 
@@ -181,6 +215,7 @@
                     { data: 'middlename' }, 
                     { data: 'lastname' }, 
                     { data: 'username' }, 
+                    { data: 'email' }, 
                     { data: 'group' }, 
                     {
                         data  : 'created_at',
@@ -193,7 +228,7 @@
                         data  : 'active',
                         render: function(data, type, row, meta){ 
                             return data == true 
-                                ? '<spand class="bg-primary text-white p-1 rounded-pill" >Active</spand>' 
+                                ? '<spand class="bg-success text-white p-1 rounded-pill" >Active</spand>' 
                                 : '<spand class="bg-danger text-white p-1 rounded-pill" >Inactive</spand>' 
                             
                         }
@@ -214,6 +249,10 @@
                                             <a data-id="'+row.id+'" class="dropdown-item text-warning" href="#" id="edit-user-button">\
                                                 <i class="mdi mdi-grease-pencil"></i>\
                                                 <span class="nav-text">Edit Details</span>\
+                                            </a>\
+                                            <a data-id="'+row.id+'" class="dropdown-item text-primary" href="#" id="change-password-button" >\
+                                                <i class="mdi mdi-account-cog-outline"></i>\
+                                                <span class="nav-text">Change Password</span>\
                                             </a>\
                                             <a data-id="'+row.id+'" class="dropdown-item text-danger" href="#" id="delete-user-button">\
                                                 <i class="mdi mdi-grease-pencil"></i>\
@@ -260,8 +299,16 @@
                     }
                 }); 
 
-            }); 
+            });
 
+            
+            $(document).on('click', '#change-password-button', function(e){ 
+                e.preventDefault(); 
+                var id = $(this).data('id')
+                $('#change-password-modal').modal('show') 
+                $('#update-password-form input[name="id"]').val(id) 
+
+            }); 
 
             $(document).on('click', '#edit-user-button', function(e){ 
                 e.preventDefault(); 
@@ -298,6 +345,38 @@
                     data: $("#update-user-form").serialize(),
                     dataType: "json", 
                     success: function (data) {  
+                        if(data.response){ 
+                            Swal.fire({
+                                title:"Good job!",
+                                text: data.message,
+                                icon:"success"
+                            })
+                            table.ajax.reload() 
+                        }else{ 
+                            Swal.fire({
+                                title:"Update Error!",
+                                text: data.message,
+                                icon:"error"
+                            }) 
+                        }
+                    },
+                    error: function (xhr, status, error) { 
+                        console.info(xhr.responseText);
+                    }
+                }); 
+
+            }); 
+
+            
+            $(document).on('submit', '#update-password-form', function(e){ 
+                e.preventDefault();    
+                var _this = $(this) 
+                $.ajax({
+                    url:  'user/update_password',
+                    method: "post", 
+                    data: $("#update-password-form").serialize(),
+                    dataType: "json", 
+                    success: function (data) {   
                         if(data.response){ 
                             Swal.fire({
                                 title:"Good job!",

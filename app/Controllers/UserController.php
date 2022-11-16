@@ -139,7 +139,33 @@ class UserController extends BaseController
                 "message" =>   $e->getMessage() , 
             ]; 
         } 
-        
+
+        echo Json_encode($res); 
+
+    }
+
+    public function update_password()
+    {
+        try{  
+            $users = model('UserModel');
+            $user  = $users->findById($this->request->getPost('id'));
+
+            $user->fill([
+                'password' => $this->request->getPost('password'), 
+            ]);
+            $users->save($user); 
+
+            $res = [
+                "response" =>  true,
+                "message" =>  "Password updated successfully", 
+            ];
+        } catch (\Exception $e) {  
+            $res = [
+                "response" =>  false,
+                "message" =>   $e->getMessage() , 
+            ]; 
+        } 
+
         echo Json_encode($res); 
 
     }
