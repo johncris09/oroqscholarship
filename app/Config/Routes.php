@@ -38,6 +38,9 @@ $routes->set404Override();
 $routes->get('/', 'Home::index', ["filter" => "auth"]);
 
 
+$routes->group('registration',  function($routes) {
+    $routes->get('/', 'ScholarRegistrationController::index', ["filter" => "auth"]);   
+});
 
 $routes->group('school',  function($routes) {
     $routes->get('/', 'SchoolController::index', ["filter" => "auth"]); 
