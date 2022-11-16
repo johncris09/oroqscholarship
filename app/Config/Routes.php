@@ -60,6 +60,16 @@ $routes->group('strand',  function($routes) {
     $routes->post('update', 'StrandController::update');   
 });
 
+$routes->group('course',  function($routes) {
+    $routes->get('/', 'CourseController::index', ["filter" => "auth"]); 
+    $routes->get('add', 'CourseController::add', ["filter" => "auth"]);  
+    $routes->get('get_all', 'CourseController::get_all', ["filter" => "auth"]);  
+    $routes->get('get/(:num)', 'CourseController::get/$1');  
+    $routes->post('delete/(:num)', 'CourseController::delete/$1');   
+    $routes->post('insert', 'CourseController::insert');   
+    $routes->post('update', 'CourseController::update');   
+});
+
 $routes->group('user',  function($routes) {
     $routes->get('/', 'UserController::index', ["filter" => "auth"]);  
     $routes->get('get_all', 'UserController::get_all', ["filter" => "auth"]);  

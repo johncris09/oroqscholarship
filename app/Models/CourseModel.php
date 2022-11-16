@@ -7,14 +7,17 @@ use CodeIgniter\Model;
 class CourseModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'courses';
-    protected $primaryKey       = 'id';
+    protected $table            = 'table_colcourse';
+    protected $primaryKey       = 'ID';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = [
+        'colCourse', 
+        'colManager'
+    ];
 
     // Dates
     protected $useTimestamps = false;
