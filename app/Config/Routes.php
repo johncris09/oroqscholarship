@@ -62,12 +62,13 @@ $routes->group('strand',  function($routes) {
 
 $routes->group('user',  function($routes) {
     $routes->get('/', 'UserController::index', ["filter" => "auth"]);  
-    $routes->get('get_all', 'UserController::get_all', ["filter" => "auth"]);   
+    $routes->get('get_all', 'UserController::get_all', ["filter" => "auth"]);  
+    $routes->post('insert', 'UserController::insert');
 });
 
 $routes->group('authlogin',  function($routes) {
     $routes->get('/', 'AuthLoginController::index', ["filter" => "auth"]);  
-    $routes->get('get_all', 'AuthLoginController::get_all', ["filter" => "auth"]);   
+    $routes->get('get_all', 'AuthLoginController::get_all', ["filter" => "auth"]);  
 });
 
 

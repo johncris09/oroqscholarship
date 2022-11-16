@@ -13,7 +13,7 @@
                 </div>
                 <h4 class="header-title"><?= $page_title; ?></h4>  
             </div>
-            <div class="card-body">  
+            <div class="card-body">   
                 <table id="user-table" class="table table-striped dt-responsive nowrap w-100">
                     <thead>
                         <tr> 
@@ -35,20 +35,47 @@
                     <h4 class="modal-title">Add New</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="add-new-user-form"> 
+                <form id="add-new-user-form" class="parsley-examples"> 
                     <div class="modal-body ">
                         <div class="form-group">
-                            <label for=" " class="form-label">Username</label>
-                            <input type="text" name="username" class="form-control"  placeholder="Username" required> 
-                        </div> 
+                            <label for=" " class="form-label">First Name</label>
+                            <input type="text" name="firstname"  class="form-control" required   placeholder="First Name" />
+                        </div>  
+                        <div class="form-group">
+                            <label for=" " class="form-label">Middle Name</label>
+                            <input type="text" name="middlename"  class="form-control"     placeholder="Middle Name" />
+                        </div>    
+                        <div class="form-group">
+                            <label for=" " class="form-label">Last Name</label>
+                            <input type="text"  name="lastname" class="form-control" required   placeholder="Last Name" />
+                        </div>  
                         <div class="form-group">
                             <label for=" " class="form-label">Email</label>
-                            <input type="email" name="email" class="form-control"  placeholder="Email" required> 
+                            <input type="email" class="form-control" name="email" required  parsley-type="email" placeholder="Enter a valid e-mail" />
                         </div>  
                         <div class="form-group">
+                            <label for=" " class="form-label">Username</label>
+                            <input type="text" class="form-control" name="username" required data-parsley-length="[8, 40]"   placeholder="Enter  username" />
+                        </div> 
+                        <div class="form-group">
                             <label for=" " class="form-label">Password</label>
-                            <input type="password" name="password" class="form-control"  placeholder="Password" required> 
-                        </div>  
+                            <input type="password" name="password" id="password" required data-parsley-type="alphanum" data-parsley-length="[8, 40]"  class="form-control"  placeholder="Password"  > 
+                        </div> 
+                        <div class="form-group">
+                            <label for=" " class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" required data-parsley-equalto="#password" placeholder="Re-Type Password" />
+                        </div>    
+                        <div class="form-group">
+                            <label for="" class="form-label">Role Type</label> 
+                            <select name="group"  class="form-control"  required>
+                                <option value="">Select</option>
+                                <option value="superadmin">Super Admin</option>
+                                <option value="admin">Admin</option>
+                                <option value="developer">Developer</option>
+                                <option value="user">User</option>
+                                <option value="beta">Beta</option>
+                            </select>  
+                        </div>    
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
@@ -102,6 +129,20 @@
 
     <script>
         $(document).ready(function() {
+
+            $(document).ready(function() {
+                $(".parsley-examples").parsley()
+            }), $(function() {
+                $("#demo-form").parsley().on("field:validated", function() {
+                    var e = 0 === $(".parsley-error").length;
+                    $(".alert-info").toggleClass("d-none", !e), $(".alert-warning").toggleClass("d-none", e)
+                }).on("form:submit", function() {
+                    return !1
+                })
+            });
+
+            
+        // $('#add-new-user-modal').modal('show')
             var table = $('#user-table').DataTable({
                 "scrollY": 450,
                 "scrollX": true, 
@@ -110,7 +151,7 @@
                     url: 'user/get_all',  
                 },
                 columns: [ 
-                    { data: 'id' }, 
+                    { data: 'id' },  
                     { data: 'username' },   
                     {
                         data  : 'created_at',
@@ -152,7 +193,7 @@
             
             $(document).on('submit', '#add-new-user-form', function(e){ 
                 e.preventDefault();    
-                var _this = $(this)
+                var _this = $(this) 
                 $.ajax({
                     url:  'user/insert',
                     method: "post", 
