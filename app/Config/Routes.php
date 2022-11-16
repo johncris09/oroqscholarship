@@ -67,6 +67,7 @@ $routes->group('user',  function($routes) {
     $routes->get('get/(:num)', 'UserController::get/$1');  
     $routes->post('update', 'UserController::update');   
     $routes->post('update_password', 'UserController::update_password');   
+    $routes->post('delete/(:num)', 'UserController::delete/$1'); 
 });
 
 $routes->group('authlogin',  function($routes) {
