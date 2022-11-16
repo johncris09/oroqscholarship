@@ -61,8 +61,8 @@ class CourseController extends BaseController
 
         
         try{  
-            $id = $_POST['id'];
             $course = new CourseModel();   
+            $id = $this->request->getPost('id');
             $data = [
                 'colCourse' => $this->request->getPost('course'),
                 'colManager' => $this->request->getPost('manager'),

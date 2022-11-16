@@ -40,11 +40,11 @@ class SchoolController extends BaseController
     public function insert()
     {   
 
-        $school = new SchoolModel();   
         try{ 
-            $data = [
-                'SchoolName' => $_POST['school_name'],
-                'Manager' => $_POST['manager'], 
+            $school = new SchoolModel();   
+            $data = [ 
+                'SchoolName' => $this->request->getPost('school_name'),
+                'Manager' =>$this->request->getPost('manager'),
             ];
 
             $res =  $school->save($data); 
@@ -65,13 +65,14 @@ class SchoolController extends BaseController
     public function update()
     {   
 
-        $school = new SchoolModel();   
-        
-        $id = $_POST['id'];
         try{  
+            
+            $school = new SchoolModel();    
+            $id = $this->request->getPost('id');
+
             $data = [
-                'SchoolName' => $_POST['school_name'],
-                'Manager' => $_POST['manager'], 
+                'SchoolName' => $this->request->getPost('school_name'),
+                'Manager' => $this->request->getPost('manager'),
             ]; 
 
             $school->update($id, $data);
@@ -93,10 +94,9 @@ class SchoolController extends BaseController
     public function delete($id)
     {   
 
-        $school = new SchoolModel();  
         
         try{  
-                        
+            $school = new SchoolModel();            
             $school->delete($id); 
             $res = [
                 "response" =>  true,

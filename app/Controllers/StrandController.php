@@ -43,8 +43,8 @@ class StrandController extends BaseController
         $strand = new StrandModel();   
         try{ 
             $data = [
-                'Strand' => $_POST['strand'],
-                'Manager' => $_POST['manager'], 
+                'Strand' => $this->request->getPost('strand'),
+                'Manager' => $this->request->getPost('manager'),
             ];
 
             $res =  $strand->save($data); 
@@ -64,14 +64,14 @@ class StrandController extends BaseController
     
     public function update()
     {   
-
-        $strand = new StrandModel();   
-        
-        $id = $_POST['id'];
+ 
+         
         try{  
+            $strand = new StrandModel();  
+            $id = $this->request->getPost('id');
             $data = [
-                'Strand' => $_POST['strand'],
-                'Manager' => $_POST['manager'], 
+                'Strand' => $this->request->getPost('strand'),
+                'Manager' => $this->request->getPost('manager'),
             ]; 
 
             $strand->update($id, $data);
@@ -93,10 +93,9 @@ class StrandController extends BaseController
     public function delete($id)
     {   
 
-        $strand = new StrandModel();  
         
         try{  
-                        
+            $strand = new StrandModel();           
             $strand->delete($id); 
             $res = [
                 "response" =>  true,
