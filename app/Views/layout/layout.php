@@ -145,7 +145,15 @@
                                     <i class="fe-airplay"></i>
                                     <span> Dashboard </span>
                                 </a>
+                            </li> 
+                            
+                            <li>
+                                <a href="#"> 
+                                    <i class="mdi mdi-book-plus-outline"></i>
+                                    <span> Scholar Registration </span>
+                                </a>
                             </li>
+
                             
                             <li class="menu-title mt-2">Senior High School</li> 
                             <li>
@@ -391,6 +399,7 @@
         <?= script_tag('assets/pdfmake/build/vfs_fonts.js'); ?>  
         <?= script_tag('assets/sweetalert2/sweetalert2.all.min.js'); ?>    
         <?= script_tag('assets/moment.js/moment.js'); ?>    
+        <?= script_tag('assets/parsleyjs/parsley.min.js'); ?>    
  
         <?= $this->renderSection('pageScript') ?> 
 
