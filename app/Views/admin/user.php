@@ -18,8 +18,13 @@
                     <thead>
                         <tr> 
                             <th>Action</th> 
+                            <th>First Name</th> 
+                            <th>Middle Name</th> 
+                            <th>Last Name</th> 
                             <th>Username</th> 
+                            <th>Role Type</th> 
                             <th>Created At</th>
+                            <th>Active</th>
                         </tr>
                     </thead> 
                 </table> 
@@ -92,24 +97,44 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add New</h4>
+                    <h4 class="modal-title">Edit Details</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="update-user-form"> 
+                
+                <form id="update-user-form" class="parsley-examples"> 
                     <div class="modal-body ">
-                        <input type="hidden" name="id">
+                        <input type="hidden" name="id"  class="form-control" required   />
                         <div class="form-group">
-                            <label for="field-1" class="form-label">user Name</label>
-                            <input type="text" class="form-control" name="user_name"  placeholder="user Name" required> 
-                        </div> 
+                            <label for=" " class="form-label">First Name</label>
+                            <input type="text" name="firstname"  class="form-control" required   placeholder="First Name" />
+                        </div>  
                         <div class="form-group">
-                            <label for="field-1" class="form-label">Manager</label>
-                            <select class="form-control" name="manager" id="" required>
+                            <label for=" " class="form-label">Middle Name</label>
+                            <input type="text" name="middlename"  class="form-control"     placeholder="Middle Name" />
+                        </div>    
+                        <div class="form-group">
+                            <label for=" " class="form-label">Last Name</label>
+                            <input type="text"  name="lastname" class="form-control" required   placeholder="Last Name" />
+                        </div>  
+                        <div class="form-group">
+                            <label for=" " class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email" required  parsley-type="email" placeholder="Enter a valid e-mail" />
+                        </div>  
+                        <div class="form-group">
+                            <label for=" " class="form-label">Username</label>
+                            <input type="text" class="form-control" name="username" required data-parsley-length="[8, 40]"   placeholder="Enter  username" />
+                        </div>  
+                        <div class="form-group">
+                            <label for="" class="form-label">Role Type</label> 
+                            <select name="group"  class="form-control"  required>
                                 <option value="">Select</option>
-                                <option value="Active">Active</option>
-                                <option value="Inactive">Inactive</option> 
-                            </select>
-                        </div> 
+                                <option value="superadmin">Super Admin</option>
+                                <option value="admin">Admin</option>
+                                <option value="developer">Developer</option>
+                                <option value="user">User</option>
+                                <option value="beta">Beta</option>
+                            </select>  
+                        </div>    
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
@@ -152,11 +177,24 @@
                 },
                 columns: [ 
                     { data: 'id' },  
-                    { data: 'username' },   
+                    { data: 'firstname' },  
+                    { data: 'middlename' }, 
+                    { data: 'lastname' }, 
+                    { data: 'username' }, 
+                    { data: 'group' }, 
                     {
                         data  : 'created_at',
                         render: function(data, type, row, meta){ 
                             return moment(data.date).format('MMM. D, YYYY H:mm:ss a');
+                            
+                        }
+                    },    
+                    {
+                        data  : 'active',
+                        render: function(data, type, row, meta){ 
+                            return data == true 
+                                ? '<spand class="bg-primary text-white p-1 rounded-pill" >Active</spand>' 
+                                : '<spand class="bg-danger text-white p-1 rounded-pill" >Inactive</spand>' 
                             
                         }
                     },
@@ -173,11 +211,11 @@
                                     <div class="btn-group">\
                                         <button type="button" class="btn dropdown-toggle text-primary" data-bs-toggle="dropdown" aria-expanded="false"> <i class="mdi mdi-cog"></i>  <i class="mdi mdi-chevron-down"></i> </button>\
                                         <div class="dropdown-menu">\
-                                            <a data-id="'+row.ID+'" class="dropdown-item text-warning" href="#" id="edit-user-button">\
+                                            <a data-id="'+row.id+'" class="dropdown-item text-warning" href="#" id="edit-user-button">\
                                                 <i class="mdi mdi-grease-pencil"></i>\
                                                 <span class="nav-text">Edit Details</span>\
                                             </a>\
-                                            <a data-id="'+row.ID+'" class="dropdown-item text-danger" href="#" id="delete-user-button">\
+                                            <a data-id="'+row.id+'" class="dropdown-item text-danger" href="#" id="delete-user-button">\
                                                 <i class="mdi mdi-grease-pencil"></i>\
                                                 <span class="nav-text">Delete</span>\
                                             </a>\
@@ -199,24 +237,23 @@
                     method: "post", 
                     data: $("#add-new-user-form").serialize(),
                     dataType: "json", 
-                    success: function (data) {  
-                        console.log(data)
-                        // if(data.response){ 
-                        //     Swal.fire({
-                        //         title:"Good job!",
-                        //         text: data.message,
-                        //         icon:"success"
-                        //     })
+                    success: function (data) { 
+                        if(data.response){ 
+                            Swal.fire({
+                                title:"Good job!",
+                                text: data.message,
+                                icon:"success"
+                            })
 
-                        //     table.ajax.reload()
-                        //     $("#add-new-user-form")[0].reset()
-                        // }else{  
-                        //     Swal.fire({
-                        //         title:"Insert Error!",
-                        //         text: data.message,
-                        //         icon:"error"
-                        //     }) 
-                        // }
+                            table.ajax.reload()
+                            $("#add-new-user-form")[0].reset()
+                        }else{  
+                            Swal.fire({
+                                title:"Insert Error!",
+                                text: data.message,
+                                icon:"error"
+                            }) 
+                        }
                     },
                     error: function (xhr, status, error) { 
                         console.info(xhr.responseText);
@@ -235,10 +272,14 @@
                     url:  'user/get/' + id,
                     method: "get",
                     dataType: "json", 
-                    success: function (data) { 
-                        $('#update-user-form input[name="id"]').val(data.ID)
-                        $('#update-user-form input[name="user_name"]').val(data.userName)
-                        $('#update-user-form select[name="manager"]').val(data.Manager)
+                    success: function (data) {  
+                        $('#update-user-form input[name="id"]').val(data.id)
+                        $('#update-user-form input[name="firstname"]').val(data.firstname)
+                        $('#update-user-form input[name="middlename"]').val(data.middlename)
+                        $('#update-user-form input[name="lastname"]').val(data.lastname)
+                        $('#update-user-form input[name="email"]').val(data.email)
+                        $('#update-user-form input[name="username"]').val(data.username) 
+                        $('#update-user-form select[name="group"]').val(data.group)
                     },
                     error: function (xhr, status, error) { 
                         console.info(xhr.responseText);
@@ -256,7 +297,7 @@
                     method: "post", 
                     data: $("#update-user-form").serialize(),
                     dataType: "json", 
-                    success: function (data) { 
+                    success: function (data) {  
                         if(data.response){ 
                             Swal.fire({
                                 title:"Good job!",

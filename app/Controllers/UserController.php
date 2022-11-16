@@ -49,8 +49,29 @@ class UserController extends BaseController
     public function get($id)
     {  
         $user = model('UserModel'); 
-        $data = $user->findById($id); 
-        echo Json_encode($data);
+        $authgroup = new AuthGroupModel();
+        $authidentities = new AuthIdentifierModel(); 
+        
+        foreach($user->asArray()->where('id', $id)->findall() as $row){ 
+            $data   = [
+                "id" => $row['id'], //id
+                "firstname" => $row['firstname'], //firstname
+                "middlename" => $row['middlename'], //middlename
+                "lastname" => $row['lastname'], //lastname
+                "username" => $row['username'], //username 
+                "email" => $authidentities
+                            ->asArray()
+                            ->where('user_id', $row['id'])
+                            ->where('type ', 'email_password')
+                            ->findall()[0]['secret'], //email
+                "group" => $authgroup
+                            ->asArray()
+                            ->where('user_id', $row['id'])
+                            ->findall()[0]['group'], //group
+            ];  
+
+        }
+        echo Json_encode($data);  
     }
 
     public function insert()
@@ -89,6 +110,40 @@ class UserController extends BaseController
         echo Json_encode($res); 
 
     }
+
+    public function update()
+    { 
+        
+        try{  
+            $users = model('UserModel');
+            $user  = $users->findById($this->request->getPost('id'));
+
+            $user->fill([
+                'lastname' => $this->request->getPost('lastname'),
+                'firstname' => $this->request->getPost('firstname'),
+                'middlename' => $this->request->getPost('middlename'),
+                'username' => $this->request->getPost('username'),
+                'email'    => $this->request->getPost('email'), 
+            ]);
+            $users->save($user);
+
+            $user->syncGroups($this->request->getPost('group'));
+
+            $res = [
+                "response" =>  true,
+                "message" =>  "Data updated successfully", 
+            ];
+        } catch (\Exception $e) {  
+            $res = [
+                "response" =>  false,
+                "message" =>   $e->getMessage() , 
+            ]; 
+        } 
+        
+        echo Json_encode($res); 
+
+    }
+
 
 
 }

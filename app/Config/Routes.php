@@ -64,6 +64,8 @@ $routes->group('user',  function($routes) {
     $routes->get('/', 'UserController::index', ["filter" => "auth"]);  
     $routes->get('get_all', 'UserController::get_all', ["filter" => "auth"]);  
     $routes->post('insert', 'UserController::insert');
+    $routes->get('get/(:num)', 'UserController::get/$1');  
+    $routes->post('update', 'UserController::update');   
 });
 
 $routes->group('authlogin',  function($routes) {
