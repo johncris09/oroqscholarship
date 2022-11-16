@@ -2,7 +2,9 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController; 
+use App\Controllers\BaseController;
+use App\Models\AuthGroupModel;
+use App\Models\AuthIdentifierModel;
 use CodeIgniter\Shield\Entities\User;  
 
 class UserController extends BaseController
@@ -16,9 +18,39 @@ class UserController extends BaseController
     
     public function get_all()
     { 
-        $user = model('UserModel'); 
-        $data['data'] = $user->findAll();
+        $user = model('UserModel');
+        $authgroup = new AuthGroupModel();
+        $authidentities = new AuthIdentifierModel(); 
+        
+        foreach($user->asArray()->findall() as $row){ 
+            $data["data"][]   = [
+                "id" => $row['id'], //id
+                "firstname" => $row['firstname'], //firstname
+                "middlename" => $row['middlename'], //middlename
+                "lastname" => $row['lastname'], //lastname
+                "username" => $row['username'], //username
+                "created_at" => $row['created_at'], //created_at
+                "active" => $row['active'], //active
+                "email" => $authidentities
+                            ->asArray()
+                            ->where('user_id', $row['id'])
+                            ->where('type ', 'email_password')
+                            ->findall()[0]['secret'], //email
+                "group" => $authgroup
+                            ->asArray()
+                            ->where('user_id', $row['id'])
+                            ->findall()[0]['group'], //group
+            ];  
+
+        }
         echo Json_encode($data);  
+    }
+    
+    public function get($id)
+    {  
+        $user = model('UserModel'); 
+        $data = $user->findById($id); 
+        echo Json_encode($data);
     }
 
     public function insert()
@@ -57,8 +89,6 @@ class UserController extends BaseController
         echo Json_encode($res); 
 
     }
-
-
 
 
 }
