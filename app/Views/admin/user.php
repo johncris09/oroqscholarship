@@ -422,22 +422,21 @@
                             url:  'user/delete/' + id,
                             method: "post",  
                             dataType: "json", 
-                            success: function (data) {  
-                                console.info(data)
-                                // if(data.response){ 
-                                //     Swal.fire({
-                                //         title:"Good job!",
-                                //         text: data.message,
-                                //         icon:"success"
-                                //     })
-                                //     table.ajax.reload() 
-                                // }else{ 
-                                //     Swal.fire({
-                                //         title:"Update Error!",
-                                //         text: data.message,
-                                //         icon:"error"
-                                //     }) 
-                                // }
+                            success: function (data) {   
+                                if(data.response){ 
+                                    Swal.fire({
+                                        title:"Good job!",
+                                        text: data.message,
+                                        icon:"success"
+                                    })
+                                    table.ajax.reload() 
+                                }else{ 
+                                    Swal.fire({
+                                        title:"Update Error!",
+                                        text: data.message,
+                                        icon:"error"
+                                    }) 
+                                }
                             },
                             error: function (xhr, status, error) { 
                                 console.info(xhr.responseText);
