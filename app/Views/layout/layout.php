@@ -148,14 +148,14 @@
                             </li> 
                             
                             <li>
-                                <a href="#"> 
+                                <a href="registration"> 
                                     <i class="mdi mdi-book-plus-outline"></i>
                                     <span> Scholar Registration </span>
                                 </a>
                             </li>
 
                             
-                            <li class="menu-title mt-2">Senior High School</li> 
+                            <!-- <li class="menu-title mt-2">Senior High School</li> 
                             <li>
                                 <a href="#"> 
                                     <i class="mdi mdi-book-plus-outline"></i>
@@ -267,11 +267,11 @@
                                     <i class="mdi mdi-magnify"></i>
                                     <span> Search </span>
                                 </a>
-                            </li>
+                            </li> -->
                             
                             <li class="menu-title mt-4">Utilities</li>
                             <li>
-                                <a href="#"> 
+                                <a href="course"> 
                                     <i class="mdi mdi-book-outline"></i>
                                     <span> Course </span>
                                 </a>
