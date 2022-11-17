@@ -69,6 +69,15 @@ class Custom_config extends BaseConfig
         "Grade 12"
     ];
 
+    public $yearLevel = [
+        "I",
+        "II",
+        "III",
+        "IV",
+        "V",
+    ];
+
+    
     
     public $semester = [
         "1st",
