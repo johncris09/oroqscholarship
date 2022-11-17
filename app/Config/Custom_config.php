@@ -75,4 +75,6 @@ class Custom_config extends BaseConfig
         "2nd"
     ];
 
+    public $requiredField = '<span class="text-warning"><strong>*</strong></span>';
+
 } 
