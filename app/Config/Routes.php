@@ -52,6 +52,15 @@ $routes->group('school',  function($routes) {
     $routes->post('update', 'SchoolController::update');   
 });
 
+$routes->group('collegeschool',  function($routes) {
+    $routes->get('/', 'CollegeSchoolController::index', ["filter" => "auth"]); 
+    $routes->get('get_all', 'CollegeSchoolController::get_all', ["filter" => "auth"]);   
+    $routes->get('get/(:num)', 'CollegeSchoolController::get/$1');  
+    $routes->post('delete/(:num)', 'CollegeSchoolController::delete/$1');   
+    $routes->post('insert', 'CollegeSchoolController::insert');   
+    $routes->post('update', 'CollegeSchoolController::update');   
+});
+
 
 $routes->group('strand',  function($routes) {
     $routes->get('/', 'StrandController::index', ["filter" => "auth"]); 
