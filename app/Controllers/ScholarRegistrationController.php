@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\CollegeRegistrationModel;
 use App\Models\CollegeSchoolModel;
 use App\Models\CourseModel;
 use App\Models\SchoolModel;
@@ -18,6 +19,7 @@ class ScholarRegistrationController extends BaseController
 public function __construct() {
 	$db = db_connect();
 	$this->senior_high_registration = new SeniorHighSchoolRegistrationModel($db);
+    $this->college_registration  = new CollegeRegistrationModel($db);
 }
 
 
@@ -102,5 +104,60 @@ public function __construct() {
         echo Json_encode($app_no_id); 
     }
  
+    
+    public function insert_college_registration()
+    { 
+         
+        try{ 
+            $data = [
+                "colAppNoYear" => $this->request->getPost('app_no_year'),
+                "colAppNoSem" => $this->request->getPost('app_no_sem'),
+                "colAppNoID" => $this->request->getPost('app_no_id'),
+                "colAppStat"  => $this->request->getPost('status'),
+                "colFirstName" => trim($this->request->getPost('firstname')),
+                "colMI" => trim($this->request->getPost('middlename')),
+                "colLastName" => trim($this->request->getPost('lastname')),
+                "colSuffix" => trim($this->request->getPost('suffix')),
+                "colAddress" => $this->request->getPost('address'),
+                "colDOB" => $this->request->getPost('birthdate'),
+                "colAge" => $this->request->getPost('age'),
+                "colCivilStat" => $this->request->getPost('civil_status'),
+                "colGender"  => $this->request->getPost('gender'),
+                "colContactNo"  =>  trim($this->request->getPost('contact_no')),
+                "colCTC" => trim($this->request->getPost('ctc_no')),
+                "colEmailAdd" => trim($this->request->getPost('email')),
+                "colAvailment" => trim($this->request->getPost('availment')),
+                "colSchool" => $this->request->getPost('school'),
+                "colCourse"  => $this->request->getPost('course'),
+                "colYearLevel" => $this->request->getPost('year_level'),
+                "colSem" => $this->request->getPost('semester'),
+                "colSY" => $this->request->getPost('school_year'),
+                "colFathersName"=> trim($this->request->getPost('father_name')),
+                "colFatherOccu" => trim($this->request->getPost('father_occupation')),
+                "colMothersName" => trim($this->request->getPost('mother_name')),
+                "colMotherOccu" => trim($this->request->getPost('mother_occupation')),
+                "colManager"  => trim($this->request->getPost('manager')),
+                "colUnits"  => trim($this->request->getPost('units')),
+                "colSchoolAddress"  => trim($this->request->getPost('school_address')),
+            ];
+
+            $res =  $this->college_registration->save($data); 
+            $res = [
+                "response" =>  true,
+                "message" =>  "Application has been saved to pending applications",
+            ];
+        } catch (\Exception $e) {  
+            $res = [
+                "response" =>  false,
+                "message" =>   $e->getMessage() , 
+            ]; 
+        }  
+
+        echo Json_encode($res); 
+ 
+    }
+ 
+    
+
     
 } 
