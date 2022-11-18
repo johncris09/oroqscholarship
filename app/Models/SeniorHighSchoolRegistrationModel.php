@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use CodeIgniter\Database\ConnectionInterface;
 
 class SeniorHighSchoolRegistrationModel extends Model
 {
@@ -67,4 +68,20 @@ class SeniorHighSchoolRegistrationModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    protected $db;
+    
+	public function __construct(ConnectionInterface &$db) {
+		$this->db =& $db;
+	}
+
+
+
+    public function count(){  
+        $builder = $this->db->table($this->table);
+        $query = $builder->countAllResults();
+        return $query; 
+
+
+    }
 }

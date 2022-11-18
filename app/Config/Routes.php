@@ -39,7 +39,9 @@ $routes->get('/', 'Home::index', ["filter" => "auth"]);
 
 
 $routes->group('registration',  function($routes) {
-    $routes->get('/', 'ScholarRegistrationController::index', ["filter" => "auth"]);   
+    $routes->get('/', 'ScholarRegistrationController::index', ["filter" => "auth"]); 
+    $routes->get('shs_app_no_id', 'ScholarRegistrationController::shs_app_no_id');   
+    $routes->post('insert_senior_high', 'ScholarRegistrationController::insert_senior_high_registration');     
 });
 
 $routes->group('school',  function($routes) {

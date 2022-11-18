@@ -9,11 +9,18 @@ use App\Models\SchoolModel;
 use App\Models\SeniorHighSchoolRegistrationModel;
 use App\Models\SequenceModel;
 use App\Models\StrandModel;
-use Config\Custom_config;
+use Config\Custom_config; 
 
 class ScholarRegistrationController extends BaseController
 {
     
+    
+public function __construct() {
+	$db = db_connect();
+	$this->senior_high_registration = new SeniorHighSchoolRegistrationModel($db);
+}
+
+
     public function index()
     {     
         $data["page_title"] = "Scholar Registration";
@@ -22,8 +29,7 @@ class ScholarRegistrationController extends BaseController
         $course = new CourseModel();
         $college_school = new CollegeSchoolModel();
         $strand = new StrandModel();
-        $sequence = new SequenceModel();
-        $senior_high_registration = new SeniorHighSchoolRegistrationModel();
+        $sequence = new SequenceModel(); 
         $data['barangay'] = $config->barangay; 
         $data['semester'] = $config->semester; 
         $data['civil_status'] = $config->civilStatus; 
@@ -36,11 +42,65 @@ class ScholarRegistrationController extends BaseController
         $data['year_level'] = $config->yearLevel;
         $data['sequence_year'] =  $sequence->asArray()->where('Sys_ID', 1)->findAll()[0]['seq_year'];
         $data['seq_sem'] =  $sequence->asArray()->where('Sys_ID', 1)->findAll()[0]['seq_sem'];
-        $data['app_no_id'] = count($senior_high_registration->asArray()->findAll()) + 1; 
-        return view('admin/scholar_registration', $data); 
+        $data['app_no_id'] = $this->senior_high_registration->count() + 1; 
+        return view('admin/scholar_registration', $data);  
     }
 
 
     
+    public function insert_senior_high_registration()
+    { 
+        try{ 
+            $data = [
+                'AppNoYear' => $this->request->getPost('app_no_year'),
+                'AppNoSem' => $this->request->getPost('app_no_sem'),
+                'AppNoID' => $this->request->getPost('app_no_id'),
+                'AppStatus' => $this->request->getPost('status'),
+                'AppLastName' => trim($this->request->getPost('lastname')),
+                'AppFirstName' => trim($this->request->getPost('firstname')),
+                'AppMidIn' => trim($this->request->getPost('middlename')),
+                'AppSuffix' => trim($this->request->getPost('suffix')),
+                'AppAddress' => $this->request->getPost('address'),
+                'AppDOB' => $this->request->getPost('birthdate'),
+                'AppAge' => $this->request->getPost('age'),
+                'AppCivilStat' => $this->request->getPost('civil_status'),
+                'AppGender' => $this->request->getPost('gender'),
+                'AppContact' => trim($this->request->getPost('contact_no')),
+                'AppCTC' => trim($this->request->getPost('contact_no')),
+                'AppEmailAdd' => trim($this->request->getPost('email')),
+                'AppAvailment' => trim($this->request->getPost('availment')),
+                'AppSchool' => $this->request->getPost('school'),
+                'AppCourse' => $this->request->getPost('strand'),
+                'AppYear' => $this->request->getPost('grade_level'),
+                'AppSem' => $this->request->getPost('semester'),
+                'AppSy' => $this->request->getPost('school_year'),
+                'AppFather' => trim($this->request->getPost('father_name')),
+                'AppFatherOccu' => trim($this->request->getPost('father_occupation')),
+                'AppMother' => trim($this->request->getPost('mother_name')),
+                'AppMotherOccu' => trim($this->request->getPost('mother_occupation')),
+                'AppManager' => trim($this->request->getPost('manager')),
+            ];
+
+            $res =  $this->senior_high_registration->save($data); 
+            $res = [
+                "response" =>  true,
+                "message" =>  "Application has been saved to pending applications",
+            ];
+        } catch (\Exception $e) {  
+            $res = [
+                "response" =>  false,
+                "message" =>   $e->getMessage() , 
+            ]; 
+        }  
+        echo Json_encode($res); 
+ 
+    }
+
+    public function shs_app_no_id()
+    {
+        $app_no_id =  $this->senior_high_registration->count() + 1; 
+        echo Json_encode($app_no_id); 
+    }
+ 
     
 } 

@@ -42,15 +42,16 @@
                                     <div class="row justify-content-between">
                                         <div class="col-6">
                                             <label for="" class="form-label">App No. </label>
-                                            <h1 style="text-decoration: underline"><?= $sequence_year ?> - <?= $seq_sem ?> - <?= $app_no_id ?> </h1>
+                                            <h1 style="text-decoration: underline"><?= $sequence_year ?> - <?= $seq_sem ?> - <span id="app_no_id"><?= $app_no_id ?></span> </h1>
                                             <input type="hidden" value="<?= $sequence_year ?>"  name="app_no_year" readonly>
                                             <input type="hidden"  value="<?= $seq_sem ?>"  name="app_no_sem" readonly>
                                             <input type="hidden"  value="<?= $app_no_id ?>"  name="app_no_id" readonly>
                                         </div>
                                         <div class="col-6">
                                             <label for="status" class="form-label">Status <?= $required_field; ?></label>
-                                            <h1 style="text-decoration: underline">Pending</h1>
-                                            <input type="hidden" class="form-control" value="Pending" name="status" required readonly>
+                                            <h1 style="text-decoration: underline" class="text-danger">Pending</h1>
+                                            <input type="hidden" value="Pending" name="status"   readonly>
+                                            <input type="hidden" value="Active" name="manager"   readonly>
                                         </div>
                                     </div>
                                 </div> 
@@ -59,25 +60,25 @@
                                     <div class="row mt-3">
                                         <div class="col-4">
                                             <label for="lastname" class="form-label">Last Name <?= $required_field; ?></label>
-                                            <input type="text" class="form-control"  name="lastname" required>
+                                            <input type="text" class="form-control text-capitalize"  name="lastname" required>
                                         </div>
                                         <div class="col-4">
                                             <label for="firstname" class="form-label">First Name <?= $required_field; ?></label>
-                                            <input type="text" class="form-control" name="firstname"  required>
+                                            <input type="text" class="form-control text-capitalize" name="firstname"  required>
                                         </div>
                                         <div class="col-2">
                                             <label for="middlename" class="form-label">M.I.</label>
-                                            <input type="text" class="form-control"   name="middlename">
+                                            <input type="text" class="form-control text-capitalize"   name="middlename">
                                         </div>
                                         <div class="col-2">
                                             <label for="suffix" class="form-label">Suffix</label>
-                                            <input type="text" class="form-control" name="suffix">
+                                            <input type="text" class="form-control text-capitalize" name="suffix">
                                         </div> 
                                     </div>
                                     <div class="row">
                                         <div class="col-12">  
-                                            <label for="barangay" class="form-label">Address <?= $required_field; ?></label>
-                                            <select class="form-control" name="barangay"   required>
+                                            <label for="address" class="form-label">Address <?= $required_field; ?></label>
+                                            <select class="form-control" name="address"   required>
                                                 <option value="">Select</option> 
                                                 <?php foreach($barangay as $row):?> 
                                                     <option value="<?= $row ?>"><?= $row ?></option>  
@@ -124,8 +125,8 @@
                                     </div> 
                                     <div class="row" >
                                         <div class="col-6">
-                                            <label for="email" class="form-label">Email Address</label>
-                                            <input type="email" class="form-control" name="email" parsley-type="email" >
+                                            <label for="email" class="form-label">Facebook/Other</label>
+                                            <input type="text" class="form-control" name="email"  >
                                         </div>
                                         <div class="col-6">
                                             <label for="availment" class="form-label">Availment <?= $required_field; ?></label>
@@ -153,7 +154,7 @@
                                         <option value="">Select</option> 
                                         <?php foreach($school as $row):?> 
                                             <?php if($row['SchoolName'] != ""):?> 
-                                                <option value="<?= $row['ID']  ?>"><?= $row['SchoolName']  ?></option>  
+                                                <option value="<?= $row['SchoolName']  ?>"><?= $row['SchoolName']  ?></option>  
                                             <?php endif; ?>
                                         <?php endforeach; ?>
                                     </select>
@@ -164,7 +165,7 @@
                                         <option value="">Select</option> 
                                         <?php foreach($strand as $row):?> 
                                             <?php if($row['Strand'] != ""):?> 
-                                                <option value="<?= $row['ID']  ?>"><?= $row['Strand']  ?></option>  
+                                                <option value="<?= $row['Strand']  ?>"><?= $row['Strand']  ?></option>  
                                             <?php endif; ?>
                                         <?php endforeach; ?>
                                     </select>
@@ -202,21 +203,21 @@
                             <div class="row g-3" >
                                 <div class="col">
                                     <label for="father_name" class="form-label">Father's  Name</label>
-                                    <input type="text" class="form-control"   name="father_name" >
+                                    <input type="text" class="form-control text-capitalize"   name="father_name" >
                                 </div>
                                 <div class="col">
                                     <label for="father_occupation" class="form-label">Occupation</label>
-                                    <input type="text" class="form-control"  name="father_occupation" >
+                                    <input type="text" class="form-control text-capitalize"  name="father_occupation" >
                                 </div> 
                             </div>
                             <div class="row g-3" >
                                 <div class="col">
                                     <label for="mother_name" class="form-label">Mother's  Name</label>
-                                    <input type="text" class="form-control" name="mother_name" >
+                                    <input type="text" class="form-control text-capitalize" name="mother_name" >
                                 </div>
                                 <div class="col">
                                     <label for="mother_occupation" class="form-label">Occupation</label>
-                                    <input type="text" class="form-control"  name="mother_occupation" >
+                                    <input type="text" class="form-control text-capitalize"  name="mother_occupation" >
                                 </div> 
                             </div>  
                             <div class="row g-3 mt-2" > 
@@ -689,34 +690,50 @@
                 $('input[name="age"]').val(age)
             });
 
+            shs_app_no_id();
+
+            function shs_app_no_id(){
+                $.ajax({
+                    url:  'registration/shs_app_no_id',
+                    method: "get",
+                    dataType: "json", 
+                    success: function (data) {   
+                        $('#senior-high-registration-form input[name="app_no_id"]').val(data)   // shs_app_no_id
+                        $('#senior-high-registration-form #app_no_id').html(data)               // shs_app_no_id 
+                    },
+                    error: function (xhr, status, error) { 
+                        console.info(xhr.responseText);
+                    }
+                }); 
+            }
+
             $(document).on('submit', '#senior-high-registration-form', function(e){ 
                 
                 e.preventDefault();    
-                var _this = $(this)
-                console.info(_this.serializeArray())
+                var _this = $(this) 
                 $.ajax({
                     url:  'registration/insert_senior_high',
                     method: "post", 
                     data: $("#senior-high-registration-form").serialize(),
                     dataType: "json", 
                     success: function (data) {  
-                        console.log(data)
-                        // if(data.response){ 
-                        //     Swal.fire({
-                        //         title:"Good job!",
-                        //         text: data.message,
-                        //         icon:"success"
-                        //     })
+                        if(data.response){ 
+                            Swal.fire({
+                                title:"Good job!",
+                                text: data.message,
+                                icon:"success"
+                            })
 
-                        //     table.ajax.reload()
-                        //     $("#senior-high-registration-form")[0].reset()
-                        // }else{  
-                        //     Swal.fire({
-                        //         title:"Insert Error!",
-                        //         text: data.message,
-                        //         icon:"error"
-                        //     }) 
-                        // }
+                            table.ajax.reload()
+                            $("#senior-high-registration-form")[0].reset()
+                            shs_app_no_id();
+                        }else{  
+                            Swal.fire({
+                                title:"Insert Error!",
+                                text: data.message,
+                                icon:"error"
+                            }) 
+                        }
                     },
                     error: function (xhr, status, error) { 
                         console.info(xhr.responseText);
