@@ -25,7 +25,9 @@
          
 
 		<!-- icons -->
-        <?= link_tag('css/icons.min.css'); ?>
+        <?= link_tag('css/icons.min.css'); ?>  
+        
+        <?= $this->renderSection('pageStyle') ?> 
 
     </head>
 
@@ -141,7 +143,7 @@
                             <li class="menu-title">Navigation</li>
 
                             <li>
-                                <a href="/"> 
+                                <a href="dashboard"> 
                                     <i class="fe-airplay"></i>
                                     <span> Dashboard </span>
                                 </a>
@@ -283,11 +285,23 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/school"> 
-                                    <i class="mdi mdi-school-outline"></i>
+                                <a href="#school" data-bs-toggle="collapse">
+                                    <i class="mdi mdi-cog-sync-outline"></i>
                                     <span> School </span>
+                                    <span class="menu-arrow"></span>
                                 </a>
-                            </li>
+                                <div class="collapse" id="school">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="school">School Name(Senior High)</a>
+                                        </li>
+                                        <li>
+                                            <a href="collegeschool">School Name(College)</a>
+                                        </li> 
+                                    </ul>
+                                </div>
+                            </li> 
+ 
                             <li>
                                 <a href="/user"> 
                                     <i class="mdi mdi-account-circle-outline"></i>
@@ -341,10 +355,7 @@
                             </div>
                         </div>     
                         <!-- end page title -->   
-
-                        <div class="row"> 
-                            <?= $this->renderSection('main') ?>
-                        </div>
+                        <?= $this->renderSection('main') ?> 
                         <!-- end row -->  
                         
                     </div> <!-- container -->

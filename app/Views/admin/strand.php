@@ -4,29 +4,31 @@
 
 
 <?= $this->section('main') ?>
+    <div class="row">
 
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header bg-white">
-                <div class=" float-end"> 
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-strand-modal">Add New</button>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-white">
+                    <div class=" float-end"> 
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-strand-modal">Add New</button>
+                    </div>
+                    <h4 class="header-title"><?= $page_title; ?></h4>  
                 </div>
-                <h4 class="header-title"><?= $page_title; ?></h4>  
-            </div>
-            <div class="card-body">
-                <table id="strand-table" class="table table-striped dt-responsive nowrap w-100">
-                    <thead>
-                        <tr> 
-                            <th>Action</th> 
-                            <th>Strand</th> 
-                            <th>Manager</th>
-                        </tr>
-                    </thead> 
-                </table>
-                
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
+                <div class="card-body">
+                    <table id="strand-table" class="table table-striped dt-responsive nowrap w-100">
+                        <thead>
+                            <tr> 
+                                <th>Action</th> 
+                                <th>Strand</th> 
+                                <th>Manager</th>
+                            </tr>
+                        </thead> 
+                    </table>
+                    
+                </div> <!-- end card body-->
+            </div> <!-- end card -->
+        </div><!-- end col-->
+    </div>
 
     
     

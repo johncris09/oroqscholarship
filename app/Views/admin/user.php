@@ -4,34 +4,36 @@
 
 
 <?= $this->section('main') ?>
-
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header bg-white">
-                <div class=" float-end"> 
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-user-modal">Add New</button>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-white">
+                    <div class=" float-end"> 
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-user-modal">Add New</button>
+                    </div>
+                    <h4 class="header-title"><?= $page_title; ?></h4>  
                 </div>
-                <h4 class="header-title"><?= $page_title; ?></h4>  
-            </div>
-            <div class="card-body">   
-                <table id="user-table" class="table table-striped dt-responsive nowrap w-100">
-                    <thead>
-                        <tr> 
-                            <th>Action</th> 
-                            <th>First Name</th> 
-                            <th>Middle Name</th> 
-                            <th>Last Name</th> 
-                            <th>Username</th> 
-                            <th>Email</th> 
-                            <th>Role Type</th> 
-                            <th>Created At</th>
-                            <th>Active</th>
-                        </tr>
-                    </thead> 
-                </table> 
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
+                <div class="card-body">   
+                    <table id="user-table" class="table table-striped dt-responsive nowrap w-100">
+                        <thead>
+                            <tr> 
+                                <th>Action</th> 
+                                <th>First Name</th> 
+                                <th>Middle Name</th> 
+                                <th>Last Name</th> 
+                                <th>Username</th> 
+                                <th>Email</th> 
+                                <th>Role Type</th> 
+                                <th>Created At</th>
+                                <th>Active</th>
+                            </tr>
+                        </thead> 
+                    </table> 
+                </div> <!-- end card body-->
+            </div> <!-- end card -->
+        </div><!-- end col-->
+    </div>
+   
 
     <!-- add modal form -->
     <div class="modal fade" id="add-new-user-modal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -199,9 +201,7 @@
                     return !1
                 })
             });
-
-            
-        // $('#add-new-user-modal').modal('show')
+ 
             var table = $('#user-table').DataTable({
                 "scrollY": 450,
                 "scrollX": true, 
