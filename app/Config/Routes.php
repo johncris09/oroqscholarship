@@ -43,6 +43,7 @@ $routes->group('registration',  function($routes) {
     $routes->get('shs_app_no_id', 'ScholarRegistrationController::shs_app_no_id');   
     $routes->post('insert_senior_high', 'ScholarRegistrationController::insert_senior_high_registration');  
     $routes->post('insert_college', 'ScholarRegistrationController::insert_college_registration');     
+    $routes->post('insert_tvet', 'ScholarRegistrationController::insert_tvet_registration');     
 });
 
 $routes->group('school',  function($routes) {
