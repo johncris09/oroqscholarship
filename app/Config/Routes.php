@@ -56,6 +56,10 @@ $routes->group('pending',  function($routes) {
     $routes->get('/', 'ApprovedPendingApplicationController::index', ["filter" => "auth"]);  
     $routes->get('get_shs_pending_list', 'SeniorHighController::get_pending_application', ["filter" => "auth"]);   
     $routes->post('update_shs', 'SeniorHighController::update');    
+    $routes->get('get_college_pending_list', 'CollegeController::get_pending_application', ["filter" => "auth"]);  
+    $routes->post('update_college', 'CollegeController::update');    
+    $routes->get('get_tvet_pending_list', 'TvetController::get_pending_application', ["filter" => "auth"]);  
+    $routes->post('update_tvet', 'TvetController::update');     
 });
 
 $routes->group('school',  function($routes) {

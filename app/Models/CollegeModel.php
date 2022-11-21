@@ -76,6 +76,7 @@ class CollegeModel extends Model
     
 	public function __construct(ConnectionInterface &$db) {
 		$this->db =& $db;
+        $this->builder = $db->table($this->table);
 	}
 
 
@@ -94,4 +95,17 @@ class CollegeModel extends Model
         return $query;  
 
     }
+
+    public function get_pending_application()
+    { 
+        $query = $this->builder 
+            ->select('ID, colAppNoYear, colAppNoSem, colAppNoID, colAppStat, colFirstName, colMI, colLastName, colSuffix, colAddress, colCourse, colSchool, colYearLevel, ')
+            ->where('colAppStat', 'Pending')
+            ->where('colManager', 'Active')
+            ->orderBy('colAppNoID', 'asc')
+            ->get()
+            ->getResult();  
+        return $query; 
+    }
+
 }
