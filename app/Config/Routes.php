@@ -42,6 +42,7 @@ $routes->group('dashboard',  function($routes) {
     $routes->get('/', 'DashboardController::index', ["filter" => "auth"]);     
 });
 
+
 $routes->group('registration',  function($routes) {
     $routes->get('/', 'ScholarRegistrationController::index', ["filter" => "auth"]); 
     $routes->get('shs_app_no_id', 'ScholarRegistrationController::shs_app_no_id');   
@@ -50,9 +51,14 @@ $routes->group('registration',  function($routes) {
     $routes->post('insert_tvet', 'ScholarRegistrationController::insert_tvet_registration');     
 });
 
+
+$routes->group('pending',  function($routes) {
+    $routes->get('/', 'ApprovedPendingApplicationController::index', ["filter" => "auth"]);  
+    $routes->get('get_pending_list', 'SeniorHighController::get_pending_application', ["filter" => "auth"]);    
+});
+
 $routes->group('school',  function($routes) {
     $routes->get('/', 'SchoolController::index', ["filter" => "auth"]); 
-    $routes->get('add', 'SchoolController::add', ["filter" => "auth"]);  
     $routes->get('get_all', 'SchoolController::get_all', ["filter" => "auth"]);  
     $routes->get('get/(:num)', 'SchoolController::get/$1');  
     $routes->post('delete/(:num)', 'SchoolController::delete/$1');   
@@ -71,8 +77,7 @@ $routes->group('collegeschool',  function($routes) {
 
 
 $routes->group('strand',  function($routes) {
-    $routes->get('/', 'StrandController::index', ["filter" => "auth"]); 
-    $routes->get('add', 'StrandController::add', ["filter" => "auth"]);  
+    $routes->get('/', 'StrandController::index', ["filter" => "auth"]);   
     $routes->get('get_all', 'StrandController::get_all', ["filter" => "auth"]);  
     $routes->get('get/(:num)', 'StrandController::get/$1');  
     $routes->post('delete/(:num)', 'StrandController::delete/$1');   
@@ -81,8 +86,7 @@ $routes->group('strand',  function($routes) {
 });
 
 $routes->group('course',  function($routes) {
-    $routes->get('/', 'CourseController::index', ["filter" => "auth"]); 
-    $routes->get('add', 'CourseController::add', ["filter" => "auth"]);  
+    $routes->get('/', 'CourseController::index', ["filter" => "auth"]);  
     $routes->get('get_all', 'CourseController::get_all', ["filter" => "auth"]);  
     $routes->get('get/(:num)', 'CourseController::get/$1');  
     $routes->post('delete/(:num)', 'CourseController::delete/$1');   

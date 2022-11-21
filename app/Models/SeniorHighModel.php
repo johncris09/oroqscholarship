@@ -73,6 +73,7 @@ class SeniorHighModel extends Model
     
 	public function __construct(ConnectionInterface &$db) {
 		$this->db =& $db;
+        $this->builder = $db->table($this->table);
 	}
 
 
@@ -92,6 +93,18 @@ class SeniorHighModel extends Model
         $query = $builder->countAllResults();
         return $query;  
 
+    }
+
+    public function get_pending_application()
+    { 
+        $query = $this->builder 
+            ->select('ID, AppNoYear, AppNoSem, AppNoID, AppStatus, AppFirstName, AppMidIn, AppLastName, AppSuffix, AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ')
+            ->where('AppStatus', 'Pending')
+            ->where('AppManager', 'Active')
+            ->orderBy('AppNoID', 'asc')
+            ->get()
+            ->getResult();  
+        return $query; 
     }
 
 
