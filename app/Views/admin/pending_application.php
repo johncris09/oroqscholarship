@@ -14,12 +14,12 @@
 
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active ">
+                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link  ">
                                 Senior High School Pending List
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#college-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link  ">
+                            <a href="#college-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link active ">
                                 College Pending List
                             </a>
                         </li>
@@ -30,7 +30,7 @@
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane show active" id="senior-high-tab">   
+                        <div class="tab-pane" id="senior-high-tab">   
                             <table id="senior-high-table" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>  
@@ -46,7 +46,8 @@
                                 </thead> 
                             </table> 
                         </div>
-                        <div class="tab-pane" id="college-tab">
+                        <div class="tab-pane  show active" id="college-tab">
+                            
                         </div> 
                         <div class="tab-pane " id="tvet-tab"> 
                         </div>
@@ -121,6 +122,56 @@
                         }, 
                     },  
                 ],
+            });  
+
+            
+            $(document).on('click', '#approve-applicant-button', function(e){ 
+                e.preventDefault();  
+
+                var id = $(this).data('id')
+                
+                Swal.fire({
+                    title: "Approve Applicant?", 
+                    icon: "question",
+                    showCancelButton: !0,
+                    confirmButtonText: "Yes, Approve it!",
+                    cancelButtonText: "No, cancel!",
+                    confirmButtonClass: "btn btn-success mt-2",
+                    cancelButtonClass: "btn btn-danger ms-2 mt-2",
+                    buttonsStyling: !1
+                }).then(function(e) {  
+                    if(e.value){ 
+                        $.ajax({
+                            url: 'pending/update_shs',  
+                            method: "post",
+                            data: {
+                                id : id,
+                                status : "Approved",
+                            },  
+                            dataType: "json", 
+                            success: function (data) {  
+                                if(data.response){ 
+                                    Swal.fire({
+                                        title:"Good job!",
+                                        text: data.message,
+                                        icon:"success"
+                                    })
+                                    senior_high_table.ajax.reload() 
+                                }else{ 
+                                    Swal.fire({
+                                        title:"Update Error!",
+                                        text: data.message,
+                                        icon:"error"
+                                    }) 
+                                }
+                            },
+                            error: function (xhr, status, error) { 
+                                console.info(xhr.responseText);
+                            }
+                        });  
+                     
+                    }
+                }) 
             });  
 
             
