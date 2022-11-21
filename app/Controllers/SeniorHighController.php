@@ -18,4 +18,31 @@ class SeniorHighController extends BaseController
         $res["data"] = $this->senior_high->get_pending_application();
         echo Json_encode($res);
     }
+
+    
+    public function update()
+    {   
+        try{   
+            $id = $this->request->getPost('id');
+            $data = [
+                'AppStatus' => $this->request->getPost('status'), 
+            ]; 
+
+            $this->senior_high->update($id, $data);
+            $res = [
+                "response" =>  true,
+                "message" =>  "Changes has been saved!", 
+            ];
+
+        } catch (\Exception $e) {  
+            $res = [
+                "response" =>  false,
+                "message" =>   $e->getMessage() , 
+            ]; 
+        } 
+        echo Json_encode($res);
+    }
+
+
+
 }

@@ -72,7 +72,7 @@
                 "scrollX": true, 
                 deferRender: true, 
                 ajax: {
-                    url: 'pending/get_pending_list',  
+                    url: 'pending/get_shs_pending_list',  
                 },
                 columns: [ 
                     { data: 'ID' }, 
@@ -106,11 +106,11 @@
                                     <div class="btn-group">\
                                         <button type="button" class="btn dropdown-toggle text-primary" data-bs-toggle="dropdown" aria-expanded="false"> <i class="mdi mdi-cog"></i>  <i class="mdi mdi-chevron-down"></i> </button>\
                                         <div class="dropdown-menu">\
-                                            <a data-id="'+row.ID+'" class="dropdown-item text-warning" href="#" id="approve-applicant">\
+                                            <a data-id="'+row.ID+'" class="dropdown-item text-warning" href="#" id="approve-applicant-button">\
                                                 <i class="mdi mdi-check"></i>\
                                                 <span class="nav-text">Approved</span>\
                                             </a>\
-                                            <a data-id="'+row.ID+'" class="dropdown-item text-danger" href="#" id="disapporve-applican">\
+                                            <a data-id="'+row.ID+'" class="dropdown-item text-danger" href="#" id="disapprove-applicant-button">\
                                                 <i class="mdi mdi-close-thick"></i>\
                                                 <span class="nav-text">Disapproved</span>\
                                             </a>\
@@ -122,6 +122,57 @@
                     },  
                 ],
             });  
+
+            
+            $(document).on('click', '#disapprove-applicant-button', function(e){ 
+                e.preventDefault();  
+
+                var id = $(this).data('id')
+                
+                Swal.fire({
+                    title: "Dissaprove Applicant?", 
+                    icon: "question",
+                    showCancelButton: !0,
+                    confirmButtonText: "Yes, Dissaprove it!",
+                    cancelButtonText: "No, cancel!",
+                    confirmButtonClass: "btn btn-success mt-2",
+                    cancelButtonClass: "btn btn-danger ms-2 mt-2",
+                    buttonsStyling: !1
+                }).then(function(e) {  
+                    if(e.value){ 
+                        $.ajax({
+                            url: 'pending/update_shs',  
+                            method: "post",
+                            data: {
+                                id : id,
+                                status : "Disapproved",
+                            },  
+                            dataType: "json", 
+                            success: function (data) {  
+                                if(data.response){ 
+                                    Swal.fire({
+                                        title:"Good job!",
+                                        text: data.message,
+                                        icon:"success"
+                                    })
+                                    senior_high_table.ajax.reload() 
+                                }else{ 
+                                    Swal.fire({
+                                        title:"Update Error!",
+                                        text: data.message,
+                                        icon:"error"
+                                    }) 
+                                }
+                            },
+                            error: function (xhr, status, error) { 
+                                console.info(xhr.responseText);
+                            }
+                        });  
+                     
+                    }
+                }) 
+            });  
+
         });
     </script>
 

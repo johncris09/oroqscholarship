@@ -54,7 +54,8 @@ $routes->group('registration',  function($routes) {
 
 $routes->group('pending',  function($routes) {
     $routes->get('/', 'ApprovedPendingApplicationController::index', ["filter" => "auth"]);  
-    $routes->get('get_pending_list', 'SeniorHighController::get_pending_application', ["filter" => "auth"]);    
+    $routes->get('get_shs_pending_list', 'SeniorHighController::get_pending_application', ["filter" => "auth"]);   
+    $routes->post('update_shs', 'SeniorHighController::update');    
 });
 
 $routes->group('school',  function($routes) {
