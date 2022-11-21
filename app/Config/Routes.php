@@ -38,6 +38,10 @@ $routes->set404Override();
 $routes->get('/', 'Home::index', ["filter" => "auth"]);
 
 
+$routes->group('dashboard',  function($routes) {
+    $routes->get('/', 'DashboardController::index', ["filter" => "auth"]);     
+});
+
 $routes->group('registration',  function($routes) {
     $routes->get('/', 'ScholarRegistrationController::index', ["filter" => "auth"]); 
     $routes->get('shs_app_no_id', 'ScholarRegistrationController::shs_app_no_id');   
