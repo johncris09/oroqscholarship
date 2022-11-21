@@ -85,5 +85,13 @@ class CollegeModel extends Model
         $query = $builder->countAllResults();
         return $query;  
     }
+    
+    public function count_approved(){  
+        $builder = $this->db
+            ->table($this->table)
+            ->where('colAppStat', 'approved');
+        $query = $builder->countAllResults();
+        return $query;  
 
+    }
 }

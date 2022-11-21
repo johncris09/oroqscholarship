@@ -78,10 +78,21 @@ class SeniorHighModel extends Model
 
 
     public function count(){  
-        $builder = $this->db->table($this->table);
+        $builder = $this->db
+            ->table($this->table);
         $query = $builder->countAllResults();
-        return $query; 
-
+        return $query;  
 
     }
+
+    public function count_approved(){  
+        $builder = $this->db
+            ->table($this->table)
+            ->where('AppStatus', 'approved');
+        $query = $builder->countAllResults();
+        return $query;  
+
+    }
+
+
 }
