@@ -155,12 +155,28 @@
                                     <span> Scholar Registration </span>
                                 </a>
                             </li>
+                            
                             <li>
-                                <a href="pending"> 
-                                    <i class="mdi mdi-calendar-check"></i>
-                                    <span> Approved Pending Application</span>
+                                <a href="#shsmanage" data-bs-toggle="collapse">
+                                    <i class="mdi mdi-cog-sync-outline"></i>
+                                    <span> Manage Application </span>
+                                    <span class="menu-arrow"></span>
                                 </a>
-                            </li>
+                                <div class="collapse" id="shsmanage">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="approved">  Approved Application </a>
+                                        </li> 
+                                        <li>
+                                            <a href="pending">  Pending Application </a>
+                                        </li>  
+                                        <li>
+                                            <a href="#">Delete/Edit Application</a>
+                                        </li> 
+                                    </ul>
+                                </div>
+                            </li> 
+
 
                             
                             <!-- <li class="menu-title mt-2">Senior High School</li> 
