@@ -7,11 +7,7 @@
         #frameShs:hover, #frameCollege:hover, #frameTvet:hover{
             cursor: pointer;
         }
-
-        
-        input[name="age"]:hover{
-            cursor: not-allowed;
-        }
+  
     </style>
 <?= $this->endSection() ?> 
 
@@ -30,16 +26,11 @@
                                     <div class="row justify-content-between">
                                         <div class="col-6">
                                             <label for="" class="form-label">App No. </label>
-                                            <h1 style="text-decoration: underline"><?= $sequence_year ?> - <?= $seq_sem ?> - <span id="app_no_id"><?= $app_no_id ?></span> </h1>
-                                            <input type="hidden" value="<?= $sequence_year ?>"  name="app_no_year" readonly>
-                                            <input type="hidden"  value="<?= $seq_sem ?>"  name="app_no_sem" readonly>
-                                            <input type="hidden"  value="<?= $app_no_id ?>"  name="app_no_id" readonly>
+                                            <h1 style="text-decoration: underline"> <?= $profile['AppNoYear'] ?> - <?=  $profile['AppNoSem'] ?> -  <?= $profile['AppNoID'] ?></span> </h1> 
                                         </div>
                                         <div class="col-6">
                                             <label for="status" class="form-label">Status <?= $required_field; ?></label>
-                                            <h1 style="text-decoration: underline" ><?= $profile['AppStatus']; ?></h1>
-                                            <input type="hidden" value="Pending" name="status"   readonly>
-                                            <input type="hidden" value="Active" name="manager"   readonly>
+                                            <h1 style="text-decoration: underline" ><?= $profile['AppStatus']; ?></h1> 
                                         </div>
                                     </div>
                                 </div> 
@@ -82,9 +73,9 @@
                                         </div>  
                                     </div>
                                     <div class="row">
-                                        <div class="col">
+                                        <div class="col"> 
                                             <label for="birthdate"  class="form-label">Date of Birth <?= $required_field; ?></label>
-                                            <input type="date" class="form-control"   name="birthdate" required >
+                                            <input type="text" value="<?= $profile['AppDOB'] ?>"  class="form-control"   name="birthdate" required >
                                         </div>
                                         <div class="col-2">
                                             <label for="age" class="form-label">Age <?= $required_field; ?></label>
@@ -264,17 +255,12 @@
                                 <div class="col-12">
                                     <div class="row justify-content-between">
                                         <div class="col-6">
-                                            <label for="" class="form-label">App No. </label>
-                                            <h1 style="text-decoration: underline"><?= $sequence_year ?> - <?= $seq_sem ?> - <span id="app_no_id"><?= $app_no_id ?></span> </h1>
-                                            <input type="hidden" value="<?= $sequence_year ?>"  name="app_no_year" readonly>
-                                            <input type="hidden"  value="<?= $seq_sem ?>"  name="app_no_sem" readonly>
-                                            <input type="hidden"  value="<?= $app_no_id ?>"  name="app_no_id" readonly>
+                                            <label for="" class="form-label">App No. </label> 
+                                            <h1 style="text-decoration: underline"> <?= $profile['colAppNoYear'] ?> - <?=  $profile['colAppNoSem'] ?> -  <?= $profile['colAppNoID'] ?></span> </h1> 
                                         </div>
                                         <div class="col-6">
                                             <label for="status" class="form-label">Status <?= $required_field; ?></label>
-                                            <h1 style="text-decoration: underline" ><?= $profile['colAppStat']; ?></h1>
-                                            <input type="hidden" value="Pending" name="status"   readonly>
-                                            <input type="hidden" value="Active" name="manager"   readonly>
+                                            <h1 style="text-decoration: underline" ><?= $profile['colAppStat']; ?></h1> 
                                         </div>
                                     </div>
                                 </div> 
@@ -321,7 +307,7 @@
                                     <div class="row">
                                         <div class="col">
                                             <label for="birthdate"  class="form-label">Date of Birth <?= $required_field; ?></label>
-                                            <input type="date" class="form-control" name="birthdate" required >
+                                            <input type="text"  value="<?= $profile['AppDOB'] ?>"  class="form-control" name="birthdate" required >
                                         </div>
                                         <div class="col-2">
                                             <label for="age" class="form-label">Age <?= $required_field; ?></label>
@@ -513,16 +499,11 @@
                                     <div class="row justify-content-between">
                                         <div class="col-6">
                                             <label for="" class="form-label">App No. </label>
-                                            <h1 style="text-decoration: underline"><?= $sequence_year ?> - <?= $seq_sem ?> - <span id="app_no_id"><?= $app_no_id ?></span> </h1>
-                                            <input type="hidden" value="<?= $sequence_year ?>"  name="app_no_year" readonly>
-                                            <input type="hidden"  value="<?= $seq_sem ?>"  name="app_no_sem" readonly>
-                                            <input type="hidden"  value="<?= $app_no_id ?>"  name="app_no_id" readonly>
+                                            <h1 style="text-decoration: underline"> <?= $profile['colAppNoYear'] ?> - <?=  $profile['colAppNoSem'] ?> -  <?= $profile['colAppNoID'] ?></span> </h1> 
                                         </div>
                                         <div class="col-6">
                                             <label for="status" class="form-label">Status <?= $required_field; ?></label>
-                                            <h1 style="text-decoration: underline" ><?= $profile['colAppStat']; ?></h1>
-                                            <input type="hidden" value="Pending" name="status"   readonly>
-                                            <input type="hidden" value="Active" name="manager"   readonly>
+                                            <h1 style="text-decoration: underline" ><?= $profile['colAppStat']; ?></h1> 
                                         </div>
                                     </div>
                                 </div> 
@@ -569,7 +550,7 @@
                                     <div class="row">
                                         <div class="col">
                                             <label for="birthdate"  class="form-label">Date of Birth <?= $required_field; ?></label>
-                                            <input type="date" class="form-control" name="birthdate" required >
+                                            <input type="text"  value="<?= $profile['AppDOB'] ?>"  class="form-control" name="birthdate" required >
                                         </div>
                                         <div class="col-2">
                                             <label for="age" class="form-label">Age <?= $required_field; ?></label>
@@ -764,6 +745,11 @@
         $(document).ready(function() { 
 
             
+            $('input').attr('readonly', true); 
+            $('input').css("cursor","pointer"); 
+            $('select option:not(:selected)').prop('disabled', true);
+            $('select').attr("style", "pointer-events: none;"); 
+
 
             $(document).ready(function() {
                 $(".validation-form").parsley()
