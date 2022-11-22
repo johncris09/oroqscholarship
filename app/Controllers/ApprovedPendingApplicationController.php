@@ -18,7 +18,7 @@ class ApprovedPendingApplicationController extends BaseController
     }
     public function index()
     {    
-        $data["page_title"] = "Approved Pending Application";
+        $data["page_title"] = "Pending Application";
         return view('admin/pending_application', $data); 
 
     }
