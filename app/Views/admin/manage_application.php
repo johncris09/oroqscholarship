@@ -31,7 +31,7 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane  show active" id="senior-high-tab">   
-                            <table id="senior-high-table" class="table table-striped dt-responsive nowrap w-100">
+                            <table id="senior-high-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>   
                                         <th>Application ID</th>  
@@ -46,7 +46,7 @@
                             </table> 
                         </div>
                         <div class="tab-pane  " id="college-tab">
-                            <table id="college-table" class="table table-striped dt-responsive nowrap w-100">
+                            <table id="college-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>   
                                         <th>Application ID</th>  
@@ -61,7 +61,7 @@
                             </table> 
                         </div> 
                         <div class="tab-pane " id="tvet-tab"> 
-                            <table id="tvet-table" class="table table-striped dt-responsive nowrap w-100">
+                            <table id="tvet-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>   
                                         <th>Application ID</th>  
@@ -175,6 +175,25 @@
                     { data: 'colAppStat' },   
                 ],  
             });  
+
+            
+            
+            $('#senior-high-table tbody').on( 'dblclick', 'tr', function () {
+                var id = senior_high_table.row( this ).data()['ID']
+                window.location.href = "/manage/application/shs/" + id
+            } );
+            
+            $('#college-table tbody').on( 'dblclick', 'tr', function () {
+                var id = college_table.row( this ).data()['ID']
+                window.location.href = "/manage/application/college/" + id
+            } );
+            
+            $('#tvet-table tbody').on( 'dblclick', 'tr', function () {
+                var id = tvet_table.row( this ).data()['ID']
+                window.location.href = "/manage/application/tvet/" + id
+            } );
+
+
  
 
         });

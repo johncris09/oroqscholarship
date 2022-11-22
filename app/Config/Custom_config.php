@@ -86,4 +86,11 @@ class Custom_config extends BaseConfig
 
     public $requiredField = '<span class="text-warning"><strong>*</strong></span>';
 
+    public $scholar_status = [
+        "Pending",
+        "Approved",
+        "Disapproved",
+        "Additional Approved"
+    ];
+
 } 
