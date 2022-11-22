@@ -54,6 +54,11 @@ $routes->group('approved',  function($routes) {
     $routes->get('get_tvet_approved_list', 'TvetController::get_approved_application', ["filter" => "auth"]);  
 });
 
+$routes->group('view',  function($routes) {
+    $routes->get('application/(:any)/(:num)', 'ViewApplicationController::get_application/$1/$2', ["filter" => "auth"]);
+    $routes->get('shs_app_no_id', 'ScholarRegistrationController::shs_app_no_id');  
+});
+
 $routes->group('pending',  function($routes) {
     $routes->get('/', 'ApprovedPendingApplicationController::index', ["filter" => "auth"]);  
     $routes->get('get_shs_pending_list', 'SeniorHighController::get_pending_application', ["filter" => "auth"]);   
