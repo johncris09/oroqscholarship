@@ -13,6 +13,12 @@ class TvetController extends BaseController
         $this->tvet = new TvetModel($db);
     } 
 
+    public function get_all()
+    {
+        $data["data"] = $this->tvet->get_all();
+        echo json_encode($data);
+    }
+
     public function get_pending_application()
     {
         $res["data"] = $this->tvet->get_pending_application();

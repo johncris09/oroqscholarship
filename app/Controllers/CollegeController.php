@@ -13,6 +13,12 @@ class CollegeController extends BaseController
         $this->college = new CollegeModel($db);
     } 
 
+    public function get_all()
+    {
+        $data["data"] = $this->college->get_all();
+        echo json_encode($data);
+    }
+    
     public function get_pending_application()
     {
         $res["data"] = $this->college->get_pending_application();

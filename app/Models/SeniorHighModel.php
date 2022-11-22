@@ -94,6 +94,28 @@ class SeniorHighModel extends Model
         return $query;  
 
     }
+    public function get_application($id)
+    { 
+        // $query = $this->builder 
+        //     ->where('id', $id)
+        //     ->get()
+        //     ->getResult();  
+        $query =  $this->asArray()->where('id', $id);
+        if($query->countAllResults()){ 
+            return $this->asArray()->where('id', $id)->get()->getResult();  
+        }
+    }
+
+    
+    public function get_all()
+    { 
+        $query = $this->builder 
+            ->select('ID, AppNoYear, AppNoSem, AppNoID, AppStatus, AppFirstName, AppMidIn, AppLastName, AppSuffix, AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ')  
+            ->orderBy('id', 'desc')
+            ->get()
+            ->getResult();  
+        return $query; 
+    }
 
     public function get_pending_application()
     { 

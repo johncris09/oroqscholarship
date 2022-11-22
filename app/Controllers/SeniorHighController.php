@@ -13,9 +13,15 @@ class SeniorHighController extends BaseController
         $this->senior_high = new SeniorHighModel($db);
     } 
 
+    public function get_all()
+    {
+        $data["data"] = $this->senior_high->get_all();
+        echo json_encode($data);
+    }
+
     public function get_pending_application()
     {
-        $res["data"] = $this->senior_high->get_pending_application();
+        $res["data"] = $this->senior_high->get_all();
         echo Json_encode($res);
     }
 
@@ -25,7 +31,6 @@ class SeniorHighController extends BaseController
         echo Json_encode($res);
     }
 
-    
     public function update()
     {   
         try{   

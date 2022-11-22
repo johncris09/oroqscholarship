@@ -69,6 +69,16 @@ $routes->group('pending',  function($routes) {
     $routes->post('update_tvet', 'TvetController::update');     
 });
 
+$routes->group('manage',  function($routes) {
+    $routes->get('/', 'ManageApplicationController::index', ["filter" => "auth"]);  
+    $routes->get('get_shs_all_list', 'SeniorHighController::get_all', ["filter" => "auth"]);   
+    $routes->post('update_shs', 'SeniorHighController::update');    
+    $routes->get('get_college_all_list', 'CollegeController::get_all', ["filter" => "auth"]);  
+    $routes->post('update_college', 'CollegeController::update');    
+    $routes->get('get_tvet_all_list', 'TvetController::get_all', ["filter" => "auth"]);  
+    $routes->post('update_tvet', 'TvetController::update');     
+});
+
 $routes->group('school',  function($routes) {
     $routes->get('/', 'SchoolController::index', ["filter" => "auth"]); 
     $routes->get('get_all', 'SchoolController::get_all', ["filter" => "auth"]);  

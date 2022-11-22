@@ -96,6 +96,16 @@ class TvetModel extends Model
 
     }
 
+    public function get_all()
+    { 
+        $query = $this->builder 
+            ->select('ID, colAppNoYear, colAppNoSem, colAppNoID, colAppStat, colFirstName, colMI, colLastName, colSuffix, colAddress, colCourse, colSchool, colYearLevel, ') 
+            ->orderBy('colAppNoID', 'desc')
+            ->get()
+            ->getResult();  
+        return $query; 
+    }
+
     public function get_pending_application()
     { 
         $query = $this->builder 
