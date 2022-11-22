@@ -108,4 +108,16 @@ class CollegeModel extends Model
         return $query; 
     }
 
+    public function get_approved_application()
+    { 
+        $query = $this->builder 
+            ->select('ID, colAppNoYear, colAppNoSem, colAppNoID, colAppStat, colFirstName, colMI, colLastName, colSuffix, colAddress, colCourse, colSchool, colYearLevel, ')
+            ->where('colAppStat', 'Approved')
+            ->where('colManager', 'Active')
+            ->orderBy('colAppNoID', 'asc')
+            ->get()
+            ->getResult();  
+        return $query; 
+    }
+
 }

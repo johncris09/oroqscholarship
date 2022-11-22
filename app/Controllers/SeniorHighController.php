@@ -19,6 +19,12 @@ class SeniorHighController extends BaseController
         echo Json_encode($res);
     }
 
+    public function get_approved_application()
+    {
+        $res["data"] = $this->senior_high->get_approved_application();
+        echo Json_encode($res);
+    }
+
     
     public function update()
     {   

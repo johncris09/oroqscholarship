@@ -19,6 +19,12 @@ class CollegeController extends BaseController
         echo Json_encode($res);
     }
 
+    public function get_approved_application()
+    {
+        $res["data"] = $this->college->get_approved_application();
+        echo Json_encode($res);
+    }
+
     
     public function update()
     {   

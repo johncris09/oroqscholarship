@@ -107,5 +107,16 @@ class SeniorHighModel extends Model
         return $query; 
     }
 
+    public function get_approved_application()
+    { 
+        $query = $this->builder 
+            ->select('ID, AppNoYear, AppNoSem, AppNoID, AppStatus, AppFirstName, AppMidIn, AppLastName, AppSuffix, AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ')
+            ->where('AppStatus', 'Approved')
+            ->where('AppManager', 'Active')
+            ->orderBy('AppNoID', 'asc')
+            ->get()
+            ->getResult();  
+        return $query; 
+    }
 
 }

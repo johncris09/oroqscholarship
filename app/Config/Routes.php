@@ -35,12 +35,8 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index', ["filter" => "auth"]);
+$routes->get('/', 'DashboardController::index', ["filter" => "auth"]);
 
-
-$routes->group('dashboard',  function($routes) {
-    $routes->get('/', 'DashboardController::index', ["filter" => "auth"]);     
-});
 
 
 $routes->group('registration',  function($routes) {
@@ -51,6 +47,12 @@ $routes->group('registration',  function($routes) {
     $routes->post('insert_tvet', 'ScholarRegistrationController::insert_tvet_registration');     
 });
 
+$routes->group('approved',  function($routes) {
+    $routes->get('/', 'ApprovedApplicationController::index', ["filter" => "auth"]);   
+    $routes->get('get_shs_approved_list', 'SeniorHighController::get_approved_application', ["filter" => "auth"]);   
+    $routes->get('get_college_approved_list', 'CollegeController::get_approved_application', ["filter" => "auth"]);  
+    $routes->get('get_tvet_approved_list', 'TvetController::get_approved_application', ["filter" => "auth"]);  
+});
 
 $routes->group('pending',  function($routes) {
     $routes->get('/', 'ApprovedPendingApplicationController::index', ["filter" => "auth"]);  

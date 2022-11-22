@@ -19,6 +19,12 @@ class TvetController extends BaseController
         echo Json_encode($res);
     }
 
+    public function get_approved_application()
+    {
+        $res["data"] = $this->tvet->get_approved_application();
+        echo Json_encode($res);
+    }
+
     
     public function update()
     {   
