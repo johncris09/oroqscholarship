@@ -176,6 +176,22 @@
                 ],  
             });  
 
+            
+            $('#senior-high-table tbody').on( 'dblclick', 'tr', function () {
+                var id = senior_high_table.row( this ).data()['ID']
+                window.location.href = "view/application/shs/" + id
+            } );
+            
+            $('#college-table tbody').on( 'dblclick', 'tr', function () {
+                var id = college_table.row( this ).data()['ID']
+                window.location.href = "view/application/college/" + id
+            } );
+            
+            $('#tvet-table tbody').on( 'dblclick', 'tr', function () {
+                var id = tvet_table.row( this ).data()['ID']
+                window.location.href = "view/application/tvet/" + id
+            } );
+
  
 
         });
