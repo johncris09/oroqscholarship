@@ -55,7 +55,7 @@ $routes->group('approved',  function($routes) {
 });
 
 $routes->group('view',  function($routes) {
-    $routes->get('application/(:any)/(:num)', 'ViewApplicationController::get_application/$1/$2', ["filter" => "auth"]);
+    $routes->get('application/(:any)/(:any)', 'ViewApplicationController::get_application/$1/$2', ["filter" => "auth"]);
     $routes->get('shs_app_no_id', 'ScholarRegistrationController::shs_app_no_id');  
 });
 

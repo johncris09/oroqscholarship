@@ -85,11 +85,13 @@ class ViewApplicationController extends BaseController
 
             }else if($segment[2] == "tvet"){ 
                 $data['profile'] = $this->tvet->asArray()->where('id', $id)->findAll()[0];
-            } 
+            }else{
+                return redirect()->back();
+            }
 
             return view('admin/view_application', $data); 
         } catch (\Exception $e) {   
-            print_r($e->getMessage());
+            return redirect()->back();
         }
 
         
