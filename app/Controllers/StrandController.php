@@ -13,11 +13,7 @@ class StrandController extends BaseController
         $data["page_title"] = "Strand";
         return view('admin/strand', $data); 
     }
-
-    public function add()
-    { 
-        return view('admin/school');
-    }
+ 
 
 
     public function get_all()
