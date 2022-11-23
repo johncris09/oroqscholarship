@@ -43,15 +43,15 @@
                                         </div>
                                         <div class="col-4">
                                             <label for="firstname" class="form-label">First Name <?= $required_field; ?></label>
-                                            <input type="text" value="<?= $profile['AppLastName'] ?>" class="form-control text-capitalize" name="firstname"  required>
+                                            <input type="text" value="<?= $profile['AppFirstName'] ?>" class="form-control text-capitalize" name="firstname"  required>
                                         </div>
                                         <div class="col-2">
                                             <label for="middlename" class="form-label">M.I.</label>
-                                            <input type="text" value="<?= $profile['AppLastName'] ?>" class="form-control text-capitalize"   name="middlename">
+                                            <input type="text" value="<?= $profile['AppMidIn'] ?>" class="form-control text-capitalize"   name="middlename">
                                         </div>
                                         <div class="col-2">
                                             <label for="suffix" class="form-label">Suffix</label>
-                                            <input type="text" value="<?= $profile['AppLastName'] ?>" class="form-control text-capitalize" name="suffix">
+                                            <input type="text" value="<?= $profile['AppSuffix'] ?>" class="form-control text-capitalize" name="suffix">
                                         </div> 
                                     </div>
                                     <div class="row">
@@ -848,109 +848,6 @@
                     }
                 }); 
             }
-
-            $(document).on('submit', '#senior-high-registration-form', function(e){ 
-                
-                e.preventDefault();    
-                var _this = $(this) 
-                $.ajax({
-                    url:  'registration/insert_senior_high',
-                    method: "post", 
-                    data: $("#senior-high-registration-form").serialize(),
-                    dataType: "json", 
-                    success: function (data) {  
-                        if(data.response){ 
-                            Swal.fire({
-                                title:"Good job!",
-                                text: data.message,
-                                icon:"success"
-                            })
-
-                            
-                            $("#senior-high-registration-form")[0].reset()
-                            shs_app_no_id();
-                        }else{  
-                            Swal.fire({
-                                title:"Insert Error!",
-                                text: data.message,
-                                icon:"error"
-                            }) 
-                        }
-                    },
-                    error: function (xhr, status, error) { 
-                        console.info(xhr.responseText);
-                    }
-                }); 
-            });
-            $(document).on('submit', '#college-registration-form', function(e){ 
-                
-                e.preventDefault();    
-                var _this = $(this)  
-                
-                $.ajax({
-                    url:  'registration/insert_college',
-                    method: "post", 
-                    data: $("#college-registration-form").serialize(),
-                    dataType: "json", 
-                    success: function (data) { 
-                        if(data.response){ 
-                            Swal.fire({
-                                title:"Good job!",
-                                text: data.message,
-                                icon:"success"
-                            })
-
-                            
-                            $("#college-registration-form")[0].reset()
-                            shs_app_no_id();
-                        }else{  
-                            Swal.fire({
-                                title:"Insert Error!",
-                                text: data.message,
-                                icon:"error"
-                            }) 
-                        }
-                    },
-                    error: function (xhr, status, error) { 
-                        console.info(xhr.responseText);
-                    }
-                }); 
-            });
-            $(document).on('submit', '#tvet-registration-form', function(e){ 
-                
-                
-                e.preventDefault();    
-                var _this = $(this)  
-                
-                $.ajax({
-                    url:  'registration/insert_tvet',
-                    method: "post", 
-                    data: $("#tvet-registration-form").serialize(),
-                    dataType: "json", 
-                    success: function (data) { 
-                        if(data.response){ 
-                            Swal.fire({
-                                title:"Good job!",
-                                text: data.message,
-                                icon:"success"
-                            })
-
-                            
-                            $("#tvet-registration-form")[0].reset()
-                            shs_app_no_id();
-                        }else{  
-                            Swal.fire({
-                                title:"Insert Error!",
-                                text: data.message,
-                                icon:"error"
-                            }) 
-                        }
-                    },
-                    error: function (xhr, status, error) { 
-                        console.info(xhr.responseText);
-                    }
-                }); 
-            });
  
 
 
