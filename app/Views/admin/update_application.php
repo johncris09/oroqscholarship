@@ -27,7 +27,7 @@
                     <?php
                         if($type == "shs"){
                     ?>     
-                            <form id="senior-high-registration-form" class="validation-form">
+                            <form id="senior-high-form" class="validation-form">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="row justify-content-between">
@@ -281,6 +281,270 @@
                         }else if($type == "college"){
                     ?>
                     
+                            <form id="college-form" class="validation-form">
+                                <div class="row">  
+                                    <div class="col-12">
+                                        <div class="row justify-content-between">
+                                            <div class="col-6">
+                                                <label for="" class="form-label">App No. </label>
+                                            <h1 style="text-decoration: underline"> <?= $profile['colAppNoYear'] ?> - <?=  $profile['colAppNoSem'] ?> -  <?= $profile['colAppNoID'] ?></span> </h1> 
+                                                <input type="hidden" value="<?= $profile['ID'] ?>"  name="id" readonly>
+                                                <input type="hidden" value="<?= $profile['colAppNoYear'] ?>"  name="app_no_year" readonly>
+                                                <input type="hidden"  value="<?= $profile['colAppNoSem'] ?>"  name="app_no_sem" readonly>
+                                                <input type="hidden"  value="<?= $profile['colAppNoID'] ?>"  name="app_no_id" readonly>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="status" class="form-label">Status <?= $required_field; ?></label>
+                                                <select class="form-control"  name="status" required>
+                                                    <option value="">Select</option> 
+                                                    <?php 
+                                                        foreach($scholar_status as $row){
+                                                            if($row == $profile['colAppStat']){
+                                                                $selected  = "selected";
+                                                            }else{ 
+                                                                $selected  = "";
+                                                            }
+                                                    ?> 
+                                                        <option <?= $selected ?> value="<?= $row ?>"><?= $row ?></option>  
+                                                    <?php } ?> 
+                                                </select> 
+                                                <input type="hidden" value="<?= $profile['colManager']  ?>" name="manager"   readonly>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                     
+                                </div> 
+                                <hr>
+                                <div class="row"> 
+                                    <div class="col-9">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <label for="lastname" class="form-label">Last Name <?= $required_field; ?></label>
+                                                <input type="text" value="<?= $profile['colLastName']; ?>" class="form-control text-capitalize" name="lastname" required>
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="firstname" class="form-label">First Name <?= $required_field; ?></label>
+                                                <input type="text" value="<?= $profile['colFirstName']; ?>" class="form-control text-capitalize" name="firstname" required>
+                                            </div>
+                                            <div class="col-2">
+                                                <label for="middlename" class="form-label">M.I.</label>
+                                                <input type="text" value="<?= $profile['colMI']; ?>" class="form-control text-capitalize" name="middlename">
+                                            </div>
+                                            <div class="col-2">
+                                                <label for="suffix" class="form-label">Suffix</label>
+                                                <input type="text" value="<?= $profile['colSuffix']; ?>" class="form-control text-capitalize" name="suffix">
+                                            </div> 
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">  
+                                                <label for="address" class="form-label">Address <?= $required_field; ?></label>
+                                                <select class="form-control" name="address"  required>
+                                                    <option value="">Select</option> 
+                                                    <?php 
+                                                        foreach($barangay as $row){
+                                                            if($row == $profile['colAddress']){
+                                                                $selected  = "selected";
+                                                            }else{ 
+                                                                $selected  = "";
+                                                            }
+                                                    ?> 
+                                                        <option <?= $selected ?> value="<?= $row ?>"><?= $row ?></option>  
+                                                    <?php } ?>
+                                                </select>
+                                            </div>  
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="birthdate"  class="form-label">Date of Birth <?= $required_field; ?></label>
+                                                <input type="date" value="<?= date("Y-m-d", strtotime($profile['colDOB'])) ?>" class="form-control" name="birthdate" required >
+                                            </div>
+                                            <div class="col-2">
+                                                <label for="age" class="form-label">Age <?= $required_field; ?></label>
+                                                <input type="number"  value="<?= $profile['colAge'] ?>" class="form-control" name="age"   readonly>
+                                            </div>
+                                            <div class="col">
+                                                <label for="civil_status" class="form-label">Civil Status <?= $required_field; ?></label>
+                                                <select class="form-control" name="civil_status"  required>
+                                                    <option value="">Select</option> 
+                                                    <?php 
+                                                        foreach($civil_status as $row){
+                                                            if($row == $profile['colCivilStat']){
+                                                                $selected  = "selected";
+                                                            }else{ 
+                                                                $selected  = "";
+                                                            }
+                                                    ?> 
+                                                        <option <?= $selected ?> value="<?= $row ?>"><?= $row ?></option>  
+                                                    <?php } ?> 
+                                                </select> 
+                                            </div>
+                                            <div class="col">
+                                                <label for="gender" class="form-label">Sex <?= $required_field; ?></label>
+                                                <select class="form-control" name="gender" required>
+                                                    <option value="">Select</option> 
+                                                    <option <?= strtolower($profile['colGender'])=="male" ? "selected" : ""; ?>  value="Male">Male</option>
+                                                    <option <?= strtolower($profile['colGender'])=="female" ? "selected" : ""; ?> value="Female">Female</option>  
+                                                </select> 
+                                            </div> 
+                                        </div> 
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="contact_no" class="form-label">Contact #</label>
+                                                <input type="text" value="<?= $profile['colContactNo'] ?>"  class="form-control"  name="contact_no">
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="" class="form-label">CTC # <?= $required_field; ?></label>
+                                                <input type="text"  value="<?= $profile['colCTC'] ?>"  class="form-control"  name="ctc_no" required>
+                                            </div> 
+                                        </div> 
+                                        <div class="row" >
+                                            <div class="col-6">
+                                                <label for="email" class="form-label">Facebook/Other</label>
+                                                <input type="text"  value="<?= $profile['colEmailAdd'] ?>"  class="form-control" name="email"  >
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="availment" class="form-label">Availment <?= $required_field; ?></label>
+                                                <input type="number"  value="<?= $profile['colAvailment'] ?>"   class="form-control" name="availment" required>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="row justify-content-center  ">   
+                                            <label for="formFileCollege" >
+                                                <img id="frameCollege" title="Select Image" class="rounded mx-auto d-block " alt="Profile Photo" src="<?=base_url()?>/img/select-image.png" style="  height: 240px !important; width: 250px !important"  /> 
+                                            </label> 
+                                            <input class="form-control" type="file" id="formFileCollege" style="display: none "> 
+                                        </div>
+                                        <div class="text-center">
+                                            <button type="button" id="clearImageCollege" class="btn btn-primary mt-3 rounded-pill">Clear Photo</button>  
+                                        </div>
+                                    </div>
+                                </div>
+                                    
+                                <div class="row g-3" >
+                                    <div class="col">
+                                        <label for="" class="form-label">School <?= $required_field; ?></label>
+                                        <select class="form-control" name="school" required>
+                                            <option value="">Select</option> 
+                                            <?php 
+                                                foreach($college_school as $row){  
+                                                    if($row['colSchoolName'] == $profile['colSchool']){
+                                                        $selected  = "selected";
+                                                    }else{ 
+                                                        $selected  = "";
+                                                    }
+                                            ?> 
+                                                <option <?= $selected ?> value="<?= $row['colSchoolName']  ?>"><?= $row['colSchoolName']  ?></option>  
+                                            <?php } ?>  
+                                        </select>  
+                                    </div>
+                                    <div class="col">
+                                        <label for="" class="form-label">Course <?= $required_field; ?></label>
+                                        <select class="form-control" name="course" required>
+                                            <option value="">Select</option> 
+                                            <?php 
+                                                foreach($course as $row){  
+                                                    if($row['colCourse'] == $profile['colCourse']){
+                                                        $selected  = "selected";
+                                                    }else{ 
+                                                        $selected  = "";
+                                                    }
+                                            ?> 
+                                                <option <?= $selected ?> value="<?= $row['colCourse']  ?>"><?= $row['colCourse']  ?></option>  
+                                            <?php } ?>  
+                                        </select>   
+                                    </div> 
+                                </div> 
+                                <div class="row g-3" >
+                                    <div class="col">
+                                        <label for="school_address" class="form-label">School Address </label> 
+                                        <input type="text" value="<?= $profile['colSchoolAddress'] ?>" class="form-control text-capitalize" name="school_address"  >
+                                    </div>
+                                </div>
+                                <div class="row g-3" >
+                                    <div class="col">
+                                        <label for="year_level" class="form-label">Year Level <?= $required_field; ?></label>
+                                        <select class="form-control" name="year_level" required>
+                                            <option value="">Select</option> 
+                                            <?php 
+                                                foreach($year_level as $row){  
+                                                    if($row == $profile['colYearLevel']){
+                                                        $selected  = "selected";
+                                                    }else{ 
+                                                        $selected  = "";
+                                                    }
+                                            ?> 
+                                                <option <?= $selected ?> value="<?= $row  ?>"><?= $row  ?></option>  
+                                            <?php } ?>  
+                                        </select>   
+                                    </div>
+                                    <div class="col">
+                                        <label for="semester" class="form-label">Semester <?= $required_field; ?></label>
+                                        <select class="form-control"  name="semester" required>
+                                            <option value="">Select</option> 
+                                            <?php 
+                                                foreach($semester as $row){  
+                                                    if($row == $profile['colSem']){
+                                                        $selected  = "selected";
+                                                    }else{ 
+                                                        $selected  = "";
+                                                    }
+                                            ?> 
+                                                <option <?= $selected ?> value="<?= $row  ?>"><?= $row  ?></option>  
+                                            <?php } ?>  
+                                        </select>   
+                                    </div>
+                                    <div class="col">
+                                        <label for="units" class="form-label">Units <?= $required_field; ?></label>
+                                        <input type="number" value="<?= $profile['colUnits'] ?>" class="form-control" name="units" required>
+                                    </div>
+                                    <div class="col">
+                                        <label for="" class="form-label">SY <?= $required_field; ?></label>
+                                        <select class="form-control" name="school_year" required>
+                                            <option value="">Select</option> 
+                                            <?php 
+                                                foreach(range(2017, date('Y')) as $year){  
+                                                    $sy   ="SY: " . $year . "-" . ($year + 1);
+                                                    if($sy  == $profile['colSY']){
+                                                        $selected  = "selected";
+                                                    }else{ 
+                                                        $selected  = "";
+                                                    }
+                                            ?>  
+                                                <option <?= $selected ?> value="SY: <?= $year . "-" . ($year + 1)?>">SY: <?= $year . "-" . ($year + 1)?></option>
+                                            <?php } ?>  
+                                        </select>  
+                                    </div> 
+                                </div>
+                                <div class="row g-3" >
+                                    <div class="col">
+                                        <label for="father_name" class="form-label">Father's  Name</label>
+                                        <input type="text" value="<?= $profile['colFathersName'] ?>"  class="form-control text-capitalize"   name="father_name" >
+                                    </div>
+                                    <div class="col">
+                                        <label for="father_occupation" class="form-label">Occupation</label>
+                                        <input type="text" value="<?= $profile['colFatherOccu'] ?>"  class="form-control text-capitalize"  name="father_occupation" >
+                                    </div> 
+                                </div>
+                                <div class="row g-3" >
+                                    <div class="col">
+                                        <label for="mother_name" class="form-label">Mother's  Name</label>
+                                        <input type="text" value="<?= $profile['colMothersName'] ?>"  class="form-control text-capitalize" name="mother_name" >
+                                    </div>
+                                    <div class="col">
+                                        <label for="mother_occupation" class="form-label">Occupation</label>
+                                        <input type="text" value="<?= $profile['colMotherOccu'] ?>"  class="form-control text-capitalize"  name="mother_occupation" >
+                                    </div> 
+                                </div>  
+                                <div class="row   mt-3" >  
+                                    <div class="col-12  float-left"> 
+                                        <button type="submit" class="btn btn-primary rounded-pill">Update</button>  
+                                        <button type="button" data-id="<?= $profile["ID"] ?>" id="delete-button" class="btn btn-danger rounded-pill">Delete</button> 
+                                        
+                                    </div>
+                                </div>   
+                            </form>
+                    
                     <?php
 
                         }else if($type == "tvet"){
@@ -388,14 +652,14 @@
                 $('#'+form_id+' input[name="age"]').val(age)
             });
  
-            $(document).on('submit', '#senior-high-registration-form', function(e){ 
+            $(document).on('submit', '#senior-high-form', function(e){ 
                 
                 e.preventDefault();    
                 var _this = $(this) 
                 $.ajax({
                     url:  '/manage/update_shs',
                     method: "post", 
-                    data: $("#senior-high-registration-form").serialize(),
+                    data: $("#senior-high-form").serialize(),
                     dataType: "json", 
                     success: function (data) {   
                         if(data.response){ 
@@ -420,7 +684,7 @@
             });
 
             
-            $(document).on('click', '#senior-high-registration-form #delete-button', function(e){ 
+            $(document).on('click', '#senior-high-form #delete-button', function(e){ 
 
                 e.preventDefault();    
                 var _this = $(this) 
@@ -445,22 +709,21 @@
                                 manager: "Archived",
                             },
                             dataType: "json", 
-                            success: function (data) {  
-                                console.info(data);
-                                // if(data.response){ 
-                                //     Swal.fire({
-                                //         title:"Good job!",
-                                //         text: data.message,
-                                //         icon:"success"
-                                //     })
-                                //     table.ajax.reload() 
-                                // }else{ 
-                                //     Swal.fire({
-                                //         title:"Update Error!",
-                                //         text: data.message,
-                                //         icon:"error"
-                                //     }) 
-                                // }
+                            success: function (data) {   
+                                if(data.response){ 
+                                    Swal.fire({
+                                        title:"Good job!",
+                                        text: data.message,
+                                        icon:"success"
+                                    })
+                                    table.ajax.reload() 
+                                }else{ 
+                                    Swal.fire({
+                                        title:"Update Error!",
+                                        text: data.message,
+                                        icon:"error"
+                                    }) 
+                                }
                             },
                             error: function (xhr, status, error) { 
                                 console.info(xhr.responseText);
@@ -473,30 +736,30 @@
             });
 
 
-            $(document).on('submit', '#college-registration-form', function(e){ 
+            $(document).on('submit', '#college-form', function(e){ 
                 
                 e.preventDefault();    
                 var _this = $(this)  
                 
+                
+                e.preventDefault();    
+                var _this = $(this) 
                 $.ajax({
-                    url:  'registration/insert_college',
+                    url:  '/manage/update_college',
                     method: "post", 
-                    data: $("#college-registration-form").serialize(),
+                    data: $("#college-form").serialize(),
                     dataType: "json", 
-                    success: function (data) { 
+                    success: function (data) {   
                         if(data.response){ 
                             Swal.fire({
                                 title:"Good job!",
                                 text: data.message,
                                 icon:"success"
                             })
-
-                            
-                            $("#college-registration-form")[0].reset()
-                            shs_app_no_id();
+ 
                         }else{  
                             Swal.fire({
-                                title:"Insert Error!",
+                                title:"Update Error!",
                                 text: data.message,
                                 icon:"error"
                             }) 
@@ -507,41 +770,61 @@
                     }
                 }); 
             });
-            $(document).on('submit', '#tvet-registration-form', function(e){ 
-                
-                
-                e.preventDefault();    
-                var _this = $(this)  
-                
-                $.ajax({
-                    url:  'registration/insert_tvet',
-                    method: "post", 
-                    data: $("#tvet-registration-form").serialize(),
-                    dataType: "json", 
-                    success: function (data) { 
-                        if(data.response){ 
-                            Swal.fire({
-                                title:"Good job!",
-                                text: data.message,
-                                icon:"success"
-                            })
+            
+            
+            
+            $(document).on('click', '#college-form #delete-button', function(e){ 
 
-                            
-                            $("#tvet-registration-form")[0].reset()
-                            shs_app_no_id();
-                        }else{  
-                            Swal.fire({
-                                title:"Insert Error!",
-                                text: data.message,
-                                icon:"error"
-                            }) 
-                        }
-                    },
-                    error: function (xhr, status, error) { 
-                        console.info(xhr.responseText);
+                e.preventDefault();    
+                var _this = $(this) 
+                var id = _this.data('id')
+
+                Swal.fire({
+                    title: "Are you sure you want to delete this record?", 
+                    icon: "warning",
+                    showCancelButton: !0,
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel!",
+                    confirmButtonClass: "btn btn-success mt-2",
+                    cancelButtonClass: "btn btn-danger ms-2 mt-2",
+                    buttonsStyling: !1
+                }).then(function(e) { 
+                    if(e.value){ 
+                        $.ajax({ 
+                            url:  '/manage/archived_college',
+                            method: "post",  
+                            data: {
+                                id: id,
+                                manager: "Archived",
+                            },
+                            dataType: "json", 
+                            success: function (data) {   
+                                if(data.response){ 
+                                    Swal.fire({
+                                        title:"Good job!",
+                                        text: data.message,
+                                        icon:"success"
+                                    })
+                                    table.ajax.reload() 
+                                }else{ 
+                                    Swal.fire({
+                                        title:"Update Error!",
+                                        text: data.message,
+                                        icon:"error"
+                                    }) 
+                                }
+                            },
+                            error: function (xhr, status, error) { 
+                                console.info(xhr.responseText);
+                            }
+                        });  
+                    
                     }
-                }); 
+                })
             });
+
+
+ 
  
 
 

@@ -48,7 +48,7 @@ class ViewApplicationController extends BaseController
 
     }
 
-    function get_application()
+    public function get_application()
     { 
         $segment = $this->uri->getSegments();
         $type = ["shs", "college", "tvet"]; 
