@@ -80,7 +80,9 @@ $routes->group('manage',  function($routes) {
     $routes->post('update_shs', 'SeniorHighController::update');  
     $routes->post('archived_shs', 'SeniorHighController::archived_application');   
     $routes->post('update_college', 'CollegeController::update');  
-    $routes->post('archived_college', 'CollegeController::archived_application');  
+    $routes->post('archived_college', 'CollegeController::archived_application');   
+    $routes->post('update_tvet', 'TvetController::update');  
+    $routes->post('archived_tvet', 'TvetController::archived_application');  
 });
 
 $routes->group('school',  function($routes) {
