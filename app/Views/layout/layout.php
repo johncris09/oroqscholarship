@@ -7,15 +7,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="<?= 'img/favicon.ico' ?>">
+        <link rel="shortcut icon" href="<?= '/img/favicon.ico' ?>">
 
         
         <!-- third party css -->
         <?= link_tag('assets/datatables.net-bs5/css/dataTables.bootstrap5.min.css'); ?>
         <?= link_tag('assets/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css'); ?>
         <?= link_tag('assets/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css'); ?>
-        <?= link_tag('assets/datatables.net-select-bs5/css//select.bootstrap5.min.css'); ?>
-        <?= link_tag('assets/sweetalert2/sweetalert2.min.css'); ?>  
+        <?= link_tag('assets/datatables.net-select-bs5/css/select.bootstrap5.min.css'); ?>
+        <?= link_tag('assets/sweetalert2/sweetalert2.min.css'); ?>      
+		<link rel="stylesheet" href="https://unpkg.com/dropzone/dist/dropzone.css" />
+		<link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet"/>
 
 
 		<!-- App css -->
@@ -62,19 +64,19 @@
                                 </div>
                 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="/javascript:void(0);" class="dropdown-item notify-item">
                                     <i class="fe-user"></i>
                                     <span>My Account</span>
                                 </a>
                 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="/javascript:void(0);" class="dropdown-item notify-item">
                                     <i class="fe-settings"></i>
                                     <span>Settings</span>
                                 </a>
                 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="/javascript:void(0);" class="dropdown-item notify-item">
                                     <i class="fe-lock"></i>
                                     <span>Lock Screen</span>
                                 </a>
@@ -82,7 +84,7 @@
                                 <div class="dropdown-divider"></div>
                 
                                 <!-- item-->
-                                <a href="<?= base_url('logout') ?>" class="dropdown-item notify-item">
+                                <a href="/<?= base_url('logout') ?>" class="dropdown-item notify-item">
                                     <i class="fe-log-out"></i>
                                     <span>Logout</span>
                                 </a>
@@ -143,21 +145,21 @@
                             <li class="menu-title">Navigation</li>
 
                             <li>
-                                <a href="dashboard"> 
+                                <a href="/"> 
                                     <i class="fe-airplay"></i>
                                     <span> Dashboard </span>
                                 </a>
                             </li> 
                             
                             <li>
-                                <a href="registration"> 
+                                <a href="/registration"> 
                                     <i class="mdi mdi-book-plus-outline"></i>
                                     <span> Scholar Registration </span>
                                 </a>
                             </li>
                             
                             <li>
-                                <a href="#shsmanage" data-bs-toggle="collapse">
+                                <a href="/#shsmanage" data-bs-toggle="collapse">
                                     <i class="mdi mdi-cog-sync-outline"></i>
                                     <span> Manage Application </span>
                                     <span class="menu-arrow"></span>
@@ -165,13 +167,13 @@
                                 <div class="collapse" id="shsmanage">
                                     <ul class="nav-second-level">
                                         <li>
-                                            <a href="approved">  Approved Application </a>
+                                            <a href="/approved">  Approved Application </a>
                                         </li> 
                                         <li>
-                                            <a href="pending">  Pending Application </a>
+                                            <a href="/pending">  Pending Application </a>
                                         </li>  
                                         <li>
-                                            <a href="#">Delete/Edit Application</a>
+                                            <a href="/manage">Delete/Edit Application</a>
                                         </li> 
                                     </ul>
                                 </div>
@@ -181,14 +183,14 @@
                             
                             <!-- <li class="menu-title mt-2">Senior High School</li> 
                             <li>
-                                <a href="#"> 
+                                <a href="/#"> 
                                     <i class="mdi mdi-book-plus-outline"></i>
                                     <span> Scholar Registration </span>
                                 </a>
                             </li>
                             
                             <li>
-                                <a href="#shsmanage" data-bs-toggle="collapse">
+                                <a href="/#shsmanage" data-bs-toggle="collapse">
                                     <i class="mdi mdi-cog-sync-outline"></i>
                                     <span> Manage </span>
                                     <span class="menu-arrow"></span>
@@ -196,22 +198,22 @@
                                 <div class="collapse" id="shsmanage">
                                     <ul class="nav-second-level">
                                         <li>
-                                            <a href="#">Approved Pending Application</a>
+                                            <a href="/#">Approved Pending Application</a>
                                         </li>
                                         <li>
-                                            <a href="#">Delete/Edit Application</a>
+                                            <a href="/#">Delete/Edit Application</a>
                                         </li> 
                                     </ul>
                                 </div>
                             </li> 
                             <li>
-                                <a href="#"> 
+                                <a href="/#"> 
                                     <i class="mdi mdi-chart-bar"></i>
                                     <span> Generate Report </span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#"> 
+                                <a href="/#"> 
                                     <i class="mdi mdi-magnify"></i>
                                     <span> Search </span>
                                 </a>
@@ -220,14 +222,14 @@
 
                             <li class="menu-title">College</li>
                             <li>
-                                <a href="#"> 
+                                <a href="/#"> 
                                     <i class="mdi mdi-book-plus-outline"></i>
                                     <span> Scholar Registration </span>
                                 </a>
                             </li>
                             
                             <li>
-                                <a href="#cmanage" data-bs-toggle="collapse">
+                                <a href="/#cmanage" data-bs-toggle="collapse">
                                     <i class="mdi mdi-cog-sync-outline"></i>
                                     <span> Manage </span>
                                     <span class="menu-arrow"></span>
@@ -235,36 +237,36 @@
                                 <div class="collapse" id="cmanage">
                                     <ul class="nav-second-level">
                                         <li>
-                                            <a href="#">Approved Pending Application</a>
+                                            <a href="/#">Approved Pending Application</a>
                                         </li>
                                         <li>
-                                            <a href="#">Delete/Edit Application</a>
+                                            <a href="/#">Delete/Edit Application</a>
                                         </li> 
                                     </ul>
                                 </div>
                             </li> 
                             <li>
-                                <a href="#"> 
+                                <a href="/#"> 
                                     <i class="mdi mdi-chart-bar"></i>
                                     <span> Generate Report </span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#"> 
+                                <a href="/#"> 
                                     <i class="mdi mdi-magnify"></i>
                                     <span> Search </span>
                                 </a>
                             </li>
                             <li class="menu-title">TVET</li>
                             <li>
-                                <a href="#"> 
+                                <a href="/#"> 
                                     <i class="mdi mdi-book-plus-outline"></i>
                                     <span> Scholar Registration </span>
                                 </a>
                             </li>
                             
                             <li>
-                                <a href="#tvetmanage" data-bs-toggle="collapse">
+                                <a href="/#tvetmanage" data-bs-toggle="collapse">
                                     <i class="mdi mdi-cog-sync-outline"></i>
                                     <span> Manage </span>
                                     <span class="menu-arrow"></span>
@@ -272,22 +274,22 @@
                                 <div class="collapse" id="tvetmanage">
                                     <ul class="nav-second-level">
                                         <li>
-                                            <a href="#">Approved Pending Application</a>
+                                            <a href="/#">Approved Pending Application</a>
                                         </li>
                                         <li>
-                                            <a href="#">Delete/Edit Application</a>
+                                            <a href="/#">Delete/Edit Application</a>
                                         </li> 
                                     </ul>
                                 </div>
                             </li> 
                             <li>
-                                <a href="#"> 
+                                <a href="/#"> 
                                     <i class="mdi mdi-chart-bar"></i>
                                     <span> Generate Report </span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#"> 
+                                <a href="/#"> 
                                     <i class="mdi mdi-magnify"></i>
                                     <span> Search </span>
                                 </a>
@@ -295,7 +297,7 @@
                             
                             <li class="menu-title mt-4">Utilities</li>
                             <li>
-                                <a href="course"> 
+                                <a href="/course"> 
                                     <i class="mdi mdi-book-outline"></i>
                                     <span> Course </span>
                                 </a>
@@ -307,7 +309,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#school" data-bs-toggle="collapse">
+                                <a href="/#school" data-bs-toggle="collapse">
                                     <i class="mdi mdi-cog-sync-outline"></i>
                                     <span> School </span>
                                     <span class="menu-arrow"></span>
@@ -315,10 +317,10 @@
                                 <div class="collapse" id="school">
                                     <ul class="nav-second-level">
                                         <li>
-                                            <a href="school">School Name(Senior High)</a>
+                                            <a href="/school">School Name(Senior High)</a>
                                         </li>
                                         <li>
-                                            <a href="collegeschool">School Name(College)</a>
+                                            <a href="/collegeschool">School Name(College)</a>
                                         </li> 
                                     </ul>
                                 </div>
@@ -365,11 +367,11 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box">
-                                    <h4 class="page-title"><?= $page_title; ?></h4>
+                                    <h4 class="page-title"><?= !isset($page_title) ? "Dashboard" : $page_title; ?></h4>
                                     <!-- <div>
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Codefox</a></li>
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
+                                            <li class="breadcrumb-item"><a href="/javascript: void(0);">Codefox</a></li>
+                                            <li class="breadcrumb-item"><a href="/javascript: void(0);">Forms</a></li>
                                             <li class="breadcrumb-item active">General Elements</li>
                                         </ol>
                                     </div> -->
@@ -432,7 +434,9 @@
         <?= script_tag('assets/pdfmake/build/vfs_fonts.js'); ?>  
         <?= script_tag('assets/sweetalert2/sweetalert2.all.min.js'); ?>    
         <?= script_tag('assets/moment.js/moment.js'); ?>    
-        <?= script_tag('assets/parsleyjs/parsley.min.js'); ?>    
+        <?= script_tag('assets/parsleyjs/parsley.min.js'); ?>   
+		<script src="https://unpkg.com/dropzone"></script>
+		<script src="https://unpkg.com/cropperjs"></script> 
  
         <?= $this->renderSection('pageScript') ?> 
 
