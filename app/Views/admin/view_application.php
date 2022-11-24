@@ -20,8 +20,8 @@
                     <?php
                         if($type == "shs"){
                     ?>   
-                        <form id="senior-high-registration-form" class="validation-form">
-                            <div class="row">
+                        <form id="senior-high-registration-form" class="validation-form"> 
+                            <div class="row"> 
                                 <div class="col-12">
                                     <div class="row justify-content-between">
                                         <div class="col-6">
@@ -130,13 +130,10 @@
                                 <div class="col-3">
                                     <div class="row justify-content-center  ">   
                                         <label for="formFileShs" >
-                                            <img id="frameShs" title="Select Image" class="rounded mx-auto d-block " alt="Profile Photo" src="<?=base_url()?>/img/select-image.png" style="  height: 240px !important; width: 250px !important"  /> 
+                                            <img id="frameShs"  title="Select Image" class="rounded mx-auto d-block " alt="Profile Photo"  style="  height: 240px !important; width: 250px !important"  /> 
                                         </label> 
                                         <input class="form-control" type="file" id="formFileShs" style="display: none "> 
-                                    </div>
-                                    <div class="text-center">
-                                        <button type="button" id="clearImageShs" class="btn btn-primary mt-3 rounded-pill">Clear Photo</button>  
-                                    </div>
+                                    </div> 
                                 </div>
                             </div>
                             
@@ -307,7 +304,7 @@
                                     <div class="row">
                                         <div class="col">
                                             <label for="birthdate"  class="form-label">Date of Birth <?= $required_field; ?></label>
-                                            <input type="text"  value="<?= $profile['AppDOB'] ?>"  class="form-control" name="birthdate" required >
+                                            <input type="text"  value="<?= $profile['colDOB'] ?>"  class="form-control" name="birthdate" required >
                                         </div>
                                         <div class="col-2">
                                             <label for="age" class="form-label">Age <?= $required_field; ?></label>
@@ -365,10 +362,7 @@
                                             <img id="frameCollege" title="Select Image" class="rounded mx-auto d-block " alt="Profile Photo" src="<?=base_url()?>/img/select-image.png" style="  height: 240px !important; width: 250px !important"  /> 
                                         </label> 
                                         <input class="form-control" type="file" id="formFileCollege" style="display: none "> 
-                                    </div>
-                                    <div class="text-center">
-                                        <button type="button" id="clearImageCollege" class="btn btn-primary mt-3 rounded-pill">Clear Photo</button>  
-                                    </div>
+                                    </div> 
                                 </div>
                             </div>
                                 
@@ -550,7 +544,7 @@
                                     <div class="row">
                                         <div class="col">
                                             <label for="birthdate"  class="form-label">Date of Birth <?= $required_field; ?></label>
-                                            <input type="text"  value="<?= $profile['AppDOB'] ?>"  class="form-control" name="birthdate" required >
+                                            <input type="text"  value="<?= $profile['colDOB'] ?>"  class="form-control" name="birthdate" required >
                                         </div>
                                         <div class="col-2">
                                             <label for="age" class="form-label">Age <?= $required_field; ?></label>
@@ -608,10 +602,7 @@
                                             <img id="frameCollege" title="Select Image" class="rounded mx-auto d-block " alt="Profile Photo" src="<?=base_url()?>/img/select-image.png" style="  height: 240px !important; width: 250px !important"  /> 
                                         </label> 
                                         <input class="form-control" type="file" id="formFileCollege" style="display: none "> 
-                                    </div>
-                                    <div class="text-center">
-                                        <button type="button" id="clearImageCollege" class="btn btn-primary mt-3 rounded-pill">Clear Photo</button>  
-                                    </div>
+                                    </div> 
                                 </div>
                             </div>
                                 
