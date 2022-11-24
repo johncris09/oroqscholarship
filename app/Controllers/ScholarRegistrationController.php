@@ -12,21 +12,21 @@ use App\Models\SequenceModel;
 use App\Models\StrandModel;
 use App\Models\TvetModel;
 use Config\Custom_config; 
+use CodeIgniter\Files\File;
 
 class ScholarRegistrationController extends BaseController
-{
-    
-    
-public function __construct() {
-	$db = db_connect();
-	$this->senior_high_registration = new SeniorHighModel($db);
-    $this->college_registration  = new CollegeModel($db);
-    $this->tvet_registration  = new TvetModel($db);
-}
+{ 
+        
+    public function __construct() {
+        $db = db_connect();
+        $this->senior_high_registration = new SeniorHighModel($db);
+        $this->college_registration  = new CollegeModel($db);
+        $this->tvet_registration  = new TvetModel($db);
+    }
 
 
     public function index()
-    {     
+    {      
         $data["page_title"] = "Scholar Registration";
         $config = new Custom_config;
         $school = new SchoolModel();
@@ -83,6 +83,7 @@ public function __construct() {
                 'AppMother' => trim($this->request->getPost('mother_name')),
                 'AppMotherOccu' => trim($this->request->getPost('mother_occupation')),
                 'AppManager' => trim($this->request->getPost('manager')),
+                'AppImage' =>  $this->request->getPost('image')== "undefined" ? NULL : $this->request->getPost('image'),
             ];
 
             $res =  $this->senior_high_registration->save($data); 
@@ -213,6 +214,16 @@ public function __construct() {
  
     }
     
+
+    public function upload(){
+        $data = $_POST["image"];  
+        $image_array_1 = explode(";", $data); 
+        $image_array_2 = explode(",", $image_array_1[1]); 
+        $data = base64_decode($image_array_2[1]); 
+        $imageName = 'upload/tmp/' . time() . '.png'; 
+        file_put_contents($imageName, $data); 
+        echo $imageName;
+    }
 
     
 } 

@@ -97,16 +97,18 @@
                                             </div> 
                                         </div>
                                     </div>
-                                    <div class="col-3"> 
-                                        <!-- <div class="image_area"> 
-                                            <label for="upload_image">
-                                                <img  alt="Profile Photo" src="<?=base_url()?>/img/select-image.png"   id="uploaded_image" class="img-responsive img-circle" />
-                                                <div class="overlay">
-                                                    <div class="text">Click to Change Profile Image</div>
-                                                </div>
-                                                <input type="file" name="image" class="image" id="upload_image" style="display:none">
-                                            </label> 
-                                        </div>  
+                                    
+                                    
+                                    <div class="col-3">  
+                                        <div class="image_area"> 
+                                                <label for="upload_image">
+                                                    <img src="<?=base_url()?>/img/select-image.png"  id="uploaded_image" class="img-responsive img-circle" />
+                                                    <div class="overlay">
+                                                        <div class="text">Click to Change Profile Image</div>
+                                                    </div>
+                                                    <input type="file" name="image" class="image" id="upload_image" style="display:none">
+                                                </label> 
+                                        </div> 
                                         <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
@@ -134,16 +136,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>	 -->
-                                        <div class="row justify-content-center  ">   
-                                            <label for="formFileShs" >
-                                                <img id="frameShs" title="Select Image" class="rounded mx-auto d-block " alt="Profile Photo" src="<?=base_url()?>/img/select-image.png" style="  height: 240px !important; width: 250px !important"  /> 
-                                            </label> 
-                                            <input class="form-control" type="file" name="formFileShs" id="formFileShs" style="display: none "> 
-                                        </div>
-                                        <div class="text-center">
-                                            <button type="button" id="clearImageShs" class="btn btn-primary mt-3 rounded-pill">Clear Photo</button>  
-                                        </div>
+                                        </div> 
                                     </div>
                                 </div>
                                 
@@ -223,4 +216,4 @@
                                 <div class="row g-3 mt-2" > 
                                         <button type="submit" class="btn btn-primary btn-block waves-effect waves-light rounded-pill">Save  Changes</button> 
                                 </div>    
-                            </form>  
+                            </form>

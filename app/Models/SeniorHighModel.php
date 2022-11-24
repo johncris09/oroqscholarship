@@ -42,7 +42,8 @@ class SeniorHighModel extends Model
         "AppFatherOccu",
         "AppMother",
         "AppMotherOccu",
-        "AppManager"
+        "AppManager",
+        "AppImage"
     ];
 
     // Dates
