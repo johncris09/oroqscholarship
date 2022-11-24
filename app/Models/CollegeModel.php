@@ -44,7 +44,8 @@ class CollegeModel extends Model
         "colMotherOccu",
         "colManager",
         "colUnits",
-        "colSchoolAddress"
+        "colSchoolAddress",
+        "colImage"
     ];
 
     // Dates

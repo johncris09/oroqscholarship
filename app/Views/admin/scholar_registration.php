@@ -45,7 +45,7 @@
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         }
 
-        #uploaded_image{
+        #uploaded_image_shs, #uploaded_image_college, #uploaded_image_tvet{
             
             width: 300px; 
             height: 300px;
@@ -120,7 +120,7 @@
                             </a>
                         </li>
                     </ul>
-                    <div class="tab-content">
+                    <div class="tab-content">   
                         <div class="tab-pane show active " id="senior-high-tab"> 
                         
                             <form id="senior-high-registration-form" class="validation-form"  enctype="multipart/form-data">
@@ -221,23 +221,20 @@
                                             </div> 
                                         </div>
                                     </div>
-                                    
-                                    
-                                    <div class="col-3">  
-                                        
+                                    <div class="col-3">   
                                         <div class="image_area"> 
-                                            <label for="upload_image">  
-                                                <img src="<?=base_url()?>/img/select-image.png"  id="uploaded_image" class="img-responsive img-circle" />
+                                            <label for="upload_image_shs">  
+                                                <img src="<?=base_url()?>/img/select-image.png"  id="uploaded_image_shs" class="img-responsive img-circle" />
                                                 <div class="overlay">
                                                     <div class="text">Change Image</div>
                                                 </div>
-                                                <input type="file" name="image" class="image" id="upload_image" style="display:none">
+                                                <input type="file" name="image" class="image" id="upload_image_shs" style="display:none">
                                             </label>   
                                         </div> 
                                         <div class="text-center">
-                                            <button type="button" id="clearImageCollege" class="btn btn-primary mt-3 rounded-pill">Clear Photo</button>  
+                                            <button type="button" id="clearImageshs" class="btn btn-primary mt-3 rounded-pill">Clear Photo</button>  
                                         </div>
-                                        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="modal_shs" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -250,7 +247,7 @@
                                                         <div class="img-container">
                                                             <div class="row">
                                                                 <div class="col-8">
-                                                                    <img src="" id="sample_image" />
+                                                                    <img src="" id="sample_image_shs" />
                                                                 </div>
                                                                 <div class="col-4">
                                                                     <div class="preview"></div>
@@ -260,12 +257,13 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                        <button type="button" class="btn btn-primary" id="crop">Crop</button>
+                                                        <button type="button" class="btn btn-primary" id="crop_shs">Crop</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div> 
-                                    </div>
+                                    </div>  
+                                    
                                 </div>
                                 
                                 <div class="row g-3" >
@@ -349,7 +347,7 @@
                             
                         </div>
                         <div class="tab-pane " id="college-tab">   
-                        <form id="college-registration-form" class="validation-form">
+                            <form id="college-registration-form" class="validation-form">
                                 <div class="row"> 
                                     <div class="col-12">
                                         <div class="row justify-content-between">
@@ -449,6 +447,49 @@
                                             </div> 
                                         </div>
                                     </div>  
+                                    
+                                    <div class="col-3">   
+                                        <div class="image_area"> 
+                                            <label for="upload_image_college">  
+                                                <img src="<?=base_url()?>/img/select-image.png"  id="uploaded_image_college" class="img-responsive img-circle" />
+                                                <div class="overlay">
+                                                    <div class="text">Change Image</div>
+                                                </div>
+                                                <input type="file" name="image" class="image" id="upload_image_college" style="display:none">
+                                            </label>   
+                                        </div> 
+                                        <div class="text-center">
+                                            <button type="button" id="clearImagecollege" class="btn btn-primary mt-3 rounded-pill">Clear Photo</button>  
+                                        </div>
+                                        <div class="modal fade" id="modal_college" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalLabel">Crop Image Before Upload</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="img-container">
+                                                            <div class="row">
+                                                                <div class="col-8">
+                                                                    <img src="" id="sample_image_college" />
+                                                                </div>
+                                                                <div class="col-4">
+                                                                    <div class="preview"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                        <button type="button" class="btn btn-primary" id="crop_college">Crop</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>  
                                 </div>
                                     
                                 <div class="row g-3" >
@@ -542,7 +583,7 @@
                         
                         <div class="tab-pane " id="tvet-tab">
                             
-                        <form id="tvet-registration-form" class="validation-form">
+                            <form id="tvet-registration-form" class="validation-form">
                                 <div class="row"> 
                                     <div class="col-12">
                                         <div class="row justify-content-between">
@@ -641,18 +682,49 @@
                                                 <input type="number" class="form-control" name="availment" required>
                                             </div> 
                                         </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="row justify-content-center  ">   
-                                            <label for="formFileCollege" >
-                                                <img id="frameCollege" title="Select Image" class="rounded mx-auto d-block " alt="Profile Photo" src="<?=base_url()?>/img/select-image.png" style="  height: 240px !important; width: 250px !important"  /> 
-                                            </label> 
-                                            <input class="form-control" type="file" id="formFileCollege" style="display: none "> 
-                                        </div>
+                                    </div> 
+                                    <div class="col-3">   
+                                        <div class="image_area"> 
+                                            <label for="upload_image_tvet">  
+                                                <img src="<?=base_url()?>/img/select-image.png"  id="uploaded_image_tvet" class="img-responsive img-circle" />
+                                                <div class="overlay">
+                                                    <div class="text">Change Image</div>
+                                                </div>
+                                                <input type="file" name="image" class="image" id="upload_image_tvet" style="display:none">
+                                            </label>   
+                                        </div> 
                                         <div class="text-center">
-                                            <button type="button" id="clearImageCollege" class="btn btn-primary mt-3 rounded-pill">Clear Photo</button>  
+                                            <button type="button" id="clearImagetvet" class="btn btn-primary mt-3 rounded-pill">Clear Photo</button>  
                                         </div>
-                                    </div>
+                                        <div class="modal fade" id="modal_tvet" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalLabel">Crop Image Before Upload</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="img-container">
+                                                            <div class="row">
+                                                                <div class="col-8">
+                                                                    <img src="" id="sample_image_tvet" />
+                                                                </div>
+                                                                <div class="col-4">
+                                                                    <div class="preview"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                        <button type="button" class="btn btn-primary" id="crop_tvet">Crop</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>  
                                 </div>
                                     
                                 <div class="row g-3" >
@@ -765,16 +837,20 @@
  
 
 
-            var $modal_shs_crop = $('#senior-high-registration-form #modal');
-            var image = document.getElementById('sample_image');
+            var $modal_shs = $('#modal_shs');
+            var image_shs = document.getElementById('sample_image_shs'); 
+            var $modal_college = $('#modal_college');
+            var image_college = document.getElementById('sample_image_college'); 
+            var $modal_tvet = $('#modal_tvet');
+            var image_tvet = document.getElementById('sample_image_tvet'); 
             var cropper;
             var base64data;
  
-            $('#senior-high-registration-form #upload_image').change(function(event){
+            $('#upload_image_shs').change(function(event){
                 var files = event.target.files;
                 var done = function (url) {
-                    image.src = url;
-                    $modal_shs_crop.modal('show');
+                    image_shs.src = url;
+                    $modal_shs.modal('show');
                 }; 
                 if (files && files.length > 0)
                 { 
@@ -786,8 +862,39 @@
                 }
             });
 
-            $modal_shs_crop.on('shown.bs.modal', function() {
-                cropper = new Cropper(image, {
+            $('#upload_image_college').change(function(event){
+                var files = event.target.files;
+                var done = function (url) {
+                    image_college.src = url;
+                    $modal_college.modal('show');
+                }; 
+                if (files && files.length > 0)
+                { 
+                    reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]); 
+                }
+            });
+            $('#upload_image_tvet').change(function(event){
+                var files = event.target.files;
+                var done = function (url) {
+                    image_tvet.src = url;
+                    $modal_tvet.modal('show');
+                }; 
+                if (files && files.length > 0)
+                { 
+                    reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]); 
+                }
+            });
+
+            $modal_shs.on('shown.bs.modal', function() {
+                cropper = new Cropper(image_shs, {
                     dragMode: 'move',    
                     // aspectRatio: 1,
                     // viewMode: 3,  
@@ -810,7 +917,57 @@
                 cropper = null;
             });
 
-            $("#senior-high-registration-form #crop").click(function(){
+            
+            $modal_college.on('shown.bs.modal', function() {
+                cropper = new Cropper(image_college, {
+                    dragMode: 'move',    
+                    // aspectRatio: 1,
+                    // viewMode: 3,  
+                    aspectRatio: 1,
+                    minCropBoxWidth: 360,
+                    minCropBoxHeight: 360,
+                    guides: true,
+                    highlight: false,
+                    dragCrop: true,
+                    cropBoxMovable: true,
+                    cropBoxResizable: true,
+                    responsive: true,
+                    background: false,
+                    preview: '.preview'
+                });
+ 
+
+            }).on('hidden.bs.modal', function() {
+                cropper.destroy();
+                cropper = null;
+            });
+
+            
+            $modal_tvet.on('shown.bs.modal', function() {
+                cropper = new Cropper(image_tvet, {
+                    dragMode: 'move',    
+                    // aspectRatio: 1,
+                    // viewMode: 3,  
+                    aspectRatio: 1,
+                    minCropBoxWidth: 360,
+                    minCropBoxHeight: 360,
+                    guides: true,
+                    highlight: false,
+                    dragCrop: true,
+                    cropBoxMovable: true,
+                    cropBoxResizable: true,
+                    responsive: true,
+                    background: false,
+                    preview: '.preview'
+                });
+ 
+
+            }).on('hidden.bs.modal', function() {
+                cropper.destroy();
+                cropper = null;
+            });
+
+            $("#crop_shs").click(function(){
                 canvas = cropper.getCroppedCanvas({ 
                     width: 160,
                     height: 160,
@@ -829,14 +986,79 @@
                             dadtaType: "json",
                             success: function(data){ 
                                 console.log(data)
-                                $modal_shs_crop.modal('hide');
-                                $('#senior-high-registration-form #uploaded_image').attr('src', data);
+                                $modal_shs.modal('hide');
+                                $('#uploaded_image_shs').attr('src', data);
+                            }
+                        });
+                    }
+                });
+            });
+
+            $("#crop_college").click(function(){
+                canvas = cropper.getCroppedCanvas({ 
+                    width: 160,
+                    height: 160,
+                });
+
+                canvas.toBlob(function(blob) {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(blob); 
+                    reader.onloadend = function() {
+                        base64data = reader.result;  
+
+                        $.ajax({
+                            url: "registration/upload",
+                            method: "POST",                	
+                            data: {image: base64data},
+                            dadtaType: "json",
+                            success: function(data){ 
+                                console.log(data)
+                                $modal_college.modal('hide');
+                                $('#uploaded_image_college').attr('src', data);
                             }
                         });
                     }
                 });
             });
  
+            $("#crop_tvet").click(function(){
+                canvas = cropper.getCroppedCanvas({ 
+                    width: 160,
+                    height: 160,
+                });
+
+                canvas.toBlob(function(blob) {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(blob); 
+                    reader.onloadend = function() {
+                        base64data = reader.result;  
+
+                        $.ajax({
+                            url: "registration/upload",
+                            method: "POST",                	
+                            data: {image: base64data},
+                            dadtaType: "json",
+                            success: function(data){ 
+                                console.log(data)
+                                $modal_tvet.modal('hide');
+                                $('#uploaded_image_tvet').attr('src', data);
+                            }
+                        });
+                    }
+                });
+            });
+  
+  
+            $(document).on('click', '#clearImageshs', function(e){  
+                $('#uploaded_image_shs').attr('src', "<?=base_url()?>/img/select-image.png"); 
+            });
+  
+            $(document).on('click', '#clearImagecollege', function(e){  
+                $('#uploaded_image_college').attr('src', "<?=base_url()?>/img/select-image.png"); 
+            });
+            $(document).on('click', '#clearImagetvet', function(e){  
+                $('#uploaded_image_tvet').attr('src', "<?=base_url()?>/img/select-image.png"); 
+            }); 
 
             $(document).ready(function() {
                 $(".validation-form").parsley()
@@ -886,13 +1108,6 @@
                     frameTvet.src = URL.createObjectURL(event.target.files[0]);
                 } 
             }); 
-
-            
-            $(document).on('click', '#clearImageTvet', function(e){ 
-
-                document.getElementById('formFileShs').value = null;
-                frameTvet.src = "<?=base_url()?>/img/select-image.png";
-            });
              
             // get age using birthdate 
             $(document).on('change', 'input[name="birthdate"]', function(e){ 
@@ -937,7 +1152,7 @@
                             $("#senior-high-registration-form")[0].reset()
                             shs_app_no_id();
                             
-                            $('#senior-high-registration-form #uploaded_image').attr('src', "<?=base_url()?>/img/select-image.png");
+                            $('#uploaded_image_shs').attr('src', "<?=base_url()?>/img/select-image.png");
 
                         }else{  
                             Swal.fire({
@@ -960,7 +1175,7 @@
                 $.ajax({
                     url:  'registration/insert_college',
                     method: "post", 
-                    data: $("#college-registration-form").serialize(),
+                    data: $("#college-registration-form").serialize() + '&image=' + base64data,
                     dataType: "json", 
                     success: function (data) { 
                         if(data.response){ 
@@ -973,6 +1188,7 @@
                             
                             $("#college-registration-form")[0].reset()
                             shs_app_no_id();
+                            $('#uploaded_image_college').attr('src', "<?=base_url()?>/img/select-image.png");
                         }else{  
                             Swal.fire({
                                 title:"Insert Error!",
@@ -995,7 +1211,7 @@
                 $.ajax({
                     url:  'registration/insert_tvet',
                     method: "post", 
-                    data: $("#tvet-registration-form").serialize(),
+                    data: $("#tvet-registration-form").serialize() + '&image=' + base64data,
                     dataType: "json", 
                     success: function (data) { 
                         if(data.response){ 
@@ -1008,6 +1224,7 @@
                             
                             $("#tvet-registration-form")[0].reset()
                             shs_app_no_id();
+                            $('#uploaded_image_tvet').attr('src', "<?=base_url()?>/img/select-image.png");
                         }else{  
                             Swal.fire({
                                 title:"Insert Error!",

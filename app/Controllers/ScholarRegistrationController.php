@@ -142,6 +142,7 @@ class ScholarRegistrationController extends BaseController
                 "colManager"  => trim($this->request->getPost('manager')),
                 "colUnits"  => trim($this->request->getPost('units')),
                 "colSchoolAddress"  => trim($this->request->getPost('school_address')),
+                'colImage' =>  $this->request->getPost('image')== "undefined" ? NULL : $this->request->getPost('image'),
             ];
 
             $res =  $this->college_registration->save($data); 
@@ -196,6 +197,7 @@ class ScholarRegistrationController extends BaseController
                 "colManager"  => trim($this->request->getPost('manager')),
                 "colUnits"  => trim($this->request->getPost('units')),
                 "colSchoolAddress"  => trim($this->request->getPost('school_address')),
+                'colImage' =>  $this->request->getPost('image')== "undefined" ? NULL : $this->request->getPost('image'),
             ];
 
             $res =  $this->tvet_registration->save($data); 
