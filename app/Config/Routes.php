@@ -46,6 +46,8 @@ $routes->group('registration',  function($routes) {
     $routes->post('insert_college', 'ScholarRegistrationController::insert_college_registration');     
     $routes->post('insert_tvet', 'ScholarRegistrationController::insert_tvet_registration');    
     $routes->post('upload', 'ScholarRegistrationController::upload');   
+    $routes->post('upload_image', 'ScholarRegistrationController::upload_image');   
+    $routes->post('shs_update_image', 'ScholarRegistrationController::update_image'); 
 });
 
 $routes->group('approved',  function($routes) {

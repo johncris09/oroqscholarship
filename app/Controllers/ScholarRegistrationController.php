@@ -12,7 +12,7 @@ use App\Models\SequenceModel;
 use App\Models\StrandModel;
 use App\Models\TvetModel;
 use Config\Custom_config; 
-use CodeIgniter\Files\File;
+use CodeIgniter\Files\File; 
 
 class ScholarRegistrationController extends BaseController
 { 
@@ -83,12 +83,12 @@ class ScholarRegistrationController extends BaseController
                 'AppMother' => trim($this->request->getPost('mother_name')),
                 'AppMotherOccu' => trim($this->request->getPost('mother_occupation')),
                 'AppManager' => trim($this->request->getPost('manager')),
-                'AppImage' =>  $this->request->getPost('image')== "undefined" ? NULL : $this->request->getPost('image'),
-            ];
 
-            $res =  $this->senior_high_registration->save($data); 
+            ];
+            $this->senior_high_registration->save($data);  
             $res = [
                 "response" =>  true,
+                "id" =>  $this->senior_high_registration->insertID,
                 "message" =>  "Application has been saved to pending applications",
             ];
         } catch (\Exception $e) {  
@@ -97,9 +97,23 @@ class ScholarRegistrationController extends BaseController
                 "message" =>   $e->getMessage() , 
             ]; 
         }  
+ 
         echo Json_encode($res); 
  
     }
+
+    public function update_image(){  
+        $id = $this->request->getPost('id'); 
+        $image =[
+            'AppImage' => file_get_contents( $_FILES['image']['tmp_name'] )
+        ]; 
+        $res = $this->senior_high_registration->update($id, $image);  
+        echo Json_encode($res); 
+
+ 
+    }
+ 
+ 
 
     public function shs_app_no_id()
     {
@@ -227,5 +241,6 @@ class ScholarRegistrationController extends BaseController
         echo $imageName;
     }
 
+     
     
 } 

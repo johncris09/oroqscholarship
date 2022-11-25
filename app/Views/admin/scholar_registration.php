@@ -103,9 +103,9 @@
                 <div class="card-body">
                     <h4 class="header-title mb-4"><?= $page_title; ?></h4>
 
-                    <ul class="nav nav-tabs">
+                    <ul class="nav nav-tabs"> 
                         <li class="nav-item">
-                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active ">
+                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link  active ">
                                 Senior High School Registration
                             </a>
                         </li>
@@ -120,9 +120,8 @@
                             </a>
                         </li>
                     </ul>
-                    <div class="tab-content">   
-                        <div class="tab-pane show active " id="senior-high-tab"> 
-                        
+                    <div class="tab-content"> 
+                        <div class="tab-pane show active  " id="senior-high-tab"> 
                             <form id="senior-high-registration-form" class="validation-form"  enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-12">
@@ -834,9 +833,7 @@
 
         
         $(document).ready(function(){
- 
-
-
+   
             var $modal_shs = $('#modal_shs');
             var image_shs = document.getElementById('sample_image_shs'); 
             var $modal_college = $('#modal_college');
@@ -894,23 +891,23 @@
             });
 
             $modal_shs.on('shown.bs.modal', function() {
-                cropper = new Cropper(image_shs, {
+                cropper = new Cropper(image_shs, { 
                     dragMode: 'move',    
                     // aspectRatio: 1,
                     // viewMode: 3,  
                     aspectRatio: 1,
-                    minCropBoxWidth: 360,
-                    minCropBoxHeight: 360,
+                    minCropBoxWidth: 150,
+                    minCropBoxHeight: 150,
+                    cropBoxResizable: true,
                     guides: true,
-                    highlight: false,
+                    highlight: true,
                     dragCrop: true,
                     cropBoxMovable: true,
                     cropBoxResizable: true,
                     responsive: true,
-                    background: false,
-                    preview: '.preview'
-                });
- 
+                    background: true,autoCropArea: 1,
+                    preview: '.preview', 
+                }); 
 
             }).on('hidden.bs.modal', function() {
                 cropper.destroy();
@@ -969,8 +966,8 @@
 
             $("#crop_shs").click(function(){
                 canvas = cropper.getCroppedCanvas({ 
-                    width: 160,
-                    height: 160,
+                    width: 96,
+                    height: 96,
                 });
 
                 canvas.toBlob(function(blob) {
@@ -1070,51 +1067,7 @@
                     return !1
                 })
             }); 
- 
-            
-            $(document).on('change', '#formFileCollege', function(e){  
-
-                var validExtensions = ["jpg","pdf","jpeg","gif","png", "jfif"]
-                var file = $(this).val().split('.').pop();
-                if (validExtensions.indexOf(file) == -1) { 
-                    Swal.fire({
-                        title:"Upload Error!",
-                        text: "Only formats are allowed : "+validExtensions.join(', '),
-                        icon:"error"
-                    }) 
-                }else{
-                    frameCollege.src = URL.createObjectURL(event.target.files[0]);
-                } 
-            }); 
-
-            $(document).on('click', '#clearImageCollege', function(e){ 
-                
-                document.getElementById('formFileShs').value = null;
-                frameCollege.src = "<?=base_url()?>/img/select-image.png";
-            });
-
-            
-            $(document).on('change', '#formFileTvet', function(e){  
-
-                var validExtensions = ["jpg","pdf","jpeg","gif","png", "jfif"]
-                var file = $(this).val().split('.').pop();
-                if (validExtensions.indexOf(file) == -1) { 
-                    Swal.fire({
-                        title:"Upload Error!",
-                        text: "Only formats are allowed : "+validExtensions.join(', '),
-                        icon:"error"
-                    }) 
-                }else{
-                    frameTvet.src = URL.createObjectURL(event.target.files[0]);
-                } 
-            }); 
-             
-            // get age using birthdate 
-            $(document).on('change', 'input[name="birthdate"]', function(e){ 
-                var age = moment().diff($(this).val(), 'years',false);    
-                var form_id = $(this).closest('form').attr('id') 
-                $('#'+form_id+' input[name="age"]').val(age)
-            });
+  
 
             shs_app_no_id();
 
@@ -1133,17 +1086,56 @@
                 }); 
             }
 
-            $(document).on('submit', '#senior-high-registration-form', function(e){ 
+            $(document).on('submit', '#senior-high-registration-form', function(e){  
+                e.preventDefault();   
                 
-                e.preventDefault();    
-                var _this = $(this)   
+                
+                var formData = new FormData($("#senior-high-registration-form")[0]);  
                 $.ajax({
                     url:  'registration/insert_senior_high',
                     method: "post", 
-                    data: $("#senior-high-registration-form").serialize() + '&image=' + base64data,
+                    data: formData,
+                    processData: false,
+                    contentType: false, 
                     dataType: "json", 
-                    success: function (data) {   
+                    success: function (data) {    
+                        console.info(data)
+
+                        // upload image
                         if(data.response){ 
+                            if($('#upload_image_shs').val() !== ""){
+                                new Compressor($('#upload_image_shs')[0].files[0], {
+                                    quality: 0.6,
+                                    width: 192,
+                                    height: 192, 
+                                    success(result){ 
+                                        formData.set('image', result, result.name); 
+                                        formData.set('id', data.id); 
+                                        $.ajax({
+                                            url:  'registration/shs_update_image',
+                                            method: "post", 
+                                            data: formData,
+                                            processData: false,
+                                            contentType: false, 
+                                            dataType: "json",
+                                            success: function (data) {   
+                                                console.info(data) 
+                                            },
+                                            error: function (xhr, status, error) { 
+                                                console.info(xhr.responseText);
+                                            }
+                                        }); 
+                                    },
+                                    error(err){
+                                        console.log(err.message);
+                                    }
+                                })
+                            }else{
+                                console.info("Enpty")
+                            } 
+                            
+                            
+                        
                             Swal.fire({
                                 title:"Good job!",
                                 text: data.message,

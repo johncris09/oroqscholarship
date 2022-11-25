@@ -7,6 +7,18 @@
         #frameShs:hover, #frameCollege:hover, #frameTvet:hover{
             cursor: pointer;
         }
+
+        form img {
+            margin-top: 50px;
+            display: block;
+            max-width: 260px; 
+            height: 260px;
+            background: transparent;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 10px; 
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
   
     </style>
 <?= $this->endSection() ?> 
@@ -19,7 +31,8 @@
                     <h4 class="header-title mb-4"><?= $page_title; ?></h4> 
                     <?php
                         if($type == "shs"){
-                    ?>   
+                    ?>     
+ 
                         <form id="senior-high-registration-form" class="validation-form"> 
                             <div class="row"> 
                                 <div class="col-12">
@@ -127,13 +140,9 @@
                                         </div> 
                                     </div>
                                 </div>
-                                <div class="col-3">
-                                    <div class="row justify-content-center  ">   
-                                        <label for="formFileShs" >
-                                            <img id="frameShs"  title="Select Image" class="rounded mx-auto d-block " alt="Profile Photo"  style="  height: 240px !important; width: 250px !important"  /> 
-                                        </label> 
-                                        <input class="form-control" type="file" id="formFileShs" style="display: none "> 
-                                    </div> 
+                                <div class="col-3">  
+                                        <img src="data:image/jpg;charset=utf8;base64,<?= base64_encode( $profile['AppImage'] ) ?>"  class="rounded mx-auto d-block" alt="Profile Photo"   />
+                                          
                                 </div>
                             </div>
                             
