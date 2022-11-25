@@ -437,6 +437,7 @@
         <?= script_tag('assets/parsleyjs/parsley.min.js'); ?>   
 		<script src="https://unpkg.com/dropzone"></script>
 		<script src="https://unpkg.com/cropperjs"></script> 
+        <script src="https://fengyuanchen.github.io/compressorjs/js/compressor.js"></script>
  
         <?= $this->renderSection('pageScript') ?> 
 
