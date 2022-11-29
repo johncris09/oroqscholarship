@@ -451,7 +451,7 @@
                                     <div class="col-3">   
                                         <div class="image_area"> 
                                             <label for="upload_image_college">  
-                                                <input type="text" id="photo" name="image">
+                                                <input type="hidden" id="photo" name="image">
                                                 <img src="<?=base_url()?>/img/select-image.png"  id="uploaded_image_college" class="img-responsive img-circle" />
                                                 <div class="overlay">
                                                     <div class="text">Change Image</div>
@@ -687,7 +687,7 @@
                                     <div class="col-3">   
                                         <div class="image_area"> 
                                             <label for="upload_image_tvet">  
-                                                <input type="text" id="photo" name="image">
+                                                <input type="hidden" id="photo" name="image">
                                                 <img src="<?=base_url()?>/img/select-image.png"  id="uploaded_image_tvet" class="img-responsive img-circle" />
                                                 <div class="overlay">
                                                     <div class="text">Change Image</div>
