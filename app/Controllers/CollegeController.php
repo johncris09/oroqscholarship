@@ -91,6 +91,7 @@ class CollegeController extends BaseController
                 "colManager"  => trim($this->request->getPost('manager')),
                 "colUnits"  => trim($this->request->getPost('units')),
                 "colSchoolAddress"  => trim($this->request->getPost('school_address')),
+                'colImage' => trim($this->request->getPost('image')),
             ];
 
 

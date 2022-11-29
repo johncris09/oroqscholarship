@@ -88,6 +88,7 @@ class SeniorHighController extends BaseController
                 'AppMother' => trim($this->request->getPost('mother_name')),
                 'AppMotherOccu' => trim($this->request->getPost('mother_occupation')),
                 'AppManager' => trim($this->request->getPost('manager')),
+                'AppImage' => trim($this->request->getPost('image')),
             ];
 
 
@@ -103,6 +104,7 @@ class SeniorHighController extends BaseController
                 "message" =>   $e->getMessage() , 
             ]; 
         } 
+ 
         echo Json_encode($res);
     }
 

@@ -3,18 +3,96 @@
 <?= $this->section('title') ?><?= $page_title; ?><?= $this->endSection() ?>
 
 <?= $this->section('pageStyle') ?>
-    <style>
+    
+<style>
         #frameShs:hover, #frameCollege:hover, #frameTvet:hover{
             cursor: pointer;
         }
-  
+
+        
         input[name="age"]:hover{
             cursor: not-allowed;
+        } 
+
+        .image_area {
+            position: relative;
+            /* border: 5px solid black; */
         }
 
-        select[name="status"]{
-            font-size: 1.5em !important;
+        .close{ 
+            /* display:block; */ 
+            position:absolute; 
+            right: 5px;
+            top: 5px;
+            color: red;
+            border-radius: 50%; 
+            font-size: 20px;
+            box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+
         }
+
+        .close:hover{
+            cursor: pointer;
+        }
+        
+
+        form img {
+            display: block;
+            max-width: 100%; 
+            background: transparent;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 10px; 
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+
+        #uploaded_image_shs, #uploaded_image_college, #uploaded_image_tvet{
+            
+            width: 300px; 
+            height: 300px;
+        }
+
+        .preview {
+            overflow: hidden;
+            width: 160px; 
+            height: 160px;
+            margin: 10px;
+            border: 1px solid red;
+        }
+
+        .modal-lg{
+            max-width: 1000px !important;
+        }
+
+        .overlay {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.5);
+            overflow: hidden;
+            height: 0;
+            transition: .5s ease;
+            width: 100%;
+        }
+
+        .image_area:hover .overlay {
+            height: 50%;
+            cursor: pointer;
+        }
+
+        .text {
+            color: #333;
+            font-size: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
     </style>
 <?= $this->endSection() ?> 
 
@@ -151,17 +229,49 @@
                                             </div> 
                                         </div>
                                     </div>
-                                    <div class="col-3">
-                                        <div class="row justify-content-center  ">   
-                                            <label for="formFileShs" >
-                                                <img id="frameShs" title="Select Image" class="rounded mx-auto d-block " alt="Profile Photo" src="<?=base_url()?>/img/select-image.png" style="  height: 240px !important; width: 250px !important"  /> 
-                                            </label> 
-                                            <input class="form-control" type="file" id="formFileShs" style="display: none "> 
-                                        </div>
+                                    <div class="col-3">   
+                                        <div class="image_area"> 
+                                            <label for="upload_image_shs">  
+                                                <input type="hidden" value="<?= $profile["AppImage"] ?>" id="photo" name="image">
+                                                <img src="<?= !empty($profile['AppImage']) ?  $profile['AppImage']  : base_url()."/img/select-image.png" ?>"   id="uploaded_image_shs" class="img-responsive img-circle" />
+                                                <div class="overlay">
+                                                    <div class="text">Change Image</div>
+                                                </div>
+                                                <input type="file"  class="image" id="upload_image_shs" style="display:none">
+                                            </label>   
+                                        </div> 
                                         <div class="text-center">
-                                            <button type="button" id="clearImageShs" class="btn btn-primary mt-3 rounded-pill">Clear Photo</button>  
+                                            <button type="button" id="clearImageshs" class="btn btn-primary mt-3 rounded-pill">Clear Photo</button>  
                                         </div>
-                                    </div>
+                                        <div class="modal fade" id="modal_shs" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalLabel">Crop Image Before Upload</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="img-container">
+                                                            <div class="row">
+                                                                <div class="col-8">
+                                                                    <img src="" id="sample_image_shs" />
+                                                                </div>
+                                                                <div class="col-4">
+                                                                    <div class="preview"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                        <button type="button" class="btn btn-primary" id="crop_shs">Crop</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>  
                                 </div>
                                 
                                 <div class="row g-3" >
@@ -406,18 +516,50 @@
                                                 <input type="number"  value="<?= $profile['colAvailment'] ?>"   class="form-control" name="availment" required>
                                             </div> 
                                         </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="row justify-content-center  ">   
-                                            <label for="formFileCollege" >
-                                                <img id="frameCollege" title="Select Image" class="rounded mx-auto d-block " alt="Profile Photo" src="<?=base_url()?>/img/select-image.png" style="  height: 240px !important; width: 250px !important"  /> 
-                                            </label> 
-                                            <input class="form-control" type="file" id="formFileCollege" style="display: none "> 
-                                        </div>
+                                    </div> 
+                                    <div class="col-3">   
+                                        <div class="image_area"> 
+                                            <label for="upload_image_college">  
+                                                <input type="hidden" value="<?= $profile["colImage"] ?>" id="photo" name="image">
+                                                <img src="<?= !empty($profile['colImage']) ?  $profile['colImage']  : base_url()."/img/select-image.png" ?>"   id="uploaded_image_college" class="img-responsive img-circle" />
+                                                <div class="overlay">
+                                                    <div class="text">Change Image</div>
+                                                </div>
+                                                <input type="file"  class="image" id="upload_image_college" style="display:none">
+                                            </label>   
+                                        </div> 
                                         <div class="text-center">
-                                            <button type="button" id="clearImageCollege" class="btn btn-primary mt-3 rounded-pill">Clear Photo</button>  
+                                            <button type="button" id="clearImagecollege" class="btn btn-primary mt-3 rounded-pill">Clear Photo</button>  
                                         </div>
-                                    </div>
+                                        <div class="modal fade" id="modal_college" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalLabel">Crop Image Before Upload</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="img-container">
+                                                            <div class="row">
+                                                                <div class="col-8">
+                                                                    <img src="" id="sample_image_college" />
+                                                                </div>
+                                                                <div class="col-4">
+                                                                    <div class="preview"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                        <button type="button" class="btn btn-primary" id="crop_college">Crop</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>  
                                 </div>
                                     
                                 <div class="row g-3" >
@@ -548,7 +690,7 @@
 
                         }else if($type == "tvet"){
                     ?>
-                    
+                            
                             <form id="tvet-form" class="validation-form">
                                 <div class="row">  
                                     <div class="col-12">
@@ -675,17 +817,50 @@
                                             </div> 
                                         </div>
                                     </div>
-                                    <div class="col-3">
-                                        <div class="row justify-content-center  ">   
-                                            <label for="formFileCollege" >
-                                                <img id="frameCollege" title="Select Image" class="rounded mx-auto d-block " alt="Profile Photo" src="<?=base_url()?>/img/select-image.png" style="  height: 240px !important; width: 250px !important"  /> 
-                                            </label> 
-                                            <input class="form-control" type="file" id="formFileCollege" style="display: none "> 
-                                        </div>
+                                    
+                                    <div class="col-3">   
+                                        <div class="image_area"> 
+                                            <label for="upload_image_tvet">  
+                                                <input type="hidden" value="<?= $profile["colImage"] ?>" id="photo" name="image">
+                                                <img src="<?= !empty($profile['colImage']) ?  $profile['colImage']  : base_url()."/img/select-image.png" ?>"   id="uploaded_image_tvet" class="img-responsive img-circle" />
+                                                <div class="overlay">
+                                                    <div class="text">Change Image</div>
+                                                </div>
+                                                <input type="file"  class="image" id="upload_image_tvet" style="display:none">
+                                            </label>   
+                                        </div> 
                                         <div class="text-center">
-                                            <button type="button" id="clearImageCollege" class="btn btn-primary mt-3 rounded-pill">Clear Photo</button>  
+                                            <button type="button" id="clearImagetvet" class="btn btn-primary mt-3 rounded-pill">Clear Photo</button>  
                                         </div>
-                                    </div>
+                                        <div class="modal fade" id="modal_tvet" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalLabel">Crop Image Before Upload</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="img-container">
+                                                            <div class="row">
+                                                                <div class="col-8">
+                                                                    <img src="" id="sample_image_tvet" />
+                                                                </div>
+                                                                <div class="col-4">
+                                                                    <div class="preview"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                        <button type="button" class="btn btn-primary" id="crop_tvet">Crop</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>  
                                 </div>
                                 
                                 <div class="row g-3" >
@@ -828,6 +1003,239 @@
 
     <script>
         $(document).ready(function() { 
+            
+            
+            var $modal_shs = $('#modal_shs');
+            var image_shs = document.getElementById('sample_image_shs'); 
+            var $modal_college = $('#modal_college');
+            var image_college = document.getElementById('sample_image_college'); 
+            var $modal_tvet = $('#modal_tvet');
+            var image_tvet = document.getElementById('sample_image_tvet'); 
+            var cropper;
+            var base64data;
+ 
+            $('#upload_image_shs').change(function(event){
+                var files = event.target.files; 
+                var done = function (url) {
+                    image_shs.src = url;
+                    $modal_shs.modal('show');  
+                }; 
+                if (files && files.length > 0)
+                { 
+                    reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]); 
+                }
+            });
+ 
+ 
+
+            $('#upload_image_college').change(function(event){
+                var files = event.target.files;
+                var done = function (url) {
+                    image_college.src = url;
+                    $modal_college.modal('show');
+                }; 
+                if (files && files.length > 0)
+                { 
+                    reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]); 
+                }
+            });
+            $('#upload_image_tvet').change(function(event){
+                var files = event.target.files;
+                var done = function (url) {
+                    image_tvet.src = url;
+                    $modal_tvet.modal('show');
+                }; 
+                if (files && files.length > 0)
+                { 
+                    reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]); 
+                }
+            });
+
+            $modal_shs.on('shown.bs.modal', function() {
+                cropper = new Cropper(image_shs, { 
+                    dragMode: 'move',    
+                    // aspectRatio: 1,
+                    // viewMode: 3,  
+                    aspectRatio: 1,
+                    minCropBoxWidth: 150,
+                    minCropBoxHeight: 150,
+                    cropBoxResizable: true,
+                    guides: true,
+                    highlight: true,
+                    dragCrop: true,
+                    cropBoxMovable: true,
+                    cropBoxResizable: true,
+                    responsive: true,
+                    background: true,autoCropArea: 1,
+                    preview: '.preview', 
+                }); 
+
+            }).on('hidden.bs.modal', function() {
+                cropper.destroy();
+                cropper = null;
+            });
+
+            
+            $modal_college.on('shown.bs.modal', function() {
+                cropper = new Cropper(image_college, {
+                    dragMode: 'move',    
+                    // aspectRatio: 1,
+                    // viewMode: 3, 
+                    aspectRatio: 1,
+                    minCropBoxWidth: 150,
+                    minCropBoxHeight: 150,
+                    cropBoxResizable: true,
+                    guides: true,
+                    highlight: true,
+                    dragCrop: true,
+                    cropBoxMovable: true,
+                    cropBoxResizable: true,
+                    responsive: true,
+                    background: true,autoCropArea: 1,
+                    preview: '.preview',  
+                });
+ 
+
+            }).on('hidden.bs.modal', function() {
+                cropper.destroy();
+                cropper = null;
+            });
+
+            
+            $modal_tvet.on('shown.bs.modal', function() {
+                cropper = new Cropper(image_tvet, {
+                    dragMode: 'move',    
+                    // aspectRatio: 1,
+                    // viewMode: 3, 
+                    aspectRatio: 1,
+                    minCropBoxWidth: 150,
+                    minCropBoxHeight: 150,
+                    cropBoxResizable: true,
+                    guides: true,
+                    highlight: true,
+                    dragCrop: true,
+                    cropBoxMovable: true,
+                    cropBoxResizable: true,
+                    responsive: true,
+                    background: true,autoCropArea: 1,
+                    preview: '.preview', 
+                });
+ 
+
+            }).on('hidden.bs.modal', function() {
+                cropper.destroy();
+                cropper = null;
+            });
+
+            $("#crop_shs").click(function(e){
+                canvas = cropper.getCroppedCanvas({ 
+                    width: 96,
+                    height: 96,
+                });
+ 
+
+                canvas.toBlob(function(blob) {
+                    var reader = new FileReader(); 
+                    reader.readAsDataURL(blob);  
+                    reader.onloadend = function() { 
+                        base64data = reader.result;
+
+                        $.ajax({
+                            url: "../../../registration/upload",
+                            method: "POST",                	
+                            data: {image: base64data},
+                            dadtaType: "json",
+                            success: function(data){   
+                                image_data = data;
+                                $modal_shs.modal('hide');   
+                                $('#uploaded_image_shs').attr('src', "<?= base_url(); ?>/" + data);                
+                            }
+                        }); 
+                        $('#senior-high-form #photo').val(base64data); 
+
+                    }
+                });
+            });
+
+
+            $("#crop_college").click(function(){
+                canvas = cropper.getCroppedCanvas({ 
+                    width: 96,
+                    height: 96,
+                });
+
+                canvas.toBlob(function(blob) {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(blob); 
+                    reader.onloadend = function() {
+                        base64data = reader.result;  
+
+                        $.ajax({
+                            url: "../../../registration/upload",
+                            method: "POST",                	
+                            data: {image: base64data},
+                            dadtaType: "json",
+                            success: function(data){  
+                                $modal_college.modal('hide'); 
+                                $('#uploaded_image_college').attr('src', "<?= base_url(); ?>/" + data);  
+                            }
+                        });
+                        $('#college-form #photo').val(base64data); 
+                    }
+                });
+            });
+ 
+            $("#crop_tvet").click(function(){
+                canvas = cropper.getCroppedCanvas({ 
+                    width: 96,
+                    height: 96,
+                });
+
+                canvas.toBlob(function(blob) {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(blob); 
+                    reader.onloadend = function() {
+                        base64data = reader.result;  
+
+                        $.ajax({
+                            url: "../../../registration/upload",
+                            method: "POST",                	
+                            data: {image: base64data},
+                            dadtaType: "json",
+                            success: function(data){  
+                                $modal_tvet.modal('hide');
+                                $('#uploaded_image_tvet').attr('src', "<?= base_url(); ?>/" + data);   
+                            }
+                        });
+                        
+                        $('#tvet-form #photo').val(base64data); 
+                    }
+                });
+            });
+  
+  
+            $(document).on('click', '#clearImageshs', function(e){  
+                $('#uploaded_image_shs').attr('src', "<?=base_url()?>/img/select-image.png"); 
+            });
+  
+            $(document).on('click', '#clearImagecollege', function(e){  
+                $('#uploaded_image_college').attr('src', "<?=base_url()?>/img/select-image.png"); 
+            });
+            $(document).on('click', '#clearImagetvet', function(e){  
+                $('#uploaded_image_tvet').attr('src', "<?=base_url()?>/img/select-image.png"); 
+            }); 
 
              
 
@@ -840,70 +1248,7 @@
                 }).on("form:submit", function() {
                     return !1
                 })
-            }); 
- 
-            $(document).on('change', '#formFileShs', function(e){   
-
-                var validExtensions = ["jpg","pdf","jpeg","gif","png", "jfif"]
-                var file = $(this).val().split('.').pop();
-                if (validExtensions.indexOf(file) == -1) { 
-                    Swal.fire({
-                        title:"Upload Error!",
-                        text: "Only formats are allowed : "+validExtensions.join(', '),
-                        icon:"error"
-                    }) 
-                }else{
-                    frameShs.src = URL.createObjectURL(event.target.files[0]);
-                } 
-            }); 
-
-            $(document).on('click', '#clearImageShs', function(e){ 
-                
-                document.getElementById('formFileShs').value = null;
-                frameShs.src = "<?=base_url()?>/img/select-image.png";
-            }); 
-            
-            $(document).on('change', '#formFileCollege', function(e){  
-
-                var validExtensions = ["jpg","pdf","jpeg","gif","png", "jfif"]
-                var file = $(this).val().split('.').pop();
-                if (validExtensions.indexOf(file) == -1) { 
-                    Swal.fire({
-                        title:"Upload Error!",
-                        text: "Only formats are allowed : "+validExtensions.join(', '),
-                        icon:"error"
-                    }) 
-                }else{
-                    frameCollege.src = URL.createObjectURL(event.target.files[0]);
-                } 
-            }); 
-
-            $(document).on('click', '#clearImageCollege', function(e){ 
-                
-                document.getElementById('formFileShs').value = null;
-                frameCollege.src = "<?=base_url()?>/img/select-image.png";
-            });
-
-            
-            $(document).on('change', '#formFileTvet', function(e){  
-
-                var validExtensions = ["jpg","pdf","jpeg","gif","png", "jfif"]
-                var file = $(this).val().split('.').pop();
-                if (validExtensions.indexOf(file) == -1) { 
-                    Swal.fire({
-                        title:"Upload Error!",
-                        text: "Only formats are allowed : "+validExtensions.join(', '),
-                        icon:"error"
-                    }) 
-                }else{
-                    frameTvet.src = URL.createObjectURL(event.target.files[0]);
-                } 
-            }); 
-            $(document).on('click', '#clearImageTvet', function(e){ 
-
-                document.getElementById('formFileShs').value = null;
-                frameTvet.src = "<?=base_url()?>/img/select-image.png";
-            });
+            });  
              
             // get age using birthdate 
             $(document).on('change', 'input[name="birthdate"]', function(e){ 
@@ -914,14 +1259,16 @@
  
             $(document).on('submit', '#senior-high-form', function(e){ 
                 
-                e.preventDefault();    
-                var _this = $(this) 
+                e.preventDefault();
+                var formData = new FormData($("#senior-high-form")[0]);  
                 $.ajax({
                     url:  '/manage/update_shs',
                     method: "post", 
-                    data: $("#senior-high-form").serialize(),
+                    data: formData,
+                    processData: false,
+                    contentType: false, 
                     dataType: "json", 
-                    success: function (data) {   
+                    success: function (data) { 
                         if(data.response){ 
                             Swal.fire({
                                 title:"Good job!",
@@ -940,7 +1287,9 @@
                     error: function (xhr, status, error) { 
                         console.info(xhr.responseText);
                     }
-                }); 
+                });
+
+
             });
 
             
@@ -1000,15 +1349,14 @@
                 
                 e.preventDefault();    
                 var _this = $(this)  
-                
-                
-                e.preventDefault();    
-                var _this = $(this) 
+                var formData = new FormData($("#college-form")[0]);  
                 $.ajax({
                     url:  '/manage/update_college',
                     method: "post", 
-                    data: $("#college-form").serialize(),
-                    dataType: "json", 
+                    data: formData,
+                    processData: false,
+                    contentType: false, 
+                    dataType: "json",  
                     success: function (data) {   
                         if(data.response){ 
                             Swal.fire({
@@ -1089,16 +1437,15 @@
             $(document).on('submit', '#tvet-form', function(e){ 
                 
                 e.preventDefault();    
-                var _this = $(this)  
-                
-                
-                e.preventDefault();    
                 var _this = $(this) 
+                var formData = new FormData($("#tvet-form")[0]);  
                 $.ajax({
                     url:  '/manage/update_tvet',
                     method: "post", 
-                    data: $("#tvet-form").serialize(),
-                    dataType: "json", 
+                    data: formData,
+                    processData: false,
+                    contentType: false, 
+                    dataType: "json",  
                     success: function (data) {   
                         if(data.response){ 
                             Swal.fire({
