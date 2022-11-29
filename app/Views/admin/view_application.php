@@ -140,9 +140,8 @@
                                         </div> 
                                     </div>
                                 </div>
-                                <div class="col-3">  
-                                        <img src="data:image/jpg;charset=utf8;base64,<?= base64_encode( $profile['AppImage'] ) ?>"  class="rounded mx-auto d-block" alt="Profile Photo"   />
-                                          
+                                <div class="col-3">    
+                                    <img src="<?= !empty($profile['AppImage']) ?  $profile['AppImage']  : base_url()."/img/select-image.png" ?>"  class="rounded mx-auto d-block" alt="Profile Photo"   />   
                                 </div>
                             </div>
                             
@@ -365,13 +364,8 @@
                                         </div> 
                                     </div> 
                                 </div>
-                                <div class="col-3">
-                                    <div class="row justify-content-center  ">   
-                                        <label for="formFileCollege" >
-                                            <img id="frameCollege" title="Select Image" class="rounded mx-auto d-block " alt="Profile Photo" src="<?=base_url()?>/img/select-image.png" style="  height: 240px !important; width: 250px !important"  /> 
-                                        </label> 
-                                        <input class="form-control" type="file" id="formFileCollege" style="display: none "> 
-                                    </div> 
+                                <div class="col-3">    
+                                    <img src="<?= !empty($profile['colImage']) ?  $profile['colImage']  : base_url()."/img/select-image.png" ?>"  class="rounded mx-auto d-block" alt="Profile Photo"   />   
                                 </div>
                             </div>
                                 
@@ -605,13 +599,8 @@
                                         </div> 
                                     </div> 
                                 </div>
-                                <div class="col-3">
-                                    <div class="row justify-content-center  ">   
-                                        <label for="formFileCollege" >
-                                            <img id="frameCollege" title="Select Image" class="rounded mx-auto d-block " alt="Profile Photo" src="<?=base_url()?>/img/select-image.png" style="  height: 240px !important; width: 250px !important"  /> 
-                                        </label> 
-                                        <input class="form-control" type="file" id="formFileCollege" style="display: none "> 
-                                    </div> 
+                                <div class="col-3">    
+                                    <img src="<?= !empty($profile['colImage']) ?  $profile['colImage']  : base_url()."/img/select-image.png" ?>"  class="rounded mx-auto d-block" alt="Profile Photo"   />   
                                 </div>
                             </div>
                                 

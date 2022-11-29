@@ -105,7 +105,7 @@
 
                     <ul class="nav nav-tabs"> 
                         <li class="nav-item">
-                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link  active ">
+                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link   ">
                                 Senior High School Registration
                             </a>
                         </li>
@@ -115,13 +115,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link ">
+                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
                                 TVET Registration
                             </a>
                         </li>
                     </ul>
                     <div class="tab-content"> 
-                        <div class="tab-pane show active  " id="senior-high-tab"> 
+                        <div class="tab-pane " id="senior-high-tab"> 
                             <form id="senior-high-registration-form" class="validation-form"  enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-12">
@@ -141,7 +141,7 @@
                                             </div>
                                         </div>
                                     </div> 
-                                    <hr>
+                                    <hr> 
                                     <div class="col-9">
                                         <div class="row mt-3">
                                             <div class="col-4">
@@ -222,12 +222,13 @@
                                     </div>
                                     <div class="col-3">   
                                         <div class="image_area"> 
-                                            <label for="upload_image_shs">  
-                                                <img src="<?=base_url()?>/img/select-image.png"  id="uploaded_image_shs" class="img-responsive img-circle" />
+                                            <label for="upload_image_shs">   
+                                                <input type="hidden" id="photo" name="image">
+                                                <img src="<?=base_url()?>/img/select-image.png" id="uploaded_image_shs" class="img-responsive img-circle" />
                                                 <div class="overlay">
                                                     <div class="text">Change Image</div>
                                                 </div>
-                                                <input type="file" name="image" class="image" id="upload_image_shs" style="display:none">
+                                                <input type="file"  class="image" id="upload_image_shs" style="display:none">
                                             </label>   
                                         </div> 
                                         <div class="text-center">
@@ -345,7 +346,7 @@
                             
                             
                         </div>
-                        <div class="tab-pane " id="college-tab">   
+                        <div class="tab-pane  " id="college-tab">   
                             <form id="college-registration-form" class="validation-form">
                                 <div class="row"> 
                                     <div class="col-12">
@@ -450,6 +451,7 @@
                                     <div class="col-3">   
                                         <div class="image_area"> 
                                             <label for="upload_image_college">  
+                                                <input type="text" id="photo" name="image">
                                                 <img src="<?=base_url()?>/img/select-image.png"  id="uploaded_image_college" class="img-responsive img-circle" />
                                                 <div class="overlay">
                                                     <div class="text">Change Image</div>
@@ -580,7 +582,7 @@
                             </form>
                         </div>
                         
-                        <div class="tab-pane " id="tvet-tab">
+                        <div class="tab-pane show active " id="tvet-tab">
                             
                             <form id="tvet-registration-form" class="validation-form">
                                 <div class="row"> 
@@ -685,6 +687,7 @@
                                     <div class="col-3">   
                                         <div class="image_area"> 
                                             <label for="upload_image_tvet">  
+                                                <input type="text" id="photo" name="image">
                                                 <img src="<?=base_url()?>/img/select-image.png"  id="uploaded_image_tvet" class="img-responsive img-circle" />
                                                 <div class="overlay">
                                                     <div class="text">Change Image</div>
@@ -833,7 +836,7 @@
 
         
         $(document).ready(function(){
-   
+            
             var $modal_shs = $('#modal_shs');
             var image_shs = document.getElementById('sample_image_shs'); 
             var $modal_college = $('#modal_college');
@@ -844,10 +847,10 @@
             var base64data;
  
             $('#upload_image_shs').change(function(event){
-                var files = event.target.files;
+                var files = event.target.files; 
                 var done = function (url) {
                     image_shs.src = url;
-                    $modal_shs.modal('show');
+                    $modal_shs.modal('show');  
                 }; 
                 if (files && files.length > 0)
                 { 
@@ -858,6 +861,8 @@
                     reader.readAsDataURL(files[0]); 
                 }
             });
+ 
+ 
 
             $('#upload_image_college').change(function(event){
                 var files = event.target.files;
@@ -964,7 +969,37 @@
                 cropper = null;
             });
 
-            $("#crop_shs").click(function(){
+            $("#crop_shs").click(function(e){
+                canvas = cropper.getCroppedCanvas({ 
+                    width: 96,
+                    height: 96,
+                });
+
+                canvas.toBlob(function(blob) {
+                    var reader = new FileReader(); 
+                    reader.readAsDataURL(blob);  
+                    reader.onloadend = function() { 
+                        base64data = reader.result;
+
+                        $.ajax({
+                            url: "registration/upload",
+                            method: "POST",                	
+                            data: {image: base64data},
+                            dadtaType: "json",
+                            success: function(data){ 
+                                image_data = data;
+                                $modal_shs.modal('hide');  
+                                $('#uploaded_image_shs').attr('src', data);                
+                            }
+                        }); 
+                        $('#senior-high-registration-form #photo').val(base64data); 
+
+                    }
+                });
+            });
+
+
+            $("#crop_college").click(function(){
                 canvas = cropper.getCroppedCanvas({ 
                     width: 96,
                     height: 96,
@@ -981,47 +1016,20 @@
                             method: "POST",                	
                             data: {image: base64data},
                             dadtaType: "json",
-                            success: function(data){ 
-                                console.log(data)
-                                $modal_shs.modal('hide');
-                                $('#uploaded_image_shs').attr('src', data);
-                            }
-                        });
-                    }
-                });
-            });
-
-            $("#crop_college").click(function(){
-                canvas = cropper.getCroppedCanvas({ 
-                    width: 160,
-                    height: 160,
-                });
-
-                canvas.toBlob(function(blob) {
-                    var reader = new FileReader();
-                    reader.readAsDataURL(blob); 
-                    reader.onloadend = function() {
-                        base64data = reader.result;  
-
-                        $.ajax({
-                            url: "registration/upload",
-                            method: "POST",                	
-                            data: {image: base64data},
-                            dadtaType: "json",
-                            success: function(data){ 
-                                console.log(data)
+                            success: function(data){  
                                 $modal_college.modal('hide');
                                 $('#uploaded_image_college').attr('src', data);
                             }
                         });
+                        $('#college-registration-form #photo').val(base64data); 
                     }
                 });
             });
  
             $("#crop_tvet").click(function(){
                 canvas = cropper.getCroppedCanvas({ 
-                    width: 160,
-                    height: 160,
+                    width: 96,
+                    height: 96,
                 });
 
                 canvas.toBlob(function(blob) {
@@ -1035,12 +1043,13 @@
                             method: "POST",                	
                             data: {image: base64data},
                             dadtaType: "json",
-                            success: function(data){ 
-                                console.log(data)
+                            success: function(data){  
                                 $modal_tvet.modal('hide');
                                 $('#uploaded_image_tvet').attr('src', data);
                             }
                         });
+                        
+                        $('#tvet-registration-form #photo').val(base64data); 
                     }
                 });
             });
@@ -1099,43 +1108,7 @@
                     contentType: false, 
                     dataType: "json", 
                     success: function (data) {    
-                        console.info(data)
-
-                        // upload image
-                        if(data.response){ 
-                            if($('#upload_image_shs').val() !== ""){
-                                new Compressor($('#upload_image_shs')[0].files[0], {
-                                    quality: 0.6,
-                                    width: 192,
-                                    height: 192, 
-                                    success(result){ 
-                                        formData.set('image', result, result.name); 
-                                        formData.set('id', data.id); 
-                                        $.ajax({
-                                            url:  'registration/shs_update_image',
-                                            method: "post", 
-                                            data: formData,
-                                            processData: false,
-                                            contentType: false, 
-                                            dataType: "json",
-                                            success: function (data) {   
-                                                console.info(data) 
-                                            },
-                                            error: function (xhr, status, error) { 
-                                                console.info(xhr.responseText);
-                                            }
-                                        }); 
-                                    },
-                                    error(err){
-                                        console.log(err.message);
-                                    }
-                                })
-                            }else{
-                                console.info("Enpty")
-                            } 
-                            
-                            
-                        
+                        if(data.response){   
                             Swal.fire({
                                 title:"Good job!",
                                 text: data.message,
@@ -1159,25 +1132,29 @@
                     }
                 }); 
             });
+
+
             $(document).on('submit', '#college-registration-form', function(e){ 
                 
                 e.preventDefault();    
                 var _this = $(this)  
                 
+                var formData = new FormData($("#college-registration-form")[0]); 
                 $.ajax({
                     url:  'registration/insert_college',
                     method: "post", 
-                    data: $("#college-registration-form").serialize() + '&image=' + base64data,
-                    dataType: "json", 
+                    data: formData,
+                    processData: false,
+                    contentType: false, 
+                    dataType: "json",
                     success: function (data) { 
                         if(data.response){ 
                             Swal.fire({
                                 title:"Good job!",
                                 text: data.message,
                                 icon:"success"
-                            })
+                            }) 
 
-                            
                             $("#college-registration-form")[0].reset()
                             shs_app_no_id();
                             $('#uploaded_image_college').attr('src', "<?=base_url()?>/img/select-image.png");
@@ -1200,10 +1177,13 @@
                 e.preventDefault();    
                 var _this = $(this)  
                 
+                var formData = new FormData($("#tvet-registration-form")[0]); 
                 $.ajax({
                     url:  'registration/insert_tvet',
                     method: "post", 
-                    data: $("#tvet-registration-form").serialize() + '&image=' + base64data,
+                    data: formData,
+                    processData: false,
+                    contentType: false, 
                     dataType: "json", 
                     success: function (data) { 
                         if(data.response){ 

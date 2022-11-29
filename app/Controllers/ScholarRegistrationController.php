@@ -53,7 +53,7 @@ class ScholarRegistrationController extends BaseController
 
     
     public function insert_senior_high_registration()
-    { 
+    {  
         try{ 
             $data = [
                 'AppNoYear' => $this->request->getPost('app_no_year'),
@@ -70,7 +70,7 @@ class ScholarRegistrationController extends BaseController
                 'AppCivilStat' => $this->request->getPost('civil_status'),
                 'AppGender' => $this->request->getPost('gender'),
                 'AppContact' => trim($this->request->getPost('contact_no')),
-                'AppCTC' => trim($this->request->getPost('contact_no')),
+                'AppCTC' => trim($this->request->getPost('ctc_no')),
                 'AppEmailAdd' => trim($this->request->getPost('email')),
                 'AppAvailment' => trim($this->request->getPost('availment')),
                 'AppSchool' => $this->request->getPost('school'),
@@ -83,12 +83,12 @@ class ScholarRegistrationController extends BaseController
                 'AppMother' => trim($this->request->getPost('mother_name')),
                 'AppMotherOccu' => trim($this->request->getPost('mother_occupation')),
                 'AppManager' => trim($this->request->getPost('manager')),
+                'AppImage' => trim($this->request->getPost('image')),
 
             ];
             $this->senior_high_registration->save($data);  
             $res = [
-                "response" =>  true,
-                "id" =>  $this->senior_high_registration->insertID,
+                "response" =>  true, 
                 "message" =>  "Application has been saved to pending applications",
             ];
         } catch (\Exception $e) {  
@@ -96,23 +96,10 @@ class ScholarRegistrationController extends BaseController
                 "response" =>  false,
                 "message" =>   $e->getMessage() , 
             ]; 
-        }  
- 
+        }    
         echo Json_encode($res); 
  
-    }
-
-    public function update_image(){  
-        $id = $this->request->getPost('id'); 
-        $image =[
-            'AppImage' => file_get_contents( $_FILES['image']['tmp_name'] )
-        ]; 
-        $res = $this->senior_high_registration->update($id, $image);  
-        echo Json_encode($res); 
-
- 
-    }
- 
+    } 
  
 
     public function shs_app_no_id()
@@ -156,7 +143,7 @@ class ScholarRegistrationController extends BaseController
                 "colManager"  => trim($this->request->getPost('manager')),
                 "colUnits"  => trim($this->request->getPost('units')),
                 "colSchoolAddress"  => trim($this->request->getPost('school_address')),
-                'colImage' =>  $this->request->getPost('image')== "undefined" ? NULL : $this->request->getPost('image'),
+                'colImage' => trim($this->request->getPost('image')),
             ];
 
             $res =  $this->college_registration->save($data); 
@@ -211,7 +198,7 @@ class ScholarRegistrationController extends BaseController
                 "colManager"  => trim($this->request->getPost('manager')),
                 "colUnits"  => trim($this->request->getPost('units')),
                 "colSchoolAddress"  => trim($this->request->getPost('school_address')),
-                'colImage' =>  $this->request->getPost('image')== "undefined" ? NULL : $this->request->getPost('image'),
+                'colImage' => trim($this->request->getPost('image')), 
             ];
 
             $res =  $this->tvet_registration->save($data); 
