@@ -69,12 +69,13 @@ $routes->group('pending',  function($routes) {
     $routes->get('get_college_pending_list', 'CollegeController::get_pending_application', ["filter" => "auth"]);  
     $routes->post('update_college', 'CollegeController::update_status');    
     $routes->get('get_tvet_pending_list', 'TvetController::get_pending_application', ["filter" => "auth"]);  
-    $routes->post('update_tvet', 'TvetController::update_status');     
+    $routes->post('update_tvet', 'TvetController::update_status');  
+    $routes->get('application/(:any)/(:any)', 'ApprovedPendingApplicationController::get_application/$1/$2', ["filter" => "auth"]);   
 });
 
-$routes->group('manage',  function($routes) {
-    $routes->get('/', 'ManageApplicationController::index', ["filter" => "auth"]);  
-    $routes->get('get_shs_all_list', 'SeniorHighController::get_all', ["filter" => "auth"]);  
+$routes->group('manage',  function($routes) {  
+    $routes->get('/', 'ManageApplicationController::index', ["filter" => "auth"]);
+    $routes->get('get_shs_all_list', 'SeniorHighController::get_all', ["filter" => "auth"]); 
     $routes->get('get_college_all_list', 'CollegeController::get_all', ["filter" => "auth"]);  
     $routes->post('update_college', 'CollegeController::update');    
     $routes->get('get_tvet_all_list', 'TvetController::get_all', ["filter" => "auth"]);  
@@ -85,7 +86,7 @@ $routes->group('manage',  function($routes) {
     $routes->post('update_college', 'CollegeController::update');  
     $routes->post('archived_college', 'CollegeController::archived_application');   
     $routes->post('update_tvet', 'TvetController::update');  
-    $routes->post('archived_tvet', 'TvetController::archived_application');  
+    $routes->post('archived_tvet', 'TvetController::archived_application');    
 });
 
 $routes->group('school',  function($routes) {
