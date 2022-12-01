@@ -21,7 +21,7 @@ class SeniorHighController extends BaseController
 
     public function get_pending_application()
     {
-        $res["data"] = $this->senior_high->get_all();
+        $res["data"] = $this->senior_high->get_pending_application();
         echo Json_encode($res);
     }
 
@@ -50,7 +50,7 @@ class SeniorHighController extends BaseController
                 "response" =>  false,
                 "message" =>   $e->getMessage() , 
             ]; 
-        } 
+        }  
         echo Json_encode($res);
     }
 
