@@ -14,7 +14,7 @@
 
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link  ">
+                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active ">
                                 Senior High School Pending List
                             </a>
                         </li>
@@ -24,17 +24,16 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
+                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link ">
                                 TVET Pending List
                             </a>
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane " id="senior-high-tab">   
+                        <div class="tab-pane show active " id="senior-high-tab">   
                             <table id="senior-high-table" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
-                                    <tr>  
-                                        <th>Action</th> 
+                                    <tr>   
                                         <th>Application ID</th>  
                                         <th>Name</th>  
                                         <th>Address</th>  
@@ -49,8 +48,7 @@
                         <div class="tab-pane  " id="college-tab">
                             <table id="college-table" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
-                                    <tr>  
-                                        <th>Action</th> 
+                                    <tr>   
                                         <th>Application ID</th>  
                                         <th>Name</th>  
                                         <th>Address</th>  
@@ -62,11 +60,10 @@
                                 </thead> 
                             </table> 
                         </div> 
-                        <div class="tab-pane show active" id="tvet-tab"> 
+                        <div class="tab-pane " id="tvet-tab"> 
                             <table id="tvet-table" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
-                                    <tr>  
-                                        <th>Action</th> 
+                                    <tr>   
                                         <th>Application ID</th>  
                                         <th>Name</th>  
                                         <th>Address</th>  
@@ -102,8 +99,7 @@
                 ajax: {
                     url: 'pending/get_shs_pending_list',  
                 },
-                columns: [ 
-                    { data: 'ID' }, 
+                columns: [  
                     {
                         data  : 'ID',
                         render: function(data, type, row, meta){ 
@@ -121,34 +117,7 @@
                     { data: 'AppSchool' },  
                     { data: 'AppYear' },  
                     { data: 'AppStatus' },   
-                ], 
-                columnDefs: [
-                    {
-                        targets  : 0,
-                        title    : 'Actions',
-                        orderable: false,
-                        render   : function(data, type, row, meta) {  
-                            var action = '';
-                        
-                            action =  '\
-                                    <div class="btn-group">\
-                                        <button type="button" class="btn dropdown-toggle text-primary" data-bs-toggle="dropdown" aria-expanded="false"> <i class="mdi mdi-cog"></i>  <i class="mdi mdi-chevron-down"></i> </button>\
-                                        <div class="dropdown-menu">\
-                                            <a data-id="'+row.ID+'" data-method="update_shs" class="dropdown-item text-warning approve-applicant-button">\
-                                                <i class="mdi mdi-check"></i>\
-                                                <span class="nav-text">Approved</span>\
-                                            </a>\
-                                            <a data-id="'+row.ID+'" data-method="update_shs"  class="dropdown-item text-danger disapprove-applicant-button">\
-                                                <i class="mdi mdi-close-thick"></i>\
-                                                <span class="nav-text">Disapproved</span>\
-                                            </a>\
-                                        </div>\
-                                    </div>\
-                                '; 
-                            return action;
-                        }, 
-                    },  
-                ],
+                ],  
             });  
  
             var college_table = $('#college-table').DataTable({
@@ -158,8 +127,7 @@
                 ajax: {
                     url: 'pending/get_college_pending_list',  
                 },
-                columns: [ 
-                    { data: 'ID' },  
+                columns: [  
                     {
                         data  : 'ID',
                         render: function(data, type, row, meta){ 
@@ -177,34 +145,7 @@
                     { data: 'colSchool' },  
                     { data: 'colYearLevel' },  
                     { data: 'colAppStat' },   
-                ], 
-                columnDefs: [
-                    {
-                        targets  : 0,
-                        title    : 'Actions',
-                        orderable: false,
-                        render   : function(data, type, row, meta) {  
-                            var action = '';
-                        
-                            action =  '\
-                                    <div class="btn-group">\
-                                        <button type="button" class="btn dropdown-toggle text-primary" data-bs-toggle="dropdown" aria-expanded="false"> <i class="mdi mdi-cog"></i>  <i class="mdi mdi-chevron-down"></i> </button>\
-                                        <div class="dropdown-menu">\
-                                            <a data-id="'+row.ID+'" data-method="update_college" class="dropdown-item text-warning approve-applicant-button">\
-                                                <i class="mdi mdi-check"></i>\
-                                                <span class="nav-text">Approved</span>\
-                                            </a>\
-                                            <a data-id="'+row.ID+'" data-method="update_college" class="dropdown-item text-danger disapprove-applicant-button">\
-                                                <i class="mdi mdi-close-thick"></i>\
-                                                <span class="nav-text">Disapproved</span>\
-                                            </a>\
-                                        </div>\
-                                    </div>\
-                                '; 
-                            return action;
-                        }, 
-                    },  
-                ],
+                ],  
             });  
 
             var tvet_table = $('#tvet-table').DataTable({
@@ -214,8 +155,7 @@
                 ajax: {
                     url: 'pending/get_tvet_pending_list',  
                 },
-                columns: [ 
-                    { data: 'ID' },  
+                columns: [   
                     {
                         data  : 'ID',
                         render: function(data, type, row, meta){ 
@@ -233,142 +173,23 @@
                     { data: 'colSchool' },  
                     { data: 'colYearLevel' },  
                     { data: 'colAppStat' },   
-                ], 
-                columnDefs: [
-                    {
-                        targets  : 0,
-                        title    : 'Actions',
-                        orderable: false,
-                        render   : function(data, type, row, meta) {  
-                            var action = '';
-                        
-                            action =  '\
-                                    <div class="btn-group">\
-                                        <button type="button" class="btn dropdown-toggle text-primary" data-bs-toggle="dropdown" aria-expanded="false"> <i class="mdi mdi-cog"></i>  <i class="mdi mdi-chevron-down"></i> </button>\
-                                        <div class="dropdown-menu">\
-                                            <a data-id="'+row.ID+'" data-method="update_tvet" class="dropdown-item text-warning approve-applicant-button">\
-                                                <i class="mdi mdi-check"></i>\
-                                                <span class="nav-text">Approved</span>\
-                                            </a>\
-                                            <a data-id="'+row.ID+'" data-method="update_tvet" class="dropdown-item text-danger disapprove-applicant-button">\
-                                                <i class="mdi mdi-close-thick"></i>\
-                                                <span class="nav-text">Disapproved</span>\
-                                            </a>\
-                                        </div>\
-                                    </div>\
-                                '; 
-                            return action;
-                        }, 
-                    },  
-                ],
+                ],  
             });  
 
-
+            $('#senior-high-table tbody').on( 'dblclick', 'tr', function () {
+                var id = senior_high_table.row( this ).data()['ID']
+                window.location.href = "/pending/application/shs/" + id
+            } ); 
             
-            $(document).on('click', '.approve-applicant-button', function(e){ 
-                e.preventDefault();  
-
-                var id = $(this).data('id')
-                var method = $(this).data('method') 
-                Swal.fire({
-                    title: "Approve Applicant?", 
-                    icon: "question",
-                    showCancelButton: !0,
-                    confirmButtonText: "Yes, Approve it!",
-                    cancelButtonText: "No, cancel!",
-                    confirmButtonClass: "btn btn-success mt-2",
-                    cancelButtonClass: "btn btn-danger ms-2 mt-2",
-                    buttonsStyling: !1
-                }).then(function(e) {  
-                    if(e.value){ 
-                        $.ajax({
-                            url: 'pending/' + method,  
-                            method: "post",
-                            data: {
-                                id : id,
-                                status : "Approved",
-                            },  
-                            dataType: "json", 
-                            success: function (data) {   
-                                if(data.response){ 
-                                    Swal.fire({
-                                        title:"Good job!",
-                                        text: data.message,
-                                        icon:"success"
-                                    })
-                                    senior_high_table.ajax.reload()
-                                    college_table.ajax.reload() 
-                                    tvet_table.ajax.reload()
-                                }else{ 
-                                    Swal.fire({
-                                        title:"Update Error!",
-                                        text: data.message,
-                                        icon:"error"
-                                    }) 
-                                }
-                            },
-                            error: function (xhr, status, error) { 
-                                console.info(xhr.responseText);
-                            }
-                        });  
-                     
-                    }
-                }) 
-            });  
-
+            $('#college-table tbody').on( 'dblclick', 'tr', function () {
+                var id = college_table.row( this ).data()['ID']
+                window.location.href = "/pending/application/college/" + id
+            } );
             
-            $(document).on('click', '.disapprove-applicant-button', function(e){ 
-                e.preventDefault();  
-
-                var id = $(this).data('id')
-                var method = $(this).data('method') 
-                
-                Swal.fire({
-                    title: "Dissaprove Applicant?", 
-                    icon: "question",
-                    showCancelButton: !0,
-                    confirmButtonText: "Yes, Dissaprove it!",
-                    cancelButtonText: "No, cancel!",
-                    confirmButtonClass: "btn btn-success mt-2",
-                    cancelButtonClass: "btn btn-danger ms-2 mt-2",
-                    buttonsStyling: !1
-                }).then(function(e) {  
-                    if(e.value){ 
-                        $.ajax({
-                            url: 'pending/' + method,  
-                            method: "post",
-                            data: {
-                                id : id,
-                                status : "Disapproved",
-                            },  
-                            dataType: "json", 
-                            success: function (data) {  
-                                if(data.response){ 
-                                    Swal.fire({
-                                        title:"Good job!",
-                                        text: data.message,
-                                        icon:"success"
-                                    })
-                                    senior_high_table.ajax.reload()
-                                    college_table.ajax.reload() 
-                                    tvet_table.ajax.reload()
-                                }else{ 
-                                    Swal.fire({
-                                        title:"Update Error!",
-                                        text: data.message,
-                                        icon:"error"
-                                    }) 
-                                }
-                            },
-                            error: function (xhr, status, error) { 
-                                console.info(xhr.responseText);
-                            }
-                        });  
-                     
-                    }
-                }) 
-            });  
-
+            $('#tvet-table tbody').on( 'dblclick', 'tr', function () {
+                var id = tvet_table.row( this ).data()['ID']
+                window.location.href = "/pending/application/tvet/" + id
+            } ); 
         });
     </script>
 
