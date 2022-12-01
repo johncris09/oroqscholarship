@@ -142,4 +142,19 @@ class SeniorHighModel extends Model
         return $query; 
     }
 
+
+    public function get_report($data, $range)
+    {   
+        $query = $this->builder 
+            ->select('ID, AppNoYear, AppNoSem, AppNoID, AppAvailment , AppStatus, AppFirstName, AppMidIn, AppLastName, AppSuffix, AppContact, AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ') 
+            ->where($data, "both")
+            ->where(isset($range['AppNoIDFrom']) ? "AppNoID >=  " .$range['AppNoIDFrom'] : "AppManager = 'Active'")
+            ->where(isset($range['AppNoIDTo']) ? "AppNoID <=  " .$range['AppNoIDTo'] :  "AppManager = 'Active'") 
+            ->where('AppManager', 'Active')
+            ->orderBy('AppLastName, AppFirstName,AppMidIn', 'asc') 
+            // ->getCompiledSelect();
+            ->get()
+            ->getResult();  
+        return $query;
+    }
 }

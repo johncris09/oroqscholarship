@@ -89,6 +89,16 @@ $routes->group('manage',  function($routes) {
     $routes->post('archived_tvet', 'TvetController::archived_application');    
 });
 
+
+$routes->group('generate_report',  function($routes) {   
+    $routes->get('/', 'GenerateReportController::index', ["filter" => "auth"]); 
+    $routes->get('shs_report', 'SeniorHighController::get_report', ["filter" => "auth"]); 
+    $routes->get('college_report', 'CollegeController::get_report', ["filter" => "auth"]); 
+    $routes->get('tvet_report', 'TvetController::get_report', ["filter" => "auth"]); 
+});
+
+
+
 $routes->group('school',  function($routes) {
     $routes->get('/', 'SchoolController::index', ["filter" => "auth"]); 
     $routes->get('get_all', 'SchoolController::get_all', ["filter" => "auth"]);  
