@@ -183,10 +183,64 @@ class SeniorHighController extends BaseController
         }  
         
         $data["result"] = $this->senior_high->get_report($query, $range);  
-        return view('admin/view_report', $data);  
-
-
+        return view('admin/view_report', $data);   
 
     }
+
+
+    
+    public function print_preview()
+    {
+ 
+    
+        $query  = [];
+        $range  = [];
+        
+
+        $data["page_title"] = "Generated Report";  
+        $data["semester"] = ""; 
+        $data["status"] = ""; 
+        $data["scholarship_type"] = "Senior High School"; 
+        $data["school_year"] = ""; 
+
+        if(!empty($_GET['school'])){ 
+            $query['AppSchool'] =  $_GET['school'];
+        }
+        if(!empty($_GET['semester'])){ 
+            $query['AppSem'] =  $_GET['semester'];
+            $data['semester'] =  $_GET['semester'];
+        }
+        if(!empty($_GET['school_year'])){ 
+            $query['AppSY'] =  $_GET['school_year'];
+            $data['school_year'] =  $_GET['school_year'];
+        }
+        if(!empty($_GET['status'])){ 
+            $query['AppStatus'] =  $_GET['status'];
+            $data['status'] =  $_GET['status'];
+        }
+        if(!empty($_GET['availment'])){ 
+            $query['AppAvailment'] =  $_GET['availment'];
+        }
+        if(!empty($_GET['gender'])){ 
+            $query['AppGender'] =  $_GET['gender'];
+        }
+        if(!empty($_GET['year_level'])){ 
+            $query['AppYear'] =  $_GET['year_level'];
+        }
+        if(!empty($_GET['address'])){ 
+            $query['AppAddress'] =  $_GET['address'];
+        }
+        if(!empty($_GET['from'])){ 
+            $range['AppNoIDFrom'] =  $_GET['from'];
+        }
+        if(!empty($_GET['to'])){ 
+            $range['AppNoIDTo'] =  $_GET['to'];
+        }  
+        
+        $data["result"] = $this->senior_high->get_report($query, $range);  
+        return view('admin/print_preview', $data);   
+
+    }
+    
 
 }
