@@ -21,8 +21,18 @@
             <div class="card">
                 <div class="card-header bg-white"> 
                     <div class=" float-end"> 
-                        
-                        <a href="shs_print_preview?<?= $_SERVER["QUERY_STRING"]  ?>"  class="btn btn-primary"> <i class="mdi mdi-printer"></i> Print Preview</a>
+                        <?php 
+                            if(strtolower($scholarship_type ) == "senior high school"){
+                                $preview = "shs_print_preview";
+                            }else if(strtolower($scholarship_type ) == "college"){
+                                $preview = "college_print_preview";
+
+                            }else if(strtolower($scholarship_type ) == "tvet"){
+                                $preview = "tvet_print_preview"; 
+                            }
+
+                        ?>
+                        <a href="<?= $preview  ?>?<?= $_SERVER["QUERY_STRING"]  ?>"  class="btn btn-primary"> <i class="mdi mdi-printer"></i> Print Preview</a>
                     </div>
                     <!-- <h4 class="header-title"><?= $page_title; ?></h4>   -->
                 </div>
@@ -36,7 +46,7 @@
                                 <th>No.</th>
                                 <th>Name</th>
                                 <th>Address</th>
-                                <th>Strand</th>
+                                <th><?= in_array( $scholarship_type  ,['College', 'TVET']) ? "Course" :  "Strand" ?></th>
                                 <th>Year Level</th>
                                 <th>School</th>
                                 <th>Contact No.</th>
@@ -47,19 +57,34 @@
                             <?php
                                 $counter = 1; 
                                 foreach($result as $row){ 
-                                    $name = $row->AppLastName . ", "  . $row->AppLastName . " "  . $row->AppMidIn . " " . " "  . $row->AppSuffix ;
-                                    $contact = in_array($row->AppContact, ["-", null, "None", "" ]) ? "" : $row->AppContact;
+                                    if(in_array( $scholarship_type  ,['College', 'TVET'])){
+                                        $contact = in_array($row->colContactNo, ["-", null, "None", "" ]) ? "" : $row->colContactNo;
+                                        $name = $row->colLastName . ", "  . $row->colFirstName . " "  . $row->colMI . " " . " "  . $row->colSuffix ; 
+                                        $address = $row->colAddress;
+                                        $course = $row->colCourse;
+                                        $year_level =  $row->colYearLevel;
+                                        $school =  $row->colSchool;
+                                        $availment =  $row->colAvailment;
+                                    }else{
+                                        $contact = in_array($row->AppContact, ["-", null, "None", "" ]) ? "" : $row->AppContact;
+                                        $name = $row->AppLastName . ", "  . $row->AppFirstName . " "  . $row->AppMidIn . " " . " "  . $row->AppSuffix ;
+                                        $address = $row->AppAddress;
+                                        $course = $row->AppCourse;
+                                        $year_level =  $row->AppYear;
+                                        $school =  $row->AppSchool;
+                                        $availment =  $row->AppAvailment;
+                                    }
                                     
                             ?>
                                 <tr>
                                     <td><?= $counter++; ?></td>
                                     <td><?= $name ?></td> 
-                                    <td><?= $row->AppAddress ?></td> 
-                                    <td><?= $row->AppCourse ?></td> 
-                                    <td><?= $row->AppYear ?></td> 
-                                    <td><?= $row->AppSchool ?></td> 
+                                    <td><?= $address ?></td> 
+                                    <td><?= $course ?></td> 
+                                    <td><?= $year_level ?></td> 
+                                    <td><?= $school ?></td> 
                                     <td><?= $contact ?></td> 
-                                    <td><?= $row->AppAvailment ?></td> 
+                                    <td><?= $availment ?></td> 
                                 </tr>
                                 
                             <?php   } ?> 

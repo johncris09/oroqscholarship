@@ -135,6 +135,116 @@ class TvetController extends BaseController
         echo Json_encode($res);
     }
 
+    
+    public function get_report()
+    {
+ 
+    
+        $query  = [];
+        $range  = [];
+        
+
+        $data["page_title"] = "Generated Report";  
+        $data["semester"] = ""; 
+        $data["status"] = ""; 
+        $data["scholarship_type"] = "TVET"; 
+        $data["school_year"] = ""; 
+
+        if(!empty($_GET['school'])){ 
+            $query['colSchool'] =  $_GET['school'];
+        }
+        if(!empty($_GET['semester'])){ 
+            $query['colAppNoSem'] =  $_GET['semester'];
+            $data['semester'] =  $_GET['semester'];
+        }
+        if(!empty($_GET['school_year'])){ 
+            $query['colSY'] =  $_GET['school_year'];
+            $data['school_year'] =  $_GET['school_year'];
+        }
+        if(!empty($_GET['status'])){ 
+            $query['colAppStat'] =  $_GET['status'];
+            $data['status'] =  $_GET['status'];
+        }
+        if(!empty($_GET['availment'])){ 
+            $query['colAvailment'] =  $_GET['availment'];
+        }
+        if(!empty($_GET['gender'])){ 
+            $query['colGender'] =  $_GET['gender'];
+        }
+        if(!empty($_GET['year_level'])){ 
+            $query['colYearLevel'] =  $_GET['year_level'];
+        }
+        if(!empty($_GET['address'])){ 
+            $query['colAddress'] =  $_GET['address'];
+        }
+        if(!empty($_GET['from'])){ 
+            $range['colAppNoIDFrom'] =  $_GET['from'];
+        }
+        if(!empty($_GET['to'])){ 
+            $range['colAppNoIDTo'] =  $_GET['to'];
+        }  
+
+        
+        $data["result"] = $this->tvet->get_report($query, $range);   
+        return view('admin/view_report', $data);   
+
+    }
+
+
+    
+    public function print_preview()
+    {
+ 
+    
+        $query  = [];
+        $range  = [];
+        
+
+        $data["page_title"] = "Generated Report";  
+        $data["semester"] = ""; 
+        $data["status"] = ""; 
+        $data["scholarship_type"] = "TVET"; 
+        $data["school_year"] = ""; 
+        if(!empty($_GET['school'])){ 
+            $query['colSchool'] =  $_GET['school'];
+        }
+        if(!empty($_GET['semester'])){ 
+            $query['colAppNoSem'] =  $_GET['semester'];
+            $data['semester'] =  $_GET['semester'];
+        }
+        if(!empty($_GET['school_year'])){ 
+            $query['colSY'] =  $_GET['school_year'];
+            $data['school_year'] =  $_GET['school_year'];
+        }
+        if(!empty($_GET['status'])){ 
+            $query['colAppStat'] =  $_GET['status'];
+            $data['status'] =  $_GET['status'];
+        }
+        if(!empty($_GET['availment'])){ 
+            $query['colAvailment'] =  $_GET['availment'];
+        }
+        if(!empty($_GET['gender'])){ 
+            $query['colGender'] =  $_GET['gender'];
+        }
+        if(!empty($_GET['year_level'])){ 
+            $query['colYearLevel'] =  $_GET['year_level'];
+        }
+        if(!empty($_GET['address'])){ 
+            $query['colAddress'] =  $_GET['address'];
+        }
+        if(!empty($_GET['from'])){ 
+            $range['colAppNoIDFrom'] =  $_GET['from'];
+        }
+        if(!empty($_GET['to'])){ 
+            $range['colAppNoIDTo'] =  $_GET['to'];
+        }  
+        
+        $data["result"] = $this->tvet->get_report($query, $range);
+        // print_r($data["result"]) ;
+        return view('admin/print_preview', $data);   
+
+    }
+
 
 
 }

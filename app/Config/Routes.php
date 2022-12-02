@@ -95,7 +95,9 @@ $routes->group('generate_report',  function($routes) {
     $routes->get('shs_report', 'SeniorHighController::get_report', ["filter" => "auth"]); 
     $routes->get('shs_print_preview', 'SeniorHighController::print_preview', ["filter" => "auth"]); 
     $routes->get('college_report', 'CollegeController::get_report', ["filter" => "auth"]); 
-    $routes->get('tvet_report', 'TvetController::get_report', ["filter" => "auth"]);  
+    $routes->get('college_print_preview', 'CollegeController::print_preview', ["filter" => "auth"]); 
+    $routes->get('tvet_report', 'TvetController::get_report', ["filter" => "auth"]); 
+    $routes->get('tvet_print_preview', 'TvetController::print_preview', ["filter" => "auth"]);  
     
 });
 

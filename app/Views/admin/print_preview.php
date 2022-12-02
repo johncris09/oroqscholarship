@@ -137,7 +137,7 @@
                                             <th>No.</th>
                                             <th>Name</th>
                                             <th>Address</th>
-                                            <th>Strand</th>
+                                            <th><?= in_array( $scholarship_type  ,['College', 'TVET']) ? "Course" :  "Strand" ?></th>
                                             <th>Year Level</th>
                                             <th>School</th>
                                             <th>Contact No.</th>
@@ -148,19 +148,37 @@
                                         <?php
                                             $counter = 1; 
                                             foreach($result as $row){ 
-                                                $name = $row->AppLastName . ", "  . $row->AppLastName . " "  . $row->AppMidIn . " " . " "  . $row->AppSuffix ;
-                                                $contact = in_array($row->AppContact, ["-", null, "None", "" ]) ? "" : $row->AppContact;
+                                                if(in_array( $scholarship_type  ,['College', 'TVET'])){
+                                                    $contact = in_array($row->colContactNo, ["-", null, "None", "" ]) ? "" : $row->colContactNo;
+                                                    $name = ucwords( $row->colLastName . ", "  . $row->colFirstName . " "  . $row->colMI . " " . " "  . $row->colSuffix) ; 
+                                                    $address = $row->colAddress;
+                                                    $course = $row->colCourse;
+                                                    $year_level =  $row->colYearLevel;
+                                                    $school =  $row->colSchool;
+                                                    $availment =  $row->colAvailment;
+                                                }else{
+                                                    $contact = in_array($row->AppContact, ["-", null, "None", "" ]) ? "" : $row->AppContact;
+                                                    $name = ucwords( $row->AppLastName . ", "  . $row->AppFirstName . " "  . $row->AppMidIn . " " . " "  . $row->AppSuffix ); 
+                                                    $address = $row->AppAddress;
+                                                    $course = $row->AppCourse;
+                                                    $year_level =  $row->AppYear;
+                                                    $school =  $row->AppSchool;
+                                                    $availment =  $row->AppAvailment;
+                                                }
                                                 
                                         ?>
-                                            <tr>
-                                                <td><?= $counter++; ?></td>
-                                                <td class="text-nowrap"><?= $name ?></td> 
-                                                <td class="text-nowrap"><?= $row->AppAddress ?></td> 
-                                                <td class="text-nowrap"><?= $row->AppCourse ?></td> 
-                                                <td class="text-nowrap"><?= $row->AppYear ?></td> 
-                                                <td class="text-nowrap"><?= $row->AppSchool ?></td> 
-                                                <td><?= $contact ?></td> 
-                                                <td><?= $row->AppAvailment ?></td> 
+                                            <tr> 
+                                                <tr>
+                                                    <td><?= $counter++; ?></td>
+                                                    <td class="text-nowrap"><?= $name ?></td> 
+                                                    <td class="text-nowrap"><?= $address ?></td> 
+                                                    <td class="text-nowrap"><?= $course ?></td> 
+                                                    <td class="text-nowrap"><?= $year_level ?></td> 
+                                                    <td class="text-nowrap"><?= $school ?></td> 
+                                                    <td><?= $contact ?></td> 
+                                                    <td><?= $availment ?></td> 
+                                                </tr>
+                                                
                                             </tr>
                                             
                                         <?php   } ?> 
