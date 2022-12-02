@@ -21,16 +21,16 @@
             <div class="card">
                 <div class="card-header bg-white"> 
                     <div class=" float-end"> 
-                        <button type="button" id="print" class="btn btn-primary"> <i class="mdi mdi-printer"></i> Print</button>
+                        
+                        <a href="shs_print_preview?<?= $_SERVER["QUERY_STRING"]  ?>"  class="btn btn-primary"> <i class="mdi mdi-printer"></i> Print Preview</a>
                     </div>
-                    <h4 class="header-title"><?= $page_title; ?></h4>  
+                    <!-- <h4 class="header-title"><?= $page_title; ?></h4>   -->
                 </div>
                 <div class="card-body"> 
-                    <div class="text-center">  
-                        <h1 class="header">Header</h1>
+                    <div class="text-center">   
                         <h4><?= $semester ?> Semester List of <?= $status ?> <?= $scholarship_type ?> Scholarship Applicants for SY: <?= $school_year ?></h4>
                     </div>
-                    <table class="table table-striped table-inverse table-responsive">
+                    <table id="report-table" class="table table-striped table-inverse table-responsive">
                         <thead class="bg-primary text-white">
                             <tr>
                                 <th>No.</th>
@@ -79,10 +79,11 @@
 <?= $this->section('pageScript') ?>
 
     <script>
-        $(document).ready(function() {  
-            $('#print').on('click', function(){ 
-                $('.card-body').printThis();
-            })
+        $(document).ready(function() {    
+            var table = $('#report-table').DataTable( {
+                searching: false,   info: false
+            }); 
+
         });
     </script>
 
