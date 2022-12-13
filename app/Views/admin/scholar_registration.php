@@ -105,7 +105,7 @@
 
                     <ul class="nav nav-tabs"> 
                         <li class="nav-item">
-                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active  ">
+                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link   ">
                                 Senior High School Registration
                             </a>
                         </li>
@@ -115,13 +115,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link ">
+                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
                                 TVET Registration
                             </a>
                         </li>
                     </ul>
                     <div class="tab-content"> 
-                        <div class="tab-pane show active  " id="senior-high-tab"> 
+                        <div class="tab-pane show   " id="senior-high-tab"> 
                             <form id="senior-high-registration-form" class="validation-form"  enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-12">
@@ -268,32 +268,74 @@
                                 
                                 <div class="row g-3" >
                                     <div class="col"> 
-                                        <label for="school" class="form-label">School <?= $required_field; ?></label>
-                                        <div class="input-group">
-                                            <select class="form-control" id="school" name="school" required>
-                                                <option value="">Select</option> 
-                                                <?php foreach($school as $row):?> 
-                                                    <?php if($row['SchoolName'] != ""):?> 
-                                                        <option value="<?= $row['SchoolName']  ?>"><?= $row['SchoolName']  ?></option>  
-                                                    <?php endif; ?>
-                                                <?php endforeach; ?>
-                                            </select>  
-                                            <button id="add-school-button" class="btn input-group-text btn-primary waves-effect waves-light" type="button"> <i class="mdi mdi-plus" aria-hidden="true"></i> </button>
-                                        </div>   
+                                        <label for="school" class="form-label">School <?= $required_field; ?></label> 
+                                        <button type="button" id="add-school-button"  class="btn btn-primary rounded-pill waves-effect waves-light btn-sm" data-bs-toggle="modal" data-bs-target="#add-new-shs-school-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> </button>
+                                        <select class="form-control" id="school" name="school" required>
+                                            <option value="">Select</option> 
+                                            <?php foreach($school as $row):?> 
+                                                <?php if($row['SchoolName'] != ""):?> 
+                                                    <option value="<?= $row['SchoolName']  ?>"><?= $row['SchoolName']  ?></option>  
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        </select>    
+                                        
+                                        <!-- add modal form -->
+                                        <div class="modal fade" id="add-new-shs-school-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Add New</h4>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div> 
+                                                    <div class="modal-body ">
+                                                        <div class="form-group">
+                                                            <label for="field-1" class="form-label">School Name</label>
+                                                            <input type="text" name="shs_school_name" class="form-control"  placeholder="School Name" required> 
+                                                        </div>   
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" id="add-new-shs-school-button" class="btn btn-info waves-effect waves-light">Save  changes</button>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
                                     </div>
                                     <div class="col">
-                                        <label for="strand" class="form-label">Strand <?= $required_field; ?></label> 
-                                        <div class="input-group">
-                                            <select class="form-control"  name="strand" required>
-                                                <option value="">Select</option> 
-                                                <?php foreach($strand as $row):?> 
-                                                    <?php if($row['Strand'] != ""):?> 
-                                                        <option value="<?= $row['Strand']  ?>"><?= $row['Strand']  ?></option>  
-                                                    <?php endif; ?>
-                                                <?php endforeach; ?>
-                                            </select>
-                                            <button id="add-strand-button" class="btn input-group-text btn-primary waves-effect waves-light" type="button"> <i class="mdi mdi-plus" aria-hidden="true"></i> </button>
-                                        </div>  
+                                        <label for="strand" class="form-label">Strand <?= $required_field; ?></label>  
+                                        <button type="button" id="add-strand-button"  class="btn btn-primary rounded-pill waves-effect waves-light btn-sm" data-bs-toggle="modal" data-bs-target="#add-new-shs-strand-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> </button>
+                                        <select class="form-control"  name="strand" required>
+                                            <option value="">Select</option> 
+                                            <?php foreach($strand as $row):?> 
+                                                <?php if($row['Strand'] != ""):?> 
+                                                    <option value="<?= $row['Strand']  ?>"><?= $row['Strand']  ?></option>  
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        </select> 
+                                        <!-- add modal form -->
+                                        <div class="modal fade" id="add-new-shs-strand-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Add New</h4>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div> 
+                                                        <div class="modal-body ">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="form-label">Strand</label>
+                                                                <input type="text" name="new_strand" class="form-control"  placeholder="Strand" required> 
+                                                            </div>  
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" id="add-new-shs-strand-button" class="btn btn-info waves-effect waves-light">Save  changes</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                             
                                     </div>
                                 </div>
                                 <div class="row g-3" >
@@ -501,31 +543,70 @@
                                     
                                 <div class="row g-3" >
                                     <div class="col">
-                                        <label for="" class="form-label">School <?= $required_field; ?></label>
-                                        <div class="input-group">
-                                            <select class="form-control" name="school" required>
-                                                <option value="">Select</option> 
-                                                <?php foreach($college_school as $row):?> 
-                                                    <?php if($row['colSchoolName'] != ""):?> 
-                                                        <option value="<?= $row['colSchoolName']  ?>"><?= $row['colSchoolName']  ?></option>  
-                                                    <?php endif; ?>
-                                                <?php endforeach; ?>
-                                            </select>  
-                                            <button id="add-school-button" class="btn input-group-text btn-primary waves-effect waves-light" type="button"> <i class="mdi mdi-plus" aria-hidden="true"></i> </button>
+                                        <label for="" class="form-label">School <?= $required_field; ?></label> 
+                                        <button type="button" id="add-school-button"  class="btn btn-primary rounded-pill waves-effect waves-light btn-sm" data-bs-toggle="modal" data-bs-target="#add-new-college-school-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> </button>
+                                        <select class="form-control" name="school" required>
+                                            <option value="">Select</option> 
+                                            <?php foreach($college_school as $row):?> 
+                                                <?php if($row['colSchoolName'] != ""):?> 
+                                                    <option value="<?= $row['colSchoolName']  ?>"><?= $row['colSchoolName']  ?></option>  
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        </select> 
+                                        <!-- add modal form -->
+                                        <div class="modal fade" id="add-new-college-school-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Add New</h4>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div> 
+                                                    <div class="modal-body ">
+                                                        <div class="form-group">
+                                                            <label for="field-1" class="form-label">School Name</label>
+                                                            <input type="text" name="college_school_name" class="form-control"  placeholder="School Name" required> 
+                                                        </div>   
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" id="add-new-college-school-button" class="btn btn-info waves-effect waves-light">Save  changes</button>
+                                                    </div> 
+                                                </div>
+                                            </div>
                                         </div> 
                                     </div>
                                     <div class="col">
                                         <label for="" class="form-label">Course <?= $required_field; ?></label>
-                                        <div class="input-group">
-                                            <select class="form-control" name="course" required>
-                                                <option value="">Select</option> 
-                                                <?php foreach($course as $row):?> 
-                                                    <?php if($row['colCourse'] != ""):?> 
-                                                        <option value="<?= $row['colCourse']  ?>"><?= $row['colCourse']  ?></option>  
-                                                    <?php endif; ?>
-                                                <?php endforeach; ?>
-                                            </select>
-                                            <button id="add-course-button" class="btn input-group-text btn-primary waves-effect waves-light" type="button"> <i class="mdi mdi-plus" aria-hidden="true"></i> </button>
+                                        <button type="button" id="add-course-button"  class="btn btn-primary rounded-pill waves-effect waves-light btn-sm" data-bs-toggle="modal" data-bs-target="#add-new-college-course-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> </button> 
+                                        <select class="form-control" name="course" required>
+                                            <option value="">Select</option> 
+                                            <?php foreach($course as $row):?> 
+                                                <?php if($row['colCourse'] != ""):?> 
+                                                    <option value="<?= $row['colCourse']  ?>"><?= $row['colCourse']  ?></option>  
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        </select> 
+
+                                        <!-- add modal form -->
+                                        <div class="modal fade" id="add-new-college-course-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Add New</h4>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div> 
+                                                    <div class="modal-body ">
+                                                        <div class="form-group">
+                                                            <label for="field-1" class="form-label">Course</label>
+                                                            <input type="text" name="college_course" class="form-control"  placeholder="Course" required> 
+                                                        </div>   
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" id="add-new-college-course-button" class="btn btn-info waves-effect waves-light">Save  changes</button>
+                                                    </div> 
+                                                </div>
+                                            </div>
                                         </div> 
                                     </div> 
                                 </div> 
@@ -594,7 +675,7 @@
                             </form>
                         </div>
                         
-                        <div class="tab-pane " id="tvet-tab">
+                        <div class="tab-pane active" id="tvet-tab">
                             
                             <form id="tvet-registration-form" class="validation-form">
                                 <div class="row"> 
@@ -744,30 +825,68 @@
                                 <div class="row g-3" >
                                     <div class="col">
                                         <label for="" class="form-label">School <?= $required_field; ?></label>
-                                        <div class="input-group">
-                                            <select class="form-control" name="school" required>
-                                                <option value="">Select</option> 
-                                                <?php foreach($college_school as $row):?> 
-                                                    <?php if($row['colSchoolName'] != ""):?> 
-                                                        <option value="<?= $row['colSchoolName']  ?>"><?= $row['colSchoolName']  ?></option>  
-                                                    <?php endif; ?>
-                                                <?php endforeach; ?>
-                                            </select>
-                                            <button id="add-school-button" class="btn input-group-text btn-primary waves-effect waves-light" type="button"> <i class="mdi mdi-plus" aria-hidden="true"></i> </button>
+                                        <button type="button" id="add-course-button"  class="btn btn-primary rounded-pill waves-effect waves-light btn-sm" data-bs-toggle="modal" data-bs-target="#add-new-tvet-school-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> </button>  
+                                        <select class="form-control" name="school" required>
+                                            <option value="">Select</option> 
+                                            <?php foreach($college_school as $row):?> 
+                                                <?php if($row['colSchoolName'] != ""):?> 
+                                                    <option value="<?= $row['colSchoolName']  ?>"><?= $row['colSchoolName']  ?></option>  
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        </select> 
+                                        <!-- add modal form -->
+                                        <div class="modal fade" id="add-new-tvet-school-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Add New</h4>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div> 
+                                                    <div class="modal-body ">
+                                                        <div class="form-group">
+                                                            <label for="field-1" class="form-label">School Name</label>
+                                                            <input type="text" name="tvet_school_name" class="form-control"  placeholder="School Name" required> 
+                                                        </div>   
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" id="add-new-tvet-school-button" class="btn btn-info waves-effect waves-light">Save  changes</button>
+                                                    </div> 
+                                                </div>
+                                            </div>
                                         </div> 
                                     </div>
                                     <div class="col">
                                         <label for="" class="form-label">Course <?= $required_field; ?></label>
-                                        <div class="input-group"> 
-                                            <select class="form-control" name="course" required>
-                                                <option value="">Select</option> 
-                                                <?php foreach($course as $row):?> 
-                                                    <?php if($row['colCourse'] != ""):?> 
-                                                        <option value="<?= $row['colCourse']  ?>"><?= $row['colCourse']  ?></option>  
-                                                    <?php endif; ?>
-                                                <?php endforeach; ?>
-                                            </select>
-                                            <button id="add-course-button" class="btn input-group-text btn-primary waves-effect waves-light" type="button"> <i class="mdi mdi-plus" aria-hidden="true"></i> </button>
+                                        <button type="button" id="add-course-button"  class="btn btn-primary rounded-pill waves-effect waves-light btn-sm" data-bs-toggle="modal" data-bs-target="#add-new-tvet-course-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> </button> 
+                                        <select class="form-control" name="course" required>
+                                            <option value="">Select</option> 
+                                            <?php foreach($course as $row):?> 
+                                                <?php if($row['colCourse'] != ""):?> 
+                                                    <option value="<?= $row['colCourse']  ?>"><?= $row['colCourse']  ?></option>  
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        </select> 
+                                        <!-- add modal form -->
+                                        <div class="modal fade" id="add-new-tvet-course-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Add New</h4>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div> 
+                                                    <div class="modal-body ">
+                                                        <div class="form-group">
+                                                            <label for="field-1" class="form-label">Course</label>
+                                                            <input type="text" name="tvet_course" class="form-control"  placeholder="Course" required> 
+                                                        </div>   
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" id="add-new-tvet-course-button" class="btn btn-info waves-effect waves-light">Save  changes</button>
+                                                    </div> 
+                                                </div>
+                                            </div>
                                         </div> 
                                     </div> 
                                 </div> 
@@ -863,6 +982,7 @@
             var image_tvet = document.getElementById('sample_image_tvet'); 
             var cropper;
             var base64data;
+  
 
             tippy('#add-school-button', {
                 content: 'Add New School',
@@ -1239,6 +1359,299 @@
                     }
                 }); 
             });
+
+
+            
+            
+            $(document).on('click', '#add-new-shs-school-button', function(e){  
+                e.preventDefault(); 
+                var school_name = $('input[name="shs_school_name"]').val() 
+                if(school_name == ""){
+                    Swal.fire({
+                        title:"Input Field must not be empty!", 
+                        icon:"error"
+                    }) 
+                }else{
+                    $.ajax({
+                        url:  'school/insert',
+                        method: "post", 
+                        data: {
+                            school_name : school_name,
+                            manager : "Active"
+                        },  
+                        dataType: "json", 
+                        success: function (data) {  
+                            if(data.response){ 
+                                Swal.fire({
+                                    title:"Good job!",
+                                    text: data.message,
+                                    icon:"success"
+                                })
+                                
+                                // append value
+                                $('#senior-high-registration-form select[name="school"]').append($('<option>', {
+                                    value: school_name,
+                                    text: school_name
+                                }));
+
+                                $('input[name="shs_school_name"]').val('')  
+                                $('#add-new-shs-school-modal').modal('hide')
+                            }else{  
+                                Swal.fire({
+                                    title:"Insert Error!",
+                                    text: data.message,
+                                    icon:"error"
+                                }) 
+                            }
+                        },
+                        error: function (xhr, status, error) { 
+                            console.info(xhr.responseText);
+                        }
+                    }); 
+
+                }
+            }); 
+            $(document).on('click', '#add-new-shs-strand-button', function(e){  
+                e.preventDefault(); 
+                var strand = $('input[name="new_strand"]').val() 
+                if(strand == ""){
+                    Swal.fire({
+                        title:"Input Field must not be empty!", 
+                        icon:"error"
+                    }) 
+                }else{
+                    $.ajax({
+                        url:  'strand/insert',
+                        method: "post", 
+                        data: {
+                            strand : strand,
+                            manager : "Active"
+                        },  
+                        dataType: "json", 
+                        success: function (data) {  
+                            if(data.response){ 
+                                Swal.fire({
+                                    title:"Good job!",
+                                    text: data.message,
+                                    icon:"success"
+                                })
+
+                                // append value
+                                $('#senior-high-registration-form select[name="strand"]').append($('<option>', {
+                                    value: school_name,
+                                    text: school_name
+                                }));
+
+                                $('input[name="new_strand"]').val('')
+                                $('#add-new-shs-strand-modal').modal('hide')
+                            }else{  
+                                Swal.fire({
+                                    title:"Insert Error!",
+                                    text: data.message,
+                                    icon:"error"
+                                }) 
+                            }
+                        },
+                        error: function (xhr, status, error) { 
+                            console.info(xhr.responseText);
+                        }
+                    }); 
+
+                }
+            });  
+            $(document).on('click', '#add-new-college-school-button', function(e){  
+                e.preventDefault(); 
+                var school_name = $('input[name="college_school_name"]').val() 
+                if(school_name == ""){
+                    Swal.fire({
+                        title:"Input Field must not be empty!", 
+                        icon:"error"
+                    }) 
+                }else{
+                    $.ajax({
+                        url:  'collegeschool/insert',
+                        method: "post", 
+                        data: {
+                            school_name : school_name,
+                            manager : "Active"
+                        },   
+                        dataType: "json", 
+                        success: function (data) {   
+                            if(data.response){ 
+                                Swal.fire({
+                                    title:"Good job!",
+                                    text: data.message,
+                                    icon:"success"
+                                })
+                                
+                                // append value
+                                $('#college-registration-form select[name="school"]').append($('<option>', {
+                                    value: school_name,
+                                    text: school_name
+                                }));
+
+                                $('input[name="college_school_name"]').val('')  
+                                $('#add-new-college-school-modal').modal('hide')
+                            }else{  
+                                Swal.fire({
+                                    title:"Insert Error!",
+                                    text: data.message,
+                                    icon:"error"
+                                }) 
+                            }
+                        },
+                        error: function (xhr, status, error) { 
+                            console.info(xhr.responseText);
+                        }
+                    }); 
+
+                }
+            });  
+            $(document).on('click', '#add-new-college-course-button', function(e){  
+                e.preventDefault(); 
+                var course = $('input[name="college_course"]').val() 
+                if(course == ""){
+                    Swal.fire({
+                        title:"Input Field must not be empty!", 
+                        icon:"error"
+                    }) 
+                }else{
+                    $.ajax({
+                        url:  'course/insert',
+                        method: "post", 
+                        data: {
+                            course : course,
+                            manager : "Active"
+                        },  
+                        dataType: "json", 
+                        success: function (data) {   
+                            if(data.response){ 
+                                Swal.fire({
+                                    title:"Good job!",
+                                    text: data.message,
+                                    icon:"success"
+                                })
+
+                                // append value
+                                $('#college-registration-form select[name="course"]').append($('<option>', {
+                                    value: course,
+                                    text: course
+                                }));
+
+                                $('input[name="college_course"]').val('')
+                                $('#add-new-college-course-modal').modal('hide')
+                            }else{  
+                                Swal.fire({
+                                    title:"Insert Error!",
+                                    text: data.message,
+                                    icon:"error"
+                                }) 
+                            }
+                        },
+                        error: function (xhr, status, error) { 
+                            console.info(xhr.responseText);
+                        }
+                    }); 
+
+                }
+            });  
+            $(document).on('click', '#add-new-tvet-school-button', function(e){  
+                e.preventDefault(); 
+                var school_name = $('input[name="tvet_school_name"]').val() 
+                if(school_name == ""){
+                    Swal.fire({
+                        title:"Input Field must not be empty!", 
+                        icon:"error"
+                    }) 
+                }else{
+                    $.ajax({
+                        url:  'collegeschool/insert',
+                        method: "post", 
+                        data: {
+                            school_name : school_name,
+                            manager : "Active"
+                        },   
+                        dataType: "json", 
+                        success: function (data) {   
+                            if(data.response){ 
+                                Swal.fire({
+                                    title:"Good job!",
+                                    text: data.message,
+                                    icon:"success"
+                                })
+                                
+                                // append value
+                                $('#tvet-registration-form select[name="school"]').append($('<option>', {
+                                    value: school_name,
+                                    text: school_name
+                                }));
+
+                                $('input[name="tvet_school_name"]').val('')  
+                                $('#add-new-tvet-school-modal').modal('hide')
+                            }else{  
+                                Swal.fire({
+                                    title:"Insert Error!",
+                                    text: data.message,
+                                    icon:"error"
+                                }) 
+                            }
+                        },
+                        error: function (xhr, status, error) { 
+                            console.info(xhr.responseText);
+                        }
+                    }); 
+
+                }
+            });  
+            $(document).on('click', '#add-new-tvet-course-button', function(e){  
+                e.preventDefault(); 
+                var course = $('input[name="tvet_course"]').val() 
+                if(course == ""){
+                    Swal.fire({
+                        title:"Input Field must not be empty!", 
+                        icon:"error"
+                    }) 
+                }else{
+                    $.ajax({
+                        url:  'course/insert',
+                        method: "post", 
+                        data: {
+                            course : course,
+                            manager : "Active"
+                        },  
+                        dataType: "json", 
+                        success: function (data) {   
+                            if(data.response){ 
+                                Swal.fire({
+                                    title:"Good job!",
+                                    text: data.message,
+                                    icon:"success"
+                                })
+
+                                // append value
+                                $('#tvet-registration-form select[name="course"]').append($('<option>', {
+                                    value: course,
+                                    text: course
+                                }));
+
+                                $('input[name="tvet_course"]').val('')
+                                $('#add-new-tvet-course-modal').modal('hide')
+                            }else{  
+                                Swal.fire({
+                                    title:"Insert Error!",
+                                    text: data.message,
+                                    icon:"error"
+                                }) 
+                            }
+                        },
+                        error: function (xhr, status, error) { 
+                            console.info(xhr.responseText);
+                        }
+                    }); 
+
+                }
+            });
+
  
 
 
