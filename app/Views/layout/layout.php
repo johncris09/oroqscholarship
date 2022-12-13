@@ -445,10 +445,10 @@
 		<script src="https://unpkg.com/dropzone"></script>
 		<script src="https://unpkg.com/cropperjs"></script> 
         <script src="https://fengyuanchen.github.io/compressorjs/js/compressor.js"></script>
-        <script src="https://jasonday.github.io/printThis/printThis.js"></script>     
-        <?= script_tag('assets/chart.js/Chart.bundle.min.js'); ?>      
-        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
- 
+        <script src="https://jasonday.github.io/printThis/printThis.js"></script>    >       
+        <?= script_tag('assets/apexcharts/apexcharts.js'); ?>  
+        <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+        <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
         <?= $this->renderSection('pageScript') ?> 
 
         

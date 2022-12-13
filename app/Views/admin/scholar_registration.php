@@ -105,7 +105,7 @@
 
                     <ul class="nav nav-tabs"> 
                         <li class="nav-item">
-                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link   ">
+                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active  ">
                                 Senior High School Registration
                             </a>
                         </li>
@@ -115,13 +115,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
+                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link ">
                                 TVET Registration
                             </a>
                         </li>
                     </ul>
                     <div class="tab-content"> 
-                        <div class="tab-pane " id="senior-high-tab"> 
+                        <div class="tab-pane show active  " id="senior-high-tab"> 
                             <form id="senior-high-registration-form" class="validation-form"  enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-12">
@@ -267,28 +267,34 @@
                                 </div>
                                 
                                 <div class="row g-3" >
-                                    <div class="col">
+                                    <div class="col"> 
                                         <label for="school" class="form-label">School <?= $required_field; ?></label>
-                                        <select class="form-control" id="school" name="school" required>
-                                            <option value="">Select</option> 
-                                            <?php foreach($school as $row):?> 
-                                                <?php if($row['SchoolName'] != ""):?> 
-                                                    <option value="<?= $row['SchoolName']  ?>"><?= $row['SchoolName']  ?></option>  
-                                                <?php endif; ?>
-                                            <?php endforeach; ?>
-                                        </select>
+                                        <div class="input-group">
+                                            <select class="form-control" id="school" name="school" required>
+                                                <option value="">Select</option> 
+                                                <?php foreach($school as $row):?> 
+                                                    <?php if($row['SchoolName'] != ""):?> 
+                                                        <option value="<?= $row['SchoolName']  ?>"><?= $row['SchoolName']  ?></option>  
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
+                                            </select>  
+                                            <button id="add-school-button" class="btn input-group-text btn-primary waves-effect waves-light" type="button"> <i class="mdi mdi-plus" aria-hidden="true"></i> </button>
+                                        </div>   
                                     </div>
                                     <div class="col">
-                                        <label for="strand" class="form-label">Strand <?= $required_field; ?></label>
-                                        <select class="form-control"  name="strand" required>
-                                            <option value="">Select</option> 
-                                            <?php foreach($strand as $row):?> 
-                                                <?php if($row['Strand'] != ""):?> 
-                                                    <option value="<?= $row['Strand']  ?>"><?= $row['Strand']  ?></option>  
-                                                <?php endif; ?>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </div> 
+                                        <label for="strand" class="form-label">Strand <?= $required_field; ?></label> 
+                                        <div class="input-group">
+                                            <select class="form-control"  name="strand" required>
+                                                <option value="">Select</option> 
+                                                <?php foreach($strand as $row):?> 
+                                                    <?php if($row['Strand'] != ""):?> 
+                                                        <option value="<?= $row['Strand']  ?>"><?= $row['Strand']  ?></option>  
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            <button id="add-strand-button" class="btn input-group-text btn-primary waves-effect waves-light" type="button"> <i class="mdi mdi-plus" aria-hidden="true"></i> </button>
+                                        </div>  
+                                    </div>
                                 </div>
                                 <div class="row g-3" >
                                     <div class="col">
@@ -496,25 +502,31 @@
                                 <div class="row g-3" >
                                     <div class="col">
                                         <label for="" class="form-label">School <?= $required_field; ?></label>
-                                        <select class="form-control" name="school" required>
-                                            <option value="">Select</option> 
-                                            <?php foreach($college_school as $row):?> 
-                                                <?php if($row['colSchoolName'] != ""):?> 
-                                                    <option value="<?= $row['colSchoolName']  ?>"><?= $row['colSchoolName']  ?></option>  
-                                                <?php endif; ?>
-                                            <?php endforeach; ?>
-                                        </select>
+                                        <div class="input-group">
+                                            <select class="form-control" name="school" required>
+                                                <option value="">Select</option> 
+                                                <?php foreach($college_school as $row):?> 
+                                                    <?php if($row['colSchoolName'] != ""):?> 
+                                                        <option value="<?= $row['colSchoolName']  ?>"><?= $row['colSchoolName']  ?></option>  
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
+                                            </select>  
+                                            <button id="add-school-button" class="btn input-group-text btn-primary waves-effect waves-light" type="button"> <i class="mdi mdi-plus" aria-hidden="true"></i> </button>
+                                        </div> 
                                     </div>
                                     <div class="col">
                                         <label for="" class="form-label">Course <?= $required_field; ?></label>
-                                        <select class="form-control" name="course" required>
-                                            <option value="">Select</option> 
-                                            <?php foreach($course as $row):?> 
-                                                <?php if($row['colCourse'] != ""):?> 
-                                                    <option value="<?= $row['colCourse']  ?>"><?= $row['colCourse']  ?></option>  
-                                                <?php endif; ?>
-                                            <?php endforeach; ?>
-                                        </select>
+                                        <div class="input-group">
+                                            <select class="form-control" name="course" required>
+                                                <option value="">Select</option> 
+                                                <?php foreach($course as $row):?> 
+                                                    <?php if($row['colCourse'] != ""):?> 
+                                                        <option value="<?= $row['colCourse']  ?>"><?= $row['colCourse']  ?></option>  
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            <button id="add-course-button" class="btn input-group-text btn-primary waves-effect waves-light" type="button"> <i class="mdi mdi-plus" aria-hidden="true"></i> </button>
+                                        </div> 
                                     </div> 
                                 </div> 
                                 <div class="row g-3" >
@@ -582,7 +594,7 @@
                             </form>
                         </div>
                         
-                        <div class="tab-pane show active " id="tvet-tab">
+                        <div class="tab-pane " id="tvet-tab">
                             
                             <form id="tvet-registration-form" class="validation-form">
                                 <div class="row"> 
@@ -732,25 +744,31 @@
                                 <div class="row g-3" >
                                     <div class="col">
                                         <label for="" class="form-label">School <?= $required_field; ?></label>
-                                        <select class="form-control" name="school" required>
-                                            <option value="">Select</option> 
-                                            <?php foreach($college_school as $row):?> 
-                                                <?php if($row['colSchoolName'] != ""):?> 
-                                                    <option value="<?= $row['colSchoolName']  ?>"><?= $row['colSchoolName']  ?></option>  
-                                                <?php endif; ?>
-                                            <?php endforeach; ?>
-                                        </select>
+                                        <div class="input-group">
+                                            <select class="form-control" name="school" required>
+                                                <option value="">Select</option> 
+                                                <?php foreach($college_school as $row):?> 
+                                                    <?php if($row['colSchoolName'] != ""):?> 
+                                                        <option value="<?= $row['colSchoolName']  ?>"><?= $row['colSchoolName']  ?></option>  
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            <button id="add-school-button" class="btn input-group-text btn-primary waves-effect waves-light" type="button"> <i class="mdi mdi-plus" aria-hidden="true"></i> </button>
+                                        </div> 
                                     </div>
                                     <div class="col">
                                         <label for="" class="form-label">Course <?= $required_field; ?></label>
-                                        <select class="form-control" name="course" required>
-                                            <option value="">Select</option> 
-                                            <?php foreach($course as $row):?> 
-                                                <?php if($row['colCourse'] != ""):?> 
-                                                    <option value="<?= $row['colCourse']  ?>"><?= $row['colCourse']  ?></option>  
-                                                <?php endif; ?>
-                                            <?php endforeach; ?>
-                                        </select>
+                                        <div class="input-group"> 
+                                            <select class="form-control" name="course" required>
+                                                <option value="">Select</option> 
+                                                <?php foreach($course as $row):?> 
+                                                    <?php if($row['colCourse'] != ""):?> 
+                                                        <option value="<?= $row['colCourse']  ?>"><?= $row['colCourse']  ?></option>  
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            <button id="add-course-button" class="btn input-group-text btn-primary waves-effect waves-light" type="button"> <i class="mdi mdi-plus" aria-hidden="true"></i> </button>
+                                        </div> 
                                     </div> 
                                 </div> 
                                 <div class="row g-3" >
@@ -845,6 +863,17 @@
             var image_tvet = document.getElementById('sample_image_tvet'); 
             var cropper;
             var base64data;
+
+            tippy('#add-school-button', {
+                content: 'Add New School',
+            });
+            tippy('#add-strand-button', {
+                content: 'Add New Strand',
+            });
+            
+            tippy('#add-course-button', {
+                content: 'Add New Course',
+            });
  
             $('#upload_image_shs').change(function(event){
                 var files = event.target.files; 
