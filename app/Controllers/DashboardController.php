@@ -16,6 +16,7 @@ class DashboardController extends BaseController
         $this->senior_high = new SeniorHighModel($db);
         $this->college  = new CollegeModel($db);
         $this->tvet  = new TvetModel($db);
+        $this->custom_config = new \Config\Custom_config();
     }
 
     public function index()
@@ -29,42 +30,164 @@ class DashboardController extends BaseController
 
     public function scholarship_status()
     { 
-        $shs  = $this->get_shs_group_by_status_tot(); 
-        $college  = $this->get_college_group_by_status_tot(); 
-        $tvet  = $this->get_tvet_group_by_status_tot(); 
+        $shs  = $this->senior_high->get_tot_by_status();
+        $college  = $this->college->get_tot_by_status();
+        $tvet  = $this->tvet->get_tot_by_status();
         foreach($shs as $row){  
+            if($row->status == "Additional Approved"){ 
+                $data["Additional_approved"][] = $row->total; 
+            }
             $data[$row->status][] = $row->total; 
         }
         foreach($college as $row){  
+            if($row->status == "Additional Approved"){ 
+                $data["Additional_approved"][] = $row->total; 
+            }
             $data[$row->status][] = $row->total; 
         }
         foreach($tvet as $row){  
+            if($row->status == "Additional Approved"){ 
+                $data["Additional_approved"][] = $row->total; 
+            }
             $data[$row->status][] = $row->total; 
         }  
 
         echo json_encode($data);
 
     }
-
-    // get shs scholarship status
-    public function get_shs_group_by_status_tot()
+  
+    public function get_by_shs_school()
     { 
-        return $this->senior_high->get_tot_group_by_status();
-    } 
+        $shs  = $this->senior_high->get_tot_by_school(); 
+        foreach($shs as $row){ 
+            if(!$row->school== null){ 
+                $data['school'][] = $row->school;
+                $data['total'][] = $row->total;
+            }else{ 
+                $data['school'][] = "N/A";
+                $data['total'][] = $row->total;
+            }
 
-    // get college scholarship status
-    public function get_college_group_by_status_tot()
-    { 
-        return $this->college->get_tot_group_by_status();
+        }
+        echo json_encode($data);
+
     }
 
     
-    // get tvet scholarship status
-    public function get_tvet_group_by_status_tot()
-    { 
-        return $this->tvet->get_tot_group_by_status();
+    public function get_by_college_school()
+    {  
+        $college  = $this->college->get_tot_by_school(); 
+        foreach($college as $row){ 
+            if(!$row->school== null){ 
+                $data['school'][] = $row->school;
+                $data['total'][] = $row->total;
+            }else{ 
+                $data['school'][] = "N/A";
+                $data['total'][] = $row->total;
+            } 
+        }
+        echo json_encode($data);
+
+    }
+ 
+    
+    public function get_by_tvet_school()
+    {  
+        $tvet  = $this->tvet->get_tot_by_school();   
+        foreach($tvet as $row){ 
+            if(!$row->school== null){ 
+                $data['school'][] = $row->school;
+                $data['total'][] = $row->total;
+            }else{ 
+                $data['school'][] = "N/A";
+                $data['total'][] = $row->total;
+            } 
+        }
+        echo json_encode($data);
+
+    }
+ 
+ 
+    
+    public function scholarship_barangay()
+    {  
+        $barangay =  $this->custom_config->barangay;
+        foreach($barangay as $brgy){ 
+            $data['barangay'][] = $brgy;
+
+            $shs  = $this->senior_high->get_tot_by_barangay($brgy);
+            foreach($shs as $shs){
+                    $data['shs'][]  = $shs->total;
+            }
+            $college  = $this->college->get_tot_by_barangay($brgy);
+            foreach($college as $college){
+                    $data['college'][]  = $college->total;
+            }
+            $tvet  = $this->tvet->get_tot_by_barangay($brgy);
+            foreach($tvet as $tvet){
+                    $data['tvet'][]  = $tvet->total;
+            }
+
+
+        }
+        echo json_encode($data); 
+
     }
 
-    
+    public function scholarship_shs_gender()
+    {
+        $shs  = $this->senior_high->get_tot_by_gender(); 
+        foreach($shs as $row){ 
+            if(!$row->gender== null){ 
+                if( strtolower($row->gender) == "male"){ 
+                    $data['total'][] = (int) $row->total;
+                    $data['gender'][] = "male";
+                }  
+                if( strtolower($row->gender) == "female"){ 
+                    $data['total'][] = (int) $row->total;
+                    $data['gender'][] = "female";
+                }
+            } 
+ 
+        } 
+        echo json_encode($data); 
+    }
+
+    public function scholarship_college_gender()
+    {
+        $college  = $this->college->get_tot_by_gender(); 
+        foreach($college as $row){ 
+            if(!$row->gender== null){ 
+                if( strtolower($row->gender) == "male"){ 
+                    $data['total'][] = (int) $row->total;
+                    $data['gender'][] = "male";
+                }  
+                if( strtolower($row->gender) == "female"){ 
+                    $data['total'][] = (int) $row->total;
+                    $data['gender'][] = "female";
+                }
+            } 
+ 
+        } 
+        echo json_encode($data); 
+    }
+    public function scholarship_tvet_gender()
+    {
+        $tvet  = $this->tvet->get_tot_by_gender(); 
+        foreach($tvet as $row){ 
+            if(!$row->gender== null){ 
+                if( strtolower($row->gender) == "male"){ 
+                    $data['total'][] = (int) $row->total;
+                    $data['gender'][] = "male";
+                }  
+                if( strtolower($row->gender) == "female"){ 
+                    $data['total'][] = (int) $row->total;
+                    $data['gender'][] = "female";
+                }
+            } 
+ 
+        } 
+        echo json_encode($data); 
+    }
 
 }

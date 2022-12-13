@@ -39,6 +39,14 @@ $routes->set404Override();
 $routes->group('/',  function($routes) {
     $routes->get('', 'DashboardController::index', ["filter" => "auth"]);  
     $routes->get('scholarship_status', 'DashboardController::scholarship_status', ["filter" => "auth"]);  
+    $routes->get('get_by_shs_school', 'DashboardController::get_by_shs_school', ["filter" => "auth"]);  
+    $routes->get('get_by_college_school', 'DashboardController::get_by_college_school', ["filter" => "auth"]); 
+    $routes->get('get_by_tvet_school', 'DashboardController::get_by_tvet_school', ["filter" => "auth"]); 
+    $routes->get('scholarship_barangay', 'DashboardController::scholarship_barangay', ["filter" => "auth"]);  
+    $routes->get('scholarship_shs_gender', 'DashboardController::scholarship_shs_gender', ["filter" => "auth"]);   
+    $routes->get('scholarship_college_gender', 'DashboardController::scholarship_college_gender', ["filter" => "auth"]);  
+    $routes->get('scholarship_tvet_gender', 'DashboardController::scholarship_tvet_gender', ["filter" => "auth"]);  
+    
 });
 
 $routes->group('registration',  function($routes) {

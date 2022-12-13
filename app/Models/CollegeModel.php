@@ -149,7 +149,7 @@ class CollegeModel extends Model
     }
 
     
-    public function get_tot_group_by_status()
+    public function get_tot_by_status()
     {
         $query = $this->builder 
             ->select('colAppStat as status, count(*) as total')  
@@ -158,5 +158,40 @@ class CollegeModel extends Model
             ->getResult();  
         return $query;
     }
+
+    
+    public function get_tot_by_school()
+    {
+        $query = $this->builder 
+            ->select('colschool as school, count(*) as total')  
+            ->groupBy('colschool')  
+            ->get()
+            ->getResult();  
+        return $query;
+    }
+
+     
+    public function get_tot_by_barangay($barangay)
+    {
+        $query = $this->builder 
+            ->select('colAddress as barangay, count(*) as total')  
+            ->like('colAddress', $barangay, 'both')
+            ->get()
+            ->getResult();  
+        return $query;
+    }
+
+    
+    public function get_tot_by_gender()
+    {
+        $query = $this->builder 
+            ->select('colGender as gender, count(*) as total')  
+            ->groupBy('colGender')  
+            ->get()
+            ->getResult();  
+        return $query;
+    }
+
+    
 
 }

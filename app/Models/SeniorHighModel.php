@@ -158,7 +158,7 @@ class SeniorHighModel extends Model
         return $query;
     }
 
-    public function get_tot_group_by_status()
+    public function get_tot_by_status()
     {
         $query = $this->builder 
             ->select('AppStatus as status, count(*) as total')  
@@ -167,4 +167,34 @@ class SeniorHighModel extends Model
             ->getResult();  
         return $query;
     }
+    public function get_tot_by_school()
+    {
+        $query = $this->builder 
+            ->select('Appschool as school, count(*) as total')  
+            ->groupBy('Appschool')  
+            ->get()
+            ->getResult();  
+        return $query;
+    }
+
+    
+    public function get_tot_by_barangay($barangay)
+    {
+        $query = $this->builder 
+            ->select('AppAddress as barangay, count(*) as total')  
+            ->like('AppAddress', $barangay, 'both')
+            ->get()
+            ->getResult();  
+        return $query;
+    }
+
+    public function get_tot_by_gender()
+    {
+        $query = $this->builder 
+            ->select('AppGender as gender, count(*) as total')  
+            ->groupBy('AppGender')  
+            ->get()
+            ->getResult();  
+        return $query;
+    } 
 }
