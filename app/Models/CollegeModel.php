@@ -147,4 +147,16 @@ class CollegeModel extends Model
             ->getResult();  
         return $query;
     }
+
+    
+    public function get_tot_group_by_status()
+    {
+        $query = $this->builder 
+            ->select('colAppStat as status, count(*) as total')  
+            ->groupBy('colAppStat')  
+            ->get()
+            ->getResult();  
+        return $query;
+    }
+
 }

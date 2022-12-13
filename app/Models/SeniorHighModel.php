@@ -157,4 +157,14 @@ class SeniorHighModel extends Model
             ->getResult();  
         return $query;
     }
+
+    public function get_tot_group_by_status()
+    {
+        $query = $this->builder 
+            ->select('AppStatus as status, count(*) as total')  
+            ->groupBy('AppStatus')  
+            ->get()
+            ->getResult();  
+        return $query;
+    }
 }

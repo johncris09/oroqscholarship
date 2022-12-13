@@ -34,10 +34,12 @@ $routes->set404Override();
  */
 
 // We get a performance increase by specifying the default
-// route since we don't have to scan directories.
-$routes->get('/', 'DashboardController::index', ["filter" => "auth"]);
+// route since we don't have to scan directories. 
 
-
+$routes->group('/',  function($routes) {
+    $routes->get('', 'DashboardController::index', ["filter" => "auth"]);  
+    $routes->get('scholarship_status', 'DashboardController::scholarship_status', ["filter" => "auth"]);  
+});
 
 $routes->group('registration',  function($routes) {
     $routes->get('/', 'ScholarRegistrationController::index', ["filter" => "auth"]); 

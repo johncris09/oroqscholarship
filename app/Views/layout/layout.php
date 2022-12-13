@@ -178,6 +178,13 @@
                                     </ul>
                                 </div>
                             </li> 
+                            
+                            <li>
+                                <a href="/generate_report"> 
+                                    <i class="mdi mdi-chart-areaspline"></i>
+                                    <span> Generat Report </span>
+                                </a>
+                            </li>
 
 
                             
@@ -438,6 +445,9 @@
 		<script src="https://unpkg.com/dropzone"></script>
 		<script src="https://unpkg.com/cropperjs"></script> 
         <script src="https://fengyuanchen.github.io/compressorjs/js/compressor.js"></script>
+        <script src="https://jasonday.github.io/printThis/printThis.js"></script>     
+        <?= script_tag('assets/chart.js/Chart.bundle.min.js'); ?>      
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
  
         <?= $this->renderSection('pageScript') ?> 
 

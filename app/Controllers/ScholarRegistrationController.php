@@ -11,8 +11,7 @@ use App\Models\SeniorHighModel;
 use App\Models\SequenceModel;
 use App\Models\StrandModel;
 use App\Models\TvetModel;
-use Config\Custom_config; 
-use CodeIgniter\Files\File; 
+use Config\Custom_config;  
 
 class ScholarRegistrationController extends BaseController
 { 
