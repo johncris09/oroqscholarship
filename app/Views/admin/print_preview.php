@@ -1,199 +1,208 @@
-
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title><?= $this->renderSection('title') ?></title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <!-- App favicon -->
-        <link rel="shortcut icon" href="<?= '/img/favicon.ico' ?>"> 
-		<!-- App css -->
-        <?= link_tag('css/bootstrap.min.css'); ?>
-        <?= link_tag('css/app.min.css'); ?>  
-		<!-- icons -->
-        <?= link_tag('css/icons.min.css'); ?>  
-        <style>
+<html>
 
-            
-            header
-            {
-                text-align: center;
-                padding: 40px 0;  
-                border-radius: 10px;
-                /* position: rela1tive; */
-                width: 100%; 
-                text-align: center; 
-            }
-            header img { 
-                position: relative;
-                page-break-before: auto;
-                /* left: 15px;
-                top: 35px; */
-                width: 110px;
-                height: 110px;
-            } 
+<head>
+    <style>
+        /* Styles go here */
 
-            header .sub-header{
-                background-color: #009EFF;  
-                margin-top: 20px;
-                padding-top: 2px;
-                padding-bottom: 2px;
-            }
+.page-header, .page-header-space {
+  height: 130px;
+}
 
-            table.report-container {
-                page-break-after:always;
-            }
-            thead.report-header {
-                display:table-header-group;
-            }
-            tfoot.report-footer {
-                display:table-footer-group;
-            } 
-            table.report-container div.article {
-                page-break-inside: avoid;
-            }
+.page-footer, .page-footer-space {
+  height: 50px;
 
-            .table-header{
-                background-color: #3B44F6;
-                color: white;
-            }
+}
 
-            .sub-header{
-                background-color: #009EFF;  
-                /* margin-top: 1px !important;  */
-                padding-top: 1px;
-                padding-bottom: 1px;
-            }
+.page-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid black; /* for demo */ 
+}
 
-            .img-container{
-                background-image: url('<?= base_url() ?>/img/logo-sm.png');
-            }
-            @media print {  
-                .sub-header{
-                    background-color: #009EFF !important;  
-                    color: red;
-                    margin-top: 1px; 
-                }   
-                footer {
-                    bottom: 0;
-                    position: fixed;
-                }
-                body {
-                    background-color: white !important;   
-                    /* margin-left: -115px !important; */
-                }
-                .img-container{
-                    background-image: url('<?= base_url() ?>/img/logo-sm.png');
-                }
-                @page {
-                    size: auto;
-                    margin-top: 0;
-                    margin-bottom: 0; 
-                    margin-left: -115px ;
-                }
-            } 
+.page-header {
+  position: fixed;
+  top: 0mm;
+  width: 100%;
+  border-bottom: 1px solid black; /* for demo */ 
+}
 
-        </style>
-    </head>
-    <body>  
-        <div class="row justify-content-center">
-            <div class="col-8">
-                <table class="report-container">
-                    <thead class="report-header">
-                        <tr>
-                            <th class="report-header-cell"> 
-                                <header>
-                                    <div class="img-container"></div>
-                                    <h3>Republic of the Philippines</h3>
-                                    <h4>Office of the City Mayor</h4> 
-                                    <h5>Oroquieta City</h5>
-                                    <h6 class="text-danger">City oF Good Life</h6> 
-                                    <div class="sub-header"  >   
-                                        <h5><?= $semester ?> Semester List of <?= $status ?> <?= $scholarship_type ?> Scholarship Applicants for SY: <?= $school_year ?></h5>
-                                    </div>  
+.page {
+  page-break-after: always;
+}
+.UpperTitle
+{
+    text-align: center;  
+    position: rela1tive;
+}
+.UpperTitle img { 
+  position: absolute; left: 15px; top: 0px; 
+}
+.header{
+  line-height: 1px;
+}
+.page-footer p {
+  display: flex;
+  justify-content: space-between;
+}
+.for-approval p {
+  display: flex;
+  justify-content: space-between;
+}
+.text-nowrap{white-space:nowrap!important}
+#report {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  line-height: 30px;
+}
 
-                                </header>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tfoot class="report-footer">
-                    <tr>
-                        <td class="report-footer-cell">
-                            <div class="footer-info">
-                                <p>Printed By: <?= auth()->user()->firstname . " " . auth()->user()->lastname ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        Printed on: <?= date('F j, Y') ?></p>
-                            </div>
-                        </td>
-                    </tr>
-                    </tfoot>
-                    <tbody class="report-content">
-                        <tr>
-                            <td class="report-content-cell">
-                                <div class="main">
-                                <table class="table">
-                                    <thead class="table-header text-nowrap" >
-                                        <tr>
-                                            <th>No.</th>
-                                            <th>Name</th>
-                                            <th>Address</th>
-                                            <th><?= in_array( $scholarship_type  ,['College', 'TVET']) ? "Course" :  "Strand" ?></th>
-                                            <th>Year Level</th>
-                                            <th>School</th>
-                                            <th>Contact No.</th>
-                                            <th>Availment</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody> 
-                                        <?php
-                                            $counter = 1; 
-                                            foreach($result as $row){ 
-                                                if(in_array( $scholarship_type  ,['College', 'TVET'])){
-                                                    $contact = in_array($row->colContactNo, ["-", null, "None", "" ]) ? "" : $row->colContactNo;
-                                                    $name = ucwords( $row->colLastName . ", "  . $row->colFirstName . " "  . $row->colMI . " " . " "  . $row->colSuffix) ; 
-                                                    $address = $row->colAddress;
-                                                    $course = $row->colCourse;
-                                                    $year_level =  $row->colYearLevel;
-                                                    $school =  $row->colSchool;
-                                                    $availment =  $row->colAvailment;
-                                                }else{
-                                                    $contact = in_array($row->AppContact, ["-", null, "None", "" ]) ? "" : $row->AppContact;
-                                                    $name = ucwords( $row->AppLastName . ", "  . $row->AppFirstName . " "  . $row->AppMidIn . " " . " "  . $row->AppSuffix ); 
-                                                    $address = $row->AppAddress;
-                                                    $course = $row->AppCourse;
-                                                    $year_level =  $row->AppYear;
-                                                    $school =  $row->AppSchool;
-                                                    $availment =  $row->AppAvailment;
-                                                }
-                                                
-                                        ?>
-                                            <tr> 
-                                                <tr>
-                                                    <td><?= $counter++; ?></td>
-                                                    <td class="text-nowrap"><?= $name ?></td> 
-                                                    <td class="text-nowrap"><?= $address ?></td> 
-                                                    <td class="text-nowrap"><?= $course ?></td> 
-                                                    <td class="text-nowrap"><?= $year_level ?></td> 
-                                                    <td class="text-nowrap"><?= $school ?></td> 
-                                                    <td><?= $contact ?></td> 
-                                                    <td><?= $availment ?></td> 
-                                                </tr>
-                                                
-                                            </tr>
-                                            
-                                        <?php   } ?> 
-                                    </tbody>
-                                </table> 
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div> 
+#report td, #report th {
+  border: 1px solid #ddd;
+  padding-left: 5px; 
+}  
+
+#report th { 
+  text-align: center;
+  background-color: #4B7BE5;
+  color: white;
+}
+@page {
+  margin: 5mm
+}
+
+@media print {
+   thead {display: table-header-group;} 
+   tfoot {display: table-footer-group;} 
+   body {margin: 0;}
+}
+    </style>
+</head>
+
+<body>
+
+  <div class="page-header" style="text-align: center"> 
+        <div class="UpperTitle">
+            <img src="<?=base_url()?>/img/logo-sm.png" width="100" height="100" alt=""> 
+            <div class="header"> 
+              <h2>Republic of the Philippines</h2>
+              <h3>Office of the City Mayor</h3> 
+              <h4>Oroquieta City</h4>
+              <h6 class="text-danger">City oF Good Life</h6> 
+              <div class="sub-header"  >   
+                  <h4><?= $semester ?> Semester List of <?= $status ?> <?= $scholarship_type ?> Scholarship Applicants for SY: <?= $school_year ?></h4>
+              </div> 
+            </div>
         </div>
+     
+  </div>
+
+  <div class="page-footer">
+    <p>
+      <span>Printed By: <?= auth()->user()->firstname . " " . auth()->user()->lastname ?></span>
+      <span>Printed on: <?= date('F j, Y') ?></span>
+    </p> 
+
+  </div>
+
+  <table>
+
+    <thead>
+      <tr>
+        <td>
+          <!--place holder for the fixed-position header-->
+          <div class="page-header-space"></div>
+        </td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td> 
+          <div class="page" style="line-height: 3; ">
+            <table class="table" id="report" style="width: 100%;">
+              <thead >
+                  <tr class="text-nowrap">
+                      <th>No.</th>
+                      <th>Name</th>
+                      <th>Address</th>
+                      <th><?= in_array( $scholarship_type  ,['College', 'TVET']) ? "Course" :  "Strand" ?></th>
+                      <th>Year Level</th>
+                      <th>School</th>
+                      <th>Contact No.</th>
+                      <th>Availment</th>
+                  </tr>
+              </thead>
+              <tbody> 
+                  <?php
+                      $counter = 1; 
+                      foreach($result as $row){ 
+                          if(in_array( $scholarship_type  ,['College', 'TVET'])){
+                              $contact = in_array($row->colContactNo, ["-", null, "None", "" ]) ? "" : $row->colContactNo;
+                              $name = ucwords( $row->colLastName . ", "  . $row->colFirstName . " "  . $row->colMI  . " " . " "  . $row->colSuffix) ; 
+                              $address = $row->colAddress;
+                              $course = $row->colCourse;
+                              $year_level =  $row->colYearLevel;
+                              $school =  $row->colSchool;
+                              $availment =  $row->colAvailment;
+                          }else{
+                              $contact = in_array($row->AppContact, ["-", null, "None", "" ]) ? "" : $row->AppContact; 
+                              $name = ucwords( $row->AppLastName . ", "  . $row->AppFirstName . " "  . $row->AppMidIn. " " . " "  . $row->AppSuffix ); 
+                              $address = $row->AppAddress;
+                              $course = $row->AppCourse;
+                              $year_level =  $row->AppYear;
+                              $school =  $row->AppSchool;
+                              $availment =  $row->AppAvailment;
+                          }
+                          
+                  ?>
+                      <tr> 
+                          <tr class="text-nowrap">
+                              <td><?= $counter++; ?></td>
+                              <td><?= $name ?></td> 
+                              <td><?= $address ?></td> 
+                              <td><?= $course ?></td> 
+                              <td><?= $year_level ?></td> 
+                              <td><?= $school ?></td> 
+                              <td><?= $contact ?></td> 
+                              <td><?= $availment ?></td> 
+                          </tr>
+                          
+                      </tr>
+                      
+                  <?php   } ?> 
+                  <tr >
+                    <td colspan="8" style="border-left: 0px;border-right: 0px;border-bottom: 0px;">
+                      <br>
+                      <p style="text-align: left">Recommended for Approval: </p>
+                      <p style="text-align: right; font-weight:bolder; margin-right: 50px;">LEMUEL MEYRICK M. ACOSTA</p>
+                      <p style="text-align: right; margin-right: 120px; margin-top: -30px;">City Mayor</p>
+                      <p style="text-align: left">In behalf of the City Scholarship Screening Committee</p> <br>
+                      <p style="text-align: left; font-weight:bolder; margin-left: 50px;">MARK ANTHONY D. ARTIGAS</p>
+                      <p style="text-align: left; margin-left: 80px; margin-top: -30px;">Commitee Chairperson</p>
+                    </td> 
+                  </tr>
+              </tbody>
+          </table> 
+          </div> 
+        </td>
+      </tr> 
+    </tbody>
+
+    <tfoot>
+      <tr>
+        <td> 
+          <div class="page-footer-space">
+             
+          </div>
+        </td>
+      </tr>
+    </tfoot>
+
+  </table>
  
-            <script>
-                window.print()
-            </script>
-    </body> 
+
+</body>
+
 </html>
