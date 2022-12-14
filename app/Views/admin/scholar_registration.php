@@ -110,12 +110,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#college-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link  ">
+                            <a href="#college-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link  active">
                                 College Registration
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
+                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link ">
                                 TVET Registration
                             </a>
                         </li>
@@ -394,7 +394,7 @@
                             
                             
                         </div>
-                        <div class="tab-pane  " id="college-tab">   
+                        <div class="tab-pane  active " id="college-tab">   
                             <form id="college-registration-form" class="validation-form">
                                 <div class="row"> 
                                     <div class="col-12">
@@ -563,7 +563,7 @@
                                                     </div> 
                                                     <div class="modal-body ">
                                                         <div class="form-group">
-                                                            <label for="field-1" class="form-label">School Name</label>
+                                                            <label  class="form-label">School Name</label>
                                                             <input type="text" name="college_school_name" class="form-control"  placeholder="School Name" required> 
                                                         </div>   
                                                     </div>
@@ -675,7 +675,7 @@
                             </form>
                         </div>
                         
-                        <div class="tab-pane active" id="tvet-tab">
+                        <div class="tab-pane  " id="tvet-tab">
                             
                             <form id="tvet-registration-form" class="validation-form">
                                 <div class="row"> 
@@ -1360,8 +1360,12 @@
                 }); 
             });
 
+            $('input[name="shs_school_name"]').bind('keyup', function(e) { 
+                if ( e.keyCode === 13 ) { // 13 is enter key 
+                    $('#add-new-shs-school-button').click() 
+                } 
+            });
 
-            
             
             $(document).on('click', '#add-new-shs-school-button', function(e){  
                 e.preventDefault(); 
@@ -1411,6 +1415,13 @@
 
                 }
             }); 
+             
+            $('input[name="new_strand"]').bind('keyup', function(e) { 
+                if ( e.keyCode === 13 ) { // 13 is enter key 
+                    $('#add-new-shs-strand-button').click() 
+                } 
+            });
+
             $(document).on('click', '#add-new-shs-strand-button', function(e){  
                 e.preventDefault(); 
                 var strand = $('input[name="new_strand"]').val() 
@@ -1438,8 +1449,8 @@
 
                                 // append value
                                 $('#senior-high-registration-form select[name="strand"]').append($('<option>', {
-                                    value: school_name,
-                                    text: school_name
+                                    value: strand,
+                                    text: strand
                                 }));
 
                                 $('input[name="new_strand"]').val('')
@@ -1459,6 +1470,14 @@
 
                 }
             });  
+
+             
+            $('input[name="college_school_name"]').bind('keyup', function(e) {  
+                if ( e.keyCode === 13 ) { // 13 is enter key 
+                    $('#add-new-college-school-button').click() 
+                }  
+            });
+            
             $(document).on('click', '#add-new-college-school-button', function(e){  
                 e.preventDefault(); 
                 var school_name = $('input[name="college_school_name"]').val() 
@@ -1507,6 +1526,14 @@
 
                 }
             });  
+
+             
+            $('input[name="college_course"]').bind('keyup', function(e) { 
+                if ( e.keyCode === 13 ) { // 13 is enter key 
+                    $('#add-new-college-course-button').click() 
+                } 
+            });
+
             $(document).on('click', '#add-new-college-course-button', function(e){  
                 e.preventDefault(); 
                 var course = $('input[name="college_course"]').val() 
@@ -1555,6 +1582,16 @@
 
                 }
             });  
+
+            
+              
+            $('input[name="tvet_school_name"]').bind('keyup', function(e) { 
+                if ( e.keyCode === 13 ) { // 13 is enter key 
+                    $('#add-new-tvet-school-button').click() 
+                } 
+            });
+            
+
             $(document).on('click', '#add-new-tvet-school-button', function(e){  
                 e.preventDefault(); 
                 var school_name = $('input[name="tvet_school_name"]').val() 
@@ -1602,7 +1639,15 @@
                     }); 
 
                 }
-            });  
+            }); 
+             
+            
+            $('input[name="tvet_course"]').bind('keyup', function(e) { 
+                if ( e.keyCode === 13 ) { // 13 is enter key 
+                    $('#add-new-tvet-course-button').click() 
+                } 
+            });
+
             $(document).on('click', '#add-new-tvet-course-button', function(e){  
                 e.preventDefault(); 
                 var course = $('input[name="tvet_course"]').val() 
