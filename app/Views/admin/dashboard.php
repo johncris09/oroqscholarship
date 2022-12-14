@@ -82,6 +82,26 @@
                 <div class="card-header bg-white">  
                     <div class="card-widgets">
                         <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                        <a data-bs-toggle="collapse" href="#cardCollpasebystatus" role="button" aria-expanded="false" aria-controls="cardCollpasebystatus"><i class="mdi mdi-minus"></i></a>
+                        <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                    </div> 
+                    <h4 class="header-title  ">Scholarship Status Chart</h4>
+                </div>
+                <div class="card-body">  
+                    <div id="cardCollpasebystatus" class="collapse show" dir="ltr">
+                        <div id="scholarship-status-chart" class="apex-charts" data-colors="#348cd4,#f06292,#ced4da"></div>
+                    </div>  
+                </div> 
+            </div> 
+        </div> 
+    </div>
+    
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header bg-white">  
+                    <div class="card-widgets">
+                        <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
                         <a data-bs-toggle="collapse" href="#cardCollpasebygender" role="button" aria-expanded="false" aria-controls="cardCollpasebygender"><i class="mdi mdi-minus"></i></a>
                         <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
                     </div> 
@@ -146,27 +166,7 @@
                 </div> 
             </div> 
         </div> 
-    </div> 
-    
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="card">
-                <div class="card-header bg-white">  
-                    <div class="card-widgets">
-                        <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-                        <a data-bs-toggle="collapse" href="#cardCollpasebystatus" role="button" aria-expanded="false" aria-controls="cardCollpasebystatus"><i class="mdi mdi-minus"></i></a>
-                        <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
-                    </div> 
-                    <h4 class="header-title  ">Scholarship Status Chart</h4>
-                </div>
-                <div class="card-body">  
-                    <div id="cardCollpasebystatus" class="collapse show" dir="ltr">
-                        <div id="scholarship-status-chart" class="apex-charts" data-colors="#348cd4,#f06292,#ced4da"></div>
-                    </div>  
-                </div> 
-            </div> 
-        </div> 
-    </div> 
+    </div>  
 
     <div class="row">
         <div class="col-sm-12">
@@ -381,23 +381,7 @@
                 error: function(xhr, status, error) {
                     console.info(xhr.responseText);
                 }
-            });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            }); 
 
             $.ajax({
                 url: 'scholarship_barangay',
@@ -422,7 +406,7 @@
                         },
                         plotOptions: {
                             bar: {
-                                horizontal: true,
+                                horizontal: false,
                                 columnWidth: '50%',
                                 endingShape: 'rounded'
                             },
@@ -531,7 +515,7 @@
                 method: "get",
                 dataType: "json",
                 success: function(data) {
-                    var options = {
+                    var options = { 
                         series: [{
                             data: data.total
                         }],
