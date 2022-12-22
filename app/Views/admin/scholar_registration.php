@@ -121,7 +121,7 @@
                         </li>
                     </ul>
                     <div class="tab-content"> 
-                        <div class="tab-pane show active" id="senior-high-tab">  
+                        <div class="tab-pane show " id="senior-high-tab">  
                             <form id="senior-high-registration-form"  class="validation-form">
                                 <div class="row">
                                     <div class="col-12">
@@ -405,18 +405,27 @@
                                 </div>    
                             </form>  
                         </div>
-                        <div class="tab-pane  " id="college-tab">   
+                        <div class="tab-pane  active" id="college-tab">   
                             <form id="college-registration-form" class="validation-form">
                                 <div class="row"> 
+                                    
                                     <div class="col-12">
                                         <div class="row justify-content-between">
                                             <div class="col-6">
-                                                <label for="" class="form-label">App No. </label>
-                                                <h1 style="text-decoration: underline"><?= $sequence_year ?> - <?= $seq_sem ?> - <span id="app_no_id"><?= $app_no_id ?></span> </h1>
-                                                <input type="hidden" value="<?= $sequence_year ?>"  name="app_no_year" readonly>
-                                                <input type="hidden"  value="<?= $seq_sem ?>"  name="app_no_sem" readonly>
-                                                <input type="hidden"  value="<?= $app_no_id ?>"  name="app_no_id" readonly>
-                                            </div>
+                                                <div class="w-50">
+                                                    <label for="" class="form-label">App No. </label> 
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" class="form-control text-center" value="<?= $sequence_year ?>" name="app_no_year" readonly> 
+                                                        <span class="input-group-text">-</span>
+                                                        <select name="app_no_sem" class="form-control"  >
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                        </select>  
+                                                        <span class="input-group-text">-</span>
+                                                        <input type="text" class="form-control text-center" name="app_no_id" required>
+                                                    </div>
+                                                </div> 
+                                            </div> 
                                             <div class="col-6">
                                                 <label for="status" class="form-label">Status <?= $required_field; ?></label>
                                                 <h1 style="text-decoration: underline" class="text-danger">Pending</h1>
@@ -700,12 +709,20 @@
                                     <div class="col-12">
                                         <div class="row justify-content-between">
                                             <div class="col-6">
-                                                <label for="" class="form-label">App No. </label>
-                                                <h1 style="text-decoration: underline"><?= $sequence_year ?> - <?= $seq_sem ?> - <span id="app_no_id"><?= $app_no_id ?></span> </h1>
-                                                <input type="hidden" value="<?= $sequence_year ?>"  name="app_no_year" readonly>
-                                                <input type="hidden"  value="<?= $seq_sem ?>"  name="app_no_sem" readonly>
-                                                <input type="hidden"  value="<?= $app_no_id ?>"  name="app_no_id" readonly>
-                                            </div>
+                                                <div class="w-50">
+                                                    <label for="" class="form-label">App No. </label> 
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" class="form-control text-center" value="<?= $sequence_year ?>" name="app_no_year" readonly> 
+                                                        <span class="input-group-text">-</span>
+                                                        <select name="app_no_sem" class="form-control"  >
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                        </select>  
+                                                        <span class="input-group-text">-</span>
+                                                        <input type="text" class="form-control text-center" name="app_no_id" required>
+                                                    </div>
+                                                </div> 
+                                            </div>  
                                             <div class="col-6">
                                                 <label for="status" class="form-label">Status <?= $required_field; ?></label>
                                                 <h1 style="text-decoration: underline" class="text-danger">Pending</h1>
