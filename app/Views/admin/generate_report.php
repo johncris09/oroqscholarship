@@ -105,7 +105,7 @@
 
                     <ul class="nav nav-tabs"> 
                         <li class="nav-item">
-                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active  ">
+                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link  active  ">
                                 Senior High School
                             </a>
                         </li>
@@ -121,7 +121,7 @@
                         </li>
                     </ul>
                     <div class="tab-content"> 
-                        <div class="tab-pane show active" id="senior-high-tab">  
+                        <div class="tab-pane active" id="senior-high-tab">  
                             <form action="generate_report/shs_report" method="get">
                                 <div class="row justify-content-center">
                                     <div class="col-9">  
@@ -211,7 +211,7 @@
                                             <?php 
                                                 }
                                             ?> 
-                                        </select>
+                                        </select>   
                                     </div>  
                                     <div class="col-2">
                                         <label class="form-label">Semester </label>
@@ -233,10 +233,231 @@
                                 </div>    
                             </form>
                         </div>
-                        <div class="tab-pane  " id="college-tab">    
+                        <div class="tab-pane  " id="college-tab">   
+                            <form action="generate_report/college_report" method="get">
+                                <div class="row justify-content-center">
+                                    <div class="col-9">  
+                                        <label for="school" class="form-label">School</label>
+                                        <select class="form-control" name="school" >
+                                            <option value="">Select</option> 
+                                            <?php foreach($college_school as $row):?> 
+                                                <?php if($row['colSchoolName'] != ""):?> 
+                                                    <option value="<?= $row['colSchoolName']  ?>"><?= $row['colSchoolName']  ?></option>  
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>  
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-3">   
+                                        <label for="semester" class="form-label">Semester</label>
+                                        <select class="form-control"   name="semester"  >
+                                            <option value="">Select</option> 
+                                            <?php foreach($semester as $row):?>  
+                                                <option value="<?= $row   ?>"><?= $row   ?></option>   
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>  
+                                    <div class="col-3">   
+                                        <label for="school_year" class="form-label">SY</label>
+                                        <select class="form-control"   name="school_year"  >
+                                            <option value="">Select</option> 
+                                            <?php foreach(range(2017, date('Y')) as $year):?>  
+                                                <option value="SY: <?= $year . "-" . ($year + 1)?>">SY: <?= $year . "-" . ($year + 1)?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-3">   
+                                        <label for="status" class="form-label">Status</label>
+                                        <select class="form-control"  name="status" >
+                                            <option value="">Select</option> 
+                                            <?php  foreach($scholar_status as $row){   ?> 
+                                                <option  value="<?= $row ?>"><?= $row ?></option>  
+                                            <?php } ?> 
+                                        </select>  
+                                    </div>
+                                </div> 
+                                <div class="row justify-content-center">
+                                    <div class="col-3">
+                                        <label for="availment" class="form-label">Availment</label>
+                                        <input type="number" class="form-control" name="availment" >
+                                    </div>  
+                                    <div class="col-3">
+                                        <label for="gender" class="form-label">Sex</label>
+                                        <select class="form-control" id="gender" name="gender" >
+                                            <option value="">Select</option> 
+                                            <option value="Male">Male</option> 
+                                            <option value="Female">Female</option>  
+                                        </select>
+                                    </div> 
+                                    <div class="col-3">
+                                        <label for="year_level" class="form-label">Year Level</label>
+                                        <select class="form-control" name="year_level" >
+                                            <option value="">Select</option> 
+                                            <?php foreach($year_level as $row):?>  
+                                                <option value="<?= $row ?>"><?= $row   ?></option>   
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-9">
+                                        <label for="address" class="form-label">Address</label>
+                                        <select class="form-control" name="address"   >
+                                            <option value="">Select</option> 
+                                            <?php foreach($barangay as $row):?> 
+                                                <option value="<?= $row ?>"><?= $row ?></option>  
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>  
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-3">
+                                        <label for="app_no_year" class="form-label">App No</label> 
+                                        <select class="form-control" name="app_no_year"   >
+                                            <option value="">Select</option> 
+                                            <?php 
+                                                $year_now = date('Y');
+                                                for($i=$year_now; $i>= 2015; $i--){ ?>
+                                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                            <?php 
+                                                }
+                                            ?> 
+                                        </select>   
+                                    </div>  
+                                    <div class="col-2">
+                                        <label class="form-label">Semester </label>
+                                        <input type="number" class="form-control" readonly>
+                                    </div> 
+                                    <div class="col-2">
+                                        <label for="from" class="form-label">From </label>
+                                        <input type="number" class="form-control" id="from" name="from" >
+                                    </div> 
+                                    <div class="col-2">
+                                        <label for="to" class="form-label">To </label>
+                                        <input type="number" class="form-control" id="to" name="to" >
+                                    </div>  
+                                </div> 
+                                <div class="row justify-content-center mt-3">
+                                    <div class="col-1">
+                                        <button type="submit" class="btn btn-primary btn-block rounded-pill">Generate</button> 
+                                    </div>   
+                                </div>    
+                            </form>
+
                         </div>
                         
-                        <div class="tab-pane " id="tvet-tab">
+                        <div class="tab-pane  show " id="tvet-tab">  
+                            <form action="generate_report/tvet_report" method="get">
+                                <div class="row justify-content-center">
+                                    <div class="col-9">  
+                                        <label for="school" class="form-label">School</label>
+                                        <select class="form-control" name="school" >
+                                            <option value="">Select</option> 
+                                            <?php foreach($college_school as $row):?> 
+                                                <?php if($row['colSchoolName'] != ""):?> 
+                                                    <option value="<?= $row['colSchoolName']  ?>"><?= $row['colSchoolName']  ?></option>  
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>  
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-3">   
+                                        <label for="semester" class="form-label">Semester</label>
+                                        <select class="form-control"   name="semester"  >
+                                            <option value="">Select</option> 
+                                            <?php foreach($semester as $row):?>  
+                                                <option value="<?= $row   ?>"><?= $row   ?></option>   
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>  
+                                    <div class="col-3">   
+                                        <label for="school_year" class="form-label">SY</label>
+                                        <select class="form-control"   name="school_year"  >
+                                            <option value="">Select</option> 
+                                            <?php foreach(range(2017, date('Y')) as $year):?>  
+                                                <option value="SY: <?= $year . "-" . ($year + 1)?>">SY: <?= $year . "-" . ($year + 1)?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-3">   
+                                        <label for="status" class="form-label">Status</label>
+                                        <select class="form-control"  name="status" >
+                                            <option value="">Select</option> 
+                                            <?php  foreach($scholar_status as $row){   ?> 
+                                                <option  value="<?= $row ?>"><?= $row ?></option>  
+                                            <?php } ?> 
+                                        </select>  
+                                    </div>
+                                </div> 
+                                <div class="row justify-content-center">
+                                    <div class="col-3">
+                                        <label for="availment" class="form-label">Availment</label>
+                                        <input type="number" class="form-control" name="availment" >
+                                    </div>  
+                                    <div class="col-3">
+                                        <label for="gender" class="form-label">Sex</label>
+                                        <select class="form-control" id="gender" name="gender" >
+                                            <option value="">Select</option> 
+                                            <option value="Male">Male</option> 
+                                            <option value="Female">Female</option>  
+                                        </select>
+                                    </div> 
+                                    <div class="col-3">
+                                        <label for="year_level" class="form-label">Year Level</label>
+                                        <select class="form-control" name="year_level" >
+                                            <option value="">Select</option> 
+                                            <?php foreach($year_level as $row):?>  
+                                                <option value="<?= $row ?>"><?= $row   ?></option>   
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-9">
+                                        <label for="address" class="form-label">Address</label>
+                                        <select class="form-control" name="address"   >
+                                            <option value="">Select</option> 
+                                            <?php foreach($barangay as $row):?> 
+                                                <option value="<?= $row ?>"><?= $row ?></option>  
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>  
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-3">
+                                        <label for="app_no_year" class="form-label">App No</label> 
+                                        <select class="form-control" name="app_no_year"   >
+                                            <option value="">Select</option> 
+                                            <?php 
+                                                $year_now = date('Y');
+                                                for($i=$year_now; $i>= 2015; $i--){ ?>
+                                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                            <?php 
+                                                }
+                                            ?> 
+                                        </select>   
+                                    </div>  
+                                    <div class="col-2">
+                                        <label class="form-label">Semester </label>
+                                        <input type="number" class="form-control" readonly>
+                                    </div> 
+                                    <div class="col-2">
+                                        <label for="from" class="form-label">From </label>
+                                        <input type="number" class="form-control" id="from" name="from" >
+                                    </div> 
+                                    <div class="col-2">
+                                        <label for="to" class="form-label">To </label>
+                                        <input type="number" class="form-control" id="to" name="to" >
+                                    </div>  
+                                </div> 
+                                <div class="row justify-content-center mt-3">
+                                    <div class="col-1">
+                                        <button type="submit" class="btn btn-primary btn-block rounded-pill">Generate</button> 
+                                    </div>   
+                                </div>    
+                            </form>
                              
 
                         </div>
