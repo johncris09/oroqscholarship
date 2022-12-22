@@ -121,17 +121,25 @@
                         </li>
                     </ul>
                     <div class="tab-content"> 
-                        <div class="tab-pane show   " id="senior-high-tab">  
+                        <div class="tab-pane show active" id="senior-high-tab">  
                             <form id="senior-high-registration-form"  class="validation-form">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="row justify-content-between">
                                             <div class="col-6">
-                                                <label for="" class="form-label">App No. </label>
-                                                <h1 style="text-decoration: underline"><?= $sequence_year ?> - <?= $seq_sem ?> - <span id="app_no_id"><?= $app_no_id ?></span> </h1>
-                                                <input type="hidden" value="<?= $sequence_year ?>"  name="app_no_year" readonly>
-                                                <input type="hidden"  value="<?= $seq_sem ?>"  name="app_no_sem" readonly>
-                                                <input type="hidden"  value="<?= $app_no_id ?>"  name="app_no_id" readonly>
+                                                <div class="w-50">
+                                                    <label for="" class="form-label">App No. </label> 
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" class="form-control text-center" value="<?= $sequence_year ?>" name="app_no_year" readonly> 
+                                                        <span class="input-group-text">-</span>
+                                                        <select name="app_no_sem" class="form-control"  >
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                        </select>  
+                                                        <span class="input-group-text">-</span>
+                                                        <input type="text" class="form-control text-center" name="app_no_id" required>
+                                                    </div>
+                                                </div> 
                                             </div>
                                             <div class="col-6">
                                                 <label for="status" class="form-label">Status <?= $required_field; ?></label>
@@ -292,7 +300,7 @@
                                                     <div class="modal-body ">
                                                         <div class="form-group">
                                                             <label for="field-1" class="form-label">School Name</label>
-                                                            <input type="text" name="shs_school_name" class="form-control"  placeholder="School Name" required> 
+                                                            <input type="text" name="shs_school_name" class="form-control"  placeholder="School Name" data-parsley-excluded="true" required> 
                                                         </div>   
                                                     </div>
                                                     <div class="modal-footer">
@@ -330,7 +338,7 @@
                                                     <div class="modal-body ">
                                                         <div class="form-group">
                                                             <label for="field-1" class="form-label">Strand</label>
-                                                            <input type="text" name="new_strand" class="form-control"  placeholder="Strand" required> 
+                                                            <input type="text" name="new_strand" class="form-control"  placeholder="Strand" data-parsley-excluded="true" required> 
                                                         </div>  
                                                     </div>
                                                     <div class="modal-footer">
@@ -395,10 +403,9 @@
                                 <div class="row g-3 mt-2" > 
                                     <button type="submit" class="btn btn-primary btn-block waves-effect waves-light rounded-pill">Save  Changes</button> 
                                 </div>    
-                            </form> 
-                            
+                            </form>  
                         </div>
-                        <div class="tab-pane  active" id="college-tab">   
+                        <div class="tab-pane  " id="college-tab">   
                             <form id="college-registration-form" class="validation-form">
                                 <div class="row"> 
                                     <div class="col-12">
@@ -572,7 +579,7 @@
                                                     <div class="modal-body ">
                                                         <div class="form-group">
                                                             <label for="field-1" class="form-label">School Name</label>
-                                                            <input type="text" name="college_school_name" class="form-control"  placeholder="School Name" required> 
+                                                            <input type="text" name="college_school_name" class="form-control"  placeholder="School Name" data-parsley-excluded="true" required> 
                                                         </div>   
                                                     </div>
                                                     <div class="modal-footer">
@@ -610,7 +617,7 @@
                                                     <div class="modal-body ">
                                                         <div class="form-group">
                                                             <label for="field-1" class="form-label">Course</label>
-                                                            <input type="text" name="college_course" class="form-control"  placeholder="Course" required> 
+                                                            <input type="text" name="college_course" class="form-control"  placeholder="Course" data-parsley-excluded="true" required> 
                                                         </div>   
                                                     </div>
                                                     <div class="modal-footer">
@@ -860,7 +867,7 @@
                                                     <div class="modal-body ">
                                                         <div class="form-group">
                                                             <label for="field-1" class="form-label">School Name</label>
-                                                            <input type="text" name="tvet_school_name" class="form-control"  placeholder="School Name" required> 
+                                                            <input type="text" name="tvet_school_name" class="form-control"  placeholder="School Name" data-parsley-excluded="true" required> 
                                                         </div>   
                                                     </div>
                                                     <div class="modal-footer">
@@ -897,7 +904,7 @@
                                                     <div class="modal-body ">
                                                         <div class="form-group">
                                                             <label for="field-1" class="form-label">Course</label>
-                                                            <input type="text" name="tvet_course" class="form-control"  placeholder="Course" required> 
+                                                            <input type="text" name="tvet_course" class="form-control"  placeholder="Course" data-parsley-excluded="true" required> 
                                                         </div>   
                                                     </div>
                                                     <div class="modal-footer">
@@ -1108,9 +1115,10 @@
 
             // Form Submit
             $(document).on('submit', '#senior-high-registration-form', function(e){  
-                e.preventDefault();   
+                e.preventDefault();  
                 
                 var formData = new FormData($("#senior-high-registration-form")[0]);  
+                 
                 $.ajax({
                     url:  'registration/insert_senior_high',
                     method: "post", 
