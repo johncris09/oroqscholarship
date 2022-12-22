@@ -95,7 +95,7 @@ class ScholarRegistrationController extends BaseController
                 "response" =>  false,
                 "message" =>   $e->getMessage() , 
             ]; 
-        }    
+        }  
         echo Json_encode($res); 
  
     } 
@@ -156,6 +156,7 @@ class ScholarRegistrationController extends BaseController
                 "message" =>   $e->getMessage() , 
             ]; 
         }  
+ 
 
         echo Json_encode($res); 
  
@@ -222,7 +223,7 @@ class ScholarRegistrationController extends BaseController
         $image_array_1 = explode(";", $data); 
         $image_array_2 = explode(",", $image_array_1[1]); 
         $data = base64_decode($image_array_2[1]); 
-        $imageName = 'upload/tmp/' . time() . '.png'; 
+        $imageName = 'upload/photo/' . time() . '.png'; 
         file_put_contents($imageName, $data); 
         echo $imageName;
     }
