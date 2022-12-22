@@ -18,6 +18,7 @@
         <?= link_tag('assets/sweetalert2/sweetalert2.min.css'); ?>      
 		<link rel="stylesheet" href="https://unpkg.com/dropzone/dist/dropzone.css" />
 		<link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet"/>
+        <link href="https://cdn.jsdelivr.net/gh/loadingio/ldLoader@v1.0.0/dist/ldld.min.css">
 
 
 		<!-- App css -->
@@ -30,6 +31,8 @@
         <?= link_tag('css/icons.min.css'); ?>  
         
         <?= $this->renderSection('pageStyle') ?> 
+
+         
 
     </head>
 
@@ -84,7 +87,7 @@
                                 <div class="dropdown-divider"></div>
                 
                                 <!-- item-->
-                                <a href="/<?= base_url('logout') ?>" class="dropdown-item notify-item">
+                                <a href="/logout" class="dropdown-item notify-item">
                                     <i class="fe-log-out"></i>
                                     <span>Logout</span>
                                 </a>
@@ -141,211 +144,108 @@
                     <div id="sidebar-menu">
 
                         <ul id="side-menu">
+                            
+                            <?php
+                                if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin", "admin", "user"])){
+                            ?>
+                                    <li class="menu-title">Navigation</li>
 
-                            <li class="menu-title">Navigation</li>
+                                    <li>
+                                        <a href="/"> 
+                                            <i class="fe-airplay"></i>
+                                            <span> Dashboard </span>
+                                        </a>
+                                    </li> 
 
-                            <li>
-                                <a href="/"> 
-                                    <i class="fe-airplay"></i>
-                                    <span> Dashboard </span>
-                                </a>
-                            </li> 
-                            
-                            <li>
-                                <a href="/registration"> 
-                                    <i class="mdi mdi-book-plus-outline"></i>
-                                    <span> Scholar Registration </span>
-                                </a>
-                            </li>
-                            
-                            <li>
-                                <a href="/#shsmanage" data-bs-toggle="collapse">
-                                    <i class="mdi mdi-cog-sync-outline"></i>
-                                    <span> Manage Application </span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <div class="collapse" id="shsmanage">
-                                    <ul class="nav-second-level">
-                                        <li>
-                                            <a href="/approved">  Approved Application </a>
-                                        </li> 
-                                        <li>
-                                            <a href="/pending">  Pending Application </a>
-                                        </li>  
-                                        <li>
-                                            <a href="/manage">Delete/Edit Application</a>
-                                        </li> 
-                                    </ul>
-                                </div>
-                            </li> 
-                            
-                            <li>
-                                <a href="/generate_report"> 
-                                    <i class="mdi mdi-chart-areaspline"></i>
-                                    <span> Generat Report </span>
-                                </a>
-                            </li>
+                                    <li>
+                                        <a href="/registration"> 
+                                            <i class="mdi mdi-book-plus-outline"></i>
+                                            <span> Scholar Registration </span>
+                                        </a>
+                                    </li>
 
+                                    <li>
+                                        <a href="/#shsmanage" data-bs-toggle="collapse">
+                                            <i class="mdi mdi-cog-sync-outline"></i>
+                                            <span> Manage Application </span>
+                                            <span class="menu-arrow"></span>
+                                        </a>
+                                        <div class="collapse" id="shsmanage">
+                                            <ul class="nav-second-level">
+                                                <li>
+                                                    <a href="/approved">  Approved Application </a>
+                                                </li> 
+                                                <li>
+                                                    <a href="/pending">  Pending Application </a>
+                                                </li>  
+                                                <li>
+                                                    <a href="/manage">Delete/Edit Application</a>
+                                                </li> 
+                                            </ul>
+                                        </div>
+                                    </li> 
 
-                            
-                            <!-- <li class="menu-title mt-2">Senior High School</li> 
-                            <li>
-                                <a href="/#"> 
-                                    <i class="mdi mdi-book-plus-outline"></i>
-                                    <span> Scholar Registration </span>
-                                </a>
-                            </li>
-                            
-                            <li>
-                                <a href="/#shsmanage" data-bs-toggle="collapse">
-                                    <i class="mdi mdi-cog-sync-outline"></i>
-                                    <span> Manage </span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <div class="collapse" id="shsmanage">
-                                    <ul class="nav-second-level">
-                                        <li>
-                                            <a href="/#">Approved Pending Application</a>
-                                        </li>
-                                        <li>
-                                            <a href="/#">Delete/Edit Application</a>
-                                        </li> 
-                                    </ul>
-                                </div>
-                            </li> 
-                            <li>
-                                <a href="/#"> 
-                                    <i class="mdi mdi-chart-bar"></i>
-                                    <span> Generate Report </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/#"> 
-                                    <i class="mdi mdi-magnify"></i>
-                                    <span> Search </span>
-                                </a>
-                            </li>
+                                    <li>
+                                        <a href="/generate_report"> 
+                                            <i class="mdi mdi-chart-areaspline"></i>
+                                            <span> Generat Report </span>
+                                        </a>
+                                    </li>
+                            <?php
+                                } 
+                            ?>
 
 
-                            <li class="menu-title">College</li>
-                            <li>
-                                <a href="/#"> 
-                                    <i class="mdi mdi-book-plus-outline"></i>
-                                    <span> Scholar Registration </span>
-                                </a>
-                            </li>
-                            
-                            <li>
-                                <a href="/#cmanage" data-bs-toggle="collapse">
-                                    <i class="mdi mdi-cog-sync-outline"></i>
-                                    <span> Manage </span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <div class="collapse" id="cmanage">
-                                    <ul class="nav-second-level">
-                                        <li>
-                                            <a href="/#">Approved Pending Application</a>
-                                        </li>
-                                        <li>
-                                            <a href="/#">Delete/Edit Application</a>
-                                        </li> 
-                                    </ul>
-                                </div>
-                            </li> 
-                            <li>
-                                <a href="/#"> 
-                                    <i class="mdi mdi-chart-bar"></i>
-                                    <span> Generate Report </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/#"> 
-                                    <i class="mdi mdi-magnify"></i>
-                                    <span> Search </span>
-                                </a>
-                            </li>
-                            <li class="menu-title">TVET</li>
-                            <li>
-                                <a href="/#"> 
-                                    <i class="mdi mdi-book-plus-outline"></i>
-                                    <span> Scholar Registration </span>
-                                </a>
-                            </li>
-                            
-                            <li>
-                                <a href="/#tvetmanage" data-bs-toggle="collapse">
-                                    <i class="mdi mdi-cog-sync-outline"></i>
-                                    <span> Manage </span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <div class="collapse" id="tvetmanage">
-                                    <ul class="nav-second-level">
-                                        <li>
-                                            <a href="/#">Approved Pending Application</a>
-                                        </li>
-                                        <li>
-                                            <a href="/#">Delete/Edit Application</a>
-                                        </li> 
-                                    </ul>
-                                </div>
-                            </li> 
-                            <li>
-                                <a href="/#"> 
-                                    <i class="mdi mdi-chart-bar"></i>
-                                    <span> Generate Report </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/#"> 
-                                    <i class="mdi mdi-magnify"></i>
-                                    <span> Search </span>
-                                </a>
-                            </li> -->
-                            
-                            <li class="menu-title mt-4">Utilities</li>
-                            <li>
-                                <a href="/course"> 
-                                    <i class="mdi mdi-book-outline"></i>
-                                    <span> Course </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/strand"> 
-                                    <i class="mdi mdi-book-outline"></i>
-                                    <span> Strand </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/#school" data-bs-toggle="collapse">
-                                    <i class="mdi mdi-cog-sync-outline"></i>
-                                    <span> School </span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <div class="collapse" id="school">
-                                    <ul class="nav-second-level">
-                                        <li>
-                                            <a href="/school">School Name(Senior High)</a>
-                                        </li>
-                                        <li>
-                                            <a href="/collegeschool">School Name(College)</a>
-                                        </li> 
-                                    </ul>
-                                </div>
-                            </li> 
- 
-                            <li>
-                                <a href="/user"> 
-                                    <i class="mdi mdi-account-circle-outline"></i>
-                                    <span> User </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/authlogin"> 
-                                    <i class="mdi mdi-web"></i>
-                                    <span> Auth Login </span>
-                                </a>
-                            </li>
-                            
+                            <?php
+                                if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin", "admin"])){
+                            ?>
+                                <li class="menu-title mt-4">Utilities</li>
+                                    <li>
+                                        <a href="/course"> 
+                                            <i class="mdi mdi-book-outline"></i>
+                                            <span> Course </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/strand"> 
+                                            <i class="mdi mdi-book-outline"></i>
+                                            <span> Strand </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/#school" data-bs-toggle="collapse">
+                                            <i class="mdi mdi-cog-sync-outline"></i>
+                                            <span> School </span>
+                                            <span class="menu-arrow"></span>
+                                        </a>
+                                        <div class="collapse" id="school">
+                                            <ul class="nav-second-level">
+                                                <li>
+                                                    <a href="/school">School Name(Senior High)</a>
+                                                </li>
+                                                <li>
+                                                    <a href="/collegeschool">School Name(College)</a>
+                                                </li> 
+                                            </ul>
+                                        </div>
+                                    </li> 
+
+                                    <li>
+                                        <a href="/user"> 
+                                            <i class="mdi mdi-account-circle-outline"></i>
+                                            <span> User </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/authlogin"> 
+                                            <i class="mdi mdi-web"></i>
+                                            <span> Auth Login </span>
+                                        </a>
+                                    </li>
+                            <?php
+                                } 
+                            ?>
+                                 
      
                         </ul>
 
@@ -369,7 +269,6 @@
 
                     <!-- Start Content-->
                     <div class="container-fluid">
-                        
                         <!-- start page title -->
                         <div class="row">
                             <div class="col-12">
@@ -449,6 +348,8 @@
         <?= script_tag('assets/apexcharts/apexcharts.js'); ?>  
         <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
         <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+        <script src="http://malsup.github.io/jquery.blockUI.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/loadingio/ldLoader@v1.0.0/dist/ldld.min.js"></script>
         <?= $this->renderSection('pageScript') ?> 
 
         
