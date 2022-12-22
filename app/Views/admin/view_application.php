@@ -141,7 +141,7 @@
                                     </div>
                                 </div>
                                 <div class="col-3">    
-                                    <img src="<?= !empty($profile['AppImage']) ?  $profile['AppImage']  : base_url()."/img/select-image.png" ?>"  class="rounded mx-auto d-block" alt="Profile Photo"   />   
+                                    <img src="<?= !empty($profile['AppImage']) ? base_url(). "/".  $profile['AppImage']  : base_url()."/img/select-image.png" ?>"  class="rounded mx-auto d-block" alt="Profile Photo"   />   
                                 </div>
                             </div>
                             
@@ -365,7 +365,7 @@
                                     </div> 
                                 </div>
                                 <div class="col-3">    
-                                    <img src="<?= !empty($profile['colImage']) ?  $profile['colImage']  : base_url()."/img/select-image.png" ?>"  class="rounded mx-auto d-block" alt="Profile Photo"   />   
+                                    <img src="<?= !empty($profile['colImage']) ?  base_url(). "/". $profile['colImage']  : base_url()."/img/select-image.png" ?>"  class="rounded mx-auto d-block" alt="Profile Photo"   />   
                                 </div>
                             </div>
                                 
@@ -600,7 +600,7 @@
                                     </div> 
                                 </div>
                                 <div class="col-3">    
-                                    <img src="<?= !empty($profile['colImage']) ?  $profile['colImage']  : base_url()."/img/select-image.png" ?>"  class="rounded mx-auto d-block" alt="Profile Photo"   />   
+                                    <img src="<?= !empty($profile['colImage']) ? base_url(). "/". $profile['colImage']  : base_url()."/img/select-image.png" ?>"  class="rounded mx-auto d-block" alt="Profile Photo"   />   
                                 </div>
                             </div>
                                 

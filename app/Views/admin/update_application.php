@@ -233,7 +233,7 @@
                                         <div class="image_area"> 
                                             <label for="upload_image_shs">  
                                                 <input type="hidden" value="<?= $profile["AppImage"] ?>" id="photo" name="image">
-                                                <img src="<?= !empty($profile['AppImage']) ?  $profile['AppImage']  : base_url()."/img/select-image.png" ?>"   id="uploaded_image_shs" class="img-responsive img-circle" />
+                                                <img src="<?= !empty($profile['AppImage']) ?  base_url()."/". $profile['AppImage']  : base_url()."/img/select-image.png" ?>"   id="uploaded_image_shs" class="img-responsive img-circle" />
                                                 <div class="overlay">
                                                     <div class="text">Change Image</div>
                                                 </div>
@@ -521,7 +521,7 @@
                                         <div class="image_area"> 
                                             <label for="upload_image_college">  
                                                 <input type="hidden" value="<?= $profile["colImage"] ?>" id="photo" name="image">
-                                                <img src="<?= !empty($profile['colImage']) ?  $profile['colImage']  : base_url()."/img/select-image.png" ?>"   id="uploaded_image_college" class="img-responsive img-circle" />
+                                                <img src="<?= !empty($profile['colImage']) ? base_url()."/". $profile['colImage']  : base_url()."/img/select-image.png" ?>"   id="uploaded_image_college" class="img-responsive img-circle" />
                                                 <div class="overlay">
                                                     <div class="text">Change Image</div>
                                                 </div>
@@ -822,7 +822,7 @@
                                         <div class="image_area"> 
                                             <label for="upload_image_tvet">  
                                                 <input type="hidden" value="<?= $profile["colImage"] ?>" id="photo" name="image">
-                                                <img src="<?= !empty($profile['colImage']) ?  $profile['colImage']  : base_url()."/img/select-image.png" ?>"   id="uploaded_image_tvet" class="img-responsive img-circle" />
+                                                <img src="<?= !empty($profile['colImage']) ? base_url()."/". $profile['colImage']  : base_url()."/img/select-image.png" ?>"   id="uploaded_image_tvet" class="img-responsive img-circle" />
                                                 <div class="overlay">
                                                     <div class="text">Change Image</div>
                                                 </div>

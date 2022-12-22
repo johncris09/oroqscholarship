@@ -105,7 +105,7 @@
 
                     <ul class="nav nav-tabs"> 
                         <li class="nav-item">
-                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link  active ">
+                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active  ">
                                 Senior High School Registration
                             </a>
                         </li>
@@ -121,7 +121,7 @@
                         </li>
                     </ul>
                     <div class="tab-content"> 
-                        <div class="tab-pane show " id="senior-high-tab">  
+                        <div class="tab-pane show active" id="senior-high-tab">  
                             <form id="senior-high-registration-form"  class="validation-form">
                                 <div class="row">
                                     <div class="col-12">
@@ -405,7 +405,7 @@
                                 </div>    
                             </form>  
                         </div>
-                        <div class="tab-pane  active" id="college-tab">   
+                        <div class="tab-pane  " id="college-tab">   
                             <form id="college-registration-form" class="validation-form">
                                 <div class="row"> 
                                     
@@ -703,7 +703,7 @@
                             </form>
                         </div>
                         
-                        <div class="tab-pane " id="tvet-tab"> 
+                        <div class="tab-pane   " id="tvet-tab"> 
                             <form id="tvet-registration-form" class="validation-form">
                                 <div class="row"> 
                                     <div class="col-12">
@@ -1102,20 +1102,22 @@
                     var reader = new FileReader(); 
                     reader.readAsDataURL(blob);  
                     reader.onloadend = function() { 
-                        base64data = reader.result;
+                        base64data = reader.result;  
 
                         $.ajax({
                             url: "registration/upload",
                             method: "POST",                	
                             data: {image: base64data},
                             dadtaType: "json",
-                            success: function(data){ 
+                            success: function(data){  
+                                console.info(data)
                                 image_data = data;
                                 $modal_shs.modal('hide');  
-                                $('#uploaded_image_shs').attr('src', data);                
+                                $('#uploaded_image_shs').attr('src', data);   
+                                $('#senior-high-registration-form #photo').val(data);              
                             }
                         }); 
-                        $('#senior-high-registration-form #photo').val(base64data); 
+                        // $('#senior-high-registration-form #photo').val(base64data); 
 
                     }
                 });
@@ -1143,7 +1145,8 @@
                     processData: false,
                     contentType: false, 
                     dataType: "json", 
-                    success: function (data) {    
+                    success: function (data) {   
+                        console.info(data) 
                         if(data.response){   
                             Swal.fire({
                                 title:"Good job!",
@@ -1349,12 +1352,13 @@
                             method: "POST",                	
                             data: {image: base64data},
                             dadtaType: "json",
-                            success: function(data){  
+                            success: function(data){   
                                 $modal_college.modal('hide');
                                 $('#uploaded_image_college').attr('src', data);
+                                $('#college-registration-form #photo').val(data); 
                             }
                         });
-                        $('#college-registration-form #photo').val(base64data); 
+                        // $('#college-registration-form #photo').val(base64data); 
                     }
                 });
             });
@@ -1380,14 +1384,13 @@
                     processData: false,
                     contentType: false, 
                     dataType: "json",
-                    success: function (data) { 
+                    success: function (data) {  
                         if(data.response){ 
                             Swal.fire({
                                 title:"Good job!",
                                 text: data.message,
                                 icon:"success"
-                            }) 
-
+                            })  
                             $("#college-registration-form")[0].reset()
                             // shs_app_no_id();
                             $('#uploaded_image_college').attr('src', "<?=base_url()?>/img/select-image.png");
@@ -1473,10 +1476,11 @@
                             success: function(data){  
                                 $modal_tvet.modal('hide');
                                 $('#uploaded_image_tvet').attr('src', data);
+                                $('#tvet-registration-form #photo').val(data); 
                             }
                         });
                         
-                        $('#tvet-registration-form #photo').val(base64data); 
+                        // $('#tvet-registration-form #photo').val(base64data); 
                     }
                 });
             });
