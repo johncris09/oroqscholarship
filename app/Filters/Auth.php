@@ -27,8 +27,7 @@ class Auth implements FilterInterface
     { 
             
         if (!auth()->loggedIn()) {
-            return redirect()->to('/login')
-                ->with('error', "You must login first.");
+            return redirect()->to('/login');
         } 
 
     }
