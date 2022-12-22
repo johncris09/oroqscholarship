@@ -4,101 +4,127 @@
 <head>
     <style>
         /* Styles go here */
+      .page-header, .page-header-space {
+        height: 130px;
+      }
 
-.page-header, .page-header-space {
-  height: 130px;
-}
+      .page-footer, .page-footer-space {
+        height: 50px;
+      }
 
-.page-footer, .page-footer-space {
-  height: 50px;
+      .page-footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        border-top: 1px solid black;
+      /* for demo */;
+      }
 
-}
+      .page-header {
+        position: fixed;
+        top: 0mm;
+        width: 100%;
+        border-bottom: 1px solid black;
+      /* for demo */;
+      }
 
-.page-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  border-top: 1px solid black; /* for demo */ 
-}
+      .page {
+        page-break-after: always;
+      }
 
-.page-header {
-  position: fixed;
-  top: 0mm;
-  width: 100%;
-  border-bottom: 1px solid black; /* for demo */ 
-}
+      .UpperTitle {
+        text-align: center;
+        position: rela1tive;
+      }
 
-.page {
-  page-break-after: always;
-}
-.UpperTitle
-{
-    text-align: center;  
-    position: rela1tive;
-}
-.UpperTitle img { 
-  position: absolute; left: 15px; top: 0px; 
-}
-.header{
-  line-height: 1px;
-}
-.page-footer p {
-  display: flex;
-  justify-content: space-between;
-}
-.for-approval p {
-  display: flex;
-  justify-content: space-between;
-}
-.text-nowrap{white-space:nowrap!important}
-#report {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-  line-height: 30px;
-}
+      .UpperTitle img {
+        position: absolute;
+        left: 15px;
+        top: 0px;
+      }
 
-#report td, #report th {
-  border: 1px solid #ddd;
-  padding-left: 5px; 
-}  
+      .header {
+        line-height: 1px;
+      }
 
-#report th { 
-  text-align: center;
-  background-color: #4B7BE5;
-  color: white;
-}
-@page {
-  margin: 5mm
-}
+      .page-footer p {
+        display: flex;
+        justify-content: space-between;
+      }
 
-@media print {
-   thead {display: table-header-group;} 
-   tfoot {display: table-footer-group;} 
-   body {margin: 0;}
-}
+      .for-approval p {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .text-nowrap {
+        white-space: nowrap!important;
+      }
+
+      #report {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        line-height: 30px;
+      }
+
+      #report td, #report th {
+        border: 1px solid #ddd;
+        padding-left: 5px;
+      }
+
+      #report th {
+        text-align: center;
+        background-color: #4B7BE5;
+        color: white;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      @page {
+        margin: 5mm;
+      }
+
+      @media print {
+        thead {
+          display: table-header-group;
+        }
+
+        tfoot {
+          display: table-footer-group;
+        }
+
+        body {
+          margin: 0;
+        }
+
+        .hidden {
+          display: block;
+        }
+      }
     </style>
 </head>
 
 <body>
 
-  <div class="page-header" style="text-align: center"> 
-        <div class="UpperTitle">
-            <img src="<?=base_url()?>/img/logo-sm.png" width="100" height="100" alt=""> 
-            <div class="header"> 
-              <h2>Republic of the Philippines</h2>
-              <h3>Office of the City Mayor</h3> 
-              <h4>Oroquieta City</h4>
-              <h6 class="text-danger">City oF Good Life</h6> 
-              <div class="sub-header"  >   
-                  <h4><?= $semester ?> Semester List of <?= $status ?> <?= $scholarship_type ?> Scholarship Applicants for SY: <?= $school_year ?></h4>
-              </div> 
-            </div>
-        </div>
-     
+  <div class="page-header hidden" style="text-align: center"> 
+      <div class="UpperTitle">
+          <img src="<?=base_url()?>/img/logo-sm.png" width="100" height="100" alt=""> 
+          <div class="header"> 
+            <h2>Republic of the Philippines</h2>
+            <h3>Office of the City Mayor</h3> 
+            <h4>Oroquieta City</h4>
+            <h6 class="text-danger">City oF Good Life</h6> 
+            <div class="sub-header"  >   
+                <h4><?= $semester ?> Semester List of <?= $status ?> <?= $scholarship_type ?> Scholarship Applicants for SY: <?= $school_year ?></h4>
+            </div> 
+          </div>
+      </div> 
   </div>
 
-  <div class="page-footer">
+  <div class="page-footer hidden">
     <p>
       <span>Printed By: <?= auth()->user()->firstname . " " . auth()->user()->lastname ?></span>
       <span>Printed on: <?= date('F j, Y') ?></span>
@@ -158,7 +184,7 @@
                           
                   ?>
                       <tr> 
-                          <tr class="text-nowrap">
+                          <tr >
                               <td><?= $counter++; ?></td>
                               <td><?= $name ?></td> 
                               <td><?= $address ?></td> 
@@ -172,7 +198,7 @@
                       </tr>
                       
                   <?php   } ?> 
-                  <tr >
+                  <tr   >
                     <td colspan="8" style="border-left: 0px;border-right: 0px;border-bottom: 0px;">
                       <br>
                       <p style="text-align: left">Recommended for Approval: </p>
