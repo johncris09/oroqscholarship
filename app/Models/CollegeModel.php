@@ -164,6 +164,7 @@ class CollegeModel extends Model
     {
         $query = $this->builder 
             ->select('colschool as school, count(*) as total')  
+            ->where('colSchool != ', "")
             ->groupBy('colschool')  
             ->get()
             ->getResult();  
@@ -186,6 +187,7 @@ class CollegeModel extends Model
     {
         $query = $this->builder 
             ->select('colGender as gender, count(*) as total')  
+            ->where('colGender != ', "")
             ->groupBy('colGender')  
             ->get()
             ->getResult();  

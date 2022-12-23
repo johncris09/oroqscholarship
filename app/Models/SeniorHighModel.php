@@ -162,6 +162,7 @@ class SeniorHighModel extends Model
     {
         $query = $this->builder 
             ->select('AppStatus as status, count(*) as total')  
+            ->where('AppStatus !=', "")
             ->groupBy('AppStatus')  
             ->get()
             ->getResult();  
@@ -171,6 +172,7 @@ class SeniorHighModel extends Model
     {
         $query = $this->builder 
             ->select('Appschool as school, count(*) as total')  
+            ->where('Appschool !=', "")
             ->groupBy('Appschool')  
             ->get()
             ->getResult();  
@@ -192,6 +194,7 @@ class SeniorHighModel extends Model
     {
         $query = $this->builder 
             ->select('AppGender as gender, count(*) as total')  
+            ->where('AppGender != ', "")
             ->groupBy('AppGender')  
             ->get()
             ->getResult();  

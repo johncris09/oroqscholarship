@@ -224,8 +224,12 @@
 
 <?= $this->section('pageScript') ?>
     <script> 
-        $(document).ready(function(){  
-            // Form Submit
+        $(document).ready(function(){   
+
+            //=============================================================================
+            //  Filter by School Year, Semester
+            //============================================================================= 
+
             $(document).on('submit', '#filter-form', function(e){  
                 e.preventDefault();   
                 
@@ -236,6 +240,13 @@
                     method: "post", 
                     data: $("#filter-form").serialize(),
                     dataType: "json", 
+                    beforeSend: function () {
+                        console.info('loading')
+                    },
+                    complete: function () {
+                        console.info('')
+                        // KTApp.unblock('body');
+                    },
                     success: function (data) {   
                         $('#shs_total').html(data.shs_total)
                         $('#college_total').html(data.college_total)
@@ -247,409 +258,383 @@
                 });   
             });  
 
+
+
+            //=============================================================================
+            //  Scholarship by Gender Chart
+            //============================================================================= 
+            
+            var shs_gender = {
+                colors: ['#F96666', '#FD841F'],
+                series: [ 
+                    <?php echo $shs_gender[0]->total; ?>, 
+                    <?php echo $shs_gender[1]->total; ?>, 
+                ],
+                chart: {
+                    width: 380,
+                    type: 'donut',
+                },
+                plotOptions: {
+                    pie: {
+                        startAngle: -90,
+                        endAngle: 270
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                fill: {
+                    type: 'gradient',
+                },
+                labels: [
+                    '<?php echo strtoupper($shs_gender[0]->gender); ?>', 
+                    '<?php echo strtoupper($shs_gender[1]->gender); ?>',  
+                ],
+                legend: {
+                    formatter: function(val, opts) {
+                        return val + " - " + opts.w.globals.series[opts.seriesIndex]
+                    }
+                }, 
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 200
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }]
+            };
+            var chart = new ApexCharts(document.querySelector("#shs-gender-chart"), shs_gender);
+            chart.render(); 
+
+
+
+            var college_gender = {
+                colors: ['#ECC5FB', '#47B5FF'],
+                series: [ 
+                    <?php echo $college_gender[0]->total; ?>, 
+                    <?php echo $college_gender[1]->total; ?>, 
+                ],
+                chart: {
+                    width: 380,
+                    type: 'donut',
+                },
+                plotOptions: {
+                    pie: {
+                        startAngle: -90,
+                        endAngle: 270
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                fill: {
+                    type: 'gradient',
+                },
+                labels: [
+                    '<?php echo strtoupper($college_gender[0]->gender); ?>', 
+                    '<?php echo strtoupper($college_gender[1]->gender); ?>',  
+                ],
+                legend: {
+                    formatter: function(val, opts) {
+                        return val + " - " + opts.w.globals.series[opts.seriesIndex]
+                    }
+                }, 
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 200
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }]
+            };
+            var chart = new ApexCharts(document.querySelector("#college-gender-chart"), college_gender);
+            chart.render();  
+
+
+
+            var tvet_gender = {
+                colors: ['#A62349', '#EE6983'],
+                series: [ 
+                    <?php echo $tvet_gender[0]->total; ?>, 
+                    <?php echo $tvet_gender[1]->total; ?>, 
+                ],
+                chart: {
+                    width: 380,
+                    type: 'donut',
+                },
+                plotOptions: {
+                    pie: {
+                        startAngle: -90,
+                        endAngle: 270
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                fill: {
+                    type: 'gradient',
+                },
+                labels: [
+                    '<?php echo strtoupper($tvet_gender[0]->gender); ?>', 
+                    '<?php echo strtoupper($tvet_gender[1]->gender); ?>',  
+                ],
+                legend: {
+                    formatter: function(val, opts) {
+                        return val + " - " + opts.w.globals.series[opts.seriesIndex]
+                    }
+                }, 
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 200
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }]
+            };
+            var chart = new ApexCharts(document.querySelector("#tvet-gender-chart"), tvet_gender);
+            chart.render();  
+
+ 
+
+
+
+            //=============================================================================
+            //  Scholarship Status Chart
+            //============================================================================= 
+            
+            var scholarship_status = {
+                colors: ['#3AB0FF', '#432C7A', '#F94892', '#FFE15D'],
+                series: [{
+                    name: 'Approved',
+                    data: <?php echo json_encode( $scholarship_status['approved']); ?>
+                }, 
+                {
+                    name: 'Additional Approved',
+                    data: <?php echo json_encode( $scholarship_status['additional_approved']); ?>
+                }, 
+                {
+                    name: 'Disapproved',
+                    data: <?php echo json_encode( $scholarship_status['disapproved']); ?>
+                }, {
+                    name: 'Pending',
+                    data: <?php echo json_encode( $scholarship_status['pending']); ?>
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 350
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: '55%',
+                        endingShape: 'rounded'
+                    },
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    show: true,
+                    width: 10,
+                    colors: ['transparent']
+                },
+                xaxis: {
+                    categories: ['Senior High School', 'College', 'TVET'],
+                },
+                yaxis: {
+                    title: {
+                        text: '# '
+                    }
+                },
+                fill: {
+                    opacity: 1
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(val) {
+                            return "#" + val
+                        }
+                    }
+                }
+            };
+            var chart = new ApexCharts(document.querySelector("#scholarship-status-chart"), scholarship_status);
+            chart.render();
+
+
+            //=============================================================================
+            //  Scholarship by Barangay Chart
+            //============================================================================= 
+
+            var scholarship_barangay = {
+                colors: ['#F76E11', '#FF99D7', '#3B3486'],
+                series: [{
+                    name: 'Senior High School',
+                    data: <?php echo json_encode($scholarship_barangay['shs']); ?>
+                }, {
+                    name: 'College',
+                    data: <?php echo json_encode($scholarship_barangay['college']); ?>
+                }, {
+                    name: 'TVET',
+                    data: <?php echo json_encode($scholarship_barangay['tvet']); ?>
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 1500
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: '50%',
+                        endingShape: 'rounded'
+                    },
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    show: true,
+                    width: 15,
+                    colors: ['transparent']
+                },
+                xaxis: {
+                    categories: <?php echo json_encode($scholarship_barangay['barangay']); ?>,
+                },
+                yaxis: {
+                    title: {
+                        text: '# '
+                    }
+                },
+                fill: {
+                    opacity: 1
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(val) {
+                            return "#" + val
+                        }
+                    }
+                }
+            };
+            var chart = new ApexCharts(document.querySelector("#scholarship-barangay-chart"), scholarship_barangay);
+            chart.render();
+            
+ 
+            //=============================================================================
+            //  Scholarship by School Chart
+            //=============================================================================  
+            var shs_school = { 
+                colors: '#F76E11',
+                series: [{ 
+                    data: <?php echo json_encode($shs_school['total']); ?>
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 350
+                },
+                plotOptions: {
+                    bar: {
+                        borderRadius: 4,
+                        horizontal: true,
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                xaxis: {
+                    categories:<?php echo json_encode($shs_school['school']); ?>
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(val) {
+                            return "#" + val
+                        }
+                    }
+                }
+            };
+            var chart = new ApexCharts(document.querySelector("#shs-school-chart"), shs_school);
+            chart.render();
+
+            
+ 
+            var college_school = { 
+                colors: '#FF99D7',
+                series: [{ 
+                    data: <?php echo json_encode($college_school['total']); ?>
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 10000
+                },
+                plotOptions: {
+                    bar: {
+                        borderRadius: 4,
+                        horizontal: true,
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                xaxis: {
+                    categories:<?php echo json_encode($college_school['school']); ?>
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(val) {
+                            return "#" + val
+                        }
+                    }
+                }
+            };
+            var chart = new ApexCharts(document.querySelector("#college-school-chart"), college_school);
+            chart.render();
+
             
             
-            $.ajax({
-                url: 'scholarship_shs_gender',
-                method: "get",
-                dataType: "json",   
-                success: function(data) { 
-                    var options = {
-                        colors: ['#F96666', '#FD841F'],
-                        series: data.total,
-                        chart: {
-                            width: 380,
-                            type: 'donut',
-                        },
-                        plotOptions: {
-                            pie: {
-                                startAngle: -90,
-                                endAngle: 270
-                            }
-                        },
-                        dataLabels: {
-                            enabled: false
-                        },
-                        fill: {
-                            type: 'gradient',
-                        },
-                        labels: ['MALE', 'FEMALE' ],
-                        legend: {
-                            formatter: function(val, opts) {
-                                return val + " - " + opts.w.globals.series[opts.seriesIndex]
-                            }
-                        }, 
-                        responsive: [{
-                            breakpoint: 480,
-                            options: {
-                                chart: {
-                                    width: 200
-                                },
-                                legend: {
-                                    position: 'bottom'
-                                }
-                            }
-                        }]
-                    };
-                    var chart = new ApexCharts(document.querySelector("#shs-gender-chart"), options);
-                    chart.render();
+            var tvet_school = { 
+                colors: '#3B3486',
+                series: [{ 
+                    data: <?php echo json_encode($tvet_school['total']); ?>
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 350
                 },
-                error: function(xhr, status, error) {
-                    console.info(xhr.responseText);
-                }
-            });
-
-
-
-            $.ajax({
-                url: 'scholarship_college_gender',
-                method: "get",
-                dataType: "json", 
-                success: function(data) {  
-                    var options = {
-                        colors: ['#ECC5FB', '#47B5FF'],
-                        series: data.total,
-                        chart: {
-                            width: 380,
-                            type: 'donut',
-                        },
-                        plotOptions: {
-                            pie: {
-                                startAngle: -90,
-                                endAngle: 270
-                            }
-                        },
-                        dataLabels: {
-                            enabled: false
-                        },
-                        fill: {
-                            type: 'gradient',
-                        },
-                        labels: ['MALE', 'FEMALE' ],
-                        legend: {
-                            formatter: function(val, opts) {
-                                return val + " - " + opts.w.globals.series[opts.seriesIndex]
-                            }
-                        }, 
-                        responsive: [{
-                            breakpoint: 480,
-                            options: {
-                                chart: {
-                                    width: 200
-                                },
-                                legend: {
-                                    position: 'bottom'
-                                }
-                            }
-                        }]
-                    };
-                    var chart = new ApexCharts(document.querySelector("#college-gender-chart"), options);
-                    chart.render();
+                plotOptions: {
+                    bar: {
+                        borderRadius: 4,
+                        horizontal: true,
+                    }
                 },
-                error: function(xhr, status, error) {
-                    console.info(xhr.responseText);
-                }
-            });
-
-
-
-            $.ajax({
-                url: 'scholarship_tvet_gender',
-                method: "get",
-                dataType: "json",
-                success: function(data) {  
-                    var options = {
-                        colors: ['#A62349', '#EE6983'],
-                        series: data.total,
-                        chart: {
-                            width: 380,
-                            type: 'donut',
-                        },
-                        plotOptions: {
-                            pie: {
-                                startAngle: -90,
-                                endAngle: 270
-                            }
-                        },
-                        dataLabels: {
-                            enabled: false
-                        },
-                        fill: {
-                            type: 'gradient',
-                        },
-                        labels: ['MALE', 'FEMALE' ],
-                        legend: {
-                            formatter: function(val, opts) {
-                                return val + " - " + opts.w.globals.series[opts.seriesIndex]
-                            }
-                        }, 
-                        responsive: [{
-                            breakpoint: 480,
-                            options: {
-                                chart: {
-                                    width: 200
-                                },
-                                legend: {
-                                    position: 'bottom'
-                                }
-                            }
-                        }]
-                    };
-                    var chart = new ApexCharts(document.querySelector("#tvet-gender-chart"), options);
-                    chart.render();
+                dataLabels: {
+                    enabled: false
                 },
-                error: function(xhr, status, error) {
-                    console.info(xhr.responseText);
-                }
-            }); 
-
-            $.ajax({
-                url: 'scholarship_barangay',
-                method: "get",
-                dataType: "json",
-                success: function(data) {
-                    var options = {
-                        colors: ['#F76E11', '#FF99D7', '#3B3486'],
-                        series: [{
-                            name: 'Senior High School',
-                            data: data.shs
-                        }, {
-                            name: 'College',
-                            data: data.college
-                        }, {
-                            name: 'TVET',
-                            data: data.tvet
-                        }],
-                        chart: {
-                            type: 'bar',
-                            height: 1500
-                        },
-                        plotOptions: {
-                            bar: {
-                                horizontal: false,
-                                columnWidth: '50%',
-                                endingShape: 'rounded'
-                            },
-                        },
-                        dataLabels: {
-                            enabled: false
-                        },
-                        stroke: {
-                            show: true,
-                            width: 15,
-                            colors: ['transparent']
-                        },
-                        xaxis: {
-                            categories: data.barangay,
-                        },
-                        yaxis: {
-                            title: {
-                                text: '# '
-                            }
-                        },
-                        fill: {
-                            opacity: 1
-                        },
-                        tooltip: {
-                            y: {
-                                formatter: function(val) {
-                                    return "#" + val
-                                }
-                            }
+                xaxis: {
+                    categories:<?php echo json_encode($tvet_school['school']); ?>
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(val) {
+                            return "#" + val
                         }
-                    };
-                    var chart = new ApexCharts(document.querySelector("#scholarship-barangay-chart"), options);
-                    chart.render();
-                },
-                error: function(xhr, status, error) {
-                    console.info(xhr.responseText);
+                    }
                 }
-            });
-            $.ajax({
-                url: 'scholarship_status',
-                method: "get",
-                dataType: "json",   
-                success: function(data) { 
-                    var options = {
-                        colors: ['#3AB0FF', '#432C7A', '#F94892', '#FFE15D'],
-                        series: [{
-                            name: 'Approved',
-                            data: data.Approved
-                        }, {
-                            name: 'Additional Approved',
-                            data: data.Additional_approved
-                        }, {
-                            name: 'Disapproved',
-                            data: data.Disapproved
-                        }, {
-                            name: 'Pending',
-                            data: data.Pending
-                        }],
-                        chart: {
-                            type: 'bar',
-                            height: 350
-                        },
-                        plotOptions: {
-                            bar: {
-                                horizontal: false,
-                                columnWidth: '55%',
-                                endingShape: 'rounded'
-                            },
-                        },
-                        dataLabels: {
-                            enabled: false
-                        },
-                        stroke: {
-                            show: true,
-                            width: 10,
-                            colors: ['transparent']
-                        },
-                        xaxis: {
-                            categories: ['Senior High School', 'College', 'TVET'],
-                        },
-                        yaxis: {
-                            title: {
-                                text: '# '
-                            }
-                        },
-                        fill: {
-                            opacity: 1
-                        },
-                        tooltip: {
-                            y: {
-                                formatter: function(val) {
-                                    return "#" + val
-                                }
-                            }
-                        }
-                    };
-                    var chart = new ApexCharts(document.querySelector("#scholarship-status-chart"), options);
-                    chart.render();
-                },
-                error: function(xhr, status, error) {
-                    console.info(xhr.responseText);
-                }
-            });
-            $.ajax({
-                url: 'get_by_shs_school',
-                method: "get",
-                dataType: "json",
-                success: function(data) {
-                    var options = { 
-                        series: [{
-                            data: data.total
-                        }],
-                        chart: {
-                            type: 'bar',
-                            height: 350
-                        },
-                        plotOptions: {
-                            bar: {
-                                borderRadius: 4,
-                                horizontal: true,
-                            }
-                        },
-                        dataLabels: {
-                            enabled: false
-                        },
-                        xaxis: {
-                            categories: data.school,
-                        },
-                        tooltip: {
-                            y: {
-                                formatter: function(val) {
-                                    return "#" + val
-                                }
-                            }
-                        }
-                    };
-                    var chart = new ApexCharts(document.querySelector("#shs-school-chart"), options);
-                    chart.render();
-                },
-                error: function(xhr, status, error) {
-                    console.info(xhr.responseText);
-                }
-            });
-            $.ajax({
-                url: 'get_by_college_school',
-                method: "get",
-                dataType: "json",
-                success: function(data) {
-                    var options = {
-                        series: [{
-                            data: data.total
-                        }],
-                        chart: {
-                            type: 'bar',
-                            height: 10000
-                        },
-                        plotOptions: {
-                            bar: {
-                                borderRadius: 4,
-                                horizontal: true,
-                            }
-                        },
-                        dataLabels: {
-                            enabled: false
-                        },
-                        xaxis: {
-                            categories: data.school,
-                        },
-                        tooltip: {
-                            y: {
-                                formatter: function(val) {
-                                    return "#" + val
-                                }
-                            }
-                        }
-                    };
-                    var chart = new ApexCharts(document.querySelector("#college-school-chart"), options);
-                    chart.render();
-                },
-                error: function(xhr, status, error) {
-                    console.info(xhr.responseText);
-                }
-            });
-            $.ajax({
-                url: 'get_by_tvet_school',
-                method: "get",
-                dataType: "json",
-                success: function(data) {
-                    var options = {
-                        series: [{
-                            data: data.total
-                        }],
-                        chart: {
-                            type: 'bar',
-                            height: 350
-                        },
-                        plotOptions: {
-                            bar: {
-                                borderRadius: 4,
-                                horizontal: true,
-                            }
-                        },
-                        dataLabels: {
-                            enabled: false
-                        },
-                        xaxis: {
-                            categories: data.school,
-                        },
-                        tooltip: {
-                            y: {
-                                formatter: function(val) {
-                                    return "#" + val
-                                }
-                            }
-                        }
-                    };
-                    var chart = new ApexCharts(document.querySelector("#tvet-school-chart"), options);
-                    chart.render();
-                },
-                error: function(xhr, status, error) {
-                    console.info(xhr.responseText);
-                }
-            });
+            };
+            var chart = new ApexCharts(document.querySelector("#tvet-school-chart"), tvet_school);
+            chart.render();
+
+               
         });
     </script>
 

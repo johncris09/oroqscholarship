@@ -160,7 +160,8 @@ class TvetModel extends Model
     public function get_tot_by_school()
     {
         $query = $this->builder 
-            ->select('colschool as school, count(*) as total')  
+            ->select('colschool as school, count(*) as total')
+            ->where('colSchool !=', "")
             ->groupBy('colschool')  
             ->get()
             ->getResult();  
@@ -181,6 +182,7 @@ class TvetModel extends Model
     {
         $query = $this->builder 
             ->select('colGender as gender, count(*) as total')  
+            ->where('colGender != ', "")
             ->groupBy('colGender')  
             ->get()
             ->getResult();  

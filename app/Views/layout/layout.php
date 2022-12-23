@@ -64,25 +64,19 @@
                                 <!-- item-->
                                 <div class="dropdown-header noti-title">
                                     <h6 class="text-overflow m-0">Welcome <?= auth()->user()->username; ?>!</h6>
-                                </div>
-                
-                                <!-- item-->
-                                <a href="/javascript:void(0);" class="dropdown-item notify-item">
+                                </div> 
+                                <!-- <a href="/javascript:void(0);" class="dropdown-item notify-item">
                                     <i class="fe-user"></i>
                                     <span>My Account</span>
-                                </a>
-                
-                                <!-- item-->
+                                </a> 
                                 <a href="/javascript:void(0);" class="dropdown-item notify-item">
                                     <i class="fe-settings"></i>
                                     <span>Settings</span>
-                                </a>
-                
-                                <!-- item-->
+                                </a> 
                                 <a href="/javascript:void(0);" class="dropdown-item notify-item">
                                     <i class="fe-lock"></i>
                                     <span>Lock Screen</span>
-                                </a>
+                                </a> -->
                 
                                 <div class="dropdown-divider"></div>
                 
