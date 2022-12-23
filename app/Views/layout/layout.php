@@ -274,13 +274,32 @@
                             <div class="col-12">
                                 <div class="page-title-box">
                                     <h4 class="page-title"><?= !isset($page_title) ? "Dashboard" : $page_title; ?></h4>
-                                    <!-- <div>
-                                        <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="/javascript: void(0);">Codefox</a></li>
-                                            <li class="breadcrumb-item"><a href="/javascript: void(0);">Forms</a></li>
-                                            <li class="breadcrumb-item active">General Elements</li>
-                                        </ol>
-                                    </div> -->
+                                    <?php
+                                        if(uri_string() == "/"){
+                                    ?>
+                                            <div>
+                                                <form id="filter-form" class="validation-form" >
+                                                    <div class="input-group "> 
+                                                        <select name="sy" class="form-control">
+                                                            <option value="">School Year</option>
+                                                            <?php foreach(range(2017, date('Y')) as $year):?>  
+                                                                <option value="SY: <?= $year . "-" . ($year + 1)?>">SY: <?= $year . "-" . ($year + 1)?></option>
+                                                            <?php endforeach; ?>
+                                                        </select> 
+                                                        <span class="input-group-text"> - </span>
+                                                        <select name="semester" class="form-control">
+                                                            <option value="">Semester</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                        </select>   
+                                                        <button class="btn btn-primary" type="submit" > <i class="mdi mdi-magnify"></i> Filter</button>
+                                                    </div>
+                                                </form>
+                                               
+                                            </div>
+                                    <?php
+                                        }
+                                    ?>
                                 </div>
                             </div>
                         </div>     
@@ -350,6 +369,7 @@
         <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
         <script src="http://malsup.github.io/jquery.blockUI.js"></script>
         <script src="https://cdn.jsdelivr.net/gh/loadingio/ldLoader@v1.0.0/dist/ldld.min.js"></script>
+        
         <?= $this->renderSection('pageScript') ?> 
 
         

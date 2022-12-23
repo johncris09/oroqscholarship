@@ -7,13 +7,12 @@
     <style> 
         .college-school-chart{
             width: 1000px   !important;
-        }
+        } 
     </style>
 
 <?= $this->endSection() ?> 
-<?= $this->section('main') ?>
-
-    <div class="row">
+<?= $this->section('main') ?> 
+    <div class="row"> 
         <div class="col-md-4 col-xl-4">
             <div class="widget-rounded-circle card bg-purple shadow-none">
                 <div class="card-body">
@@ -25,8 +24,8 @@
                         </div>
                         <div class="col-6">
                             <div class="text-end">
-                                <h2 class="text-white mt-2"><?= $tot_approved_shs; ?></h2>
-                                <p class="text-white   text-truncate">Senio High</p>
+                                <h2 id="shs_total" class="text-white mt-2"><?= $tot_approved_shs; ?> </h2>
+                                <p class="text-white   text-truncate">Senio High School</p>
                             </div>
                         </div>
                     </div> <!-- end row-->
@@ -34,7 +33,7 @@
             </div> <!-- end widget-rounded-circle-->
         </div> <!-- end col-->
 
-        <div class="col-md-4 col-xl-3">
+        <div class="col-md-4 col-xl-4">
             <div class="widget-rounded-circle card bg-info shadow-none">
                 <div class="card-body">
                     <div class="row">
@@ -45,7 +44,7 @@
                         </div>
                         <div class="col-6">
                             <div class="text-end">
-                                <h2 class="text-white mt-2"><?= $tot_approved_college; ?></h2>
+                                <h2  id="college_total"  class="text-white mt-2"><?= $tot_approved_college; ?></h2>
                                 <p class="text-white   text-truncate">College</p>
                             </div>
                         </div>
@@ -65,7 +64,7 @@
                         </div>
                         <div class="col-6">
                             <div class="text-end">
-                                <h2 class="text-white mt-2"><?= $tot_approved_tvet; ?></h2>
+                                <h2  id="tvet_total"  class="text-white mt-2"><?= $tot_approved_tvet; ?></h2>
                                 <p class="text-white   text-truncate">TVET</p>
                             </div>
                         </div>
@@ -78,7 +77,7 @@
     
     <div class="row">
         <div class="col-sm-12">
-            <div class="card">
+            <div class="card card-status"> 
                 <div class="card-header bg-white">  
                     <div class="card-widgets">
                         <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
@@ -87,7 +86,7 @@
                     </div> 
                     <h4 class="header-title  ">Scholarship Status Chart</h4>
                 </div>
-                <div class="card-body">  
+                <div class="card-body">   
                     <div id="cardCollpasebystatus" class="collapse show" dir="ltr">
                         <div id="scholarship-status-chart" class="apex-charts" data-colors="#348cd4,#f06292,#ced4da"></div>
                     </div>  
@@ -224,13 +223,36 @@
 
 
 <?= $this->section('pageScript') ?>
+    <script> 
+        $(document).ready(function(){  
+            // Form Submit
+            $(document).on('submit', '#filter-form', function(e){  
+                e.preventDefault();   
+                
+                var formData = new FormData($("#filter-form")[0]);
+                
+                $.ajax({
+                    url:  '/filter',
+                    method: "post", 
+                    data: $("#filter-form").serialize(),
+                    dataType: "json", 
+                    success: function (data) {   
+                        $('#shs_total').html(data.shs_total)
+                        $('#college_total').html(data.college_total)
+                        $('#tvet_total').html(data.tvet_total) 
+                    },
+                    error: function (xhr, status, error) { 
+                        console.info(xhr.responseText);
+                    }
+                });   
+            });  
 
-    <script>
-        $(document).ready(function() {
+            
+            
             $.ajax({
                 url: 'scholarship_shs_gender',
                 method: "get",
-                dataType: "json",
+                dataType: "json",   
                 success: function(data) { 
                     var options = {
                         colors: ['#F96666', '#FD841F'],
@@ -282,9 +304,8 @@
             $.ajax({
                 url: 'scholarship_college_gender',
                 method: "get",
-                dataType: "json",
-                success: function(data) { 
-                    console.info(data)
+                dataType: "json", 
+                success: function(data) {  
                     var options = {
                         colors: ['#ECC5FB', '#47B5FF'],
                         series: data.total,
@@ -336,8 +357,7 @@
                 url: 'scholarship_tvet_gender',
                 method: "get",
                 dataType: "json",
-                success: function(data) { 
-                    console.info(data)
+                success: function(data) {  
                     var options = {
                         colors: ['#A62349', '#EE6983'],
                         series: data.total,
@@ -448,8 +468,8 @@
             $.ajax({
                 url: 'scholarship_status',
                 method: "get",
-                dataType: "json",
-                success: function(data) {
+                dataType: "json",   
+                success: function(data) { 
                     var options = {
                         colors: ['#3AB0FF', '#432C7A', '#F94892', '#FFE15D'],
                         series: [{
@@ -633,4 +653,4 @@
         });
     </script>
 
-<?= $this->endSection() ?>
+<?= $this->endSection() ?>  

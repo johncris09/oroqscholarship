@@ -186,5 +186,16 @@ class TvetModel extends Model
             ->getResult();  
         return $query;
     }
+
+    public function filter($data)
+    {
+        $builder = $this->db
+            ->table($this->table)
+            ->where(isset($data['sy']) ? "colSY = '" .$data['sy'] ."'": "colManager = 'Active'")
+            ->where(isset($data['semester']) ? "colAppNoSem = " .$data['semester'] : "colManager = 'Active'")
+            ->where('colAppStat', 'approved');
+        $query = $builder->countAllResults();
+        return $query;  
+    }
     
 }

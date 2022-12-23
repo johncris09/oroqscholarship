@@ -136,7 +136,7 @@ class SeniorHighModel extends Model
             ->select('ID, AppNoYear, AppNoSem, AppNoID, AppStatus, AppFirstName, AppMidIn, AppLastName, AppSuffix, AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ')
             ->where('AppStatus', 'Approved')
             ->where('AppManager', 'Active')
-            ->orderBy('AppNoID', 'asc')
+            ->orderBy('ID', 'asc')
             ->get()
             ->getResult();  
         return $query; 
@@ -197,4 +197,15 @@ class SeniorHighModel extends Model
             ->getResult();  
         return $query;
     } 
+
+    public function filter($data)
+    {
+        $builder = $this->db
+            ->table($this->table)
+            ->where(isset($data['sy']) ? "AppSY = '" .$data['sy'] ."'": "AppManager = 'Active'")
+            ->where(isset($data['semester']) ? "AppNoSem = " .$data['semester'] : "AppManager = 'Active'")
+            ->where('AppStatus', 'approved');
+        $query = $builder->countAllResults();
+        return $query;  
+    }
 }

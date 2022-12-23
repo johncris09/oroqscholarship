@@ -46,6 +46,7 @@ $routes->group('/',  function($routes) {
     $routes->get('scholarship_shs_gender', 'DashboardController::scholarship_shs_gender', ["filter" => "auth"]);   
     $routes->get('scholarship_college_gender', 'DashboardController::scholarship_college_gender', ["filter" => "auth"]);  
     $routes->get('scholarship_tvet_gender', 'DashboardController::scholarship_tvet_gender', ["filter" => "auth"]);  
+    $routes->post('filter', 'DashboardController::filter', ["filter" => "auth"]); 
     
 });
 

@@ -190,4 +190,53 @@ class DashboardController extends BaseController
         echo json_encode($data); 
     }
 
+
+    public function filter()
+    { 
+        
+        
+        $data['shs_total'] = $this->shs_filter($_GET);
+        $data['college_total'] = $this->college_filter($_GET);
+        $data['tvet_total'] = $this->tvet_filter($_GET);
+
+
+        echo json_encode($data); 
+    }
+
+    public function shs_filter($data)
+    {
+        if(isset($_POST['sy']) && !empty($_POST['sy'])){
+            $data['sy'] = $_POST['sy'];
+        }
+        if(isset($_POST['semester']) && !empty($_POST['semester'])){
+            $data['semester'] = $_POST['semester'];
+        }
+ 
+        return  $this->senior_high->filter($data);
+    }
+    public function college_filter($data)
+    {
+        if(isset($_POST['sy']) && !empty($_POST['sy'])){
+            $data['sy'] = $_POST['sy'];
+        }
+        if(isset($_POST['semester']) && !empty($_POST['semester'])){
+            $data['semester'] = $_POST['semester'];
+        }
+ 
+        return  $this->college->filter($data);
+
+    }
+    public function tvet_filter($data)
+    {
+        if(isset($_POST['sy']) && !empty($_POST['sy'])){
+            $data['sy'] = $_POST['sy'];
+        }
+        if(isset($_POST['semester']) && !empty($_POST['semester'])){
+            $data['semester'] = $_POST['semester'];
+        }
+ 
+        return  $this->tvet->filter($data);
+
+    }
+
 }
