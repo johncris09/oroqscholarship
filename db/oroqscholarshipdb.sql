@@ -1,187 +1,293 @@
-/*
-SQLyog Community v13.2.0 (64 bit)
-MySQL - 5.5.59 : Database - oroqscholarshipdb
-*********************************************************************
-*/
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jan 16, 2023 at 03:20 AM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
-/*!40101 SET NAMES utf8 */;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
-/*!40101 SET SQL_MODE=''*/;
 
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`oroqscholarshipdb` /*!40100 DEFAULT CHARACTER SET utf8 */;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-USE `oroqscholarshipdb`;
+--
+-- Database: `oroqscholarshipdb`
+--
 
-/*Table structure for table `auth_groups_users` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `auth_groups_users`;
+--
+-- Table structure for table `auth_groups_users`
+--
 
 CREATE TABLE `auth_groups_users` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) unsigned NOT NULL,
+  `id` int(11) UNSIGNED NOT NULL,
+  `user_id` int(11) UNSIGNED NOT NULL,
   `group` varchar(255) NOT NULL,
-  `created_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `auth_groups_users_user_id_foreign` (`user_id`),
-  CONSTRAINT `auth_groups_users_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `auth_identities` */
+--
+-- Dumping data for table `auth_groups_users`
+--
 
-DROP TABLE IF EXISTS `auth_identities`;
+INSERT INTO `auth_groups_users` (`id`, `user_id`, `group`, `created_at`) VALUES
+(42, 72, 'superadmin', '2023-01-15 19:52:31'),
+(43, 73, 'superadmin', '2023-01-15 20:19:05');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `auth_identities`
+--
 
 CREATE TABLE `auth_identities` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) unsigned NOT NULL,
+  `id` int(11) UNSIGNED NOT NULL,
+  `user_id` int(11) UNSIGNED NOT NULL,
   `type` varchar(255) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `secret` varchar(255) NOT NULL,
   `secret2` varchar(255) DEFAULT NULL,
   `expires` datetime DEFAULT NULL,
-  `extra` text,
-  `force_reset` tinyint(1) NOT NULL DEFAULT '0',
+  `extra` text DEFAULT NULL,
+  `force_reset` tinyint(1) NOT NULL DEFAULT 0,
   `last_used_at` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `type_secret` (`type`,`secret`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `auth_identities_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `auth_logins` */
+--
+-- Dumping data for table `auth_identities`
+--
 
-DROP TABLE IF EXISTS `auth_logins`;
+INSERT INTO `auth_identities` (`id`, `user_id`, `type`, `name`, `secret`, `secret2`, `expires`, `extra`, `force_reset`, `last_used_at`, `created_at`, `updated_at`) VALUES
+(58, 72, 'email_password', NULL, 'manabojc@gmail.com', '$2y$10$dbKbUV0TBqb/Vo1klCxayO6MBCQ.hDjwMtVT6uGLNPFLi1xCFOyYa', NULL, NULL, 0, NULL, '2023-01-15 19:52:31', '2023-01-15 19:52:31'),
+(61, 73, 'email_password', NULL, 'test@gmail.com', '$2y$10$KMOkaZ9skzV3ttbRXzjvneBdQLTZSMa19hIMetcFTCmK8JZJZtWN.', NULL, NULL, 0, '2023-01-15 20:19:35', '2023-01-15 20:19:04', '2023-01-15 20:19:35');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `auth_logins`
+--
 
 CREATE TABLE `auth_logins` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL,
   `ip_address` varchar(255) NOT NULL,
   `user_agent` varchar(255) DEFAULT NULL,
   `id_type` varchar(255) NOT NULL,
   `identifier` varchar(255) NOT NULL,
-  `user_id` int(11) unsigned DEFAULT NULL,
+  `user_id` int(11) UNSIGNED DEFAULT NULL,
   `date` datetime NOT NULL,
-  `success` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_type_identifier` (`id_type`,`identifier`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
+  `success` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `auth_permissions_users` */
+--
+-- Dumping data for table `auth_logins`
+--
 
-DROP TABLE IF EXISTS `auth_permissions_users`;
+INSERT INTO `auth_logins` (`id`, `ip_address`, `user_agent`, `id_type`, `identifier`, `user_id`, `date`, `success`) VALUES
+(56, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36', 'email_password', 'manabojc@gmail.com', NULL, '2023-01-15 19:52:00', 0),
+(57, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36', 'email_password', 'test@gmail.com', 73, '2023-01-15 20:19:35', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `auth_permissions_users`
+--
 
 CREATE TABLE `auth_permissions_users` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) unsigned NOT NULL,
+  `id` int(11) UNSIGNED NOT NULL,
+  `user_id` int(11) UNSIGNED NOT NULL,
   `permission` varchar(255) NOT NULL,
-  `created_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `auth_permissions_users_user_id_foreign` (`user_id`),
-  CONSTRAINT `auth_permissions_users_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+  `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `auth_remember_tokens` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `auth_remember_tokens`;
+--
+-- Table structure for table `auth_remember_tokens`
+--
 
 CREATE TABLE `auth_remember_tokens` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL,
   `selector` varchar(255) NOT NULL,
   `hashedValidator` varchar(255) NOT NULL,
-  `user_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) UNSIGNED NOT NULL,
   `expires` datetime NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `selector` (`selector`),
-  KEY `auth_remember_tokens_user_id_foreign` (`user_id`),
-  CONSTRAINT `auth_remember_tokens_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+  `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `auth_token_logins` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `auth_token_logins`;
+--
+-- Table structure for table `auth_token_logins`
+--
 
 CREATE TABLE `auth_token_logins` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL,
   `ip_address` varchar(255) NOT NULL,
   `user_agent` varchar(255) DEFAULT NULL,
   `id_type` varchar(255) NOT NULL,
   `identifier` varchar(255) NOT NULL,
-  `user_id` int(11) unsigned DEFAULT NULL,
+  `user_id` int(11) UNSIGNED DEFAULT NULL,
   `date` datetime NOT NULL,
-  `success` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_type_identifier` (`id_type`,`identifier`),
-  KEY `user_id` (`user_id`)
+  `success` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `migrations` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `migrations`;
+--
+-- Table structure for table `migrations`
+--
 
 CREATE TABLE `migrations` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `version` varchar(255) NOT NULL,
   `class` varchar(255) NOT NULL,
   `group` varchar(255) NOT NULL,
   `namespace` varchar(255) NOT NULL,
   `time` int(11) NOT NULL,
-  `batch` int(11) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `batch` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `settings` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `settings`;
+--
+-- Table structure for table `settings`
+--
 
 CREATE TABLE `settings` (
-  `id` int(9) NOT NULL AUTO_INCREMENT,
+  `id` int(9) NOT NULL,
   `class` varchar(255) NOT NULL,
   `key` varchar(255) NOT NULL,
-  `value` text,
+  `value` text DEFAULT NULL,
   `type` varchar(31) NOT NULL DEFAULT 'string',
   `context` varchar(255) DEFAULT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `sys_sequence` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `sys_sequence`;
+--
+-- Table structure for table `sys_sequence`
+--
 
 CREATE TABLE `sys_sequence` (
-  `Sys_ID` int(50) NOT NULL AUTO_INCREMENT,
+  `Sys_ID` int(50) NOT NULL,
   `seq_name` varchar(50) NOT NULL,
   `seq_year` int(50) NOT NULL,
   `seq_sem` int(50) NOT NULL,
-  `seq_appno` int(50) NOT NULL,
-  PRIMARY KEY (`Sys_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `seq_appno` int(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `table_colcourse` */
+--
+-- Dumping data for table `sys_sequence`
+--
 
-DROP TABLE IF EXISTS `table_colcourse`;
+INSERT INTO `sys_sequence` (`Sys_ID`, `seq_name`, `seq_year`, `seq_sem`, `seq_appno`) VALUES
+(1, 'shs_appno', 2022, 1, 850),
+(2, 'college_appno', 2022, 1, 1490),
+(3, 'tvet_appno', 2021, 1, 63);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `table_colcourse`
+--
 
 CREATE TABLE `table_colcourse` (
-  `ID` int(50) NOT NULL AUTO_INCREMENT,
+  `ID` int(50) NOT NULL,
   `colCourse` varchar(50) NOT NULL,
-  `colManager` varchar(50) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
+  `colManager` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `table_collegeapp` */
+--
+-- Dumping data for table `table_colcourse`
+--
 
-DROP TABLE IF EXISTS `table_collegeapp`;
+INSERT INTO `table_colcourse` (`ID`, `colCourse`, `colManager`) VALUES
+(1, 'BS Accounting Tech.', 'Active'),
+(2, 'BSED - English', 'Active'),
+(3, 'BEED', 'Active'),
+(4, 'BSED - TLE', 'Active'),
+(5, 'BSED', 'Active'),
+(6, 'BS Accountancy', 'Active'),
+(7, 'BS-IT', 'Active'),
+(8, 'BSBA', 'Active'),
+(9, 'BS Criminology', 'Active'),
+(10, 'AB-English', 'Active'),
+(11, 'BEED-ECE', 'Active'),
+(12, 'BSE-TLE', 'Active'),
+(13, 'BTLEd-ICT', 'Active'),
+(14, 'BSMT', 'Active'),
+(15, 'BS Mechanical Engineering', 'Active'),
+(16, 'BSME', 'Active'),
+(17, 'HM', 'Active'),
+(18, 'EIM', 'Active'),
+(19, 'Driving', 'Active'),
+(20, 'Massage Therapy', 'Active'),
+(21, 'BTLEd-HE', 'Active'),
+(22, 'BSHM', 'Active'),
+(23, 'BS-Biology', 'Active'),
+(24, 'BTLEd-IA', 'Active'),
+(25, 'IET', 'Active'),
+(26, 'BS-MARE', 'Active'),
+(27, 'BS HRM', 'Active'),
+(28, 'BS Civil Engineering', 'Active'),
+(29, 'BS MB', 'Active'),
+(30, 'BS Nursing', 'Active'),
+(31, 'BSCS', 'Active'),
+(32, 'BS Chemistry', 'Active'),
+(33, 'BSTM', 'Active'),
+(34, 'BS Chemical Engineering', 'Active'),
+(35, 'BS ECE', 'Active'),
+(36, 'BSHM', 'Active'),
+(37, 'BET-MMT', 'Active'),
+(38, 'DAT', 'Active'),
+(39, 'BS IS', 'Active'),
+(40, 'BS IA', 'Active'),
+(41, 'BS HM', 'Active'),
+(42, 'BS Math', 'Active'),
+(43, 'BET-ELET', 'Active'),
+(44, 'BS Architecture', 'Active'),
+(45, 'BSAIS', 'Active'),
+(46, 'BS COE', 'Active'),
+(47, 'BS STAT', 'Active'),
+(48, 'BS TM', 'Active'),
+(49, 'BS MB', 'Active'),
+(50, 'BS SW', 'Active'),
+(51, 'BSIT-Civil Tech.', 'Active'),
+(52, 'BS CE', 'Active'),
+(53, 'BS Economics', 'Active'),
+(54, 'BS Agriculture', 'Active'),
+(55, 'BS PE', 'Active'),
+(56, 'BSED Filipino', 'Active'),
+(57, 'BTLEd-HE', 'Active'),
+(58, 'BTLEd-IA', 'Active'),
+(59, 'BS EE', 'Active'),
+(60, 'BS ME', 'Active'),
+(61, 'SMAW', 'Active'),
+(62, 'BSMA', 'Active'),
+(63, 'BS AM', 'Active'),
+(64, 'BA-English', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `table_collegeapp`
+--
 
 CREATE TABLE `table_collegeapp` (
-  `ID` int(50) NOT NULL AUTO_INCREMENT,
+  `ID` int(50) NOT NULL,
   `colAppNoYear` int(10) NOT NULL,
   `colAppNoID` int(10) NOT NULL,
   `colAppNoSem` int(10) NOT NULL,
@@ -211,16 +317,17 @@ CREATE TABLE `table_collegeapp` (
   `colMotherOccu` varchar(50) NOT NULL,
   `colManager` varchar(50) NOT NULL,
   `colUnits` varchar(50) NOT NULL,
-  `colImage` longblob,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5985 DEFAULT CHARSET=utf8;
+  `colImage` longblob DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `table_colonlineapplication` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `table_colonlineapplication`;
+--
+-- Table structure for table `table_colonlineapplication`
+--
 
 CREATE TABLE `table_colonlineapplication` (
-  `ID` int(50) NOT NULL AUTO_INCREMENT,
+  `ID` int(50) NOT NULL,
   `TimeStamp` varchar(50) NOT NULL,
   `EmailAddress` varchar(50) NOT NULL,
   `Availment` varchar(50) NOT NULL,
@@ -245,43 +352,87 @@ CREATE TABLE `table_colonlineapplication` (
   `FathersOccupation` varchar(50) NOT NULL,
   `MothersName` varchar(50) NOT NULL,
   `MothersOccupation` varchar(50) NOT NULL,
-  `Status` varchar(50) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2962 DEFAULT CHARSET=utf8;
+  `Status` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `table_colschool` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `table_colschool`;
+--
+-- Table structure for table `table_colschool`
+--
 
 CREATE TABLE `table_colschool` (
-  `ID` int(50) NOT NULL AUTO_INCREMENT,
+  `ID` int(50) NOT NULL,
   `colSchoolName` varchar(50) NOT NULL,
-  `colManager` varchar(50) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+  `colManager` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `table_login` */
+--
+-- Dumping data for table `table_colschool`
+--
 
-DROP TABLE IF EXISTS `table_login`;
+INSERT INTO `table_colschool` (`ID`, `colSchoolName`, `colManager`) VALUES
+(1, '', 'Active'),
+(2, 'SAINT VINCENTS COLLEGE', 'Active'),
+(3, 'USTP (Oroquieta City)', 'Active'),
+(4, 'SVC', 'Active'),
+(5, 'MU (Oroquieta City)', 'Active'),
+(6, 'SMC', 'Active'),
+(7, 'DSUMC', 'Active'),
+(8, 'SCC', 'Active'),
+(9, 'MIT', 'Active'),
+(10, 'PHINMA-Cagayan de Oro College', 'Active'),
+(11, 'MFC', 'Active'),
+(12, 'DDAST', 'Active'),
+(13, 'OAIS', 'Active'),
+(14, 'OLT', 'Active'),
+(15, 'St. Columban College', 'Active'),
+(16, 'NMSC', 'Active'),
+(17, 'USTP', 'Active'),
+(18, 'MSU-MSAT', 'Active'),
+(19, 'JRMSU', 'Active'),
+(20, 'SPC', 'Active'),
+(21, 'DMMA CSP', 'Active'),
+(22, 'MSU-IIT', 'Active'),
+(23, 'MU (Oroquieta City)', 'Active'),
+(24, 'LSU', 'Active'),
+(25, 'DMCCFI', 'Active'),
+(26, 'NOSU', 'Active'),
+(27, 'AMCC', 'Active'),
+(28, 'CMU', 'Active'),
+(29, 'MSU-Marawi', 'Active'),
+(30, 'NMSCST', 'Active'),
+(31, 'MU (Ozamiz City)', 'Active'),
+(32, 'WMSU', 'Active'),
+(33, 'SHCCI', 'Active'),
+(34, 'Liceo DCU', 'Active'),
+(35, 'CPC', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `table_login`
+--
 
 CREATE TABLE `table_login` (
-  `ID` int(5) NOT NULL AUTO_INCREMENT,
+  `ID` int(5) NOT NULL,
   `UserName` varchar(50) NOT NULL,
   `Password` varchar(50) NOT NULL,
   `FirstName` varchar(50) NOT NULL,
   `MidIn` varchar(50) DEFAULT NULL,
   `LastName` varchar(50) NOT NULL,
   `Role` varchar(50) NOT NULL,
-  `ConfirmPassword` varchar(50) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+  `ConfirmPassword` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `table_scholarregistration` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `table_scholarregistration`;
+--
+-- Table structure for table `table_scholarregistration`
+--
 
 CREATE TABLE `table_scholarregistration` (
-  `ID` int(50) NOT NULL AUTO_INCREMENT,
+  `ID` int(50) NOT NULL,
   `AppNoYear` int(4) DEFAULT NULL,
   `AppNoID` int(50) DEFAULT NULL,
   `AppNoSem` int(2) DEFAULT NULL,
@@ -309,38 +460,67 @@ CREATE TABLE `table_scholarregistration` (
   `AppMother` varchar(50) DEFAULT NULL,
   `AppMotherOccu` varchar(50) DEFAULT NULL,
   `AppManager` varchar(50) DEFAULT NULL,
-  `AppImage` longblob,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5364 DEFAULT CHARSET=utf8;
+  `AppImage` longblob DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `table_schoolname` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `table_schoolname`;
+--
+-- Table structure for table `table_schoolname`
+--
 
 CREATE TABLE `table_schoolname` (
-  `ID` int(50) NOT NULL AUTO_INCREMENT,
+  `ID` int(50) NOT NULL,
   `SchoolName` varchar(50) NOT NULL,
-  `Manager` varchar(50) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+  `Manager` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `table_strand` */
+--
+-- Dumping data for table `table_schoolname`
+--
 
-DROP TABLE IF EXISTS `table_strand`;
+INSERT INTO `table_schoolname` (`ID`, `SchoolName`, `Manager`) VALUES
+(1, '', 'Active'),
+(34, 'MONHS', 'Active'),
+(35, 'MIS', 'Active'),
+(36, 'MOSTHS', 'Active'),
+(37, 'BNHS', 'Active'),
+(38, 'SNHS', 'Active'),
+(39, 'TNHS', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `table_strand`
+--
 
 CREATE TABLE `table_strand` (
-  `ID` int(50) NOT NULL AUTO_INCREMENT,
+  `ID` int(50) NOT NULL,
   `Strand` varchar(50) NOT NULL,
-  `Manager` varchar(50) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+  `Manager` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `table_tvet` */
+--
+-- Dumping data for table `table_strand`
+--
 
-DROP TABLE IF EXISTS `table_tvet`;
+INSERT INTO `table_strand` (`ID`, `Strand`, `Manager`) VALUES
+(1, 'GAS', 'Active'),
+(2, 'HUMSS', 'Active'),
+(3, 'TVL', 'Active'),
+(4, 'STEM', 'Active'),
+(5, 'ABM', 'Active'),
+(6, 'ICT', 'Active'),
+(7, 'EIM', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `table_tvet`
+--
 
 CREATE TABLE `table_tvet` (
-  `ID` int(50) NOT NULL AUTO_INCREMENT,
+  `ID` int(50) NOT NULL,
   `colAppNoYear` int(10) NOT NULL,
   `colAppNoID` int(10) NOT NULL,
   `colAppNoSem` int(10) NOT NULL,
@@ -370,32 +550,314 @@ CREATE TABLE `table_tvet` (
   `colMotherOccu` varchar(500) NOT NULL,
   `colManager` varchar(50) NOT NULL,
   `colUnits` varchar(50) NOT NULL,
-  `colImage` longblob,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
+  `colImage` longblob DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `users` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `users`;
+--
+-- Table structure for table `users`
+--
 
 CREATE TABLE `users` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL,
   `lastname` varchar(100) NOT NULL,
   `firstname` varchar(100) NOT NULL,
   `middlename` varchar(100) DEFAULT NULL,
   `username` varchar(30) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   `status_message` varchar(255) DEFAULT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '0',
+  `active` tinyint(1) NOT NULL DEFAULT 0,
   `last_active` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `deleted_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8;
+  `deleted_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `lastname`, `firstname`, `middlename`, `username`, `status`, `status_message`, `active`, `last_active`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(72, '', '', NULL, 'johncris09', NULL, NULL, 1, NULL, '2023-01-15 19:52:31', '2023-01-15 19:53:05', NULL),
+(73, 'Test1', 'Test1', '', 'test12345', NULL, NULL, 0, NULL, '2023-01-15 20:19:04', '2023-01-15 20:19:04', NULL);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `auth_groups_users`
+--
+ALTER TABLE `auth_groups_users`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `auth_groups_users_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `auth_identities`
+--
+ALTER TABLE `auth_identities`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `type_secret` (`type`,`secret`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `auth_logins`
+--
+ALTER TABLE `auth_logins`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_type_identifier` (`id_type`,`identifier`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `auth_permissions_users`
+--
+ALTER TABLE `auth_permissions_users`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `auth_permissions_users_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `auth_remember_tokens`
+--
+ALTER TABLE `auth_remember_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `selector` (`selector`),
+  ADD KEY `auth_remember_tokens_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `auth_token_logins`
+--
+ALTER TABLE `auth_token_logins`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_type_identifier` (`id_type`,`identifier`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `settings`
+--
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sys_sequence`
+--
+ALTER TABLE `sys_sequence`
+  ADD PRIMARY KEY (`Sys_ID`);
+
+--
+-- Indexes for table `table_colcourse`
+--
+ALTER TABLE `table_colcourse`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `table_collegeapp`
+--
+ALTER TABLE `table_collegeapp`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `table_colonlineapplication`
+--
+ALTER TABLE `table_colonlineapplication`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `table_colschool`
+--
+ALTER TABLE `table_colschool`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `table_login`
+--
+ALTER TABLE `table_login`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `table_scholarregistration`
+--
+ALTER TABLE `table_scholarregistration`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `table_schoolname`
+--
+ALTER TABLE `table_schoolname`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `table_strand`
+--
+ALTER TABLE `table_strand`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `table_tvet`
+--
+ALTER TABLE `table_tvet`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `auth_groups_users`
+--
+ALTER TABLE `auth_groups_users`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT for table `auth_identities`
+--
+ALTER TABLE `auth_identities`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+
+--
+-- AUTO_INCREMENT for table `auth_logins`
+--
+ALTER TABLE `auth_logins`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+
+--
+-- AUTO_INCREMENT for table `auth_permissions_users`
+--
+ALTER TABLE `auth_permissions_users`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `auth_remember_tokens`
+--
+ALTER TABLE `auth_remember_tokens`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `auth_token_logins`
+--
+ALTER TABLE `auth_token_logins`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `id` int(9) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `sys_sequence`
+--
+ALTER TABLE `sys_sequence`
+  MODIFY `Sys_ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `table_colcourse`
+--
+ALTER TABLE `table_colcourse`
+  MODIFY `ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+
+--
+-- AUTO_INCREMENT for table `table_collegeapp`
+--
+ALTER TABLE `table_collegeapp`
+  MODIFY `ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5985;
+
+--
+-- AUTO_INCREMENT for table `table_colonlineapplication`
+--
+ALTER TABLE `table_colonlineapplication`
+  MODIFY `ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2962;
+
+--
+-- AUTO_INCREMENT for table `table_colschool`
+--
+ALTER TABLE `table_colschool`
+  MODIFY `ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- AUTO_INCREMENT for table `table_login`
+--
+ALTER TABLE `table_login`
+  MODIFY `ID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `table_scholarregistration`
+--
+ALTER TABLE `table_scholarregistration`
+  MODIFY `ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5364;
+
+--
+-- AUTO_INCREMENT for table `table_schoolname`
+--
+ALTER TABLE `table_schoolname`
+  MODIFY `ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT for table `table_strand`
+--
+ALTER TABLE `table_strand`
+  MODIFY `ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `table_tvet`
+--
+ALTER TABLE `table_tvet`
+  MODIFY `ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `auth_groups_users`
+--
+ALTER TABLE `auth_groups_users`
+  ADD CONSTRAINT `auth_groups_users_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `auth_identities`
+--
+ALTER TABLE `auth_identities`
+  ADD CONSTRAINT `auth_identities_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `auth_permissions_users`
+--
+ALTER TABLE `auth_permissions_users`
+  ADD CONSTRAINT `auth_permissions_users_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `auth_remember_tokens`
+--
+ALTER TABLE `auth_remember_tokens`
+  ADD CONSTRAINT `auth_remember_tokens_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
