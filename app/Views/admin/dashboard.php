@@ -287,8 +287,8 @@
                     type: 'gradient',
                 },
                 labels: [
-                    '<?php echo isset($shs_gender[0]->gender)  ?  strtoupper($shs_gender[0]->gender) :  ""; ?>', 
-                    '<?php echo isset($shs_gender[1]->gender)  ?  strtoupper($shs_gender[1]->gender) :  ""; ?>',  
+                    '<?php echo isset($shs_gender[0]->gender)  ?  strtoupper($shs_gender[0]->gender) :  "MALE"; ?>', 
+                    '<?php echo isset($shs_gender[1]->gender)  ?  strtoupper($shs_gender[1]->gender) :  "FEMALE"; ?>',  
                 ],
                 legend: {
                     formatter: function(val, opts) {
@@ -335,8 +335,8 @@
                     type: 'gradient',
                 },
                 labels: [
-                    '<?php echo isset($college_gender[0]->gender)  ?  strtoupper($college_gender[0]->gender) :  ""; ?>',  
-                    '<?php echo isset($college_gender[1]->gender)  ?  strtoupper($college_gender[1]->gender) :  ""; ?>',  
+                    '<?php echo isset($college_gender[0]->gender)  ?  strtoupper($college_gender[0]->gender) :  "MALE"; ?>',  
+                    '<?php echo isset($college_gender[1]->gender)  ?  strtoupper($college_gender[1]->gender) :  "FEMALE"; ?>',  
                 ],
                 legend: {
                     formatter: function(val, opts) {
@@ -383,8 +383,8 @@
                     type: 'gradient',
                 },
                 labels: [
-                    '<?php echo isset($tvet_gender[0]->gender)  ?  strtoupper($tvet_gender[0]->gender) :  ""; ?>', 
-                    '<?php echo isset($tvet_gender[1]->gender)  ?  strtoupper($tvet_gender[1]->gender) :  ""; ?>',   
+                    '<?php echo isset($tvet_gender[0]->gender)  ?  strtoupper($tvet_gender[0]->gender) :  "MALE"; ?>', 
+                    '<?php echo isset($tvet_gender[1]->gender)  ?  strtoupper($tvet_gender[1]->gender) :  "FEMALE"; ?>',   
                 ],
                 legend: {
                     formatter: function(val, opts) {
@@ -416,21 +416,23 @@
             
             var scholarship_status = {
                 colors: ['#3AB0FF', '#432C7A', '#F94892', '#FFE15D'],
-                series: [{
-                    name: 'Approved',
-                    data: <?php echo isset($scholarship_status['approved']) ?  json_encode( $scholarship_status['approved']):  0; ?>
-                }, 
-                {
-                    name: 'Additional Approved',
-                    data: <?php echo isset($scholarship_status['additional_approved']) ?  json_encode( $scholarship_status['additional_approved']):  0; ?> 
-                }, 
-                {
-                    name: 'Disapproved',
-                    data: <?php echo isset($scholarship_status['disapproved']) ?  json_encode( $scholarship_status['disapproved']):  0; ?>  
-                }, {
-                    name: 'Pending',
-                    data: <?php echo isset($scholarship_status['pending']) ?  json_encode( $scholarship_status['pending']):  0; ?>   
-                }],
+                series: [
+                    {
+                        name: 'Approved',
+                        data: <?php echo isset($scholarship_status['approved']) ?  json_encode( $scholarship_status['approved']):  json_encode([0]); ?>
+                    }, 
+                    {
+                        name: 'Additional Approved',
+                        data: <?php echo isset($scholarship_status['additional_approved']) ?  json_encode( $scholarship_status['additional_approved']):  json_encode([0]); ?> 
+                    }, 
+                    {
+                        name: 'Disapproved',
+                        data: <?php echo isset($scholarship_status['disapproved']) ?  json_encode( $scholarship_status['disapproved']):  json_encode([0]); ?>  
+                    }, {
+                        name: 'Pending',
+                        data: <?php echo isset($scholarship_status['pending']) ? json_encode( $scholarship_status['pending']):  json_encode([0]); ?>   
+                    }
+                ],
                 chart: {
                     type: 'bar',
                     height: 350
@@ -587,7 +589,7 @@
                     enabled: false
                 },
                 xaxis: {
-                    categories:<?php echo isset($college_school['school']) ?  json_encode($college_school['school']) : ""  ; ?> 
+                    categories:<?php echo isset($college_school['school']) ?  json_encode($college_school['school']) : "category"  ; ?> 
                 },
                 tooltip: {
                     y: {
@@ -621,7 +623,7 @@
                     enabled: false
                 },
                 xaxis: { 
-                    categories:<?php echo isset($tvet_school['school']) ?  json_encode($tvet_school['school']) : ""  ; ?> 
+                    categories:<?php echo isset($tvet_school['school']) ?  json_encode($tvet_school['school']) : "category"  ; ?> 
                 },
                 tooltip: {
                     y: {
