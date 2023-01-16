@@ -267,8 +267,8 @@
             var shs_gender = {
                 colors: ['#F96666', '#FD841F'],
                 series: [ 
-                    <?php echo $shs_gender[0]->total; ?>, 
-                    <?php echo $shs_gender[1]->total; ?>, 
+                    <?php echo isset($shs_gender[0]->total) ? $shs_gender[0]->total : 0; ?>, 
+                    <?php echo isset($shs_gender[1]->total) ? $shs_gender[1]->total : 0; ?>,  
                 ],
                 chart: {
                     width: 380,
@@ -287,8 +287,8 @@
                     type: 'gradient',
                 },
                 labels: [
-                    '<?php echo strtoupper($shs_gender[0]->gender); ?>', 
-                    '<?php echo strtoupper($shs_gender[1]->gender); ?>',  
+                    '<?php echo isset($shs_gender[0]->gender)  ?  strtoupper($shs_gender[0]->gender) :  ""; ?>', 
+                    '<?php echo isset($shs_gender[1]->gender)  ?  strtoupper($shs_gender[1]->gender) :  ""; ?>',  
                 ],
                 legend: {
                     formatter: function(val, opts) {
@@ -315,8 +315,8 @@
             var college_gender = {
                 colors: ['#ECC5FB', '#47B5FF'],
                 series: [ 
-                    <?php echo $college_gender[0]->total; ?>, 
-                    <?php echo $college_gender[1]->total; ?>, 
+                    <?php echo isset($college_gender[0]->total) ? $college_gender[0]->total : 0; ?>, 
+                    <?php echo isset($college_gender[1]->total) ? $college_gender[1]->total : 0; ?>,  
                 ],
                 chart: {
                     width: 380,
@@ -335,8 +335,8 @@
                     type: 'gradient',
                 },
                 labels: [
-                    '<?php echo strtoupper($college_gender[0]->gender); ?>', 
-                    '<?php echo strtoupper($college_gender[1]->gender); ?>',  
+                    '<?php echo isset($college_gender[0]->gender)  ?  strtoupper($college_gender[0]->gender) :  ""; ?>',  
+                    '<?php echo isset($college_gender[1]->gender)  ?  strtoupper($college_gender[1]->gender) :  ""; ?>',  
                 ],
                 legend: {
                     formatter: function(val, opts) {
@@ -363,8 +363,8 @@
             var tvet_gender = {
                 colors: ['#A62349', '#EE6983'],
                 series: [ 
-                    <?php echo $tvet_gender[0]->total; ?>, 
-                    <?php echo $tvet_gender[1]->total; ?>, 
+                    <?php echo isset($tvet_gender[0]->total) ? $tvet_gender[0]->total : 0; ?>, 
+                    <?php echo isset($tvet_gender[1]->total) ? $tvet_gender[1]->total : 0; ?>,  
                 ],
                 chart: {
                     width: 380,
@@ -383,8 +383,8 @@
                     type: 'gradient',
                 },
                 labels: [
-                    '<?php echo strtoupper($tvet_gender[0]->gender); ?>', 
-                    '<?php echo strtoupper($tvet_gender[1]->gender); ?>',  
+                    '<?php echo isset($tvet_gender[0]->gender)  ?  strtoupper($tvet_gender[0]->gender) :  ""; ?>', 
+                    '<?php echo isset($tvet_gender[1]->gender)  ?  strtoupper($tvet_gender[1]->gender) :  ""; ?>',   
                 ],
                 legend: {
                     formatter: function(val, opts) {
@@ -418,18 +418,18 @@
                 colors: ['#3AB0FF', '#432C7A', '#F94892', '#FFE15D'],
                 series: [{
                     name: 'Approved',
-                    data: <?php echo json_encode( $scholarship_status['approved']); ?>
+                    data: <?php echo isset($scholarship_status['approved']) ?  json_encode( $scholarship_status['approved']):  0; ?>
                 }, 
                 {
                     name: 'Additional Approved',
-                    data: <?php echo json_encode( $scholarship_status['additional_approved']); ?>
+                    data: <?php echo isset($scholarship_status['additional_approved']) ?  json_encode( $scholarship_status['additional_approved']):  0; ?> 
                 }, 
                 {
                     name: 'Disapproved',
-                    data: <?php echo json_encode( $scholarship_status['disapproved']); ?>
+                    data: <?php echo isset($scholarship_status['disapproved']) ?  json_encode( $scholarship_status['disapproved']):  0; ?>  
                 }, {
                     name: 'Pending',
-                    data: <?php echo json_encode( $scholarship_status['pending']); ?>
+                    data: <?php echo isset($scholarship_status['pending']) ?  json_encode( $scholarship_status['pending']):  0; ?>   
                 }],
                 chart: {
                     type: 'bar',
@@ -537,7 +537,7 @@
             var shs_school = { 
                 colors: '#F76E11',
                 series: [{ 
-                    data: <?php echo json_encode($shs_school['total']); ?>
+                    data: <?php echo isset($shs_school['total']) ? json_encode($shs_school['total']) :  0; ?>
                 }],
                 chart: {
                     type: 'bar',
@@ -553,7 +553,7 @@
                     enabled: false
                 },
                 xaxis: {
-                    categories:<?php echo json_encode($shs_school['school']); ?>
+                    categories:<?php echo isset($shs_school['school']) ?  json_encode($shs_school['school']) : ""  ; ?>
                 },
                 tooltip: {
                     y: {
@@ -571,7 +571,7 @@
             var college_school = { 
                 colors: '#FF99D7',
                 series: [{ 
-                    data: <?php echo json_encode($college_school['total']); ?>
+                    data: <?php echo isset($college_school['total']) ? json_encode($college_school['total']) :  0; ?> 
                 }],
                 chart: {
                     type: 'bar',
@@ -587,7 +587,7 @@
                     enabled: false
                 },
                 xaxis: {
-                    categories:<?php echo json_encode($college_school['school']); ?>
+                    categories:<?php echo isset($college_school['school']) ?  json_encode($college_school['school']) : ""  ; ?> 
                 },
                 tooltip: {
                     y: {
@@ -604,8 +604,8 @@
             
             var tvet_school = { 
                 colors: '#3B3486',
-                series: [{ 
-                    data: <?php echo json_encode($tvet_school['total']); ?>
+                series: [{  
+                    data: <?php echo isset($tvet_school['total']) ? json_encode($tvet_school['total']) :  0; ?> 
                 }],
                 chart: {
                     type: 'bar',
@@ -620,8 +620,8 @@
                 dataLabels: {
                     enabled: false
                 },
-                xaxis: {
-                    categories:<?php echo json_encode($tvet_school['school']); ?>
+                xaxis: { 
+                    categories:<?php echo isset($tvet_school['school']) ?  json_encode($tvet_school['school']) : ""  ; ?> 
                 },
                 tooltip: {
                     y: {
