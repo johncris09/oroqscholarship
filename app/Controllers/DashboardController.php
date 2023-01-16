@@ -25,7 +25,7 @@ class DashboardController extends BaseController
         $data['tot_approved_college'] = $this->college->count_approved();
         $data['tot_approved_tvet'] = $this->tvet->count_approved();
         $data["page_title"] = "Dashboard";
-        $data["shs_gender"] = $this->scholarship_shs_gender();
+        $data["shs_gender"] = $this->scholarship_shs_gender(); 
         $data["college_gender"] = $this->scholarship_college_gender();
         $data["tvet_gender"] = $this->scholarship_tvet_gender();
         $data["scholarship_status"] = $this->scholarship_status();
@@ -41,8 +41,8 @@ class DashboardController extends BaseController
 
     public function scholarship_shs_gender()
     {
-        $data  = $this->senior_high->get_tot_by_gender();  
-        return $data; 
+        $data  = $this->senior_high->get_tot_by_gender();
+        return $data;  
     }
 
     public function scholarship_college_gender()
@@ -61,6 +61,7 @@ class DashboardController extends BaseController
         $shs  = $this->senior_high->get_tot_by_status();
         $college  = $this->college->get_tot_by_status();
         $tvet  = $this->tvet->get_tot_by_status();
+        $data = [];
         foreach($shs as $row){  
             if($row->status == "Additional Approved"){ 
                 $data["additional_approved"][] = $row->total; 
@@ -87,6 +88,7 @@ class DashboardController extends BaseController
     public function get_by_shs_school()
     { 
         $shs  = $this->senior_high->get_tot_by_school(); 
+        $data = [];
         foreach($shs as $row){  
             $data['school'][] = $row->school;
             $data['total'][] = $row->total; 
@@ -99,6 +101,7 @@ class DashboardController extends BaseController
     public function get_by_college_school()
     {  
         $college  = $this->college->get_tot_by_school(); 
+        $data = [];
         foreach($college as $row){  
             $data['school'][] = $row->school;
             $data['total'][] = $row->total; 
@@ -110,7 +113,8 @@ class DashboardController extends BaseController
     
     public function get_by_tvet_school()
     {  
-        $tvet  = $this->tvet->get_tot_by_school();   
+        $tvet  = $this->tvet->get_tot_by_school();  
+        $data = []; 
         foreach($tvet as $row){  
             $data['school'][] = $row->school;
             $data['total'][] = $row->total; 
@@ -124,6 +128,7 @@ class DashboardController extends BaseController
     public function scholarship_barangay()
     {  
         $barangay =  $this->custom_config->barangay;
+        $data = [];
         foreach($barangay as $brgy){ 
             $data['barangay'][] = $brgy;
 

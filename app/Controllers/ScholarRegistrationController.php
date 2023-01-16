@@ -106,6 +106,20 @@ class ScholarRegistrationController extends BaseController
         $app_no_id =  $this->senior_high_registration->count() + 1; 
         echo Json_encode($app_no_id); 
     }
+    
+
+    public function college_app_no_id()
+    {
+        $app_no_id =  $this->college_registration->count() + 1; 
+        echo Json_encode($app_no_id); 
+    }
+    
+
+    public function tvet_app_no_id()
+    {
+        $app_no_id =  $this->tvet_registration->count() + 1; 
+        echo Json_encode($app_no_id); 
+    }
  
     
     public function insert_college_registration()

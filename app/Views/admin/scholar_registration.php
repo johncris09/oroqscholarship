@@ -1748,22 +1748,53 @@
 
 
 
-            // shs_app_no_id();
+            shs_app_no_id();
 
-            // function shs_app_no_id(){
-            //     $.ajax({
-            //         url:  'registration/shs_app_no_id',
-            //         method: "get",
-            //         dataType: "json", 
-            //         success: function (data) {   
-            //             $('#senior-high-registration-form input[name="app_no_id"]').val(data)   // shs_app_no_id
-            //             $('#senior-high-registration-form #app_no_id').html(data)               // shs_app_no_id 
-            //         },
-            //         error: function (xhr, status, error) { 
-            //             console.info(xhr.responseText);
-            //         }
-            //     }); 
-            // }
+            function shs_app_no_id(){
+                $.ajax({
+                    url:  'registration/shs_app_no_id',
+                    method: "get",
+                    dataType: "json", 
+                    success: function (data) {
+                        
+                        // $('#senior-high-registration-form input[name="app_no_id"]').val(data)   // shs_app_no_id
+                        // $('#senior-high-registration-form #app_no_id').html(data)               // shs_app_no_id 
+                    },
+                    error: function (xhr, status, error) { 
+                        console.info(xhr.responseText);
+                    }
+                }); 
+            }
+
+            
+            college_app_no_id();
+            function college_app_no_id(){
+                $.ajax({
+                    url:  'registration/college_app_no_id',
+                    method: "get",
+                    dataType: "json", 
+                    success: function (data) { 
+                         
+                    },
+                    error: function (xhr, status, error) { 
+                        console.info(xhr.responseText);
+                    }
+                }); 
+            }
+            
+            tvet_app_no_id();
+            function tvet_app_no_id(){
+                $.ajax({
+                    url:  'registration/tvet_app_no_id',
+                    method: "get",
+                    dataType: "json", 
+                    success: function (data) {  
+                    },
+                    error: function (xhr, status, error) { 
+                        console.info(xhr.responseText);
+                    }
+                }); 
+            }
 
 
 
