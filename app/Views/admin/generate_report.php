@@ -215,7 +215,7 @@
                                     </div>  
                                     <div class="col-2">
                                         <label class="form-label">Semester </label>
-                                        <input type="number" class="form-control" readonly>
+                                        <input type="number" class="form-control semester" readonly>
                                     </div> 
                                     <div class="col-2">
                                         <label for="from" class="form-label">From </label>
@@ -327,7 +327,7 @@
                                     </div>  
                                     <div class="col-2">
                                         <label class="form-label">Semester </label>
-                                        <input type="number" class="form-control" readonly>
+                                        <input type="number" class="form-control semester" readonly>
                                     </div> 
                                     <div class="col-2">
                                         <label for="from" class="form-label">From </label>
@@ -441,7 +441,7 @@
                                     </div>  
                                     <div class="col-2">
                                         <label class="form-label">Semester </label>
-                                        <input type="number" class="form-control" readonly>
+                                        <input type="number" class="form-control semester" readonly>
                                     </div> 
                                     <div class="col-2">
                                         <label for="from" class="form-label">From </label>
@@ -475,8 +475,14 @@
 
 <?= $this->section('pageScript') ?>
 
-    <script>
- 
+        
+    <script> 
+
+        $(document).ready(function(){
+            $('select[name="semester"]').on('change', function(){  
+                $(this).closest("div.active").find('input.semester').val(($(this).val() == "1st") ?  1 : 2) 
+            })
+        });
     </script>
 
 <?= $this->endSection() ?>
