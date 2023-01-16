@@ -43,11 +43,11 @@
                 <form id="add-new-strand-form"> 
                     <div class="modal-body ">
                         <div class="form-group">
-                            <label for="field-1" class="form-label">Strand</label>
+                            <label for="field-1" class="form-label">Strand <span class="text-danger">*</span></label>
                             <input type="text" name="strand" class="form-control"  placeholder="Strand" required> 
                         </div> 
                         <div class="form-group">
-                            <label for="field-1" class="form-label">Manager</label>
+                            <label for="field-1" class="form-label">Manager <span class="text-danger">*</span></label>
                             <select class="form-control" name="manager" id="" required>
                                 <option value="">Select</option>
                                 <option value="Active">Active</option>

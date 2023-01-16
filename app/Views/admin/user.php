@@ -46,35 +46,35 @@
                 <form id="add-new-user-form" class="parsley-examples"> 
                     <div class="modal-body ">
                         <div class="form-group">
-                            <label for=" " class="form-label">First Name</label>
+                            <label for=" " class="form-label">First Name <span class="text-danger">*</span> </label>
                             <input type="text" name="firstname"  class="form-control" required   placeholder="First Name" />
                         </div>  
                         <div class="form-group">
                             <label for=" " class="form-label">Middle Name</label>
-                            <input type="text" name="middlename"  class="form-control"     placeholder="Middle Name" />
+                            <input type="text" name="middlename"  class="form-control" placeholder="Middle Name" />
                         </div>    
                         <div class="form-group">
-                            <label for=" " class="form-label">Last Name</label>
+                            <label for=" " class="form-label">Last Name <span class="text-danger">*</span></label>
                             <input type="text"  name="lastname" class="form-control" required   placeholder="Last Name" />
                         </div>  
                         <div class="form-group">
-                            <label for=" " class="form-label">Email</label>
+                            <label for=" " class="form-label">Email <span class="text-danger">*</span></label>
                             <input type="email" class="form-control" name="email" required  parsley-type="email" placeholder="Enter a valid e-mail" />
                         </div>  
                         <div class="form-group">
-                            <label for=" " class="form-label">Username</label>
+                            <label for=" " class="form-label">Username <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="username" required data-parsley-length="[8, 40]"   placeholder="Enter  username" />
                         </div> 
                         <div class="form-group">
-                            <label for=" " class="form-label">Password</label>
+                            <label for=" " class="form-label">Password <span class="text-danger">*</span></label>
                             <input type="password" name="password" id="password" required data-parsley-type="alphanum" data-parsley-length="[8, 40]"  class="form-control"  placeholder="Password"  > 
                         </div> 
                         <div class="form-group">
-                            <label for=" " class="form-label">Confirm Password</label>
+                            <label for=" " class="form-label">Confirm Password <span class="text-danger">*</span></label>
                             <input type="password" class="form-control" required data-parsley-equalto="#password" placeholder="Re-Type Password" />
                         </div>    
                         <div class="form-group">
-                            <label for="" class="form-label">Role Type</label> 
+                            <label for="" class="form-label">Role Type <span class="text-danger">*</span></label> 
                             <select name="group"  class="form-control"  required>
                                 <option value="">Select</option>
                                 <option value="superadmin">Super Admin</option>
