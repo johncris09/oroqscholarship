@@ -4,7 +4,7 @@
 
 <?= $this->section('pageStyle') ?>
     
-<style>
+    <style>
         #frameShs:hover, #frameCollege:hover, #frameTvet:hover{
             cursor: pointer;
         }
@@ -275,8 +275,13 @@
                                 </div>
                                 
                                 <div class="row g-3" >
-                                    <div class="col">
-                                        <label for="school" class="form-label">School <?= $required_field; ?></label>
+                                    <div class="col"> 
+                                        <div style="text-align:left;">
+                                            <label for="school" class="form-label">School <?= $required_field; ?></label> 
+                                            <span style="float:right;">
+                                                <button type="button" id="add-school-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm my-1" data-bs-toggle="modal" data-bs-target="#add-new-shs-school-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New School </button>
+                                            </span>
+                                        </div> 
                                         <select class="form-control" id="school" name="school" required>
                                             <option value="">Select</option> 
                                             <?php 
@@ -289,10 +294,36 @@
                                             ?> 
                                                 <option <?= $selected ?> value="<?= $row['SchoolName']  ?>"><?= $row['SchoolName']  ?></option>  
                                             <?php } ?>  
-                                        </select> 
+                                        </select>    
+                                        <!-- add modal form -->
+                                        <div class="modal fade" id="add-new-shs-school-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Add New</h4>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div> 
+                                                    <div class="modal-body ">
+                                                        <div class="form-group">
+                                                            <label for="field-1" class="form-label">School Name <?= $required_field; ?></label>
+                                                            <input type="text" name="shs_school_name" class="form-control"  placeholder="School Name" data-parsley-excluded="true" required> 
+                                                        </div>   
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" id="add-new-shs-school-button" class="btn btn-info waves-effect waves-light">Save  changes</button>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col">
-                                        <label for="strand" class="form-label">Strand <?= $required_field; ?></label>
+                                        <div style="text-align:left;">
+                                            <label for="strand" class="form-label">Strand <?= $required_field; ?></label>  
+                                            <span style="float:right;">
+                                                <button type="button" id="add-strand-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm my-1" data-bs-toggle="modal" data-bs-target="#add-new-shs-strand-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New Strand</button>
+                                            </span> 
+                                        </div> 
                                         <select class="form-control"  name="strand" required>
                                             <option value="">Select</option> 
                                             <?php 
@@ -306,6 +337,27 @@
                                                 <option <?= $selected ?> value="<?= $row['Strand']  ?>"><?= $row['Strand']  ?></option>  
                                             <?php } ?>   
                                         </select> 
+                                        <!-- add modal form -->
+                                        <div class="modal fade" id="add-new-shs-strand-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Add New</h4>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div> 
+                                                    <div class="modal-body ">
+                                                        <div class="form-group">
+                                                            <label for="field-1" class="form-label">Strand <?= $required_field; ?></label> 
+                                                            <input type="text" name="new_strand" class="form-control"  placeholder="Strand" data-parsley-excluded="true" required> 
+                                                        </div>  
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" id="add-new-shs-strand-button" class="btn btn-info waves-effect waves-light">Save  changes</button>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div> 
                                 </div>
                                 <div class="row g-3" >
@@ -564,7 +616,12 @@
                                     
                                 <div class="row g-3" >
                                     <div class="col">
-                                        <label for="" class="form-label">School <?= $required_field; ?></label>
+                                        <div style="text-align:left;">
+                                            <label for="" class="form-label">School <?= $required_field; ?></label> 
+                                            <span style="float:right;">
+                                                <button type="button" id="add-school-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#add-new-college-school-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New School</button>
+                                            </span>
+                                        </div> 
                                         <select class="form-control" name="school" required>
                                             <option value="">Select</option> 
                                             <?php 
@@ -577,10 +634,36 @@
                                             ?> 
                                                 <option <?= $selected ?> value="<?= $row['colSchoolName']  ?>"><?= $row['colSchoolName']  ?></option>  
                                             <?php } ?>  
-                                        </select>  
+                                        </select> 
+                                        <!-- add modal form -->
+                                        <div class="modal fade" id="add-new-college-school-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Add New</h4>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div> 
+                                                    <div class="modal-body ">
+                                                        <div class="form-group">
+                                                            <label for="field-1" class="form-label">School Name <?= $required_field; ?></label>
+                                                            <input type="text" name="college_school_name" class="form-control"  placeholder="School Name" data-parsley-excluded="true" required> 
+                                                        </div>   
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" id="add-new-college-school-button" class="btn btn-info waves-effect waves-light">Save  changes</button>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div>  
                                     </div>
-                                    <div class="col">
-                                        <label for="" class="form-label">Course <?= $required_field; ?></label>
+                                    <div class="col">  
+                                        <div style="text-align:left;">
+                                            <label for="" class="form-label">Course <?= $required_field; ?></label>
+                                            <span style="float:right;">
+                                                <button type="button" id="add-course-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#add-new-college-course-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New Course</button> 
+                                            </span>
+                                        </div> 
                                         <select class="form-control" name="course" required>
                                             <option value="">Select</option> 
                                             <?php 
@@ -593,12 +676,33 @@
                                             ?> 
                                                 <option <?= $selected ?> value="<?= $row['colCourse']  ?>"><?= $row['colCourse']  ?></option>  
                                             <?php } ?>  
-                                        </select>   
+                                        </select> 
+                                        <!-- add modal form -->
+                                        <div class="modal fade" id="add-new-college-course-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Add New</h4>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div> 
+                                                    <div class="modal-body ">
+                                                        <div class="form-group">
+                                                            <label for="field-1" class="form-label">Course <?= $required_field; ?></label>
+                                                            <input type="text" name="college_course" class="form-control"  placeholder="Course" data-parsley-excluded="true" required> 
+                                                        </div>   
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" id="add-new-college-course-button" class="btn btn-info waves-effect waves-light">Save  changes</button>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div>  
                                     </div> 
                                 </div> 
                                 <div class="row g-3" >
                                     <div class="col">
-                                        <label for="school_address" class="form-label">School Address </label> 
+                                        <label for="school_address" class="form-label">School Address <?= $required_field; ?></label> 
                                         <input type="text" value="<?= $profile['colSchoolAddress'] ?>" class="form-control text-capitalize" name="school_address"  >
                                     </div>
                                 </div>
@@ -865,7 +969,12 @@
                                 
                                 <div class="row g-3" >
                                     <div class="col">
-                                        <label for="" class="form-label">School <?= $required_field; ?></label>
+                                        <div style="text-align:left;">
+                                            <label for="" class="form-label">School <?= $required_field; ?></label>
+                                            <span style="float:right;">
+                                                <button type="button" id="add-course-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm my-1" data-bs-toggle="modal" data-bs-target="#add-new-tvet-school-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New School</button>  
+                                            </span>
+                                        </div> 
                                         <select class="form-control" name="school" required>
                                             <option value="">Select</option> 
                                             <?php 
@@ -879,9 +988,35 @@
                                                 <option <?= $selected ?> value="<?= $row['colSchoolName']  ?>"><?= $row['colSchoolName']  ?></option>  
                                             <?php } ?>  
                                         </select>  
+                                        <!-- add modal form -->
+                                        <div class="modal fade" id="add-new-tvet-school-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Add New</h4>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div> 
+                                                    <div class="modal-body ">
+                                                        <div class="form-group">
+                                                            <label for="field-1" class="form-label">School Name <?= $required_field; ?></label>
+                                                            <input type="text" name="tvet_school_name" class="form-control"  placeholder="School Name" data-parsley-excluded="true" required> 
+                                                        </div>   
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" id="add-new-tvet-school-button" class="btn btn-info waves-effect waves-light">Save  changes</button>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div> 
                                     </div>
                                     <div class="col">
-                                        <label for="" class="form-label">Course <?= $required_field; ?></label>
+                                        <div style="text-align:left;">
+                                            <label for="" class="form-label">Course <?= $required_field; ?></label>
+                                            <span style="float:right;">
+                                                <button type="button" id="add-course-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#add-new-tvet-course-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New Course </button> 
+                                            </span>
+                                        </div>
                                         <select class="form-control" name="course" required>
                                             <option value="">Select</option> 
                                             <?php 
@@ -895,6 +1030,27 @@
                                                 <option <?= $selected ?> value="<?= $row['colCourse']  ?>"><?= $row['colCourse']  ?></option>  
                                             <?php } ?>  
                                         </select>   
+                                        <!-- add modal form -->
+                                        <div class="modal fade" id="add-new-tvet-course-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Add New</h4>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div> 
+                                                    <div class="modal-body ">
+                                                        <div class="form-group">
+                                                            <label for="field-1" class="form-label">Course</label>
+                                                            <input type="text" name="tvet_course" class="form-control"  placeholder="Course" data-parsley-excluded="true" required> 
+                                                        </div>   
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" id="add-new-tvet-course-button" class="btn btn-info waves-effect waves-light">Save  changes</button>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div> 
                                     </div> 
                                 </div> 
                                 <div class="row g-3" >
@@ -1003,17 +1159,40 @@
 
     <script>
         $(document).ready(function() { 
-            
-            
-            var $modal_shs = $('#modal_shs');
-            var image_shs = document.getElementById('sample_image_shs'); 
-            var $modal_college = $('#modal_college');
-            var image_college = document.getElementById('sample_image_college'); 
-            var $modal_tvet = $('#modal_tvet');
-            var image_tvet = document.getElementById('sample_image_tvet'); 
+             
             var cropper;
             var base64data;
+
+            
+            // get age using birthdate 
+            $(document).on('change', 'input[name="birthdate"]', function(e){ 
+                var age = moment().diff($(this).val(), 'years',false);    
+                var form_id = $(this).closest('form').attr('id') 
+                $('#'+form_id+' input[name="age"]').val(age)
+            });
+
+
+            // Input validation
+            $(".validation-form").parsley()
+            
+
+            //=============================================================================
+            //  Senior High School Update
+            //============================================================================= 
  
+
+            var $modal_shs = $('#modal_shs');
+            var image_shs = document.getElementById('sample_image_shs');  
+
+            // Tippy
+            tippy('#add-school-button', {
+                content: 'Add New School',
+            });
+            tippy('#add-strand-button', {
+                content: 'Add New Strand',
+            }); 
+
+
             $('#upload_image_shs').change(function(event){
                 var files = event.target.files; 
                 var done = function (url) {
@@ -1029,39 +1208,7 @@
                     reader.readAsDataURL(files[0]); 
                 }
             });
- 
- 
 
-            $('#upload_image_college').change(function(event){
-                var files = event.target.files;
-                var done = function (url) {
-                    image_college.src = url;
-                    $modal_college.modal('show');
-                }; 
-                if (files && files.length > 0)
-                { 
-                    reader = new FileReader();
-                    reader.onload = function (event) {
-                        done(reader.result);
-                    };
-                    reader.readAsDataURL(files[0]); 
-                }
-            });
-            $('#upload_image_tvet').change(function(event){
-                var files = event.target.files;
-                var done = function (url) {
-                    image_tvet.src = url;
-                    $modal_tvet.modal('show');
-                }; 
-                if (files && files.length > 0)
-                { 
-                    reader = new FileReader();
-                    reader.onload = function (event) {
-                        done(reader.result);
-                    };
-                    reader.readAsDataURL(files[0]); 
-                }
-            });
 
             $modal_shs.on('shown.bs.modal', function() {
                 cropper = new Cropper(image_shs, { 
@@ -1086,66 +1233,13 @@
                 cropper.destroy();
                 cropper = null;
             });
-
             
-            $modal_college.on('shown.bs.modal', function() {
-                cropper = new Cropper(image_college, {
-                    dragMode: 'move',    
-                    // aspectRatio: 1,
-                    // viewMode: 3, 
-                    aspectRatio: 1,
-                    minCropBoxWidth: 150,
-                    minCropBoxHeight: 150,
-                    cropBoxResizable: true,
-                    guides: true,
-                    highlight: true,
-                    dragCrop: true,
-                    cropBoxMovable: true,
-                    cropBoxResizable: true,
-                    responsive: true,
-                    background: true,autoCropArea: 1,
-                    preview: '.preview',  
-                });
- 
-
-            }).on('hidden.bs.modal', function() {
-                cropper.destroy();
-                cropper = null;
-            });
-
-            
-            $modal_tvet.on('shown.bs.modal', function() {
-                cropper = new Cropper(image_tvet, {
-                    dragMode: 'move',    
-                    // aspectRatio: 1,
-                    // viewMode: 3, 
-                    aspectRatio: 1,
-                    minCropBoxWidth: 150,
-                    minCropBoxHeight: 150,
-                    cropBoxResizable: true,
-                    guides: true,
-                    highlight: true,
-                    dragCrop: true,
-                    cropBoxMovable: true,
-                    cropBoxResizable: true,
-                    responsive: true,
-                    background: true,autoCropArea: 1,
-                    preview: '.preview', 
-                });
- 
-
-            }).on('hidden.bs.modal', function() {
-                cropper.destroy();
-                cropper = null;
-            });
 
             $("#crop_shs").click(function(e){
                 canvas = cropper.getCroppedCanvas({ 
                     width: 96,
                     height: 96,
                 });
- 
-
                 canvas.toBlob(function(blob) {
                     var reader = new FileReader(); 
                     reader.readAsDataURL(blob);  
@@ -1157,106 +1251,24 @@
                             method: "POST",                	
                             data: {image: base64data},
                             dadtaType: "json",
-                            success: function(data){   
+                            success: function(data){
                                 image_data = data;
-                                $modal_shs.modal('hide');   
-                                $('#uploaded_image_shs').attr('src', "<?= base_url(); ?>/" + data);                
+                                $modal_shs.modal('hide');    
+                                $('#uploaded_image_shs').attr('src', "<?=base_url()?>/" + data);   
+                                $('#senior-high-form #photo').val(data); 
                             }
-                        }); 
-                        $('#senior-high-form #photo').val(base64data); 
+                        });  
 
                     }
                 });
-            });
-
-
-            $("#crop_college").click(function(){
-                canvas = cropper.getCroppedCanvas({ 
-                    width: 96,
-                    height: 96,
-                });
-
-                canvas.toBlob(function(blob) {
-                    var reader = new FileReader();
-                    reader.readAsDataURL(blob); 
-                    reader.onloadend = function() {
-                        base64data = reader.result;  
-
-                        $.ajax({
-                            url: "../../../registration/upload",
-                            method: "POST",                	
-                            data: {image: base64data},
-                            dadtaType: "json",
-                            success: function(data){  
-                                $modal_college.modal('hide'); 
-                                $('#uploaded_image_college').attr('src', "<?= base_url(); ?>/" + data);  
-                            }
-                        });
-                        $('#college-form #photo').val(base64data); 
-                    }
-                });
-            });
- 
-            $("#crop_tvet").click(function(){
-                canvas = cropper.getCroppedCanvas({ 
-                    width: 96,
-                    height: 96,
-                });
-
-                canvas.toBlob(function(blob) {
-                    var reader = new FileReader();
-                    reader.readAsDataURL(blob); 
-                    reader.onloadend = function() {
-                        base64data = reader.result;  
-
-                        $.ajax({
-                            url: "../../../registration/upload",
-                            method: "POST",                	
-                            data: {image: base64data},
-                            dadtaType: "json",
-                            success: function(data){  
-                                $modal_tvet.modal('hide');
-                                $('#uploaded_image_tvet').attr('src', "<?= base_url(); ?>/" + data);   
-                            }
-                        });
-                        
-                        $('#tvet-form #photo').val(base64data); 
-                    }
-                });
-            });
-  
-  
+            }); 
+            
+            // Clear Image
             $(document).on('click', '#clearImageshs', function(e){  
                 $('#uploaded_image_shs').attr('src', "<?=base_url()?>/img/select-image.png"); 
-            });
-  
-            $(document).on('click', '#clearImagecollege', function(e){  
-                $('#uploaded_image_college').attr('src', "<?=base_url()?>/img/select-image.png"); 
-            });
-            $(document).on('click', '#clearImagetvet', function(e){  
-                $('#uploaded_image_tvet').attr('src', "<?=base_url()?>/img/select-image.png"); 
             }); 
 
-             
-
-            $(document).ready(function() {
-                $(".validation-form").parsley()
-            }), $(function() {
-                $("#demo-form").parsley().on("field:validated", function() {
-                    var e = 0 === $(".parsley-error").length;
-                    $(".alert-info").toggleClass("d-none", !e), $(".alert-warning").toggleClass("d-none", e)
-                }).on("form:submit", function() {
-                    return !1
-                })
-            });  
-             
-            // get age using birthdate 
-            $(document).on('change', 'input[name="birthdate"]', function(e){ 
-                var age = moment().diff($(this).val(), 'years',false);    
-                var form_id = $(this).closest('form').attr('id') 
-                $('#'+form_id+' input[name="age"]').val(age)
-            });
- 
+            // Form Submit
             $(document).on('submit', '#senior-high-form', function(e){ 
                 
                 e.preventDefault();
@@ -1287,12 +1299,113 @@
                     error: function (xhr, status, error) { 
                         console.info(xhr.responseText);
                     }
-                });
+                }); 
+            }); 
+
+            // Add New Shs School Button
+            $(document).on('click', '#add-new-shs-school-button', function(e){  
+                e.preventDefault(); 
+                var school_name = $('input[name="shs_school_name"]').val() 
+                if(school_name == ""){
+                    Swal.fire({
+                        title:"Input Field must not be empty!", 
+                        icon:"error"
+                    }) 
+                }else{
+                    $.ajax({
+                        url:  '/school/insert',
+                        method: "post", 
+                        data: {
+                            school_name : school_name,
+                            manager : "Active"
+                        },  
+                        dataType: "json", 
+                        success: function (data) { 
+
+                            if(data.response){ 
+                                Swal.fire({
+                                    title:"Good job!",
+                                    text: data.message,
+                                    icon:"success"
+                                })
+                                
+                                // append value
+                                $('#senior-high-form select[name="school"]').append($('<option>', {
+                                    value: school_name,
+                                    text: school_name
+                                }));
+
+                                $('input[name="shs_school_name"]').val('')  
+                                $('#add-new-shs-school-modal').modal('hide')
+                            }else{  
+                                Swal.fire({
+                                    title:"Insert Error!",
+                                    text: data.message,
+                                    icon:"error"
+                                }) 
+                            }
+                        },
+                        error: function (xhr, status, error) { 
+                            console.info(xhr.responseText);
+                        }
+                    }); 
+
+                }
+            }); 
 
 
-            });
+            // Add New Shs Strand Button
+            $(document).on('click', '#add-new-shs-strand-button', function(e){  
+                e.preventDefault(); 
+                var strand = $('input[name="new_strand"]').val() 
+                if(strand == ""){
+                    Swal.fire({
+                        title:"Input Field must not be empty!", 
+                        icon:"error"
+                    }) 
+                }else{
+                    $.ajax({
+                        url:  '/strand/insert',
+                        method: "post", 
+                        data: {
+                            strand : strand,
+                            manager : "Active"
+                        },  
+                        dataType: "json", 
+                        success: function (data) {  
+                            console.info(data)
+                            if(data.response){ 
+                                Swal.fire({
+                                    title:"Good job!",
+                                    text: data.message,
+                                    icon:"success"
+                                })
 
-            
+                                // append value
+                                $('#senior-high-form select[name="strand"]').append($('<option>', {
+                                    value: strand,
+                                    text: strand
+                                }));
+
+                                $('input[name="new_strand"]').val('')
+                                $('#add-new-shs-strand-modal').modal('hide')
+                            }else{  
+                                Swal.fire({
+                                    title:"Insert Error!",
+                                    text: data.message,
+                                    icon:"error"
+                                }) 
+                            }
+                        },
+                        error: function (xhr, status, error) { 
+                            console.info(xhr.responseText);
+                        }
+                    }); 
+
+                }
+            });  
+
+            // Delete Senior High
             $(document).on('click', '#senior-high-form #delete-button', function(e){ 
 
                 e.preventDefault();    
@@ -1338,12 +1451,100 @@
                                 console.info(xhr.responseText);
                             }
                         });  
-                     
+                    
                     }
                 }) 
-
+            
             });
 
+
+            //=============================================================================
+            //  College Update
+            //=============================================================================  
+ 
+ 
+            
+            var $modal_college = $('#modal_college');
+            var image_college = document.getElementById('sample_image_college');
+
+            // Tippy
+            tippy('#add-course-button', {
+                content: 'Add New Course',
+            });
+
+            $('#upload_image_college').change(function(event){
+                var files = event.target.files;
+                var done = function (url) {
+                    image_college.src = url;
+                    $modal_college.modal('show');
+                }; 
+                if (files && files.length > 0)
+                { 
+                    reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]); 
+                }
+            }); 
+            
+            $modal_college.on('shown.bs.modal', function() {
+                cropper = new Cropper(image_college, {
+                    dragMode: 'move',    
+                    // aspectRatio: 1,
+                    // viewMode: 3, 
+                    aspectRatio: 1,
+                    minCropBoxWidth: 150,
+                    minCropBoxHeight: 150,
+                    cropBoxResizable: true,
+                    guides: true,
+                    highlight: true,
+                    dragCrop: true,
+                    cropBoxMovable: true,
+                    cropBoxResizable: true,
+                    responsive: true,
+                    background: true,autoCropArea: 1,
+                    preview: '.preview',  
+                });
+ 
+
+            }).on('hidden.bs.modal', function() {
+                cropper.destroy();
+                cropper = null;
+            });
+
+            // Crop Image
+            $("#crop_college").click(function(){
+                canvas = cropper.getCroppedCanvas({ 
+                    width: 96,
+                    height: 96,
+                });
+
+                canvas.toBlob(function(blob) {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(blob); 
+                    reader.onloadend = function() {
+                        base64data = reader.result;  
+
+                        $.ajax({
+                            url: "../../../registration/upload",
+                            method: "POST",                	
+                            data: {image: base64data},
+                            dadtaType: "json",
+                            success: function(data){ 
+                                image_data = data; 
+                                $modal_college.modal('hide'); 
+                                $('#uploaded_image_college').attr('src', "<?= base_url(); ?>/" + data);   
+                                $('#college-form #photo').val(data); 
+                            }
+                        }); 
+                    }
+                });
+            });
+  
+            $(document).on('click', '#clearImagecollege', function(e){  
+                $('#uploaded_image_college').attr('src', "<?=base_url()?>/img/select-image.png"); 
+            }); 
 
             $(document).on('submit', '#college-form', function(e){ 
                 
@@ -1377,9 +1578,109 @@
                         console.info(xhr.responseText);
                     }
                 }); 
+            }); 
+             
+            // Add New College School Button
+            $(document).on('click', '#add-new-college-school-button', function(e){  
+                e.preventDefault(); 
+                var school_name = $('input[name="college_school_name"]').val() 
+                if(school_name == ""){
+                    Swal.fire({
+                        title:"Input Field must not be empty!", 
+                        icon:"error"
+                    }) 
+                }else{
+                    $.ajax({
+                        url:  '/collegeschool/insert',
+                        method: "post", 
+                        data: {
+                            school_name : school_name,
+                            manager : "Active"
+                        },   
+                        dataType: "json", 
+                        success: function (data) {   
+                            if(data.response){ 
+                                Swal.fire({
+                                    title:"Good job!",
+                                    text: data.message,
+                                    icon:"success"
+                                })
+                                
+                                // append value
+                                $('#college-form select[name="school"]').append($('<option>', {
+                                    value: school_name,
+                                    text: school_name
+                                }));
+
+                                $('input[name="college_school_name"]').val('')  
+                                $('#add-new-college-school-modal').modal('hide')
+                            }else{  
+                                Swal.fire({
+                                    title:"Insert Error!",
+                                    text: data.message,
+                                    icon:"error"
+                                }) 
+                            }
+                        },
+                        error: function (xhr, status, error) { 
+                            console.info(xhr.responseText);
+                        }
+                    }); 
+
+                }
+            });  
+
+
+            // Add New College Course Button
+            $(document).on('click', '#add-new-college-course-button', function(e){  
+                e.preventDefault(); 
+                var course = $('input[name="college_course"]').val() 
+                if(course == ""){
+                    Swal.fire({
+                        title:"Input Field must not be empty!", 
+                        icon:"error"
+                    }) 
+                }else{
+                    $.ajax({
+                        url:  '/course/insert',
+                        method: "post", 
+                        data: {
+                            course : course,
+                            manager : "Active"
+                        },  
+                        dataType: "json", 
+                        success: function (data) {   
+                            if(data.response){ 
+                                Swal.fire({
+                                    title:"Good job!",
+                                    text: data.message,
+                                    icon:"success"
+                                })
+
+                                // append value
+                                $('#college-form select[name="course"]').append($('<option>', {
+                                    value: course,
+                                    text: course
+                                }));
+
+                                $('input[name="college_course"]').val('')
+                                $('#add-new-college-course-modal').modal('hide')
+                            }else{  
+                                Swal.fire({
+                                    title:"Insert Error!",
+                                    text: data.message,
+                                    icon:"error"
+                                }) 
+                            }
+                        },
+                        error: function (xhr, status, error) { 
+                            console.info(xhr.responseText);
+                        }
+                    }); 
+
+                }
             });
-            
-            
+
             
             $(document).on('click', '#college-form #delete-button', function(e){ 
 
@@ -1429,13 +1730,105 @@
                     
                     }
                 })
+                });
+
+
+            
+            //=============================================================================
+            //  TVET Update
+            //============================================================================= 
+            var $modal_tvet = $('#modal_tvet');
+            var image_tvet = document.getElementById('sample_image_tvet'); 
+
+            $('#upload_image_tvet').change(function(event){
+                var files = event.target.files;
+                var done = function (url) {
+                    image_tvet.src = url;
+                    $modal_tvet.modal('show');
+                }; 
+                if (files && files.length > 0)
+                { 
+                    reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]); 
+                }
+            }); 
+            
+            $modal_tvet.on('shown.bs.modal', function() {
+                cropper = new Cropper(image_tvet, {
+                    dragMode: 'move',    
+                    // aspectRatio: 1,
+                    // viewMode: 3, 
+                    aspectRatio: 1,
+                    minCropBoxWidth: 150,
+                    minCropBoxHeight: 150,
+                    cropBoxResizable: true,
+                    guides: true,
+                    highlight: true,
+                    dragCrop: true,
+                    cropBoxMovable: true,
+                    cropBoxResizable: true,
+                    responsive: true,
+                    background: true,autoCropArea: 1,
+                    preview: '.preview', 
+                });
+ 
+
+            }).on('hidden.bs.modal', function() {
+                cropper.destroy();
+                cropper = null;
             });
 
 
  
- 
-            $(document).on('submit', '#tvet-form', function(e){ 
-                
+            $("#crop_tvet").click(function(){
+                canvas = cropper.getCroppedCanvas({ 
+                    width: 96,
+                    height: 96,
+                });
+
+                canvas.toBlob(function(blob) {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(blob); 
+                    reader.onloadend = function() {
+                        base64data = reader.result;  
+                        $.ajax({
+                            url: "../../../registration/upload",
+                            method: "POST",                	
+                            data: {image: base64data},
+                            dadtaType: "json",
+                            success: function(data){ 
+                                image_data = data; 
+                                $modal_college.modal('hide'); 
+                                $('#uploaded_image_college').attr('src', "<?= base_url(); ?>/" + data);   
+                                $('#college-form #photo').val(data); 
+                            }
+                        }); 
+                        $.ajax({
+                            url: "../../../registration/upload",
+                            method: "POST",                	
+                            data: {image: base64data},
+                            dadtaType: "json",
+                            success: function(data){  
+                                $modal_tvet.modal('hide');
+                                image_data = data; 
+                                $modal_college.modal('hide'); 
+                                $('#uploaded_image_tvet').attr('src', "<?= base_url(); ?>/" + data);   
+                                $('#tvet-form #photo').val(data);
+
+                            }
+                        }); 
+                    }
+                });
+            });
+  
+            $(document).on('click', '#clearImagetvet', function(e){  
+                $('#uploaded_image_tvet').attr('src', "<?=base_url()?>/img/select-image.png"); 
+            });
+
+            $(document).on('submit', '#tvet-form', function(e){  
                 e.preventDefault();    
                 var _this = $(this) 
                 var formData = new FormData($("#tvet-form")[0]);  
@@ -1519,6 +1912,115 @@
                     }
                 })
             });
+
+            
+
+            // Add New TVET School Button
+            $(document).on('click', '#add-new-tvet-school-button', function(e){  
+                e.preventDefault(); 
+                var school_name = $('input[name="tvet_school_name"]').val() 
+                if(school_name == ""){
+                    Swal.fire({
+                        title:"Input Field must not be empty!", 
+                        icon:"error"
+                    }) 
+                }else{
+                    $.ajax({
+                        url:  '/collegeschool/insert',
+                        method: "post", 
+                        data: {
+                            school_name : school_name,
+                            manager : "Active"
+                        },   
+                        dataType: "json", 
+                        success: function (data) {   
+                            if(data.response){ 
+                                Swal.fire({
+                                    title:"Good job!",
+                                    text: data.message,
+                                    icon:"success"
+                                })
+                                
+                                // append value
+                                $('#tvet-form select[name="school"]').append($('<option>', {
+                                    value: school_name,
+                                    text: school_name
+                                }));
+
+                                $('input[name="tvet_school_name"]').val('')  
+                                $('#add-new-tvet-school-modal').modal('hide')
+                            }else{  
+                                Swal.fire({
+                                    title:"Insert Error!",
+                                    text: data.message,
+                                    icon:"error"
+                                }) 
+                            }
+                        },
+                        error: function (xhr, status, error) { 
+                            console.info(xhr.responseText);
+                        }
+                    }); 
+
+                }
+            });  
+
+
+            // Add New TVET Course Button
+            $(document).on('click', '#add-new-tvet-course-button', function(e){  
+                e.preventDefault(); 
+                var course = $('input[name="tvet_course"]').val() 
+                if(course == ""){
+                    Swal.fire({
+                        title:"Input Field must not be empty!", 
+                        icon:"error"
+                    }) 
+                }else{
+                    $.ajax({
+                        url:  '/course/insert',
+                        method: "post", 
+                        data: {
+                            course : course,
+                            manager : "Active"
+                        },  
+                        dataType: "json", 
+                        success: function (data) {   
+                            if(data.response){ 
+                                Swal.fire({
+                                    title:"Good job!",
+                                    text: data.message,
+                                    icon:"success"
+                                })
+
+                                // append value
+                                $('#tvet-form select[name="course"]').append($('<option>', {
+                                    value: course,
+                                    text: course
+                                }));
+
+                                $('input[name="tvet_course"]').val('')
+                                $('#add-new-tvet-course-modal').modal('hide')
+                            }else{  
+                                Swal.fire({
+                                    title:"Insert Error!",
+                                    text: data.message,
+                                    icon:"error"
+                                }) 
+                            }
+                        },
+                        error: function (xhr, status, error) { 
+                            console.info(xhr.responseText);
+                        }
+                    }); 
+
+                }
+            });   
+
+
+            //=============================================================================
+            // END
+            //=============================================================================
+
 
 
         });

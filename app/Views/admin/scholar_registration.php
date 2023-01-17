@@ -299,7 +299,7 @@
                                                     </div> 
                                                     <div class="modal-body ">
                                                         <div class="form-group">
-                                                            <label for="field-1" class="form-label">School Name</label>
+                                                            <label for="field-1" class="form-label">School Name <?= $required_field; ?></label>
                                                             <input type="text" name="shs_school_name" class="form-control"  placeholder="School Name" data-parsley-excluded="true" required> 
                                                         </div>   
                                                     </div>
@@ -337,7 +337,7 @@
                                                     </div> 
                                                     <div class="modal-body ">
                                                         <div class="form-group">
-                                                            <label for="field-1" class="form-label">Strand</label>
+                                                            <label for="field-1" class="form-label">Strand <?= $required_field; ?></label> 
                                                             <input type="text" name="new_strand" class="form-control"  placeholder="Strand" data-parsley-excluded="true" required> 
                                                         </div>  
                                                     </div>
@@ -587,7 +587,7 @@
                                                     </div> 
                                                     <div class="modal-body ">
                                                         <div class="form-group">
-                                                            <label for="field-1" class="form-label">School Name</label>
+                                                            <label for="field-1" class="form-label">School Name <?= $required_field; ?></label>
                                                             <input type="text" name="college_school_name" class="form-control"  placeholder="School Name" data-parsley-excluded="true" required> 
                                                         </div>   
                                                     </div>
@@ -625,7 +625,7 @@
                                                     </div> 
                                                     <div class="modal-body ">
                                                         <div class="form-group">
-                                                            <label for="field-1" class="form-label">Course</label>
+                                                            <label for="field-1" class="form-label">Course <?= $required_field; ?></label>
                                                             <input type="text" name="college_course" class="form-control"  placeholder="Course" data-parsley-excluded="true" required> 
                                                         </div>   
                                                     </div>
@@ -1109,8 +1109,8 @@
                             method: "POST",                	
                             data: {image: base64data},
                             dadtaType: "json",
-                            success: function(data){  
-                                console.info(data)
+                            success: function(data){   
+                                console.info(data) 
                                 image_data = data;
                                 $modal_shs.modal('hide');  
                                 $('#uploaded_image_shs').attr('src', data);   
@@ -1153,9 +1153,11 @@
                                 text: data.message,
                                 icon:"success"
                             }) 
-                            $("#senior-high-registration-form")[0].reset()
                             // shs_app_no_id();
                             
+
+                            // clear form
+                            $("#senior-high-registration-form")[0].reset()
                             $('#uploaded_image_shs').attr('src', "<?=base_url()?>/img/select-image.png");
 
                         }else{  
@@ -1391,8 +1393,10 @@
                                 text: data.message,
                                 icon:"success"
                             })  
-                            $("#college-registration-form")[0].reset()
                             // shs_app_no_id();
+
+                            // clear form
+                            $("#college-registration-form")[0].reset()
                             $('#uploaded_image_college').attr('src', "<?=base_url()?>/img/select-image.png");
                         }else{  
                             Swal.fire({
@@ -1407,6 +1411,108 @@
                     }
                 }); 
             });
+
+            
+             
+            // Add New College School Button
+            $(document).on('click', '#add-new-college-school-button', function(e){  
+                e.preventDefault(); 
+                var school_name = $('input[name="college_school_name"]').val() 
+                if(school_name == ""){
+                    Swal.fire({
+                        title:"Input Field must not be empty!", 
+                        icon:"error"
+                    }) 
+                }else{
+                    $.ajax({
+                        url:  'collegeschool/insert',
+                        method: "post", 
+                        data: {
+                            school_name : school_name,
+                            manager : "Active"
+                        },   
+                        dataType: "json", 
+                        success: function (data) {   
+                            if(data.response){ 
+                                Swal.fire({
+                                    title:"Good job!",
+                                    text: data.message,
+                                    icon:"success"
+                                })
+                                
+                                // append value
+                                $('#college-registration-form select[name="school"]').append($('<option>', {
+                                    value: school_name,
+                                    text: school_name
+                                }));
+
+                                $('input[name="college_school_name"]').val('')  
+                                $('#add-new-college-school-modal').modal('hide')
+                            }else{  
+                                Swal.fire({
+                                    title:"Insert Error!",
+                                    text: data.message,
+                                    icon:"error"
+                                }) 
+                            }
+                        },
+                        error: function (xhr, status, error) { 
+                            console.info(xhr.responseText);
+                        }
+                    }); 
+
+                }
+            });  
+            // Add New College Course Button
+            $(document).on('click', '#add-new-college-course-button', function(e){  
+                e.preventDefault(); 
+                var course = $('input[name="college_course"]').val() 
+                if(course == ""){
+                    Swal.fire({
+                        title:"Input Field must not be empty!", 
+                        icon:"error"
+                    }) 
+                }else{
+                    $.ajax({
+                        url:  'course/insert',
+                        method: "post", 
+                        data: {
+                            course : course,
+                            manager : "Active"
+                        },  
+                        dataType: "json", 
+                        success: function (data) {   
+                            if(data.response){ 
+                                Swal.fire({
+                                    title:"Good job!",
+                                    text: data.message,
+                                    icon:"success"
+                                })
+
+                                // append value
+                                $('#college-registration-form select[name="course"]').append($('<option>', {
+                                    value: course,
+                                    text: course
+                                }));
+
+                                $('input[name="college_course"]').val('')
+                                $('#add-new-college-course-modal').modal('hide')
+                            }else{  
+                                Swal.fire({
+                                    title:"Insert Error!",
+                                    text: data.message,
+                                    icon:"error"
+                                }) 
+                            }
+                        },
+                        error: function (xhr, status, error) { 
+                            console.info(xhr.responseText);
+                        }
+                    }); 
+
+                }
+            }); 
+
 
 
             //=============================================================================
@@ -1631,119 +1737,13 @@
                     }); 
 
                 }
-            });  
-             
-            // Add New College School Button
-            $(document).on('click', '#add-new-college-school-button', function(e){  
-                e.preventDefault(); 
-                var school_name = $('input[name="college_school_name"]').val() 
-                if(school_name == ""){
-                    Swal.fire({
-                        title:"Input Field must not be empty!", 
-                        icon:"error"
-                    }) 
-                }else{
-                    $.ajax({
-                        url:  'collegeschool/insert',
-                        method: "post", 
-                        data: {
-                            school_name : school_name,
-                            manager : "Active"
-                        },   
-                        dataType: "json", 
-                        success: function (data) {   
-                            if(data.response){ 
-                                Swal.fire({
-                                    title:"Good job!",
-                                    text: data.message,
-                                    icon:"success"
-                                })
-                                
-                                // append value
-                                $('#college-registration-form select[name="school"]').append($('<option>', {
-                                    value: school_name,
-                                    text: school_name
-                                }));
-
-                                $('input[name="college_school_name"]').val('')  
-                                $('#add-new-college-school-modal').modal('hide')
-                            }else{  
-                                Swal.fire({
-                                    title:"Insert Error!",
-                                    text: data.message,
-                                    icon:"error"
-                                }) 
-                            }
-                        },
-                        error: function (xhr, status, error) { 
-                            console.info(xhr.responseText);
-                        }
-                    }); 
-
-                }
-            });  
-            // Add New College Course Button
-            $(document).on('click', '#add-new-college-course-button', function(e){  
-                e.preventDefault(); 
-                var course = $('input[name="college_course"]').val() 
-                if(course == ""){
-                    Swal.fire({
-                        title:"Input Field must not be empty!", 
-                        icon:"error"
-                    }) 
-                }else{
-                    $.ajax({
-                        url:  'course/insert',
-                        method: "post", 
-                        data: {
-                            course : course,
-                            manager : "Active"
-                        },  
-                        dataType: "json", 
-                        success: function (data) {   
-                            if(data.response){ 
-                                Swal.fire({
-                                    title:"Good job!",
-                                    text: data.message,
-                                    icon:"success"
-                                })
-
-                                // append value
-                                $('#college-registration-form select[name="course"]').append($('<option>', {
-                                    value: course,
-                                    text: course
-                                }));
-
-                                $('input[name="college_course"]').val('')
-                                $('#add-new-college-course-modal').modal('hide')
-                            }else{  
-                                Swal.fire({
-                                    title:"Insert Error!",
-                                    text: data.message,
-                                    icon:"error"
-                                }) 
-                            }
-                        },
-                        error: function (xhr, status, error) { 
-                            console.info(xhr.responseText);
-                        }
-                    }); 
-
-                }
-            });  
+            });    
 
 
-
-
-
-
-
+            
             //=============================================================================
-            // END
+            // APP ID
             //=============================================================================
-
-
-
 
 
 
@@ -1795,6 +1795,17 @@
                     }
                 }); 
             }
+
+
+            
+
+            //=============================================================================
+            // END
+            //=============================================================================
+
+
+
+
 
 
 
