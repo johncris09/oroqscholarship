@@ -12,7 +12,7 @@
                 <div class="card-body">
                     <h4 class="header-title mb-4"><?= $page_title; ?></h4>
 
-                    <ul class="nav nav-tabs">
+                    <ul class="nav nav-pills navtab-bg nav-justified">
                         <li class="nav-item">
                             <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active ">
                                 Senior High School Pending List
@@ -31,7 +31,7 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane show active " id="senior-high-tab">   
-                            <table id="senior-high-table" class="table table-striped dt-responsive nowrap w-100">
+                            <table id="senior-high-table"  style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>   
                                         <th>Application ID</th>  

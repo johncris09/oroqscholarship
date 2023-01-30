@@ -103,8 +103,8 @@
                 <div class="card-body">
                     <h4 class="header-title mb-4"><?= $page_title; ?></h4>
 
-                    <ul class="nav nav-tabs"> 
-                        <li class="nav-item">
+                    <ul class="nav nav-pills navtab-bg nav-justified">
+                        <li class="nav-item ">
                             <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active  ">
                                 Senior High School Registration
                             </a>
@@ -115,7 +115,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link ">
+                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link   ">
                                 TVET Registration
                             </a>
                         </li>
