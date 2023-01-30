@@ -168,7 +168,7 @@
                                 <div class="row justify-content-center">
                                     <div class="col-3">
                                         <label for="availment" class="form-label">Availment</label>
-                                        <input type="number" class="form-control" name="availment" >
+                                        <input type="number" min="1" max="8" step="1" class="form-control" name="availment" >
                                     </div>  
                                     <div class="col-3">
                                         <label for="gender" class="form-label">Sex</label>
@@ -280,7 +280,7 @@
                                 <div class="row justify-content-center">
                                     <div class="col-3">
                                         <label for="availment" class="form-label">Availment</label>
-                                        <input type="number" class="form-control" name="availment" >
+                                        <input type="number" min="1" max="8" step="1" class="form-control" name="availment" >
                                     </div>  
                                     <div class="col-3">
                                         <label for="gender" class="form-label">Sex</label>
@@ -394,7 +394,7 @@
                                 <div class="row justify-content-center">
                                     <div class="col-3">
                                         <label for="availment" class="form-label">Availment</label>
-                                        <input type="number" class="form-control" name="availment" >
+                                        <input type="number" min="1" max="8" step="1" class="form-control" name="availment" >
                                     </div>  
                                     <div class="col-3">
                                         <label for="gender" class="form-label">Sex</label>
@@ -479,6 +479,15 @@
     <script> 
 
         $(document).ready(function(){
+
+            $('input[name=availment]').focusout(function() { 
+                var max = $(this).val();
+                if (max > 9) {
+                    $(this).val(1);
+                    alert("Please input only 1-8");
+                }
+            });
+ 
             $('select[name="semester"]').on('change', function(){  
                 $(this).closest("div.active").find('input.semester').val(($(this).val() == "1st") ?  1 : 2) 
             })
