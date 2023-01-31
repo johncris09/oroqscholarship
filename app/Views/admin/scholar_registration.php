@@ -353,6 +353,12 @@
                                 </div>
                                 <div class="row g-3" >
                                     <div class="col">
+                                        <label for="school_address" class="form-label">School Address </label> 
+                                        <input type="text" class="form-control text-capitalize" name="school_address"  >
+                                    </div>
+                                </div>
+                                <div class="row g-3" >
+                                    <div class="col">
                                         <label for="grade_level" class="form-label">Grade Level <?= $required_field; ?></label>
                                         <select class="form-control"  name="grade_level"  required>
                                             <option value="">Select</option> 

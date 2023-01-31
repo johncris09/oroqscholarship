@@ -52,7 +52,7 @@ class ScholarRegistrationController extends BaseController
 
     
     public function insert_senior_high_registration()
-    {  
+    {   
         try{ 
             $data = [
                 'AppNoYear' => $this->request->getPost('app_no_year'),
@@ -74,6 +74,7 @@ class ScholarRegistrationController extends BaseController
                 'AppAvailment' => trim($this->request->getPost('availment')),
                 'AppSchool' => $this->request->getPost('school'),
                 'AppCourse' => $this->request->getPost('strand'),
+                "AppSchoolAddress"  => trim($this->request->getPost('school_address')),
                 'AppYear' => $this->request->getPost('grade_level'),
                 'AppSem' => $this->request->getPost('semester'),
                 'AppSy' => $this->request->getPost('school_year'),

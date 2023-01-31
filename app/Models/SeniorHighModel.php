@@ -35,6 +35,7 @@ class SeniorHighModel extends Model
         "AppAvailment",
         "AppSchool",
         "AppCourse",
+        "AppSchoolAddress",
         "AppYear",
         "AppSem",
         "AppSy",
