@@ -21,6 +21,7 @@ class ScholarRegistrationController extends BaseController
         $this->senior_high_registration = new SeniorHighModel($db);
         $this->college_registration  = new CollegeModel($db);
         $this->tvet_registration  = new TvetModel($db);
+        $this->uri  = service('uri');
     }
 
 
@@ -243,6 +244,33 @@ class ScholarRegistrationController extends BaseController
         echo $imageName;
     }
 
-     
+    public function print()
+    {
+        $data['page_title'] = "Page Title";
+        $segment = $this->uri->getSegments(); 
+        $id = $segment[3]; 
+
+        try{ 
+            if($segment[2] == "shs"){ 
+                // $data['profile'] = $this->senior_high->asArray()->where('id', $id)->findAll()[0];
+            }else if($segment[2] == "college"){ 
+                $data['profile']  = $this->college_registration->asArray()->where('id', $id)->findAll()[0]; 
+                // print_r($data['profile']);
+                return view('admin/scholar_registration_college_tvet_print', $data);  
+
+            }else if($segment[2] == "tvet"){ 
+                $data['profile'] = $this->tvet_registration->asArray()->where('id', $id)->findAll()[0];
+                return view('admin/scholar_registration_college_tvet_print', $data);  
+            }else{
+                return redirect()->back();
+            }
+
+        } catch (\Exception $e) {    
+            print_r($e->getMessage());
+        }
+
+
+
+    }
     
 } 
