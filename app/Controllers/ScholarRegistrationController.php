@@ -46,7 +46,7 @@ class ScholarRegistrationController extends BaseController
         $data['year_level'] = $config->yearLevel;
         $data['sequence_year'] =  $sequence->asArray()->where('Sys_ID', 1)->findAll()[0]['seq_year'];
         $data['seq_sem'] =  $sequence->asArray()->where('Sys_ID', 1)->findAll()[0]['seq_sem'];
-        $data['app_no_id'] = $this->senior_high_registration->count() + 1; 
+        $data['app_no_id'] = $this->senior_high_registration->count() + 1;
         return view('admin/scholar_registration', $data);  
     }
 
@@ -90,7 +90,8 @@ class ScholarRegistrationController extends BaseController
             $this->senior_high_registration->save($data);  
             $res = [
                 "response" =>  true, 
-                "message" =>  "Application has been saved to pending applications",
+                "message" =>  "Application has been saved to pending applications. Do you want to print the file?", 
+                "id" => $this->senior_high_registration->insertID(),
             ];
         } catch (\Exception $e) {  
             $res = [
@@ -271,6 +272,18 @@ class ScholarRegistrationController extends BaseController
 
 
 
+    }
+
+    public function get_shs_latest_app_no_id()
+    { 
+        $data = array( 
+            "AppNoYear " => $this->request->getPost('app_year'),
+            "AppNoSem" => $this->request->getPost('app_sem'),
+        );
+
+        $app_no_id = $this->senior_high_registration->get_shs_latest_app_no_id($data);
+        $app_no_id +=  1;
+        echo Json_encode($app_no_id); 
     }
     
 } 

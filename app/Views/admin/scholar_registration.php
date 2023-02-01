@@ -130,14 +130,14 @@
                                                 <div class="w-50">
                                                     <label for="" class="form-label">App No. </label> 
                                                     <div class="input-group mb-3">
-                                                        <input type="text" class="form-control text-center" value="<?= $sequence_year ?>" name="app_no_year" readonly> 
+                                                        <input type="text" class="form-control text-center" value="<?php echo date('Y'); ?>" name="app_no_year"> 
                                                         <span class="input-group-text">-</span>
-                                                        <select name="app_no_sem" class="form-control"  >
+                                                        <select name="app_no_sem" class="form-control shs"  >
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
                                                         </select>  
                                                         <span class="input-group-text">-</span>
-                                                        <input type="text" class="form-control text-center" name="app_no_id" required>
+                                                        <input type="text" class="form-control text-center shs" name="app_no_id" required>
                                                     </div>
                                                 </div> 
                                             </div>
@@ -148,8 +148,7 @@
                                                 <input type="hidden" value="Active" name="manager"   readonly>
                                             </div>
                                         </div>
-                                    </div> 
-                                    <hr> 
+                                    </div>  
                                     <div class="col-9">
                                         <div class="row mt-3">
                                             <div class="col-4">
@@ -305,7 +304,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" id="add-new-shs-school-button" class="btn btn-info waves-effect waves-light">Save  changes</button>
+                                                        <button type="button" id="add-new-shs-school-button" class="btn btn-info waves-effect waves-light">Save changes and Print</button>
                                                     </div> 
                                                 </div>
                                             </div>
@@ -343,7 +342,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" id="add-new-shs-strand-button" class="btn btn-info waves-effect waves-light">Save  changes</button>
+                                                        <button type="button" id="add-new-shs-strand-button" class="btn btn-info waves-effect waves-light">Save changes and Print</button>
                                                     </div> 
                                                 </div>
                                             </div>
@@ -380,8 +379,8 @@
                                         <label for="school_year" class="form-label">SY <?= $required_field; ?></label>
                                         <select class="form-control"   name="school_year"  required>
                                             <option value="">Select</option> 
-                                            <?php foreach(range(2017, date('Y')) as $year):?>  
-                                                <option value="SY: <?= $year . "-" . ($year + 1)?>">SY: <?= $year . "-" . ($year + 1)?></option>
+                                            <?php foreach(range(date('Y'), 2018) as $year):?>  
+                                                <option value="SY: <?=  ($year - 1) . "-" .  $year ?>">SY: <?= ($year - 1) . "-" .  $year  ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div> 
@@ -407,14 +406,13 @@
                                     </div> 
                                 </div>  
                                 <div class="row g-3 mt-2" > 
-                                    <button type="submit" class="btn btn-primary btn-block waves-effect waves-light rounded-pill">Save  Changes</button> 
+                                    <button type="submit" class="btn btn-primary btn-block waves-effect waves-light rounded-pill">Save Changes and Print</button> 
                                 </div>    
                             </form>  
                         </div>
                         <div class="tab-pane  " id="college-tab">   
                             <form id="college-registration-form" class="validation-form">
-                                <div class="row"> 
-                                    
+                                <div class="row">  
                                     <div class="col-12">
                                         <div class="row justify-content-between">
                                             <div class="col-6">
@@ -440,8 +438,7 @@
                                             </div>
                                         </div>
                                     </div> 
-                                </div> 
-                                <hr>
+                                </div>  
                                 <div class="row"> 
                                     <div class="col-9">
                                         <div class="row">
@@ -737,8 +734,7 @@
                                             </div>
                                         </div>
                                     </div> 
-                                </div> 
-                                <hr>
+                                </div>  
                                 <div class="row"> 
                                     <div class="col-9">
                                         <div class="row">
@@ -1041,9 +1037,34 @@
             //=============================================================================
             //  Senior High School Registration
             //============================================================================= 
+            
             var $modal_shs = $('#modal_shs');
             var image_shs = document.getElementById('sample_image_shs'); 
+            var shs_app_no_id = $('input[name="app_no_id"]').val()
+ 
 
+            get_latest_shs_app_no_id();
+            
+            function get_latest_shs_app_no_id(appYear = $('input[name="app_no_year"]').val() , appSem = $('select[name="app_no_sem"]').val()){
+
+                $.ajax({
+                    url: "registration/shs_latest_app_no_id",
+                    method: "POST",  
+                    data: {
+                        app_year: appYear,
+                        app_sem: appSem,
+                    },           
+                    dataType: "json",
+                    success: function(data){  
+                        console.info(data)
+                        $('input.shs[name="app_no_id"]').val(data) 
+                    }
+                });
+            }
+
+            $('select.shs[name=app_no_sem]').on('change', function(){ 
+                get_latest_shs_app_no_id(appYear = $('input[name="app_no_year"]').val(),  appSem = $(this).val() );
+            })
 
             // Tippy
             tippy('#add-school-button', {
@@ -1151,20 +1172,28 @@
                     processData: false,
                     contentType: false, 
                     dataType: "json", 
-                    success: function (data) {   
+                    success: function (data) {  
                         console.info(data) 
                         if(data.response){   
                             Swal.fire({
                                 title:"Good job!",
                                 text: data.message,
-                                icon:"success"
-                            }) 
-                            // shs_app_no_id();
-                            
-
+                                icon:"success",  
+                                showCancelButton: true,
+                                confirmButtonText: 'Yes',
+                                denyButtonText: 'Cancel',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.open("registration/print/shs/" + data.id);
+                                }  
+                            })
+                            // display latest shs app no id
+                            get_latest_shs_app_no_id();
+                             
                             // clear form
                             $("#senior-high-registration-form")[0].reset()
                             $('#uploaded_image_shs').attr('src', "<?=base_url()?>/img/select-image.png");
+ 
 
                         }else{  
                             Swal.fire({
@@ -1754,7 +1783,7 @@
 
 
 
-            shs_app_no_id();
+            // shs_app_no_id();
 
             function shs_app_no_id(){
                 $.ajax({

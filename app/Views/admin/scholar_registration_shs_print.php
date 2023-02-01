@@ -4,8 +4,11 @@
 
 <head>
 	<meta charset="utf-8" />
-	<meta name="generator" content="pdf2htmlEX" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>Print Preview</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<!-- App favicon -->
+	<link rel="shortcut icon" href="/img/favicon.ico">
 	<style type="text/css">
 	/*! 
  * Base CSS for pdf2htmlEX
@@ -3077,13 +3080,13 @@
 					<div class="t m0 x0 h26 y53 ff7 fs7 fc0 sc0 ls2 ws5">I hereby certi<span class="_ _1"></span>fy that the above info<span class="_ _1"></span>rmatio<span class="_ _1"></span>n is true and corre<span class="_ _1"></span>ct to the best of my k<span class="_ _1"></span>nowledge and beli<span class="_ _1"></span>ef.<span class="_ _2"></span><span class="ff1 fs5"> </span></div>
 				</div>
 				<div class="c x8 y54 w21 h1d">
-					<div class="t m0 x4 h27 y55 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo ucwords($profile['AppLastName'] . ", " . $profile['AppFirstName'] . ", " . $profile['AppMidIn'] . ", " . $profile['AppSuffix']); ?>  </div>
+					<div class="t m0 x4 h27 y55 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo ucwords($profile['AppLastName'] . ", " . $profile['AppFirstName'] . " " . $profile['AppMidIn'] . " " . $profile['AppSuffix']); ?>  </div>
 				</div>
 				<div class="c x1 y56 w22 h1d">
 					<div class="t m0 x4 h27 y55 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo ucwords($profile['AppAddress']); ?></div>
 				</div>
 				<div class="c x1 y57 w21 h1d">
-					<div class="t m0 x4 h27 y55 ff1 fs9 fc0 sc0 ls2 ws5"> <?php echo  $profile['AppEmailAdd'] ; ?> </div>
+					<div class="t m0 x4 h27 y55 ff1 fs9 fc0 sc0 ls2 ws5"> <?php echo $profile['AppEmailAdd'] ; ?> </div>
 				</div>
 				<div class="c x1 y58 w21 h1d">
 					<div class="t m0 x4 h27 y55 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo ucwords($profile['AppSchool']); ?> </div>
@@ -3125,13 +3128,13 @@
 					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo date('F/d/Y', strtotime( $profile['AppDOB'])) ?></div>
 				</div>
 				<div class="c x28 y56 w29 h28">
-					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls4 ws4">23<span class="ls2 ws5"> </span></div>
+					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls4 ws4"><?php echo $profile['AppAge']; ?></div>
 				</div>
 				<div class="c x29 y63 w2a h1d">
 					<div class="t m0 x4 h7 y64 ff1 fs1 fc0 sc0 ls2 ws5">M </div>
 				</div>
 				<div class="c x2a y65 w2a h28">
-					<div class="t m0 x4 h7 y66 ff1 fs1 fc0 sc0 ls2 ws5">F </div>
+					<div class="t m0 x4 h7 y66 ff1 fs1 fc0 sc0 ls2 ws5"> F </div>
 				</div>
 				<div class="c x2b y67 w2b h29" <?php echo  strtolower($profile['AppGender']) == "male" ? "style='background-color: black !important; height: 7px; '" : ""; ?> >
 					<div class="t m0 x4 h7 y68 ff1 fs1 fc0 sc0 ls2 ws5"> </div>
