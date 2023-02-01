@@ -252,10 +252,10 @@ class ScholarRegistrationController extends BaseController
 
         try{ 
             if($segment[2] == "shs"){ 
-                // $data['profile'] = $this->senior_high->asArray()->where('id', $id)->findAll()[0];
+                $data['profile'] = $this->senior_high_registration->asArray()->where('id', $id)->findAll()[0];  
+                return view('admin/scholar_registration_shs_print', $data);  
             }else if($segment[2] == "college"){ 
-                $data['profile']  = $this->college_registration->asArray()->where('id', $id)->findAll()[0]; 
-                // print_r($data['profile']);
+                $data['profile']  = $this->college_registration->asArray()->where('id', $id)->findAll()[0];  
                 return view('admin/scholar_registration_college_tvet_print', $data);  
 
             }else if($segment[2] == "tvet"){ 
