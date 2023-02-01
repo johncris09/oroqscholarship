@@ -1018,7 +1018,24 @@
 
         $(document).ready(function(){ 
 
-            
+           
+            var is_sem_closed = "<?php echo true ?>";
+
+            if(is_sem_closed){
+                Swal.fire({
+                    title:"Semester Closed!", 
+                    icon:"error",   
+                    confirmButtonText: 'Ok', 
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.href ="/"
+                    }  
+                })
+            }
+
+
             var cropper;
             var base64data; 
             
