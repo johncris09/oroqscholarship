@@ -84,14 +84,14 @@ class ScholarRegistrationController extends BaseController
                 'AppMother' => trim($this->request->getPost('mother_name')),
                 'AppMotherOccu' => trim($this->request->getPost('mother_occupation')),
                 'AppManager' => trim($this->request->getPost('manager')),
-                'AppImage' => trim($this->request->getPost('image')),
-
+                'AppImage' => trim($this->request->getPost('image')), 
             ];
             $this->senior_high_registration->save($data);  
             $res = [
                 "response" =>  true, 
-                "message" =>  "Application has been saved to pending applications. Do you want to print the file?", 
+                "message" =>  "Application has been saved to pending applications. Do you want to print the application form?", 
                 "id" => $this->senior_high_registration->insertID(),
+                "appnosem" => $data['AppNoSem'],
             ];
         } catch (\Exception $e) {  
             $res = [
@@ -283,7 +283,7 @@ class ScholarRegistrationController extends BaseController
 
         $app_no_id = $this->senior_high_registration->get_shs_latest_app_no_id($data);
         $app_no_id +=  1;
-        echo Json_encode($app_no_id); 
+        echo Json_encode($app_no_id);  
     }
     
 } 

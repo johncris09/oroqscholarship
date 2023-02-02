@@ -1019,7 +1019,7 @@
         $(document).ready(function(){ 
 
            
-            var is_sem_closed = "<?php echo true ?>";
+            var is_sem_closed = "<?php echo false ?>";
 
             if(is_sem_closed){
                 Swal.fire({
@@ -1204,14 +1204,15 @@
                                     window.open("registration/print/shs/" + data.id);
                                 }  
                             })
-                            // display latest shs app no id
-                            get_latest_shs_app_no_id();
                              
                             // clear form
                             $("#senior-high-registration-form")[0].reset()
                             $('#uploaded_image_shs').attr('src', "<?=base_url()?>/img/select-image.png");
  
 
+                            // display latest shs app no id
+                            $('select.shs[name="app_no_sem"]').val(data.appnosem) 
+                            get_latest_shs_app_no_id();
                         }else{  
                             Swal.fire({
                                 title:"Insert Error!",
