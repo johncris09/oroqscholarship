@@ -362,7 +362,8 @@
         <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
         <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
         <script src="http://malsup.github.io/jquery.blockUI.js"></script>
-        <script src="https://cdn.jsdelivr.net/gh/loadingio/ldLoader@v1.0.0/dist/ldld.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/loadingio/ldLoader@v1.0.0/dist/ldld.min.js"></script> 
+        <?= script_tag('assets/jquery-mask-plugin/jquery.mask.min.js'); ?>   
         
         <?= $this->renderSection('pageScript') ?> 
 

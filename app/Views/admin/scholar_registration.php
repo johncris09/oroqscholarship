@@ -209,7 +209,8 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <label for="contact_no" class="form-label">Contact #</label>
-                                                <input type="text" class="form-control"   name="contact_no">
+                                                <input type="text" class="form-control" name="contact_no" placeholder="0000 000 0000" data-toggle="input-mask" data-mask-format="0900 000 0000"  > 
+                                                <span class="font-13 text-muted">e.g "xxxx xxx xxxx"</span>
                                             </div>
                                             <div class="col-6">
                                                 <label for="ctc_no" class="form-label">CTC # <?= $required_field; ?></label>
@@ -500,7 +501,8 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <label for="contact_no" class="form-label">Contact #</label>
-                                                <input type="text" class="form-control"  name="contact_no">
+                                                <input type="text" class="form-control"  name="contact_no" placeholder="0000 000 0000" data-toggle="input-mask" data-mask-format="0900 000 0000"  > 
+                                                <span class="font-13 text-muted">e.g "xxxx xxx xxxx"</span>
                                             </div>
                                             <div class="col-6">
                                                 <label for="" class="form-label">CTC # <?= $required_field; ?></label>
@@ -796,7 +798,8 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <label for="contact_no" class="form-label">Contact #</label>
-                                                <input type="text" class="form-control"  name="contact_no">
+                                                <input type="text" class="form-control"  name="contact_no" placeholder="0000 000 0000" data-toggle="input-mask" data-mask-format="0900 000 0000"  > 
+                                                <span class="font-13 text-muted">e.g "xxxx xxx xxxx"</span>
                                             </div>
                                             <div class="col-6">
                                                 <label for="" class="form-label">CTC # <?= $required_field; ?></label>
@@ -1018,7 +1021,15 @@
 
         $(document).ready(function(){ 
 
-           
+            $('[data-toggle="input-mask"]').each(function(a, e) {
+                var t = $(e).data("maskFormat"),
+                    n = $(e).data("reverse");
+                null != n ? $(e).mask(t, {
+                    reverse: n
+                }) : $(e).mask(t)
+            })
+
+
             var is_sem_closed = "<?php echo false ?>";
 
             if(is_sem_closed){
