@@ -166,7 +166,9 @@ class ScholarRegistrationController extends BaseController
             $res =  $this->college_registration->save($data); 
             $res = [
                 "response" =>  true,
-                "message" =>  "Application has been saved to pending applications",
+                "message" =>  "Application has been saved to pending applications. Do you want to print the application form?", 
+                "id" => $this->college_registration->insertID(),
+                "appnosem" => $data['colAppNoSem'],
             ];
         } catch (\Exception $e) {  
             $res = [
@@ -222,7 +224,9 @@ class ScholarRegistrationController extends BaseController
             $res =  $this->tvet_registration->save($data); 
             $res = [
                 "response" =>  true,
-                "message" =>  "Application has been saved to pending applications",
+                "message" =>  "Application has been saved to pending applications. Do you want to print the application form?", 
+                "id" => $this->tvet_registration->insertID(),
+                "appnosem" => $data['colAppNoSem'],
             ];
         } catch (\Exception $e) {  
             $res = [
@@ -282,9 +286,33 @@ class ScholarRegistrationController extends BaseController
             "AppNoSem" => $this->request->getPost('app_sem'),
         );
 
-        $app_no_id = $this->senior_high_registration->get_shs_latest_app_no_id($data);
+        $app_no_id = $this->senior_high_registration->get_latest_app_no_id($data);
         $app_no_id +=  1;
         echo Json_encode($app_no_id);  
+    }
+
+    public function get_college_latest_app_no_id()
+    { 
+        $data = array( 
+            "colAppNoYear " => $this->request->getPost('app_year'),
+            "colAppNoSem" => $this->request->getPost('app_sem'),
+        );
+
+        $app_no_id = $this->college_registration->get_latest_app_no_id($data);
+        $app_no_id +=  1;
+        echo Json_encode($app_no_id); 
+    }
+
+    public function get_tvet_latest_app_no_id()
+    { 
+        $data = array( 
+            "colAppNoYear " => $this->request->getPost('app_year'),
+            "colAppNoSem" => $this->request->getPost('app_sem'),
+        );
+
+        $app_no_id = $this->tvet_registration->get_latest_app_no_id($data);
+        $app_no_id +=  1;
+        echo Json_encode($app_no_id); 
     }
     
 } 

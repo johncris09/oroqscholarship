@@ -200,4 +200,19 @@ class TvetModel extends Model
         return $query;  
     }
     
+    public  function get_latest_app_no_id($data)
+    {
+        $builder = $this->db
+            ->table($this->table)
+            ->select('colAppNoID')
+            ->limit(1)
+            ->orderBy('id', 'DESC')
+            ->where($data); 
+        $query =$builder->get() ;
+        if($query->getNumRows() > 0){
+            return $query->getResultArray()[0]['colAppNoID'];
+        }
+        return 0;
+    }
+    
 }

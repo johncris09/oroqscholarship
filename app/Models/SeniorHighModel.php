@@ -213,7 +213,7 @@ class SeniorHighModel extends Model
         return $query;  
     }
 
-    public  function get_shs_latest_app_no_id($data)
+    public  function get_latest_app_no_id($data)
     {
         $builder = $this->db
             ->table($this->table)

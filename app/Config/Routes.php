@@ -62,6 +62,8 @@ $routes->group('registration',  function($routes) {
     $routes->post('upload_image', 'ScholarRegistrationController::upload_image');   
     $routes->post('shs_update_image', 'ScholarRegistrationController::update_image'); 
     $routes->post('shs_latest_app_no_id', 'ScholarRegistrationController::get_shs_latest_app_no_id'); 
+    $routes->post('college_latest_app_no_id', 'ScholarRegistrationController::get_college_latest_app_no_id');
+    $routes->post('tvet_latest_app_no_id', 'ScholarRegistrationController::get_tvet_latest_app_no_id');
     $routes->get('print/(:any)/(:any)', 'ScholarRegistrationController::print/$1/$2', ["filter" => "auth"]);   
 });
 

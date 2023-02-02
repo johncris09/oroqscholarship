@@ -130,7 +130,7 @@
                                                 <div class="w-50">
                                                     <label for="" class="form-label">App No. </label> 
                                                     <div class="input-group mb-3">
-                                                        <input type="text" class="form-control text-center" value="<?php echo date('Y'); ?>" name="app_no_year"> 
+                                                        <input type="text" class="form-control text-center shs" value="<?php echo date('Y'); ?>" name="app_no_year"> 
                                                         <span class="input-group-text">-</span>
                                                         <select name="app_no_sem" class="form-control shs"  >
                                                             <option value="1">1</option>
@@ -419,14 +419,14 @@
                                                 <div class="w-50">
                                                     <label for="" class="form-label">App No. </label> 
                                                     <div class="input-group mb-3">
-                                                        <input type="text" class="form-control text-center" value="<?= $sequence_year ?>" name="app_no_year" readonly> 
+                                                        <input type="text" class="form-control text-center college" value="<?php echo date('Y') ?>" name="app_no_year"  > 
                                                         <span class="input-group-text">-</span>
-                                                        <select name="app_no_sem" class="form-control"  >
+                                                        <select name="app_no_sem" class="form-control college"  >
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
                                                         </select>  
                                                         <span class="input-group-text">-</span>
-                                                        <input type="text" class="form-control text-center" name="app_no_id" required>
+                                                        <input type="text" class="form-control text-center college" name="app_no_id" required>
                                                     </div>
                                                 </div> 
                                             </div> 
@@ -715,14 +715,14 @@
                                                 <div class="w-50">
                                                     <label for="" class="form-label">App No. </label> 
                                                     <div class="input-group mb-3">
-                                                        <input type="text" class="form-control text-center" value="<?= $sequence_year ?>" name="app_no_year" readonly> 
+                                                        <input type="text" class="form-control text-center tvet" value="<?php echo date('Y') ?>" name="app_no_year"  > 
                                                         <span class="input-group-text">-</span>
-                                                        <select name="app_no_sem" class="form-control"  >
+                                                        <select name="app_no_sem" class="form-control tvet"  >
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
                                                         </select>  
                                                         <span class="input-group-text">-</span>
-                                                        <input type="text" class="form-control text-center" name="app_no_id" required>
+                                                        <input type="text" class="form-control text-center tvet" name="app_no_id" required>
                                                     </div>
                                                 </div> 
                                             </div>  
@@ -1062,7 +1062,7 @@
 
             get_latest_shs_app_no_id();
             
-            function get_latest_shs_app_no_id(appYear = $('input[name="app_no_year"]').val() , appSem = $('select[name="app_no_sem"]').val()){
+            function get_latest_shs_app_no_id(appYear = $('input.shs[name="app_no_year"]').val() , appSem = $('select.shs[name="app_no_sem"]').val()){
 
                 $.ajax({
                     url: "registration/shs_latest_app_no_id",
@@ -1080,7 +1080,7 @@
             }
 
             $('select.shs[name=app_no_sem]').on('change', function(){ 
-                get_latest_shs_app_no_id(appYear = $('input[name="app_no_year"]').val(),  appSem = $(this).val() );
+                get_latest_shs_app_no_id(appYear = $('input.shs[name="app_no_year"]').val(),  appSem = $(this).val() );
             })
 
             // Tippy
@@ -1189,8 +1189,7 @@
                     processData: false,
                     contentType: false, 
                     dataType: "json", 
-                    success: function (data) {  
-                        console.info(data) 
+                    success: function (data) {   
                         if(data.response){   
                             Swal.fire({
                                 title:"Good job!",
@@ -1339,7 +1338,31 @@
             //  College Registration
             //=============================================================================  
             var $modal_college = $('#modal_college');
-            var image_college = document.getElementById('sample_image_college');  
+            var image_college = document.getElementById('sample_image_college');   
+ 
+
+            get_latest_college_app_no_id();
+            
+            function get_latest_college_app_no_id(appYear = $('input.college[name="app_no_year"]').val() , appSem = $('select.college[name="app_no_sem"]').val()){
+
+                $.ajax({
+                    url: "registration/college_latest_app_no_id",
+                    method: "POST",  
+                    data: {
+                        app_year: appYear,
+                        app_sem: appSem,
+                    },           
+                    dataType: "json",
+                    success: function(data){  
+                        console.info(data)
+                        $('input.college[name="app_no_id"]').val(data) 
+                    }
+                });
+            }
+
+            $('select.college[name=app_no_sem]').on('change', function(){ 
+                get_latest_college_app_no_id(appYear = $('input.college[name="app_no_year"]').val(),  appSem = $(this).val() );
+            })
             
             // Tippy
             tippy('#add-course-button', {
@@ -1439,18 +1462,29 @@
                     processData: false,
                     contentType: false, 
                     dataType: "json",
-                    success: function (data) {  
-                        if(data.response){ 
+                    success: function (data) {
+                        if(data.response){   
                             Swal.fire({
                                 title:"Good job!",
                                 text: data.message,
-                                icon:"success"
-                            })  
-                            // shs_app_no_id();
-
+                                icon:"success",  
+                                showCancelButton: true,
+                                confirmButtonText: 'Yes',
+                                denyButtonText: 'Cancel',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.open("registration/print/college/" + data.id);
+                                }  
+                            })
+                             
                             // clear form
                             $("#college-registration-form")[0].reset()
                             $('#uploaded_image_college').attr('src', "<?=base_url()?>/img/select-image.png");
+ 
+
+                            // display latest college app no id
+                            $('select.college[name="app_no_sem"]').val(data.appnosem) 
+                            get_latest_college_app_no_id();
                         }else{  
                             Swal.fire({
                                 title:"Insert Error!",
@@ -1458,6 +1492,8 @@
                                 icon:"error"
                             }) 
                         }
+
+
                     },
                     error: function (xhr, status, error) { 
                         console.info(xhr.responseText);
@@ -1573,6 +1609,31 @@
             //=============================================================================
             var $modal_tvet = $('#modal_tvet');
             var image_tvet = document.getElementById('sample_image_tvet'); 
+
+            
+            get_latest_tvet_app_no_id();
+            
+            function get_latest_tvet_app_no_id(appYear = $('input.tvet[name="app_no_year"]').val() , appSem = $('select.tvet[name="app_no_sem"]').val()){
+
+                $.ajax({
+                    url: "registration/tvet_latest_app_no_id",
+                    method: "POST",  
+                    data: {
+                        app_year: appYear,
+                        app_sem: appSem,
+                    },           
+                    dataType: "json",
+                    success: function(data){  
+                        console.info(data)
+                        $('input.tvet[name="app_no_id"]').val(data) 
+                    }
+                });
+            }
+
+            $('select.tvet[name=app_no_sem]').on('change', function(){ 
+                get_latest_tvet_app_no_id(appYear = $('input.tvet[name="app_no_year"]').val(),  appSem = $(this).val() );
+            })
+
   
             
             // Upload Image
@@ -1666,18 +1727,31 @@
                     processData: false,
                     contentType: false, 
                     dataType: "json", 
-                    success: function (data) { 
-                        if(data.response){ 
+                    success: function (data) {  
+                        console.info(data)
+                        if(data.response){   
                             Swal.fire({
                                 title:"Good job!",
                                 text: data.message,
-                                icon:"success"
+                                icon:"success",  
+                                showCancelButton: true,
+                                confirmButtonText: 'Yes',
+                                denyButtonText: 'Cancel',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.open("registration/print/tvet/" + data.id);
+                                }  
                             })
-
-                            
-                            $("#tvet-registration-form")[0].reset()
-                            // shs_app_no_id();
+                             
+                            // clear form
+                            $("#tvet-registration-form")[0].reset() 
                             $('#uploaded_image_tvet').attr('src', "<?=base_url()?>/img/select-image.png");
+ 
+
+                            // display latest tvet app no id
+                            $('select.tvet[name="app_no_sem"]').val(data.appnosem) 
+                            get_latest_tvet_app_no_id();
+                            
                         }else{  
                             Swal.fire({
                                 title:"Insert Error!",
@@ -1685,6 +1759,8 @@
                                 icon:"error"
                             }) 
                         }
+
+
                     },
                     error: function (xhr, status, error) { 
                         console.info(xhr.responseText);
