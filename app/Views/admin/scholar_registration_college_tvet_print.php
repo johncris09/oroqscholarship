@@ -3,9 +3,12 @@
 <!-- Created by pdf2htmlEX (https://github.com/pdf2htmlEX/pdf2htmlEX) -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="utf-8"/>
-<meta name="generator" content="pdf2htmlEX"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta charset="utf-8" />
+<title>Print Preview</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<!-- App favicon -->
+<link rel="shortcut icon" href="/img/favicon.ico">
 <style type="text/css">
 /*! 
  * Base CSS for pdf2htmlEX
