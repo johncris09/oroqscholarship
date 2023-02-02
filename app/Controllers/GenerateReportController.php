@@ -31,6 +31,7 @@ class GenerateReportController extends BaseController
         $college_school = new CollegeSchoolModel();
         $strand = new StrandModel();
         $sequence = new SequenceModel(); 
+        $data['year_started'] = $config->year_started;  
         $data['barangay'] = $config->barangay; 
         $data['semester'] = $config->semester; 
         $data['civil_status'] = $config->civilStatus; 
