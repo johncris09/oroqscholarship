@@ -118,6 +118,15 @@ $routes->group('generate_report',  function($routes) {
     
 });
 
+$routes->group('manage_scholarship',  function($routes) {   
+    $routes->get('/', 'ManageScholarship::index', ["filter" => "auth"]);  
+    $routes->post('semester_closed', 'ManageScholarship::semester_closed');   
+    $routes->post('update_year', 'ManageScholarship::update_year');    
+    $routes->post('update_sem', 'ManageScholarship::update_sem');   
+    
+    
+});
+
 
 
 $routes->group('school',  function($routes) {
