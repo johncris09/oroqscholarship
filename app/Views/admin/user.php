@@ -24,8 +24,7 @@
                                 <th>Username</th> 
                                 <th>Email</th> 
                                 <th>Role Type</th> 
-                                <th>Created At</th>
-                                <th>Active</th>
+                                <th>Created At</th> 
                             </tr>
                         </thead> 
                     </table> 
@@ -223,16 +222,7 @@
                             return moment(data.date).format('MMM. D, YYYY H:mm:ss a');
                             
                         }
-                    },    
-                    {
-                        data  : 'active',
-                        render: function(data, type, row, meta){ 
-                            return data == true 
-                                ? '<spand class="bg-success text-white p-1 rounded-pill" >Active</spand>' 
-                                : '<spand class="bg-danger text-white p-1 rounded-pill" >Inactive</spand>' 
-                            
-                        }
-                    },
+                    },   
                 ], 
                 columnDefs: [
                     {
