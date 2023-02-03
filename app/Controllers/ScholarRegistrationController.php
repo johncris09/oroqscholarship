@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\CollegeModel;
 use App\Models\CollegeSchoolModel;
+use App\Models\ConfigModel;
 use App\Models\CourseModel;
 use App\Models\SchoolModel;
 use App\Models\SeniorHighModel;
@@ -21,6 +22,7 @@ class ScholarRegistrationController extends BaseController
         $this->senior_high_registration = new SeniorHighModel($db);
         $this->college_registration  = new CollegeModel($db);
         $this->tvet_registration  = new TvetModel($db);
+        $this->config_model = new ConfigModel($db);
         $this->uri  = service('uri');
     }
 
@@ -48,6 +50,7 @@ class ScholarRegistrationController extends BaseController
         $data['sequence_year'] =  $sequence->asArray()->where('Sys_ID', 1)->findAll()[0]['seq_year'];
         $data['seq_sem'] =  $sequence->asArray()->where('Sys_ID', 1)->findAll()[0]['seq_sem'];
         $data['app_no_id'] = $this->senior_high_registration->count() + 1;
+        $data["config"] = $this->config_model->asArray()->where('id', 1)->findAll()[0]; 
         return view('admin/scholar_registration', $data);  
     }
 
@@ -261,7 +264,7 @@ class ScholarRegistrationController extends BaseController
                 $data['profile'] = $this->senior_high_registration->asArray()->where('id', $id)->findAll()[0];  
                 return view('admin/scholar_registration_shs_print', $data);  
             }else if($segment[2] == "college"){ 
-                $data['profile']  = $this->college_registration->asArray()->where('id', $id)->findAll()[0];  
+                $data['profile']  = $this->college_registration->asArray()->where('id', $id)->findAll()[0]; 
                 return view('admin/scholar_registration_college_tvet_print', $data);  
 
             }else if($segment[2] == "tvet"){ 

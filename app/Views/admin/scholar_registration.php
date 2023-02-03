@@ -407,7 +407,13 @@
                                     </div> 
                                 </div>  
                                 <div class="row g-3 mt-2" > 
-                                    <button type="submit" class="btn btn-primary btn-block waves-effect waves-light rounded-pill">Save Changes and Print</button> 
+                                    <?php 
+                                        if(!$config['semester_closed']){ 
+                                    ?>
+                                            <button type="submit" class="btn btn-primary btn-block waves-effect waves-light rounded-pill">Save Changes and Print</button> 
+                                    <?php
+                                        }
+                                    ?>
                                 </div>    
                             </form>  
                         </div>
@@ -703,7 +709,13 @@
                                     </div> 
                                 </div>     
                                 <div class="row g-3 mt-2" > 
-                                    <button type="submit" class="btn btn-primary btn-block waves-effect waves-light rounded-pill">Save  Changes</button> 
+                                    <?php 
+                                        if(!$config['semester_closed']){ 
+                                    ?> 
+                                        <button type="submit" class="btn btn-primary btn-block waves-effect waves-light rounded-pill">Save Changes and Print</button> 
+                                    <?php
+                                        }
+                                    ?>
                                 </div>    
                             </form>
                         </div>
@@ -998,7 +1010,13 @@
                                     </div> 
                                 </div>     
                                 <div class="row g-3 mt-2" > 
-                                    <button type="submit" class="btn btn-primary btn-block waves-effect waves-light rounded-pill">Save  Changes</button> 
+                                    <?php 
+                                        if(!$config['semester_closed']){ 
+                                    ?> 
+                                        <button type="submit" class="btn btn-primary btn-block waves-effect waves-light rounded-pill">Save Changes and Print</button> 
+                                    <?php
+                                        }
+                                    ?>
                                 </div>    
                             </form> 
 
@@ -1030,8 +1048,7 @@
             })
 
 
-            var is_sem_closed = "<?php echo false ?>";
-
+            var is_sem_closed = <?php echo $config['semester_closed'] ?>; 
             if(is_sem_closed){
                 Swal.fire({
                     title:"Semester Closed!", 
@@ -1083,8 +1100,7 @@
                         app_sem: appSem,
                     },           
                     dataType: "json",
-                    success: function(data){  
-                        console.info(data)
+                    success: function(data){   
                         $('input.shs[name="app_no_id"]').val(data) 
                     }
                 });
@@ -1165,7 +1181,6 @@
                             data: {image: base64data},
                             dadtaType: "json",
                             success: function(data){   
-                                console.info(data) 
                                 image_data = data;
                                 $modal_shs.modal('hide');  
                                 $('#uploaded_image_shs').attr('src', data);   
@@ -1364,8 +1379,7 @@
                         app_sem: appSem,
                     },           
                     dataType: "json",
-                    success: function(data){  
-                        console.info(data)
+                    success: function(data){
                         $('input.college[name="app_no_id"]').val(data) 
                     }
                 });
@@ -1635,7 +1649,7 @@
                     },           
                     dataType: "json",
                     success: function(data){  
-                        console.info(data)
+                        
                         $('input.tvet[name="app_no_id"]').val(data) 
                     }
                 });
@@ -1739,7 +1753,7 @@
                     contentType: false, 
                     dataType: "json", 
                     success: function (data) {  
-                        console.info(data)
+                        
                         if(data.response){   
                             Swal.fire({
                                 title:"Good job!",
