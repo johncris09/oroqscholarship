@@ -91,6 +91,8 @@
                                             title:"Good job!",
                                             text: data.message,
                                             icon:"success"
+                                        }).then((result) => { 
+                                            window.location.reload();
                                         })
                                         that.checked = true
                                     }
@@ -125,6 +127,8 @@
                                             title:"Good job!",
                                             text: data.message,
                                             icon:"success"
+                                        }).then((result) => { 
+                                            window.location.reload();
                                         })
                                         that.checked = false
                                     }
@@ -155,7 +159,9 @@
                                 title:"Good job!",
                                 text: data.message,
                                 icon:"success"
-                            }) 
+                            }).then((result) => { 
+                                window.location.reload();
+                            })
                         }
                     }
                 }); 
@@ -179,7 +185,9 @@
                                 title:"Good job!",
                                 text: data.message,
                                 icon:"success"
-                            }) 
+                            }).then((result) => { 
+                                window.location.reload();
+                            })
                         }
                     }
                 }); 
