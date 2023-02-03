@@ -19,9 +19,9 @@
 		<link rel="stylesheet" href="https://unpkg.com/dropzone/dist/dropzone.css" />
 		<link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet"/>
         <link href="https://cdn.jsdelivr.net/gh/loadingio/ldLoader@v1.0.0/dist/ldld.min.css">
-
-
-		<!-- App css -->
+        
+        
+        <!-- App css -->
         <?= link_tag('css/bootstrap.min.css'); ?>
         <?= link_tag('css/app.min.css'); ?> 
 
@@ -183,6 +183,13 @@
                                         <a href="/generate_report"> 
                                             <i class="mdi mdi-chart-areaspline"></i>
                                             <span> Generat Report </span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="/manage_scholarship"> 
+                                            <i class="mdi mdi-cogs"></i>
+                                            <span> Manage Scholarship </span>
                                         </a>
                                     </li>
                             <?php
@@ -364,8 +371,8 @@
         <script src="http://malsup.github.io/jquery.blockUI.js"></script>
         <script src="https://cdn.jsdelivr.net/gh/loadingio/ldLoader@v1.0.0/dist/ldld.min.js"></script> 
         <?= script_tag('assets/jquery-mask-plugin/jquery.mask.min.js'); ?>   
-        
-        <?= $this->renderSection('pageScript') ?> 
+ 
+         <?= $this->renderSection('pageScript') ?> 
 
         
     </body>
