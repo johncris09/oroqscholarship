@@ -129,12 +129,12 @@
                                             <div class="col-6">
                                                 <div class="w-50">
                                                     <label for="" class="form-label">App No. </label> 
-                                                    <div class="input-group mb-3">
-                                                        <input type="text" class="form-control text-center shs" value="<?php echo date('Y'); ?>" name="app_no_year"> 
+                                                    <div class="input-group mb-3"> 
+                                                        <input type="text" class="form-control text-center shs" value="<?php echo $config['current_year'] ; ?>" name="app_no_year"> 
                                                         <span class="input-group-text">-</span>
                                                         <select name="app_no_sem" class="form-control shs"  >
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
+                                                            <option <?php echo ($config['current_sem'] == 1) ? "selected" : ""; ?> value="1">1</option>
+                                                            <option <?php echo ($config['current_sem'] == 2) ? "selected" : ""; ?> value="2">2</option>
                                                         </select>  
                                                         <span class="input-group-text">-</span>
                                                         <input type="text" class="form-control text-center shs" name="app_no_id" required>
@@ -424,13 +424,13 @@
                                         <div class="row justify-content-between">
                                             <div class="col-6">
                                                 <div class="w-50">
-                                                    <label for="" class="form-label">App No. </label> 
+                                                    <label for="" class="form-label">App No. </label>   
                                                     <div class="input-group mb-3">
-                                                        <input type="text" class="form-control text-center college" value="<?php echo date('Y') ?>" name="app_no_year"  > 
+                                                        <input type="text" class="form-control text-center college" value="<?php echo $config['current_year'] ; ?>" name="app_no_year"  > 
                                                         <span class="input-group-text">-</span>
                                                         <select name="app_no_sem" class="form-control college"  >
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
+                                                            <option <?php echo ($config['current_sem'] == 1) ? "selected" : ""; ?> value="1">1</option>
+                                                            <option <?php echo ($config['current_sem'] == 2) ? "selected" : ""; ?> value="2">2</option>
                                                         </select>  
                                                         <span class="input-group-text">-</span>
                                                         <input type="text" class="form-control text-center college" name="app_no_id" required>
@@ -727,13 +727,13 @@
                                         <div class="row justify-content-between">
                                             <div class="col-6">
                                                 <div class="w-50">
-                                                    <label for="" class="form-label">App No. </label> 
+                                                    <label for="" class="form-label">App No. </label>   
                                                     <div class="input-group mb-3">
-                                                        <input type="text" class="form-control text-center tvet" value="<?php echo date('Y') ?>" name="app_no_year"  > 
+                                                        <input type="text" class="form-control text-center tvet" value="<?php echo $config['current_year'] ; ?>"  name="app_no_year"  > 
                                                         <span class="input-group-text">-</span>
                                                         <select name="app_no_sem" class="form-control tvet"  >
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
+                                                            <option <?php echo ($config['current_sem'] == 1) ? "selected" : ""; ?> value="1">1</option>
+                                                            <option <?php echo ($config['current_sem'] == 2) ? "selected" : ""; ?> value="2">2</option>
                                                         </select>  
                                                         <span class="input-group-text">-</span>
                                                         <input type="text" class="form-control text-center tvet" name="app_no_id" required>

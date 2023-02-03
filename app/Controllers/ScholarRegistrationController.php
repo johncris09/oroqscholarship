@@ -26,7 +26,6 @@ class ScholarRegistrationController extends BaseController
         $this->uri  = service('uri');
     }
 
-
     public function index()
     {      
         $data["page_title"] = "Scholar Registration";
@@ -36,6 +35,7 @@ class ScholarRegistrationController extends BaseController
         $college_school = new CollegeSchoolModel();
         $strand = new StrandModel();
         $sequence = new SequenceModel(); 
+        $data["config"] = $this->config_model->asArray()->where('id', 1)->findAll()[0]; 
         $data['year_started'] = $config->year_started;  
         $data['barangay'] = $config->barangay; 
         $data['semester'] = $config->semester; 

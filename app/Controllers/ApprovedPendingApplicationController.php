@@ -64,8 +64,7 @@ class ApprovedPendingApplicationController extends BaseController
             if($segment[2] == "shs"){ 
                 $data['profile'] = $this->senior_high->asArray()->where('id', $id)->findAll()[0];
             }else if($segment[2] == "college"){ 
-                $data['profile']  = $this->college->asArray()->where('id', $id)->findAll()[0];
-
+                $data['profile']  = $this->college->asArray()->where('id', $id)->findAll()[0]; 
             }else if($segment[2] == "tvet"){ 
                 $data['profile'] = $this->tvet->asArray()->where('id', $id)->findAll()[0];
             }else{

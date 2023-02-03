@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController; 
+use App\Models\ConfigModel;
 use App\Models\CollegeModel;
 
 class CollegeController extends BaseController
@@ -11,6 +12,7 @@ class CollegeController extends BaseController
     public function __construct() {
         $db = db_connect();
         $this->college = new CollegeModel($db);
+        $this->config_model =  new ConfigModel($db); 
     } 
 
     public function get_all()
@@ -21,13 +23,23 @@ class CollegeController extends BaseController
     
     public function get_pending_application()
     {
-        $res["data"] = $this->college->get_pending_application();
+        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0]; 
+        $data = array(
+            'colAppNoYear' => $config['current_year'],
+            'colAppNoSem' => $config['current_sem'],
+        ); 
+        $res["data"] = $this->college->get_pending_application($data);
         echo Json_encode($res);
     }
 
     public function get_approved_application()
     {
-        $res["data"] = $this->college->get_approved_application();
+        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0]; 
+        $data = array(
+            'colAppNoYear' => $config['current_year'],
+            'colAppNoSem' => $config['current_sem'],
+        ); 
+        $res["data"] = $this->college->get_approved_application($data);
         echo Json_encode($res);
     }
 
@@ -37,7 +49,7 @@ class CollegeController extends BaseController
         try{   
             $id = $this->request->getPost('id');
             $data = [
-                'AppStatus' => $this->request->getPost('status'), 
+                'colAppStat' => $this->request->getPost('status'), 
             ]; 
 
             $this->college->update($id, $data);

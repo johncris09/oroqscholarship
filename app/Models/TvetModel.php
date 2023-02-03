@@ -107,24 +107,26 @@ class TvetModel extends Model
         return $query; 
     }
 
-    public function get_pending_application()
+    public function get_pending_application($data)
     { 
         $query = $this->builder 
             ->select('ID, colAppNoYear, colAppNoSem, colAppNoID, colAppStat, colFirstName, colMI, colLastName, colSuffix, colAddress, colCourse, colSchool, colYearLevel, ')
             ->where('colAppStat', 'Pending')
             ->where('colManager', 'Active')
+            ->where($data)
             ->orderBy('colAppNoID', 'asc')
             ->get()
             ->getResult();  
         return $query; 
     }
 
-    public function get_approved_application()
+    public function get_approved_application($data)
     { 
         $query = $this->builder 
             ->select('ID, colAppNoYear, colAppNoSem, colAppNoID, colAppStat, colFirstName, colMI, colLastName, colSuffix, colAddress, colCourse, colSchool, colYearLevel, ')
             ->where('colAppStat', 'Approved')
             ->where('colManager', 'Active')
+            ->where($data)
             ->orderBy('colAppNoID', 'asc')
             ->get()
             ->getResult();  

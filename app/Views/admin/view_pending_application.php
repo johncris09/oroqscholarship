@@ -272,7 +272,7 @@
                                         </div>
                                         <div class="col-6">
                                             <label for="status" class="form-label">Status <?= $required_field; ?></label>
-                                            <h1 style="text-decoration: underline" class="text-danger"><?= $profile['colAppStat']; ?></h1> 
+                                            <h1 style="text-decoration: underline" class="status <?= in_array(strtolower($profile['colAppStat']), ['pending','disapproved']) ? 'text-danger' : ''  ?>"><?= $profile['colAppStat']; ?></h1> 
                                         </div>
                                     </div>
                                 </div> 
@@ -493,8 +493,8 @@
                             </div> 
                             <div class="row  mt-3" >  
                                 <div class="col-12  float-left"> 
-                                    <button type="button" data-method="update_shs" data-id="<?= $profile["ID"] ?>"  class="btn btn-primary rounded-pill approve-applicant-button">Approved</button>  
-                                    <button type="button" data-method="update_shs" data-id="<?= $profile["ID"] ?>" class="btn btn-danger rounded-pill disapprove-applicant-button">Disapproved</button> 
+                                    <button type="button" data-method="update_college" data-id="<?= $profile["ID"] ?>"  class="btn btn-primary rounded-pill approve-applicant-button">Approved</button>  
+                                    <button type="button" data-method="update_college" data-id="<?= $profile["ID"] ?>" class="btn btn-danger rounded-pill disapprove-applicant-button">Disapproved</button> 
                                     
                                 </div>
                             </div>    
@@ -514,7 +514,7 @@
                                         </div>
                                         <div class="col-6">
                                             <label for="status" class="form-label">Status <?= $required_field; ?></label>
-                                            <h1 style="text-decoration: underline" class="text-danger"><?= $profile['colAppStat']; ?></h1> 
+                                            <h1 style="text-decoration: underline" class="status <?= in_array(strtolower($profile['colAppStat']), ['pending','disapproved']) ? 'text-danger' : ''  ?>"><?= $profile['colAppStat']; ?></h1> 
                                         </div>
                                     </div>
                                 </div> 
@@ -729,8 +729,8 @@
                             </div>
                             <div class="row  mt-3" >  
                                 <div class="col-12  float-left"> 
-                                    <button type="button" data-method="update_shs" data-id="<?= $profile["ID"] ?>"  class="btn btn-primary rounded-pill approve-applicant-button">Approved</button>  
-                                    <button type="button" data-method="update_shs" data-id="<?= $profile["ID"] ?>" class="btn btn-danger rounded-pill disapprove-applicant-button">Disapproved</button> 
+                                    <button type="button" data-method="update_tvet" data-id="<?= $profile["ID"] ?>"  class="btn btn-primary rounded-pill approve-applicant-button">Approved</button>  
+                                    <button type="button" data-method="update_tvet" data-id="<?= $profile["ID"] ?>" class="btn btn-danger rounded-pill disapprove-applicant-button">Disapproved</button> 
                                     
                                 </div>
                             </div>   
@@ -786,7 +786,7 @@
                                 status : "Approved",
                             },  
                             dataType: "json", 
-                            success: function (data) {   
+                            success: function (data) { 
                                 if(data.response){ 
                                     Swal.fire({
                                         title:"Good job!",
@@ -795,6 +795,7 @@
                                     }) 
                                     $('.status').html('Approved')
                                     $('.status').removeClass('text-danger')
+                                    $('.status').addClass('text-primary')
                                 }else{ 
                                     Swal.fire({
                                         title:"Update Error!",

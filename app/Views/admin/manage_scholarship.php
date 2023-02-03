@@ -41,8 +41,8 @@
                                     ?> 
                                 </select>
                                 <select name="semester" class="form-select" id="inputGroupSelect01"> 
-                                    <option <?php echo ($config['current_sem']) ? "selected" : ""; ?> value="1">1</option>
-                                    <option <?php echo ($config['current_sem']) ? "selected" : ""; ?> value="2">2</option> 
+                                    <option <?php echo ($config['current_sem'] == 1) ? "selected" : ""; ?> value="1">1</option>
+                                    <option <?php echo ($config['current_sem'] == 2) ? "selected" : ""; ?> value="2">2</option> 
                                 </select>
                             </div>
                         </div>
@@ -165,7 +165,7 @@
 
 
             $('select[name=semester]').on('change', function(){ 
-                var sem = $('select[name=semester]').val();
+                var sem = $('select[name=semester]').val(); 
                 $.ajax({
                     url: "manage_scholarship/update_sem",
                     method: "POST",  
@@ -173,7 +173,7 @@
                         current_sem: sem 
                     }, 
                     dataType: "json",
-                    success: function(data){ 
+                    success: function(data){  
                         if(data.response){ 
                             Swal.fire({
                                 title:"Good job!",
@@ -184,7 +184,8 @@
                     }
                 }); 
                 
-            })        });
+            })        
+        });
 
 
     </script>
