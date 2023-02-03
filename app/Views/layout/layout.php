@@ -1,4 +1,11 @@
+<?php
 
+use App\Models\ConfigModel;
+
+$db = db_connect();
+    $config = new ConfigModel($db);
+    $config = $config->asArray()->where('id', 1)->findAll()[0];  
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -51,7 +58,11 @@
                                 <i class="fe-maximize noti-icon"></i>
                             </a>
                         </li>
-                
+                        <li class="dropdown d-none d-lg-inline-block"> 
+                            <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" href="#">
+                                <i class="mdi mdi-checkbox-blank-circle text-<?php echo ($config['semester_closed']) ? "danger" : "success" ?>"></i> Scholarship Status: <?php echo ($config['semester_closed']) ? "Closed" : "Open" ?>
+                            </a>
+                        </li>
                         
                         <li class="dropdown notification-list topbar-dropdown">
                             <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -122,7 +133,16 @@
                             </a>
                             <!-- End mobile menu toggle-->
                         </li>   
-                        
+                        <li class="dropdown d-none d-xl-block">
+                            <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" href="#">
+                                Current Application Year: <strong><u><?php echo $config['current_year']  ?></u></strong>  
+                            </a>  
+                        </li> 
+                        <li class="dropdown d-none d-xl-block">
+                            <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" href="#">
+                                Current Semester:  <strong><u><?php echo $config['current_sem']  ?></u></strong>  
+                            </a>  
+                        </li>
                 
                     </ul>
                     <div class="clearfix"></div>
