@@ -88,9 +88,10 @@ class SeniorHighModel extends Model
 
     }
 
-    public function count_approved(){  
+    public function count_approved($data){  
         $builder = $this->db
             ->table($this->table)
+            ->where($data)
             ->where('AppStatus', 'approved');
         $query = $builder->countAllResults();
         return $query;  
@@ -161,20 +162,22 @@ class SeniorHighModel extends Model
         return $query;
     }
 
-    public function get_tot_by_status()
+    public function get_tot_by_status($data)
     {
         $query = $this->builder 
             ->select('AppStatus as status, count(*) as total')  
+            ->where($data)
             ->where('AppStatus !=', "")
             ->groupBy('AppStatus')  
             ->get()
             ->getResult();  
         return $query;
     }
-    public function get_tot_by_school()
+    public function get_tot_by_school($data)
     {
         $query = $this->builder 
             ->select('Appschool as school, count(*) as total')  
+            ->where($data) 
             ->where('Appschool !=', "")
             ->groupBy('Appschool')  
             ->get()
@@ -183,21 +186,23 @@ class SeniorHighModel extends Model
     }
 
     
-    public function get_tot_by_barangay($barangay)
+    public function get_tot_by_barangay($barangay, $data)
     {
         $query = $this->builder 
             ->select('AppAddress as barangay, count(*) as total')  
+            ->where($data)
             ->like('AppAddress', $barangay, 'both')
             ->get()
             ->getResult();  
         return $query;
     }
 
-    public function get_tot_by_gender()
+    public function get_tot_by_gender($data)
     {
         $query = $this->builder 
             ->select('AppGender as gender, count(*) as total')  
             ->where('AppGender != ', "")
+            ->where($data)
             ->groupBy('AppGender')  
             ->get()
             ->getResult();  

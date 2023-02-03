@@ -88,9 +88,10 @@ class TvetModel extends Model
         return $query;  
     }
 
-    public function count_approved(){  
+    public function count_approved($data){  
         $builder = $this->db
             ->table($this->table)
+            ->where($data)
             ->where('colAppStat', 'approved');
         $query = $builder->countAllResults();
         return $query;  
@@ -149,42 +150,46 @@ class TvetModel extends Model
         return $query;
     }
     
-    public function get_tot_by_status()
+    public function get_tot_by_status($data)
     {
         $query = $this->builder 
             ->select('colAppStat as status, count(*) as total')  
+            ->where($data)
             ->groupBy('colAppStat')  
             ->get()
             ->getResult();  
         return $query;
     }
     
-    public function get_tot_by_school()
+    public function get_tot_by_school($data)
     {
         $query = $this->builder 
             ->select('colschool as school, count(*) as total')
             ->where('colSchool !=', "")
+            ->where($data)
             ->groupBy('colschool')  
             ->get()
             ->getResult();  
         return $query;
     } 
      
-    public function get_tot_by_barangay($barangay)
+    public function get_tot_by_barangay($barangay, $data)
     {
         $query = $this->builder 
-            ->select('colAddress as barangay, count(*) as total')  
+            ->select('colAddress as barangay, count(*) as total')    
+            ->where($data)
             ->like('colAddress', $barangay, 'both')
             ->get()
             ->getResult();  
         return $query;
     } 
     
-    public function get_tot_by_gender()
+    public function get_tot_by_gender($data)
     {
         $query = $this->builder 
             ->select('colGender as gender, count(*) as total')  
             ->where('colGender != ', "")
+            ->where($data)
             ->groupBy('colGender')  
             ->get()
             ->getResult();  
