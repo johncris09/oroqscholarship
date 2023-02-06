@@ -1,6 +1,10 @@
 <?php
 
 use App\Models\ConfigModel;
+use Config\Custom_config;
+
+$custom_config = new Custom_config; 
+$year_started = $custom_config->year_started; 
 
 $db = db_connect();
     $config = new ConfigModel($db);
@@ -53,6 +57,12 @@ $db = db_connect();
                 <div class="container-fluid">
                     <ul class="list-unstyled topnav-menu float-end mb-0">  
                 
+                        <li class="dropdown notification-list topbar-dropdown">
+                            <a class="nav-link dropdown-toggle waves-effect waves-light"   href="/registration" role="button"  >
+                                <i class="fe-plus noti-icon"></i> Add New Applicant
+                            </a> 
+                        </li>
+                        
                         <li class="dropdown d-none d-lg-inline-block">
                             <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="fullscreen" href="#">
                                 <i class="fe-maximize noti-icon"></i>
@@ -60,7 +70,7 @@ $db = db_connect();
                         </li>
                         <li class="dropdown d-none d-lg-inline-block"> 
                             <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" href="#">
-                                <i class="mdi mdi-checkbox-blank-circle text-<?php echo ($config['semester_closed']) ? "danger" : "success" ?>"></i> Scholarship Status: <?php echo ($config['semester_closed']) ? "Closed" : "Open" ?>
+                                 Scholarship Status: <i class="mdi mdi-checkbox-blank-circle text-<?php echo ($config['semester_closed']) ? "danger" : "success" ?>"></i>
                             </a>
                         </li>
                         
@@ -169,14 +179,7 @@ $db = db_connect();
                                             <i class="fe-airplay"></i>
                                             <span> Dashboard </span>
                                         </a>
-                                    </li> 
-
-                                    <li>
-                                        <a href="/registration"> 
-                                            <i class="mdi mdi-book-plus-outline"></i>
-                                            <span> Scholar Registration </span>
-                                        </a>
-                                    </li>
+                                    </li>  
 
                                     <li>
                                         <a href="/#shsmanage" data-bs-toggle="collapse">
@@ -199,13 +202,37 @@ $db = db_connect();
                                         </div>
                                     </li> 
 
+
+                            <?php
+                                } 
+                            ?>
+                            
+                            <?php
+                                if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin", "admin"])){
+                            ?>  
+                            
+                                    <li>
+                                        <a href="/registration"> 
+                                            <i class="mdi mdi-book-plus-outline"></i>
+                                            <span> Scholar Registration </span>
+                                        </a>
+                                    </li>
+                                    
                                     <li>
                                         <a href="/generate_report"> 
                                             <i class="mdi mdi-chart-areaspline"></i>
                                             <span> Generat Report </span>
                                         </a>
                                     </li>
+                            <?php
+                                }
+                            ?>
 
+
+                            
+                            <?php
+                                if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                            ?> 
                                     <li>
                                         <a href="/manage_scholarship"> 
                                             <i class="mdi mdi-cogs"></i>
@@ -213,9 +240,8 @@ $db = db_connect();
                                         </a>
                                     </li>
                             <?php
-                                } 
+                                }
                             ?>
-
 
                             <?php
                                 if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin", "admin"])){
@@ -298,8 +324,54 @@ $db = db_connect();
                                     <?php
                                         if(uri_string() == "/"){
                                     ?>
-                                            <div>
-                                                <form id="filter-form" class="validation-form" >
+                                        
+                                            <div> 
+                                                
+                                                <input <?php echo (isset($_GET['view'])) ?  "checked" : "" ?> type="checkbox" id="view-all" name=""  > 
+                                                <label for="view-all">View All Data</label> 
+                                                <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#advance-filter-modal"> <i class="mdi mdi-filter-outline"></i> Advance Filter</button> 
+ 
+                                                <div class="modal fade" id="advance-filter-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Advance Filter</h4>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <form id="advance-filter-form" action="" method="get"> 
+                                                                <div class="modal-body ">
+                                                                    <div class="form-group">
+                                                                        <label for="application-year" class="form-label">Application Year</label>
+                                                                        <select name="app_year" class="form-select" id="application-year"> 
+                                                                        <?php  
+                                                                            foreach(range(date('Y'), $year_started) as $year){ 
+                                                                        ?>
+                                                                                <option value="<?php echo $year; ?>"><?php echo $year; ?></option>
+                                                                        <?php
+
+                                                                            }
+                                                                        ?> 
+                                                                    </select>
+                                                                    
+                                                                    </div>  
+                                                                    <div class="form-group">
+                                                                        <label for=" " class="form-label">Semester</label>
+                                                                        <select name="app_sem" class="form-select" id="inputGroupSelect01"> 
+                                                                            <option value="">Select</option>
+                                                                            <option value="1">1</option>
+                                                                            <option value="2">2</option> 
+                                                                        </select>
+                                                                    </div>   
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-info waves-effect waves-light">Filter</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- <form id="filter-form" class="validation-form" > 
                                                     <div class="input-group "> 
                                                         <select name="sy" class="form-control">
                                                             <option value="">School Year</option>
@@ -314,8 +386,8 @@ $db = db_connect();
                                                             <option value="2">2</option>
                                                         </select>   
                                                         <button class="btn btn-primary" type="submit" > <i class="mdi mdi-magnify"></i> Filter</button>
-                                                    </div>
-                                                </form>
+                                                    </div> 
+                                                </form>-->
                                                
                                             </div>
                                     <?php
@@ -356,6 +428,7 @@ $db = db_connect();
         
         <script>
             var BASE_URL = "<?= base_url(); ?>";
+            
         </script>
 
         <!-- Vendor js -->
@@ -391,8 +464,8 @@ $db = db_connect();
         <script src="http://malsup.github.io/jquery.blockUI.js"></script>
         <script src="https://cdn.jsdelivr.net/gh/loadingio/ldLoader@v1.0.0/dist/ldld.min.js"></script> 
         <?= script_tag('assets/jquery-mask-plugin/jquery.mask.min.js'); ?>   
- 
-         <?= $this->renderSection('pageScript') ?> 
+                        
+        <?= $this->renderSection('pageScript') ?> 
 
         
     </body>

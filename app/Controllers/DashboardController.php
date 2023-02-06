@@ -24,32 +24,42 @@ class DashboardController extends BaseController
 
     public function index()
     {     
-
         $config= $this->config_model->asArray()->where('id', 1)->findAll()[0]; 
-        $shs_data = array(
-            'AppNoYear' => $config['current_year'],
-            'AppNoSem' => $config['current_sem'],
-        );  
-        $college_tvet_data = array(
-            'colAppNoYear' => $config['current_year'],
-            'colAppNoSem' => $config['current_sem'],
-        );  
+        $shs_data = []; 
+        $college_tvet_data = [];
+        if(isset($_GET['view'])){
+            if($_GET['view']== "all"){  
+                $shs_data = []; 
+                $college_tvet_data = []; 
+            }  
+        }else{ 
+            if(isset($_GET['app_sem'])){
+                if(!empty($_GET['app_sem'])){
+                    $shs_data['AppNoSem'] = $_GET['app_sem'];
+                    $college_tvet_data['colAppNoSem'] = $_GET['app_sem'];
+                }else{
+                    $shs_data = [];
+                } 
+            }else{ 
+                $shs_data['AppNoSem'] = $config['current_sem'];
+                $college_tvet_data['colAppNoSem'] = $config['current_sem'];
+            }
+            $shs_data['AppNoYear'] = (isset($_GET['app_year'])) ? $_GET['app_year'] : $config['current_year']; 
+            $college_tvet_data['colAppNoYear'] = (isset($_GET['app_year'])) ? $_GET['app_year'] : $config['current_year']; 
+        }  
         $data['tot_approved_shs'] = $this->senior_high->count_approved($shs_data); 
         $data['tot_approved_college'] = $this->college->count_approved($college_tvet_data);
-        $data['tot_approved_tvet'] = $this->tvet->count_approved($college_tvet_data);
-        
+        $data['tot_approved_tvet'] = $this->tvet->count_approved($college_tvet_data); 
         $data["page_title"] = "Dashboard";
-        $data["shs_gender"] = $this->scholarship_shs_gender($shs_data); 
-        
-
+        $data["shs_gender"] = $this->scholarship_shs_gender($shs_data);  
         $data["college_gender"] = $this->scholarship_college_gender($college_tvet_data); 
         $data["tvet_gender"] = $this->scholarship_tvet_gender($college_tvet_data);
-        $data["scholarship_status"] = $this->scholarship_status();
-        $data["scholarship_barangay"] = $this->scholarship_barangay();
-        $data["shs_school"] = $this->get_by_shs_school();  
-        $data["college_school"] = $this->get_by_college_school(); 
-        $data["tvet_school"] = $this->get_by_tvet_school();  
-        return view('admin/dashboard', $data); 
+        $data["scholarship_status"] = $this->scholarship_status($shs_data, $college_tvet_data); 
+        $data["scholarship_barangay"] = $this->scholarship_barangay($shs_data, $college_tvet_data);
+        $data["shs_school"] = $this->get_by_shs_school($shs_data, $college_tvet_data);  
+        $data["college_school"] = $this->get_by_college_school( $college_tvet_data); 
+        $data["tvet_school"] = $this->get_by_tvet_school($college_tvet_data);  
+        return view('admin/dashboard', $data);  
     }
 
     
@@ -72,20 +82,10 @@ class DashboardController extends BaseController
         return $data; 
     }
 
-    public function scholarship_status()
+    public function scholarship_status($shs_data, $college_tvet_data)
     { 
 
-        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0]; 
-        $shs_data = array(
-            'AppNoYear' => $config['current_year'],
-            'AppNoSem' => $config['current_sem'],
-        );  
-        $college_tvet_data = array(
-            'colAppNoYear' => $config['current_year'],
-            'colAppNoSem' => $config['current_sem'],
-        ); 
-
-
+        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0];   
         $shs  = $this->senior_high->get_tot_by_status($shs_data);
         $college  = $this->college->get_tot_by_status($college_tvet_data);
         $tvet  = $this->tvet->get_tot_by_status($college_tvet_data);
@@ -113,13 +113,9 @@ class DashboardController extends BaseController
 
     }
   
-    public function get_by_shs_school()
+    public function get_by_shs_school($shs_data)
     { 
-        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0]; 
-        $shs_data = array(
-            'AppNoYear' => $config['current_year'],
-            'AppNoSem' => $config['current_sem'],
-        ); 
+        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0];  
 
         $shs  = $this->senior_high->get_tot_by_school($shs_data); 
         $data = [];
@@ -132,14 +128,10 @@ class DashboardController extends BaseController
     }
 
     
-    public function get_by_college_school()
+    public function get_by_college_school($college_tvet_data)
     {  
         
-        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0]; 
-        $college_tvet_data = array(
-            'colAppNoYear' => $config['current_year'],
-            'colAppNoSem' => $config['current_sem'],
-        ); 
+        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0];  
 
         $college  = $this->college->get_tot_by_school($college_tvet_data); 
         $data = [];
@@ -152,14 +144,9 @@ class DashboardController extends BaseController
     }
  
     
-    public function get_by_tvet_school()
+    public function get_by_tvet_school($college_tvet_data)
     {  
-        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0]; 
-        $college_tvet_data = array(
-            'colAppNoYear' => $config['current_year'],
-            'colAppNoSem' => $config['current_sem'],
-        ); 
-
+        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0];   
         $tvet  = $this->tvet->get_tot_by_school($college_tvet_data);  
         $data = []; 
         foreach($tvet as $row){  
@@ -172,19 +159,10 @@ class DashboardController extends BaseController
  
  
     
-    public function scholarship_barangay()
+    public function scholarship_barangay($shs_data, $college_tvet_data)
     {  
 
-        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0]; 
-        $shs_data = array(
-            'AppNoYear' => $config['current_year'],
-            'AppNoSem' => $config['current_sem'],
-        );  
-        $college_tvet_data = array(
-            'colAppNoYear' => $config['current_year'],
-            'colAppNoSem' => $config['current_sem'],
-        ); 
-
+        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0];  
 
 
         $barangay =  $this->custom_config->barangay;
