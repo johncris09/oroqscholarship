@@ -433,9 +433,15 @@
                                 </div>  
                                 <div class="row   mt-3" >  
                                     <div class="col-12  float-left"> 
-                                        <button type="submit" class="btn btn-primary rounded-pill">Update</button>  
-                                        <button type="button" data-id="<?= $profile["ID"] ?>" id="delete-button" class="btn btn-danger rounded-pill">Delete</button> 
-                                        
+                                        <?php
+                                            if( !in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+                                        ?>  
+                                                <button type="submit" class="btn btn-primary rounded-pill">Update</button>  
+                                                <button type="button" data-id="<?= $profile["ID"] ?>" id="delete-button" class="btn btn-danger rounded-pill">Delete</button> 
+                                                
+                                        <?php
+                                            }
+                                        ?>  
                                     </div>
                                 </div>    
                             </form>    
@@ -783,9 +789,15 @@
                                 </div>  
                                 <div class="row   mt-3" >  
                                     <div class="col-12  float-left"> 
-                                        <button type="submit" class="btn btn-primary rounded-pill">Update</button>  
-                                        <button type="button" data-id="<?= $profile["ID"] ?>" id="delete-button" class="btn btn-danger rounded-pill">Delete</button> 
+                                        <?php
+                                            if( !in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+                                        ?>   
+                                                <button type="submit" class="btn btn-primary rounded-pill">Update</button>  
+                                                <button type="button" data-id="<?= $profile["ID"] ?>" id="delete-button" class="btn btn-danger rounded-pill">Delete</button> 
                                         
+                                        <?php
+                                            }
+                                        ?>
                                     </div>
                                 </div>   
                             </form>
@@ -1134,10 +1146,16 @@
                                     </div> 
                                 </div>  
                                 <div class="row   mt-3" >  
-                                    <div class="col-12  float-left"> 
-                                        <button type="submit" class="btn btn-primary rounded-pill">Update</button>  
-                                        <button type="button" data-id="<?= $profile["ID"] ?>" id="delete-button" class="btn btn-danger rounded-pill">Delete</button> 
+                                    <div class="col-12  float-left">
+                                        <?php
+                                            if( !in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+                                        ?>    
+                                                <button type="submit" class="btn btn-primary rounded-pill">Update</button>  
+                                                <button type="button" data-id="<?= $profile["ID"] ?>" id="delete-button" class="btn btn-danger rounded-pill">Delete</button> 
                                         
+                                        <?php
+                                            }
+                                        ?>
                                     </div>
                                 </div>   
                             </form> 

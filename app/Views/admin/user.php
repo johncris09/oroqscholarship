@@ -77,10 +77,8 @@
                             <select name="group"  class="form-control"  required>
                                 <option value="">Select</option>
                                 <option value="superadmin">Super Admin</option>
-                                <option value="admin">Admin</option>
-                                <option value="developer">Developer</option>
-                                <option value="user">User</option>
-                                <option value="beta">Beta</option>
+                                <option value="admin">Admin</option> 
+                                <option value="user">User</option> 
                             </select>  
                         </div>    
                     </div>
@@ -131,10 +129,8 @@
                             <select name="group"  class="form-control"  required>
                                 <option value="">Select</option>
                                 <option value="superadmin">Super Admin</option>
-                                <option value="admin">Admin</option>
-                                <option value="developer">Developer</option>
-                                <option value="user">User</option>
-                                <option value="beta">Beta</option>
+                                <option value="admin">Admin</option> 
+                                <option value="user">User</option> 
                             </select>  
                         </div>    
                     </div>

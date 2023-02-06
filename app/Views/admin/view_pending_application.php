@@ -251,10 +251,15 @@
                                 </div> 
                             </div>  
                             <div class="row  mt-3" >  
-                                <div class="col-12  float-left"> 
-                                    <button type="button" data-method="update_shs" data-id="<?= $profile["ID"] ?>"  class="btn btn-primary rounded-pill approve-applicant-button">Approved</button>  
-                                    <button type="button" data-method="update_shs" data-id="<?= $profile["ID"] ?>" class="btn btn-danger rounded-pill disapprove-applicant-button">Disapproved</button> 
-                                    
+                                <div class="col-12  float-left">  
+                                    <?php
+                                        if( !in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+                                    ?>  
+                                            <button type="button" data-method="update_shs" data-id="<?= $profile["ID"] ?>"  class="btn btn-primary rounded-pill approve-applicant-button">Approved</button>  
+                                            <button type="button" data-method="update_shs" data-id="<?= $profile["ID"] ?>" class="btn btn-danger rounded-pill disapprove-applicant-button">Disapproved</button>  
+                                    <?php
+                                        }
+                                    ?>  
                                 </div>
                             </div>  
                         </form>    
@@ -491,12 +496,16 @@
                                     <input type="text" value="<?= $profile['colMotherOccu'] ?>"  class="form-control text-capitalize"  name="mother_occupation" >
                                 </div> 
                             </div> 
-                            <div class="row  mt-3" >  
-                                <div class="col-12  float-left"> 
+                            <div class="row  mt-3" >   
+                                <?php
+                                    if( !in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+                                ?>  
                                     <button type="button" data-method="update_college" data-id="<?= $profile["ID"] ?>"  class="btn btn-primary rounded-pill approve-applicant-button">Approved</button>  
                                     <button type="button" data-method="update_college" data-id="<?= $profile["ID"] ?>" class="btn btn-danger rounded-pill disapprove-applicant-button">Disapproved</button> 
                                     
-                                </div>
+                                <?php
+                                    }
+                                ?>   
                             </div>    
                         </form>
                 <?php
@@ -727,11 +736,17 @@
                                     <input type="text" value="<?= $profile['colMotherOccu'] ?>"  class="form-control text-capitalize"  name="mother_occupation" >
                                 </div> 
                             </div>
-                            <div class="row  mt-3" >  
-                                <div class="col-12  float-left"> 
-                                    <button type="button" data-method="update_tvet" data-id="<?= $profile["ID"] ?>"  class="btn btn-primary rounded-pill approve-applicant-button">Approved</button>  
-                                    <button type="button" data-method="update_tvet" data-id="<?= $profile["ID"] ?>" class="btn btn-danger rounded-pill disapprove-applicant-button">Disapproved</button> 
-                                    
+                            <div class="row  mt-3" >   
+                                <div class="col-12  float-left">  
+                                    <?php
+                                        if( !in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+                                    ?>  
+                                        <button type="button" data-method="update_tvet" data-id="<?= $profile["ID"] ?>"  class="btn btn-primary rounded-pill approve-applicant-button">Approved</button>  
+                                        <button type="button" data-method="update_tvet" data-id="<?= $profile["ID"] ?>" class="btn btn-danger rounded-pill disapprove-applicant-button">Disapproved</button> 
+                                        
+                                    <?php
+                                        }
+                                    ?>   
                                 </div>
                             </div>   
                         </form> 
