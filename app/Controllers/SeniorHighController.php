@@ -20,27 +20,63 @@ class SeniorHighController extends BaseController
     {
         $data["data"] = $this->senior_high->get_all();
         echo json_encode($data);
-    }
-
+    } 
+    
     public function get_pending_application()
     {
-        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0]; 
-        $data = array(
-            'AppNoYear' => $config['current_year'],
-            'AppNoSem' => $config['current_sem'],
-        ); 
-        $res["data"] = $this->senior_high->get_pending_application($data);
+        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0];  
+        $shs_data = [];  
+        if(!empty($_GET['view'])){
+            $shs_data = [];
+        }
+
+        if(!empty($_GET['app_sem'])){
+            $shs_data['AppNoSem'] = $_GET['app_sem']; 
+        }else{
+            $shs_data = [];
+        }  
+
+        if(!empty($_GET['app_year'])){
+            $shs_data['AppNoYear'] = $_GET['app_year']; 
+        }else{ 
+            $shs_data = [];
+        }  
+        if(empty($_GET['app_year']) && empty($_GET['app_sem'])  && empty($_GET['view']) ){ 
+            $shs_data = array(
+                'AppNoYear' => $config['current_year'],
+                'AppNoSem' => $config['current_sem'],
+            ); 
+        } 
+        $res["data"] = $this->senior_high->get_approved_application($shs_data);
         echo Json_encode($res);
     }
 
     public function get_approved_application()
     {
-        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0]; 
-        $data = array(
-            'AppNoYear' => $config['current_year'],
-            'AppNoSem' => $config['current_sem'],
-        ); 
-        $res["data"] = $this->senior_high->get_approved_application($data);
+        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0];  
+        $shs_data = [];  
+        if(!empty($_GET['view'])){
+            $shs_data = [];
+        }
+
+        if(!empty($_GET['app_sem'])){
+            $shs_data['AppNoSem'] = $_GET['app_sem']; 
+        }else{
+            $shs_data = [];
+        }  
+
+        if(!empty($_GET['app_year'])){
+            $shs_data['AppNoYear'] = $_GET['app_year']; 
+        }else{ 
+            $shs_data = [];
+        }  
+        if(empty($_GET['app_year']) && empty($_GET['app_sem'])  && empty($_GET['view']) ){ 
+            $shs_data = array(
+                'AppNoYear' => $config['current_year'],
+                'AppNoSem' => $config['current_sem'],
+            ); 
+        } 
+        $res["data"] = $this->senior_high->get_approved_application($shs_data);
         echo Json_encode($res);
     }
 

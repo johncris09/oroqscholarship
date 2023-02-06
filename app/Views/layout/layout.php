@@ -322,7 +322,7 @@ $db = db_connect();
                                 <div class="page-title-box">
                                     <h4 class="page-title"><?= !isset($page_title) ? "Dashboard" : $page_title; ?></h4>
                                     <?php
-                                        if(uri_string() == "/"){
+                                        if( in_array(uri_string(), ["/", "approved", "pending"]) ){
                                     ?>
                                         
                                             <div> 

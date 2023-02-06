@@ -91,12 +91,30 @@
     <script>
         $(document).ready(function() {  
 
+            
+            $('#view-all').on('change', function(){
+                var that = this
+                if($(this).is(':checked')){ 
+                    // that.checked = false;   \
+                    window.location.href="?view=all"
+                }else{
+                    window.location.href= "<?php  echo uri_string() ?>"
+                }
+            })  
+            
+            
             var senior_high_table = $('#senior-high-table').DataTable({
                 "scrollY": 450,
                 "scrollX": true, 
                 deferRender: true, 
                 ajax: {
-                    url: 'approved/get_shs_approved_list',  
+                    url: 'approved/get_shs_approved_list',   
+                    method: "get", 
+                    data: {
+                        view : "<?php echo isset($_GET['view']) ?  $_GET['view'] : ''?>",
+                        app_sem : "<?php echo isset($_GET['app_sem']) ?  $_GET['app_sem'] : ''?>",
+                        app_year : "<?php echo isset($_GET['app_year']) ?  $_GET['app_year'] : ''?>", 
+                    },
                 },
                 columns: [  
                     {
@@ -125,7 +143,13 @@
                 "scrollX": true, 
                 deferRender: true, 
                 ajax: {
-                    url: 'approved/get_college_approved_list',  
+                    url: 'approved/get_college_approved_list',    
+                    method: "get", 
+                    data: {
+                        view : "<?php echo isset($_GET['view']) ?  $_GET['view'] : ''?>",
+                        app_sem : "<?php echo isset($_GET['app_sem']) ?  $_GET['app_sem'] : ''?>",
+                        app_year : "<?php echo isset($_GET['app_year']) ?  $_GET['app_year'] : ''?>", 
+                    },
                 },
                 columns: [  
                     {
@@ -153,7 +177,13 @@
                 "scrollX": true, 
                 deferRender: true, 
                 ajax: {
-                    url: 'approved/get_tvet_approved_list',  
+                    url: 'approved/get_tvet_approved_list',    
+                    method: "get", 
+                    data: {
+                        view : "<?php echo isset($_GET['view']) ?  $_GET['view'] : ''?>",
+                        app_sem : "<?php echo isset($_GET['app_sem']) ?  $_GET['app_sem'] : ''?>",
+                        app_year : "<?php echo isset($_GET['app_year']) ?  $_GET['app_year'] : ''?>", 
+                    },
                 },
                 columns: [  
                     {

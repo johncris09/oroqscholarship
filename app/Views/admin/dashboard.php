@@ -226,16 +226,14 @@
     <script> 
         $(document).ready(function(){   
 
-            
-            // $('#advance-filter-modal').modal('show')
- 
+             
             $('#view-all').on('change', function(){
                 var that = this
                 if($(this).is(':checked')){ 
                     // that.checked = false;   \
                     window.location.href="?view=all"
                 }else{
-                    window.location.href="/" 
+                    window.location.href= "<?php  echo uri_string() ?>"
                 }
             })
 

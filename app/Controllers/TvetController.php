@@ -20,28 +20,70 @@ class TvetController extends BaseController
         $data["data"] = $this->tvet->get_all();
         echo json_encode($data);
     }
-
+ 
+    
     public function get_pending_application()
     {
-        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0]; 
-        $data = array(
-            'colAppNoYear' => $config['current_year'],
-            'colAppNoSem' => $config['current_sem'],
-        ); 
-        $res["data"] = $this->tvet->get_pending_application($data);
+        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0];  
+        $tvet_data = [];  
+        if(!empty($_GET['view'])){
+            $tvet_data = [];
+        }
+
+        if(!empty($_GET['app_sem'])){
+            $tvet_data['colAppNoSem'] = $_GET['app_sem']; 
+        }else{
+            $tvet_data = [];
+        }  
+
+        if(!empty($_GET['app_year'])){
+            $tvet_data['colAppNoYear'] = $_GET['app_year']; 
+        }else{ 
+            $tvet_data = [];
+        }  
+        if(empty($_GET['app_year']) && empty($_GET['app_sem'])  && empty($_GET['view']) ){ 
+            $tvet_data = array(
+                'colAppNoYear' => $config['current_year'],
+                'colAppNoSem' => $config['current_sem'],
+            ); 
+        } 
+        $res["data"] = $this->tvet->get_pending_application($tvet_data);
         echo Json_encode($res);
     }
 
+
+
+    
     public function get_approved_application()
     {
-        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0]; 
-        $data = array(
-            'colAppNoYear' => $config['current_year'],
-            'colAppNoSem' => $config['current_sem'],
-        ); 
-        $res["data"] = $this->tvet->get_approved_application($data);
+        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0];  
+        $colelge_data = [];  
+        if(!empty($_GET['view'])){
+            $colelge_data = [];
+        }
+
+        if(!empty($_GET['app_sem'])){
+            $colelge_data['colAppNoSem'] = $_GET['app_sem']; 
+        }else{
+            $colelge_data = [];
+        }  
+
+        if(!empty($_GET['app_year'])){
+            $colelge_data['colAppNoYear'] = $_GET['app_year']; 
+        }else{ 
+            $colelge_data = [];
+        }  
+        if(empty($_GET['app_year']) && empty($_GET['app_sem'])  && empty($_GET['view']) ){ 
+            $colelge_data = array(
+                'colAppNoYear' => $config['current_year'],
+                'colAppNoSem' => $config['current_sem'],
+            ); 
+        } 
+        $res["data"] = $this->tvet->get_approved_application($colelge_data);
         echo Json_encode($res);
     }
+
+
 
     
     public function update_status()
