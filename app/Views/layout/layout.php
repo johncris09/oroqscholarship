@@ -194,10 +194,16 @@ $db = db_connect();
                                                 </li> 
                                                 <li>
                                                     <a href="/pending">  Pending Application </a>
-                                                </li>  
-                                                <li>
-                                                    <a href="/manage">Delete/Edit Application</a>
-                                                </li> 
+                                                </li>
+                                                <?php 
+                                                    if(strtolower(auth()->user()->groups[0]) !== "user"){
+                                                ?>
+                                                        <li>
+                                                            <a href="/manage">Delete/Edit Application</a>
+                                                        </li> 
+                                                <?php
+                                                    }
+                                                ?>
                                             </ul>
                                         </div>
                                     </li> 
@@ -244,7 +250,7 @@ $db = db_connect();
                             ?>
 
                             <?php
-                                if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin", "admin"])){
+                                if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
                             ?>
                                 <li class="menu-title mt-4">Utilities</li>
                                     <li>
