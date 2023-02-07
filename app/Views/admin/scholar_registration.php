@@ -137,7 +137,7 @@
                                                             <option <?php echo ($config['current_sem'] == 2) ? "selected" : ""; ?> value="2">2</option>
                                                         </select>  
                                                         <span class="input-group-text">-</span>
-                                                        <input type="text" class="form-control text-center shs" name="app_no_id" required>
+                                                        <input type="text" class="form-control text-center shs" name="app_no_id" required readonly>
                                                     </div>
                                                 </div> 
                                             </div>
@@ -433,7 +433,7 @@
                                                             <option <?php echo ($config['current_sem'] == 2) ? "selected" : ""; ?> value="2">2</option>
                                                         </select>  
                                                         <span class="input-group-text">-</span>
-                                                        <input type="text" class="form-control text-center college" name="app_no_id" required>
+                                                        <input type="text" class="form-control text-center college" name="app_no_id" required readonly>
                                                     </div>
                                                 </div> 
                                             </div> 
@@ -736,7 +736,7 @@
                                                             <option <?php echo ($config['current_sem'] == 2) ? "selected" : ""; ?> value="2">2</option>
                                                         </select>  
                                                         <span class="input-group-text">-</span>
-                                                        <input type="text" class="form-control text-center tvet" name="app_no_id" required>
+                                                        <input type="text" class="form-control text-center tvet" name="app_no_id" required readonly>
                                                     </div>
                                                 </div> 
                                             </div>  
