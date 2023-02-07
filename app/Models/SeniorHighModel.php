@@ -110,10 +110,11 @@ class SeniorHighModel extends Model
     }
 
     
-    public function get_all()
+    public function get_all($data)
     { 
         $query = $this->builder 
-            ->select('ID, AppNoYear, AppNoSem, AppNoID, AppStatus, AppFirstName, AppMidIn, AppLastName, AppSuffix, AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ')  
+            ->select('ID, AppNoYear, AppNoSem, AppNoID, AppStatus, AppFirstName, AppMidIn, AppLastName, AppSuffix, AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ')
+            ->where($data)
             ->orderBy('id', 'desc')
             ->get()
             ->getResult();  

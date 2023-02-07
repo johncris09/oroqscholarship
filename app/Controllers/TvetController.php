@@ -15,12 +15,35 @@ class TvetController extends BaseController
         $this->config_model =  new ConfigModel($db); 
     } 
 
+    
     public function get_all()
-    {
-        $data["data"] = $this->tvet->get_all();
+    { 
+        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0];  
+        $tvet_data = [];  
+        if(!empty($_GET['view'])){
+            $tvet_data = [];
+        }
+
+        if(!empty($_GET['app_sem'])){
+            $tvet_data['colAppNoSem'] = $_GET['app_sem']; 
+        }else{
+            $tvet_data = [];
+        }  
+
+        if(!empty($_GET['app_year'])){
+            $tvet_data['colAppNoYear'] = $_GET['app_year']; 
+        }else{ 
+            $tvet_data = [];
+        }  
+        if(empty($_GET['app_year']) && empty($_GET['app_sem'])  && empty($_GET['view']) ){ 
+            $tvet_data = array(
+                'colAppNoYear' => $config['current_year'],
+                'colAppNoSem' => $config['current_sem'],
+            ); 
+        }  
+        $data["data"] = $this->tvet->get_all($tvet_data);
         echo json_encode($data);
-    }
- 
+    }  
     
     public function get_pending_application()
     {

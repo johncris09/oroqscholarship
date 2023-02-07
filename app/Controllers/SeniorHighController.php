@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\ConfigModel;
-use App\Models\SeniorHighModel;
+use App\Models\SeniorHighModel; 
 
 class SeniorHighController extends BaseController
 {
@@ -12,13 +12,36 @@ class SeniorHighController extends BaseController
     public function __construct() {
         $db = db_connect();
         $this->senior_high = new SeniorHighModel($db);
-        $this->config_model =  new ConfigModel($db); 
+        $this->config_model =  new ConfigModel($db);  
 
     }  
 
     public function get_all()
-    {
-        $data["data"] = $this->senior_high->get_all();
+    { 
+        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0];  
+        $shs_data = [];  
+        if(!empty($_GET['view'])){
+            $shs_data = [];
+        }
+
+        if(!empty($_GET['app_sem'])){
+            $shs_data['AppNoSem'] = $_GET['app_sem']; 
+        }else{
+            $shs_data = [];
+        }  
+
+        if(!empty($_GET['app_year'])){
+            $shs_data['AppNoYear'] = $_GET['app_year']; 
+        }else{ 
+            $shs_data = [];
+        }  
+        if(empty($_GET['app_year']) && empty($_GET['app_sem'])  && empty($_GET['view']) ){ 
+            $shs_data = array(
+                'AppNoYear' => $config['current_year'],
+                'AppNoSem' => $config['current_sem'],
+            ); 
+        }  
+        $data["data"] = $this->senior_high->get_all($shs_data);
         echo json_encode($data);
     } 
     
@@ -47,7 +70,7 @@ class SeniorHighController extends BaseController
                 'AppNoSem' => $config['current_sem'],
             ); 
         } 
-        $res["data"] = $this->senior_high->get_approved_application($shs_data);
+        $res["data"] = $this->senior_high->get_pending_application($shs_data);
         echo Json_encode($res);
     }
 

@@ -98,10 +98,11 @@ class TvetModel extends Model
 
     }
 
-    public function get_all()
+    public function get_all($data)
     { 
         $query = $this->builder 
             ->select('ID, colAppNoYear, colAppNoSem, colAppNoID, colAppStat, colFirstName, colMI, colLastName, colSuffix, colAddress, colCourse, colSchool, colYearLevel, ') 
+            ->where($data)
             ->orderBy('colAppNoID', 'desc')
             ->get()
             ->getResult();  

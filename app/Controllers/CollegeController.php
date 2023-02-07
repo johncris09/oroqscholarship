@@ -13,13 +13,36 @@ class CollegeController extends BaseController
         $db = db_connect();
         $this->college = new CollegeModel($db);
         $this->config_model =  new ConfigModel($db); 
-    } 
+    }
 
     public function get_all()
-    {
-        $data["data"] = $this->college->get_all();
+    { 
+        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0];  
+        $college_data = [];  
+        if(!empty($_GET['view'])){
+            $college_data = [];
+        }
+
+        if(!empty($_GET['app_sem'])){
+            $college_data['colAppNoSem'] = $_GET['app_sem']; 
+        }else{
+            $college_data = [];
+        }  
+
+        if(!empty($_GET['app_year'])){
+            $college_data['colAppNoYear'] = $_GET['app_year']; 
+        }else{ 
+            $college_data = [];
+        }  
+        if(empty($_GET['app_year']) && empty($_GET['app_sem'])  && empty($_GET['view']) ){ 
+            $college_data = array(
+                'colAppNoYear' => $config['current_year'],
+                'colAppNoSem' => $config['current_sem'],
+            ); 
+        }  
+        $data["data"] = $this->college->get_all($college_data);
         echo json_encode($data);
-    }
+    } 
      
     public function get_pending_application()
     {

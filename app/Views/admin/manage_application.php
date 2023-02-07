@@ -92,12 +92,32 @@
     <script>
         $(document).ready(function() {  
 
+            
+            
+            $('#view-all').on('change', function(){
+                var that = this
+                if($(this).is(':checked')){ 
+                    // that.checked = false;   \
+                    window.location.href="?view=all"
+                }else{
+                    window.location.href= "<?php  echo uri_string() ?>"
+                }
+            })  
+            
+
+
             var senior_high_table = $('#senior-high-table').DataTable({
                 "scrollY": 450,
                 "scrollX": true, 
                 deferRender: true, 
                 ajax: {
-                    url: 'manage/get_shs_all_list',  
+                    url: 'manage/get_shs_all_list',   
+                    method: "get", 
+                    data: {
+                        view : "<?php echo isset($_GET['view']) ?  $_GET['view'] : ''?>",
+                        app_sem : "<?php echo isset($_GET['app_sem']) ?  $_GET['app_sem'] : ''?>",
+                        app_year : "<?php echo isset($_GET['app_year']) ?  $_GET['app_year'] : ''?>", 
+                    },
                 },
                 columns: [  
                     {
@@ -125,7 +145,13 @@
                 "scrollX": true, 
                 deferRender: true, 
                 ajax: {
-                    url: 'manage/get_college_all_list',  
+                    url: 'manage/get_college_all_list',   
+                    method: "get", 
+                    data: {
+                        view : "<?php echo isset($_GET['view']) ?  $_GET['view'] : ''?>",
+                        app_sem : "<?php echo isset($_GET['app_sem']) ?  $_GET['app_sem'] : ''?>",
+                        app_year : "<?php echo isset($_GET['app_year']) ?  $_GET['app_year'] : ''?>", 
+                    },
                 },
                 columns: [  
                     {
@@ -153,7 +179,13 @@
                 "scrollX": true, 
                 deferRender: true, 
                 ajax: {
-                    url: 'manage/get_tvet_all_list',
+                    url: 'manage/get_tvet_all_list', 
+                    method: "get", 
+                    data: {
+                        view : "<?php echo isset($_GET['view']) ?  $_GET['view'] : ''?>",
+                        app_sem : "<?php echo isset($_GET['app_sem']) ?  $_GET['app_sem'] : ''?>",
+                        app_year : "<?php echo isset($_GET['app_year']) ?  $_GET['app_year'] : ''?>", 
+                    },
                 },
                 columns: [  
                     {
