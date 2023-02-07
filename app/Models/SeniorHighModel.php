@@ -236,4 +236,15 @@ class SeniorHighModel extends Model
         return 0;
     }
 
+    public function get_total_gender(){
+        $query = $this->db
+            ->table($this->table)
+            ->select('table_scholarregistration.AppGender as gender, count(table_scholarregistration.AppGender) as total')
+            ->groupBy('AppGender') 
+            ->get()
+            ->getResult();  
+        return $query;
+    } 
+
+
 }

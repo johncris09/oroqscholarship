@@ -6,7 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\CollegeModel;
 use App\Models\SeniorHighModel;
 use App\Models\TvetModel;
-use App\Models\ConfigModel;
+use App\Models\ConfigModel; 
 
 class DashboardController extends BaseController
 {
@@ -18,7 +18,7 @@ class DashboardController extends BaseController
         $this->college  = new CollegeModel($db);
         $this->tvet  = new TvetModel($db);
         $this->custom_config = new \Config\Custom_config();
-        $this->config_model =  new ConfigModel($db); 
+        $this->config_model =  new ConfigModel($db);  
 
     }
 
@@ -59,10 +59,61 @@ class DashboardController extends BaseController
         $data["shs_school"] = $this->get_by_shs_school($shs_data, $college_tvet_data);  
         $data["college_school"] = $this->get_by_college_school( $college_tvet_data); 
         $data["tvet_school"] = $this->get_by_tvet_school($college_tvet_data);  
+        $data['total_gender'] = $this->get_total_gender($shs_data, $college_tvet_data);
         return view('admin/dashboard', $data);  
+
     }
 
-    
+    public function get_total_gender($shs_data, $college_tvet_data)
+    {   
+
+        $shs  = $this->senior_high->get_tot_by_gender($shs_data);
+        $college  = $this->college->get_tot_by_gender($college_tvet_data);  
+        $tvet  = $this->tvet->get_tot_by_gender($college_tvet_data);  
+
+        $male = $female = 0;
+        foreach($shs as $row){
+            if( strtolower( $row->gender ) == "male"){
+                $male += $row->total;
+            }
+            if( strtolower( $row->gender ) == "female"){
+                $female += $row->total;
+            }
+
+        }
+        
+        foreach($college as $row){
+            if( strtolower( $row->gender ) == "male"){
+                $male += $row->total;
+            }
+            if( strtolower( $row->gender ) == "female"){
+                $female += $row->total;
+            }
+
+        }
+        
+        foreach($tvet as $row){
+            if( strtolower( $row->gender ) == "male"){
+                $male += $row->total;
+            }
+            if( strtolower( $row->gender ) == "female"){
+                $female += $row->total;
+            }
+
+        }
+ 
+        $data =  array(
+            (object) [
+                "gender" => "Male",
+                "total" => $male
+            ],
+            (object) [
+                "gender" => "Female",
+                "total" => $female
+            ], 
+        );
+        return $data;  
+    }
 
 
     public function scholarship_shs_gender($data)

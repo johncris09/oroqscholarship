@@ -226,6 +226,17 @@ class CollegeModel extends Model
             return $query->getResultArray()[0]['colAppNoID'];
         }
         return 0;
-    }
+    } 
+    
+    public function get_total_gender(){
+        $query = $this->db
+            ->table($this->table)
+            ->select('colGender as gender, count(colGender) as total')
+            ->groupBy('colGender') 
+            ->get()
+            ->getResult();  
+        return $query;
+    } 
+
 
 }

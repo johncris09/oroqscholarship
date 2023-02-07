@@ -141,6 +141,22 @@
                     </div>
                 </div>
                 
+                <div class="row">
+                    <div class="col-md-12 col-xl-12">
+                        <div class="card-header bg-white">   
+                            <h4 class="header-title  text-center">Total Gender</h4>
+                        </div>
+                        <div class="card-body">   
+                            <?Php print_r($total_gender); ?>
+                            <div id="cardCollpasebygender" class="collapse show" dir="ltr">
+                                <div id="total-gender-chart" class="apex-charts" data-colors="#348cd4,#f06292,#ced4da"></div>
+                            </div>  
+                        </div> 
+                    </div>
+                     
+                </div>
+
+                
             </div> 
         </div> 
         
@@ -394,8 +410,8 @@
                     type: 'gradient',
                 },
                 labels: [
-                    '<?php echo isset($tvet_gender[0]->gender)  ?  strtoupper($tvet_gender[0]->gender) :  "MALE"; ?>', 
-                    '<?php echo isset($tvet_gender[1]->gender)  ?  strtoupper($tvet_gender[1]->gender) :  "FEMALE"; ?>',   
+                    '<?php echo isset($tvet_gender[0]->gender)  ?  strtoupper($tvet_gender[0]->gender) :  "FEMALE"; ?>',   
+                    '<?php echo isset($tvet_gender[1]->gender)  ?  strtoupper($tvet_gender[1]->gender) :  "MALE"; ?>', 
                 ],
                 legend: {
                     formatter: function(val, opts) {
@@ -418,6 +434,56 @@
             chart.render();  
 
  
+
+            //=============================================================================
+            //  Scholarship by Total Gender Chart
+            //============================================================================= 
+            
+            var total_gender = {
+                colors: ['#645CBB', '#CD5888'],
+                series: [ 
+                    <?php echo isset($total_gender[0]->total) ? $total_gender[0]->total : 0; ?>, 
+                    <?php echo isset($total_gender[1]->total) ? $total_gender[1]->total : 0; ?>,  
+                ],
+                chart: {
+                    width: 380,
+                    type: 'donut',
+                },
+                plotOptions: {
+                    pie: {
+                        startAngle: -90,
+                        endAngle: 270
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                fill: {
+                    type: 'gradient',
+                },
+                labels: [
+                    '<?php echo isset($total_gender[0]->gender)  ?  strtoupper($total_gender[0]->gender) :  "MALE"; ?>', 
+                    '<?php echo isset($total_gender[1]->gender)  ?  strtoupper($total_gender[1]->gender) :  "FEMALE"; ?>',  
+                ],
+                legend: {
+                    formatter: function(val, opts) {
+                        return val + " - " + opts.w.globals.series[opts.seriesIndex]
+                    }
+                }, 
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 200
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }]
+            };
+            var chart = new ApexCharts(document.querySelector("#total-gender-chart"), total_gender);
+            chart.render(); 
 
 
 
