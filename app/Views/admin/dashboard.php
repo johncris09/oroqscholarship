@@ -94,7 +94,29 @@
             </div> 
         </div> 
     </div>
+
     
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-status"> 
+                <div class="card-header bg-white">  
+                    <div class="card-widgets">
+                        <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                        <a data-bs-toggle="collapse" href="#cardCollpasebystatus" role="button" aria-expanded="false" aria-controls="cardCollpasebystatus"><i class="mdi mdi-minus"></i></a>
+                        <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                    </div> 
+                    <h4 class="header-title  ">Scholarship Total Status Chart</h4>
+                </div>
+                <div class="card-body">   
+                    <div id="cardCollpasebystatus" class="collapse show" dir="ltr"> 
+                        <div id="scholarship-total-status-chart" class="apex-charts"  ></div>
+                    </div>  
+                </div> 
+            </div> 
+        </div> 
+    </div>
+
+      
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
@@ -146,8 +168,7 @@
                         <div class="card-header bg-white">   
                             <h4 class="header-title  text-center">Total Gender</h4>
                         </div>
-                        <div class="card-body">   
-                            <?Php print_r($total_gender); ?>
+                        <div class="card-body">    
                             <div id="cardCollpasebygender" class="collapse show" dir="ltr">
                                 <div id="total-gender-chart" class="apex-charts" data-colors="#348cd4,#f06292,#ced4da"></div>
                             </div>  
@@ -550,6 +571,82 @@
             };
             var chart = new ApexCharts(document.querySelector("#scholarship-status-chart"), scholarship_status);
             chart.render();
+
+
+            
+            //=============================================================================
+            //  Total Scholarship Status Chart
+            //============================================================================= 
+            
+            var total_scholarship_status = { 
+                series: [
+                    { 
+                        data: [
+                            { 
+                                x: 'Additional Approved',
+                                y: <?php echo isset($total_scholarship_status[0]['total']) ?  $total_scholarship_status[0]['total'] :  0; ?>,
+                                fillColor: '#3AB0FF', 
+                            },
+                            { 
+                                x: 'Approved',
+                                y: <?php echo isset($total_scholarship_status[1]['total']) ?  $total_scholarship_status[1]['total'] :  0; ?>,
+                                fillColor: '#3AB0FF', 
+                            },
+                            { 
+                                x: 'Pending',
+                                y: <?php echo isset($total_scholarship_status[2]['total']) ?  $total_scholarship_status[2]['total'] :  0; ?>,
+                                fillColor: '#FFE15D', 
+                            },
+                            { 
+                                x: 'Disapproved',
+                                y: <?php echo isset($total_scholarship_status[3]['total']) ?  $total_scholarship_status[3]['total'] :  0; ?>,
+                                fillColor: '#F94892', 
+                            }, 
+                        ]
+                    },  
+                ],
+                chart: {
+                    type: 'bar',
+                    height: 350
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: '55%',
+                        endingShape: 'rounded', 
+                    },
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    show: true,
+                    width: 10,
+                    colors: ['transparent']
+                },
+                xaxis: {
+                    categories: [ 'Additional Approved',  'Approved', 'Pending',  'Disapproved', ],
+                },
+                yaxis: {
+                    title: {
+                        text: '# '
+                    }
+                },
+                fill: {
+                    opacity: 1
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(val) {
+                            return "#" + val
+                        }
+                    }
+                }
+            };
+            var chart = new ApexCharts(document.querySelector("#scholarship-total-status-chart"), total_scholarship_status);
+            chart.render();
+
+
 
 
             //=============================================================================
