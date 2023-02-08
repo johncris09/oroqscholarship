@@ -35,6 +35,7 @@
                                 <thead>
                                     <tr>   
                                         <th>Application ID</th>  
+                                        <th>SY</th>  
                                         <th>Name</th>  
                                         <th>Address</th>  
                                         <th>Strand</th>  
@@ -50,6 +51,7 @@
                                 <thead>
                                     <tr>   
                                         <th>Application ID</th>  
+                                        <th>SY</th>  
                                         <th>Name</th>  
                                         <th>Address</th>  
                                         <th>Strand</th>  
@@ -65,6 +67,7 @@
                                 <thead>
                                     <tr>   
                                         <th>Application ID</th>  
+                                        <th>SY</th>  
                                         <th>Name</th>  
                                         <th>Address</th>  
                                         <th>Strand</th>  
@@ -126,6 +129,7 @@
                             return row.AppNoYear + "-" + row.AppNoSem + "-"  + row.AppNoID  
                         }
                     }, 
+                    { data: 'AppSY' }, 
                     {
                         data  : 'ID',
                         render: function(data, type, row, meta){   
@@ -160,6 +164,7 @@
                             return row.colAppNoYear + "-" + row.colAppNoSem + "-"  + row.colAppNoID  
                         }
                     }, 
+                    { data: 'colSY' }, 
                     {
                         data  : 'ID',
                         render: function(data, type, row, meta){   
@@ -194,6 +199,7 @@
                             return row.colAppNoYear + "-" + row.colAppNoSem + "-"  + row.colAppNoID  
                         }
                     }, 
+                    { data: 'colSY' },  
                     {
                         data  : 'ID',
                         render: function(data, type, row, meta){   

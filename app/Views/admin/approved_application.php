@@ -34,6 +34,7 @@
                                 <thead>
                                     <tr>   
                                         <th>Application ID</th>  
+                                        <th>SY</th>
                                         <th>Name</th>  
                                         <th>Address</th>  
                                         <th>Strand</th>  
@@ -49,6 +50,7 @@
                                 <thead>
                                     <tr>   
                                         <th>Application ID</th>  
+                                        <th>SY</th>  
                                         <th>Name</th>  
                                         <th>Address</th>  
                                         <th>Strand</th>  
@@ -63,7 +65,8 @@
                             <table id="tvet-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>   
-                                        <th>Application ID</th>  
+                                        <th>Application ID</th> 
+                                        <th>SY</th> 
                                         <th>Name</th>  
                                         <th>Address</th>  
                                         <th>Strand</th>  
@@ -102,6 +105,7 @@
                 }
             })  
             
+
             
             var senior_high_table = $('#senior-high-table').DataTable({
                 "scrollY": 450,
@@ -113,7 +117,7 @@
                     data: {
                         view : "<?php echo isset($_GET['view']) ?  $_GET['view'] : ''?>",
                         app_sem : "<?php echo isset($_GET['app_sem']) ?  $_GET['app_sem'] : ''?>",
-                        app_year : "<?php echo isset($_GET['app_year']) ?  $_GET['app_year'] : ''?>", 
+                        app_sy : "<?php echo isset($_GET['app_sy']) ?  $_GET['app_sy'] : ''?>", 
                     },
                 },
                 columns: [  
@@ -123,6 +127,7 @@
                             return row.AppNoYear + "-" + row.AppNoSem + "-"  + row.AppNoID  
                         }
                     }, 
+                    { data: 'AppSY' }, 
                     {
                         data  : 'ID',
                         render: function(data, type, row, meta){   
@@ -148,7 +153,7 @@
                     data: {
                         view : "<?php echo isset($_GET['view']) ?  $_GET['view'] : ''?>",
                         app_sem : "<?php echo isset($_GET['app_sem']) ?  $_GET['app_sem'] : ''?>",
-                        app_year : "<?php echo isset($_GET['app_year']) ?  $_GET['app_year'] : ''?>", 
+                        app_sy : "<?php echo isset($_GET['app_sy']) ?  $_GET['app_sy'] : ''?>", 
                     },
                 },
                 columns: [  
@@ -158,12 +163,13 @@
                             return row.colAppNoYear + "-" + row.colAppNoSem + "-"  + row.colAppNoID  
                         }
                     }, 
+                    { data: 'colSY' },
                     {
                         data  : 'ID',
                         render: function(data, type, row, meta){   
                             return row.colFirstName + " " + row.colMI + " "  + row.colLastName  + " "  + row.colSuffix 
                         }
-                    }, 
+                    },  
                     { data: 'colAddress' },  
                     { data: 'colCourse' },  
                     { data: 'colSchool' },  
@@ -182,7 +188,7 @@
                     data: {
                         view : "<?php echo isset($_GET['view']) ?  $_GET['view'] : ''?>",
                         app_sem : "<?php echo isset($_GET['app_sem']) ?  $_GET['app_sem'] : ''?>",
-                        app_year : "<?php echo isset($_GET['app_year']) ?  $_GET['app_year'] : ''?>", 
+                        app_sy : "<?php echo isset($_GET['app_sy']) ?  $_GET['app_sy'] : ''?>", 
                     },
                 },
                 columns: [  
@@ -192,12 +198,14 @@
                             return row.colAppNoYear + "-" + row.colAppNoSem + "-"  + row.colAppNoID  
                         }
                     }, 
+                    { data: 'colSY' },
                     {
                         data  : 'ID',
                         render: function(data, type, row, meta){   
                             return row.colFirstName + " " + row.colMI + " "  + row.colLastName  + " "  + row.colSuffix 
                         }
                     }, 
+                    { data: 'colSY' }, 
                     { data: 'colAddress' },  
                     { data: 'colCourse' },  
                     { data: 'colSchool' },  
