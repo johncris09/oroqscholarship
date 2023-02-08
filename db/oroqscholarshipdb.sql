@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2023 at 08:29 AM
+-- Generation Time: Feb 08, 2023 at 04:04 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -40,7 +40,8 @@ CREATE TABLE `auth_groups_users` (
 
 INSERT INTO `auth_groups_users` (`id`, `user_id`, `group`, `created_at`) VALUES
 (42, 72, 'superadmin', '2023-01-15 19:52:31'),
-(43, 73, 'superadmin', '2023-01-15 20:19:05');
+(43, 73, 'superadmin', '2023-01-15 20:19:05'),
+(44, 74, 'superadmin', '2023-02-03 00:34:09');
 
 -- --------------------------------------------------------
 
@@ -69,7 +70,8 @@ CREATE TABLE `auth_identities` (
 
 INSERT INTO `auth_identities` (`id`, `user_id`, `type`, `name`, `secret`, `secret2`, `expires`, `extra`, `force_reset`, `last_used_at`, `created_at`, `updated_at`) VALUES
 (58, 72, 'email_password', NULL, 'manabojc@gmail.com', '$2y$10$dbKbUV0TBqb/Vo1klCxayO6MBCQ.hDjwMtVT6uGLNPFLi1xCFOyYa', NULL, NULL, 0, NULL, '2023-01-15 19:52:31', '2023-01-15 19:52:31'),
-(61, 73, 'email_password', NULL, 'test@gmail.com', '$2y$10$KMOkaZ9skzV3ttbRXzjvneBdQLTZSMa19hIMetcFTCmK8JZJZtWN.', NULL, NULL, 0, '2023-02-01 18:16:04', '2023-01-15 20:19:04', '2023-02-01 18:16:04');
+(61, 73, 'email_password', NULL, 'test@gmail.com', '$2y$10$KMOkaZ9skzV3ttbRXzjvneBdQLTZSMa19hIMetcFTCmK8JZJZtWN.', NULL, NULL, 0, '2023-02-07 18:54:40', '2023-01-15 20:19:04', '2023-02-07 18:54:40'),
+(62, 74, 'email_password', NULL, 'user@gmail.com', '$2y$10$6JPgGriX8hVWRBboblJkPeeNDRi4AE2uX75M8UF.g4bMb0A10nXXW', NULL, NULL, 0, '2023-02-03 00:34:27', '2023-02-03 00:34:09', '2023-02-03 00:34:27');
 
 -- --------------------------------------------------------
 
@@ -103,7 +105,15 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `user_agent`, `id_type`, `identif
 (63, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'email_password', 'test@gmail.com', 73, '2023-01-30 18:07:08', 1),
 (64, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'email_password', 'test@gmail.com', 73, '2023-01-30 23:38:51', 1),
 (65, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'email_password', 'test@gmail.com', 73, '2023-01-31 18:09:09', 1),
-(66, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'email_password', 'test@gmail.com', 73, '2023-02-01 18:16:04', 1);
+(66, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'email_password', 'test@gmail.com', 73, '2023-02-01 18:16:04', 1),
+(67, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'email_password', 'test@gmail.com', 73, '2023-02-02 18:14:14', 1),
+(68, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'email_password', 'test@gmail.com', 73, '2023-02-03 00:02:20', 1),
+(69, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'email_password', 'test@gmail.com', 73, '2023-02-03 00:33:27', 1),
+(70, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'email_password', 'user@gmail.com', 74, '2023-02-03 00:34:27', 1),
+(71, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'email_password', 'test@gmail.com', 73, '2023-02-05 18:09:59', 1),
+(72, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'email_password', 'test@gmail.com', 73, '2023-02-06 19:13:19', 1),
+(73, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'email_password', 'test@gmail.com', 73, '2023-02-06 21:28:34', 1),
+(74, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'email_password', 'test@gmail.com', 73, '2023-02-07 18:54:40', 1);
 
 -- --------------------------------------------------------
 
@@ -161,6 +171,7 @@ CREATE TABLE `config` (
   `id` int(11) NOT NULL,
   `semester_closed` tinyint(1) NOT NULL,
   `current_year` year(4) NOT NULL,
+  `current_sy` varchar(100) NOT NULL,
   `current_sem` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -168,8 +179,8 @@ CREATE TABLE `config` (
 -- Dumping data for table `config`
 --
 
-INSERT INTO `config` (`id`, `semester_closed`, `current_year`, `current_sem`) VALUES
-(1, 0, 2023, 1);
+INSERT INTO `config` (`id`, `semester_closed`, `current_year`, `current_sy`, `current_sem`) VALUES
+(1, 0, 2023, 'SY: 2022-2023', 1);
 
 -- --------------------------------------------------------
 
@@ -357,7 +368,9 @@ CREATE TABLE `table_collegeapp` (
 --
 
 INSERT INTO `table_collegeapp` (`ID`, `colAppNoYear`, `colAppNoID`, `colAppNoSem`, `colAppStat`, `colFirstName`, `colLastName`, `colMI`, `colSuffix`, `colAddress`, `colDOB`, `colAge`, `colCivilStat`, `colGender`, `colContactNo`, `colCTC`, `colEmailAdd`, `colAvailment`, `colSchool`, `colSchoolAddress`, `colCourse`, `colYearLevel`, `colSem`, `colSY`, `colFathersName`, `colFatherOccu`, `colMothersName`, `colMotherOccu`, `colManager`, `colUnits`, `colImage`) VALUES
-(1, 2023, 1, 1, 'Pending', 'asdasdasdf ', 'asdfasdf ', 'b', '', 'Binuangan', '2000-02-14', '22', 'WIDOWED', 'Male', '09501271511', 'asdf', 'asdf@ hasdfasd', '1', 'USTP', 'School address asjkd asdf', 'BEED-ECE', 'I', '1st', 'SY: 2022-2023', 'father name oasdja', 'Father occipationasdf', 'Mother name asdhfkasd', 'Mother oocpation', 'Active', '1', 0x75706c6f61642f70686f746f2f313637353330323937312e706e67);
+(1, 2023, 1, 1, 'Approved', 'asdasdasdf ', 'asdfasdf ', 'b', '', 'Binuangan', '2000-02-14', '22', 'WIDOWED', 'Male', '09501271511', 'asdf', 'asdf@ hasdfasd', '1', 'USTP', 'School address asjkd asdf', 'BEED-ECE', 'I', '1st', 'SY: 2022-2023', 'father name oasdja', 'Father occipationasdf', 'Mother name asdhfkasd', 'Mother oocpation', 'Active', '1', 0x75706c6f61642f70686f746f2f313637353330323937312e706e67),
+(2, 2022, 1, 1, 'Approved', 'asdasd', 'asd', '', '', 'Bolibol', '2023-02-08', '0', 'SINGLE', 'Male', '', '1', '', '1', 'USTP (Oroquieta City)', '', 'BSED - English', 'I', '1st', 'SY: 2022-2023', 'asd', 'fasd', 'as', 'dfasdf', 'Active', '1', ''),
+(3, 2023, 2, 1, 'Pending', 'asdf', 'asdf', '', '', 'Binuangan', '2023-02-08', '0', 'SINGLE', 'Male', '', '1', '', '1', 'SVC', '', 'BEED', 'II', '2nd', 'SY: 2021-2022', '', '', '', '', 'Active', '1', '');
 
 -- --------------------------------------------------------
 
@@ -512,15 +525,18 @@ CREATE TABLE `table_scholarregistration` (
 --
 
 INSERT INTO `table_scholarregistration` (`ID`, `AppNoYear`, `AppNoID`, `AppNoSem`, `AppStatus`, `AppFirstName`, `AppMidIn`, `AppLastName`, `AppSuffix`, `AppAddress`, `AppDOB`, `AppAge`, `AppCivilStat`, `AppGender`, `AppContact`, `AppCTC`, `AppEmailAdd`, `AppAvailment`, `AppSchool`, `AppCourse`, `AppSchoolAddress`, `AppYear`, `AppSem`, `AppSY`, `AppFather`, `AppFatherOccu`, `AppMother`, `AppMotherOccu`, `AppManager`, `AppImage`) VALUES
-(1, 2023, 1, 1, 'Pending', 'asdfasdf', 'C', 'asdfasdf', '', 'Bolibol', '2023-02-09', 0, 'SINGLE', 'Female', '089203123', 'asdfasd fas', 'asdfasdf haksdfasd', 1, 'MIS', 'TVL', 'this is school address', 'Grade 12', '1st', 'SY: 2022-2023', 'asd', 'fasd', 'fasd', 'fasdfasdf', 'Active', 0x75706c6f61642f70686f746f2f313637353330353235352e706e67),
-(2, 2023, 1, 2, 'Pending', 'fasdfa', 'sd', 'asd', '', 'Buenavista', '2023-02-14', 0, 'SINGLE', 'Female', '', '1', '', 1, 'MONHS', 'GAS', 'asdf', 'Grade 11', '1st', 'SY: 2022-2023', 'asd', 'fasd', 'asd', 'fasdfasdf', 'Active', ''),
-(3, 2023, 2, 1, 'Pending', 'asdf', '', 'aasd', '', 'Buenavista', '2023-02-02', 0, 'MARRIED', 'Female', '', 'asd', '', 1, 'MOSTHS', 'HUMSS', 'asd', 'Grade 12', '1st', 'SY: 2022-2023', 'asdf', 'asd', 'fasd', 'fasdfa', 'Active', ''),
+(1, 2023, 1, 1, 'Approved', 'asdfasdf', 'C', 'asdfasdf', '', 'Bolibol', '2023-02-09', 0, 'SINGLE', 'Female', '089203123', 'asdfasd fas', 'asdfasdf haksdfasd', 1, 'MIS', 'TVL', 'this is school address', 'Grade 12', '1st', 'SY: 2022-2023', 'asd', 'fasd', 'fasd', 'fasdfasdf', 'Active', 0x75706c6f61642f70686f746f2f313637353330353235352e706e67),
+(2, 2023, 1, 2, 'Approved', 'fasdfa', 'sd', 'asd', '', 'Buenavista', '2023-02-14', 0, 'SINGLE', 'Female', '', '1', '', 1, 'MONHS', 'GAS', 'asdf', 'Grade 11', '1st', 'SY: 2022-2023', 'asd', 'fasd', 'asd', 'fasdfasdf', 'Active', ''),
+(3, 2023, 2, 1, 'Approved', 'asdf', '', 'aasd', '', 'Buenavista', '2023-02-02', 0, 'MARRIED', 'Female', '', 'asd', '', 1, 'MOSTHS', 'HUMSS', 'asd', 'Grade 12', '1st', 'SY: 2022-2023', 'asdf', 'asd', 'fasd', 'fasdfa', 'Active', ''),
 (4, 2023, 2, 2, 'Pending', 'asdfasdf', '', 'asd', '', 'Bunga', '2023-02-02', 0, 'MARRIED', 'Male', 'asd', 'asdf', 'asd', 1, 'MOSTHS', 'TVL', 'asdf', 'Grade 12', '1st', 'SY: 2022-2023', 'asd', 'fasd', 'fasd', 'fasdf', 'Active', ''),
 (5, 2023, 3, 1, 'Pending', 'fasdfa', 's', 'asd', '', 'Binuangan', '2023-02-09', 0, 'SINGLE', 'Male', '', 'asd', 'asdfasdfasdf', 1, 'MOSTHS', 'GAS', 'dfasdf', 'Grade 11', '1st', 'SY: 2022-2023', 'asd', 'fasd', 'fasd', 'fasdfas', 'Active', ''),
 (6, 2023, 3, 2, 'Pending', 'asdf', '', 'asd', '', 'Binuangan', '2023-02-06', 0, 'SINGLE', 'Male', '', 'asd', '', 1, 'MIS', 'HUMSS', '', 'Grade 11', '1st', 'SY: 2022-2023', 'asdfasdf', 'asd', 'as', 'dfasdf', 'Active', ''),
 (7, 2023, 4, 2, 'Pending', 'asdf', '', 'asd', '', 'Bolibol', '2023-02-07', 0, 'MARRIED', 'Male', '', 'asd', '', 1, 'MONHS', 'HUMSS', '', 'Grade 11', '2nd', 'SY: 2022-2023', '', '', '', '', 'Active', ''),
 (8, 2023, 5, 2, 'Pending', 'fasdf', '', 'asd', '', 'Buenavista', '2023-02-07', 0, 'SINGLE', 'Male', '', '1', '', 1, 'MIS', 'HUMSS', '', 'Grade 12', '1st', 'SY: 2022-2023', '', '', '', '', 'Active', ''),
-(9, 2023, 4, 1, 'Pending', 'asd', '', 'asd', '', 'Buenavista', '2023-02-09', 0, 'SINGLE', 'Male', '', 'asd', '', 1, 'MOSTHS', 'HUMSS', 'asd', 'Grade 11', '1st', 'SY: 2022-2023', '', '', '', '', 'Active', '');
+(9, 2023, 4, 1, 'Pending', 'asd', '', 'asd', '', 'Buenavista', '2023-02-09', 0, 'SINGLE', 'Male', '', 'asd', '', 1, 'MOSTHS', 'HUMSS', 'asd', 'Grade 11', '1st', 'SY: 2022-2023', '', '', '', '', 'Active', ''),
+(10, 2022, 1, 1, 'Approved', 'Daniel', 'v', 'Escamilla', '', 'Binuangan', '2023-02-13', 0, 'SINGLE', 'Male', '0182 938 1927', '1', 'asdfasdf', 1, 'MIS', 'GAS', 'asd', 'Grade 11', '1st', 'SY: 2022-2023', '', '', '', '', 'Active', ''),
+(11, 2022, 2, 1, 'Approved', 'Joshua', '', 'Callender', '', 'Apil', '2023-02-01', 0, 'SINGLE', 'Male', '', 'asd', '1', 1, 'MONHS', 'GAS', '', 'Grade 11', '1st', 'SY: 2022-2023', '', '', '', '', 'Active', ''),
+(12, 2022, 3, 1, 'Approved', 'asdf', '', 'asd', '', 'Buenavista', '2023-02-14', 0, 'MARRIED', 'Female', '', '1', '', 1, 'MIS', 'TVL', '', 'Grade 11', '2nd', 'SY: 2021-2022', '', '', '', '', 'Active', '');
 
 -- --------------------------------------------------------
 
@@ -617,6 +633,14 @@ CREATE TABLE `table_tvet` (
   `colImage` longblob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `table_tvet`
+--
+
+INSERT INTO `table_tvet` (`ID`, `colAppNoYear`, `colAppNoID`, `colAppNoSem`, `colAppStat`, `colFirstName`, `colLastName`, `colMI`, `colSuffix`, `colAddress`, `colDOB`, `colAge`, `colCivilStat`, `colGender`, `colContactNo`, `colCTC`, `colEmailAdd`, `colAvailment`, `colSchool`, `colSchoolAddress`, `colCourse`, `colYearLevel`, `colSem`, `colSY`, `colFathersName`, `colFatherOccu`, `colMothersName`, `colMotherOccu`, `colManager`, `colUnits`, `colImage`) VALUES
+(1, 2022, 1, 1, 'Approved', 'dasdf', 'as', '', '', 'Buenavista', '2023-02-10', '0', 'MARRIED', 'Female', '', '1', '', '1', 'St. Columban College', '', 'BTLEd-ICT', 'III', '1st', 'SY: 2020-2021', 'asd', 'asdf', 'asd', 'fasdf', 'Active', '1', ''),
+(2, 2022, 2, 1, 'Approved', 'asd', 'asdf', '', '', 'Binuangan', '2023-02-08', '0', 'SINGLE', 'Female', '', '1', '', '1', 'SVC', '', 'BEED', 'I', '1st', 'SY: 2020-2021', 'as', 'dasd', 'asd', 'asdf', 'Active', '1', '');
+
 -- --------------------------------------------------------
 
 --
@@ -644,7 +668,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `lastname`, `firstname`, `middlename`, `username`, `status`, `status_message`, `active`, `last_active`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (72, '', '', NULL, 'johncris09', NULL, NULL, 1, NULL, '2023-01-15 19:52:31', '2023-01-15 19:53:05', NULL),
-(73, 'Test1', 'Test1', '', 'test12345', NULL, NULL, 0, NULL, '2023-01-15 20:19:04', '2023-01-15 20:19:04', NULL);
+(73, 'Test1', 'Test1', '', 'test12345', NULL, NULL, 0, NULL, '2023-01-15 20:19:04', '2023-01-15 20:19:04', NULL),
+(74, 'user1', 'user1', 'user1', 'user12345', NULL, NULL, 0, NULL, '2023-02-03 00:34:08', '2023-02-03 00:34:08', NULL);
 
 --
 -- Indexes for dumped tables
@@ -789,19 +814,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `auth_groups_users`
 --
 ALTER TABLE `auth_groups_users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `auth_identities`
 --
 ALTER TABLE `auth_identities`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions_users`
@@ -855,7 +880,7 @@ ALTER TABLE `table_colcourse`
 -- AUTO_INCREMENT for table `table_collegeapp`
 --
 ALTER TABLE `table_collegeapp`
-  MODIFY `ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `table_colonlineapplication`
@@ -879,7 +904,7 @@ ALTER TABLE `table_login`
 -- AUTO_INCREMENT for table `table_scholarregistration`
 --
 ALTER TABLE `table_scholarregistration`
-  MODIFY `ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `table_schoolname`
@@ -897,13 +922,13 @@ ALTER TABLE `table_strand`
 -- AUTO_INCREMENT for table `table_tvet`
 --
 ALTER TABLE `table_tvet`
-  MODIFY `ID` int(50) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- Constraints for dumped tables
