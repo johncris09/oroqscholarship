@@ -18,6 +18,7 @@ class ConfigModel extends Model
         "id",
         "semester_closed",
         "current_year",
+        "current_sy",
         "current_sem"
     ];
 

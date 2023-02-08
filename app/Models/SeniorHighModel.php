@@ -113,7 +113,7 @@ class SeniorHighModel extends Model
     public function get_all($data)
     { 
         $query = $this->builder 
-            ->select('ID, AppNoYear, AppNoSem, AppNoID, AppStatus, AppFirstName, AppMidIn, AppLastName, AppSuffix, AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ')
+            ->select('ID, AppSY, AppNoYear, AppNoSem, AppNoID, AppStatus, AppFirstName, AppMidIn, AppLastName, AppSuffix, AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ')
             ->where($data)
             ->orderBy('id', 'desc')
             ->get()
@@ -124,7 +124,7 @@ class SeniorHighModel extends Model
     public function get_pending_application($data)
     { 
         $query = $this->builder 
-            ->select('ID, AppNoYear, AppNoSem, AppNoID, AppStatus, AppFirstName, AppMidIn, AppLastName, AppSuffix, AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ')
+            ->select('ID, AppSY,AppNoYear, AppNoSem, AppNoID, AppStatus, AppFirstName, AppMidIn, AppLastName, AppSuffix, AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ')
             ->where('AppStatus', 'Pending')
             ->where('AppManager', 'Active')
             ->where($data)
@@ -137,7 +137,7 @@ class SeniorHighModel extends Model
     public function get_approved_application($data)
     { 
         $query = $this->builder 
-            ->select('ID, AppNoYear, AppNoSem, AppNoID, AppStatus, AppFirstName, AppMidIn, AppLastName, AppSuffix, AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ')
+            ->select('ID, AppSY, AppNoYear, AppNoSem, AppNoID, AppStatus, AppFirstName, AppMidIn, AppLastName, AppSuffix, AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ')
             ->where('AppStatus', 'Approved')
             ->where('AppManager', 'Active')
             ->where($data)
