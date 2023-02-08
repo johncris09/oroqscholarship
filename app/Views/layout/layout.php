@@ -145,7 +145,7 @@ $db = db_connect();
                         </li>   
                         <li class="dropdown d-none d-xl-block">
                             <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" href="#">
-                                Current Application Year: <strong><u><?php echo $config['current_year']  ?></u></strong>  
+                                Current School Year: <strong><u><?php echo $config['current_sy']  ?></u></strong>  
                             </a>  
                         </li> 
                         <li class="dropdown d-none d-xl-block">
@@ -348,16 +348,23 @@ $db = db_connect();
                                                                 <div class="modal-body ">
                                                                     <div class="form-group">
                                                                         <label for="application-year" class="form-label">Application Year</label>
-                                                                        <select name="app_year" class="form-select" id="application-year"> 
-                                                                        <?php  
-                                                                            foreach(range(date('Y'), $year_started) as $year){ 
-                                                                        ?>
-                                                                                <option value="<?php echo $year; ?>"><?php echo $year; ?></option>
-                                                                        <?php
+                                                                        <!-- <select name="app_year" class="form-select" id="application-year"> 
+                                                                            <?php  
+                                                                                foreach(range(date('Y'), $year_started) as $year){ 
+                                                                            ?>
+                                                                                    <option value="<?php echo $year; ?>"><?php echo $year; ?></option>
+                                                                            <?php
 
-                                                                            }
-                                                                        ?> 
-                                                                    </select>
+                                                                                }
+                                                                            ?> 
+                                                                        </select> -->
+                                                                        <select class="form-select" name="app_sy" id="application-sy"> 
+                                                                            <?php foreach(range(date('Y'), $year_started) as $year):?>  
+                                                                                <option value="SY: <?=  ($year - 1) . "-" .  $year ?>">SY: <?= ($year - 1) . "-" .  $year  ?></option>
+                                                                            <?php endforeach; ?>
+                                                                        </select>
+
+                                                                        
                                                                     
                                                                     </div>  
                                                                     <div class="form-group">

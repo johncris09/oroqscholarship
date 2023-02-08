@@ -21,28 +21,19 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <h4>Configuration of Current Year and Current Semester</h4>
+                            <h4>Configuration of Current School Year and Current Semester</h4>
                         </div>
                         <div class="col-6">
                             <div class="input-group mb-3"> 
-                                <select name="year" class="form-select" id="inputGroupSelect01"> 
-                                    <?php 
-                                        foreach(range(date('Y'), $year_started) as $year){
-                                            if($year == $config['current_year']){
-                                                $selected = "selected";
-                                            }else{
-                                                $selected = "";
-                                            }
-                                    ?>
-                                            <option <?php echo $selected; ?> value="<?php echo $year; ?>"><?php echo $year; ?></option>
-                                    <?php
-
-                                        }
-                                    ?> 
+                                <select class="form-select" name="school_year"  >
+                                    <option value="">Select</option> 
+                                    <?php foreach(range(date('Y'), $year_started) as $year):?>  
+                                        <option <?php echo ( "SY: " . ($year - 1) . "-" .  $year == $config['current_sy']) ? 'selected' : '' ?> value="SY: <?=  ($year - 1) . "-" .  $year ?>">SY: <?= ($year - 1) . "-" .  $year  ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                                 <select name="semester" class="form-select" id="inputGroupSelect01"> 
-                                    <option <?php echo ($config['current_sem'] == 1) ? "selected" : ""; ?> value="1">1</option>
-                                    <option <?php echo ($config['current_sem'] == 2) ? "selected" : ""; ?> value="2">2</option> 
+                                    <option <?php echo ($config['current_sem'] == 1) ? "selected" : ""; ?> value="1">1st</option>
+                                    <option <?php echo ($config['current_sem'] == 2) ? "selected" : ""; ?> value="2">2nd</option> 
                                 </select>
                             </div>
                         </div>
@@ -144,16 +135,17 @@
 
             }) 
 
-            $('select[name=year]').on('change', function(){ 
-                var year = $('select[name=year]').val();
+            $('select[name=school_year]').on('change', function(){ 
+                var school_year = $('select[name=school_year]').val();
                 $.ajax({
-                    url: "manage_scholarship/update_year",
+                    url: "manage_scholarship/update_sy",
                     method: "POST",  
                     data: {
-                        current_year: year 
+                        current_sy: school_year 
                     }, 
                     dataType: "json",
                     success: function(data){ 
+                        console.info(data)
                         if(data.response){ 
                             Swal.fire({
                                 title:"Good job!",
