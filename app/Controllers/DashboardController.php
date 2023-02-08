@@ -24,7 +24,7 @@ class DashboardController extends BaseController
 
     public function index()
     {     
-        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0]; 
+        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0];  
         $shs_data = []; 
         $college_tvet_data = [];
         if(isset($_GET['view'])){
@@ -44,9 +44,9 @@ class DashboardController extends BaseController
                 $shs_data['AppNoSem'] = $config['current_sem'];
                 $college_tvet_data['colAppNoSem'] = $config['current_sem'];
             }
-            $shs_data['AppNoYear'] = (isset($_GET['app_year'])) ? $_GET['app_year'] : $config['current_year']; 
-            $college_tvet_data['colAppNoYear'] = (isset($_GET['app_year'])) ? $_GET['app_year'] : $config['current_year']; 
-        }  
+            $shs_data['AppSY'] = (isset($_GET['app_year'])) ? $_GET['app_year'] : $config['current_sy']; 
+            $college_tvet_data['colSY'] = (isset($_GET['app_year'])) ? $_GET['app_year'] : $config['current_sy']; 
+        }   
         $data['tot_approved_shs'] = $this->senior_high->count_approved($shs_data); 
         $data['tot_approved_college'] = $this->college->count_approved($college_tvet_data);
         $data['tot_approved_tvet'] = $this->tvet->count_approved($college_tvet_data); 
@@ -55,14 +55,95 @@ class DashboardController extends BaseController
         $data["college_gender"] = $this->scholarship_college_gender($college_tvet_data); 
         $data["tvet_gender"] = $this->scholarship_tvet_gender($college_tvet_data);
         $data["scholarship_status"] = $this->scholarship_status($shs_data, $college_tvet_data); 
+        $data["total_scholarship_status"] = $this->get_total_scholarship_status($shs_data, $college_tvet_data); 
         $data["scholarship_barangay"] = $this->scholarship_barangay($shs_data, $college_tvet_data);
         $data["shs_school"] = $this->get_by_shs_school($shs_data, $college_tvet_data);  
         $data["college_school"] = $this->get_by_college_school( $college_tvet_data); 
         $data["tvet_school"] = $this->get_by_tvet_school($college_tvet_data);  
-        $data['total_gender'] = $this->get_total_gender($shs_data, $college_tvet_data);
-        return view('admin/dashboard', $data);  
+        $data['total_gender'] = $this->get_total_gender($shs_data, $college_tvet_data);  
+        return view('admin/dashboard', $data);   
 
     }
+ 
+
+    
+    public function get_total_scholarship_status($shs_data, $college_tvet_data)
+    { 
+  
+        $shs  = $this->senior_high->get_tot_by_status($shs_data);
+        $college  = $this->college->get_tot_by_status($college_tvet_data);
+        $tvet  = $this->tvet->get_tot_by_status($college_tvet_data);
+        $data = [];
+        $additional_approved = $approved = $disapproved =   $pending =  0;
+        foreach($shs as $row){ 
+            if( strtolower( $row->status ) == "approved"){  
+                $approved += $row->total;
+            }   
+            if( strtolower( $row->status ) == "additional approved"){  
+                $additional_approved += $row->total;
+            }   
+            if( strtolower( $row->status ) == "disapproved"){  
+                $disapproved += $row->total;
+            }    
+            if( strtolower( $row->status ) == "pending"){  
+                $pending += $row->total;
+            }
+        }
+        
+        foreach($college as $row){ 
+            if( strtolower( $row->status ) == "approved"){  
+                $approved += $row->total;
+            }   
+            if( strtolower( $row->status ) == "additional approved"){  
+                $additional_approved += $row->total;
+            }   
+            if( strtolower( $row->status ) == "disapproved"){  
+                $disapproved += $row->total;
+            }    
+            if( strtolower( $row->status ) == "pending"){  
+                $pending += $row->total;
+            }
+        }
+        
+        foreach($tvet as $row){ 
+            if( strtolower( $row->status ) == "approved"){  
+                $approved += $row->total;
+            }   
+            if( strtolower( $row->status ) == "additional approved"){  
+                $additional_approved += $row->total;
+            }   
+            if( strtolower( $row->status ) == "disapproved"){  
+                $disapproved += $row->total;
+            }    
+            if( strtolower( $row->status ) == "pending"){  
+                $pending += $row->total;
+            }
+        } 
+ 
+        $data =  array(
+            [
+                "status" => "additional_approved",
+                "total" => $additional_approved
+            ],
+            [
+                "status" => "approved",
+                "total" => $approved
+            ], 
+            [
+                "status" => "pending",
+                "total" => $pending
+            ], 
+            [
+                "status" => "disapproved",
+                "total" => $disapproved
+            ],
+        );
+
+        return $data; 
+
+    }
+
+
 
     public function get_total_gender($shs_data, $college_tvet_data)
     {   
@@ -135,8 +216,7 @@ class DashboardController extends BaseController
 
     public function scholarship_status($shs_data, $college_tvet_data)
     { 
-
-        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0];   
+  
         $shs  = $this->senior_high->get_tot_by_status($shs_data);
         $college  = $this->college->get_tot_by_status($college_tvet_data);
         $tvet  = $this->tvet->get_tot_by_status($college_tvet_data);
@@ -165,8 +245,7 @@ class DashboardController extends BaseController
     }
   
     public function get_by_shs_school($shs_data)
-    { 
-        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0];  
+    {   
 
         $shs  = $this->senior_high->get_tot_by_school($shs_data); 
         $data = [];
@@ -181,8 +260,7 @@ class DashboardController extends BaseController
     
     public function get_by_college_school($college_tvet_data)
     {  
-        
-        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0];  
+         
 
         $college  = $this->college->get_tot_by_school($college_tvet_data); 
         $data = [];
@@ -196,8 +274,7 @@ class DashboardController extends BaseController
  
     
     public function get_by_tvet_school($college_tvet_data)
-    {  
-        $config= $this->config_model->asArray()->where('id', 1)->findAll()[0];   
+    {   
         $tvet  = $this->tvet->get_tot_by_school($college_tvet_data);  
         $data = []; 
         foreach($tvet as $row){  
