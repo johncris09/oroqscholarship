@@ -150,7 +150,7 @@ $db = db_connect();
                         </li> 
                         <li class="dropdown d-none d-xl-block">
                             <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" href="#">
-                                Current Semester:  <strong><u><?php echo $config['current_sem']  ?></u></strong>  
+                                Current Semester:  <strong><u><?php echo ($config['current_sem'] ==1) ? "1st" : "2nd" ?></u></strong>  
                             </a>  
                         </li>
                 
