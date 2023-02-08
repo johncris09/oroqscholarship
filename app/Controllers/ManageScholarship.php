@@ -42,14 +42,14 @@ class ManageScholarship extends BaseController
             ]; 
         } 
         echo Json_encode($res);
-    }
-
-    public function update_year()
+    } 
+    
+    public function update_sy()
     { 
         try{   
             $id = 1;
             $data = [
-                "current_year" => $this->request->getPost('current_year'), 
+                "current_sy" => $this->request->getPost('current_sy'), 
             ]; 
             $this->config_model->update($id, $data);
             $res = [
@@ -65,6 +65,7 @@ class ManageScholarship extends BaseController
         } 
         echo Json_encode($res);
     }
+
     public function update_sem()
     { 
         try{   

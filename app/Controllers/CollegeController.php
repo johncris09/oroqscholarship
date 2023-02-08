@@ -29,14 +29,14 @@ class CollegeController extends BaseController
             $college_data = [];
         }  
 
-        if(!empty($_GET['app_year'])){
-            $college_data['colAppNoYear'] = $_GET['app_year']; 
+        if(!empty($_GET['app_sy'])){
+            $college_data['colSY'] = $_GET['app_sy']; 
         }else{ 
             $college_data = [];
         }  
-        if(empty($_GET['app_year']) && empty($_GET['app_sem'])  && empty($_GET['view']) ){ 
+        if(empty($_GET['app_sy']) && empty($_GET['app_sem'])  && empty($_GET['view']) ){ 
             $college_data = array(
-                'colAppNoYear' => $config['current_year'],
+                'colSY' => $config['current_sy'],
                 'colAppNoSem' => $config['current_sem'],
             ); 
         }  
@@ -58,14 +58,14 @@ class CollegeController extends BaseController
             $college_data = [];
         }  
 
-        if(!empty($_GET['app_year'])){
-            $college_data['colAppNoYear'] = $_GET['app_year']; 
+        if(!empty($_GET['app_sy'])){
+            $college_data['colSY'] = $_GET['app_sy']; 
         }else{ 
             $college_data = [];
         }  
-        if(empty($_GET['app_year']) && empty($_GET['app_sem'])  && empty($_GET['view']) ){ 
+        if(empty($_GET['app_sy']) && empty($_GET['app_sem'])  && empty($_GET['view']) ){ 
             $college_data = array(
-                'colAppNoYear' => $config['current_year'],
+                'colSY' => $config['current_sy'],
                 'colAppNoSem' => $config['current_sem'],
             ); 
         } 
@@ -88,14 +88,14 @@ class CollegeController extends BaseController
             $colelge_data = [];
         }  
 
-        if(!empty($_GET['app_year'])){
-            $colelge_data['colAppNoYear'] = $_GET['app_year']; 
+        if(!empty($_GET['app_sy'])){
+            $colelge_data['colAppNoYear'] = $_GET['app_sy']; 
         }else{ 
             $colelge_data = [];
         }  
-        if(empty($_GET['app_year']) && empty($_GET['app_sem'])  && empty($_GET['view']) ){ 
+        if(empty($_GET['app_sy']) && empty($_GET['app_sem'])  && empty($_GET['view']) ){ 
             $colelge_data = array(
-                'colAppNoYear' => $config['current_year'],
+                'colSY' => $config['current_sy'],
                 'colAppNoSem' => $config['current_sem'],
             ); 
         } 

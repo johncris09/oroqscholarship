@@ -30,14 +30,14 @@ class SeniorHighController extends BaseController
             $shs_data = [];
         }  
 
-        if(!empty($_GET['app_year'])){
-            $shs_data['AppNoYear'] = $_GET['app_year']; 
+        if(!empty($_GET['app_sy'])){
+            $shs_data['AppSY'] = $_GET['app_sy']; 
         }else{ 
             $shs_data = [];
         }  
-        if(empty($_GET['app_year']) && empty($_GET['app_sem'])  && empty($_GET['view']) ){ 
+        if(empty($_GET['app_sy']) && empty($_GET['app_sem'])  && empty($_GET['view']) ){ 
             $shs_data = array(
-                'AppNoYear' => $config['current_year'],
+                'AppSY' => $config['current_sy'],
                 'AppNoSem' => $config['current_sem'],
             ); 
         }  
@@ -59,14 +59,14 @@ class SeniorHighController extends BaseController
             $shs_data = [];
         }  
 
-        if(!empty($_GET['app_year'])){
-            $shs_data['AppNoYear'] = $_GET['app_year']; 
+        if(!empty($_GET['app_sy'])){
+            $shs_data['AppSY'] = $_GET['app_sy']; 
         }else{ 
             $shs_data = [];
         }  
-        if(empty($_GET['app_year']) && empty($_GET['app_sem'])  && empty($_GET['view']) ){ 
+        if(empty($_GET['app_sy']) && empty($_GET['app_sem'])  && empty($_GET['view']) ){ 
             $shs_data = array(
-                'AppNoYear' => $config['current_year'],
+                'AppSY' => $config['current_sy'],
                 'AppNoSem' => $config['current_sem'],
             ); 
         } 
@@ -88,14 +88,14 @@ class SeniorHighController extends BaseController
             $shs_data = [];
         }  
 
-        if(!empty($_GET['app_year'])){
-            $shs_data['AppNoYear'] = $_GET['app_year']; 
+        if(!empty($_GET['app_sy'])){
+            $shs_data['AppSY'] = $_GET['app_sy']; 
         }else{ 
             $shs_data = [];
         }  
-        if(empty($_GET['app_year']) && empty($_GET['app_sem'])  && empty($_GET['view']) ){ 
+        if(empty($_GET['app_sy']) && empty($_GET['app_sem'])  && empty($_GET['view']) ){ 
             $shs_data = array(
-                'AppNoYear' => $config['current_year'],
+                'AppSY' => $config['current_sy'],
                 'AppNoSem' => $config['current_sem'],
             ); 
         } 
@@ -133,7 +133,7 @@ class SeniorHighController extends BaseController
         try{   
             $id = $this->request->getPost('id');
             $data = [
-                'AppNoYear' => $this->request->getPost('app_no_year'),
+                'AppSY' => $this->request->getPost('app_no_year'),
                 'AppNoSem' => $this->request->getPost('app_no_sem'),
                 'AppNoID' => $this->request->getPost('app_no_id'),
                 'AppStatus' => $this->request->getPost('status'),

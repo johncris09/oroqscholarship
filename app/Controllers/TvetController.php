@@ -30,14 +30,14 @@ class TvetController extends BaseController
             $tvet_data = [];
         }  
 
-        if(!empty($_GET['app_year'])){
-            $tvet_data['colAppNoYear'] = $_GET['app_year']; 
+        if(!empty($_GET['app_sy'])){
+            $tvet_data['colAppNoYear'] = $_GET['app_sy']; 
         }else{ 
             $tvet_data = [];
         }  
-        if(empty($_GET['app_year']) && empty($_GET['app_sem'])  && empty($_GET['view']) ){ 
+        if(empty($_GET['app_sy']) && empty($_GET['app_sem'])  && empty($_GET['view']) ){ 
             $tvet_data = array(
-                'colAppNoYear' => $config['current_year'],
+                'colSY' => $config['current_sy'],
                 'colAppNoSem' => $config['current_sem'],
             ); 
         }  
@@ -59,14 +59,14 @@ class TvetController extends BaseController
             $tvet_data = [];
         }  
 
-        if(!empty($_GET['app_year'])){
-            $tvet_data['colAppNoYear'] = $_GET['app_year']; 
+        if(!empty($_GET['app_sy'])){
+            $tvet_data['colAppNoYear'] = $_GET['app_sy']; 
         }else{ 
             $tvet_data = [];
         }  
-        if(empty($_GET['app_year']) && empty($_GET['app_sem'])  && empty($_GET['view']) ){ 
+        if(empty($_GET['app_sy']) && empty($_GET['app_sem'])  && empty($_GET['view']) ){ 
             $tvet_data = array(
-                'colAppNoYear' => $config['current_year'],
+                'colSY' => $config['current_sy'],
                 'colAppNoSem' => $config['current_sem'],
             ); 
         } 
@@ -91,14 +91,14 @@ class TvetController extends BaseController
             $colelge_data = [];
         }  
 
-        if(!empty($_GET['app_year'])){
-            $colelge_data['colAppNoYear'] = $_GET['app_year']; 
+        if(!empty($_GET['app_sy'])){
+            $colelge_data['colAppNoYear'] = $_GET['app_sy']; 
         }else{ 
             $colelge_data = [];
         }  
-        if(empty($_GET['app_year']) && empty($_GET['app_sem'])  && empty($_GET['view']) ){ 
+        if(empty($_GET['app_sy']) && empty($_GET['app_sem'])  && empty($_GET['view']) ){ 
             $colelge_data = array(
-                'colAppNoYear' => $config['current_year'],
+                'colSY' => $config['current_sy'],
                 'colAppNoSem' => $config['current_sem'],
             ); 
         } 
