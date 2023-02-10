@@ -182,7 +182,7 @@
                                         <label for="year_level" class="form-label">Year Level</label>
                                         <select class="form-control" name="year_level" >
                                             <option value="">Select</option> 
-                                            <?php foreach($year_level as $row):?>  
+                                            <?php foreach($grade_level as $row):?>  
                                                 <option value="<?= $row ?>"><?= $row   ?></option>   
                                             <?php endforeach; ?>
                                         </select>

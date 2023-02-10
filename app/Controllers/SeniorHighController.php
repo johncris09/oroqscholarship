@@ -367,7 +367,6 @@ class SeniorHighController extends BaseController
         }  
         
         $data["result"] = $this->senior_high->get_payroll($query, $range);  
-        
         $data['tot_record'] = count($data["result"]);
         $data['tot_page'] = ceil($data['tot_record']   / 20);
         $data['from'] = 1;

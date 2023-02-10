@@ -121,7 +121,7 @@
                         </li>
                     </ul>
                     <div class="tab-content"> 
-                        <div class="tab-pane active" id="senior-high-tab">  
+                        <div class="tab-pane show active" id="senior-high-tab">  
                             <form action="generate_payroll/shs_payroll" method="get">
                                 <div class="row justify-content-center">
                                     <div class="col-9">  
@@ -347,7 +347,7 @@
 
                         </div>
                         
-                        <div class="tab-pane  show " id="tvet-tab">  
+                        <div class="tab-pane   " id="tvet-tab">  
                             <form action="generate_payroll/tvet_payroll" method="get">
                                 <div class="row justify-content-center">
                                     <div class="col-9">  

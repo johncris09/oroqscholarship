@@ -123,6 +123,8 @@ $routes->group('generate_report',  function($routes) {
 $routes->group('generate_payroll',  function($routes) {   
     $routes->get('/', 'GeneratePayrollController::index', ["filter" => "auth"]); 
     $routes->get('shs_payroll', 'SeniorHighController::payroll_print_preview', ["filter" => "auth"]);  
+    $routes->get('college_payroll', 'CollegeController::payroll_print_preview', ["filter" => "auth"]);  
+    $routes->get('tvet_payroll', 'TvetController::payroll_print_preview', ["filter" => "auth"]);  
      
 });
 

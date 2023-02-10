@@ -103,7 +103,7 @@
 				<td></td>
 				<td colspan="12">We hereby acknowledge to have received from MR. ROEL T. VISITACION, City Treasurer, the sum herein specified
 					opposite our respective names, the same being as FINANCIAL SUPPORT/ASSISTANCE as Beneficiaries of the city's Scholarship
-					Grant (Senior High School) for the
+					Grant (Higher Education Course) for the
 					<?php 
 						$semester = "";
 						if($_GET['semester'] == "1st"){
@@ -143,13 +143,12 @@
 				foreach(range($from, $to) as $num){
 					
 					$profile = $result[$num-1];
-					$name = ucwords( $profile->AppLastName . ", " . $profile->AppFirstName . " " . $profile->AppMidIn . " " . $profile->AppSuffix );
-					$address = ucwords( $profile->AppAddress );
-					$strand = $profile->AppCourse;
-					$year_level = $profile->AppYear;
-					$school = $profile->AppSchool;
-					$availment = $profile->AppAvailment;
-					$school = $profile->AppSchool;
+					$name = ucwords( $profile->colLastName . ", " . $profile->colFirstName . " " . $profile->colMI . " " . $profile->colSuffix );
+					$address = ucwords( $profile->colAddress );
+					$strand = $profile->colCourse;
+					$year_level = $profile->colYearLevel;
+					$school = $profile->colSchool;
+					$availment = $profile->colAvailment; 
 
 					if($num == $tot_record){
 			?>

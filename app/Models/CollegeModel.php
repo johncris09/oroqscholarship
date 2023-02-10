@@ -152,6 +152,24 @@ class CollegeModel extends Model
         return $query;
     }
 
+
+    
+    
+    public function get_payroll($data, $range)
+    {   
+        $query = $this->builder 
+            ->select('ID, colAppNoYear, colAppNoSem, colContactNo, colAvailment ,  colAppNoID, colAppStat, colFirstName, colMI, colLastName, colSuffix, colAddress, colCourse, colSchool, colYearLevel, ')
+            ->where($data, "both")
+            ->where(isset($range['colAppNoIDFrom']) ? "colAppNoID >=  " .$range['colAppNoIDFrom'] : "colManager = 'Active'")
+            ->where(isset($range['colAppNoIDTo']) ? "colAppNoID <=  " .$range['colAppNoIDTo'] :  "colManager = 'Active'") 
+            ->where('colManager', 'Active')
+            ->orderBy('colLastName, colFirstName, colMI', 'asc') 
+            // ->getCompiledSelect();
+            ->get()
+            ->getResult();  
+        return $query;
+    }
+
     
     public function get_tot_by_status($data)
     {
