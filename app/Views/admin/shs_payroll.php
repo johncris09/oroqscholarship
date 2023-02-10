@@ -232,11 +232,11 @@
 			</tr>
 			<tr class="text-size-11 text-center text-bold">
 				<td></td> 
-				<td>MARK ANTHONY D. ARTIGAS</td> 
+				<td><?php echo $config->chairman; ?></td> 
 				<td class="border-right border-bottom"></td> 
-				<td colspan="3">KANE ALFONSO P. IYOG, CPA-MBM</td> 
+				<td colspan="3"><?php echo $config->city_accountant; ?></td> 
 				<td class="border-right border-bottom" colspan="2"></td> 
-				<td colspan="3">ROEL T. VISITACION</td> 
+				<td colspan="3"><?php echo $config->city_treasurer; ?></td> 
 				<td colspan="2" class="border-bottom"></td> 
 			</tr>
 			<tr class="text-size-11 text-center border-bottom">
@@ -266,7 +266,7 @@
 			</tr>
 			<tr class="text-size-11 text-center">
 				<td></td> 
-				<td class="text-bold ">MANUEL U. NERI</td> 
+				<td class="text-bold "><?php echo $config->city_administrator; ?></td> 
 				<td class="border-right border-bottom"></td> 
 				<td colspan="3" class="border-bottom"></td> 
 				<td colspan="2" class="border-right border-bottom"></td> 

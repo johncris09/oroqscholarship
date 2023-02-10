@@ -94,6 +94,10 @@ class Custom_config extends BaseConfig
     ];
  
     public $year_started = 2018;
+    public $city_accountant = "KANE ALFONSO P. IYOG, CPA-MBM";
+    public $city_treasurer = "ROEL T. VISITACION";
+    public $city_administrator = "MANUEL U. NERI";
+    public $chairman = "MARK ANTHONY D. ARTIGAS";
  
 
 } 

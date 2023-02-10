@@ -4,7 +4,8 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\ConfigModel;
-use App\Models\SeniorHighModel; 
+use App\Models\SeniorHighModel;
+use Config\Custom_config;
 
 class SeniorHighController extends BaseController
 {
@@ -326,6 +327,7 @@ class SeniorHighController extends BaseController
 
         $data["page_title"] = "Generated Payroll";  
         $data["semester"] = ""; 
+        $data['config']= new Custom_config;
         $data["status"] = ""; 
         $data["scholarship_type"] = "Senior High School"; 
         $data["school_year"] = ""; 
