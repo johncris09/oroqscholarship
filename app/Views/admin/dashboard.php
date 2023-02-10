@@ -25,7 +25,7 @@
                         <div class="col-6">
                             <div class="text-end">
                                 <h2 id="shs_total" class="text-white mt-2"><?= $tot_approved_shs; ?> </h2>
-                                <p class="text-white   text-truncate">Senio High School</p>
+                                <p class="text-white   text-truncate">Senior High School</p>
                             </div>
                         </div>
                     </div> <!-- end row-->

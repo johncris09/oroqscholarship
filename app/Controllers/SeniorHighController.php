@@ -259,7 +259,7 @@ class SeniorHighController extends BaseController
 
     }
 
-
+ 
     
     public function print_preview()
     {
@@ -314,5 +314,68 @@ class SeniorHighController extends BaseController
 
     }
     
+
+    
+    public function payroll_print_preview()
+    {
+ 
+    
+        $query  = [];
+        $range  = [];
+        
+
+        $data["page_title"] = "Generated Payroll";  
+        $data["semester"] = ""; 
+        $data["status"] = ""; 
+        $data["scholarship_type"] = "Senior High School"; 
+        $data["school_year"] = ""; 
+
+        if(!empty($_GET['school'])){ 
+            $query['AppSchool'] =  $_GET['school'];
+        }
+        if(!empty($_GET['semester'])){ 
+            $query['AppSem'] =  $_GET['semester'];
+            $data['semester'] =  $_GET['semester'];
+        }
+        if(!empty($_GET['school_year'])){ 
+            $query['AppSY'] =  $_GET['school_year'];
+            $data['school_year'] =  $_GET['school_year'];
+        }
+        if(!empty($_GET['status'])){ 
+            $query['AppStatus'] =  $_GET['status'];
+            $data['status'] =  $_GET['status'];
+        }
+        if(!empty($_GET['availment'])){ 
+            $query['AppAvailment'] =  $_GET['availment'];
+        }
+        if(!empty($_GET['gender'])){ 
+            $query['AppGender'] =  $_GET['gender'];
+        }
+        if(!empty($_GET['year_level'])){ 
+            $query['AppYear'] =  $_GET['year_level'];
+        }
+        if(!empty($_GET['address'])){ 
+            $query['AppAddress'] =  $_GET['address'];
+        }
+        if(!empty($_GET['from'])){ 
+            $range['AppNoIDFrom'] =  $_GET['from'];
+        }
+        if(!empty($_GET['to'])){ 
+            $range['AppNoIDTo'] =  $_GET['to'];
+        }  
+        
+        $data["result"] = $this->senior_high->get_payroll($query, $range);  
+        
+        $data['tot_record'] = count($data["result"]);
+        $data['tot_page'] = ceil($data['tot_record']   / 20);
+        $data['from'] = 1;
+        if($data['tot_record'] !=0){
+            return view('admin/shs_payroll', $data);   
+        }else{
+            echo "No record Found";
+        }
+
+    }
+
 
 }

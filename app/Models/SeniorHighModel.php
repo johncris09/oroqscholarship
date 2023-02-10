@@ -151,7 +151,7 @@ class SeniorHighModel extends Model
     public function get_report($data, $range)
     {   
         $query = $this->builder 
-            ->select('ID, AppNoYear, AppNoSem, AppNoID, AppAvailment , AppStatus, AppFirstName, AppMidIn, AppLastName, AppSuffix, AppContact, AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ') 
+            ->select('ID, AppNoYear, AppNoSem, AppNoID, AppAvailment , AppStatus, replace(AppFirstName," ", "")  as AppFirstName ,   replace(AppMidIn," ", "") as AppMidIn , replace(AppLastName," ", "") as AppLastName, AppSuffix, AppContact, AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ') 
             ->where($data, "both")
             ->where(isset($range['AppNoIDFrom']) ? "AppNoID >=  " .$range['AppNoIDFrom'] : "AppManager = 'Active'")
             ->where(isset($range['AppNoIDTo']) ? "AppNoID <=  " .$range['AppNoIDTo'] :  "AppManager = 'Active'") 
@@ -162,6 +162,25 @@ class SeniorHighModel extends Model
             ->getResult();  
         return $query;
     }
+
+
+    
+    public function get_payroll($data, $range)
+    {   
+        $query = $this->builder 
+            ->select('ID, AppNoYear, AppNoSem, AppNoID, AppAvailment , AppStatus, AppFirstName, AppMidIn, AppLastName, AppSuffix, AppContact, AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ') 
+            ->where($data)
+            ->where(isset($range['AppNoIDFrom']) ? "AppNoID >=  " .$range['AppNoIDFrom'] : "AppManager = 'Active'")
+            ->where(isset($range['AppNoIDTo']) ? "AppNoID <=  " .$range['AppNoIDTo'] :  "AppManager = 'Active'") 
+            ->where('AppManager', 'Active') 
+            ->orderBy('AppLastName, AppFirstName,AppMidIn', 'asc')  
+            // ->getCompiledSelect();
+            ->get()
+            ->getResult();  
+        return $query;
+
+    }
+
 
     public function get_tot_by_status($data)
     {

@@ -223,13 +223,6 @@ $db = db_connect();
                                             <span> Scholar Registration </span>
                                         </a>
                                     </li>
-                                    
-                                    <li>
-                                        <a href="/generate_report"> 
-                                            <i class="mdi mdi-chart-areaspline"></i>
-                                            <span> Generat Report </span>
-                                        </a>
-                                    </li>
                             <?php
                                 }
                             ?>
@@ -238,13 +231,34 @@ $db = db_connect();
                             
                             <?php
                                 if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
-                            ?> 
+                            ?>  
                                     <li>
                                         <a href="/manage_scholarship"> 
                                             <i class="mdi mdi-cogs"></i>
                                             <span> Manage Scholarship </span>
                                         </a>
                                     </li>
+                            <?php
+                                }
+                            ?>
+                            <?php
+                                if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin", "admin"])){
+                            ?>   
+                                    <li class="menu-title">REPORT</li>
+                                    <li>
+                                        <a href="/generate_report"> 
+                                            <i class="mdi mdi-chart-areaspline"></i>
+                                            <span> Generat Report </span>
+                                        </a>
+                                    </li> 
+                                    
+
+                                    <li>
+                                        <a href="/generate_payroll"> 
+                                            <i class="mdi mdi-format-list-text"></i>
+                                            <span> Generat Payroll </span>
+                                        </a>
+                                    </li> 
                             <?php
                                 }
                             ?>
