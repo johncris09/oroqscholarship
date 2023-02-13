@@ -38,7 +38,8 @@ class CollegeSchoolController extends BaseController
         try{ 
             $school = new CollegeSchoolModel();   
             $data = [
-                'colSchoolName' => $this->request->getPost('school_name'),
+                'colSchoolName' => ucwords(trim($this->request->getPost('school_name'))),
+                'address' => ucwords(trim($this->request->getPost('address'))),
                 'colManager' => $this->request->getPost('manager'),
             ];
 
@@ -66,7 +67,8 @@ class CollegeSchoolController extends BaseController
             $id = $this->request->getPost('id');
 
             $data = [
-                'colSchoolName' => $this->request->getPost('school_name'),
+                'colSchoolName' => ucwords(trim($this->request->getPost('school_name'))),
+                'address' => ucwords(trim($this->request->getPost('address'))),
                 'colManager' =>  $this->request->getPost('manager'),
             ]; 
 

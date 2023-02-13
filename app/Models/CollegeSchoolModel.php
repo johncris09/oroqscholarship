@@ -16,6 +16,7 @@ class CollegeSchoolModel extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [
         'colSchoolName',
+        'address',
         'colManager'
     ];
 

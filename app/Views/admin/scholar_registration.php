@@ -285,7 +285,7 @@
                                             <option value="">Select</option> 
                                             <?php foreach($school as $row):?> 
                                                 <?php if($row['SchoolName'] != ""):?> 
-                                                    <option value="<?= $row['SchoolName']  ?>"><?= $row['SchoolName']  ?></option>  
+                                                    <option data-school-address="<?= $row['address']; ?>" value="<?= $row['SchoolName']  ?>"><?= $row['SchoolName']  ?></option>  
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
                                         </select>     
@@ -584,7 +584,7 @@
                                             <option value="">Select</option> 
                                             <?php foreach($college_school as $row):?> 
                                                 <?php if($row['colSchoolName'] != ""):?> 
-                                                    <option value="<?= $row['colSchoolName']  ?>"><?= $row['colSchoolName']  ?></option>  
+                                                    <option data-school-address="<?= $row['address']  ?>" value="<?= $row['colSchoolName']  ?>"><?= $row['colSchoolName']  ?></option>  
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
                                         </select> 
@@ -886,7 +886,7 @@
                                             <option value="">Select</option> 
                                             <?php foreach($college_school as $row):?> 
                                                 <?php if($row['colSchoolName'] != ""):?> 
-                                                    <option value="<?= $row['colSchoolName']  ?>"><?= $row['colSchoolName']  ?></option>  
+                                                    <option data-school-address="<?= $row['address']  ?>"  value="<?= $row['colSchoolName']  ?>"><?= $row['colSchoolName']  ?></option>  
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
                                         </select> 
@@ -1201,6 +1201,12 @@
             });
 
             
+            $(document).on('change', 'select[name="school"]', function(e){ 
+                // $(this).val()
+                var address = $(this).find(':selected').data('schoolAddress')
+                var form = $(this).closest("form").attr('id');  
+                $("#" +form + " input[name=school_address]").val(address)
+            })
 
             // Form Submit
             $(document).on('submit', '#senior-high-registration-form', function(e){  
