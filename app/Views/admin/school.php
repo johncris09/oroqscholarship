@@ -19,6 +19,7 @@
                             <tr> 
                                 <th>Action</th> 
                                 <th>School Name</th> 
+                                <th>Address</th> 
                                 <th>Manager</th>
                             </tr>
                         </thead> 
@@ -41,6 +42,10 @@
                         <div class="form-group">
                             <label for="field-1" class="form-label">School Name <span class="text-danger">*</span></label>
                             <input type="text" name="school_name" class="form-control"  placeholder="School Name" required> 
+                        </div> 
+                        <div class="form-group">
+                            <label for="field-1" class="form-label">School Address <span class="text-danger">*</span></label>
+                            <input type="text" name="address" class="form-control"  placeholder="School Address" required> 
                         </div> 
                         <div class="form-group">
                             <label for="field-1" class="form-label">Manager <span class="text-danger">*</span></label>
@@ -75,6 +80,10 @@
                         <div class="form-group">
                             <label for="field-1" class="form-label">School Name</label>
                             <input type="text" class="form-control" name="school_name"  placeholder="School Name" required> 
+                        </div> 
+                        <div class="form-group">
+                            <label for="field-1" class="form-label">School Address <span class="text-danger">*</span></label>
+                            <input type="text" name="address" class="form-control"  placeholder="School Address" required> 
                         </div> 
                         <div class="form-group">
                             <label for="field-1" class="form-label">Manager</label>
@@ -113,6 +122,7 @@
                 columns: [ 
                     { data: 'ID' },  
                     { data: 'SchoolName' },  
+                    { data: 'address' },  
                     { data: 'Manager' },  
                 ], 
                 columnDefs: [
@@ -191,6 +201,7 @@
                     success: function (data) { 
                         $('#update-school-form input[name="id"]').val(data.ID)
                         $('#update-school-form input[name="school_name"]').val(data.SchoolName)
+                        $('#update-school-form input[name="address"]').val(data.address)
                         $('#update-school-form select[name="manager"]').val(data.Manager)
                     },
                     error: function (xhr, status, error) { 

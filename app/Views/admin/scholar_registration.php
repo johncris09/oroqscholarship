@@ -223,8 +223,8 @@
                                                 <input type="text" class="form-control" name="email"  >
                                             </div>
                                             <div class="col-6">
-                                                <label for="availment" class="form-label">Availment <?= $required_field; ?></label>
-                                                <input type="number" class="form-control" name="availment" required>
+                                                <label for="availment" class="form-label">Availment <?= $required_field; ?></label> 
+                                                <input type="number" min="1" max="8" step="1" class="form-control" name="availment" required >
                                             </div> 
                                         </div>
                                     </div>
@@ -521,8 +521,8 @@
                                                 <input type="text" class="form-control" name="email"  >
                                             </div>
                                             <div class="col-6">
-                                                <label for="availment" class="form-label">Availment <?= $required_field; ?></label>
-                                                <input type="number" class="form-control" name="availment" required>
+                                                <label for="availment" class="form-label">Availment <?= $required_field; ?></label> 
+                                                <input type="number" min="1" max="8" step="1" class="form-control" name="availment" required >
                                             </div> 
                                         </div>
                                     </div>  
@@ -825,7 +825,7 @@
                                             </div>
                                             <div class="col-6">
                                                 <label for="availment" class="form-label">Availment <?= $required_field; ?></label>
-                                                <input type="number" class="form-control" name="availment" required>
+                                                <input type="number" min="1" max="8" step="1" class="form-control" name="availment" required >
                                             </div> 
                                         </div>
                                     </div> 
