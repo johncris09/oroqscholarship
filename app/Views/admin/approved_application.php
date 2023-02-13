@@ -129,9 +129,17 @@
                     }, 
                     { data: 'AppSY' }, 
                     {
-                        data  : 'ID',
-                        render: function(data, type, row, meta){   
-                            return row.AppFirstName + " " + row.AppMidIn + " "  + row.AppLastName  + " "  + row.AppSuffix 
+                        data  : 'ID', 
+                        render: function(data, type, row, meta){ 
+                            var first_name = row.AppFirstName.toLowerCase();
+                            var middle_name = row.AppMidIn.toLowerCase();
+                            var last_name = row.AppLastName.toLowerCase();
+                            var suffix = row.AppSuffix.toUpperCase();
+
+                            return  first_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " " + 
+                                    middle_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " "  + 
+                                    last_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " "  + 
+                                    suffix 
                         }
                     }, 
                     { data: 'AppAddress' },  
@@ -165,9 +173,17 @@
                     }, 
                     { data: 'colSY' },
                     {
-                        data  : 'ID',
-                        render: function(data, type, row, meta){   
-                            return row.colFirstName + " " + row.colMI + " "  + row.colLastName  + " "  + row.colSuffix 
+                        data  : 'ID', 
+                        render: function(data, type, row, meta){ 
+                            var first_name = row.colFirstName.toLowerCase();
+                            var middle_name = row.colMI.toLowerCase();
+                            var last_name = row.colLastName.toLowerCase();
+                            var suffix = row.colSuffix.toUpperCase();
+
+                            return  first_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " " + 
+                                    middle_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " "  + 
+                                    last_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " "  + 
+                                    suffix 
                         }
                     },  
                     { data: 'colAddress' },  
@@ -200,17 +216,24 @@
                     }, 
                     { data: 'colSY' },
                     {
-                        data  : 'ID',
-                        render: function(data, type, row, meta){   
-                            return row.colFirstName + " " + row.colMI + " "  + row.colLastName  + " "  + row.colSuffix 
+                        data  : 'ID',  
+                        render: function(data, type, row, meta){ 
+                            var first_name = row.colFirstName.toLowerCase();
+                            var middle_name = row.colMI.toLowerCase();
+                            var last_name = row.colLastName.toLowerCase();
+                            var suffix = row.colSuffix.toUpperCase();
+
+                            return  first_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " " + 
+                                    middle_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " "  + 
+                                    last_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " "  + 
+                                    suffix 
                         }
-                    }, 
-                    { data: 'colSY' }, 
+                    },  
                     { data: 'colAddress' },  
                     { data: 'colCourse' },  
                     { data: 'colSchool' },  
                     { data: 'colYearLevel' },  
-                    { data: 'colAppStat' },   
+                    { data: 'colAppStat' },
                 ],  
             });  
 
