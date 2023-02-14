@@ -105,7 +105,7 @@
 
                     <ul class="nav nav-pills navtab-bg nav-justified">
                         <li class="nav-item ">
-                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link   ">
+                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active  ">
                                 Senior High School Registration
                             </a>
                         </li>
@@ -115,13 +115,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link  active ">
+                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link   ">
                                 TVET Registration
                             </a>
                         </li>
                     </ul>
                     <div class="tab-content"> 
-                        <div class="tab-pane " id="senior-high-tab">  
+                        <div class="tab-pane show active" id="senior-high-tab">  
                             <form id="senior-high-registration-form"  class="validation-form">
                                 <div class="row">
                                     <div class="col-12">
@@ -372,11 +372,18 @@
                                         </select>
                                     </div>
                                     <div class="col">
-                                        <label for="semester" class="form-label">Semester <?= $required_field; ?></label>
+                                        <label for="semester" class="form-label">Semester <?= $required_field; ?></label> 
                                         <select class="form-control"   name="semester"  required>
                                             <option value="">Select</option> 
-                                            <?php foreach($semester as $row):?>  
-                                                <option value="<?= $row   ?>"><?= $row   ?></option>   
+                                            <?php foreach($semester as $row):?> 
+                                                <?Php 
+                                                    if( ($config['current_sem'] == 1 ? "1st" : "2nd") == $row){ 
+                                                        $selected= "selected";
+                                                    }else{
+                                                        $selected= "";
+                                                    }
+                                                ?>
+                                                <option <?php echo $selected; ?> value="<?= $row   ?>"><?= $row   ?></option>   
                                             <?php endforeach; ?>
                                         </select>
                                     </div> 
@@ -686,7 +693,14 @@
                                         <select class="form-control"  name="semester" required>
                                             <option value="">Select</option> 
                                             <?php foreach($semester as $row):?>  
-                                                <option value="<?= $row   ?>"><?= $row   ?></option>   
+                                                <?Php 
+                                                    if( ($config['current_sem'] == 1 ? "1st" : "2nd") == $row){ 
+                                                        $selected= "selected";
+                                                    }else{
+                                                        $selected= "";
+                                                    }
+                                                ?>
+                                                <option <?php echo $selected; ?> value="<?= $row   ?>"><?= $row   ?></option>   
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
@@ -699,7 +713,14 @@
                                         <select class="form-control" name="school_year" required>
                                             <option value="">Select</option>  
                                             <?php foreach(range(date('Y'), $year_started) as $year):?>  
-                                                <option value="SY: <?=  ($year - 1) . "-" .  $year ?>">SY: <?= ($year - 1) . "-" .  $year  ?></option>
+                                                <?Php 
+                                                    if($config['current_sy'] == "SY: " . ($year - 1) . "-" .  $year){ 
+                                                        $selected= "selected";
+                                                    }else{
+                                                        $selected= "";
+                                                    }
+                                                ?>
+                                                <option <?php echo $selected; ?> value="SY: <?=  ($year - 1) . "-" .  $year ?>">SY: <?= ($year - 1) . "-" .  $year  ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div> 
@@ -736,7 +757,7 @@
                             </form>
                         </div>
                         
-                        <div class="tab-pane show active  " id="tvet-tab"> 
+                        <div class="tab-pane   " id="tvet-tab"> 
                             <form id="tvet-registration-form" class="validation-form">
                                 <div class="row"> 
                                     <div class="col-12">
@@ -991,7 +1012,14 @@
                                         <select class="form-control"  name="semester" required>
                                             <option value="">Select</option> 
                                             <?php foreach($semester as $row):?>  
-                                                <option value="<?= $row   ?>"><?= $row   ?></option>   
+                                                <?Php 
+                                                    if( ($config['current_sem'] == 1 ? "1st" : "2nd") == $row){ 
+                                                        $selected= "selected";
+                                                    }else{
+                                                        $selected= "";
+                                                    }
+                                                ?>
+                                                <option <?php echo $selected; ?> value="<?= $row   ?>"><?= $row   ?></option>   
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
@@ -1004,7 +1032,14 @@
                                         <select class="form-control" name="school_year" required>
                                             <option value="">Select</option> 
                                             <?php foreach(range(date('Y'), $year_started) as $year):?>  
-                                                <option value="SY: <?=  ($year - 1) . "-" .  $year ?>">SY: <?= ($year - 1) . "-" .  $year  ?></option>
+                                                <?Php 
+                                                    if($config['current_sy'] == "SY: " . ($year - 1) . "-" .  $year){ 
+                                                        $selected= "selected";
+                                                    }else{
+                                                        $selected= "";
+                                                    }
+                                                ?>
+                                                <option <?php echo $selected; ?> value="SY: <?=  ($year - 1) . "-" .  $year ?>">SY: <?= ($year - 1) . "-" .  $year  ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div> 
