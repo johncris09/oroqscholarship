@@ -105,7 +105,7 @@
 
                     <ul class="nav nav-pills navtab-bg nav-justified">
                         <li class="nav-item ">
-                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active  ">
+                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link   ">
                                 Senior High School Registration
                             </a>
                         </li>
@@ -115,13 +115,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link   ">
+                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link  active ">
                                 TVET Registration
                             </a>
                         </li>
                     </ul>
                     <div class="tab-content"> 
-                        <div class="tab-pane show active" id="senior-high-tab">  
+                        <div class="tab-pane " id="senior-high-tab">  
                             <form id="senior-high-registration-form"  class="validation-form">
                                 <div class="row">
                                     <div class="col-12">
@@ -297,15 +297,19 @@
                                                         <h4 class="modal-title">Add New</h4>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div> 
-                                                    <div class="modal-body ">
+                                                    <div class="modal-body shs-add-school">
                                                         <div class="form-group">
                                                             <label for="field-1" class="form-label">School Name <?= $required_field; ?></label>
-                                                            <input type="text" name="shs_school_name" class="form-control"  placeholder="School Name" data-parsley-excluded="true" required> 
+                                                            <input type="text" name="shs_school_name" class="form-control "  placeholder="School Name" data-parsley-excluded="true" required> 
                                                         </div>   
+                                                        <div class="form-group">
+                                                            <label for="field-1" class="form-label">School Address <?= $required_field; ?></label>
+                                                            <input type="text" name="shs_school_address" class="form-control"  placeholder="School Address" data-parsley-excluded="true" required> 
+                                                        </div>  
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" id="add-new-shs-school-button" class="btn btn-info waves-effect waves-light">Save changes and Print</button>
+                                                        <button type="button" id="add-new-shs-school-button" class="btn btn-info waves-effect waves-light">Save changes</button>
                                                     </div> 
                                                 </div>
                                             </div>
@@ -339,7 +343,7 @@
                                                         <div class="form-group">
                                                             <label for="field-1" class="form-label">Strand <?= $required_field; ?></label> 
                                                             <input type="text" name="new_strand" class="form-control"  placeholder="Strand" data-parsley-excluded="true" required> 
-                                                        </div>  
+                                                        </div>    
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
@@ -377,11 +381,19 @@
                                         </select>
                                     </div> 
                                     <div class="col">
-                                        <label for="school_year" class="form-label">SY <?= $required_field; ?></label>
+                                        <label for="school_year" class="form-label">SY <?= $required_field; ?></label> 
                                         <select class="form-control"   name="school_year"  required>
+                                            
                                             <option value="">Select</option> 
                                             <?php foreach(range(date('Y'), $year_started) as $year):?>  
-                                                <option value="SY: <?=  ($year - 1) . "-" .  $year ?>">SY: <?= ($year - 1) . "-" .  $year  ?></option>
+                                                <?Php 
+                                                    if($config['current_sy'] == "SY: " . ($year - 1) . "-" .  $year){ 
+                                                        $selected= "selected";
+                                                    }else{
+                                                        $selected= "";
+                                                    }
+                                                ?>
+                                                <option <?= $selected ?> value="SY: <?=  ($year - 1) . "-" .  $year ?>">SY: <?= ($year - 1) . "-" .  $year  ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div> 
@@ -596,10 +608,14 @@
                                                         <h4 class="modal-title">Add New</h4>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div> 
-                                                    <div class="modal-body ">
+                                                    <div class="modal-body college-add-school">
                                                         <div class="form-group">
                                                             <label for="field-1" class="form-label">School Name <?= $required_field; ?></label>
                                                             <input type="text" name="college_school_name" class="form-control"  placeholder="School Name" data-parsley-excluded="true" required> 
+                                                        </div>  
+                                                        <div class="form-group">
+                                                            <label for="field-1" class="form-label">School Address <?= $required_field; ?></label>
+                                                            <input type="text" name="college_school_address" class="form-control "  placeholder="School Address" data-parsley-excluded="true" required> 
                                                         </div>   
                                                     </div>
                                                     <div class="modal-footer">
@@ -720,7 +736,7 @@
                             </form>
                         </div>
                         
-                        <div class="tab-pane   " id="tvet-tab"> 
+                        <div class="tab-pane show active  " id="tvet-tab"> 
                             <form id="tvet-registration-form" class="validation-form">
                                 <div class="row"> 
                                     <div class="col-12">
@@ -898,16 +914,20 @@
                                                         <h4 class="modal-title">Add New</h4>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div> 
-                                                    <div class="modal-body ">
+                                                    <div class="modal-body tvet-add-school">
                                                         <div class="form-group">
-                                                            <label for="field-1" class="form-label">School Name</label>
+                                                            <label for="field-1" class="form-label">School Name <?= $required_field; ?></label>
                                                             <input type="text" name="tvet_school_name" class="form-control"  placeholder="School Name" data-parsley-excluded="true" required> 
+                                                        </div>  
+                                                        <div class="form-group">
+                                                            <label for="field-1" class="form-label">School Address <?= $required_field; ?></label>
+                                                            <input type="text" name="tvet_school_address" class="form-control "  placeholder="School Address" data-parsley-excluded="true" required> 
                                                         </div>   
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
                                                         <button type="button" id="add-new-tvet-school-button" class="btn btn-info waves-effect waves-light">Save  changes</button>
-                                                    </div> 
+                                                    </div>  
                                                 </div>
                                             </div>
                                         </div> 
@@ -1257,13 +1277,30 @@
                     }
                 }); 
             });
-
-            
+ 
             // Add New Shs School Button
             $(document).on('click', '#add-new-shs-school-button', function(e){  
                 e.preventDefault(); 
+                var bool =1; 
+                $(".shs-add-school").find("input[required]").each(function() {  
+                    console.info()
+                    if($(this).val().trim() == ''){ 
+                        bool = 0;
+                        return false;
+                    }else{
+                        bool = 1
+                    } 
+                })
+ 
                 var school_name = $('input[name="shs_school_name"]').val() 
-                if(school_name == ""){
+                school_name = school_name.toLowerCase().split(' ').map(function(word) {
+                    return word.charAt(0).toUpperCase() + word.slice(1);
+                }).join(' ');
+                var address = $('input[name="shs_school_address"]').val() 
+                address = address.toLowerCase().split(' ').map(function(word) {
+                    return word.charAt(0).toUpperCase() + word.slice(1);
+                }).join(' ');
+                if(!bool){
                     Swal.fire({
                         title:"Input Field must not be empty!", 
                         icon:"error"
@@ -1274,23 +1311,21 @@
                         method: "post", 
                         data: {
                             school_name : school_name,
+                            address : address,
                             manager : "Active"
                         },  
                         dataType: "json", 
-                        success: function (data) {  
+                        success: function (data) {   
                             if(data.response){ 
                                 Swal.fire({
                                     title:"Good job!",
                                     text: data.message,
                                     icon:"success"
-                                })
-                                
-                                // append value
-                                $('#senior-high-registration-form select[name="school"]').append($('<option>', {
-                                    value: school_name,
-                                    text: school_name
-                                }));
+                                }) 
+                                var option = $('<option>').val(school_name).text(school_name).attr('data-school-address', address);
+                                $('#senior-high-registration-form select[name="school"]').append(option);
 
+                                $('input[name="shs_school_name"]').val('')  
                                 $('input[name="shs_school_name"]').val('')  
                                 $('#add-new-shs-school-modal').modal('hide')
                             }else{  
@@ -1530,15 +1565,33 @@
                         console.info(xhr.responseText);
                     }
                 }); 
-            });
+            });  
 
-            
-             
             // Add New College School Button
             $(document).on('click', '#add-new-college-school-button', function(e){  
                 e.preventDefault(); 
+
+                var bool =1; 
+                $(".college-add-school").find("input[required]").each(function() {   
+                    if($(this).val().trim() == ''){ 
+                        bool = 0;
+                        return false;
+                    }else{
+                        bool = 1
+                    } 
+                })
+ 
+
                 var school_name = $('input[name="college_school_name"]').val() 
-                if(school_name == ""){
+                school_name = school_name.toLowerCase().split(' ').map(function(word) {
+                    return word.charAt(0).toUpperCase() + word.slice(1);
+                }).join(' ');
+                var address = $('input[name="college_school_address"]').val() 
+                address = address.toLowerCase().split(' ').map(function(word) {
+                    return word.charAt(0).toUpperCase() + word.slice(1);
+                }).join(' ');
+
+                if(!bool){
                     Swal.fire({
                         title:"Input Field must not be empty!", 
                         icon:"error"
@@ -1549,23 +1602,21 @@
                         method: "post", 
                         data: {
                             school_name : school_name,
+                            address : address,
                             manager : "Active"
-                        },   
+                        },  
                         dataType: "json", 
-                        success: function (data) {   
+                        success: function (data) {  
                             if(data.response){ 
                                 Swal.fire({
                                     title:"Good job!",
                                     text: data.message,
                                     icon:"success"
-                                })
-                                
-                                // append value
-                                $('#college-registration-form select[name="school"]').append($('<option>', {
-                                    value: school_name,
-                                    text: school_name
-                                }));
+                                }) 
+                                var option = $('<option>').val(school_name).text(school_name).attr('data-school-address', address);
+                                $('#college-registration-form select[name="school"]').append(option);
 
+                                $('input[name="college_school_name"]').val('')  
                                 $('input[name="college_school_name"]').val('')  
                                 $('#add-new-college-school-modal').modal('hide')
                             }else{  
@@ -1579,9 +1630,8 @@
                         error: function (xhr, status, error) { 
                             console.info(xhr.responseText);
                         }
-                    }); 
-
-                }
+                    });  
+                } 
             });  
             // Add New College Course Button
             $(document).on('click', '#add-new-college-course-button', function(e){  
@@ -1631,9 +1681,7 @@
                     }); 
 
                 }
-            }); 
-
-
+            });  
 
             //=============================================================================
             //  TVET Registration
@@ -1800,11 +1848,32 @@
             });
 
 
-            // Add New TVET School Button
-            $(document).on('click', '#add-new-tvet-school-button', function(e){  
+            
+            // Add New College School Button
+            $(document).on('click', '#add-new-college-school-button', function(e){  
                 e.preventDefault(); 
-                var school_name = $('input[name="tvet_school_name"]').val() 
-                if(school_name == ""){
+
+                var bool =1; 
+                $(".college-add-school").find("input[required]").each(function() {   
+                    if($(this).val().trim() == ''){ 
+                        bool = 0;
+                        return false;
+                    }else{
+                        bool = 1
+                    } 
+                })
+ 
+
+                var school_name = $('input[name="college_school_name"]').val() 
+                school_name = school_name.toLowerCase().split(' ').map(function(word) {
+                    return word.charAt(0).toUpperCase() + word.slice(1);
+                }).join(' ');
+                var address = $('input[name="college_school_address"]').val() 
+                address = address.toLowerCase().split(' ').map(function(word) {
+                    return word.charAt(0).toUpperCase() + word.slice(1);
+                }).join(' ');
+
+                if(!bool){
                     Swal.fire({
                         title:"Input Field must not be empty!", 
                         icon:"error"
@@ -1815,23 +1884,90 @@
                         method: "post", 
                         data: {
                             school_name : school_name,
+                            address : address,
                             manager : "Active"
-                        },   
+                        },  
                         dataType: "json", 
-                        success: function (data) {   
+                        success: function (data) {  
                             if(data.response){ 
                                 Swal.fire({
                                     title:"Good job!",
                                     text: data.message,
                                     icon:"success"
-                                })
-                                
-                                // append value
-                                $('#tvet-registration-form select[name="school"]').append($('<option>', {
-                                    value: school_name,
-                                    text: school_name
-                                }));
+                                }) 
+                                var option = $('<option>').val(school_name).text(school_name).attr('data-school-address', address);
+                                $('#college-registration-form select[name="school"]').append(option);
 
+                                $('input[name="college_school_name"]').val('')  
+                                $('input[name="college_school_name"]').val('')  
+                                $('#add-new-college-school-modal').modal('hide')
+                            }else{  
+                                Swal.fire({
+                                    title:"Insert Error!",
+                                    text: data.message,
+                                    icon:"error"
+                                }) 
+                            }
+                        },
+                        error: function (xhr, status, error) { 
+                            console.info(xhr.responseText);
+                        }
+                    });  
+                } 
+            });  
+
+
+
+            // Add New TVET School Button
+            $(document).on('click', '#add-new-tvet-school-button', function(e){  
+                e.preventDefault(); 
+
+                var bool =1; 
+                $(".tvet-add-school").find("input[required]").each(function() {   
+                    if($(this).val().trim() == ''){ 
+                        bool = 0;
+                        return false;
+                    }else{
+                        bool = 1
+                    } 
+                })
+ 
+
+                var school_name = $('input[name="tvet_school_name"]').val() 
+                school_name = school_name.toLowerCase().split(' ').map(function(word) {
+                    return word.charAt(0).toUpperCase() + word.slice(1);
+                }).join(' ');
+                var address = $('input[name="tvet_school_address"]').val() 
+                address = address.toLowerCase().split(' ').map(function(word) {
+                    return word.charAt(0).toUpperCase() + word.slice(1);
+                }).join(' ');
+
+                if(!bool){
+                    Swal.fire({
+                        title:"Input Field must not be empty!", 
+                        icon:"error"
+                    }) 
+                }else{
+                    $.ajax({
+                        url:  'collegeschool/insert',
+                        method: "post", 
+                        data: {
+                            school_name : school_name,
+                            address : address,
+                            manager : "Active"
+                        },  
+                        dataType: "json", 
+                        success: function (data) {  
+                            if(data.response){ 
+                                Swal.fire({
+                                    title:"Good job!",
+                                    text: data.message,
+                                    icon:"success"
+                                }) 
+                                var option = $('<option>').val(school_name).text(school_name).attr('data-school-address', address);
+                                $('#tvet-registration-form select[name="school"]').append(option);
+
+                                $('input[name="tvet_school_name"]').val('')  
                                 $('input[name="tvet_school_name"]').val('')  
                                 $('#add-new-tvet-school-modal').modal('hide')
                             }else{  
@@ -1845,9 +1981,8 @@
                         error: function (xhr, status, error) { 
                             console.info(xhr.responseText);
                         }
-                    }); 
-
-                }
+                    });  
+                }  
             });  
             // Add New TVET Course Button
             $(document).on('click', '#add-new-tvet-course-button', function(e){  
