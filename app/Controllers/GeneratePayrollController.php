@@ -15,37 +15,37 @@ use Config\Custom_config;
 class GeneratePayrollController extends BaseController
 {
     public function __construct() {
-        $db = db_connect();
+        $db                             = db_connect();
         $this->senior_high_registration = new SeniorHighModel($db);
-        $this->college_registration  = new CollegeModel($db);
-        $this->tvet_registration  = new TvetModel($db);
+        $this->college_registration     = new CollegeModel($db);
+        $this->tvet_registration        = new TvetModel($db);
     }
 
 
     public function index()
     {      
-        $data["page_title"] = "Generate Payroll";
-        $config = new Custom_config;
-        $school = new SchoolModel();
-        $course = new CourseModel();
-        $college_school = new CollegeSchoolModel();
-        $strand = new StrandModel();
-        $sequence = new SequenceModel(); 
-        $data['year_started'] = $config->year_started;  
-        $data['barangay'] = $config->barangay; 
-        $data['semester'] = $config->semester; 
-        $data['civil_status'] = $config->civilStatus; 
+        $data["page_title"]     = "Generate Payroll";
+        $config                 = new Custom_config;
+        $school                 = new SchoolModel();
+        $course                 = new CourseModel();
+        $college_school         = new CollegeSchoolModel();
+        $strand                 = new StrandModel();
+        $sequence               = new SequenceModel(); 
+        $data['year_started']   = $config->year_started;  
+        $data['barangay']       = $config->barangay; 
+        $data['semester']       = $config->semester; 
+        $data['civil_status']   = $config->civilStatus; 
         $data['scholar_status'] = $config->scholar_status;  
         $data['required_field'] = $config->requiredField;  
-        $data['grade_level'] = $config->gradeLevel;
-        $data['school'] = $school->asArray()->findAll();
-        $data['strand'] = $strand->asArray()->findAll();
-        $data['course'] = $course->asArray()->findAll();
+        $data['grade_level']    = $config->gradeLevel;
+        $data['school']         = $school->asArray()->findAll();
+        $data['strand']         = $strand->asArray()->findAll();
+        $data['course']         = $course->asArray()->findAll();
         $data['college_school'] = $college_school->asArray()->findAll();
-        $data['year_level'] = $config->yearLevel;
-        $data['sequence_year'] =  $sequence->asArray()->where('Sys_ID', 1)->findAll()[0]['seq_year'];
-        $data['seq_sem'] =  $sequence->asArray()->where('Sys_ID', 1)->findAll()[0]['seq_sem'];
-        $data['app_no_id'] = $this->senior_high_registration->count() + 1; 
+        $data['year_level']     = $config->yearLevel;
+        $data['sequence_year']  = $sequence->asArray()->where('Sys_ID', 1)->findAll()[0]['seq_year'];
+        $data['seq_sem']        = $sequence->asArray()->where('Sys_ID', 1)->findAll()[0]['seq_sem'];
+        $data['app_no_id']      = $this->senior_high_registration->count() + 1; 
         return view('admin/generate_payroll', $data);  
     }
 

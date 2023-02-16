@@ -1200,7 +1200,7 @@
  
 
             var $modal_shs = $('#modal_shs');
-            var image_shs = document.getElementById('sample_image_shs');  
+            var image_shs  = document.getElementById('sample_image_shs');  
 
             // Tippy
             tippy('#add-school-button', {
@@ -1213,13 +1213,13 @@
 
             $('#upload_image_shs').change(function(event){
                 var files = event.target.files; 
-                var done = function (url) {
+                var done  = function (url) {
                     image_shs.src = url;
                     $modal_shs.modal('show');  
                 }; 
                 if (files && files.length > 0)
                 { 
-                    reader = new FileReader();
+                    reader        = new FileReader();
                     reader.onload = function (event) {
                         done(reader.result);
                     };
@@ -1230,21 +1230,21 @@
 
             $modal_shs.on('shown.bs.modal', function() {
                 cropper = new Cropper(image_shs, { 
-                    dragMode: 'move',    
-                    // aspectRatio: 1,
-                    // viewMode: 3,  
-                    aspectRatio: 1,
-                    minCropBoxWidth: 150,
+                    dragMode        : 'move',    
+                    // aspectRatio  : 1,
+                    // viewMode     : 3,  
+                    aspectRatio     : 1,
+                    minCropBoxWidth : 150,
                     minCropBoxHeight: 150,
                     cropBoxResizable: true,
-                    guides: true,
-                    highlight: true,
-                    dragCrop: true,
-                    cropBoxMovable: true,
+                    guides          : true,
+                    highlight       : true,
+                    dragCrop        : true,
+                    cropBoxMovable  : true,
                     cropBoxResizable: true,
-                    responsive: true,
-                    background: true,autoCropArea: 1,
-                    preview: '.preview', 
+                    responsive      : true,
+                    background      : true,autoCropArea: 1,
+                    preview         : '.preview', 
                 }); 
 
             }).on('hidden.bs.modal', function() {
@@ -1255,21 +1255,21 @@
 
             $("#crop_shs").click(function(e){
                 canvas = cropper.getCroppedCanvas({ 
-                    width: 96,
+                    width : 96,
                     height: 96,
                 });
                 canvas.toBlob(function(blob) {
                     var reader = new FileReader(); 
                     reader.readAsDataURL(blob);  
                     reader.onloadend = function() { 
-                        base64data = reader.result;
+                        base64data   = reader.result;
 
                         $.ajax({
-                            url: "../../../registration/upload",
-                            method: "POST",                	
-                            data: {image: base64data},
+                            url      : "../../../registration/upload",
+                            method   : "POST",                	
+                            data     : {image: base64data},
                             dadtaType: "json",
-                            success: function(data){
+                            success  : function(data){
                                 image_data = data;
                                 $modal_shs.modal('hide');    
                                 $('#uploaded_image_shs').attr('src', "<?=base_url()?>/" + data);   
@@ -1292,29 +1292,29 @@
                 e.preventDefault();
                 var formData = new FormData($("#senior-high-form")[0]);  
                 $.ajax({
-                    url:  '/manage/update_shs',
-                    method: "post", 
-                    data: formData,
+                    url        : '/manage/update_shs',
+                    method     : "post", 
+                    data       : formData,
                     processData: false,
                     contentType: false, 
-                    dataType: "json", 
-                    success: function (data) { 
+                    dataType   : "json", 
+                    success    : function (data) { 
                         if(data.response){ 
                             Swal.fire({
-                                title:"Good job!",
-                                text: data.message,
-                                icon:"success"
+                                title: "Good job!",
+                                text : data.message,
+                                icon : "success"
                             })
  
                         }else{  
                             Swal.fire({
-                                title:"Update Error!",
-                                text: data.message,
-                                icon:"error"
+                                title: "Update Error!",
+                                text : data.message,
+                                icon : "error"
                             }) 
                         }
                     },
-                    error: function (xhr, status, error) { 
+                    error      : function (xhr, status, error) { 
                         console.info(xhr.responseText);
                     }
                 }); 
@@ -1326,44 +1326,43 @@
                 var school_name = $('input[name="shs_school_name"]').val() 
                 if(school_name == ""){
                     Swal.fire({
-                        title:"Input Field must not be empty!", 
-                        icon:"error"
+                        title: "Input Field must not be empty!", 
+                        icon : "error"
                     }) 
                 }else{
                     $.ajax({
-                        url:  '/school/insert',
-                        method: "post", 
-                        data: {
-                            school_name : school_name,
-                            manager : "Active"
-                        },  
+                        url     : '/school/insert',
+                        method  : "post", 
                         dataType: "json", 
-                        success: function (data) { 
-
+                        data    : {
+                            school_name: school_name,
+                            manager    : "Active"
+                        },  
+                        success : function (data) {  
                             if(data.response){ 
                                 Swal.fire({
-                                    title:"Good job!",
-                                    text: data.message,
-                                    icon:"success"
+                                    title: "Good job!",
+                                    text : data.message,
+                                    icon : "success"
                                 })
                                 
                                 // append value
                                 $('#senior-high-form select[name="school"]').append($('<option>', {
                                     value: school_name,
-                                    text: school_name
+                                    text : school_name
                                 }));
 
                                 $('input[name="shs_school_name"]').val('')  
                                 $('#add-new-shs-school-modal').modal('hide')
                             }else{  
                                 Swal.fire({
-                                    title:"Insert Error!",
-                                    text: data.message,
-                                    icon:"error"
+                                    title: "Insert Error!",
+                                    text : data.message,
+                                    icon : "error"
                                 }) 
                             }
                         },
-                        error: function (xhr, status, error) { 
+                        error   : function (xhr, status, error) { 
                             console.info(xhr.responseText);
                         }
                     }); 
@@ -1383,39 +1382,38 @@
                     }) 
                 }else{
                     $.ajax({
-                        url:  '/strand/insert',
-                        method: "post", 
-                        data: {
+                        url     : '/strand/insert',
+                        method  : "post", 
+                        dataType: "json", 
+                        data    : {
                             strand : strand,
                             manager : "Active"
                         },  
-                        dataType: "json", 
-                        success: function (data) {  
-                            console.info(data)
+                        success : function (data) {   
                             if(data.response){ 
                                 Swal.fire({
-                                    title:"Good job!",
-                                    text: data.message,
-                                    icon:"success"
+                                    title: "Good job!",
+                                    text : data.message,
+                                    icon : "success"
                                 })
 
                                 // append value
                                 $('#senior-high-form select[name="strand"]').append($('<option>', {
                                     value: strand,
-                                    text: strand
+                                    text : strand
                                 }));
 
                                 $('input[name="new_strand"]').val('')
                                 $('#add-new-shs-strand-modal').modal('hide')
                             }else{  
                                 Swal.fire({
-                                    title:"Insert Error!",
-                                    text: data.message,
-                                    icon:"error"
+                                    title: "Insert Error!",
+                                    text : data.message,
+                                    icon : "error"
                                 }) 
                             }
                         },
-                        error: function (xhr, status, error) { 
+                        error   : function (xhr, status, error) { 
                             console.info(xhr.responseText);
                         }
                     }); 
@@ -1442,30 +1440,30 @@
                 }).then(function(e) { 
                     if(e.value){ 
                         $.ajax({ 
-                            url:  '/manage/archived_shs',
-                            method: "post",  
-                            data: {
+                            url     : '/manage/archived_shs',
+                            method  : "post",  
+                            dataType: "json", 
+                            data    : {
                                 id: id,
                                 manager: "Archived",
-                            },
-                            dataType: "json", 
-                            success: function (data) {   
+                            }, 
+                            success : function (data) { 
                                 if(data.response){ 
                                     Swal.fire({
-                                        title:"Good job!",
-                                        text: data.message,
-                                        icon:"success"
+                                        title: "Good job!",
+                                        text : data.message,
+                                        icon : "success"
                                     })
                                     table.ajax.reload() 
                                 }else{ 
                                     Swal.fire({
-                                        title:"Update Error!",
-                                        text: data.message,
-                                        icon:"error"
+                                        title: "Update Error!",
+                                        text : data.message,
+                                        icon : "error"
                                     }) 
                                 }
                             },
-                            error: function (xhr, status, error) { 
+                            error   : function (xhr, status, error) { 
                                 console.info(xhr.responseText);
                             }
                         });  
@@ -1483,7 +1481,7 @@
  
             
             var $modal_college = $('#modal_college');
-            var image_college = document.getElementById('sample_image_college');
+            var image_college  = document.getElementById('sample_image_college');
 
             // Tippy
             tippy('#add-course-button', {
@@ -1492,13 +1490,13 @@
 
             $('#upload_image_college').change(function(event){
                 var files = event.target.files;
-                var done = function (url) {
+                var done  = function (url) {
                     image_college.src = url;
                     $modal_college.modal('show');
                 }; 
                 if (files && files.length > 0)
                 { 
-                    reader = new FileReader();
+                    reader        = new FileReader();
                     reader.onload = function (event) {
                         done(reader.result);
                     };
@@ -1508,21 +1506,21 @@
             
             $modal_college.on('shown.bs.modal', function() {
                 cropper = new Cropper(image_college, {
-                    dragMode: 'move',    
-                    // aspectRatio: 1,
-                    // viewMode: 3, 
-                    aspectRatio: 1,
-                    minCropBoxWidth: 150,
+                    dragMode        : 'move',    
+                    // aspectRatio  : 1,
+                    // viewMode     : 3, 
+                    aspectRatio     : 1,
+                    minCropBoxWidth : 150,
                     minCropBoxHeight: 150,
                     cropBoxResizable: true,
-                    guides: true,
-                    highlight: true,
-                    dragCrop: true,
-                    cropBoxMovable: true,
+                    guides          : true,
+                    highlight       : true,
+                    dragCrop        : true,
+                    cropBoxMovable  : true,
                     cropBoxResizable: true,
-                    responsive: true,
-                    background: true,autoCropArea: 1,
-                    preview: '.preview',  
+                    responsive      : true,
+                    background      : true,autoCropArea: 1,
+                    preview         : '.preview',  
                 });
  
 
@@ -1534,7 +1532,7 @@
             // Crop Image
             $("#crop_college").click(function(){
                 canvas = cropper.getCroppedCanvas({ 
-                    width: 96,
+                    width : 96,
                     height: 96,
                 });
 
@@ -1542,14 +1540,14 @@
                     var reader = new FileReader();
                     reader.readAsDataURL(blob); 
                     reader.onloadend = function() {
-                        base64data = reader.result;  
+                        base64data   = reader.result;  
 
                         $.ajax({
-                            url: "../../../registration/upload",
-                            method: "POST",                	
-                            data: {image: base64data},
+                            url      : "../../../registration/upload",
+                            method   : "POST",                	
+                            data     : {image: base64data},
                             dadtaType: "json",
-                            success: function(data){ 
+                            success  : function(data){ 
                                 image_data = data; 
                                 $modal_college.modal('hide'); 
                                 $('#uploaded_image_college').attr('src', "<?= base_url(); ?>/" + data);   
@@ -1567,32 +1565,32 @@
             $(document).on('submit', '#college-form', function(e){ 
                 
                 e.preventDefault();    
-                var _this = $(this)  
+                var _this    = $(this)  
                 var formData = new FormData($("#college-form")[0]);  
                 $.ajax({
-                    url:  '/manage/update_college',
-                    method: "post", 
-                    data: formData,
+                    url        : '/manage/update_college',
+                    method     : "post", 
+                    data       : formData,
                     processData: false,
                     contentType: false, 
-                    dataType: "json",  
-                    success: function (data) {   
+                    dataType   : "json",  
+                    success    : function (data) {   
                         if(data.response){ 
                             Swal.fire({
-                                title:"Good job!",
-                                text: data.message,
-                                icon:"success"
+                                title: "Good job!",
+                                text : data.message,
+                                icon : "success"
                             })
  
                         }else{  
                             Swal.fire({
-                                title:"Update Error!",
-                                text: data.message,
-                                icon:"error"
+                                title: "Update Error!",
+                                text : data.message,
+                                icon : "error"
                             }) 
                         }
                     },
-                    error: function (xhr, status, error) { 
+                    error      : function (xhr, status, error) { 
                         console.info(xhr.responseText);
                     }
                 }); 
@@ -1604,43 +1602,43 @@
                 var school_name = $('input[name="college_school_name"]').val() 
                 if(school_name == ""){
                     Swal.fire({
-                        title:"Input Field must not be empty!", 
-                        icon:"error"
+                        title: "Input Field must not be empty!", 
+                        icon : "error"
                     }) 
                 }else{
                     $.ajax({
-                        url:  '/collegeschool/insert',
-                        method: "post", 
-                        data: {
-                            school_name : school_name,
-                            manager : "Active"
-                        },   
+                        url     : '/collegeschool/insert',
+                        method  : "post", 
                         dataType: "json", 
-                        success: function (data) {   
+                        data    : {
+                            school_name: school_name,
+                            manager    : "Active"
+                        },    
+                        success : function (data) { 
                             if(data.response){ 
                                 Swal.fire({
-                                    title:"Good job!",
-                                    text: data.message,
-                                    icon:"success"
+                                    title: "Good job!",
+                                    text : data.message,
+                                    icon : "success"
                                 })
                                 
                                 // append value
                                 $('#college-form select[name="school"]').append($('<option>', {
                                     value: school_name,
-                                    text: school_name
+                                    text : school_name
                                 }));
 
                                 $('input[name="college_school_name"]').val('')  
                                 $('#add-new-college-school-modal').modal('hide')
                             }else{  
                                 Swal.fire({
-                                    title:"Insert Error!",
-                                    text: data.message,
-                                    icon:"error"
+                                    title: "Insert Error!",
+                                    text : data.message,
+                                    icon : "error"
                                 }) 
                             }
                         },
-                        error: function (xhr, status, error) { 
+                        error   : function (xhr, status, error) {  
                             console.info(xhr.responseText);
                         }
                     }); 
@@ -1655,43 +1653,43 @@
                 var course = $('input[name="college_course"]').val() 
                 if(course == ""){
                     Swal.fire({
-                        title:"Input Field must not be empty!", 
-                        icon:"error"
+                        title: "Input Field must not be empty!", 
+                        icon : "error"
                     }) 
                 }else{
                     $.ajax({
-                        url:  '/course/insert',
-                        method: "post", 
-                        data: {
+                        url     : '/course/insert',
+                        method  : "post", 
+                        data    : {
                             course : course,
-                            manager : "Active"
-                        },  
-                        dataType: "json", 
-                        success: function (data) {   
+                            manager: "Active"
+                        }, 
+                        dataType: "json",   
+                        success : function (data) {  
                             if(data.response){ 
                                 Swal.fire({
-                                    title:"Good job!",
-                                    text: data.message,
-                                    icon:"success"
+                                    title: "Good job!",
+                                    text : data.message,
+                                    icon : "success"
                                 })
 
                                 // append value
                                 $('#college-form select[name="course"]').append($('<option>', {
                                     value: course,
-                                    text: course
+                                    text : course
                                 }));
 
                                 $('input[name="college_course"]').val('')
                                 $('#add-new-college-course-modal').modal('hide')
                             }else{  
                                 Swal.fire({
-                                    title:"Insert Error!",
-                                    text: data.message,
-                                    icon:"error"
+                                    title: "Insert Error!",
+                                    text : data.message,
+                                    icon : "error"
                                 }) 
                             }
                         },
-                        error: function (xhr, status, error) { 
+                        error   : function (xhr, status, error) { 
                             console.info(xhr.responseText);
                         }
                     }); 
@@ -1707,41 +1705,41 @@
                 var id = _this.data('id')
 
                 Swal.fire({
-                    title: "Are you sure you want to delete this record?", 
-                    icon: "warning",
-                    showCancelButton: !0,
-                    confirmButtonText: "Yes, delete it!",
-                    cancelButtonText: "No, cancel!",
+                    title             : "Are you sure you want to delete this record?", 
+                    icon              : "warning",
+                    showCancelButton  : !0,
+                    confirmButtonText : "Yes, delete it!",
+                    cancelButtonText  : "No, cancel!",
                     confirmButtonClass: "btn btn-success mt-2",
-                    cancelButtonClass: "btn btn-danger ms-2 mt-2",
-                    buttonsStyling: !1
+                    cancelButtonClass : "btn btn-danger ms-2 mt-2",
+                    buttonsStyling    : !1
                 }).then(function(e) { 
                     if(e.value){ 
                         $.ajax({ 
-                            url:  '/manage/archived_college',
-                            method: "post",  
-                            data: {
-                                id: id,
+                            url     : '/manage/archived_college',
+                            method  : "post",  
+                            dataType: "json", 
+                            data    : {
+                                id     : id,
                                 manager: "Archived",
                             },
-                            dataType: "json", 
-                            success: function (data) {   
+                            success : function (data) {  
                                 if(data.response){ 
                                     Swal.fire({
-                                        title:"Good job!",
-                                        text: data.message,
-                                        icon:"success"
+                                        title: "Good job!",
+                                        text : data.message,
+                                        icon : "success"
                                     })
                                     table.ajax.reload() 
                                 }else{ 
                                     Swal.fire({
-                                        title:"Update Error!",
-                                        text: data.message,
-                                        icon:"error"
+                                        title: "Update Error!",
+                                        text : data.message,
+                                        icon : "error"
                                     }) 
                                 }
                             },
-                            error: function (xhr, status, error) { 
+                            error   : function (xhr, status, error) {  
                                 console.info(xhr.responseText);
                             }
                         });  
@@ -1756,17 +1754,17 @@
             //  TVET Update
             //============================================================================= 
             var $modal_tvet = $('#modal_tvet');
-            var image_tvet = document.getElementById('sample_image_tvet'); 
+            var image_tvet  = document.getElementById('sample_image_tvet'); 
 
             $('#upload_image_tvet').change(function(event){
                 var files = event.target.files;
-                var done = function (url) {
+                var done  = function (url) {
                     image_tvet.src = url;
                     $modal_tvet.modal('show');
                 }; 
                 if (files && files.length > 0)
                 { 
-                    reader = new FileReader();
+                    reader        = new FileReader();
                     reader.onload = function (event) {
                         done(reader.result);
                     };
@@ -1776,21 +1774,21 @@
             
             $modal_tvet.on('shown.bs.modal', function() {
                 cropper = new Cropper(image_tvet, {
-                    dragMode: 'move',    
-                    // aspectRatio: 1,
-                    // viewMode: 3, 
-                    aspectRatio: 1,
-                    minCropBoxWidth: 150,
+                    dragMode        : 'move',    
+                    // aspectRatio  : 1,
+                    // viewMode     : 3, 
+                    aspectRatio     : 1,
+                    minCropBoxWidth : 150,
                     minCropBoxHeight: 150,
                     cropBoxResizable: true,
-                    guides: true,
-                    highlight: true,
-                    dragCrop: true,
-                    cropBoxMovable: true,
+                    guides          : true,
+                    highlight       : true,
+                    dragCrop        : true,
+                    cropBoxMovable  : true,
                     cropBoxResizable: true,
-                    responsive: true,
-                    background: true,autoCropArea: 1,
-                    preview: '.preview', 
+                    responsive      : true,
+                    background      : true,autoCropArea: 1,
+                    preview         : '.preview', 
                 });
  
 
@@ -1803,21 +1801,21 @@
  
             $("#crop_tvet").click(function(){
                 canvas = cropper.getCroppedCanvas({ 
-                    width: 96,
+                    width : 96,
                     height: 96,
                 });
 
                 canvas.toBlob(function(blob) {
-                    var reader = new FileReader();
+                    var reader       = new FileReader();
                     reader.readAsDataURL(blob); 
                     reader.onloadend = function() {
                         base64data = reader.result;  
                         $.ajax({
-                            url: "../../../registration/upload",
-                            method: "POST",                	
-                            data: {image: base64data},
+                            url      : "../../../registration/upload",
+                            method   : "POST",                	
+                            data     : {image: base64data},
                             dadtaType: "json",
-                            success: function(data){ 
+                            success  : function(data){ 
                                 image_data = data; 
                                 $modal_college.modal('hide'); 
                                 $('#uploaded_image_college').attr('src', "<?= base_url(); ?>/" + data);   
@@ -1825,11 +1823,11 @@
                             }
                         }); 
                         $.ajax({
-                            url: "../../../registration/upload",
-                            method: "POST",                	
-                            data: {image: base64data},
+                            url      : "../../../registration/upload",
+                            method   : "POST",                	
+                            data     : {image: base64data},
                             dadtaType: "json",
-                            success: function(data){  
+                            success  : function(data){  
                                 $modal_tvet.modal('hide');
                                 image_data = data; 
                                 $modal_college.modal('hide'); 
@@ -1848,15 +1846,15 @@
 
             $(document).on('submit', '#tvet-form', function(e){  
                 e.preventDefault();    
-                var _this = $(this) 
+                var _this    = $(this) 
                 var formData = new FormData($("#tvet-form")[0]);  
                 $.ajax({
-                    url:  '/manage/update_tvet',
-                    method: "post", 
-                    data: formData,
+                    url        : '/manage/update_tvet',
+                    method     : "post", 
+                    data       : formData,
                     processData: false,
                     contentType: false, 
-                    dataType: "json",  
+                    dataType   : "json",  
                     success: function (data) {   
                         if(data.response){ 
                             Swal.fire({
@@ -1873,7 +1871,7 @@
                             }) 
                         }
                     },
-                    error: function (xhr, status, error) { 
+                    error      : function (xhr, status, error) { 
                         console.info(xhr.responseText);
                     }
                 }); 
@@ -1885,44 +1883,44 @@
 
                 e.preventDefault();    
                 var _this = $(this) 
-                var id = _this.data('id')
+                var id    = _this.data('id')
 
                 Swal.fire({
-                    title: "Are you sure you want to delete this record?", 
-                    icon: "warning",
-                    showCancelButton: !0,
-                    confirmButtonText: "Yes, delete it!",
-                    cancelButtonText: "No, cancel!",
+                    title             : "Are you sure you want to delete this record?", 
+                    icon              : "warning",
+                    showCancelButton  : !0,
+                    confirmButtonText : "Yes, delete it!",
+                    cancelButtonText  : "No, cancel!",
                     confirmButtonClass: "btn btn-success mt-2",
-                    cancelButtonClass: "btn btn-danger ms-2 mt-2",
-                    buttonsStyling: !1
+                    cancelButtonClass : "btn btn-danger ms-2 mt-2",
+                    buttonsStyling    : !1
                 }).then(function(e) { 
                     if(e.value){ 
                         $.ajax({ 
-                            url:  '/manage/archived_tvet',
-                            method: "post",  
-                            data: {
+                            url     : '/manage/archived_tvet',
+                            method  : "post",  
+                            dataType: "json", 
+                            data    : {
                                 id: id,
                                 manager: "Archived",
-                            },
-                            dataType: "json", 
-                            success: function (data) {   
+                            }, 
+                            success : function (data) {  
                                 if(data.response){ 
                                     Swal.fire({
-                                        title:"Good job!",
-                                        text: data.message,
-                                        icon:"success"
+                                        title: "Good job!",
+                                        text : data.message,
+                                        icon : "success"
                                     })
                                     table.ajax.reload() 
                                 }else{ 
                                     Swal.fire({
-                                        title:"Update Error!",
-                                        text: data.message,
-                                        icon:"error"
+                                        title: "Update Error!",
+                                        text : data.message,
+                                        icon : "error"
                                     }) 
                                 }
                             },
-                            error: function (xhr, status, error) { 
+                            error   : function (xhr, status, error) { 
                                 console.info(xhr.responseText);
                             }
                         });  
@@ -1939,43 +1937,43 @@
                 var school_name = $('input[name="tvet_school_name"]').val() 
                 if(school_name == ""){
                     Swal.fire({
-                        title:"Input Field must not be empty!", 
-                        icon:"error"
+                        title: "Input Field must not be empty!", 
+                        icon : "error"
                     }) 
                 }else{
                     $.ajax({
-                        url:  '/collegeschool/insert',
-                        method: "post", 
-                        data: {
-                            school_name : school_name,
-                            manager : "Active"
-                        },   
+                        url     : '/collegeschool/insert',
+                        method  : "post", 
                         dataType: "json", 
-                        success: function (data) {   
+                        data    : {
+                            school_name: school_name,
+                            manager    : "Active"
+                        },     
+                        success : function (data) { 
                             if(data.response){ 
                                 Swal.fire({
-                                    title:"Good job!",
-                                    text: data.message,
-                                    icon:"success"
+                                    title: "Good job!",
+                                    text : data.message,
+                                    icon : "success"
                                 })
                                 
                                 // append value
                                 $('#tvet-form select[name="school"]').append($('<option>', {
                                     value: school_name,
-                                    text: school_name
+                                    text : school_name
                                 }));
 
                                 $('input[name="tvet_school_name"]').val('')  
                                 $('#add-new-tvet-school-modal').modal('hide')
                             }else{  
                                 Swal.fire({
-                                    title:"Insert Error!",
-                                    text: data.message,
-                                    icon:"error"
+                                    title: "Insert Error!",
+                                    text : data.message,
+                                    icon : "error"
                                 }) 
                             }
                         },
-                        error: function (xhr, status, error) { 
+                        error   : function (xhr, status, error) { 
                             console.info(xhr.responseText);
                         }
                     }); 
@@ -1995,38 +1993,38 @@
                     }) 
                 }else{
                     $.ajax({
-                        url:  '/course/insert',
-                        method: "post", 
-                        data: {
-                            course : course,
-                            manager : "Active"
-                        },  
+                        url     : '/course/insert',
+                        method  : "post", 
                         dataType: "json", 
-                        success: function (data) {   
+                        data    : {
+                            course : course,
+                            manager: "Active"
+                        },   
+                        success : function (data) {  
                             if(data.response){ 
                                 Swal.fire({
-                                    title:"Good job!",
-                                    text: data.message,
-                                    icon:"success"
+                                    title: "Good job!",
+                                    text : data.message,
+                                    icon : "success"
                                 })
 
                                 // append value
                                 $('#tvet-form select[name="course"]').append($('<option>', {
                                     value: course,
-                                    text: course
+                                    text : course
                                 }));
 
                                 $('input[name="tvet_course"]').val('')
                                 $('#add-new-tvet-course-modal').modal('hide')
                             }else{  
                                 Swal.fire({
-                                    title:"Insert Error!",
-                                    text: data.message,
-                                    icon:"error"
+                                    title: "Insert Error!",
+                                    text : data.message,
+                                    icon : "error"
                                 }) 
                             }
                         },
-                        error: function (xhr, status, error) { 
+                        error   : function (xhr, status, error) { 
                             console.info(xhr.responseText);
                         }
                     }); 

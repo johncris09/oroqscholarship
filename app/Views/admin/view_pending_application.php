@@ -779,34 +779,33 @@
             
             $(document).on('click', '.approve-applicant-button', function(e){ 
                 e.preventDefault();   
-                var id = $(this).data('id')
-                var method = $(this).data('method') 
-                console.info([method, id])
+                var id     = $(this).data('id')
+                var method = $(this).data('method')  
                 Swal.fire({
-                    title: "Approve Applicant?", 
-                    icon: "question",
-                    showCancelButton: !0,
-                    confirmButtonText: "Yes, Approve it!",
-                    cancelButtonText: "No, cancel!",
+                    title             : "Approve Applicant?", 
+                    icon              : "question",
+                    showCancelButton  : !0,
+                    confirmButtonText : "Yes, Approve it!",
+                    cancelButtonText  : "No, cancel!",
                     confirmButtonClass: "btn btn-success mt-2",
-                    cancelButtonClass: "btn btn-danger ms-2 mt-2",
-                    buttonsStyling: !1
+                    cancelButtonClass : "btn btn-danger ms-2 mt-2",
+                    buttonsStyling    : !1
                 }).then(function(e) {  
                     if(e.value){ 
                         $.ajax({
-                            url: '/pending/' + method,  
-                            method: "post",
-                            data: {
+                            url     : '/pending/' + method,  
+                            method  : "post",
+                            dataType: "json", 
+                            data    : {
                                 id : id,
                                 status : "Approved",
                             },  
-                            dataType: "json", 
-                            success: function (data) { 
+                            success : function (data) { 
                                 if(data.response){ 
                                     Swal.fire({
-                                        title:"Good job!",
-                                        text: data.message,
-                                        icon:"success"
+                                        title: "Good job!",
+                                        text : data.message,
+                                        icon : "success"
                                     }) 
                                     $('.status').html('Approved')
                                     $('.status').removeClass('text-danger')
@@ -820,7 +819,7 @@
                                 }
 
                             },
-                            error: function (xhr, status, error) { 
+                            error   : function (xhr, status, error) { 
                                 console.info(xhr.responseText);
                             }
                         });  
@@ -837,42 +836,42 @@
                 var method = $(this).data('method') 
                 
                 Swal.fire({
-                    title: "Dissaprove Applicant?", 
-                    icon: "question",
-                    showCancelButton: !0,
-                    confirmButtonText: "Yes, Dissaprove it!",
-                    cancelButtonText: "No, cancel!",
+                    title             : "Dissaprove Applicant?", 
+                    icon              : "question",
+                    showCancelButton  : !0,
+                    confirmButtonText : "Yes, Dissaprove it!",
+                    cancelButtonText  : "No, cancel!",
                     confirmButtonClass: "btn btn-success mt-2",
-                    cancelButtonClass: "btn btn-danger ms-2 mt-2",
-                    buttonsStyling: !1
+                    cancelButtonClass : "btn btn-danger ms-2 mt-2",
+                    buttonsStyling    : !1
                 }).then(function(e) {  
                     if(e.value){ 
                         $.ajax({
-                            url: '/pending/' + method,  
-                            method: "post",
-                            data: {
-                                id : id,
-                                status : "Disapproved",
-                            },  
+                            url     : '/pending/' + method,  
+                            method  : "post",
                             dataType: "json", 
-                            success: function (data) {  
+                            data    : {
+                                id    : id,
+                                status: "Disapproved",
+                            },  
+                            success : function (data) {  
                                 console.info(data)
                                 if(data.response){ 
                                     Swal.fire({
-                                        title:"Good job!",
-                                        text: data.message,
-                                        icon:"success"
+                                        title: "Good job!",
+                                        text : data.message,
+                                        icon : "success"
                                     }) 
                                     $('.status').html('Disapproved') 
                                 }else{ 
                                     Swal.fire({
-                                        title:"Update Error!",
-                                        text: data.message,
-                                        icon:"error"
+                                        title: "Update Error!",
+                                        text : data.message,
+                                        icon : "error"
                                     }) 
                                 }
                             },
-                            error: function (xhr, status, error) { 
+                            error   : function (xhr, status, error) { 
                                 console.info(xhr.responseText);
                             }
                         });  

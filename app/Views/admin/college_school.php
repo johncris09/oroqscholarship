@@ -127,27 +127,26 @@
             });
 
             var table = $('#school-table').DataTable({
-                "scrollY": 450,
-                "scrollX": true, 
+                "scrollY"  : 450,
+                "scrollX"  : true, 
                 deferRender: true, 
-                ajax: {
+                ajax       : {
                     url: 'collegeschool/get_all',  
                 },
-                columns: [ 
+                columns    : [ 
                     { data: 'ID' },  
                     { data: 'colSchoolName' },  
                     { data: 'address' },  
                     { data: 'colManager' },  
                 ], 
-                columnDefs: [
+                columnDefs : [
                     {
                         targets  : 0,
                         title    : 'Actions',
                         orderable: false,
                         render   : function(data, type, row, meta) {  
-                            var action = '';
-                        
-                            action =  '\
+                            var action = ''; 
+                            action     = '\
                                     <div class="btn-group">\
                                         <button type="button" class="btn dropdown-toggle text-primary" data-bs-toggle="dropdown" aria-expanded="false"> <i class="mdi mdi-cog"></i>  <i class="mdi mdi-chevron-down"></i> </button>\
                                         <div class="dropdown-menu">\
@@ -173,29 +172,29 @@
                 e.preventDefault();    
                 var _this = $(this)
                 $.ajax({
-                    url:  'collegeschool/insert',
-                    method: "post", 
-                    data: $("#add-new-college-school-form").serialize(),
+                    url     : 'collegeschool/insert',
+                    method  : "post", 
+                    data    : $("#add-new-college-school-form").serialize(),
                     dataType: "json", 
-                    success: function (data) {  
+                    success : function (data) {  
                         if(data.response){ 
                             Swal.fire({
-                                title:"Good job!",
-                                text: data.message,
-                                icon:"success"
+                                title: "Good job!",
+                                text : data.message,
+                                icon : "success"
                             })
 
                             table.ajax.reload()
                             $("#add-new-college-school-form")[0].reset()
                         }else{  
                             Swal.fire({
-                                title:"Insert Error!",
-                                text: data.message,
-                                icon:"error"
+                                title: "Insert Error!",
+                                text : data.message,
+                                icon : "error"
                             }) 
                         }
                     },
-                    error: function (xhr, status, error) { 
+                    error   : function (xhr, status, error) { 
                         console.info(xhr.responseText);
                     }
                 }); 
@@ -209,16 +208,16 @@
 
                 var id = $(this).data('id')
                 $.ajax({
-                    url:  'collegeschool/get/' + id,
-                    method: "get",
+                    url     : 'collegeschool/get/' + id,
+                    method  : "get",
                     dataType: "json", 
-                    success: function (data) {  
+                    success : function (data) {  
                         $('#update-college-school-form input[name="id"]').val(data.ID)
                         $('#update-college-school-form input[name="school_name"]').val(data.colSchoolName)
                         $('#update-college-school-form input[name="address"]').val(data.address)
                         $('#update-college-school-form select[name="manager"]').val(data.colManager)
                     },
-                    error: function (xhr, status, error) { 
+                    error   : function (xhr, status, error) { 
                         console.info(xhr.responseText);
                     }
                 }); 
@@ -230,27 +229,27 @@
                 e.preventDefault();    
                 var _this = $(this)
                 $.ajax({
-                    url:  'collegeschool/update',
-                    method: "post", 
-                    data: $("#update-college-school-form").serialize(),
+                    url     : 'collegeschool/update',
+                    method  : "post", 
+                    data    : $("#update-college-school-form").serialize(),
                     dataType: "json", 
-                    success: function (data) { 
+                    success : function (data) { 
                         if(data.response){ 
                             Swal.fire({
-                                title:"Good job!",
-                                text: data.message,
-                                icon:"success"
+                                title: "Good job!",
+                                text : data.message,
+                                icon : "success"
                             })
                             table.ajax.reload() 
                         }else{ 
                             Swal.fire({
-                                title:"Update Error!",
-                                text: data.message,
-                                icon:"error"
+                                title: "Update Error!",
+                                text : data.message,
+                                icon : "error"
                             }) 
                         }
                     },
-                    error: function (xhr, status, error) { 
+                    error   : function (xhr, status, error) { 
                         console.info(xhr.responseText);
                     }
                 }); 
@@ -265,38 +264,38 @@
                 var id = $(this).data('id')
                 
                 Swal.fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
-                    icon: "warning",
-                    showCancelButton: !0,
-                    confirmButtonText: "Yes, delete it!",
-                    cancelButtonText: "No, cancel!",
+                    title             : "Are you sure?",
+                    text              : "You won't be able to revert this!",
+                    icon              : "warning",
+                    showCancelButton  : !0,
+                    confirmButtonText : "Yes, delete it!",
+                    cancelButtonText  : "No, cancel!",
                     confirmButtonClass: "btn btn-success mt-2",
-                    cancelButtonClass: "btn btn-danger ms-2 mt-2",
-                    buttonsStyling: !1
+                    cancelButtonClass : "btn btn-danger ms-2 mt-2",
+                    buttonsStyling    : !1
                 }).then(function(e) { 
                     if(e.value){ 
                         $.ajax({
-                            url:  'collegeschool/delete/' + id,
-                            method: "post",  
+                            url     : 'collegeschool/delete/' + id,
+                            method  : "post",  
                             dataType: "json", 
-                            success: function (data) {  
+                            success : function (data) { 
                                 if(data.response){ 
                                     Swal.fire({
-                                        title:"Good job!",
-                                        text: data.message,
-                                        icon:"success"
+                                        title: "Good job!",
+                                        text : data.message,
+                                        icon : "success"
                                     })
                                     table.ajax.reload() 
                                 }else{ 
                                     Swal.fire({
-                                        title:"Update Error!",
-                                        text: data.message,
-                                        icon:"error"
+                                        title: "Update Error!",
+                                        text : data.message,
+                                        icon : "error"
                                     }) 
                                 }
                             },
-                            error: function (xhr, status, error) { 
+                            error   : function (xhr, status, error) { 
                                 console.info(xhr.responseText);
                             }
                         });  

@@ -754,12 +754,12 @@
             $(document).on('change', '#formFileShs', function(e){   
 
                 var validExtensions = ["jpg","pdf","jpeg","gif","png", "jfif"]
-                var file = $(this).val().split('.').pop();
+                var file            = $(this).val().split('.').pop();
                 if (validExtensions.indexOf(file) == -1) { 
                     Swal.fire({
-                        title:"Upload Error!",
-                        text: "Only formats are allowed : "+validExtensions.join(', '),
-                        icon:"error"
+                        title: "Upload Error!",
+                        text : "Only formats are allowed: "+validExtensions.join(', '),
+                        icon : "error"
                     }) 
                 }else{
                     frameShs.src = URL.createObjectURL(event.target.files[0]);
@@ -775,12 +775,12 @@
             $(document).on('change', '#formFileCollege', function(e){  
 
                 var validExtensions = ["jpg","pdf","jpeg","gif","png", "jfif"]
-                var file = $(this).val().split('.').pop();
+                var file            = $(this).val().split('.').pop();
                 if (validExtensions.indexOf(file) == -1) { 
                     Swal.fire({
-                        title:"Upload Error!",
-                        text: "Only formats are allowed : "+validExtensions.join(', '),
-                        icon:"error"
+                        title: "Upload Error!",
+                        text : "Only formats are allowed: "+validExtensions.join(', '),
+                        icon : "error"
                     }) 
                 }else{
                     frameCollege.src = URL.createObjectURL(event.target.files[0]);
@@ -797,7 +797,7 @@
             $(document).on('change', '#formFileTvet', function(e){  
 
                 var validExtensions = ["jpg","pdf","jpeg","gif","png", "jfif"]
-                var file = $(this).val().split('.').pop();
+                var file            = $(this).val().split('.').pop();
                 if (validExtensions.indexOf(file) == -1) { 
                     Swal.fire({
                         title:"Upload Error!",
@@ -816,7 +816,7 @@
              
             // get age using birthdate 
             $(document).on('change', 'input[name="birthdate"]', function(e){ 
-                var age = moment().diff($(this).val(), 'years',false);    
+                var age     = moment().diff($(this).val(), 'years',false);    
                 var form_id = $(this).closest('form').attr('id') 
                 $('#'+form_id+' input[name="age"]').val(age)
             });
@@ -825,20 +825,18 @@
 
             function shs_app_no_id(){
                 $.ajax({
-                    url:  '/registration/shs_app_no_id',
-                    method: "get",
+                    url     : '/registration/shs_app_no_id',
+                    method  : "get",
                     dataType: "json", 
-                    success: function (data) {   
+                    success : function (data) {   
                         $('#senior-high-registration-form input[name="app_no_id"]').val(data)   // shs_app_no_id
                         $('#senior-high-registration-form #app_no_id').html(data)               // shs_app_no_id 
                     },
-                    error: function (xhr, status, error) { 
+                    error   : function (xhr, status, error) { 
                         console.info(xhr.responseText);
                     }
                 }); 
-            }
- 
-
+            } 
 
         });
     </script>

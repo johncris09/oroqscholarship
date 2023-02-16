@@ -110,16 +110,16 @@
 
 
             var senior_high_table = $('#senior-high-table').DataTable({
-                "scrollY": 450,
-                "scrollX": true, 
+                "scrollY"  : 450,
+                "scrollX"  : true, 
                 deferRender: true, 
-                ajax: {
-                    url: 'manage/get_shs_all_list',   
+                ajax       : {
+                    url   : 'manage/get_shs_all_list',   
                     method: "get", 
-                    data: {
-                        view : "<?php echo isset($_GET['view']) ?  $_GET['view'] : ''?>",
-                        app_sem : "<?php echo isset($_GET['app_sem']) ?  $_GET['app_sem'] : ''?>",
-                        app_year : "<?php echo isset($_GET['app_year']) ?  $_GET['app_year'] : ''?>", 
+                    data  : {
+                        view    : "<?php echo isset($_GET['view']) ?  $_GET['view']        : ''?>",
+                        app_sem : "<?php echo isset($_GET['app_sem']) ?  $_GET['app_sem']  : ''?>",
+                        app_year: "<?php echo isset($_GET['app_year']) ?  $_GET['app_year']: ''?>", 
                     },
                 },
                 columns: [  
@@ -133,10 +133,10 @@
                     {
                         data  : 'ID', 
                         render: function(data, type, row, meta){ 
-                            var first_name = row.AppFirstName.toLowerCase();
+                            var first_name  = row.AppFirstName.toLowerCase();
                             var middle_name = row.AppMidIn.toLowerCase();
-                            var last_name = row.AppLastName.toLowerCase();
-                            var suffix = row.AppSuffix.toUpperCase();
+                            var last_name   = row.AppLastName.toLowerCase();
+                            var suffix      = row.AppSuffix.toUpperCase();
 
                             return  first_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " " + 
                                     middle_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " "  + 
@@ -153,16 +153,16 @@
             });  
  
             var college_table = $('#college-table').DataTable({
-                "scrollY": 450,
-                "scrollX": true, 
+                "scrollY"  : 450,
+                "scrollX"  : true, 
                 deferRender: true, 
-                ajax: {
-                    url: 'manage/get_college_all_list',   
+                ajax       : {
+                    url   : 'manage/get_college_all_list',   
                     method: "get", 
-                    data: {
-                        view : "<?php echo isset($_GET['view']) ?  $_GET['view'] : ''?>",
-                        app_sem : "<?php echo isset($_GET['app_sem']) ?  $_GET['app_sem'] : ''?>",
-                        app_year : "<?php echo isset($_GET['app_year']) ?  $_GET['app_year'] : ''?>", 
+                    data  : {
+                        view    : "<?php echo isset($_GET['view']) ?  $_GET['view']        : ''?>",
+                        app_sem : "<?php echo isset($_GET['app_sem']) ?  $_GET['app_sem']  : ''?>",
+                        app_year: "<?php echo isset($_GET['app_year']) ?  $_GET['app_year']: ''?>", 
                     },
                 },
                 columns: [  
@@ -176,10 +176,10 @@
                     {
                         data  : 'ID',
                         render: function(data, type, row, meta){ 
-                            var first_name = row.colFirstName.toLowerCase();
+                            var first_name  = row.colFirstName.toLowerCase();
                             var middle_name = row.colMI.toLowerCase();
-                            var last_name = row.colLastName.toLowerCase();
-                            var suffix = row.colSuffix.toUpperCase();
+                            var last_name   = row.colLastName.toLowerCase();
+                            var suffix      = row.colSuffix.toUpperCase();
 
                             return  first_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " " + 
                                     middle_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " "  + 
@@ -196,16 +196,16 @@
             });  
 
             var tvet_table = $('#tvet-table').DataTable({
-                "scrollY": 450,
-                "scrollX": true, 
+                "scrollY"  : 450,
+                "scrollX"  : true, 
                 deferRender: true, 
-                ajax: {
-                    url: 'manage/get_tvet_all_list', 
+                ajax       : {
+                    url   : 'manage/get_tvet_all_list', 
                     method: "get", 
-                    data: {
-                        view : "<?php echo isset($_GET['view']) ?  $_GET['view'] : ''?>",
-                        app_sem : "<?php echo isset($_GET['app_sem']) ?  $_GET['app_sem'] : ''?>",
-                        app_year : "<?php echo isset($_GET['app_year']) ?  $_GET['app_year'] : ''?>", 
+                    data  : {
+                        view    : "<?php echo isset($_GET['view']) ?  $_GET['view']        : ''?>",
+                        app_sem : "<?php echo isset($_GET['app_sem']) ?  $_GET['app_sem']  : ''?>",
+                        app_year: "<?php echo isset($_GET['app_year']) ?  $_GET['app_year']: ''?>", 
                     },
                 },
                 columns: [  
@@ -219,10 +219,10 @@
                     {
                         data  : 'ID', 
                         render: function(data, type, row, meta){ 
-                            var first_name = row.colFirstName.toLowerCase();
+                            var first_name  = row.colFirstName.toLowerCase();
                             var middle_name = row.colMI.toLowerCase();
-                            var last_name = row.colLastName.toLowerCase();
-                            var suffix = row.colSuffix.toUpperCase();
+                            var last_name   = row.colLastName.toLowerCase();
+                            var suffix      = row.colSuffix.toUpperCase();
 
                             return  first_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " " + 
                                     middle_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " "  + 
@@ -241,17 +241,17 @@
             
             
             $('#senior-high-table tbody').on( 'dblclick', 'tr', function () {
-                var id = senior_high_table.row( this ).data()['ID']
+                var id               = senior_high_table.row( this ).data()['ID']
                 window.location.href = "/manage/application/shs/" + id
             } );
             
             $('#college-table tbody').on( 'dblclick', 'tr', function () {
-                var id = college_table.row( this ).data()['ID']
+                var id               = college_table.row( this ).data()['ID']
                 window.location.href = "/manage/application/college/" + id
             } );
             
             $('#tvet-table tbody').on( 'dblclick', 'tr', function () {
-                var id = tvet_table.row( this ).data()['ID']
+                var id               = tvet_table.row( this ).data()['ID']
                 window.location.href = "/manage/application/tvet/" + id
             } );
 

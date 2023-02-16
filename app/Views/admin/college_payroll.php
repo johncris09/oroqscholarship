@@ -136,18 +136,18 @@
 				<th>Nbr</th>   
 			</tr> 
 			<?php
-				$to = $page * 20; 
-				$amount = 3500;
+				$to         = $page * 20; 
+				$amount     = 3500;
 				$tot_amount = 0;
-				$row = 0;
+				$row        = 0;
 				foreach(range($from, $to) as $num){
 					
-					$profile = $result[$num-1];
-					$name = ucwords( $profile->colLastName . ", " . $profile->colFirstName . " " . $profile->colMI . " " . $profile->colSuffix );
-					$address = ucwords( $profile->colAddress );
-					$strand = $profile->colCourse;
+					$profile    = $result[$num-1];
+					$name       = ucwords( $profile->colLastName . ", " . $profile->colFirstName . " " . $profile->colMI . " " . $profile->colSuffix );
+					$address    = ucwords( $profile->colAddress );
+					$strand     = $profile->colCourse;
 					$year_level = $profile->colYearLevel;
-					$school = $profile->colSchool;
+					$school     = $profile->colSchool;
 					$availment = $profile->colAvailment; 
 
 					if($num == $tot_record){

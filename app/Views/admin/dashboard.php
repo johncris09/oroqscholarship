@@ -284,23 +284,22 @@
                 var formData = new FormData($("#filter-form")[0]);
                 
                 $.ajax({
-                    url:  '/filter',
-                    method: "post", 
-                    data: $("#filter-form").serialize(),
-                    dataType: "json", 
-                    beforeSend: function () {
+                    url       : '/filter',
+                    method    : "post", 
+                    data      : $("#filter-form").serialize(),
+                    dataType  : "json", 
+                    beforeSend: function () { 
                         console.info('loading')
                     },
-                    complete: function () {
-                        console.info('')
-                        // KTApp.unblock('body');
+                    complete  : function () {
+                        console.info('') 
                     },
-                    success: function (data) {   
+                    success   : function (data) {   
                         $('#shs_total').html(data.shs_total)
                         $('#college_total').html(data.college_total)
                         $('#tvet_total').html(data.tvet_total) 
                     },
-                    error: function (xhr, status, error) { 
+                    error     : function (xhr, status, error) { 
                         console.info(xhr.responseText);
                     }
                 });   
@@ -320,12 +319,12 @@
                 ],
                 chart: {
                     width: 380,
-                    type: 'donut',
+                    type : 'donut',
                 },
                 plotOptions: {
                     pie: {
                         startAngle: -90,
-                        endAngle: 270
+                        endAngle  : 270
                     }
                 },
                 dataLabels: {
@@ -355,7 +354,7 @@
                     }
                 }]
             };
-            var chart = new ApexCharts(document.querySelector("#shs-gender-chart"), shs_gender);
+            var chart      = new ApexCharts(document.querySelector("#shs-gender-chart"), shs_gender);
             chart.render(); 
 
 
@@ -368,12 +367,12 @@
                 ],
                 chart: {
                     width: 380,
-                    type: 'donut',
+                    type : 'donut',
                 },
                 plotOptions: {
                     pie: {
                         startAngle: -90,
-                        endAngle: 270
+                        endAngle  : 270
                     }
                 },
                 dataLabels: {
@@ -416,12 +415,12 @@
                 ],
                 chart: {
                     width: 380,
-                    type: 'donut',
+                    type : 'donut',
                 },
                 plotOptions: {
                     pie: {
                         startAngle: -90,
-                        endAngle: 270
+                        endAngle  : 270
                     }
                 },
                 dataLabels: {
@@ -473,7 +472,7 @@
                 plotOptions: {
                     pie: {
                         startAngle: -90,
-                        endAngle: 270
+                        endAngle  : 270
                     }
                 },
                 dataLabels: {
@@ -532,12 +531,12 @@
                     }
                 ],
                 chart: {
-                    type: 'bar',
+                    type  : 'bar',
                     height: 350
                 },
                 plotOptions: {
                     bar: {
-                        horizontal: false,
+                        horizontal : false,
                         columnWidth: '55%',
                         endingShape: 'rounded'
                     },
@@ -546,8 +545,8 @@
                     enabled: false
                 },
                 stroke: {
-                    show: true,
-                    width: 10,
+                    show  : true,
+                    width : 10,
                     colors: ['transparent']
                 },
                 xaxis: {
@@ -581,37 +580,37 @@
             var total_scholarship_status = { 
                 series: [
                     { 
-                        data: [
+                        data             : [
                             { 
-                                x: 'Additional Approved',
-                                y: <?php echo isset($total_scholarship_status[0]['total']) ?  $total_scholarship_status[0]['total'] :  0; ?>,
+                                x        : 'Additional Approved',
+                                y        : <?php echo isset($total_scholarship_status[0]['total']) ?  $total_scholarship_status[0]['total']: 0; ?>,
                                 fillColor: '#3AB0FF', 
                             },
                             { 
-                                x: 'Approved',
-                                y: <?php echo isset($total_scholarship_status[1]['total']) ?  $total_scholarship_status[1]['total'] :  0; ?>,
+                                x        : 'Approved',
+                                y        : <?php echo isset($total_scholarship_status[1]['total']) ?  $total_scholarship_status[1]['total']: 0; ?>,
                                 fillColor: '#3AB0FF', 
                             },
                             { 
-                                x: 'Pending',
-                                y: <?php echo isset($total_scholarship_status[2]['total']) ?  $total_scholarship_status[2]['total'] :  0; ?>,
+                                x        : 'Pending',
+                                y        : <?php echo isset($total_scholarship_status[2]['total']) ?  $total_scholarship_status[2]['total']: 0; ?>,
                                 fillColor: '#FFE15D', 
                             },
                             { 
-                                x: 'Disapproved',
-                                y: <?php echo isset($total_scholarship_status[3]['total']) ?  $total_scholarship_status[3]['total'] :  0; ?>,
+                                x        : 'Disapproved',
+                                y        : <?php echo isset($total_scholarship_status[3]['total']) ?  $total_scholarship_status[3]['total']: 0; ?>,
                                 fillColor: '#F94892', 
                             }, 
                         ]
                     },  
                 ],
                 chart: {
-                    type: 'bar',
+                    type  : 'bar',
                     height: 350
                 },
                 plotOptions: {
                     bar: {
-                        horizontal: false,
+                        horizontal : false,
                         columnWidth: '55%',
                         endingShape: 'rounded', 
                     },
@@ -620,8 +619,8 @@
                     enabled: false
                 },
                 stroke: {
-                    show: true,
-                    width: 10,
+                    show  : true,
+                    width : 10,
                     colors: ['transparent']
                 },
                 xaxis: {
@@ -666,12 +665,12 @@
                     data: <?php echo json_encode($scholarship_barangay['tvet']); ?>
                 }],
                 chart: {
-                    type: 'bar',
+                    type  : 'bar',
                     height: 1500
                 },
                 plotOptions: {
                     bar: {
-                        horizontal: false,
+                        horizontal : false,
                         columnWidth: '50%',
                         endingShape: 'rounded'
                     },
@@ -680,8 +679,8 @@
                     enabled: false
                 },
                 stroke: {
-                    show: true,
-                    width: 15,
+                    show  : true,
+                    width : 15,
                     colors: ['transparent']
                 },
                 xaxis: {
@@ -716,13 +715,13 @@
                     data: <?php echo isset($shs_school['total']) ? json_encode($shs_school['total']) :  0; ?>
                 }],
                 chart: {
-                    type: 'bar',
+                    type  : 'bar',
                     height: 350
                 },
                 plotOptions: {
                     bar: {
                         borderRadius: 4,
-                        horizontal: true,
+                        horizontal  : true,
                     }
                 },
                 dataLabels: {
@@ -750,13 +749,13 @@
                     data: <?php echo isset($college_school['total']) ? json_encode($college_school['total']) :  0; ?> 
                 }],
                 chart: {
-                    type: 'bar',
+                    type  : 'bar',
                     height: 10000
                 },
                 plotOptions: {
                     bar: {
                         borderRadius: 4,
-                        horizontal: true,
+                        horizontal  : true,
                     }
                 },
                 dataLabels: {
@@ -784,13 +783,13 @@
                     data: <?php echo isset($tvet_school['total']) ? json_encode($tvet_school['total']) :  0; ?> 
                 }],
                 chart: {
-                    type: 'bar',
+                    type  : 'bar',
                     height: 350
                 },
                 plotOptions: {
                     bar: {
                         borderRadius: 4,
-                        horizontal: true,
+                        horizontal  : true,
                     }
                 },
                 dataLabels: {

@@ -198,13 +198,13 @@
             });
  
             var table = $('#user-table').DataTable({
-                "scrollY": 450,
-                "scrollX": true, 
+                "scrollY"  : 450,
+                "scrollX"  : true, 
                 deferRender: true, 
-                ajax: {
+                ajax       : {
                     url: 'user/get_all',  
                 },
-                columns: [ 
+                columns    : [ 
                     { data: 'id' },  
                     { data: 'firstname' },  
                     { data: 'middlename' }, 
@@ -220,15 +220,14 @@
                         }
                     },   
                 ], 
-                columnDefs: [
+                columnDefs : [
                     {
                         targets  : 0,
                         title    : 'Actions',
                         orderable: false,
                         render   : function(data, type, row, meta) {  
-                            var action = '';
-                        
-                            action =  '\
+                            var action = ''; 
+                            action     = '\
                                     <div class="btn-group">\
                                         <button type="button" class="btn dropdown-toggle text-primary" data-bs-toggle="dropdown" aria-expanded="false"> <i class="mdi mdi-cog"></i>  <i class="mdi mdi-chevron-down"></i> </button>\
                                         <div class="dropdown-menu">\
@@ -258,29 +257,29 @@
                 e.preventDefault();    
                 var _this = $(this) 
                 $.ajax({
-                    url:  'user/insert',
-                    method: "post", 
-                    data: $("#add-new-user-form").serialize(),
+                    url     : 'user/insert',
+                    method  : "post", 
+                    data    : $("#add-new-user-form").serialize(),
                     dataType: "json", 
-                    success: function (data) { 
+                    success : function (data) { 
                         if(data.response){ 
                             Swal.fire({
-                                title:"Good job!",
-                                text: data.message,
-                                icon:"success"
+                                title: "Good job!",
+                                text : data.message,
+                                icon : "success"
                             })
 
                             table.ajax.reload()
                             $("#add-new-user-form")[0].reset()
                         }else{  
                             Swal.fire({
-                                title:"Insert Error!",
-                                text: data.message,
-                                icon:"error"
+                                title: "Insert Error!",
+                                text : data.message,
+                                icon : "error"
                             }) 
                         }
                     },
-                    error: function (xhr, status, error) { 
+                    error   : function (xhr, status, error) { 
                         console.info(xhr.responseText);
                     }
                 }); 
@@ -302,10 +301,10 @@
 
                 var id = $(this).data('id')
                 $.ajax({
-                    url:  'user/get/' + id,
-                    method: "get",
+                    url     : 'user/get/' + id,
+                    method  : "get",
                     dataType: "json", 
-                    success: function (data) {  
+                    success : function (data) {  
                         $('#update-user-form input[name="id"]').val(data.id)
                         $('#update-user-form input[name="firstname"]').val(data.firstname)
                         $('#update-user-form input[name="middlename"]').val(data.middlename)
@@ -314,7 +313,7 @@
                         $('#update-user-form input[name="username"]').val(data.username) 
                         $('#update-user-form select[name="group"]').val(data.group)
                     },
-                    error: function (xhr, status, error) { 
+                    error   : function (xhr, status, error) { 
                         console.info(xhr.responseText);
                     }
                 }); 
@@ -326,27 +325,27 @@
                 e.preventDefault();    
                 var _this = $(this)
                 $.ajax({
-                    url:  'user/update',
-                    method: "post", 
-                    data: $("#update-user-form").serialize(),
+                    url     : 'user/update',
+                    method  : "post", 
+                    data    : $("#update-user-form").serialize(),
                     dataType: "json", 
-                    success: function (data) {  
+                    success : function (data) {  
                         if(data.response){ 
                             Swal.fire({
-                                title:"Good job!",
-                                text: data.message,
-                                icon:"success"
+                                title: "Good job!",
+                                text : data.message,
+                                icon : "success"
                             })
                             table.ajax.reload() 
                         }else{ 
                             Swal.fire({
-                                title:"Update Error!",
-                                text: data.message,
-                                icon:"error"
+                                title: "Update Error!",
+                                text : data.message,
+                                icon : "error"
                             }) 
                         }
                     },
-                    error: function (xhr, status, error) { 
+                    error   : function (xhr, status, error) { 
                         console.info(xhr.responseText);
                     }
                 }); 
@@ -358,27 +357,27 @@
                 e.preventDefault();    
                 var _this = $(this) 
                 $.ajax({
-                    url:  'user/update_password',
-                    method: "post", 
-                    data: $("#update-password-form").serialize(),
+                    url     : 'user/update_password',
+                    method  : "post", 
+                    data    : $("#update-password-form").serialize(),
                     dataType: "json", 
-                    success: function (data) {   
+                    success : function (data) {   
                         if(data.response){ 
                             Swal.fire({
-                                title:"Good job!",
-                                text: data.message,
-                                icon:"success"
+                                title: "Good job!",
+                                text : data.message,
+                                icon : "success"
                             })
                             table.ajax.reload() 
                         }else{ 
                             Swal.fire({
-                                title:"Update Error!",
-                                text: data.message,
-                                icon:"error"
+                                title: "Update Error!",
+                                text : data.message,
+                                icon : "error"
                             }) 
                         }
                     },
-                    error: function (xhr, status, error) { 
+                    error   : function (xhr, status, error) { 
                         console.info(xhr.responseText);
                     }
                 }); 
@@ -393,38 +392,38 @@
                 var id = $(this).data('id')
                 
                 Swal.fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
-                    icon: "warning",
-                    showCancelButton: !0,
-                    confirmButtonText: "Yes, delete it!",
-                    cancelButtonText: "No, cancel!",
+                    title             : "Are you sure?",
+                    text              : "You won't be able to revert this!",
+                    icon              : "warning",
+                    showCancelButton  : !0,
+                    confirmButtonText : "Yes, delete it!",
+                    cancelButtonText  : "No, cancel!",
                     confirmButtonClass: "btn btn-success mt-2",
-                    cancelButtonClass: "btn btn-danger ms-2 mt-2",
-                    buttonsStyling: !1
+                    cancelButtonClass : "btn btn-danger ms-2 mt-2",
+                    buttonsStyling    : !1
                 }).then(function(e) { 
                     if(e.value){ 
                         $.ajax({
-                            url:  'user/delete/' + id,
-                            method: "post",  
+                            url     : 'user/delete/' + id,
+                            method  : "post",  
                             dataType: "json", 
-                            success: function (data) {   
+                            success : function (data) {   
                                 if(data.response){ 
                                     Swal.fire({
-                                        title:"Good job!",
-                                        text: data.message,
-                                        icon:"success"
+                                        title: "Good job!",
+                                        text : data.message,
+                                        icon : "success"
                                     })
                                     table.ajax.reload() 
                                 }else{ 
                                     Swal.fire({
-                                        title:"Update Error!",
-                                        text: data.message,
-                                        icon:"error"
+                                        title: "Update Error!",
+                                        text : data.message,
+                                        icon : "error"
                                     }) 
                                 }
                             },
-                            error: function (xhr, status, error) { 
+                            error   : function (xhr, status, error) { 
                                 console.info(xhr.responseText);
                             }
                         });  

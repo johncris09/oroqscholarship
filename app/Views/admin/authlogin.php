@@ -39,18 +39,18 @@
     <script>
         $(document).ready(function() {
             var table = $('#authlogin-table').DataTable({
-                "scrollY": 450,
-                "scrollX": true, 
+                "scrollY"  : 450,
+                "scrollX"  : true, 
                 deferRender: true, 
-                ajax: {
+                ajax       : {
                     url: 'authlogin/get_all',  
                 },
                 columns: [  
-                    { data: 'ip_address' },   
-                    { data: 'user_agent' },   
-                    { data: 'id_type' },   
-                    { data: 'identifier' },  
-                    { data: 'user_id' },     
+                    { data    : 'ip_address' },   
+                    { data    : 'user_agent' },   
+                    { data    : 'id_type' },   
+                    { data    : 'identifier' },  
+                    { data    : 'user_id' },  
                     {
                         data  : 'date',
                         render: function(data, type, row, meta){ 
@@ -58,7 +58,7 @@
                             
                         }
                     }, 
-                    { data: 'success' },
+                    { data    : 'success' },   
                 ],  
             });  
  

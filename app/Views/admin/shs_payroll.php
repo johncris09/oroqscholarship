@@ -136,20 +136,20 @@
 				<th>Nbr</th>   
 			</tr> 
 			<?php
-				$to = $page * 20; 
-				$amount = 2000;
+				$to         = $page * 20; 
+				$amount     = 2000;
 				$tot_amount = 0;
-				$row = 0;
+				$row        = 0;
 				foreach(range($from, $to) as $num){
 					
-					$profile = $result[$num-1];
-					$name = ucwords( $profile->AppLastName . ", " . $profile->AppFirstName . " " . $profile->AppMidIn . " " . $profile->AppSuffix );
-					$address = ucwords( $profile->AppAddress );
-					$strand = $profile->AppCourse;
+					$profile    = $result[$num-1];
+					$name       = ucwords( $profile->AppLastName . ", " . $profile->AppFirstName . " " . $profile->AppMidIn . " " . $profile->AppSuffix );
+					$address    = ucwords( $profile->AppAddress );
+					$strand     = $profile->AppCourse;
 					$year_level = $profile->AppYear;
-					$school = $profile->AppSchool;
-					$availment = $profile->AppAvailment;
-					$school = $profile->AppSchool;
+					$school     = $profile->AppSchool;
+					$availment  = $profile->AppAvailment;
+					$school     = $profile->AppSchool;
 
 					if($num == $tot_record){
 			?>

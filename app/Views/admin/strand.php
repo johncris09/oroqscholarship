@@ -108,10 +108,10 @@
     <script>
         $(document).ready(function() { 
             var table = $('#strand-table').DataTable({
-                "scrollY": 450,
-                "scrollX": true, 
+                "scrollY"  : 450,
+                "scrollX"  : true, 
                 deferRender: true, 
-                ajax: {
+                ajax       : {
                     url: 'strand/get_all',  
                 }, 
                 columns: [ 
@@ -125,9 +125,8 @@
                         title    : 'Actions',
                         orderable: false, 
                         render   : function(data, type, row, meta) {  
-                            var action = '';
-                        
-                            action =  '\
+                            var action = ''; 
+                            action     = '\
                                     <div class="btn-group">\
                                         <button type="button" class="btn dropdown-toggle text-primary" data-bs-toggle="dropdown" aria-expanded="false"> <i class="mdi mdi-cog"></i>  <i class="mdi mdi-chevron-down"></i> </button>\
                                         <div class="dropdown-menu">\
@@ -154,30 +153,30 @@
                 e.preventDefault();    
                 var _this = $(this)
                 $.ajax({
-                    url:  'strand/insert',
-                    method: "post", 
-                    data: $("#add-new-strand-form").serialize(),
+                    url     : 'strand/insert',
+                    method  : "post", 
+                    data    : $("#add-new-strand-form").serialize(),
                     dataType: "json", 
-                    success: function (data) {  
+                    success : function (data) {  
                         console.info(data)
                         if(data.response){ 
                             Swal.fire({
-                                title:"Good job!",
-                                text: data.message,
-                                icon:"success"
+                                title: "Good job!",
+                                text : data.message,
+                                icon : "success"
                             })
 
                             table.ajax.reload()
                             $("#add-new-strand-form")[0].reset()
                         }else{  
                             Swal.fire({
-                                title:"Insert Error!",
-                                text: data.message,
-                                icon:"error"
+                                title: "Insert Error!",
+                                text : data.message,
+                                icon : "error"
                             }) 
                         }
                     },
-                    error: function (xhr, status, error) { 
+                    error   : function (xhr, status, error) { 
                         console.info(xhr.responseText);
                     }
                 }); 
@@ -191,15 +190,15 @@
 
                 var id = $(this).data('id')
                 $.ajax({
-                    url:  'strand/get/' + id,
-                    method: "get",
+                    url     : 'strand/get/' + id,
+                    method  : "get",
                     dataType: "json", 
-                    success: function (data) {  
+                    success : function (data) {  
                         $('#update-strand-form input[name="id"]').val(data.ID)
                         $('#update-strand-form input[name="strand"]').val(data.Strand)
                         $('#update-strand-form select[name="manager"]').val(data.Manager)
                     },
-                    error: function (xhr, status, error) { 
+                    error   : function (xhr, status, error) { 
                         console.info(xhr.responseText);
                     }
                 }); 
@@ -211,27 +210,27 @@
                 e.preventDefault();    
                 var _this = $(this)
                 $.ajax({
-                    url:  'strand/update',
-                    method: "post", 
-                    data: $("#update-strand-form").serialize(),
+                    url     : 'strand/update',
+                    method  : "post", 
+                    data    : $("#update-strand-form").serialize(),
                     dataType: "json", 
-                    success: function (data) { 
+                    success : function (data) { 
                         if(data.response){ 
                             Swal.fire({
-                                title:"Good job!",
-                                text: data.message,
-                                icon:"success"
+                                title: "Good job!",
+                                text : data.message,
+                                icon : "success"
                             })
                             table.ajax.reload() 
                         }else{ 
                             Swal.fire({
-                                title:"Update Error!",
-                                text: data.message,
-                                icon:"error"
+                                title: "Update Error!",
+                                text : data.message,
+                                icon : "error"
                             }) 
                         }
                     },
-                    error: function (xhr, status, error) { 
+                    error   : function (xhr, status, error) { 
                         console.info(xhr.responseText);
                     }
                 }); 
@@ -246,38 +245,38 @@
                 var id = $(this).data('id')
                 
                 Swal.fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
-                    icon: "warning",
-                    showCancelButton: !0,
-                    confirmButtonText: "Yes, delete it!",
-                    cancelButtonText: "No, cancel!",
+                    title             : "Are you sure?",
+                    text              : "You won't be able to revert this!",
+                    icon              : "warning",
+                    showCancelButton  : !0,
+                    confirmButtonText : "Yes, delete it!",
+                    cancelButtonText  : "No, cancel!",
                     confirmButtonClass: "btn btn-success mt-2",
-                    cancelButtonClass: "btn btn-danger ms-2 mt-2",
-                    buttonsStyling: !1
+                    cancelButtonClass : "btn btn-danger ms-2 mt-2",
+                    buttonsStyling    : !1
                 }).then(function(e) { 
                     if(e.value){ 
                         $.ajax({
-                            url:  'strand/delete/' + id,
-                            method: "post",  
+                            url     : 'strand/delete/' + id,
+                            method  : "post",  
                             dataType: "json", 
-                            success: function (data) {  
+                            success : function (data) {  
                                 if(data.response){ 
                                     Swal.fire({
-                                        title:"Good job!",
-                                        text: data.message,
-                                        icon:"success"
+                                        title: "Good job!",
+                                        text : data.message,
+                                        icon : "success"
                                     })
                                     table.ajax.reload() 
                                 }else{ 
                                     Swal.fire({
-                                        title:"Update Error!",
-                                        text: data.message,
-                                        icon:"error"
+                                        title: "Update Error!",
+                                        text : data.message,
+                                        icon : "error"
                                     }) 
                                 }
                             },
-                            error: function (xhr, status, error) { 
+                            error   : function (xhr, status, error) { 
                                 console.info(xhr.responseText);
                             }
                         });  

@@ -4,7 +4,7 @@ use App\Models\ConfigModel;
 use Config\Custom_config;
 
 $custom_config = new Custom_config; 
-$year_started = $custom_config->year_started; 
+$year_started  = $custom_config->year_started; 
 
 $db = db_connect();
     $config = new ConfigModel($db);

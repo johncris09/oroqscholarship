@@ -63,25 +63,25 @@
                     that.checked = false; 
                     
                     Swal.fire({
-                        title: 'Do you want to save the changes?', 
-                        showCancelButton: true,
+                        title            : 'Do you want to save the changes?', 
+                        showCancelButton : true,
                         confirmButtonText: 'Yes', 
-                        icon:"question"
+                        icon             : "question"
                     }).then((result) => { 
                         if (result.isConfirmed) {
                             $.ajax({
-                                url: "manage_scholarship/semester_closed",
+                                url   : "manage_scholarship/semester_closed",
                                 method: "POST",  
-                                data: {
+                                data  : {
                                     semester_closed: 1, 
                                 }, 
                                 dataType: "json",
-                                success: function(data){
+                                success : function(data){
                                     if(data.response){ 
                                         Swal.fire({
-                                            title:"Good job!",
-                                            text: data.message,
-                                            icon:"success"
+                                            title        :" Good job!",
+                                            text         :  data.message,
+                                            icon         :" success"
                                         }).then((result) => { 
                                             window.location.reload();
                                         })
@@ -99,25 +99,25 @@
 
                     
                     Swal.fire({
-                        title: 'Do you want to save the changes?', 
-                        showCancelButton: true,
+                        title            : 'Do you want to save the changes?', 
+                        showCancelButton : true,
                         confirmButtonText: 'Yes', 
-                        icon:"question"
+                        icon             : "question"
                     }).then((result) => { 
                         if (result.isConfirmed) {
                             $.ajax({
-                                url: "manage_scholarship/semester_closed",
+                                url   : "manage_scholarship/semester_closed",
                                 method: "POST",  
-                                data: {
+                                data  : {
                                     semester_closed: 0, 
                                 }, 
                                 dataType: "json",
-                                success: function(data){
+                                success : function(data){
                                     if(data.response){ 
                                         Swal.fire({
-                                            title:"Good job!",
-                                            text: data.message,
-                                            icon:"success"
+                                            title: "Good job!",
+                                            text : data.message,
+                                            icon : "success"
                                         }).then((result) => { 
                                             window.location.reload();
                                         })
@@ -138,19 +138,18 @@
             $('select[name=school_year]').on('change', function(){ 
                 var school_year = $('select[name=school_year]').val();
                 $.ajax({
-                    url: "manage_scholarship/update_sy",
+                    url   : "manage_scholarship/update_sy",
                     method: "POST",  
-                    data: {
+                    data  : {
                         current_sy: school_year 
                     }, 
                     dataType: "json",
-                    success: function(data){ 
-                        console.info(data)
+                    success: function(data){  
                         if(data.response){ 
                             Swal.fire({
-                                title:"Good job!",
-                                text: data.message,
-                                icon:"success"
+                                title: "Good job!",
+                                text : data.message,
+                                icon : "success"
                             }).then((result) => { 
                                 window.location.reload();
                             })
@@ -165,18 +164,18 @@
             $('select[name=semester]').on('change', function(){ 
                 var sem = $('select[name=semester]').val(); 
                 $.ajax({
-                    url: "manage_scholarship/update_sem",
+                    url   : "manage_scholarship/update_sem",
                     method: "POST",  
-                    data: {
+                    data  : {
                         current_sem: sem 
                     }, 
                     dataType: "json",
                     success: function(data){  
                         if(data.response){ 
                             Swal.fire({
-                                title:"Good job!",
-                                text: data.message,
-                                icon:"success"
+                                title: "Good job!",
+                                text : data.message,
+                                icon : "success"
                             }).then((result) => { 
                                 window.location.reload();
                             })
