@@ -244,15 +244,13 @@ $db = db_connect();
                             <?php
                                 if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin", "admin"])){
                             ?>   
-                                    <li class="menu-title">REPORT</li>
+                                    <li class="menu-title">AUTOMATED REPORT</li>
                                     <li>
                                         <a href="/generate_report"> 
                                             <i class="mdi mdi-chart-areaspline"></i>
                                             <span> Generat Report </span>
                                         </a>
-                                    </li> 
-                                    
-
+                                    </li>  
                                     <li>
                                         <a href="/generate_payroll"> 
                                             <i class="mdi mdi-format-list-text"></i>
@@ -478,6 +476,7 @@ $db = db_connect();
         <?= script_tag('assets/datatables.net-select/js/dataTables.select.min.js'); ?>
         <?= script_tag('assets/pdfmake/build/pdfmake.min.js'); ?>
         <?= script_tag('assets/pdfmake/build/vfs_fonts.js'); ?>  
+        <?= script_tag('assets/jszip/jszip.min.js'); ?>  
         <?= script_tag('assets/sweetalert2/sweetalert2.all.min.js'); ?>    
         <?= script_tag('assets/moment.js/moment.js'); ?>    
         <?= script_tag('assets/parsleyjs/parsley.min.js'); ?>   
