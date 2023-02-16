@@ -138,7 +138,8 @@ class SeniorHighModel extends Model
     { 
         $query = $this->builder 
             ->select('ID, AppSY, AppNoYear, AppNoSem, AppNoID, AppStatus, AppFirstName, AppMidIn, AppLastName, AppSuffix, AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ')
-            ->where('AppStatus', 'Approved')
+            ->orWhere('AppStatus', 'Approved')
+            ->orWhere('AppStatus', 'Additional Approved')
             ->where('AppManager', 'Active')
             ->where($data)
             ->orderBy('ID', 'asc')
@@ -151,8 +152,9 @@ class SeniorHighModel extends Model
     public function get_report($data, $range)
     {   
         $query = $this->builder 
-            ->select('ID, AppNoYear, AppNoSem, AppNoID, AppAvailment , AppStatus, replace(AppFirstName," ", "")  as AppFirstName ,   replace(AppMidIn," ", "") as AppMidIn , replace(AppLastName," ", "") as AppLastName, AppSuffix, AppContact, AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ') 
-            ->where($data, "both")
+            ->select('ID, AppNoYear, AppNoSem, AppNoID, AppAvailment , AppStatus, AppFirstName, AppMidIn, AppLastName, AppSuffix, replace(AppContact," ", "")  as AppContact  , AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ') 
+            ->Where('(AppStatus = "Approved" or AppStatus = "Additional Approved")') 
+            ->where($data)
             ->where(isset($range['AppNoIDFrom']) ? "AppNoID >=  " .$range['AppNoIDFrom'] : "AppManager = 'Active'")
             ->where(isset($range['AppNoIDTo']) ? "AppNoID <=  " .$range['AppNoIDTo'] :  "AppManager = 'Active'") 
             ->where('AppManager', 'Active')
@@ -169,6 +171,7 @@ class SeniorHighModel extends Model
     {   
         $query = $this->builder 
             ->select('ID, AppNoYear, AppNoSem, AppNoID, AppAvailment , AppStatus, AppFirstName, AppMidIn, AppLastName, AppSuffix, AppContact, AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ') 
+            ->Where('(AppStatus = "Approved" or AppStatus = "Additional Approved")') 
             ->where($data)
             ->where(isset($range['AppNoIDFrom']) ? "AppNoID >=  " .$range['AppNoIDFrom'] : "AppManager = 'Active'")
             ->where(isset($range['AppNoIDTo']) ? "AppNoID <=  " .$range['AppNoIDTo'] :  "AppManager = 'Active'") 

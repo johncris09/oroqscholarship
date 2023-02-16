@@ -226,6 +226,13 @@ class SeniorHighController extends BaseController
         }
         if(!empty($_GET['semester'])){ 
             $query['AppSem'] =  $_GET['semester'];
+            if($_GET['semester'] !== ""){
+                if($_GET['semester'] == "1st"){
+                    $query['AppNoSem'] = 1;
+                }else{
+                    $query['AppNoSem'] = 2;
+                } 
+            } 
             $data['semester'] =  $_GET['semester'];
         }
         if(!empty($_GET['school_year'])){ 
@@ -281,6 +288,13 @@ class SeniorHighController extends BaseController
         }
         if(!empty($_GET['semester'])){ 
             $query['AppSem'] =  $_GET['semester'];
+            if($_GET['semester'] !== ""){
+                if($_GET['semester'] == "1st"){
+                    $query['AppNoSem'] = 1;
+                }else{
+                    $query['AppNoSem'] = 2;
+                } 
+            } 
             $data['semester'] =  $_GET['semester'];
         }
         if(!empty($_GET['school_year'])){ 
@@ -328,7 +342,7 @@ class SeniorHighController extends BaseController
         $data["page_title"] = "Generated Payroll";  
         $data["semester"] = ""; 
         $data['config']= new Custom_config;
-        $data["status"] = ""; 
+        // $data["status"] = ""; 
         $data["scholarship_type"] = "Senior High School"; 
         $data["school_year"] = ""; 
 
@@ -337,16 +351,23 @@ class SeniorHighController extends BaseController
         }
         if(!empty($_GET['semester'])){ 
             $query['AppSem'] =  $_GET['semester'];
+            if($_GET['semester'] !== ""){
+                if($_GET['semester'] == "1st"){
+                    $query['AppNoSem'] = 1;
+                }else{
+                    $query['AppNoSem'] = 2;
+                } 
+            } 
             $data['semester'] =  $_GET['semester'];
         }
         if(!empty($_GET['school_year'])){ 
             $query['AppSY'] =  $_GET['school_year'];
             $data['school_year'] =  $_GET['school_year'];
         }
-        if(!empty($_GET['status'])){ 
-            $query['AppStatus'] =  $_GET['status'];
-            $data['status'] =  $_GET['status'];
-        }
+        // if(!empty($_GET['status'])){ 
+        //     $query['AppStatus'] =  $_GET['status'];
+        //     $data['status'] =  $_GET['status'];
+        // }
         if(!empty($_GET['availment'])){ 
             $query['AppAvailment'] =  $_GET['availment'];
         }
@@ -366,7 +387,7 @@ class SeniorHighController extends BaseController
             $range['AppNoIDTo'] =  $_GET['to'];
         }  
         
-        $data["result"] = $this->senior_high->get_payroll($query, $range);  
+        $data["result"] = $this->senior_high->get_payroll($query, $range);    
         $data['tot_record'] = count($data["result"]);
         $data['tot_page'] = ceil($data['tot_record']   / 20);
         $data['from'] = 1;

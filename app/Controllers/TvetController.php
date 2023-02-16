@@ -317,8 +317,7 @@ class TvetController extends BaseController
             $range['colAppNoIDTo'] =  $_GET['to'];
         }  
         
-        $data["result"] = $this->tvet->get_report($query, $range);
-        // print_r($data["result"]) ;
+        $data["result"] = $this->tvet->get_report($query, $range); 
         return view('admin/print_preview', $data);   
 
     }
@@ -335,7 +334,7 @@ class TvetController extends BaseController
         $data["page_title"] = "Generated Payroll";  
         $data["semester"] = ""; 
         $data['config']= new Custom_config;
-        $data["status"] = ""; 
+        // $data["status"] = ""; 
         $data["scholarship_type"] = "College"; 
         $data["school_year"] = ""; 
 
@@ -344,16 +343,23 @@ class TvetController extends BaseController
         }
         if(!empty($_GET['semester'])){ 
             $query['colAppNoSem'] =  $_GET['semester'];
+            if($_GET['semester'] !== ""){
+                if($_GET['semester'] == "1st"){
+                    $query['colAppNoSem'] = 1;
+                }else{
+                    $query['colAppNoSem'] = 2;
+                } 
+            } 
             $data['semester'] =  $_GET['semester'];
         }
         if(!empty($_GET['school_year'])){ 
             $query['colSY'] =  $_GET['school_year'];
             $data['school_year'] =  $_GET['school_year'];
         }
-        if(!empty($_GET['status'])){ 
-            $query['colAppStat'] =  $_GET['status'];
-            $data['status'] =  $_GET['status'];
-        }
+        // if(!empty($_GET['status'])){ 
+        //     $query['colAppStat'] =  $_GET['status'];
+        //     $data['status'] =  $_GET['status'];
+        // }
         if(!empty($_GET['availment'])){ 
             $query['colAvailment'] =  $_GET['availment'];
         }

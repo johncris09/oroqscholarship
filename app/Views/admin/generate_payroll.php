@@ -137,7 +137,7 @@
                                     </div>  
                                 </div>
                                 <div class="row justify-content-center">
-                                    <div class="col-3">   
+                                    <div class="col-5">   
                                         <label for="semester" class="form-label">Semester</label>
                                         <select class="form-control"   name="semester"  >
                                             <option value="">Select</option> 
@@ -146,7 +146,7 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </div>  
-                                    <div class="col-3">   
+                                    <div class="col-4">   
                                         <label for="school_year" class="form-label">SY</label>
                                         <select class="form-control"   name="school_year"  >
                                             <option value="">Select</option> 
@@ -155,7 +155,7 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-                                    <div class="col-3">   
+                                    <!-- <div class="col-3">   
                                         <label for="status" class="form-label">Status</label>
                                         <select class="form-control"  name="status" >
                                             <option value="">Select</option> 
@@ -163,7 +163,7 @@
                                                 <option  value="<?= $row ?>"><?= $row ?></option>  
                                             <?php } ?> 
                                         </select>  
-                                    </div>
+                                    </div> -->
                                 </div> 
                                 <div class="row justify-content-center">
                                     <div class="col-3">
@@ -249,7 +249,7 @@
                                     </div>  
                                 </div>
                                 <div class="row justify-content-center">
-                                    <div class="col-3">   
+                                    <div class="col-5">   
                                         <label for="semester" class="form-label">Semester</label>
                                         <select class="form-control"   name="semester"  >
                                             <option value="">Select</option> 
@@ -258,7 +258,7 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </div>  
-                                    <div class="col-3">   
+                                    <div class="col-4">   
                                         <label for="school_year" class="form-label">SY</label>
                                         <select class="form-control"   name="school_year"  >
                                             <option value="">Select</option> 
@@ -267,7 +267,7 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-                                    <div class="col-3">   
+                                    <!-- <div class="col-3">   
                                         <label for="status" class="form-label">Status</label>
                                         <select class="form-control"  name="status" >
                                             <option value="">Select</option> 
@@ -275,7 +275,7 @@
                                                 <option  value="<?= $row ?>"><?= $row ?></option>  
                                             <?php } ?> 
                                         </select>  
-                                    </div>
+                                    </div> -->
                                 </div> 
                                 <div class="row justify-content-center">
                                     <div class="col-3">
@@ -363,7 +363,7 @@
                                     </div>  
                                 </div>
                                 <div class="row justify-content-center">
-                                    <div class="col-3">   
+                                    <div class="col-5">   
                                         <label for="semester" class="form-label">Semester</label>
                                         <select class="form-control"   name="semester"  >
                                             <option value="">Select</option> 
@@ -372,7 +372,7 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </div>  
-                                    <div class="col-3">   
+                                    <div class="col-4">   
                                         <label for="school_year" class="form-label">SY</label>
                                         <select class="form-control"   name="school_year"  >
                                             <option value="">Select</option> 
@@ -381,7 +381,7 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-                                    <div class="col-3">   
+                                    <!-- <div class="col-3">   
                                         <label for="status" class="form-label">Status</label>
                                         <select class="form-control"  name="status" >
                                             <option value="">Select</option> 
@@ -389,7 +389,7 @@
                                                 <option  value="<?= $row ?>"><?= $row ?></option>  
                                             <?php } ?> 
                                         </select>  
-                                    </div>
+                                    </div> -->
                                 </div> 
                                 <div class="row justify-content-center">
                                     <div class="col-3">
@@ -489,7 +489,11 @@
             });
  
             $('select[name="semester"]').on('change', function(){  
-                $(this).closest("div.active").find('input.semester').val(($(this).val() == "1st") ?  1 : 2) 
+                $(this).closest("div.active").find('input.semester').val(
+                    ($(this).val() !== "") ?
+                        ($(this).val() == "1st") ? 1: 2
+                    : ""
+                ) 
             })
         });
     </script>

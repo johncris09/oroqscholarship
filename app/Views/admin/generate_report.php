@@ -487,9 +487,13 @@
                     alert("Please input only 1-8");
                 }
             });
- 
+            
             $('select[name="semester"]').on('change', function(){  
-                $(this).closest("div.active").find('input.semester').val(($(this).val() == "1st") ?  1 : 2) 
+                $(this).closest("div.active").find('input.semester').val(
+                    ($(this).val() !== "") ?
+                        ($(this).val() == "1st") ? 1: 2
+                    : ""
+                ) 
             })
         });
     </script>

@@ -286,6 +286,13 @@ class CollegeController extends BaseController
         }
         if(!empty($_GET['semester'])){ 
             $query['colAppNoSem'] =  $_GET['semester'];
+            if($_GET['semester'] !== ""){
+                if($_GET['semester'] == "1st"){
+                    $query['colAppNoSem'] = 1;
+                }else{
+                    $query['colAppNoSem'] = 2;
+                } 
+            } 
             $data['semester'] =  $_GET['semester'];
         }
         if(!empty($_GET['school_year'])){ 
@@ -336,25 +343,31 @@ class CollegeController extends BaseController
         $data["page_title"] = "Generated Payroll";  
         $data["semester"] = ""; 
         $data['config']= new Custom_config;
-        $data["status"] = ""; 
+        // $data["status"] = ""; 
         $data["scholarship_type"] = "College"; 
         $data["school_year"] = ""; 
 
         if(!empty($_GET['school'])){ 
             $query['colSchool'] =  $_GET['school'];
         }
-        if(!empty($_GET['semester'])){ 
-            $query['colAppNoSem'] =  $_GET['semester'];
+        if(!empty($_GET['semester'])){  
+            if($_GET['semester'] !== ""){
+                if($_GET['semester'] == "1st"){
+                    $query['colAppNoSem'] = 1;
+                }else{
+                    $query['colAppNoSem'] = 2;
+                } 
+            } 
             $data['semester'] =  $_GET['semester'];
         }
         if(!empty($_GET['school_year'])){ 
             $query['colSY'] =  $_GET['school_year'];
             $data['school_year'] =  $_GET['school_year'];
         }
-        if(!empty($_GET['status'])){ 
-            $query['colAppStat'] =  $_GET['status'];
-            $data['status'] =  $_GET['status'];
-        }
+        // if(!empty($_GET['status'])){ 
+        //     $query['colAppStat'] =  $_GET['status'];
+        //     $data['status'] =  $_GET['status'];
+        // }
         if(!empty($_GET['availment'])){ 
             $query['colAvailment'] =  $_GET['availment'];
         }

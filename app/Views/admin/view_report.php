@@ -59,7 +59,7 @@
                                 foreach($result as $row){ 
                                     if(in_array( $scholarship_type  ,['College', 'TVET'])){
                                         $contact = in_array($row->colContactNo, ["-", null, "None", "" ]) ? "" : $row->colContactNo;
-                                        $name = $row->colLastName . ", "  . $row->colFirstName . " "  . $row->colMI . " " . " "  . $row->colSuffix ; 
+                                        $name =ucwords( $row->colLastName . ", "  . $row->colFirstName . " "  . $row->colMI . " " . " "  . $row->colSuffix) ; 
                                         $address = $row->colAddress;
                                         $course = $row->colCourse;
                                         $year_level =  $row->colYearLevel;
@@ -67,7 +67,7 @@
                                         $availment =  $row->colAvailment;
                                     }else{
                                         $contact = in_array($row->AppContact, ["-", null, "None", "" ]) ? "" : $row->AppContact;
-                                        $name = $row->AppLastName . ", "  . $row->AppFirstName . " "  . $row->AppMidIn . " " . " "  . $row->AppSuffix ;
+                                        $name = ucwords( $row->AppLastName . ", "  . $row->AppFirstName . " "  . $row->AppMidIn . " " . " "  . $row->AppSuffix);
                                         $address = $row->AppAddress;
                                         $course = $row->AppCourse;
                                         $year_level =  $row->AppYear;
@@ -106,7 +106,21 @@
     <script>
         $(document).ready(function() {    
             var table = $('#report-table').DataTable( {
-                searching: false,   info: false
+                searching: false,   
+                info: false,
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="mdi mdi-file-excel"></i> Excel',
+                        className: 'btn btn-success btn-sm',
+                        action: function ( e, dt, button, config ) {
+                            if (confirm('Are you sure you want to export to Excel?')) {
+                                $.fn.dataTable.ext.buttons.excelHtml5.action.call(this, e, dt, button, config);
+                            }
+                        }
+                    }
+                ]
             }); 
 
         });

@@ -126,7 +126,8 @@ class TvetModel extends Model
     { 
         $query = $this->builder 
             ->select('ID, colSY, colAppNoYear, colAppNoSem, colAppNoID, colAppStat, colFirstName, colMI, colLastName, colSuffix, colAddress, colCourse, colSchool, colYearLevel, ')
-            ->where('colAppStat', 'Approved')
+            ->orWhere('colAppStat', 'Approved')
+            ->orWhere('colAppStat', 'Additional Approved')
             ->where('colManager', 'Active')
             ->where($data)
             ->orderBy('colAppNoID', 'asc')
@@ -139,8 +140,9 @@ class TvetModel extends Model
     public function get_report($data, $range)
     {   
         $query = $this->builder 
-            ->select('ID, colAppNoYear, colAppNoSem, colContactNo, colAvailment ,  colAppNoID, colAppStat, colFirstName, colMI, colLastName, colSuffix, colAddress, colCourse, colSchool, colYearLevel, ')
-            ->where($data, "both")
+            ->select('ID, colAppNoYear, colAppNoSem,  replace(colContactNo," ", "")  as colContactNo, colAvailment ,  colAppNoID, colAppStat, colFirstName, colMI, colLastName, colSuffix, colAddress, colCourse, colSchool, colYearLevel, ')
+            ->Where('(colAppStat = "Approved" or colAppStat = "Additional Approved")') 
+            ->where($data)
             ->where(isset($range['colAppNoIDFrom']) ? "colAppNoID >=  " .$range['colAppNoIDFrom'] : "colManager = 'Active'")
             ->where(isset($range['colAppNoIDTo']) ? "colAppNoID <=  " .$range['colAppNoIDTo'] :  "colManager = 'Active'") 
             ->where('colManager', 'Active')
@@ -155,7 +157,8 @@ class TvetModel extends Model
     {   
         $query = $this->builder 
             ->select('ID, colAppNoYear, colAppNoSem, colContactNo, colAvailment ,  colAppNoID, colAppStat, colFirstName, colMI, colLastName, colSuffix, colAddress, colCourse, colSchool, colYearLevel, ')
-            ->where($data, "both")
+            ->Where('(colAppStat = "Approved" or colAppStat = "Additional Approved")') 
+            ->where($data)
             ->where(isset($range['colAppNoIDFrom']) ? "colAppNoID >=  " .$range['colAppNoIDFrom'] : "colManager = 'Active'")
             ->where(isset($range['colAppNoIDTo']) ? "colAppNoID <=  " .$range['colAppNoIDTo'] :  "colManager = 'Active'") 
             ->where('colManager', 'Active')
