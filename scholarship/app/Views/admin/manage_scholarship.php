@@ -27,7 +27,7 @@
                             <div class="input-group mb-3"> 
                                 <select class="form-select" name="school_year"  >
                                     <option value="">Select</option> 
-                                    <?php foreach(range(date('Y'), $year_started) as $year):?>  
+                                    <?php foreach(range(date('Y') + 1, $year_started) as $year):?>  
                                         <option <?php echo ( "SY: " . ($year - 1) . "-" .  $year == $config['current_sy']) ? 'selected' : '' ?> value="SY: <?=  ($year - 1) . "-" .  $year ?>">SY: <?= ($year - 1) . "-" .  $year  ?></option>
                                     <?php endforeach; ?>
                                 </select>

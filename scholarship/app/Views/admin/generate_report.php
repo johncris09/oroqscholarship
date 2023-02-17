@@ -150,7 +150,7 @@
                                         <label for="school_year" class="form-label">SY</label>
                                         <select class="form-control"   name="school_year"  >
                                             <option value="">Select</option> 
-                                            <?php foreach(range(date('Y'), $year_started) as $year):?>  
+                                            <?php foreach(range(date('Y') + 1, $year_started) as $year):?>  
                                                 <option value="SY: <?=  ($year - 1) . "-" .  $year ?>">SY: <?= ($year - 1) . "-" .  $year  ?></option>
                                             <?php endforeach; ?>
                                         </select>
@@ -262,7 +262,7 @@
                                         <label for="school_year" class="form-label">SY</label>
                                         <select class="form-control"   name="school_year"  >
                                             <option value="">Select</option> 
-                                            <?php foreach(range(date('Y'), $year_started) as $year):?>  
+                                            <?php foreach(range(date('Y') + 1, $year_started) as $year):?>  
                                                 <option value="SY: <?=  ($year - 1) . "-" .  $year ?>">SY: <?= ($year - 1) . "-" .  $year  ?></option>
                                             <?php endforeach; ?>
                                         </select>
@@ -376,7 +376,7 @@
                                         <label for="school_year" class="form-label">SY</label>
                                         <select class="form-control"   name="school_year"  >
                                             <option value="">Select</option> 
-                                            <?php foreach(range(date('Y'), $year_started) as $year):?>  
+                                            <?php foreach(range(date('Y') + 1, $year_started) as $year):?>  
                                                 <option value="SY: <?=  ($year - 1) . "-" .  $year ?>">SY: <?= ($year - 1) . "-" .  $year  ?></option>
                                             <?php endforeach; ?>
                                         </select>
