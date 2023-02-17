@@ -276,9 +276,13 @@ class ScholarRegistrationController extends BaseController
 
     public function get_shs_latest_app_no_id()
     {
-        $data = array(
-            "AppNoYear " => $this->request->getPost('app_year'),
-            "AppNoSem"   => $this->request->getPost('app_sem'),
+        
+        $config = $this->config_model->asArray()->where('id', 1)->findAll()[0]; 
+        $data   = array(
+            "AppNoYear" => $this->request->getPost('app_year'),
+            "AppNoSem"  => $this->request->getPost('app_sem'),
+            "AppSY"     => $config['current_sy'],
+            "AppSem"    => ($this->request->getPost('app_sem') == 1) ? "1st": "2nd",
         );
 
         $app_no_id = $this->senior_high_registration->get_latest_app_no_id($data);
@@ -288,9 +292,12 @@ class ScholarRegistrationController extends BaseController
 
     public function get_college_latest_app_no_id()
     {
-        $data = array(
+        $config = $this->config_model->asArray()->where('id', 1)->findAll()[0]; 
+        $data   = array(
             "colAppNoYear " => $this->request->getPost('app_year'),
             "colAppNoSem"   => $this->request->getPost('app_sem'),
+            "colSY"         => $config['current_sy'],
+            "colSem"        => ($this->request->getPost('app_sem') == 1) ? "1st": "2nd",
         );
 
         $app_no_id = $this->college_registration->get_latest_app_no_id($data);
@@ -300,9 +307,12 @@ class ScholarRegistrationController extends BaseController
 
     public function get_tvet_latest_app_no_id()
     {
-        $data = array(
+        $config = $this->config_model->asArray()->where('id', 1)->findAll()[0]; 
+        $data   = array(
             "colAppNoYear " => $this->request->getPost('app_year'),
             "colAppNoSem"   => $this->request->getPost('app_sem'),
+            "colSY"         => $config['current_sy'],
+            "colSem"        => ($this->request->getPost('app_sem') == 1) ? "1st" : "2nd",
         );
 
         $app_no_id = $this->tvet_registration->get_latest_app_no_id($data);
