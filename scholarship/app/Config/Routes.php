@@ -51,6 +51,12 @@ $routes->group('/',  function($routes) {
 });
 
 
+
+$routes->group('search',  function($routes) { 
+    $routes->get('/', 'SearchApplicationController::index/$1', ["filter" => "auth"]);   
+    
+});
+
 $routes->group('approved',  function($routes) {
     $routes->get('/', 'ApprovedApplicationController::index', ["filter" => "auth"]);   
     $routes->get('get_shs_approved_list', 'SeniorHighController::get_approved_application', ["filter" => "auth"]);   

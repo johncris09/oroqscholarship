@@ -56,67 +56,68 @@ $db = db_connect();
             <!-- Topbar Start -->
             <div class="navbar-custom">
                 <div class="container-fluid">
-                    <ul class="list-unstyled topnav-menu float-end mb-0">  
-                
-                        <li class="dropdown notification-list topbar-dropdown">
-                            <a class="nav-link dropdown-toggle waves-effect waves-light"   href="registration" role="button"  >
-                                <i class="fe-plus noti-icon"></i> Add New Applicant
-                            </a> 
-                        </li>
-                        
-                        <li class="dropdown d-none d-lg-inline-block">
-                            <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="fullscreen" href="#">
-                                <i class="fe-maximize noti-icon"></i>
-                            </a>
-                        </li>
-                        <li class="dropdown d-none d-lg-inline-block"> 
-                            <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" href="#">
-                                 Scholarship Status: <i class="mdi mdi-checkbox-blank-circle text-<?php echo ($config['semester_closed']) ? "danger" : "success" ?>"></i>
-                            </a>
-                        </li>
-                        
-                        <li class="dropdown notification-list topbar-dropdown">
-                            <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="<?=base_url()?>/public/img/user.png" alt="user-image" class="rounded-circle">
-                                <span class="pro-user-name ms-1">
-                                    <?= auth()->user()->username; ?> <i class="mdi mdi-chevron-down"></i> 
-                                </span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
-                                <!-- item-->
-                                <div class="dropdown-header noti-title">
-                                    <h6 class="text-overflow m-0">Welcome <?= auth()->user()->username; ?>!</h6>
+                <ul class="list-unstyled topnav-menu float-end mb-0">
+
+                    <li class="d-none d-lg-block">
+                        <form action="<?= base_url('search') ?>" method="get" class="app-search">
+                            <div class="app-search-box dropdown">
+                                <div class="input-group">
+                                    <input type="search" value="<?php echo isset($_GET['search']) ? $_GET['search'] : "" ?>" name="search" class="form-control" placeholder="Search..." id="top-search">
+                                    <button class="btn input-group-text" type="submit">
+                                        <i class="fe-search"></i>
+                                    </button>
                                 </div> 
-                                <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="fe-user"></i>
-                                    <span>My Account</span>
-                                </a> 
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="fe-settings"></i>
-                                    <span>Settings</span>
-                                </a> 
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="fe-lock"></i>
-                                    <span>Lock Screen</span>
-                                </a> -->
-                
-                                <div class="dropdown-divider"></div>
-                 
-                                <!-- item-->
-                                <a href="<?= base_url('logout') ?>" class="dropdown-item notify-item">
-                                    <i class="fe-log-out"></i>
-                                    <span>Logout</span>
-                                </a>
-                
                             </div>
-                        </li>
-                
-                
+                        </form>
+                    </li>
+
+                    <li class="dropdown d-inline-block d-lg-none">
+                        <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                            <i class="fe-search noti-icon"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-lg dropdown-menu-end p-0">
+                            <form action="<?= base_url('search') ?>" name="search" method="get"  class="p-3">
+                                <input type="text"  name="search" value="<?php echo isset($_GET['search']) ? $_GET['search'] : "" ?>" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
+                            </form>
+                        </div>
+                    </li>
+
+                    <li class="dropdown d-none d-lg-inline-block">
+                        <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" href="<?= base_url('registration') ?>">
+                            <i class="fe-plus noti-icon"></i> New Applicant
+                        </a>
+                    </li> 
+                    <li class="dropdown d-none d-lg-inline-block"> 
+                        <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" href="#">
+                                Scholarship Status: <i class="mdi mdi-checkbox-blank-circle text-<?php echo ($config['semester_closed']) ? "danger" : "success" ?>"></i>
+                        </a>
+                    </li>
+                    <li class="dropdown notification-list topbar-dropdown">
+                        <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                            <img src="<?=base_url()?>/public/img/user.png" alt="user-image" class="rounded-circle">
+                            <span class="pro-user-name ms-1">
+                                <?= auth()->user()->username; ?> <i class="mdi mdi-chevron-down"></i> 
+                            </span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end profile-dropdown "> 
+                            <div class="dropdown-header noti-title">
+                                <h6 class="text-overflow m-0">Welcome <?= auth()->user()->username; ?>!</h6>
+                            </div>  
+            
+                            <div class="dropdown-divider"></div> 
+                            <a href="<?= base_url('logout') ?>" class="dropdown-item notify-item">
+                                <i class="fe-log-out"></i>
+                                <span>Logout</span>
+                            </a>
+            
+                        </div>
+                    </li> 
+
                     </ul>
                 
                     <!-- LOGO -->
                     <div class="logo-box"> 
-                        <a href="" class="logo logo-light text-center">
+                        <a href="<?= base_url('/') ?>" class="logo logo-light text-center">
                             <span class="logo-sm">
                                 <img src="<?=base_url()?>/public/img/logo-sm.png" alt="" height="40">
                             </span>
@@ -143,17 +144,7 @@ $db = db_connect();
                                 </div>
                             </a>
                             <!-- End mobile menu toggle-->
-                        </li>   
-                        <li class="dropdown d-none d-xl-block">
-                            <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" href="#">
-                                Current School Year: <strong><u><?php echo $config['current_sy']  ?></u></strong>  
-                            </a>  
-                        </li> 
-                        <li class="dropdown d-none d-xl-block">
-                            <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" href="#">
-                                Current Semester:  <strong><u><?php echo ($config['current_sem'] ==1) ? "1st" : "2nd" ?></u></strong>  
-                            </a>  
-                        </li>
+                        </li>    
                 
                     </ul>
                     <div class="clearfix"></div>
@@ -265,7 +256,7 @@ $db = db_connect();
                             <?php
                                 if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
                             ?>
-                                <li class="menu-title mt-4">Utilities</li>
+                                <li class="menu-title mt-1">Utilities</li>
                                     <li> 
                                         <a href="<?= base_url('course') ?>">  
                                             <i class="mdi mdi-book-outline"></i>
@@ -311,6 +302,15 @@ $db = db_connect();
                             <?php
                                 } 
                             ?> 
+
+                            <?php
+                                if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin", "admin", "user"])){ 
+                            ?>
+                                    <li class="menu-title mt-1">Current School Year: <strong><u><?php echo $config['current_sy']  ?></u></strong></li>
+                                    <li class="menu-title">Current Semester:  <strong><u><?php echo ($config['current_sem'] ==1) ? "1st" : "2nd" ?></u></strong> </li>
+                            <?php
+                                }
+                            ?>
                                  
      
                         </ul>
@@ -363,7 +363,7 @@ $db = db_connect();
                                                                         <label for="application-year" class="form-label">Application Year</label>
                                                                         <!-- <select name="app_year" class="form-select" id="application-year"> 
                                                                             <?php  
-                                                                                foreach(range(date('Y'), $year_started) as $year){ 
+                                                                                foreach(range(date('Y') + 1, $year_started) as $year){ 
                                                                             ?>
                                                                                     <option value="<?php echo $year; ?>"><?php echo $year; ?></option>
                                                                             <?php
@@ -372,7 +372,7 @@ $db = db_connect();
                                                                             ?> 
                                                                         </select> -->
                                                                         <select class="form-select" name="app_sy" id="application-sy"> 
-                                                                            <?php foreach(range(date('Y'), $year_started) as $year):?>  
+                                                                            <?php foreach(range(date('Y') + 1, $year_started) as $year):?>  
                                                                                 <option value="SY: <?=  ($year - 1) . "-" .  $year ?>">SY: <?= ($year - 1) . "-" .  $year  ?></option>
                                                                             <?php endforeach; ?>
                                                                         </select>
