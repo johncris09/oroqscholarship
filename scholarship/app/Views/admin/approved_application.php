@@ -101,7 +101,7 @@
                     // that.checked = false;   \
                     window.location.href="?view=all"
                 }else{
-                    window.location.href= "<?php  echo uri_string() ?>"
+                    window.location.href= "<?php  echo base_url('/') ?>"
                 }
             })  
             

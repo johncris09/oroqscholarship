@@ -270,7 +270,7 @@
                     // that.checked = false;   \
                     window.location.href="?view=all"
                 }else{
-                    window.location.href= "<?php  echo uri_string() ?>"
+                    window.location.href= "<?php  echo base_url('/') ?>"
                 }
             })
 
@@ -746,7 +746,7 @@
             var college_school = { 
                 colors: '#FF99D7',
                 series: [{ 
-                    data: <?php echo isset($college_school['total']) ? json_encode($college_school['total']) :  0; ?> 
+                    data: <?php echo isset($college_school['total']) ? json_encode($college_school['total']) : 0; ?> 
                 }],
                 chart: {
                     type  : 'bar',
@@ -762,7 +762,7 @@
                     enabled: false
                 },
                 xaxis: {
-                    categories:<?php echo isset($college_school['school']) ?  json_encode($college_school['school']) : "category"  ; ?> 
+                    categories:<?php echo isset($college_school['school']) ?  json_encode($college_school['school']) :  "c"; ?> 
                 },
                 tooltip: {
                     y: {
@@ -774,8 +774,7 @@
             };
             var chart = new ApexCharts(document.querySelector("#college-school-chart"), college_school);
             chart.render();
-
-            
+ 
             
             var tvet_school = { 
                 colors: '#3B3486',
