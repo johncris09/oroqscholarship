@@ -1526,22 +1526,22 @@
 	} 
 
 	.xf {
-		left: 407.070000px;
+		left: 406.070000px;
 	}
 	.y21 {
-		bottom: 333.730000px;
+		bottom: 331.730000px;
 	}
 	
-	.we { 
-		width: 142.060000px;
+	.we {  
+		width: 144px;
 	}
 	.we>img{
-		width: 142px;
+		width: 144px;
 		height: 100%;
 	}
 
 	.hf {
-		height: 127.940000px;
+		height: 129.940000px;
 	}  
 	.x13 {
 		left: 441.940000px;
@@ -2167,24 +2167,26 @@
 			width: 153.146667pt;
 		} 
 
+
 		.we { 
-			width: 188.746667pt;
-		} 
-			
-		.we>img{
-			width: 189pt;
+			width: 191pt;
+		}  
+		.we>img{ 
+			width: 191pt;
 			height: 100%;
 		}
 		
 		.hf {
-			height: 169.586667pt;
+			height: 172.586667pt;
 		}
 		.y21 {
-			bottom: 445.306667pt;
+			bottom: 443.306667pt;
 		} 
 		.xf {
-			left: 544.093333pt;
+			left: 543.093333pt;
 		} 
+
+
 		.w5 {
 			width: 171.066667pt;
 		}
@@ -2993,7 +2995,7 @@
 					<div class="t m0 x0 hb y13 ff2 fs2 fc0 sc0 ls2 ws5">Birthday (<span class="_ _0"></span>MM/DD/YYYY) </div>
 				</div>
 				<div class="c xf y21 we hf"> 
-					<img src="<?= !empty($profile['AppImage']) ?  base_url()."/". $profile['AppImage']  : base_url()."/img/blank-image.png" ?>"   
+					<img src="<?= !empty($profile['AppImage']) ?  base_url()."/". $profile['AppImage']  : base_url()."/public/img/blank-image.png" ?>"   
 						
 						/>
 					<!-- <div class="t m0 x2 h2 y22 ff1 fs0 fc0 sc0 ls2 ws5"> </div> -->
