@@ -1,0 +1,9 @@
+000webhost
+username:   oroqscholarship
+password:   eFbLVp&bef(N@7hbh4Dl
+
+db
+username:   oroqscholarsip_db
+password:   P$OhCZy2RQ)x44Dj
+
+otpauth://totp/Heroku:John%20Cris%20Manabo?issuer=Heroku&secret=4TQRJGCVZMLDQEFKIQR6ZMBZDLXESLGB&algorithm=SHA1&digits=6&period=30
