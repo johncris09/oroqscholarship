@@ -105,7 +105,7 @@
 
                     <ul class="nav nav-pills navtab-bg nav-justified">
                         <li class="nav-item ">
-                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active  ">
+                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link  active ">
                                 Senior High School Registration
                             </a>
                         </li>
@@ -130,14 +130,14 @@
                                                 <div class="w-50">
                                                     <label for="" class="form-label">App No. </label> 
                                                     <div class="input-group mb-3"> 
-                                                        <input type="text" class="form-control text-center shs" value="<?php echo $config['current_year'] ; ?>" name="app_no_year"> 
+                                                        <input type="text" class="form-control text-center shs w-25" value="<?php echo $config['current_year'] ; ?>" name="app_no_year"> 
                                                         <span class="input-group-text">-</span>
-                                                        <select name="app_no_sem" class="form-control shs"  >
+                                                        <select name="app_no_sem" class="form-control shs w-25"  >
                                                             <option <?php echo ($config['current_sem'] == 1) ? "selected" : ""; ?> value="1">1</option>
                                                             <option <?php echo ($config['current_sem'] == 2) ? "selected" : ""; ?> value="2">2</option>
                                                         </select>  
                                                         <span class="input-group-text">-</span>
-                                                        <input type="text" class="form-control text-center shs" name="app_no_id" required readonly>
+                                                        <input type="text" class="form-control text-center shs w-25" name="app_no_id" required readonly>
                                                     </div>
                                                 </div> 
                                             </div>
@@ -373,7 +373,7 @@
                                     </div>
                                     <div class="col">
                                         <label for="semester" class="form-label">Semester <?= $required_field; ?></label> 
-                                        <select class="form-control"   name="semester"  required>
+                                        <select class="form-control shs"   name="semester"  required>
                                             <option value="">Select</option> 
                                             <?php foreach($semester as $row):?> 
                                                 <?Php 
@@ -392,7 +392,7 @@
                                         <select class="form-control"   name="school_year"  required>
                                             
                                             <option value="">Select</option> 
-                                            <?php foreach(range(date('Y'), $year_started) as $year):?>  
+                                            <?php foreach(range(date('Y') + 1, $year_started) as $year):?>  
                                                 <?Php 
                                                     if($config['current_sy'] == "SY: " . ($year - 1) . "-" .  $year){ 
                                                         $selected= "selected";
@@ -436,7 +436,7 @@
                                 </div>    
                             </form>  
                         </div>
-                        <div class="tab-pane  " id="college-tab">   
+                        <div class="tab-pane" id="college-tab">   
                             <form id="college-registration-form" class="validation-form">
                                 <div class="row">  
                                     <div class="col-12">
@@ -445,14 +445,14 @@
                                                 <div class="w-50">
                                                     <label for="" class="form-label">App No. </label>   
                                                     <div class="input-group mb-3">
-                                                        <input type="text" class="form-control text-center college" value="<?php echo $config['current_year'] ; ?>" name="app_no_year"  > 
+                                                        <input type="text" class="form-control text-center college w-25"  value="<?php echo $config['current_year'] ; ?>" name="app_no_year"  > 
                                                         <span class="input-group-text">-</span>
-                                                        <select name="app_no_sem" class="form-control college"  >
+                                                        <select name="app_no_sem" class="form-control college w-25"  >
                                                             <option <?php echo ($config['current_sem'] == 1) ? "selected" : ""; ?> value="1">1</option>
                                                             <option <?php echo ($config['current_sem'] == 2) ? "selected" : ""; ?> value="2">2</option>
                                                         </select>  
                                                         <span class="input-group-text">-</span>
-                                                        <input type="text" class="form-control text-center college" name="app_no_id" required readonly>
+                                                        <input type="text" class="form-control text-center college w-25" name="app_no_id" required readonly>
                                                     </div>
                                                 </div> 
                                             </div> 
@@ -690,7 +690,7 @@
                                     </div>
                                     <div class="col">
                                         <label for="semester" class="form-label">Semester <?= $required_field; ?></label>
-                                        <select class="form-control"  name="semester" required>
+                                        <select class="form-control college"  name="semester" required>
                                             <option value="">Select</option> 
                                             <?php foreach($semester as $row):?>  
                                                 <?Php 
@@ -712,7 +712,7 @@
                                         <label for="" class="form-label">SY <?= $required_field; ?></label>
                                         <select class="form-control" name="school_year" required>
                                             <option value="">Select</option>  
-                                            <?php foreach(range(date('Y'), $year_started) as $year):?>  
+                                            <?php foreach(range(date('Y') + 1, $year_started) as $year):?>  
                                                 <?Php 
                                                     if($config['current_sy'] == "SY: " . ($year - 1) . "-" .  $year){ 
                                                         $selected= "selected";
@@ -766,14 +766,14 @@
                                                 <div class="w-50">
                                                     <label for="" class="form-label">App No. </label>   
                                                     <div class="input-group mb-3">
-                                                        <input type="text" class="form-control text-center tvet" value="<?php echo $config['current_year'] ; ?>"  name="app_no_year"  > 
+                                                        <input type="text" class="form-control text-center tvet w-25" value="<?php echo $config['current_year'] ; ?>"  name="app_no_year"  > 
                                                         <span class="input-group-text">-</span>
-                                                        <select name="app_no_sem" class="form-control tvet"  >
+                                                        <select name="app_no_sem" class="form-control tvet w-25"  >
                                                             <option <?php echo ($config['current_sem'] == 1) ? "selected" : ""; ?> value="1">1</option>
                                                             <option <?php echo ($config['current_sem'] == 2) ? "selected" : ""; ?> value="2">2</option>
                                                         </select>  
                                                         <span class="input-group-text">-</span>
-                                                        <input type="text" class="form-control text-center tvet" name="app_no_id" required readonly>
+                                                        <input type="text" class="form-control text-center tvet w-25" name="app_no_id" required readonly>
                                                     </div>
                                                 </div> 
                                             </div>  
@@ -1009,7 +1009,7 @@
                                     </div>
                                     <div class="col">
                                         <label for="semester" class="form-label">Semester <?= $required_field; ?></label>
-                                        <select class="form-control"  name="semester" required>
+                                        <select class="form-control tvet"  name="semester" required>
                                             <option value="">Select</option> 
                                             <?php foreach($semester as $row):?>  
                                                 <?Php 
@@ -1031,7 +1031,7 @@
                                         <label for="" class="form-label">SY <?= $required_field; ?></label>
                                         <select class="form-control" name="school_year" required>
                                             <option value="">Select</option> 
-                                            <?php foreach(range(date('Y'), $year_started) as $year):?>  
+                                            <?php foreach(range(date('Y') + 1, $year_started) as $year):?>  
                                                 <?Php 
                                                     if($config['current_sy'] == "SY: " . ($year - 1) . "-" .  $year){ 
                                                         $selected= "selected";
@@ -1157,12 +1157,19 @@
                     dataType: "json",
                     success: function(data){   
                         $('input.shs[name="app_no_id"]').val(data) 
+                    },
+                    error: function (xhr, status, error) { 
+                        console.info(xhr.responseText);
                     }
                 });
             }
 
             $('select.shs[name=app_no_sem]').on('change', function(){ 
                 get_latest_shs_app_no_id(appYear = $('input.shs[name="app_no_year"]').val(),  appSem = $(this).val() );
+                
+                var sem = ($(this).val() == 1) ? "1st" : "2nd"; 
+                $('select.shs[name=semester]').val(sem)
+
             })
 
             // Tippy
@@ -1220,8 +1227,8 @@
             // Crop Image
             $("#crop_shs").click(function(e){
                 canvas = cropper.getCroppedCanvas({ 
-                    width: 96,
-                    height: 96,
+                    width: 200,
+                    height: 200,
                 });
 
                 canvas.toBlob(function(blob) {
@@ -1296,7 +1303,8 @@
  
 
                             // display latest shs app no id
-                            $('select.shs[name="app_no_sem"]').val(data.appnosem) 
+                            $('select.shs[name="app_no_sem"]').val(data.appnosem)  
+                            
                             get_latest_shs_app_no_id();
                         }else{  
                             Swal.fire({
@@ -1456,12 +1464,19 @@
                     dataType: "json",
                     success : function(data){
                         $('input.college[name="app_no_id"]').val(data) 
+                    },
+                    error: function (xhr, status, error) { 
+                        console.info(xhr.responseText);
                     }
                 });
             }
 
             $('select.college[name=app_no_sem]').on('change', function(){ 
                 get_latest_college_app_no_id(appYear = $('input.college[name="app_no_year"]').val(),  appSem = $(this).val() );
+
+                var sem = ($(this).val() == 1) ? "1st" : "2nd"; 
+                $('select.college[name=semester]').val(sem)
+                
             })
             
             // Tippy
@@ -1515,8 +1530,8 @@
             // Crop Image
             $("#crop_college").click(function(){
                 canvas = cropper.getCroppedCanvas({ 
-                    width : 96,
-                    height: 96,
+                    width : 200,
+                    height: 200,
                 });
 
                 canvas.toBlob(function(blob) {
@@ -1744,6 +1759,9 @@
 
             $('select.tvet[name=app_no_sem]').on('change', function(){ 
                 get_latest_tvet_app_no_id(appYear = $('input.tvet[name="app_no_year"]').val(),  appSem = $(this).val() );
+                
+                var sem = ($(this).val() == 1) ? "1st" : "2nd"; 
+                $('select.tvet[name=semester]').val(sem)
             })
 
   
@@ -1790,8 +1808,8 @@
             // Crop Image 
             $("#crop_tvet").click(function(){
                 canvas = cropper.getCroppedCanvas({ 
-                    width : 96,
-                    height: 96,
+                    width : 200,
+                    height: 200,
                 });
 
                 canvas.toBlob(function(blob) {
