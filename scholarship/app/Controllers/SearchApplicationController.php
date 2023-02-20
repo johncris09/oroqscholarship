@@ -18,14 +18,12 @@ class SearchApplicationController extends BaseController
     public function index()
     { 
         $search = '';
-        if(isset($_GET['search'])){
-            $str = str_replace(array("\r", "\n", "\t"), '', $_GET['search']);
-            $search = preg_replace('/\s+/', '', $str);  
+        if(isset($_GET['search'])){ 
+            $search =  trim($_GET['search']);
         }
-        $data['result'] = $this->search_model->search($search); 
-        $data['for'] = $search; 
-
-        $data["page_title"]     = "Search Result"; 
+        $data['result']     = $this->search_model->search($search); 
+        $data['for']        = $search;  
+        $data["page_title"] = "Search Result"; 
         return view('admin/search_result', $data);
     }
 
