@@ -128,8 +128,7 @@ class TvetModel extends Model
     {
         $query = $this->builder
             ->select('ID, colSY, colAppNoYear, colAppNoSem, colAppNoID, colAppStat, colFirstName, colMI, colLastName, colSuffix, colAddress, colCourse, colSchool, colYearLevel, ')
-            ->orWhere('colAppStat', 'Approved')
-            ->orWhere('colAppStat', 'Additional Approved')
+            ->Where('(colAppStat = "Approved" or colAppStat = "Additional Approved")')
             ->where('colManager', 'Active')
             ->where($data)
             ->orderBy('colAppNoID', 'asc')

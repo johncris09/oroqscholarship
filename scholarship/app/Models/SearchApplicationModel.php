@@ -44,22 +44,28 @@ class SearchApplicationModel extends Model
     {
         $builder = $this->db->table('table_scholarregistration');
         $builder->select('
-            table_scholarregistration.id, 
-            table_scholarregistration.AppLastName, 
-            table_scholarregistration.AppFirstName,
-            table_scholarregistration.AppMidIn,
-            table_scholarregistration.AppSuffix, 
-            table_scholarregistration.AppAvailment, 
-            table_scholarregistration.AppSY, 
-            table_scholarregistration.AppYear, 
-            table_scholarregistration.AppAddress, 
-            table_scholarregistration.AppSem, 
+            table_scholarregistration.id as id, 
+            table_scholarregistration.AppLastName as lastname, 
+            table_scholarregistration.AppFirstName as firstname,
+            table_scholarregistration.AppMidIn as middlename,
+            table_scholarregistration.AppSuffix as suffix, 
+            table_scholarregistration.AppAvailment as availment, 
+            table_scholarregistration.AppSY as sy, 
+            table_scholarregistration.AppYear as yearlevel, 
+            table_scholarregistration.AppAddress as address, 
+            table_scholarregistration.AppSem as sem, 
+            table_scholarregistration.AppStatus as status, 
             "senior high" AS source 
         '); 
         $builder->like("table_scholarregistration.AppFirstName ", $data, "both"); 
         $builder->orLike("table_scholarregistration.AppLastName ", $data, "both"); 
-        $builder->orLike("table_scholarregistration.AppMidIn ", $data, "both"); 
-        $builder->orLike("table_scholarregistration.AppSuffix ", $data, "both"); 
+        $builder->orLike("table_scholarregistration.AppMidIn", $data, "both"); 
+        $builder->orLike("table_scholarregistration.AppSuffix", $data, "both"); 
+        $builder->orLike("table_scholarregistration.AppSuffix", $data, "both"); 
+        $builder->orLike("CONCAT(table_scholarregistration.AppFirstName, ' ', table_scholarregistration.AppLastName)", $data, "both"); 
+        $builder->orLike("CONCAT(table_scholarregistration.AppLastName, ' ', table_scholarregistration.AppFirstName)", $data, "both"); 
+
+        
         
         $builder->union(
             $this->db
@@ -75,11 +81,14 @@ class SearchApplicationModel extends Model
                     table_collegeapp.colYearLevel,  
                     table_collegeapp.colAddress, 
                     table_collegeapp.colSem, 
+                    table_collegeapp.colAppStat, 
                     "college" AS source 
                 ')
                 ->like("table_collegeapp.colFirstName", $data, "both")
                 ->orLike("table_collegeapp.colLastName", $data, "both")
                 ->orLike("table_collegeapp.colMI", $data, "both") 
+                ->orLike("CONCAT(table_collegeapp.colLastName, ' ', table_collegeapp.colLastName)", $data, "both")
+                ->orLike("CONCAT(table_collegeapp.colLastName, ' ', table_collegeapp.colLastName)", $data, "both")
         );
         
         $builder->union(
@@ -96,12 +105,15 @@ class SearchApplicationModel extends Model
                     table_tvet.colYearLevel, 
                     table_tvet.colAddress, 
                     table_tvet.colSem, 
+                    table_tvet.colAppStat, 
                     "tvet" AS source 
                 ')
                 ->like("table_tvet.colFirstName", $data, "both")
                 ->orLike("table_tvet.colLastName", $data, "both")
                 ->orLike("table_tvet.colMI", $data, "both")
                 ->orLike("table_tvet.colSuffix", $data, "both") 
+                ->orLike("CONCAT(table_tvet.colLastName, ' ', table_tvet.colLastName)", $data, "both")
+                ->orLike("CONCAT(table_tvet.colLastName, ' ', table_tvet.colLastName)", $data, "both")
         );
  
         // Get the result

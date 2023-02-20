@@ -139,11 +139,10 @@ class SeniorHighModel extends Model
     {
         $query = $this->builder
             ->select('ID, AppSY, AppNoYear, AppNoSem, AppNoID, AppStatus, AppFirstName, AppMidIn, AppLastName, AppSuffix, AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ')
-            ->orWhere('AppStatus', 'Approved')
-            ->orWhere('AppStatus', 'Additional Approved')
+            ->Where('(AppStatus = "Approved" or AppStatus = "Additional Approved")')
             ->where('AppManager', 'Active')
             ->where($data)
-            ->orderBy('ID', 'asc')
+            ->orderBy('ID', 'asc')  
             ->get()
             ->getResult();
         return $query;
