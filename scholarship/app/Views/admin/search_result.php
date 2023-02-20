@@ -8,7 +8,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header bg-white"> 
-                    <h4 class="header-title"><?= $page_title; ?> for '<?php echo $for; ?>'</h4>  
+                    <h4 class="header-title"><?= $page_title; ?> for <i>'<?php echo $for; ?>'</i></h4>  
                 </div>
                 <div class="card-body"> 
                     <table id="search-result-table" class="table table-striped dt-responsive nowrap w-100">
@@ -20,6 +20,7 @@
                                 <th>Availment</th>
                                 <th>Semester</th>
                                 <th>School Year</th>
+                                <th>Status</th> 
                                 <th>Source</th> 
                             </tr>
                         </thead> 
@@ -28,13 +29,14 @@
                             if(!empty($result)){
                                
                                 foreach($result as $row){
-                                    $name       = ucwords( $row->AppLastName. ", "  . $row->AppFirstName . " "  . $row->AppMidIn . " " . " "  . $row->AppSuffix); 
+                                    $name       = ucwords( $row->lastname. ", "  . $row->firstname . " "  . $row->middlename . " " . " "  . $row->suffix); 
                                     $source     = strtoupper($row->source);
-                                    $availment  = $row->AppAvailment;
-                                    $sy         = $row->AppSY;
-                                    $address    = ucwords($row->AppAddress);
-                                    $year_level = $row->AppYear;
-                                    $sem        = $row->AppSem;
+                                    $availment  = $row->availment;
+                                    $sy         = $row->sy;
+                                    $address    = ucwords($row->address);
+                                    $year_level = $row->yearlevel;
+                                    $sem        = $row->sem;
+                                    $status     = $row->status;
                             ?>
                                     <tr>
                                         <td><?php echo $name;  ?></td>
@@ -43,6 +45,7 @@
                                         <td><?php echo $availment;  ?></td> 
                                         <td><?php echo $sem;  ?></td>
                                         <td><?php echo $sy;  ?></td> 
+                                        <td><?php echo $status ?></td>
                                         <td><?php echo $source ?></td>
                                     </tr>
                             <?php 
@@ -50,7 +53,7 @@
                             }else{
                             ?>
                                 <tr>
-                                    <td colspan="7">No result</td>
+                                    <td colspan="8" class="text-center">No result</td>
                                 </tr>
                             <?php
                             }
