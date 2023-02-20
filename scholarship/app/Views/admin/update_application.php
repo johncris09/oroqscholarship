@@ -1255,8 +1255,8 @@
 
             $("#crop_shs").click(function(e){
                 canvas = cropper.getCroppedCanvas({ 
-                    width : 96,
-                    height: 96,
+                    width : 200,
+                    height: 200,
                 });
                 canvas.toBlob(function(blob) {
                     var reader = new FileReader(); 
@@ -1532,8 +1532,8 @@
             // Crop Image
             $("#crop_college").click(function(){
                 canvas = cropper.getCroppedCanvas({ 
-                    width : 96,
-                    height: 96,
+                    width : 200,
+                    height: 200,
                 });
 
                 canvas.toBlob(function(blob) {
@@ -1801,8 +1801,8 @@
  
             $("#crop_tvet").click(function(){
                 canvas = cropper.getCroppedCanvas({ 
-                    width : 96,
-                    height: 96,
+                    width : 200,
+                    height: 200,
                 });
 
                 canvas.toBlob(function(blob) {
