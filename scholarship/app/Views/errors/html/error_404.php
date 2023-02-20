@@ -1,84 +1,71 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>404 Page Not Found</title>
+    <head>
+        <meta charset="utf-8" />
+        <title>404 Page Not Found</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="<?= base_url('/public/img/favicon.ico') ?>">
 
-    <style>
-        div.logo {
-            height: 200px;
-            width: 155px;
-            display: inline-block;
-            opacity: 0.08;
-            position: absolute;
-            top: 2rem;
-            left: 50%;
-            margin-left: -73px;
-        }
-        body {
-            height: 100%;
-            background: #fafafa;
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            color: #777;
-            font-weight: 300;
-        }
-        h1 {
-            font-weight: lighter;
-            letter-spacing: normal;
-            font-size: 3rem;
-            margin-top: 0;
-            margin-bottom: 0;
-            color: #222;
-        }
-        .wrap {
-            max-width: 1024px;
-            margin: 5rem auto;
-            padding: 2rem;
-            background: #fff;
-            text-align: center;
-            border: 1px solid #efefef;
-            border-radius: 0.5rem;
-            position: relative;
-        }
-        pre {
-            white-space: normal;
-            margin-top: 1.5rem;
-        }
-        code {
-            background: #fafafa;
-            border: 1px solid #efefef;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            display: block;
-        }
-        p {
-            margin-top: 1.5rem;
-        }
-        .footer {
-            margin-top: 2rem;
-            border-top: 1px solid #efefef;
-            padding: 1em 2em 0 2em;
-            font-size: 85%;
-            color: #999;
-        }
-        a:active,
-        a:link,
-        a:visited {
-            color: #dd4814;
-        }
-    </style>
-</head>
-<body>
-    <div class="wrap">
-        <h1>404 - File Not Found</h1>
+        <!-- App css --> 
+        <link rel="stylesheet" href="<?= base_url('public/css/bootstrap.min.css') ?>">
+        <link rel="stylesheet" href="<?= base_url('public/css/app.min.css') ?>">
+		<!-- icons --> 
+        <!-- <link rel="stylesheet" href="<?= base_url('public/css/icons.min.css') ?>"> -->
+         
+    </head>
 
-        <p>
-            <?php if (ENVIRONMENT !== 'production') : ?>
-                <?= nl2br(esc($message)) ?>
-            <?php else : ?>
-                Sorry! Cannot seem to find the page you were looking for.
-            <?php endif ?>
-        </p>
-    </div>
-</body>
+    <body class="loading authentication-bg">
+
+        <div class="account-pages mt-5 mb-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6 col-xl-4">
+                        <div class="card shadow-none">
+
+                            <div class="card-body p-3">
+                                
+                                <div class="auth-logo">
+                                    <a href="index.html" class="logo logo-dark text-center">
+                                        <span class="logo-lg">
+                                            <img src="assets/images/logo-dark.png" alt="" height="22">
+                                        </span>
+                                    </a>
+                
+                                    <a href="<?php echo base_url(); ?>" class="logo logo-light text-center">
+                                        <span class="logo-lg">
+                                            <img src="assets/images/logo-light.png" alt="" height="22">
+                                        </span>
+                                    </a>
+                                </div>
+
+                                <div class="text-center mt-4">
+                                    <h1 class="">Oroquieta City Scholarship Program</h1>
+                                    <img src="<?=base_url()?>/public/img/logo-sm.png"  height="60">
+                                    <h4 class="  mt-4">404 - File Not Found</h4>
+                                    <p class="text-muted">We're improving the system and will return soon.</a></p>
+
+                                    <a href="<?php echo base_url(); ?>" class="btn btn-primary waves-effect waves-light mt-3">Return Home</a>
+                                </div>
+
+                            </div> <!-- end card-body -->
+                        </div>
+                        <!-- end card -->
+
+                    </div> <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end container -->
+        </div>
+        <!-- end page --> 
+
+        <!-- Vendor js -->
+        <script src="<?= base_url('public/js/vendor.min.js') ?>"></script> s
+
+        <!-- App js--> 
+        <script src="<?= base_url('public/js/app.min.js') ?>"></script>
+        
+    </body>
 </html>
