@@ -793,7 +793,7 @@
                 }).then(function(e) {  
                     if(e.value){ 
                         $.ajax({
-                            url     : '/pending/' + method,  
+                            url     : '<?php echo base_url("/pending") ?>/' + method,  
                             method  : "post",
                             dataType: "json", 
                             data    : {
@@ -801,6 +801,7 @@
                                 status : "Approved",
                             },  
                             success : function (data) { 
+                                
                                 if(data.response){ 
                                     Swal.fire({
                                         title: "Good job!",
@@ -847,7 +848,7 @@
                 }).then(function(e) {  
                     if(e.value){ 
                         $.ajax({
-                            url     : '/pending/' + method,  
+                            url     : '<?php echo base_url("/pending") ?>/' + method,
                             method  : "post",
                             dataType: "json", 
                             data    : {
@@ -855,7 +856,7 @@
                                 status: "Disapproved",
                             },  
                             success : function (data) {  
-                                console.info(data)
+                                
                                 if(data.response){ 
                                     Swal.fire({
                                         title: "Good job!",
