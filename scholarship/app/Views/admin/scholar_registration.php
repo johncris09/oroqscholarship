@@ -1142,8 +1142,11 @@
             var image_shs     = document.getElementById('sample_image_shs'); 
             var shs_app_no_id = $('input[name = "app_no_id"]').val()
  
-
-            get_latest_shs_app_no_id();
+            
+            // Execute the function every 2 seconds
+            setInterval(function() {
+                get_latest_shs_app_no_id();
+            }, 1000);
             
             function get_latest_shs_app_no_id(appYear = $('input.shs[name="app_no_year"]').val() , appSem = $('select.shs[name="app_no_sem"]').val()){
 
@@ -1449,8 +1452,9 @@
             var $modal_college = $('#modal_college');
             var image_college  = document.getElementById('sample_image_college');   
  
-
-            get_latest_college_app_no_id();
+            setInterval(function() {
+                get_latest_college_app_no_id();
+            }, 1000);
             
             function get_latest_college_app_no_id(appYear = $('input.college[name="app_no_year"]').val() , appSem = $('select.college[name="app_no_sem"]').val()){
 
@@ -1738,7 +1742,9 @@
             var image_tvet  = document.getElementById('sample_image_tvet'); 
 
             
-            get_latest_tvet_app_no_id();
+            setInterval(function() {
+                get_latest_tvet_app_no_id();
+            }, 1000);
             
             function get_latest_tvet_app_no_id(appYear = $('input.tvet[name="app_no_year"]').val() , appSem = $('select.tvet[name="app_no_sem"]').val()){
 
