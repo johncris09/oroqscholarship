@@ -18,7 +18,7 @@ class CourseController extends BaseController
     public function get_all()
     {
         $course       = new CourseModel();
-        $data['data'] = $course->findAll();
+        $data['data'] = $course->orderBy('colCourse', 'asc')->findAll(); 
         echo Json_encode($data);
     }
 

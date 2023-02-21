@@ -119,7 +119,7 @@
 
   <div class="page-header hidden" style="text-align: center"> 
       <div class="UpperTitle">
-          <img src="<?=base_url()?>/img/logo-sm.png" width="100" height="100" alt=""> 
+          <img src="<?=base_url()?>/public/img/logo-sm.png" width="100" height="100" alt=""> 
           <div class="header"> 
             <h2>Republic of the Philippines</h2>
             <h3>Office of the City Mayor</h3> 

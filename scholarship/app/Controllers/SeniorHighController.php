@@ -147,7 +147,7 @@ class SeniorHighController extends BaseController
                 'AppCivilStat'  => $this->request->getPost('civil_status'),
                 'AppGender'     => $this->request->getPost('gender'),
                 'AppContact'    => trim($this->request->getPost('contact_no')),
-                'AppCTC'        => trim($this->request->getPost('contact_no')),
+                'AppCTC'        => trim($this->request->getPost('ctc_no')),
                 'AppEmailAdd'   => trim($this->request->getPost('email')),
                 'AppAvailment'  => trim($this->request->getPost('availment')),
                 'AppSchool'     => $this->request->getPost('school'),
@@ -212,7 +212,20 @@ class SeniorHighController extends BaseController
         $data["semester"]         = "";
         $data["status"]           = "";
         $data["scholarship_type"] = "Senior High School";
-        $data["school_year"] = "";
+        $data["school_year"]      = ""; 
+        
+        $query['AppSchool']       = ""; 
+        $query['AppSem']          = ""; 
+        $query['AppNoSem']        = "";  
+        $query['AppSY']           = "";
+        $query['AppStatus']       = "";
+        $query['AppAvailment']    = "";
+        $query['AppGender']       = "";
+        $query['AppYear']         = "";
+        $query['AppAddress']      = "";
+        $query['app_no_year']     = "";
+        $range['AppNoIDFrom']     = ""; 
+        $range['AppNoIDTo']       = "";
 
         if (!empty($_GET['school'])) {
             $query['AppSchool'] =  $_GET['school'];
@@ -247,6 +260,9 @@ class SeniorHighController extends BaseController
         }
         if (!empty($_GET['address'])) {
             $query['AppAddress'] =  $_GET['address'];
+        }
+        if (!empty($_GET['app_no_year'])) {
+            $query['app_no_year'] =  $_GET['app_no_year'];
         }
         if (!empty($_GET['from'])) {
             $range['AppNoIDFrom'] =  $_GET['from'];
@@ -268,8 +284,21 @@ class SeniorHighController extends BaseController
         $data["page_title"]       = "Generated Report";
         $data["semester"]         = "";
         $data["status"]           = "";
-        $data["scholarship_type"] = "Senior High School";
-        $data["school_year"]      = "";
+        $data["scholarship_type"] = "Senior    High School";
+        $data["school_year"]      = ""; 
+        
+        $query['AppSchool']       = ""; 
+        $query['AppSem']          = ""; 
+        $query['AppNoSem']        = "";  
+        $query['AppSY']           = "";
+        $query['AppStatus']       = "";
+        $query['AppAvailment']    = "";
+        $query['AppGender']       = "";
+        $query['AppYear']         = "";
+        $query['AppAddress']      = "";
+        $query['app_no_year']     = "";
+        $range['AppNoIDFrom']     = ""; 
+        $range['AppNoIDTo']       = "";
 
         if (!empty($_GET['school'])) {
             $query['AppSchool'] =  $_GET['school'];
@@ -305,12 +334,16 @@ class SeniorHighController extends BaseController
         if (!empty($_GET['address'])) {
             $query['AppAddress'] =  $_GET['address'];
         }
+        if (!empty($_GET['app_no_year'])) {
+            $query['app_no_year'] =  $_GET['app_no_year'];
+        }
         if (!empty($_GET['from'])) {
             $range['AppNoIDFrom'] =  $_GET['from'];
         }
         if (!empty($_GET['to'])) {
             $range['AppNoIDTo'] =  $_GET['to'];
         }
+
 
         $data["result"] = $this->senior_high->get_report($query, $range);
         return view('admin/print_preview', $data);
@@ -379,5 +412,11 @@ class SeniorHighController extends BaseController
         } else {
             echo "No record Found";
         }
+    }
+
+    public function bulk_disapproved()
+    {  
+        $res = $this->senior_high->bulk_disapproved($_POST['applicant_id']);
+        echo Json_encode($res);
     }
 }

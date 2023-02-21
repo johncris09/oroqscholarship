@@ -172,6 +172,7 @@
 
                             table.ajax.reload()
                             $("#add-new-school-form")[0].reset()
+                            $('#add-new-school-modal').modal('hide')
                         }else{  
                             Swal.fire({
                                 title: "Insert Error!",
@@ -227,6 +228,7 @@
                                 icon:"success"
                             })
                             table.ajax.reload() 
+                            $('#edit-school-modal').modal('hide')
                         }else{ 
                             Swal.fire({
                                 title:"Update Error!",
@@ -259,34 +261,68 @@
                     confirmButtonClass: "btn btn-success mt-2",
                     cancelButtonClass : "btn btn-danger ms-2 mt-2",
                     buttonsStyling    : !1
-                }).then(function(e) { 
-                    if(e.value){ 
-                        $.ajax({
-                            url     : 'school/delete/' + id,
-                            method  : "post",  
-                            dataType: "json", 
-                            success : function (data) {  
-                                if(data.response){ 
-                                    Swal.fire({
-                                        title: "Good job!",
-                                        text : data.message,
-                                        icon : "success"
-                                    })
-                                    table.ajax.reload() 
-                                }else{ 
-                                    Swal.fire({
-                                        title: "Update Error!",
-                                        text : data.message,
-                                        icon : "error"
-                                    }) 
-                                }
+                }).then(function(e) {  
+                    if(e.isConfirmed){
+                        Swal.fire({
+                            title: 'Please Enter your password',
+                            input: 'password',
+                            inputAttributes: {
+                                autocapitalize: 'off'
                             },
-                            error   : function (xhr, status, error) { 
-                                console.info(xhr.responseText);
-                            }
-                        });  
-                     
-                    }
+                            showCancelButton: true,
+                            confirmButtonText: 'Look up',
+                            showLoaderOnConfirm: true,   
+                            }).then((result) => { 
+                                if (result.isConfirmed) {
+                                    $.ajax({
+                                        url   : "<?php echo base_url('user/checkpassword') ?>",
+                                        method: "POST",  
+                                        data  : {
+                                            password: result.value
+                                        },           
+                                        dataType: "json",
+                                        success: function(data){  
+                                            if(data.response){ 
+                                                $.ajax({
+                                                    url     : 'school/delete/' + id,
+                                                    method  : "post",  
+                                                    dataType: "json", 
+                                                    success : function (data) {  
+                                                        if(data.response){ 
+                                                            Swal.fire({
+                                                                title: "Good job!",
+                                                                text : data.message,
+                                                                icon : "success"
+                                                            })
+                                                            table.ajax.reload() 
+                                                        }else{ 
+                                                            Swal.fire({
+                                                                title: "Update Error!",
+                                                                text : data.message,
+                                                                icon : "error"
+                                                            }) 
+                                                        }
+                                                    },
+                                                    error   : function (xhr, status, error) { 
+                                                        console.info(xhr.responseText);
+                                                    }
+                                                });   
+                                            }else{
+                                                Swal.fire({
+                                                    title            : "Invalid Credential",  
+                                                    icon             : "error",   
+                                                    confirmButtonText: 'Ok',  
+                                                })   
+                                            } 
+                                        },
+                                        error: function (xhr, status, error) { 
+                                            console.info(xhr.responseText);
+                                        }
+                                    }); 
+                                }
+                        }) 
+                    } 
+
                 }) 
             });  
              

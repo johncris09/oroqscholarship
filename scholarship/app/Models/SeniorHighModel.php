@@ -94,7 +94,7 @@ class SeniorHighModel extends Model
         $builder = $this->db
             ->table($this->table)
             ->where($data)
-            ->where('AppStatus', 'approved');
+            ->Where('(AppStatus = "Approved" or AppStatus = "Additional Approved")');
         $query = $builder->countAllResults();
         return $query;
     }
@@ -146,25 +146,48 @@ class SeniorHighModel extends Model
             ->get()
             ->getResult();
         return $query;
-    }
-
-
+    } 
+    
     public function get_report($data, $range)
-    {
-        $query = $this->builder
-            ->select('ID, AppNoYear, AppNoSem, AppNoID, AppAvailment , AppStatus, AppFirstName, AppMidIn, AppLastName, AppSuffix, replace(AppContact," ", "")  as AppContact  , AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ')
-            ->Where('(AppStatus = "Approved" or AppStatus = "Additional Approved")')
-            ->where($data)
-            ->where(isset($range['AppNoIDFrom']) ? "AppNoID >=  " . $range['AppNoIDFrom'] : "AppManager = 'Active'")
-            ->where(isset($range['AppNoIDTo']) ? "AppNoID <=  " . $range['AppNoIDTo'] :  "AppManager = 'Active'")
-            ->where('AppManager', 'Active')
-            ->orderBy('AppLastName, AppFirstName,AppMidIn', 'asc')
-            // ->getCompiledSelect();
-            ->get()
-            ->getResult();
-        return $query;
-    }
-
+    {  
+         
+        if($range['AppNoIDFrom'] == "" ||  $range['AppNoIDTo'] == "" ){
+            $query_string =  ' 
+                SELECT * 
+                FROM table_scholarregistration 
+                WHERE AppSchool LIKE "'.$data['AppSchool'].'%" 
+                AND AppStatus LIKE "'.$data['AppStatus'].'%"
+                AND AppSY LIKE "'.$data['AppSY'].'%"  
+                AND AppNoSem LIKE "'.$data['AppNoSem'].'%"  
+                AND AppAvailment LIKE "'.$data['AppAvailment'].'%"
+                AND AppGender LIKE "'.$data['AppGender'].'%"
+                AND AppYear LIKE "'.$data['AppYear'].'%"
+                AND AppAddress LIKE "'.$data['AppAddress'].'%" 
+                AND AppManager = "Active"
+                ORDER BY AppLastName, AppFirstName and AppMidIn
+            '; 
+        }else{
+            $query_string =  ' 
+                SELECT * 
+                FROM table_scholarregistration 
+                WHERE AppNoID BETWEEN "'.$range['AppNoIDFrom'].'" 
+                AND "'.$range['AppNoIDTo'].'" 
+                HAVING AppNoYear LIKE "'.$data['app_no_year'].'%"  
+                AND AppNoSem LIKE "'.$data['AppNoSem'].'%" 
+                AND AppSchool LIKE "'.$data['AppSchool'].'%" 
+                AND AppSY LIKE "'.$data['AppSY'].'%"  
+                AND AppAvailment LIKE "'.$data['AppAvailment'].'%"
+                AND AppGender LIKE "'.$data['AppGender'].'%"
+                AND AppYear LIKE "'.$data['AppYear'].'%"
+                AND AppAddress LIKE "'.$data['AppAddress'].'%" 
+                AND AppStatus LIKE "'.$data['AppStatus'].'%"
+                AND AppManager="Active"
+                ORDER BY AppNoID
+            ';  
+        }   
+        $query = $this->db->query($query_string); 
+        return $query->getResult(); 
+    } 
 
 
     public function get_payroll($data, $range)
@@ -267,4 +290,16 @@ class SeniorHighModel extends Model
             ->getResult();
         return $query;
     }
+
+    
+    public function bulk_disapproved($data)
+    { 
+        $query = $this->db
+            ->table($this->table)
+            ->set('appstatus', 'Disapproved')
+            ->whereIn('id', $data)
+            ->update();
+        return $query;
+    }
+
 }

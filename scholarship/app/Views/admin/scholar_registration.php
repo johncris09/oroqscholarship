@@ -277,9 +277,15 @@
                                     <div class="col">   
                                         <div style="text-align:left;">
                                             <label for="school" class="form-label">School <?= $required_field; ?></label> 
-                                            <span style="float:right;">
-                                                <button type="button" id="add-school-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm my-1" data-bs-toggle="modal" data-bs-target="#add-new-shs-school-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New School </button>
-                                            </span>
+                                            <?php
+                                                if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                                            ?>
+                                                    <span style="float:right;">
+                                                        <button type="button" id="add-school-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-xs my-1" data-bs-toggle="modal" data-bs-target="#add-new-shs-school-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New School </button>
+                                                    </span> 
+                                            <?php 
+                                                }
+                                            ?>
                                         </div> 
                                         <select class="form-control" id="school" name="school" required>
                                             <option value="">Select</option> 
@@ -319,9 +325,15 @@
                                     <div class="col"> 
                                         <div style="text-align:left;">
                                             <label for="strand" class="form-label">Strand <?= $required_field; ?></label>  
-                                            <span style="float:right;">
-                                                <button type="button" id="add-strand-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm my-1" data-bs-toggle="modal" data-bs-target="#add-new-shs-strand-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New Strand</button>
-                                            </span> 
+                                            <?php
+                                                if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                                            ?>
+                                                    <span style="float:right;">
+                                                        <button type="button" id="add-strand-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-xs my-1" data-bs-toggle="modal" data-bs-target="#add-new-shs-strand-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New Strand</button>
+                                                    </span>
+                                            <?php 
+                                                }
+                                            ?> 
                                         </div> 
                                         <select class="form-control"  name="strand" required>
                                             <option value="">Select</option> 
@@ -594,10 +606,16 @@
                                 <div class="row g-3" >
                                     <div class="col">  
                                         <div style="text-align:left;">
-                                            <label for="" class="form-label">School <?= $required_field; ?></label> 
-                                            <span style="float:right;">
-                                                <button type="button" id="add-school-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#add-new-college-school-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New School</button>
-                                            </span>
+                                            <label for="" class="form-label">School <?= $required_field; ?></label>
+                                            <?php
+                                                if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                                            ?> 
+                                                    <span style="float:right;">
+                                                        <button type="button" id="add-school-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#add-new-college-school-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New School</button>
+                                                    </span>
+                                            <?php 
+                                                }
+                                            ?> 
                                         </div> 
                                         <select class="form-control" name="school" required>
                                             <option value="">Select</option> 
@@ -636,9 +654,15 @@
                                     <div class="col">  
                                         <div style="text-align:left;">
                                             <label for="" class="form-label">Course <?= $required_field; ?></label>
-                                            <span style="float:right;">
-                                                <button type="button" id="add-course-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#add-new-college-course-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New Course</button> 
-                                            </span>
+                                            <?php
+                                                if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                                            ?>  
+                                                    <span style="float:right;">
+                                                        <button type="button" id="add-course-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#add-new-college-course-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New Course</button> 
+                                                    </span>
+                                            <?php 
+                                                }
+                                            ?> 
                                         </div> 
                                         <select class="form-control" name="course" required>
                                             <option value="">Select</option> 
@@ -915,9 +939,15 @@
                                     <div class="col">
                                         <div style="text-align:left;">
                                             <label for="" class="form-label">School <?= $required_field; ?></label>
-                                            <span style="float:right;">
-                                                <button type="button" id="add-course-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm my-1" data-bs-toggle="modal" data-bs-target="#add-new-tvet-school-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New School</button>  
-                                            </span>
+                                            <?php
+                                                if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                                            ?>   
+                                                    <span style="float:right;">
+                                                        <button type="button" id="add-course-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-xs my-1" data-bs-toggle="modal" data-bs-target="#add-new-tvet-school-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New School</button>  
+                                                    </span>
+                                            <?php 
+                                                }
+                                            ?> 
                                         </div> 
                                         <select class="form-control" name="school" required>
                                             <option value="">Select</option> 
@@ -956,9 +986,15 @@
                                     <div class="col">
                                         <div style="text-align:left;">
                                             <label for="" class="form-label">Course <?= $required_field; ?></label>
-                                            <span style="float:right;">
-                                                <button type="button" id="add-course-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#add-new-tvet-course-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New Course </button> 
-                                            </span>
+                                            <?php
+                                                if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                                            ?>   
+                                                    <span style="float:right;">
+                                                        <button type="button" id="add-course-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#add-new-tvet-course-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New Course </button> 
+                                                    </span>
+                                            <?php 
+                                                }
+                                            ?> 
                                         </div> 
                                         <select class="form-control" name="course" required>
                                             <option value="">Select</option> 

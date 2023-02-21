@@ -137,7 +137,7 @@
                                         </div>
                                     </div> 
                                     <hr>
-                                    <div class="col-9">
+                                    <div class="col-9"> 
                                         <div class="row mt-3">
                                             <div class="col-4">
                                                 <label for="lastname" class="form-label">Last Name <?= $required_field; ?></label>
@@ -215,7 +215,7 @@
                                             </div>
                                             <div class="col-6">
                                                 <label for="ctc_no" class="form-label">CTC # <?= $required_field; ?></label>
-                                                <input type="text" value="<?= $profile['AppCTC'] ?>" class="form-control"   name="ctc_no" required>
+                                                <input type="text" value="<?= $profile['AppCTC'] ?>" class="form-control" name="ctc_no" required>
                                             </div> 
                                         </div> 
                                         <div class="row" >
@@ -277,10 +277,17 @@
                                 <div class="row g-3" >
                                     <div class="col"> 
                                         <div style="text-align:left;">
-                                            <label for="school" class="form-label">School <?= $required_field; ?></label> 
-                                            <span style="float:right;">
-                                                <button type="button" id="add-school-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm my-1" data-bs-toggle="modal" data-bs-target="#add-new-shs-school-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New School </button>
-                                            </span>
+                                            <label for="school" class="form-label">School <?= $required_field; ?></label>  
+                                            <?php
+                                                if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                                            ?>   
+                                                    <span style="float:right;">
+                                                        <button type="button" id="add-school-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm my-1" data-bs-toggle="modal" data-bs-target="#add-new-shs-school-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New School </button>
+                                                    </span>
+                                            <?php 
+                                                }
+                                            ?>
+                                            
                                         </div> 
                                         <select class="form-control" id="school" name="school" required>
                                             <option value="">Select</option> 
@@ -320,9 +327,17 @@
                                     <div class="col">
                                         <div style="text-align:left;">
                                             <label for="strand" class="form-label">Strand <?= $required_field; ?></label>  
-                                            <span style="float:right;">
-                                                <button type="button" id="add-strand-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm my-1" data-bs-toggle="modal" data-bs-target="#add-new-shs-strand-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New Strand</button>
-                                            </span> 
+                                            
+                                            <?php
+                                                if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                                            ?>    
+                                                    <span style="float:right;">
+                                                        <button type="button" id="add-strand-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm my-1" data-bs-toggle="modal" data-bs-target="#add-new-shs-strand-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New Strand</button>
+                                                    </span> 
+                                            <?php 
+                                                }
+                                            ?>
+
                                         </div> 
                                         <select class="form-control"  name="strand" required>
                                             <option value="">Select</option> 
@@ -624,9 +639,16 @@
                                     <div class="col">
                                         <div style="text-align:left;">
                                             <label for="" class="form-label">School <?= $required_field; ?></label> 
-                                            <span style="float:right;">
-                                                <button type="button" id="add-school-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#add-new-college-school-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New School</button>
-                                            </span>
+                                            <?php
+                                                if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                                            ?>     
+                                                    <span style="float:right;">
+                                                        <button type="button" id="add-school-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#add-new-college-school-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New School</button>
+                                                    </span>
+                                            <?php 
+                                                }
+                                            ?>
+                                            
                                         </div> 
                                         <select class="form-control" name="school" required>
                                             <option value="">Select</option> 
@@ -665,10 +687,16 @@
                                     </div>
                                     <div class="col">  
                                         <div style="text-align:left;">
-                                            <label for="" class="form-label">Course <?= $required_field; ?></label>
-                                            <span style="float:right;">
-                                                <button type="button" id="add-course-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#add-new-college-course-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New Course</button> 
-                                            </span>
+                                            <label for="" class="form-label">Course <?= $required_field; ?></label> 
+                                            <?php
+                                                if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                                            ?>     
+                                                    <span style="float:right;">
+                                                        <button type="button" id="add-course-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#add-new-college-course-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New Course</button> 
+                                                    </span>
+                                            <?php 
+                                                }
+                                            ?> 
                                         </div> 
                                         <select class="form-control" name="course" required>
                                             <option value="">Select</option> 
@@ -982,10 +1010,16 @@
                                 <div class="row g-3" >
                                     <div class="col">
                                         <div style="text-align:left;">
-                                            <label for="" class="form-label">School <?= $required_field; ?></label>
-                                            <span style="float:right;">
-                                                <button type="button" id="add-course-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm my-1" data-bs-toggle="modal" data-bs-target="#add-new-tvet-school-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New School</button>  
-                                            </span>
+                                            <label for="" class="form-label">School <?= $required_field; ?></label> 
+                                            <?php
+                                                if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                                            ?>     
+                                                    <span style="float:right;">
+                                                        <button type="button" id="add-course-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm my-1" data-bs-toggle="modal" data-bs-target="#add-new-tvet-school-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New School</button>  
+                                                    </span>
+                                            <?php 
+                                                }
+                                            ?>
                                         </div> 
                                         <select class="form-control" name="school" required>
                                             <option value="">Select</option> 
@@ -1025,9 +1059,15 @@
                                     <div class="col">
                                         <div style="text-align:left;">
                                             <label for="" class="form-label">Course <?= $required_field; ?></label>
-                                            <span style="float:right;">
-                                                <button type="button" id="add-course-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#add-new-tvet-course-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New Course </button> 
-                                            </span>
+                                            <?php
+                                                if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                                            ?>      
+                                                    <span style="float:right;">
+                                                        <button type="button" id="add-course-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#add-new-tvet-course-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New Course </button> 
+                                                    </span>
+                                            <?php 
+                                                }
+                                            ?>
                                         </div>
                                         <select class="form-control" name="course" required>
                                             <option value="">Select</option> 
@@ -1292,7 +1332,7 @@
                 e.preventDefault();
                 var formData = new FormData($("#senior-high-form")[0]);  
                 $.ajax({
-                    url        : '/manage/update_shs',
+                    url        : '<?php echo base_url('manage/update_shs') ?>',
                     method     : "post", 
                     data       : formData,
                     processData: false,
@@ -1440,7 +1480,7 @@
                 }).then(function(e) { 
                     if(e.value){ 
                         $.ajax({ 
-                            url     : '/manage/archived_shs',
+                            url     : '<?php echo base_url('manage/archived_shs') ?>',
                             method  : "post",  
                             dataType: "json", 
                             data    : {
@@ -1453,8 +1493,7 @@
                                         title: "Good job!",
                                         text : data.message,
                                         icon : "success"
-                                    })
-                                    table.ajax.reload() 
+                                    }) 
                                 }else{ 
                                     Swal.fire({
                                         title: "Update Error!",
@@ -1567,8 +1606,8 @@
                 e.preventDefault();    
                 var _this    = $(this)  
                 var formData = new FormData($("#college-form")[0]);  
-                $.ajax({
-                    url        : '/manage/update_college',
+                $.ajax({ 
+                    url        : '<?php echo base_url('manage/update_college') ?>',
                     method     : "post", 
                     data       : formData,
                     processData: false,
@@ -1716,7 +1755,7 @@
                 }).then(function(e) { 
                     if(e.value){ 
                         $.ajax({ 
-                            url     : '/manage/archived_college',
+                            url     : '<?php echo base_url('manage/archived_college') ?>',
                             method  : "post",  
                             dataType: "json", 
                             data    : {
@@ -1729,8 +1768,7 @@
                                         title: "Good job!",
                                         text : data.message,
                                         icon : "success"
-                                    })
-                                    table.ajax.reload() 
+                                    }) 
                                 }else{ 
                                     Swal.fire({
                                         title: "Update Error!",
@@ -1849,7 +1887,7 @@
                 var _this    = $(this) 
                 var formData = new FormData($("#tvet-form")[0]);  
                 $.ajax({
-                    url        : '/manage/update_tvet',
+                    url        : '<?php echo base_url('manage/update_tvet') ?>',
                     method     : "post", 
                     data       : formData,
                     processData: false,
@@ -1897,7 +1935,7 @@
                 }).then(function(e) { 
                     if(e.value){ 
                         $.ajax({ 
-                            url     : '/manage/archived_tvet',
+                            url     : '<?php echo base_url('manage/archived_tvet') ?>',
                             method  : "post",  
                             dataType: "json", 
                             data    : {
@@ -1910,8 +1948,7 @@
                                         title: "Good job!",
                                         text : data.message,
                                         icon : "success"
-                                    })
-                                    table.ajax.reload() 
+                                    }) 
                                 }else{ 
                                     Swal.fire({
                                         title: "Update Error!",

@@ -105,12 +105,12 @@
 
                     <ul class="nav nav-pills navtab-bg nav-justified">
                         <li class="nav-item">
-                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link  active  ">
+                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active   ">
                                 Senior High School
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#college-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link  ">
+                            <a href="#college-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link   ">
                                 College
                             </a>
                         </li>

@@ -24,7 +24,7 @@ class SchoolController extends BaseController
     public function get_all()
     {
         $school       = new SchoolModel();
-        $data['data'] = $school->findAll();
+        $data['data'] = $school->orderBy('SchoolName', 'asc')->findAll();
         echo Json_encode($data);
     }
 

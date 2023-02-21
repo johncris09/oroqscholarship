@@ -151,7 +151,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit Details</h4>
+                    <h4 class="modal-title">Edit Password</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 
@@ -206,9 +206,32 @@
                 },
                 columns    : [ 
                     { data: 'id' },  
-                    { data: 'firstname' },  
-                    { data: 'middlename' }, 
-                    { data: 'lastname' }, 
+                    {
+                        data  : 'firstname',
+                        render: function(data, type, row, meta){  
+                            var first_name  = row.firstname.toLowerCase();  
+                            return  first_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")  
+                        }
+                    }, 
+                    {
+                        data  : 'middlename',
+                        render: function(data, type, row, meta){   
+                            if(row.middlename !== null){
+                                var middlename  = row.middlename.toLowerCase();  
+                                return  middlename.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")  
+                            }else{
+                                return "";
+                            }
+                                
+                        }
+                    },    
+                    {
+                        data  : 'lastname',
+                        render: function(data, type, row, meta){   
+                            var lastname  = row.lastname.toLowerCase();  
+                            return  lastname.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")  
+                        }
+                    }, 
                     { data: 'username' }, 
                     { data: 'email' }, 
                     { data: 'group' }, 
@@ -271,6 +294,7 @@
 
                             table.ajax.reload()
                             $("#add-new-user-form")[0].reset()
+                            $('#add-new-user-modal').modal('hide')
                         }else{  
                             Swal.fire({
                                 title: "Insert Error!",
@@ -337,6 +361,7 @@
                                 icon : "success"
                             })
                             table.ajax.reload() 
+                            $('#edit-user-modal').modal('hide')
                         }else{ 
                             Swal.fire({
                                 title: "Update Error!",
@@ -369,6 +394,7 @@
                                 icon : "success"
                             })
                             table.ajax.reload() 
+                            $('#change-password-modal').modal('hide')
                         }else{ 
                             Swal.fire({
                                 title: "Update Error!",
@@ -402,33 +428,66 @@
                     cancelButtonClass : "btn btn-danger ms-2 mt-2",
                     buttonsStyling    : !1
                 }).then(function(e) { 
-                    if(e.value){ 
-                        $.ajax({
-                            url     : 'user/delete/' + id,
-                            method  : "post",  
-                            dataType: "json", 
-                            success : function (data) {   
-                                if(data.response){ 
-                                    Swal.fire({
-                                        title: "Good job!",
-                                        text : data.message,
-                                        icon : "success"
-                                    })
-                                    table.ajax.reload() 
-                                }else{ 
-                                    Swal.fire({
-                                        title: "Update Error!",
-                                        text : data.message,
-                                        icon : "error"
-                                    }) 
-                                }
+                    if(e.isConfirmed){
+                        Swal.fire({
+                            title: 'Please Enter your password',
+                            input: 'password',
+                            inputAttributes: {
+                                autocapitalize: 'off'
                             },
-                            error   : function (xhr, status, error) { 
-                                console.info(xhr.responseText);
-                            }
-                        });  
-                     
-                    }
+                            showCancelButton: true,
+                            confirmButtonText: 'Look up',
+                            showLoaderOnConfirm: true,   
+                            }).then((result) => { 
+                                if (result.isConfirmed) {
+                                    $.ajax({
+                                        url   : "<?php echo base_url('user/checkpassword') ?>",
+                                        method: "POST",  
+                                        data  : {
+                                            password: result.value
+                                        },           
+                                        dataType: "json",
+                                        success: function(data){  
+                                            if(data.response){ 
+                                                $.ajax({
+                                                    url     : 'user/delete/' + id,
+                                                    method  : "post",  
+                                                    dataType: "json", 
+                                                    success : function (data) {  
+                                                        if(data.response){ 
+                                                            Swal.fire({
+                                                                title: "Good job!",
+                                                                text : data.message,
+                                                                icon : "success"
+                                                            })
+                                                            table.ajax.reload() 
+                                                        }else{ 
+                                                            Swal.fire({
+                                                                title: "Update Error!",
+                                                                text : data.message,
+                                                                icon : "error"
+                                                            }) 
+                                                        }
+                                                    },
+                                                    error   : function (xhr, status, error) { 
+                                                        console.info(xhr.responseText);
+                                                    }
+                                                });   
+                                            }else{
+                                                Swal.fire({
+                                                    title            : "Invalid Credential",  
+                                                    icon             : "error",   
+                                                    confirmButtonText: 'Ok',  
+                                                })   
+                                            } 
+                                        },
+                                        error: function (xhr, status, error) { 
+                                            console.info(xhr.responseText);
+                                        }
+                                    }); 
+                                }
+                        }) 
+                    }  
                 }) 
             });  
              

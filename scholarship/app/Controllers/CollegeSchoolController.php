@@ -19,7 +19,7 @@ class CollegeSchoolController extends BaseController
     public function get_all()
     {
         $school       = new CollegeSchoolModel();
-        $data['data'] = $school->findAll();
+        $data['data'] = $school->orderBy('colSchoolName', 'asc')->findAll();
         echo Json_encode($data);
     }
 

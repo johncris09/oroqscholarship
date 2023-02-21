@@ -222,12 +222,30 @@ class TvetController extends BaseController
         $data["scholarship_type"] = "TVET";
         $data["school_year"]      = "";
 
+        $query['colSchool']      = "";
+        $query['colSem']         = ""; 
+        $query['colAppNoSem']    = "";
+        $query['colSY']          = "";
+        $query['colAppStat']     = "";
+        $query['colAvailment']   = "";
+        $query['colGender']      = "";
+        $query['colYearLevel']   = "";
+        $query['colAddress']     = "";
+        $query['app_no_year']    = "";
+        $range['colAppNoIDFrom'] = ""; 
+        $range['colAppNoIDTo']   = "";
+
         if (!empty($_GET['school'])) {
             $query['colSchool'] =  $_GET['school'];
         }
         if (!empty($_GET['semester'])) {
-            $query['colAppNoSem'] = $_GET['semester'];
+            if($_GET['semester'] == 1){ 
+                $query['colAppNoSem'] = 1;
+            }else{
+                $query['colAppNoSem'] = 2;
+            }
             $data['semester']     = $_GET['semester'];
+            $query['colSem']     = $_GET['semester'];
         }
         if (!empty($_GET['school_year'])) {
             $query['colSY']      = $_GET['school_year'];
@@ -249,13 +267,17 @@ class TvetController extends BaseController
         if (!empty($_GET['address'])) {
             $query['colAddress'] =  $_GET['address'];
         }
+ 
+        if (!empty($_GET['app_no_year'])) {
+            $query['app_no_year'] =  $_GET['app_no_year'];
+        }
+
         if (!empty($_GET['from'])) {
             $range['colAppNoIDFrom'] =  $_GET['from'];
         }
         if (!empty($_GET['to'])) {
             $range['colAppNoIDTo'] =  $_GET['to'];
         }
-
 
         $data["result"] = $this->tvet->get_report($query, $range);
         return view('admin/view_report', $data);
@@ -272,12 +294,31 @@ class TvetController extends BaseController
         $data["status"]           = "";
         $data["scholarship_type"] = "TVET";
         $data["school_year"]      = "";
+
+        $query['colSchool']      = "";
+        $query['colSem']         = ""; 
+        $query['colAppNoSem']    = "";
+        $query['colSY']          = "";
+        $query['colAppStat']     = "";
+        $query['colAvailment']   = "";
+        $query['colGender']      = "";
+        $query['colYearLevel']   = "";
+        $query['colAddress']     = "";
+        $query['app_no_year']    = "";
+        $range['colAppNoIDFrom'] = ""; 
+        $range['colAppNoIDTo']   = "";
+
         if (!empty($_GET['school'])) {
             $query['colSchool'] =  $_GET['school'];
         }
         if (!empty($_GET['semester'])) {
-            $query['colAppNoSem'] = $_GET['semester'];
+            if($_GET['semester'] == 1){ 
+                $query['colAppNoSem'] = 1;
+            }else{
+                $query['colAppNoSem'] = 2;
+            }
             $data['semester']     = $_GET['semester'];
+            $query['colSem']     = $_GET['semester'];
         }
         if (!empty($_GET['school_year'])) {
             $query['colSY']      = $_GET['school_year'];
@@ -299,13 +340,17 @@ class TvetController extends BaseController
         if (!empty($_GET['address'])) {
             $query['colAddress'] =  $_GET['address'];
         }
+ 
+        if (!empty($_GET['app_no_year'])) {
+            $query['app_no_year'] =  $_GET['app_no_year'];
+        }
+
         if (!empty($_GET['from'])) {
             $range['colAppNoIDFrom'] =  $_GET['from'];
         }
         if (!empty($_GET['to'])) {
             $range['colAppNoIDTo'] =  $_GET['to'];
         }
-
         $data["result"] = $this->tvet->get_report($query, $range);
         return view('admin/print_preview', $data);
     }
@@ -373,5 +418,10 @@ class TvetController extends BaseController
         } else {
             echo "No record Found";
         }
+    }
+    public function bulk_disapproved()
+    {  
+        $res = $this->tvet->bulk_disapproved($_POST['applicant_id']);
+        echo Json_encode($res);
     }
 }

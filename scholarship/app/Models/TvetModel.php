@@ -94,8 +94,8 @@ class TvetModel extends Model
     {
         $builder = $this->db
             ->table($this->table)
-            ->where($data)
-            ->where('colAppStat', 'approved');
+            ->where($data) 
+            ->Where('(colAppStat = "Approved" or colAppStat = "Additional Approved")');
         $query = $builder->countAllResults();
         return $query;
     }
@@ -135,24 +135,51 @@ class TvetModel extends Model
             ->get()
             ->getResult();
         return $query;
-    }
-
-
+    } 
+    
     public function get_report($data, $range)
-    {
-        $query = $this->builder
-            ->select('ID, colAppNoYear, colAppNoSem,  replace(colContactNo," ", "")  as colContactNo, colAvailment ,  colAppNoID, colAppStat, colFirstName, colMI, colLastName, colSuffix, colAddress, colCourse, colSchool, colYearLevel, ')
-            ->Where('(colAppStat = "Approved" or colAppStat = "Additional Approved")')
-            ->where($data)
-            ->where(isset($range['colAppNoIDFrom']) ? "colAppNoID >=  " . $range['colAppNoIDFrom'] : "colManager = 'Active'")
-            ->where(isset($range['colAppNoIDTo']) ? "colAppNoID <=  " . $range['colAppNoIDTo'] :  "colManager = 'Active'")
-            ->where('colManager', 'Active')
-            ->orderBy('colLastName, colFirstName, colMI', 'asc')
-            // ->getCompiledSelect();
-            ->get()
-            ->getResult();
-        return $query;
+    {  
+         
+        if($range['colAppNoIDFrom'] == "" ||  $range['colAppNoIDTo'] == "" ){
+            $query_string =  ' 
+                SELECT * 
+                FROM table_tvet 
+                WHERE colSchool LIKE "'.$data['colSchool'].'%" 
+                AND colAppStat LIKE "'.$data['colAppStat'].'%"
+                AND colSY LIKE "'.$data['colSY'].'%"  
+                AND colSem LIKE "'.$data['colSem'].'%"  
+                AND colAvailment LIKE "'.$data['colAvailment'].'%"
+                AND colGender LIKE "'.$data['colGender'].'%"
+                AND colYearLevel LIKE "'.$data['colYearLevel'].'%"
+                AND colAddress LIKE "'.$data['colAddress'].'%" 
+                AND colManager = "Active"
+                ORDER BY colLastName, colFirstName and colMI
+            '; 
+        }else{
+            $query_string =  ' 
+                SELECT * 
+                FROM table_tvet 
+                WHERE colAppnoID BETWEEN "'.$range['colAppNoIDFrom'].'" 
+                AND "'.$range['colAppNoIDTo'].'" 
+                HAVING colAppNoYear LIKE "'.$data['app_no_year'].'%"  
+                AND colAppNoSem LIKE "'.$data['colAppNoSem'].'%" 
+                AND colSchool LIKE "'.$data['colSchool'].'%" 
+                AND colSY LIKE "'.$data['colSY'].'%"  
+                AND colAvailment LIKE "'.$data['colAvailment'].'%"
+                AND colGender LIKE "'.$data['colGender'].'%"
+                AND colYearLevel LIKE "'.$data['colYearLevel'].'%"
+                AND colAddress LIKE "'.$data['colAddress'].'%" 
+                AND colAppStat LIKE "'.$data['colAppStat'].'%"
+                AND colManager="Active"
+                ORDER BY colAppNoID
+            ';  
+        }  
+ 
+        $query = $this->db->query($query_string);
+        
+        return $query->getResult(); 
     }
+
 
     public function get_payroll($data, $range)
     {
@@ -249,6 +276,16 @@ class TvetModel extends Model
             ->groupBy('colGender')
             ->get()
             ->getResult();
+        return $query;
+    }
+    
+    public function bulk_disapproved($data)
+    { 
+        $query = $this->db
+            ->table($this->table)
+            ->set('colAppStat', 'Disapproved')
+            ->whereIn('id', $data)
+            ->update();
         return $query;
     }
 }

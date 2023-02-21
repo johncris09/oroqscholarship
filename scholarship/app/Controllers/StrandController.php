@@ -18,8 +18,8 @@ class StrandController extends BaseController
 
     public function get_all()
     {
-        $strand       = new StrandModel();
-        $data['data'] = $strand->findAll();
+        $strand       = new StrandModel(); 
+        $data['data'] = $strand->orderBy('strand', 'asc')->findAll(); 
         echo Json_encode($data);
     }
 

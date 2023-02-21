@@ -181,4 +181,18 @@ class UserController extends BaseController
         }
         echo Json_encode($res);
     }
+
+    public function checkpassword()
+    {  
+        $credentials = [
+            'email'    => auth()->user()->email,
+            'password' => $_POST['password'],
+        ];
+        
+        $validCreds = auth()->check($credentials);
+         
+
+        $res = [ "response" => $validCreds->isOK()];
+        echo Json_encode($res); 
+    }
 }
