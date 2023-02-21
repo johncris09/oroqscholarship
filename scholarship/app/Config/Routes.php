@@ -77,7 +77,10 @@ $routes->group('pending',  function($routes) {
     $routes->post('update_college', 'CollegeController::update_status');    
     $routes->get('get_tvet_pending_list', 'TvetController::get_pending_application', ["filter" => "auth"]);  
     $routes->post('update_tvet', 'TvetController::update_status');  
-    $routes->get('application/(:any)/(:any)', 'ApprovedPendingApplicationController::get_application/$1/$2', ["filter" => "auth"]);   
+    $routes->get('application/(:any)/(:any)', 'ApprovedPendingApplicationController::get_application/$1/$2', ["filter" => "auth"]);
+    $routes->post('shs_bulk_disapproved', 'SeniorHighController::bulk_disapproved', ["filter" => "auth"]);     
+    $routes->post('college_bulk_disapproved', 'CollegeController::bulk_disapproved', ["filter" => "auth"]);   
+    $routes->post('tvet_bulk_disapproved', 'TvetController::bulk_disapproved', ["filter" => "auth"]);  
 });
 
 $routes->group('registration',  function($routes) {
@@ -191,6 +194,7 @@ $routes->group('user',  function($routes) {
     $routes->post('update', 'UserController::update');   
     $routes->post('update_password', 'UserController::update_password');   
     $routes->post('delete/(:num)', 'UserController::delete/$1'); 
+    $routes->post('checkpassword', 'UserController::checkpassword');   
 });
 
 $routes->group('authlogin',  function($routes) {
