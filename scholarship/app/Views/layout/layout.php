@@ -31,7 +31,7 @@ $db = db_connect();
 		<link rel="stylesheet" href="https://unpkg.com/dropzone/dist/dropzone.css" />
 		<link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet"/>
         <link href="https://cdn.jsdelivr.net/gh/loadingio/ldLoader@v1.0.0/dist/ldld.min.css">
-        
+        <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css" rel="stylesheet" />
         
         <!-- App css -->
         <?= link_tag('public/css/bootstrap.min.css'); ?>
@@ -243,12 +243,12 @@ $db = db_connect();
                                             <span> Generat Report </span>
                                         </a>
                                     </li>  
-                                    <li> 
+                                    <!-- <li> 
                                         <a href="<?= base_url('generate_payroll') ?>">  
                                             <i class="mdi mdi-format-list-text"></i>
                                             <span> Generat Payroll </span>
                                         </a>
-                                    </li> 
+                                    </li>  -->
                             <?php
                                 }
                             ?>
@@ -306,7 +306,12 @@ $db = db_connect();
                             <?php
                                 if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin", "admin", "user"])){ 
                             ?>
-                                    <li class="menu-title mt-1">Current School Year: <strong><u><?php echo $config['current_sy']  ?></u></strong></li>
+                                    <li class="menu-title mt-1">
+                                        <?php  
+                                            $current_sy = str_replace("SY: ", "", $config['current_sy']); 
+                                        ?>
+                                        Current SY: <strong><u><?php echo $current_sy  ?></u></strong>
+                                    </li>
                                     <li class="menu-title">Current Semester:  <strong><u><?php echo ($config['current_sem'] ==1) ? "1st" : "2nd" ?></u></strong> </li>
                             <?php
                                 }
@@ -490,7 +495,8 @@ $db = db_connect();
         <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
         <script src="http://malsup.github.io/jquery.blockUI.js"></script>
         <script src="https://cdn.jsdelivr.net/gh/loadingio/ldLoader@v1.0.0/dist/ldld.min.js"></script> 
-        <?= script_tag('public/assets/jquery-mask-plugin/jquery.mask.min.js'); ?>   
+        <?= script_tag('public/assets/jquery-mask-plugin/jquery.mask.min.js'); ?> 
+        <script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
                         
         <?= $this->renderSection('pageScript') ?> 
 
