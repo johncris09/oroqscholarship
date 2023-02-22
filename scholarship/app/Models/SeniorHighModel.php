@@ -146,48 +146,56 @@ class SeniorHighModel extends Model
             ->get()
             ->getResult();
         return $query;
-    } 
+    }  
     
-    public function get_report($data, $range)
-    {  
-         
-        if($range['AppNoIDFrom'] == "" ||  $range['AppNoIDTo'] == "" ){
-            $query_string =  ' 
-                SELECT * 
-                FROM table_scholarregistration 
-                WHERE AppSchool LIKE "'.$data['AppSchool'].'%" 
-                AND AppStatus LIKE "'.$data['AppStatus'].'%"
-                AND AppSY LIKE "'.$data['AppSY'].'%"  
-                AND AppNoSem LIKE "'.$data['AppNoSem'].'%"  
-                AND AppAvailment LIKE "'.$data['AppAvailment'].'%"
-                AND AppGender LIKE "'.$data['AppGender'].'%"
-                AND AppYear LIKE "'.$data['AppYear'].'%"
-                AND AppAddress LIKE "'.$data['AppAddress'].'%" 
-                AND AppManager = "Active"
-                ORDER BY AppLastName, AppFirstName and AppMidIn
-            '; 
-        }else{
-            $query_string =  ' 
-                SELECT * 
-                FROM table_scholarregistration 
-                WHERE AppNoID BETWEEN "'.$range['AppNoIDFrom'].'" 
-                AND "'.$range['AppNoIDTo'].'" 
-                HAVING AppNoYear LIKE "'.$data['app_no_year'].'%"  
-                AND AppNoSem LIKE "'.$data['AppNoSem'].'%" 
-                AND AppSchool LIKE "'.$data['AppSchool'].'%" 
-                AND AppSY LIKE "'.$data['AppSY'].'%"  
-                AND AppAvailment LIKE "'.$data['AppAvailment'].'%"
-                AND AppGender LIKE "'.$data['AppGender'].'%"
-                AND AppYear LIKE "'.$data['AppYear'].'%"
-                AND AppAddress LIKE "'.$data['AppAddress'].'%" 
-                AND AppStatus LIKE "'.$data['AppStatus'].'%"
-                AND AppManager="Active"
-                ORDER BY AppNoID
-            ';  
-        }   
+    
+
+    public function generate($school, $status, $sy, $sem, $availment, $gender, $year_level, $address )
+    {
+        $query_string =  ' 
+            SELECT * 
+            FROM table_scholarregistration 
+            WHERE AppSchool LIKE "'.$school.'%"  
+            AND AppStatus LIKE "'.$status.'%"
+            AND AppSY LIKE "'.$sy.'%"  
+            AND AppSem LIKE "'.$sem.'%"  
+            AND AppAvailment LIKE "'.$availment.'%"
+            AND AppGender LIKE "'.$gender.'%"
+            AND AppYear LIKE "'.$year_level.'%"
+            AND AppAddress LIKE "'.$address.'%"  
+            AND AppManager = "Active"
+            ORDER BY AppLastName, AppFirstName and AppMidIn
+        '; 
+
         $query = $this->db->query($query_string); 
         return $query->getResult(); 
     } 
+
+    public function between($appnoidfrom, $appnoidto, $appnoyear, $appnosem,  $school, $status,$sy, $sem, $availment, $gender, $year_level, $address )
+    {
+        $query_string =  ' 
+            SELECT * 
+            FROM table_scholarregistration 
+            WHERE AppNoID BETWEEN "'.$appnoidfrom.'" 
+            AND "'.$appnoidto.'" 
+            HAVING AppNoYear LIKE "'.$appnoyear.'%"  
+            AND AppNoSem LIKE "'.$appnosem.'%" 
+            AND AppSchool LIKE "'.$school.'%" 
+            AND AppSem LIKE "'.$sem.'%" 
+            AND AppSY LIKE "'.$sy.'%"  
+            AND AppAvailment LIKE "'.$availment.'%"
+            AND AppGender LIKE "'.$gender.'%"
+            AND AppYear LIKE "'.$year_level.'%"
+            AND AppAddress LIKE "'.$address.'%"  
+            AND AppStatus LIKE "'.$status.'%"
+            AND AppManager="Active"
+            ORDER BY AppNoID
+        '; 
+
+        $query = $this->db->query($query_string);
+        return $query->getResult(); 
+    }
+
 
 
     public function get_payroll($data, $range)

@@ -137,48 +137,57 @@ class TvetModel extends Model
         return $query;
     } 
     
-    public function get_report($data, $range)
-    {  
-         
-        if($range['colAppNoIDFrom'] == "" ||  $range['colAppNoIDTo'] == "" ){
-            $query_string =  ' 
-                SELECT * 
-                FROM table_tvet 
-                WHERE colSchool LIKE "'.$data['colSchool'].'%" 
-                AND colAppStat LIKE "'.$data['colAppStat'].'%"
-                AND colSY LIKE "'.$data['colSY'].'%"  
-                AND colSem LIKE "'.$data['colSem'].'%"  
-                AND colAvailment LIKE "'.$data['colAvailment'].'%"
-                AND colGender LIKE "'.$data['colGender'].'%"
-                AND colYearLevel LIKE "'.$data['colYearLevel'].'%"
-                AND colAddress LIKE "'.$data['colAddress'].'%" 
-                AND colManager = "Active"
-                ORDER BY colLastName, colFirstName and colMI
-            '; 
-        }else{
-            $query_string =  ' 
-                SELECT * 
-                FROM table_tvet 
-                WHERE colAppnoID BETWEEN "'.$range['colAppNoIDFrom'].'" 
-                AND "'.$range['colAppNoIDTo'].'" 
-                HAVING colAppNoYear LIKE "'.$data['app_no_year'].'%"  
-                AND colAppNoSem LIKE "'.$data['colAppNoSem'].'%" 
-                AND colSchool LIKE "'.$data['colSchool'].'%" 
-                AND colSY LIKE "'.$data['colSY'].'%"  
-                AND colAvailment LIKE "'.$data['colAvailment'].'%"
-                AND colGender LIKE "'.$data['colGender'].'%"
-                AND colYearLevel LIKE "'.$data['colYearLevel'].'%"
-                AND colAddress LIKE "'.$data['colAddress'].'%" 
-                AND colAppStat LIKE "'.$data['colAppStat'].'%"
-                AND colManager="Active"
-                ORDER BY colAppNoID
-            ';  
-        }  
- 
+
+    
+
+    public function generate($school, $status, $sy, $sem, $availment, $gender, $year_level, $address )
+    {
+        $query_string =  ' 
+            SELECT * 
+            FROM table_tvet 
+            WHERE colSchool LIKE "'.$school.'%" 
+            AND colAppStat LIKE "'.$status.'%"
+            AND colSY LIKE "'.$sy.'%"  
+            AND colSem LIKE "'.$sem.'%"  
+            AND colAvailment LIKE "'.$availment.'%"
+            AND colGender LIKE "'.$gender.'%"
+            AND colYearLevel LIKE "'.$year_level.'%"
+            AND colAddress LIKE "'.$address.'%" 
+            AND colManager = "Active"
+            ORDER BY colLastName, colFirstName and colMI
+        '; 
+
         $query = $this->db->query($query_string);
         
         return $query->getResult(); 
     }
+
+
+    public function between($appnoidfrom, $appnoidto, $appnoyear, $appnosem,  $school, $status, $sy, $sem, $availment, $gender, $year_level, $address )
+    {
+        $query_string =  ' 
+            SELECT * 
+            FROM table_tvet 
+            WHERE colAppnoID BETWEEN "'.$appnoidfrom.'" 
+            AND "'.$appnoidto.'" 
+            HAVING colAppNoYear LIKE "'.$appnoyear.'%"  
+            AND colAppNoSem LIKE "'.$appnosem.'%" 
+            AND colSchool LIKE "'.$school.'%" 
+            AND colSem LIKE "'.$sem.'%" 
+            AND colSY LIKE "'.$sy.'%"  
+            AND colAvailment LIKE "'.$availment.'%"
+            AND colGender LIKE "'.$gender.'%"
+            AND colYearLevel LIKE "'.$year_level.'%"
+            AND colAddress LIKE "'.$address.'%" 
+            AND colAppStat LIKE "'.$status.'%"
+            AND colManager="Active"
+            ORDER BY colAppNoID
+        '; 
+
+        $query = $this->db->query($query_string);
+        
+        return $query->getResult(); 
+    } 
 
 
     public function get_payroll($data, $range)

@@ -206,147 +206,63 @@ class SeniorHighController extends BaseController
 
     public function get_report()
     { 
-        $query                    = [];
-        $range                    = []; 
+        $appnoidfrom              = $_POST['appnoidfrom'];
+        $appnoidto                = $_POST['appnoidto'];
+        $appnoyear                = $_POST['appnoyear'];
+        $appnosem                 = $_POST['appnosem'];
+        $school                   = $_POST['school'];
+        $sem                      = $_POST['sem'];
+        $sy                       = $_POST['school_year'];
+        $status                   = $_POST['status'];
+        $availment                = $_POST['availment'];
+        $gender                   = $_POST['gender'];
+        $year_level               = $_POST['year_level'];
+        $address                  = $_POST['address']; 
         $data["page_title"]       = "Generated Report";
-        $data["semester"]         = "";
-        $data["status"]           = "";
         $data["scholarship_type"] = "Senior High School";
-        $data["school_year"]      = ""; 
-        
-        $query['AppSchool']       = ""; 
-        $query['AppSem']          = ""; 
-        $query['AppNoSem']        = "";  
-        $query['AppSY']           = "";
-        $query['AppStatus']       = "";
-        $query['AppAvailment']    = "";
-        $query['AppGender']       = "";
-        $query['AppYear']         = "";
-        $query['AppAddress']      = "";
-        $query['app_no_year']     = "";
-        $range['AppNoIDFrom']     = ""; 
-        $range['AppNoIDTo']       = "";
+        $data['semester']         = $_POST['sem'];
+        $data['status']           = $_POST['status'];
+        $data['school_year']      = $_POST['school_year']; 
 
-        if (!empty($_GET['school'])) {
-            $query['AppSchool'] =  $_GET['school'];
-        }
-        if (!empty($_GET['semester'])) {
-            $query['AppSem'] =  $_GET['semester'];
-            if ($_GET['semester'] !== "") {
-                if ($_GET['semester'] == "1st") {
-                    $query['AppNoSem'] = 1;
-                } else {
-                    $query['AppNoSem'] = 2;
-                }
-            }
-            $data['semester'] =  $_GET['semester'];
-        }
-        if (!empty($_GET['school_year'])) {
-            $query['AppSY']      = $_GET['school_year'];
-            $data['school_year'] = $_GET['school_year'];
-        }
-        if (!empty($_GET['status'])) {
-            $query['AppStatus'] = $_GET['status'];
-            $data['status']     = $_GET['status'];
-        }
-        if (!empty($_GET['availment'])) {
-            $query['AppAvailment'] =  $_GET['availment'];
-        }
-        if (!empty($_GET['gender'])) {
-            $query['AppGender'] =  $_GET['gender'];
-        }
-        if (!empty($_GET['year_level'])) {
-            $query['AppYear'] =  $_GET['year_level'];
-        }
-        if (!empty($_GET['address'])) {
-            $query['AppAddress'] =  $_GET['address'];
-        }
-        if (!empty($_GET['app_no_year'])) {
-            $query['app_no_year'] =  $_GET['app_no_year'];
-        }
-        if (!empty($_GET['from'])) {
-            $range['AppNoIDFrom'] =  $_GET['from'];
-        }
-        if (!empty($_GET['to'])) {
-            $range['AppNoIDTo'] =  $_GET['to'];
-        }
-
-        $data["result"] = $this->senior_high->get_report($query, $range);
-        return view('admin/view_report', $data);
+        if($_POST['appnoidfrom'] == "" || $_POST['appnoidto']  == ""  ){
+            $res = $this->senior_high->generate($school, $status, $sy, $sem, $availment, $gender, $year_level, $address );
+        }else{
+            $res = $this->senior_high->between($appnoidfrom, $appnoidto, $appnoyear, $appnosem,  $school, $status, $sy, $sem, $availment, $gender, $year_level, $address );
+        } 
+        $data['query_string'] = 'appnoidfrom='.$appnoidfrom.'&appnoidto='.$appnoidto.'&appnoyear='.$appnoyear.'&appnosem='.$appnosem.'&school='.$school.'&status='.$status.'&school_year='.$sy.'&sem='.$sem.'&availment='.$availment.'&gender='.$gender.'&year_level='.$year_level.'&address='.$address;
+        $data["result"]       = $res;  
+        return view('admin/view_report', $data);  
     }
 
 
 
     public function print_preview()
-    { 
-        $query                    = [];
-        $range                    = []; 
-        $data["page_title"]       = "Generated Report";
-        $data["semester"]         = "";
-        $data["status"]           = "";
-        $data["scholarship_type"] = "Senior    High School";
-        $data["school_year"]      = ""; 
-        
-        $query['AppSchool']       = ""; 
-        $query['AppSem']          = ""; 
-        $query['AppNoSem']        = "";  
-        $query['AppSY']           = "";
-        $query['AppStatus']       = "";
-        $query['AppAvailment']    = "";
-        $query['AppGender']       = "";
-        $query['AppYear']         = "";
-        $query['AppAddress']      = "";
-        $query['app_no_year']     = "";
-        $range['AppNoIDFrom']     = ""; 
-        $range['AppNoIDTo']       = "";
+    {  
+        $appnoidfrom              = $_GET['appnoidfrom'];
+        $appnoidto                = $_GET['appnoidto'];
+        $appnoyear                = $_GET['appnoyear'];
+        $appnosem                 = $_GET['appnosem'];
+        $school                   = $_GET['school'];
+        $sem                      = $_GET['sem'];
+        $sy                       = $_GET['school_year'];
+        $status                   = $_GET['status'];
+        $availment                = $_GET['availment'];
+        $gender                   = $_GET['gender'];
+        $year_level               = $_GET['year_level'];
+        $address                  = $_GET['address']; 
+        $data["page_title"]       = "Generated Report"; 
+        $data["scholarship_type"] = "Senior High School";
+        $data['semester']         = $_GET['sem'];
+        $data['status']           = $_GET['status'];
+        $data['school_year']      = $_GET['school_year']; 
 
-        if (!empty($_GET['school'])) {
-            $query['AppSchool'] =  $_GET['school'];
+        if($_GET['appnoidfrom'] == "" || $_GET['appnoidto']  == ""  ){ 
+            $res = $this->senior_high->generate($school, $status, $sy, $sem, $availment, $gender, $year_level, $address );
+        }else{
+            $res = $this->senior_high->between($appnoidfrom, $appnoidto, $appnoyear, $appnosem,  $school, $status, $sy, $sem, $availment, $gender, $year_level, $address );
         }
-        if (!empty($_GET['semester'])) {
-            $query['AppSem'] =  $_GET['semester'];
-            if ($_GET['semester'] !== "") {
-                if ($_GET['semester'] == "1st") {
-                    $query['AppNoSem'] = 1;
-                } else {
-                    $query['AppNoSem'] = 2;
-                }
-            }
-            $data['semester'] =  $_GET['semester'];
-        }
-        if (!empty($_GET['school_year'])) {
-            $query['AppSY']      = $_GET['school_year'];
-            $data['school_year'] = $_GET['school_year'];
-        }
-        if (!empty($_GET['status'])) {
-            $query['AppStatus'] = $_GET['status'];
-            $data['status']     = $_GET['status'];
-        }
-        if (!empty($_GET['availment'])) {
-            $query['AppAvailment'] =  $_GET['availment'];
-        }
-        if (!empty($_GET['gender'])) {
-            $query['AppGender'] =  $_GET['gender'];
-        }
-        if (!empty($_GET['year_level'])) {
-            $query['AppYear'] =  $_GET['year_level'];
-        }
-        if (!empty($_GET['address'])) {
-            $query['AppAddress'] =  $_GET['address'];
-        }
-        if (!empty($_GET['app_no_year'])) {
-            $query['app_no_year'] =  $_GET['app_no_year'];
-        }
-        if (!empty($_GET['from'])) {
-            $range['AppNoIDFrom'] =  $_GET['from'];
-        }
-        if (!empty($_GET['to'])) {
-            $range['AppNoIDTo'] =  $_GET['to'];
-        }
-
-
-        $data["result"] = $this->senior_high->get_report($query, $range);
-        return view('admin/print_preview', $data);
+        $data["result"] = $res;  
+        return view('admin/print_preview', $data);  
     }
 
 

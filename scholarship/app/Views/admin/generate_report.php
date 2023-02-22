@@ -105,7 +105,7 @@
 
                     <ul class="nav nav-pills navtab-bg nav-justified">
                         <li class="nav-item">
-                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active   ">
+                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link ">
                                 Senior High School
                             </a>
                         </li>
@@ -115,14 +115,14 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link ">
+                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
                                 TVET
                             </a>
                         </li>
                     </ul>
                     <div class="tab-content"> 
-                        <div class="tab-pane active" id="senior-high-tab">  
-                            <form action="generate_report/shs_report" method="get">
+                        <div class="tab-pane " id="senior-high-tab">  
+                            <form action="generate_report/shs_report" method="post">
                                 <div class="row justify-content-center">
                                     <div class="col-9">  
                                         <label for="school" class="form-label">School</label>
@@ -139,7 +139,7 @@
                                 <div class="row justify-content-center">
                                     <div class="col-3">   
                                         <label for="semester" class="form-label">Semester</label>
-                                        <select class="form-control"   name="semester"  >
+                                        <select class="form-control" name="sem"  >
                                             <option value="">Select</option> 
                                             <?php foreach($semester as $row):?>  
                                                 <option value="<?= $row   ?>"><?= $row   ?></option>   
@@ -202,7 +202,7 @@
                                 <div class="row justify-content-center">
                                     <div class="col-3">
                                         <label for="app_no_year" class="form-label">App No</label> 
-                                        <select class="form-control" name="app_no_year"   >
+                                        <select class="form-control" name="appnoyear"   >
                                             <option value="">Select</option> 
                                             <?php 
                                                 $year_now = date('Y');
@@ -215,15 +215,15 @@
                                     </div>  
                                     <div class="col-2">
                                         <label class="form-label">Semester </label>
-                                        <input type="number" class="form-control semester" readonly>
+                                        <input type="number" class="form-control semester" name="appnosem" readonly>
                                     </div> 
                                     <div class="col-2">
                                         <label for="from" class="form-label">From </label>
-                                        <input type="number" class="form-control" id="from" name="from" >
+                                        <input type="number" class="form-control" id="from" name="appnoidfrom" >
                                     </div> 
                                     <div class="col-2">
                                         <label for="to" class="form-label">To </label>
-                                        <input type="number" class="form-control" id="to" name="to" >
+                                        <input type="number" class="form-control" id="to" name="appnoidto" >
                                     </div>  
                                 </div> 
                                 <div class="row justify-content-center mt-3">
@@ -234,7 +234,7 @@
                             </form>
                         </div>
                         <div class="tab-pane  " id="college-tab">   
-                            <form action="generate_report/college_report" method="get">
+                            <form  action="generate_report/college_report" method="post">
                                 <div class="row justify-content-center">
                                     <div class="col-9">  
                                         <label for="school" class="form-label">School</label>
@@ -251,7 +251,7 @@
                                 <div class="row justify-content-center">
                                     <div class="col-3">   
                                         <label for="semester" class="form-label">Semester</label>
-                                        <select class="form-control"   name="semester"  >
+                                        <select class="form-control" name="sem"  >
                                             <option value="">Select</option> 
                                             <?php foreach($semester as $row):?>  
                                                 <option value="<?= $row   ?>"><?= $row   ?></option>   
@@ -314,7 +314,7 @@
                                 <div class="row justify-content-center">
                                     <div class="col-3">
                                         <label for="app_no_year" class="form-label">App No</label> 
-                                        <select class="form-control" name="app_no_year"   >
+                                        <select class="form-control" name="appnoyear"   >
                                             <option value="">Select</option> 
                                             <?php 
                                                 $year_now = date('Y');
@@ -327,15 +327,15 @@
                                     </div>  
                                     <div class="col-2">
                                         <label class="form-label">Semester </label>
-                                        <input type="number" class="form-control semester" readonly>
+                                        <input type="number" class="form-control semester" name="appnosem" readonly>
                                     </div> 
                                     <div class="col-2">
                                         <label for="from" class="form-label">From </label>
-                                        <input type="number" class="form-control" id="from" name="from" >
+                                        <input type="number" class="form-control" id="from" name="appnoidfrom" >
                                     </div> 
                                     <div class="col-2">
                                         <label for="to" class="form-label">To </label>
-                                        <input type="number" class="form-control" id="to" name="to" >
+                                        <input type="number" class="form-control" id="to" name="appnoidto" >
                                     </div>  
                                 </div> 
                                 <div class="row justify-content-center mt-3">
@@ -343,12 +343,10 @@
                                         <button type="submit" class="btn btn-primary btn-block rounded-pill">Generate</button> 
                                     </div>   
                                 </div>    
-                            </form>
-
-                        </div>
-                        
-                        <div class="tab-pane  show " id="tvet-tab">  
-                            <form action="generate_report/tvet_report" method="get">
+                            </form> 
+                        </div> 
+                        <div class="tab-pane  show active" id="tvet-tab">  
+                            <form action="generate_report/tvet_report" method="post">
                                 <div class="row justify-content-center">
                                     <div class="col-9">  
                                         <label for="school" class="form-label">School</label>
@@ -365,7 +363,7 @@
                                 <div class="row justify-content-center">
                                     <div class="col-3">   
                                         <label for="semester" class="form-label">Semester</label>
-                                        <select class="form-control"   name="semester"  >
+                                        <select class="form-control" name="sem" >
                                             <option value="">Select</option> 
                                             <?php foreach($semester as $row):?>  
                                                 <option value="<?= $row   ?>"><?= $row   ?></option>   
@@ -428,7 +426,7 @@
                                 <div class="row justify-content-center">
                                     <div class="col-3">
                                         <label for="app_no_year" class="form-label">App No</label> 
-                                        <select class="form-control" name="app_no_year"   >
+                                        <select class="form-control" name="appnoyear"   >
                                             <option value="">Select</option> 
                                             <?php 
                                                 $year_now = date('Y');
@@ -441,15 +439,15 @@
                                     </div>  
                                     <div class="col-2">
                                         <label class="form-label">Semester </label>
-                                        <input type="number" class="form-control semester" readonly>
+                                        <input type="number" class="form-control semester" name="appnosem" readonly>
                                     </div> 
                                     <div class="col-2">
                                         <label for="from" class="form-label">From </label>
-                                        <input type="number" class="form-control" id="from" name="from" >
+                                        <input type="number" class="form-control" id="from" name="appnoidfrom" >
                                     </div> 
                                     <div class="col-2">
                                         <label for="to" class="form-label">To </label>
-                                        <input type="number" class="form-control" id="to" name="to" >
+                                        <input type="number" class="form-control" id="to" name="appnoidto" >
                                     </div>  
                                 </div> 
                                 <div class="row justify-content-center mt-3">
@@ -488,8 +486,8 @@
                 }
             });
             
-            $('select[name="semester"]').on('change', function(){  
-                $(this).closest("div.active").find('input.semester').val(
+            $('select[name="sem"]').on('change', function(){   
+                $(this).closest("div.active").find('input[name=appnosem]').val(
                     ($(this).val() !== "") ?
                         ($(this).val() == "1st") ? 1: 2
                     : ""
