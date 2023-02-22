@@ -194,25 +194,56 @@ class SeniorHighModel extends Model
 
         $query = $this->db->query($query_string);
         return $query->getResult(); 
-    }
+    } 
 
-
-
-    public function get_payroll($data, $range)
+    public function generate_payroll($school, $sy, $sem, $availment, $gender, $year_level, $address )
     {
-        $query = $this->builder
-            ->select('ID, AppNoYear, AppNoSem, AppNoID, AppAvailment , AppStatus, AppFirstName, AppMidIn, AppLastName, AppSuffix, AppContact, AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ')
-            ->Where('(AppStatus = "Approved" or AppStatus = "Additional Approved")')
-            ->where($data)
-            ->where(isset($range['AppNoIDFrom']) ? "AppNoID >=  " . $range['AppNoIDFrom'] : "AppManager = 'Active'")
-            ->where(isset($range['AppNoIDTo']) ? "AppNoID <=  " . $range['AppNoIDTo'] :  "AppManager = 'Active'")
-            ->where('AppManager', 'Active')
-            ->orderBy('AppLastName, AppFirstName,AppMidIn', 'asc')
-            // ->getCompiledSelect();
-            ->get()
-            ->getResult();
-        return $query;
-    }
+        $query_string =  ' 
+            SELECT * 
+            FROM table_scholarregistration 
+            WHERE AppSchool LIKE "'.$school.'%"  
+            AND AppSY LIKE "'.$sy.'%"  
+            AND AppSem LIKE "'.$sem.'%"  
+            AND AppAvailment LIKE "'.$availment.'%"
+            AND AppGender LIKE "'.$gender.'%"
+            AND AppYear LIKE "'.$year_level.'%"
+            AND AppAddress LIKE "'.$address.'%"  
+            AND (AppStatus = "Approved" or AppStatus = "Additional Approved")
+            AND AppManager = "Active"
+            ORDER BY AppLastName, AppFirstName and AppMidIn
+        '; 
+
+        $query = $this->db->query($query_string); 
+        return $query->getResult(); 
+    } 
+
+    
+
+    public function between_payroll($appnoidfrom, $appnoidto, $appnoyear, $appnosem,  $school, $status,$sy, $sem, $availment, $gender, $year_level, $address )
+    {
+        $query_string =  ' 
+            SELECT * 
+            FROM table_scholarregistration 
+            WHERE AppNoID BETWEEN "'.$appnoidfrom.'" 
+            AND "'.$appnoidto.'" 
+            HAVING AppNoYear LIKE "'.$appnoyear.'%"  
+            AND AppNoSem LIKE "'.$appnosem.'%" 
+            AND AppSchool LIKE "'.$school.'%" 
+            AND AppSem LIKE "'.$sem.'%" 
+            AND AppSY LIKE "'.$sy.'%"  
+            AND AppAvailment LIKE "'.$availment.'%"
+            AND AppGender LIKE "'.$gender.'%"
+            AND AppYear LIKE "'.$year_level.'%"
+            AND AppAddress LIKE "'.$address.'%"  
+            AND AppStatus LIKE "'.$status.'%"
+            AND (AppStatus = "Approved" or AppStatus = "Additional Approved")
+            AND AppManager="Active"
+            ORDER BY AppNoID
+        '; 
+
+        $query = $this->db->query($query_string);
+        return $query->getResult(); 
+    } 
 
 
     public function get_tot_by_status($data)

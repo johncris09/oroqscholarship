@@ -267,68 +267,48 @@ class SeniorHighController extends BaseController
 
 
 
+    
+    
     public function payroll_print_preview()
     {
-        $query                    = [];
-        $range                    = []; 
-        $data["page_title"]       = "Generated Payroll";
-        $data["semester"]         = "";
-        $data['config']           = new Custom_config;
-        // $data["status"]        = ""; 
-        $data["scholarship_type"] = "Senior High School";
-        $data["school_year"]      = "";
+ 
+        $data['config']           = new Custom_config; 
+        $appnoidfrom              = $_POST['appnoidfrom'];
+        $appnoidto                = $_POST['appnoidto'];
+        $appnoyear                = $_POST['appnoyear'];
+        $appnosem                 = $_POST['appnosem'];
+        $school                   = $_POST['school'];
+        $sem                      = $_POST['sem'];
+        $sy                       = $_POST['school_year']; 
+        $availment                = $_POST['availment'];
+        $gender                   = $_POST['gender'];
+        $year_level               = $_POST['year_level'];
+        $address                  = $_POST['address']; 
+        $data["page_title"]       = "Generated Report"; 
+        $data["scholarship_type"] = "College";
+        $data['semester']         = $_POST['sem']; 
+        $data['school_year']      = $_POST['school_year'];
 
-        if (!empty($_GET['school'])) {
-            $query['AppSchool'] =  $_GET['school'];
-        }
-        if (!empty($_GET['semester'])) {
-            $query['AppSem'] =  $_GET['semester'];
-            if ($_GET['semester'] !== "") {
-                if ($_GET['semester'] == "1st") {
-                    $query['AppNoSem'] = 1;
-                } else {
-                    $query['AppNoSem'] = 2;
-                }
-            }
-            $data['semester'] =  $_GET['semester'];
-        }
-        if (!empty($_GET['school_year'])) {
-            $query['AppSY']      = $_GET['school_year'];
-            $data['school_year'] = $_GET['school_year'];
-        }
-        // if(!empty($_GET['status'])){ 
-        //     $query['AppStatus'] =  $_GET['status'];
-        //     $data['status'] =  $_GET['status'];
-        // }
-        if (!empty($_GET['availment'])) {
-            $query['AppAvailment'] =  $_GET['availment'];
-        }
-        if (!empty($_GET['gender'])) {
-            $query['AppGender'] =  $_GET['gender'];
-        }
-        if (!empty($_GET['year_level'])) {
-            $query['AppYear'] =  $_GET['year_level'];
-        }
-        if (!empty($_GET['address'])) {
-            $query['AppAddress'] =  $_GET['address'];
-        }
-        if (!empty($_GET['from'])) {
-            $range['AppNoIDFrom'] =  $_GET['from'];
-        }
-        if (!empty($_GET['to'])) {
-            $range['AppNoIDTo'] =  $_GET['to'];
-        }
 
-        $data["result"]     = $this->senior_high->get_payroll($query, $range);
-        $data['tot_record'] = count($data["result"]);
-        $data['tot_page']   = ceil($data['tot_record']   / 20);
-        $data['from']       = 1;
+        if($_POST['appnoidfrom'] == "" || $_POST['appnoidto']  == ""  ){ 
+            $res = $this->senior_high->generate_payroll($school, $sy, $sem, $availment, $gender, $year_level, $address );
+        }else{
+            $res = $this->senior_high->between_payroll($appnoidfrom, $appnoidto, $appnoyear, $appnosem,  $school, $sy, $sem, $availment, $gender, $year_level, $address );
+        } 
+        
+        $data["result"]      = $res; 
+        $data['tot_record']  = count($data["result"]);
+        $data['tot_page']    = ceil($data['tot_record']   / 20);
+        $data['from']        = 1;
+        $data['sem']         = $_POST['sem'];
+        $data['school_year'] = $_POST['school_year'];
         if ($data['tot_record'] != 0) {
             return view('admin/shs_payroll', $data);
         } else {
-            echo "No record Found";
-        }
-    }
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }  
+
+    } 
 
     public function bulk_disapproved()
     {  

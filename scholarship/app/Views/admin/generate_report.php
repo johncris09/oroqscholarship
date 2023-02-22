@@ -105,7 +105,7 @@
 
                     <ul class="nav nav-pills navtab-bg nav-justified">
                         <li class="nav-item">
-                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link ">
+                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active">
                                 Senior High School
                             </a>
                         </li>
@@ -115,13 +115,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
+                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link ">
                                 TVET
                             </a>
                         </li>
                     </ul>
                     <div class="tab-content"> 
-                        <div class="tab-pane " id="senior-high-tab">  
+                        <div class="tab-pane active" id="senior-high-tab">  
                             <form action="generate_report/shs_report" method="post">
                                 <div class="row justify-content-center">
                                     <div class="col-9">  
@@ -345,7 +345,7 @@
                                 </div>    
                             </form> 
                         </div> 
-                        <div class="tab-pane  show active" id="tvet-tab">  
+                        <div class="tab-pane  show " id="tvet-tab">  
                             <form action="generate_report/tvet_report" method="post">
                                 <div class="row justify-content-center">
                                     <div class="col-9">  

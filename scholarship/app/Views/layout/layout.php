@@ -243,12 +243,12 @@ $db = db_connect();
                                             <span> Generat Report </span>
                                         </a>
                                     </li>  
-                                    <!-- <li> 
+                                    <li> 
                                         <a href="<?= base_url('generate_payroll') ?>">  
                                             <i class="mdi mdi-format-list-text"></i>
                                             <span> Generat Payroll </span>
                                         </a>
-                                    </li>  -->
+                                    </li> 
                             <?php
                                 }
                             ?>

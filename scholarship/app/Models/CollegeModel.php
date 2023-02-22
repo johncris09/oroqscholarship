@@ -189,25 +189,58 @@ class CollegeModel extends Model
         
         return $query->getResult(); 
     }
-
-
-
-    public function get_payroll($data, $range)
+    
+    public function generate_payroll($school, $sy, $sem, $availment, $gender, $year_level, $address )
     {
-        $query = $this->builder
-            ->select('ID, colAppNoYear, colAppNoSem, colContactNo, colAvailment ,  colAppNoID, colAppStat, colFirstName, colMI, colLastName, colSuffix, colAddress, colCourse, colSchool, colYearLevel, ')
-            ->Where('(colAppStat = "Approved" or colAppStat = "Additional Approved")')
-            ->where($data)
-            ->where(isset($range['colAppNoIDFrom']) ? "colAppNoID >=  " . $range['colAppNoIDFrom'] : "colManager = 'Active'")
-            ->where(isset($range['colAppNoIDTo']) ? "colAppNoID <=  " . $range['colAppNoIDTo'] :  "colManager = 'Active'")
-            ->where('colManager', 'Active')
-            ->orderBy('colLastName, colFirstName, colMI', 'asc')
-            // ->getCompiledSelect();
-            ->get()
-            ->getResult();
-        return $query;
+        $query_string =  ' 
+            SELECT * 
+            FROM table_collegeapp 
+            WHERE colSchool LIKE "'.$school.'%"  
+            AND colSY LIKE "'.$sy.'%"  
+            AND colSem LIKE "'.$sem.'%"  
+            AND colAvailment LIKE "'.$availment.'%"
+            AND colGender LIKE "'.$gender.'%"
+            AND colYearLevel LIKE "'.$year_level.'%"
+            AND colAddress LIKE "'.$address.'%" 
+            AND (colAppStat = "Approved" or colAppStat = "Additional Approved")
+            AND colManager = "Active"
+            ORDER BY colLastName, colFirstName and colMI
+        '; 
+
+        $query = $this->db->query($query_string);
+        
+        return $query->getResult(); 
     }
 
+
+    
+    public function between_payroll($appnoidfrom, $appnoidto, $appnoyear, $appnosem,  $school,  $sy, $sem, $availment, $gender, $year_level, $address )
+    {
+        $query_string =  ' 
+            SELECT * 
+            FROM table_collegeapp 
+            WHERE colAppnoID BETWEEN "'.$appnoidfrom.'" 
+            AND "'.$appnoidto.'" 
+            HAVING colAppNoYear LIKE "'.$appnoyear.'%"  
+            AND colAppNoSem LIKE "'.$appnosem.'%" 
+            AND colSchool LIKE "'.$school.'%" 
+            AND colSem LIKE "'.$sem.'%" 
+            AND colSY LIKE "'.$sy.'%"  
+            AND colAvailment LIKE "'.$availment.'%"
+            AND colGender LIKE "'.$gender.'%"
+            AND colYearLevel LIKE "'.$year_level.'%"
+            AND colAddress LIKE "'.$address.'%"  
+            AND (colAppStat = "Approved" or colAppStat = "Additional Approved")
+            AND colManager="Active"
+            ORDER BY colAppNoID
+        '; 
+
+        $query = $this->db->query($query_string);
+        
+        return $query->getResult(); 
+    }
+    
+ 
 
     public function get_tot_by_status($data)
     {

@@ -84,7 +84,7 @@
 			</tr>
 			<tr> 
 				<td colspan="8"></td>  
-				<td colspan="4" class="text-size-11 text-bold">For the period:  <?php echo $_GET['semester']; ?> Semester of <?php echo $_GET['school_year']; ?></td>
+				<td colspan="4" class="text-size-11 text-bold">For the period:  <?php echo $sem; ?> Semester of <?php echo str_replace("SY: ", "", $school_year); ?></td>
 				<td></td>
 			</tr>
 			<tr class="text-size-11 text-bold"> 
@@ -106,16 +106,16 @@
 					Grant (Senior High School) for the
 					<?php 
 						$semester = "";
-						if($_GET['semester'] == "1st"){
+						if($sem == "1st"){
 							$semester = "FIRST";
 						}
-						if($_GET['semester'] == "2nd"){
+						if($sem == "2nd"){
 							$semester = "SECOND"; 
 						}
 						echo $semester;
 					?>
 					
-					SEMESTER of <?php echo $_GET['school_year']; ?>, the correctness of which we hereby severally certify.</td>  
+					SEMESTER of <?php echo str_replace("SY: ", "", $school_year); ?>, the correctness of which we hereby severally certify.</td>  
 			</tr> 
 			<tr class="text-size-11 text-bold table-data" > 
 				<th>Seq</th>
@@ -364,7 +364,7 @@
 				<td colspan="6" class="text-italic">Head, Accounting Department/Unit</td>
 			</tr> 
 		</table>
-		<p class="text-size-11 text-italic">Attachments:  (1) CAFOA (2)List of Approved Scholarship Applicants for the <?php echo $_GET['semester'] ?> Semester of  <?php echo $_GET['semester'] ?> (3) Barangay Clearances (4)Certificates of Indigency(5) Certificates of Enrolment</p>
+		<p class="text-size-11 text-italic">Attachments:  (1) CAFOA (2)List of Approved Scholarship Applicants for the <?php echo $sem ?> Semester of  <?php echo $sem ?> (3) Barangay Clearances (4)Certificates of Indigency(5) Certificates of Enrolment</p>
 		<br> 
 	<?php
 		}

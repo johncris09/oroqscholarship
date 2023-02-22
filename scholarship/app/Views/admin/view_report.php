@@ -33,8 +33,7 @@
 
                         ?>
                         <a href="<?= $preview  ?>?<?= $query_string ?>"  class="btn btn-primary"> <i class="mdi mdi-printer"></i> Print Preview</a>
-                    </div>
-                    <!-- <h4 class="header-title"><?= $page_title; ?></h4>   -->
+                    </div> 
                 </div>
                 <div class="card-body"> 
                     <div class="text-center">   
