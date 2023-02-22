@@ -32,13 +32,13 @@
                             }
 
                         ?>
-                        <a href="<?= $preview  ?>?<?= $_SERVER["QUERY_STRING"]  ?>"  class="btn btn-primary"> <i class="mdi mdi-printer"></i> Print Preview</a>
+                        <a href="<?= $preview  ?>?<?= $query_string ?>"  class="btn btn-primary"> <i class="mdi mdi-printer"></i> Print Preview</a>
                     </div>
                     <!-- <h4 class="header-title"><?= $page_title; ?></h4>   -->
                 </div>
                 <div class="card-body"> 
                     <div class="text-center">   
-                        <h4><?= $semester ?> Semester List of <?= $status ?> <?= $scholarship_type ?> Scholarship Applicants for SY: <?= $school_year ?></h4>
+                        <h4><?= $semester ?> Semester List of <?= $status ?> <?= $scholarship_type ?> Scholarship Applicants for SY: <?=  str_replace("SY: ", "", $school_year);  ?></h4>
                     </div>
                     <table id="report-table" class="table table-striped table-inverse table-responsive">
                         <thead class="bg-primary text-white">
