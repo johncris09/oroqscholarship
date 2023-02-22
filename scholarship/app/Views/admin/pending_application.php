@@ -36,7 +36,13 @@
                             <table id="senior-high-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>   
-                                        <th></th>  
+                                        <?php
+                                            if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                                        ?>  
+                                            <th></th> 
+                                        <?php
+                                            }
+                                        ?> 
                                         <th>Application ID</th>  
                                         <th>SY</th>  
                                         <th>Name</th>  
@@ -52,8 +58,14 @@
                         <div class="tab-pane  " id="college-tab">
                             <table id="college-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
-                                    <tr>   
-                                        <th></th> 
+                                    <tr>    
+                                        <?php
+                                            if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                                        ?>  
+                                            <th></th> 
+                                        <?php
+                                            }
+                                        ?>   
                                         <th>Application ID</th> 
                                         <th>SY</th>    
                                         <th>Name</th>  
@@ -69,8 +81,14 @@
                         <div class="tab-pane " id="tvet-tab"> 
                             <table id="tvet-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
-                                    <tr>   
-                                        <th></th> 
+                                    <tr>    
+                                        <?php
+                                            if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                                        ?>  
+                                            <th></th> 
+                                        <?php
+                                            }
+                                        ?>    
                                         <th>Application ID</th>  
                                         <th>SY</th>  
                                         <th>Name</th>  
@@ -126,8 +144,14 @@
                         app_year: "<?php echo isset($_GET['app_year']) ?  $_GET['app_year']: ''?>", 
                     },
                 },
-                columns: [  
-                    { data: 'ID' },  
+                columns: [   
+                    <?php
+                        if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                    ?>  
+                        { data: 'ID' }, 
+                    <?php
+                        }
+                    ?> 
                     {
                         data  : 'ID',
                         render: function(data, type, row, meta){ 
@@ -155,6 +179,9 @@
                     { data: 'AppYear' },  
                     { data: 'AppStatus' },   
                 ],
+                <?php
+                    if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                ?>   
                 columnDefs: [
                     {
                         targets: 0,
@@ -166,11 +193,11 @@
                 select: {
                     style: 'multi'
                 },
-                order: [[1, 'asc']] ,
+                order: [[1, 'asc']] , 
                 dom: 'Bfrtip', 
                 buttons: [
                     {
-                        text: '<i class="mdi mdi-trash-can-outline"></i>Bulk Disapproved',
+                        text: '<i class="mdi mdi-trash-can-outline"></i>Bulk Disapproved', 
                         className: 'btn-danger btn-sm',
                         action: function () {
                             var rows_selected = senior_high_table.column(0).checkboxes.selected(); 
@@ -260,6 +287,9 @@
                         }
                     }
                 ]
+                <?php
+                    }
+                ?>
             });  
  
             var college_table = $('#college-table').DataTable({
@@ -275,8 +305,14 @@
                         app_year: "<?php echo isset($_GET['app_year']) ?  $_GET['app_year']: ''?>", 
                     }, 
                 },
-                columns: [  
-                    { data: 'ID' }, 
+                columns: [   
+                    <?php
+                        if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                    ?>  
+                        { data: 'ID' }, 
+                    <?php
+                        }
+                    ?> 
                     {
                         data  : 'ID',
                         render: function(data, type, row, meta){ 
@@ -304,6 +340,9 @@
                     { data: 'colYearLevel' },  
                     { data: 'colAppStat' },   
                 ],  
+                <?php
+                    if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                ?>   
                 columnDefs: [
                     {
                         targets: 0,
@@ -315,7 +354,7 @@
                 select: {
                     style: 'multi'
                 },
-                order: [[1, 'asc']] ,
+                order: [[1, 'asc']] , 
                 dom: 'Bfrtip', 
                 buttons: [
                     {
@@ -408,7 +447,10 @@
                               
                         }
                     }
-                ] 
+                ]
+                <?php 
+                    }
+                ?> 
 
             });  
 
@@ -426,7 +468,13 @@
                     },
                 },
                 columns: [   
-                    { data: 'ID' },  
+                    <?php
+                        if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                    ?>  
+                        { data: 'ID' }, 
+                    <?php
+                        }
+                    ?> 
                     {
                         data  : 'ID',
                         render: function(data, type, row, meta){ 
@@ -455,7 +503,10 @@
                     { data: 'colYearLevel' },  
                     { data: 'colAppStat' },   
                 ],  
-                
+                 
+                <?php
+                    if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                ?>  
                 columnDefs: [
                     {
                         targets: 0,
@@ -561,6 +612,9 @@
                         }
                     }
                 ] 
+                <?php 
+                    }
+                ?> 
             });  
 
             $('#senior-high-table tbody').on( 'dblclick', 'tr', function () {
