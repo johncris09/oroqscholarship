@@ -62,7 +62,7 @@ $db = db_connect();
                         <form action="<?= base_url('search') ?>" method="get" class="app-search">
                             <div class="app-search-box dropdown">
                                 <div class="input-group">
-                                    <input type="search" value="<?php echo isset($_GET['search']) ? $_GET['search'] : "" ?>" name="search" class="form-control" placeholder="Search..." id="top-search">
+                                    <input type="search" value="<?php echo isset($_GET['search']) ? $_GET['search'] : "" ?>" name="search" class="form-control" placeholder="Search Name ..." id="top-search">
                                     <button class="btn input-group-text" type="submit">
                                         <i class="fe-search"></i>
                                     </button>
@@ -77,7 +77,7 @@ $db = db_connect();
                         </a>
                         <div class="dropdown-menu dropdown-lg dropdown-menu-end p-0">
                             <form action="<?= base_url('search') ?>" name="search" method="get"  class="p-3">
-                                <input type="text"  name="search" value="<?php echo isset($_GET['search']) ? $_GET['search'] : "" ?>" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
+                                <input type="text"  name="search" value="<?php echo isset($_GET['search']) ? $_GET['search'] : "" ?>" class="form-control" placeholder="Search  Name ..." aria-label="Recipient's username">
                             </form>
                         </div>
                     </li>
@@ -240,13 +240,13 @@ $db = db_connect();
                                     <li> 
                                         <a href="<?= base_url('generate_report') ?>">  
                                             <i class="mdi mdi-chart-areaspline"></i>
-                                            <span> Generat Report </span>
+                                            <span> Generate Report </span>
                                         </a>
                                     </li>  
                                     <li> 
                                         <a href="<?= base_url('generate_payroll') ?>">  
                                             <i class="mdi mdi-format-list-text"></i>
-                                            <span> Generat Payroll </span>
+                                            <span> Generate Payroll </span>
                                         </a>
                                     </li> 
                             <?php
@@ -489,7 +489,7 @@ $db = db_connect();
 		<script src="https://unpkg.com/dropzone"></script>
 		<script src="https://unpkg.com/cropperjs"></script> 
         <script src="https://fengyuanchen.github.io/compressorjs/js/compressor.js"></script>
-        <script src="https://jasonday.github.io/printThis/printThis.js"></script>    >       
+        <script src="https://jasonday.github.io/printThis/printThis.js"></script> 
         <?= script_tag('public/assets/apexcharts/apexcharts.js'); ?>  
         <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
         <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
