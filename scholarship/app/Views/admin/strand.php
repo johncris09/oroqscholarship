@@ -42,12 +42,13 @@
                 </div>
                 <form id="add-new-strand-form"> 
                     <div class="modal-body ">
+                        <code>Note: * is required field</code>
                         <div class="form-group">
-                            <label for="field-1" class="form-label">Strand <span class="text-danger">*</span></label>
+                            <label for="field-1" class="form-label">Strand <?= $required_field; ?></label>
                             <input type="text" name="strand" class="form-control"  placeholder="Strand" required> 
                         </div> 
                         <div class="form-group">
-                            <label for="field-1" class="form-label">Manager <span class="text-danger">*</span></label>
+                            <label for="field-1" class="form-label">Manager <?= $required_field; ?></label>
                             <select class="form-control" name="manager" id="" required>
                                 <option value="">Select</option>
                                 <option value="Active">Active</option>
@@ -75,13 +76,14 @@
                 </div>
                 <form id="update-strand-form"> 
                     <div class="modal-body ">
+                        <code>Note: * is required field</code>
                         <input type="hidden" name="id">
                         <div class="form-group">
-                            <label for="field-1" class="form-label">Strand</label>
+                            <label for="field-1" class="form-label">Strand <?= $required_field; ?></label>
                             <input type="text" name="strand" class="form-control"  placeholder="Strand" required> 
                         </div> 
                         <div class="form-group">
-                            <label for="field-1" class="form-label">Manager</label>
+                            <label for="field-1" class="form-label">Manager <?= $required_field; ?></label>
                             <select class="form-control" name="manager" id="" required>
                                 <option value="">Select</option>
                                 <option value="Active">Active</option>

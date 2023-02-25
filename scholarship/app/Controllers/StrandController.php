@@ -4,13 +4,16 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\StrandModel;
+use Config\Custom_config;
 
 class StrandController extends BaseController
 {
 
     public function index()
     {
-        $data["page_title"] = "Strand";
+        $data["page_title"]     = "Strand";
+        $config                 = new Custom_config();
+        $data['required_field'] = $config->requiredField; 
         return view('admin/strand', $data);
     }
 

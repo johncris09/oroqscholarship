@@ -39,14 +39,15 @@
                     <h4 class="modal-title">Add New</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="add-new-course-form" class="validation-form"> 
-                    <div class="modal-body ">
+                <form id="add-new-course-form" class="validation-form">
+                    <div class="modal-body ">  
+                        <code>Note: * is required field</code>
                         <div class="form-group">
-                            <label for="field-1" class="form-label">Course</label>
+                            <label for="field-1" class="form-label">Course <?= $required_field; ?></label>
                             <input type="text" name="course" class="form-control"  placeholder="Course" required> 
                         </div> 
                         <div class="form-group">
-                            <label for="field-1" class="form-label">Manager</label>
+                            <label for="field-1" class="form-label">Manager <?= $required_field; ?></label>
                             <select class="form-control" name="manager"   required>
                                 <option value="">Select</option>
                                 <option value="Active">Active</option>
@@ -74,13 +75,14 @@
                 </div>
                 <form id="update-course-form"> 
                     <div class="modal-body ">
+                        <code>Note: * is required field</code>
                         <input type="hidden" name="id">
                         <div class="form-group">
-                            <label for="field-1" class="form-label">Course</label>
+                            <label for="field-1" class="form-label">Course <?= $required_field; ?></label>
                             <input type="text" name="course" class="form-control"  placeholder="Course" required> 
                         </div> 
                         <div class="form-group">
-                            <label for="field-1" class="form-label">Manager</label>
+                            <label for="field-1" class="form-label">Manager <?= $required_field; ?></label>
                             <select class="form-control" name="manager" id="" required>
                                 <option value="">Select</option>
                                 <option value="Active">Active</option>

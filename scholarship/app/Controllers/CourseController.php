@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\CourseModel;
+use Config\Custom_config;
 
 class CourseController extends BaseController
 {
@@ -11,13 +12,15 @@ class CourseController extends BaseController
     public function index()
     {
         $data["page_title"] = "Course";
+        $config                 = new Custom_config();
+        $data['required_field'] = $config->requiredField; 
         return view('admin/course', $data);
     }
 
 
     public function get_all()
     {
-        $course       = new CourseModel();
+        $course                 = new CourseModel(); 
         $data['data'] = $course->orderBy('colCourse', 'asc')->findAll(); 
         echo Json_encode($data);
     }
