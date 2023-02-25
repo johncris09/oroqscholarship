@@ -6,12 +6,21 @@ use App\Controllers\BaseController;
 use App\Models\AuthGroupModel;
 use App\Models\AuthIdentifierModel;
 use CodeIgniter\Shield\Entities\User;
+use App\Models\SchoolModel;
+use Config\Custom_config;
+use App\Models\CollegeSchoolModel;
 
 class UserController extends BaseController
 {
     public function index()
     {
         $data["page_title"] = "User";
+        $config             = new Custom_config(); 
+        $school                 = new SchoolModel();
+        $college_school         = new CollegeSchoolModel(); 
+        $data['school']         = $school->asArray()->orderBy('schoolname', 'ASC')->findAll();
+        $data['college_school'] = $college_school->asArray()->orderBy('colschoolname', 'ASC')->findAll();
+        $data['required_field'] = $config->requiredField; 
         return view('admin/user', $data);
     }
 
@@ -24,14 +33,16 @@ class UserController extends BaseController
 
         foreach ($user->asArray()->findall() as $row) {
             $data["data"][]   = [
-                "id"         => $row['id'], //id
-                "firstname"  => $row['firstname'], //firstname
-                "middlename" => $row['middlename'], //middlename
-                "lastname"   => $row['lastname'], //lastname
-                "username"   => $row['username'], //username
-                "created_at" => $row['created_at'], //created_at
-                "active"     => $row['active'], //active
-                "email"      => $authidentities
+                "id"               => $row['id'], //id
+                "firstname"        => $row['firstname'], //firstname
+                "middlename"       => $row['middlename'], //middlename
+                "lastname"         => $row['lastname'], //lastname
+                "username"         => $row['username'], //username
+                "created_at"       => $row['created_at'], //created_at
+                "active"           => $row['active'], //active
+                "scholarship_type" => $row['scholarship_type'], //scholarship_type
+                "school"           => $row['school'], //school
+                "email"            => $authidentities
                     ->asArray()
                     ->where('user_id', $row['id'])
                     ->where('type ', 'email_password')
@@ -83,6 +94,8 @@ class UserController extends BaseController
                 'username'   => $this->request->getPost('username'),
                 'email'      => $this->request->getPost('email'),
                 'password'   => $this->request->getPost('password'),
+                'scholarship_type'   => $this->request->getPost('scholarship_type'),
+                'school'   => $this->request->getPost('school'),
             ]);
 
             $users->save($user);
