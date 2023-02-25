@@ -88,8 +88,56 @@ class TvetModel extends Model
         $builder = $this->db->table($this->table);
         $query = $builder->countAllResults();
         return $query;
+    } 
+
+    public function count_application($data)
+    {
+        $builder = $this->db
+            ->table($this->table) 
+            ->where($data) 
+            ->where('colManager', 'Active');
+        $query = $builder->countAllResults();
+        return $query;
+    } 
+    
+
+    // Approved
+    public function get_tot_approved($data)
+    {
+        $builder = $this->db
+            ->table($this->table) 
+            ->like('colAppStat', 'approved', 'both' )
+            ->where('colAppStat !=', 'disapproved')
+            ->where($data)
+            ->where('colManager', 'Active');
+        $query = $builder->countAllResults();
+        return $query; 
     }
 
+    // Disapproved
+    public function get_tot_disapproved($data)
+    {
+        $builder = $this->db
+            ->table($this->table)  
+            ->where('colAppStat', 'disapproved')
+            ->where($data)
+            ->where('colManager', 'Active');
+        $query = $builder->countAllResults();
+        return $query; 
+    } 
+
+    // Pending
+    public function get_tot_pending($data)
+    {
+        $builder = $this->db
+            ->table($this->table)  
+            ->where('colAppStat', 'pending')
+            ->where($data)
+            ->where('colManager', 'Active');
+        $query = $builder->countAllResults();
+        return $query; 
+    }
+ 
     public function count_approved($data)
     {
         $builder = $this->db

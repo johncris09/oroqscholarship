@@ -87,7 +87,59 @@ class SeniorHighModel extends Model
             ->table($this->table);
         $query = $builder->countAllResults();
         return $query;
+    }   
+
+    public function count_application($data)
+    {
+        $builder = $this->db
+            ->table($this->table) 
+            ->where($data)
+            ->where('AppManager', 'Active');
+        $query = $builder->countAllResults();
+        return $query;
     }
+    
+    
+    // Approved
+    public function get_tot_approved($data)
+    {
+        $builder = $this->db
+            ->table($this->table) 
+            ->like('AppStatus', 'approved', 'both' )
+            ->where('AppStatus !=', 'disapproved')
+            ->where($data)
+            ->where('AppManager', 'Active');
+        $query = $builder->countAllResults();
+        return $query;
+    }
+
+    
+    
+    // Disapproved
+    public function get_tot_disapproved($data)
+    {
+        $builder = $this->db
+            ->table($this->table)  
+            ->where('AppStatus', 'disapproved')
+            ->where($data)
+            ->where('AppManager', 'Active');
+        $query = $builder->countAllResults();
+        return $query; 
+    } 
+
+    // Pending
+    public function get_tot_pending($data)
+    {
+        $builder = $this->db
+            ->table($this->table)  
+            ->where('AppStatus', 'pending')
+            ->where($data)
+            ->where('AppManager', 'Active');
+        $query = $builder->countAllResults();
+        return $query; 
+    }
+
+
 
     public function count_approved($data)
     {
@@ -253,8 +305,9 @@ class SeniorHighModel extends Model
             ->where($data)
             ->where('AppStatus !=', "")
             ->groupBy('AppStatus')
-            ->get()
-            ->getResult();
+            ->getCompiledSelect();
+        //     ->get()
+        //     ->getResult();
         return $query;
     }
     public function get_tot_by_school($data)

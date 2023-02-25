@@ -512,16 +512,12 @@
             //============================================================================= 
             
             var scholarship_status = {
-                colors: ['#3AB0FF', '#432C7A', '#F94892', '#FFE15D'],
+                colors: ['#3AB0FF', '#432C7A',   '#FFE15D'],
                 series: [
                     {
                         name: 'Approved',
                         data: <?php echo isset($scholarship_status['approved']) ?  json_encode( $scholarship_status['approved']):  json_encode([0]); ?>
-                    }, 
-                    {
-                        name: 'Additional Approved',
-                        data: <?php echo isset($scholarship_status['additional_approved']) ?  json_encode( $scholarship_status['additional_approved']):  json_encode([0]); ?> 
-                    }, 
+                    },  
                     {
                         name: 'Disapproved',
                         data: <?php echo isset($scholarship_status['disapproved']) ?  json_encode( $scholarship_status['disapproved']):  json_encode([0]); ?>  
@@ -580,15 +576,10 @@
             var total_scholarship_status = { 
                 series: [
                     { 
-                        data             : [
-                            { 
-                                x        : 'Additional Approved',
-                                y        : <?php echo isset($total_scholarship_status[0]['total']) ?  $total_scholarship_status[0]['total']: 0; ?>,
-                                fillColor: '#3AB0FF', 
-                            },
+                        data             : [ 
                             { 
                                 x        : 'Approved',
-                                y        : <?php echo isset($total_scholarship_status[1]['total']) ?  $total_scholarship_status[1]['total']: 0; ?>,
+                                y        : <?php echo isset($total_scholarship_status[0]['total']) ?  $total_scholarship_status[0]['total']: 0; ?>,
                                 fillColor: '#3AB0FF', 
                             },
                             { 
@@ -598,8 +589,8 @@
                             },
                             { 
                                 x        : 'Disapproved',
-                                y        : <?php echo isset($total_scholarship_status[3]['total']) ?  $total_scholarship_status[3]['total']: 0; ?>,
-                                fillColor: '#F94892', 
+                                y        : <?php echo isset($total_scholarship_status[1]['total']) ?  $total_scholarship_status[1]['total']: 0; ?>,
+                                fillColor: '#432C7A', 
                             }, 
                         ]
                     },  
@@ -624,7 +615,7 @@
                     colors: ['transparent']
                 },
                 xaxis: {
-                    categories: [ 'Additional Approved',  'Approved', 'Pending',  'Disapproved', ],
+                    categories: [ 'Approved', 'Pending',  'Disapproved', ],
                 },
                 yaxis: {
                     title: {
