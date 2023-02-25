@@ -24,6 +24,8 @@
                                 <th>Username</th> 
                                 <th>Email</th> 
                                 <th>Role Type</th> 
+                                <th>Scholarship Type</th> 
+                                <th>School</th> 
                                 <th>Created At</th> 
                             </tr>
                         </thead> 
@@ -44,43 +46,74 @@
                 </div>
                 <form id="add-new-user-form" class="parsley-examples"> 
                     <div class="modal-body ">
+                        <code>Note: * is required field</code>
                         <div class="form-group">
-                            <label for=" " class="form-label">First Name <span class="text-danger">*</span> </label>
-                            <input type="text" name="firstname"  class="form-control" required   placeholder="First Name" />
+                            <label for=" " class="form-label">First Name <?= $required_field; ?> </label>
+                            <input type="text" name="firstname"  value="asdfasdf"  class="form-control" required   placeholder="First Name" />
                         </div>  
                         <div class="form-group">
                             <label for=" " class="form-label">Middle Name</label>
-                            <input type="text" name="middlename"  class="form-control" placeholder="Middle Name" />
+                            <input type="text" name="middlename"  value="asdfasdf"  class="form-control" placeholder="Middle Name" />
                         </div>    
                         <div class="form-group">
-                            <label for=" " class="form-label">Last Name <span class="text-danger">*</span></label>
-                            <input type="text"  name="lastname" class="form-control" required   placeholder="Last Name" />
+                            <label for=" " class="form-label">Last Name <?= $required_field; ?></label>
+                            <input type="text"  name="lastname" value="asdfasdf"  class="form-control" required   placeholder="Last Name" />
                         </div>  
                         <div class="form-group">
-                            <label for=" " class="form-label">Email <span class="text-danger">*</span></label>
-                            <input type="email" class="form-control" name="email" required  parsley-type="email" placeholder="Enter a valid e-mail" />
+                            <label for=" " class="form-label">Email <?= $required_field; ?></label>
+                            <input type="email" class="form-control"  value="asdfasdf@asdf.asdf" name="email" required  parsley-type="email" placeholder="Enter a valid e-mail" />
                         </div>  
                         <div class="form-group">
-                            <label for=" " class="form-label">Username <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="username" required data-parsley-length="[8, 40]"   placeholder="Enter  username" />
+                            <label for=" " class="form-label">Username <?= $required_field; ?></label>
+                            <input type="text" class="form-control" value="asdfasdf"  name="username" required data-parsley-length="[8, 40]"   placeholder="Enter  username" />
                         </div> 
                         <div class="form-group">
-                            <label for=" " class="form-label">Password <span class="text-danger">*</span></label>
-                            <input type="password" name="password" id="password" required data-parsley-type="alphanum" data-parsley-length="[8, 40]"  class="form-control"  placeholder="Password"  > 
+                            <label for=" " class="form-label">Password <?= $required_field; ?></label>
+                            <input type="password" name="password"  value="asdfasdf" id="password" required data-parsley-type="alphanum" data-parsley-length="[8, 40]"  class="form-control"  placeholder="Password"  > 
                         </div> 
                         <div class="form-group">
-                            <label for=" " class="form-label">Confirm Password <span class="text-danger">*</span></label>
-                            <input type="password" class="form-control" required data-parsley-equalto="#password" placeholder="Re-Type Password" />
+                            <label for=" " class="form-label">Confirm Password <?= $required_field; ?></label>
+                            <input type="password" class="form-control" value="asdfasdf"  required data-parsley-equalto="#password" placeholder="Re-Type Password" />
                         </div>    
                         <div class="form-group">
-                            <label for="" class="form-label">Role Type <span class="text-danger">*</span></label> 
+                            <label for="" class="form-label">Role Type <?= $required_field; ?></label> 
                             <select name="group"  class="form-control"  required>
                                 <option value="">Select</option>
                                 <option value="superadmin">Super Admin</option>
                                 <option value="admin">Admin</option> 
-                                <option value="user">User</option> 
+                                <option value="user">User</option>  
                             </select>  
-                        </div>    
+                        </div>   
+                        <div class="form-group d-none scholarship-type">
+                            <label for="" class="form-label">Scholarship Type</label> 
+                            <select name="scholarship_type" class="form-control"  >
+                                <option value="">Select</option>
+                                <option value="shs">Senior Hig School</option>
+                                <option value="college">College</option> 
+                                <option value="tvet">Tvet</option>  
+                            </select>  
+                        </div>  
+                        <div class="form-group d-none school"> 
+                            <label for="" class="form-label">School</label> 
+                            <select class="form-control" name="school" >
+                                <option value="">Select</option> 
+                                <div class="shs-school d-none"> 
+                                    <?php foreach($school as $row):?> 
+                                        <?php if($row['SchoolName'] != ""):?> 
+                                            <option class="d-none" data-scholarship-type="shs" value="<?= $row['SchoolName']  ?>"><?= $row['SchoolName']  ?></option>  
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </div>
+                                <div class="college-tvet-school d-none">
+                                    <?php foreach($college_school as $row):?> 
+                                        <?php if($row['colSchoolName'] != ""):?> 
+                                            <option  class="d-none" data-scholarship-type="colege_tvet" value="<?= $row['colSchoolName']  ?>"><?= $row['colSchoolName']  ?></option>  
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </div>
+                            </select> 
+                        </div>  
+                        
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
@@ -103,34 +136,34 @@
                 
                 <form id="update-user-form" class="parsley-examples"> 
                     <div class="modal-body ">
+                        <code>Note: * is required field</code>
                         <input type="hidden" name="id"  class="form-control" required   />
                         <div class="form-group">
-                            <label for=" " class="form-label">First Name</label>
-                            <input type="text" name="firstname"  class="form-control" required   placeholder="First Name" />
+                            <label for=" " class="form-label">First Name <?= $required_field; ?></label>
+                            <input type="text" name="firstname" value="asdfasdfasd"  class="form-control" required   placeholder="First Name" />
                         </div>  
                         <div class="form-group">
                             <label for=" " class="form-label">Middle Name</label>
-                            <input type="text" name="middlename"  class="form-control"     placeholder="Middle Name" />
+                            <input type="text" name="middlename" value="asdfasdfasd"  class="form-control"     placeholder="Middle Name" />
                         </div>    
                         <div class="form-group">
-                            <label for=" " class="form-label">Last Name</label>
-                            <input type="text"  name="lastname" class="form-control" required   placeholder="Last Name" />
+                            <label for=" " class="form-label">Last Name <?= $required_field; ?></label>
+                            <input type="text"  name="lastname" value="asdfasdfasd" class="form-control" required   placeholder="Last Name" />
                         </div>  
                         <div class="form-group">
-                            <label for=" " class="form-label">Email</label>
-                            <input type="email" class="form-control" name="email" required  parsley-type="email" placeholder="Enter a valid e-mail" />
+                            <label for=" " class="form-label">Email <?= $required_field; ?></label>
+                            <input type="email" class="form-control" value="asdfasdfasd@ashdjasd.com" name="email" required  parsley-type="email" placeholder="Enter a valid e-mail" />
                         </div>  
                         <div class="form-group">
-                            <label for=" " class="form-label">Username</label>
-                            <input type="text" class="form-control" name="username" required data-parsley-length="[8, 40]"   placeholder="Enter  username" />
+                            <label for=" " class="form-label">Username <?= $required_field; ?></label>
+                            <input type="text" class="form-control" value="asdfasdfasd" name="username" required data-parsley-length="[8, 40]"   placeholder="Enter  username" />
                         </div>  
                         <div class="form-group">
-                            <label for="" class="form-label">Role Type</label> 
+                            <label for="" class="form-label">Role Type <?= $required_field; ?></label> 
                             <select name="group"  class="form-control"  required>
                                 <option value="">Select</option>
                                 <option value="superadmin">Super Admin</option>
-                                <option value="admin">Admin</option> 
-                                <option value="user">User</option> 
+                                <option value="admin">Admin</option>  
                             </select>  
                         </div>    
                     </div>
@@ -184,7 +217,32 @@
 <?= $this->section('pageScript') ?>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function() { 
+
+            $('select[name=scholarship_type]').change(function(){
+                var val = $(this).val() 
+                $('.school').removeClass('d-none')
+                if(val == "shs"){
+                    $('select[name="school"]').val('') 
+                    $('select[name="school"] option[data-scholarship-type="shs"]').removeClass('d-none') 
+                    $('select[name="school"] option[data-scholarship-type="colege_tvet"]').addClass('d-none') 
+ 
+                }
+                if(val == "college" || val == "tvet"){  
+                    $('select[name="school"]').val('')
+                    $('select[name="school"] option[data-scholarship-type="colege_tvet"]').removeClass('d-none') 
+                    $('select[name="school"] option[data-scholarship-type="shs"]').addClass('d-none') 
+                     
+                }
+
+                if( val == ""){ 
+                    $('.school').addClass('d-none') 
+                    $('select[name="school"] option[data-scholarship-type="shs"]').addClass('d-none')
+                    $('select[name="school"] option[data-scholarship-type="colege_tvet"]').addClass('d-none')
+
+                }
+            })
+
 
             $(document).ready(function() {
                 $(".parsley-examples").parsley()
@@ -196,13 +254,31 @@
                     return !1
                 })
             });
+
+
+            
+            $('select[name=group]').change(function(){
+                var val = $(this).val() 
+                if(val == "user"){ 
+                    $('select[name=scholarship_type]').val('')
+                    $('.scholarship-type').removeClass('d-none').attr('required', true) 
+                }else{ 
+                    $('.scholarship-type').addClass('d-none')
+                    $('.school').addClass('d-none')
+                    $('select[name=scholarship_type]').val('') 
+                    $('select[name=school]').val('') 
+                }
+            })
+
+
+            
  
             var table = $('#user-table').DataTable({
                 "scrollY"  : 450,
                 "scrollX"  : true, 
                 deferRender: true, 
                 ajax       : {
-                    url: 'user/get_all',  
+                    url: 'user/get_all', 
                 },
                 columns    : [ 
                     { data: 'id' },  
@@ -235,6 +311,8 @@
                     { data: 'username' }, 
                     { data: 'email' }, 
                     { data: 'group' }, 
+                    { data: 'scholarship_type' },
+                    { data: 'school' },
                     {
                         data  : 'created_at',
                         render: function(data, type, row, meta){ 
@@ -284,7 +362,7 @@
                     method  : "post", 
                     data    : $("#add-new-user-form").serialize(),
                     dataType: "json", 
-                    success : function (data) { 
+                    success : function (data) {  
                         if(data.response){ 
                             Swal.fire({
                                 title: "Good job!",
