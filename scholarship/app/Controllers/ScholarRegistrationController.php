@@ -13,6 +13,7 @@ use App\Models\SequenceModel;
 use App\Models\StrandModel;
 use App\Models\TvetModel;
 use Config\Custom_config;
+use App\Models\SearchApplicationModel;
 
 class ScholarRegistrationController extends BaseController
 {
@@ -24,6 +25,7 @@ class ScholarRegistrationController extends BaseController
         $this->college_registration     = new CollegeModel($db);
         $this->tvet_registration        = new TvetModel($db);
         $this->config_model             = new ConfigModel($db);
+        $this->search_model             = new SearchApplicationModel($db); 
         $this->uri                      = service('uri');
     }
 
@@ -318,5 +320,26 @@ class ScholarRegistrationController extends BaseController
         $app_no_id = $this->tvet_registration->get_latest_app_no_id($data);
         $app_no_id +=  1;
         echo Json_encode($app_no_id);
+    }
+
+
+    public function shs_autofill()
+    {
+        $data = $this->search_model->shs_autofill( $_POST['search']); 
+        echo Json_encode($data);
+    }
+
+    
+    public function college_autofill()
+    {
+        $data = $this->search_model->college_autofill( $_POST['search']); 
+        echo Json_encode($data);
+    }
+
+    
+    public function tvet_autofill()
+    {
+        $data = $this->search_model->tvet_autofill( $_POST['search']); 
+        echo Json_encode($data);
     }
 }
