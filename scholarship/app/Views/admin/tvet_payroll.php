@@ -121,7 +121,7 @@
 				<th>Seq</th>
 				<th rowspan="2">Name</th>
 				<th rowspan="2">Address</th>
-				<th rowspan="2" colspan="2">Strand</th>
+				<th rowspan="2" colspan="2">Course</th>
 				<th rowspan="2">Year Level</th>
 				<th rowspan="2">School</th>
 				<th rowspan="2">AVAILMENT</th>
