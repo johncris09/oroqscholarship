@@ -124,7 +124,7 @@
                         <div class="tab-pane active" id="senior-high-tab">  
                             <form action="generate_report/shs_report" method="post">
                                 <div class="row justify-content-center">
-                                    <div class="col-9">  
+                                    <div class="col-md-9">  
                                         <label for="school" class="form-label">School</label>
                                         <select class="form-control" id="school" name="school" >
                                             <option value="">Select</option> 
@@ -137,7 +137,7 @@
                                     </div>  
                                 </div>
                                 <div class="row justify-content-center">
-                                    <div class="col-3">   
+                                    <div class="col-md-3">   
                                         <label for="semester" class="form-label">Semester</label>
                                         <select class="form-control" name="sem"  >
                                             <option value="">Select</option> 
@@ -146,7 +146,7 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </div>  
-                                    <div class="col-3">   
+                                    <div class="col-md-3">   
                                         <label for="school_year" class="form-label">SY</label>
                                         <select class="form-control"   name="school_year"  >
                                             <option value="">Select</option> 
@@ -155,22 +155,23 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-                                    <div class="col-3">   
+                                    <div class="col-md-3">   
                                         <label for="status" class="form-label">Status</label>
                                         <select class="form-control"  name="status" >
                                             <option value="">Select</option> 
                                             <?php  foreach($scholar_status as $row){   ?> 
                                                 <option  value="<?= $row ?>"><?= $row ?></option>  
                                             <?php } ?> 
+                                            <option value="All Approved">All Approved</option>
                                         </select>  
                                     </div>
                                 </div> 
                                 <div class="row justify-content-center">
-                                    <div class="col-3">
+                                    <div class="col-md-3">
                                         <label for="availment" class="form-label">Availment</label>
                                         <input type="number" min="1" max="8" step="1" class="form-control" name="availment" >
                                     </div>  
-                                    <div class="col-3">
+                                    <div class="col-md-3">
                                         <label for="gender" class="form-label">Sex</label>
                                         <select class="form-control" id="gender" name="gender" >
                                             <option value="">Select</option> 
@@ -178,7 +179,7 @@
                                             <option value="Female">Female</option>  
                                         </select>
                                     </div> 
-                                    <div class="col-3">
+                                    <div class="col-md-3">
                                         <label for="year_level" class="form-label">Year Level</label>
                                         <select class="form-control" name="year_level" >
                                             <option value="">Select</option> 
@@ -189,7 +190,7 @@
                                     </div>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <div class="col-9">
+                                    <div class="col-md-9">
                                         <label for="address" class="form-label">Address</label>
                                         <select class="form-control" name="address"   >
                                             <option value="">Select</option> 
@@ -200,7 +201,7 @@
                                     </div>  
                                 </div>
                                 <div class="row justify-content-center">
-                                    <div class="col-3">
+                                    <div class="col-md-3">
                                         <label for="app_no_year" class="form-label">App No</label> 
                                         <select class="form-control" name="appnoyear"   >
                                             <option value="">Select</option> 
@@ -213,30 +214,30 @@
                                             ?> 
                                         </select>   
                                     </div>  
-                                    <div class="col-2">
+                                    <div class="col-md-2">
                                         <label class="form-label">Semester </label>
                                         <input type="number" class="form-control semester" name="appnosem" readonly>
                                     </div> 
-                                    <div class="col-2">
+                                    <div class="col-md-2">
                                         <label for="from" class="form-label">From </label>
                                         <input type="number" class="form-control" id="from" name="appnoidfrom" >
                                     </div> 
-                                    <div class="col-2">
+                                    <div class="col-md-2">
                                         <label for="to" class="form-label">To </label>
                                         <input type="number" class="form-control" id="to" name="appnoidto" >
-                                    </div>  
-                                </div> 
-                                <div class="row justify-content-center mt-3">
-                                    <div class="col-1">
-                                        <button type="submit" class="btn btn-primary btn-block rounded-pill">Generate</button> 
                                     </div>   
-                                </div>    
+                                </div>   
+                                <div class="row justify-content-center">
+                                    <div class="col-1 mt-2">
+                                        <button type="submit" class="btn btn-primary  ">Generate</button> 
+                                    </div>  
+                                </div>  
                             </form>
                         </div>
                         <div class="tab-pane  " id="college-tab">   
                             <form  action="generate_report/college_report" method="post">
                                 <div class="row justify-content-center">
-                                    <div class="col-9">  
+                                    <div class="col-md-9">  
                                         <label for="school" class="form-label">School</label>
                                         <select class="form-control" name="school" >
                                             <option value="">Select</option> 
@@ -249,7 +250,7 @@
                                     </div>  
                                 </div>
                                 <div class="row justify-content-center">
-                                    <div class="col-3">   
+                                    <div class="col-md-3">   
                                         <label for="semester" class="form-label">Semester</label>
                                         <select class="form-control" name="sem"  >
                                             <option value="">Select</option> 
@@ -258,7 +259,7 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </div>  
-                                    <div class="col-3">   
+                                    <div class="col-md-3">   
                                         <label for="school_year" class="form-label">SY</label>
                                         <select class="form-control"   name="school_year"  >
                                             <option value="">Select</option> 
@@ -267,7 +268,7 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-                                    <div class="col-3">   
+                                    <div class="col-md-3">   
                                         <label for="status" class="form-label">Status</label>
                                         <select class="form-control"  name="status" >
                                             <option value="">Select</option> 
@@ -278,11 +279,11 @@
                                     </div>
                                 </div> 
                                 <div class="row justify-content-center">
-                                    <div class="col-3">
+                                    <div class="col-md-3">
                                         <label for="availment" class="form-label">Availment</label>
                                         <input type="number" min="1" max="8" step="1" class="form-control" name="availment" >
                                     </div>  
-                                    <div class="col-3">
+                                    <div class="col-md-3">
                                         <label for="gender" class="form-label">Sex</label>
                                         <select class="form-control" id="gender" name="gender" >
                                             <option value="">Select</option> 
@@ -290,7 +291,7 @@
                                             <option value="Female">Female</option>  
                                         </select>
                                     </div> 
-                                    <div class="col-3">
+                                    <div class="col-md-3">
                                         <label for="year_level" class="form-label">Year Level</label>
                                         <select class="form-control" name="year_level" >
                                             <option value="">Select</option> 
@@ -301,7 +302,7 @@
                                     </div>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <div class="col-9">
+                                    <div class="col-md-9">
                                         <label for="address" class="form-label">Address</label>
                                         <select class="form-control" name="address"   >
                                             <option value="">Select</option> 
@@ -312,7 +313,7 @@
                                     </div>  
                                 </div>
                                 <div class="row justify-content-center">
-                                    <div class="col-3">
+                                    <div class="col-md-3">
                                         <label for="app_no_year" class="form-label">App No</label> 
                                         <select class="form-control" name="appnoyear"   >
                                             <option value="">Select</option> 
@@ -325,30 +326,30 @@
                                             ?> 
                                         </select>   
                                     </div>  
-                                    <div class="col-2">
+                                    <div class="col-md-2">
                                         <label class="form-label">Semester </label>
                                         <input type="number" class="form-control semester" name="appnosem" readonly>
                                     </div> 
-                                    <div class="col-2">
+                                    <div class="col-md-2">
                                         <label for="from" class="form-label">From </label>
                                         <input type="number" class="form-control" id="from" name="appnoidfrom" >
                                     </div> 
-                                    <div class="col-2">
+                                    <div class="col-md-2">
                                         <label for="to" class="form-label">To </label>
                                         <input type="number" class="form-control" id="to" name="appnoidto" >
                                     </div>  
-                                </div> 
-                                <div class="row justify-content-center mt-3">
-                                    <div class="col-1">
-                                        <button type="submit" class="btn btn-primary btn-block rounded-pill">Generate</button> 
-                                    </div>   
-                                </div>    
+                                </div>  
+                                <div class="row justify-content-center">
+                                    <div class="col-1 mt-2">
+                                        <button type="submit" class="btn btn-primary  ">Generate</button> 
+                                    </div>  
+                                </div>   
                             </form> 
                         </div> 
                         <div class="tab-pane  show " id="tvet-tab">  
                             <form action="generate_report/tvet_report" method="post">
                                 <div class="row justify-content-center">
-                                    <div class="col-9">  
+                                    <div class="col-md-9">  
                                         <label for="school" class="form-label">School</label>
                                         <select class="form-control" name="school" >
                                             <option value="">Select</option> 
@@ -361,7 +362,7 @@
                                     </div>  
                                 </div>
                                 <div class="row justify-content-center">
-                                    <div class="col-3">   
+                                    <div class="col-md-3">   
                                         <label for="semester" class="form-label">Semester</label>
                                         <select class="form-control" name="sem" >
                                             <option value="">Select</option> 
@@ -370,7 +371,7 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </div>  
-                                    <div class="col-3">   
+                                    <div class="col-md-3">   
                                         <label for="school_year" class="form-label">SY</label>
                                         <select class="form-control"   name="school_year"  >
                                             <option value="">Select</option> 
@@ -379,7 +380,7 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-                                    <div class="col-3">   
+                                    <div class="col-md-3">   
                                         <label for="status" class="form-label">Status</label>
                                         <select class="form-control"  name="status" >
                                             <option value="">Select</option> 
@@ -390,11 +391,11 @@
                                     </div>
                                 </div> 
                                 <div class="row justify-content-center">
-                                    <div class="col-3">
+                                    <div class="col-md-3">
                                         <label for="availment" class="form-label">Availment</label>
                                         <input type="number" min="1" max="8" step="1" class="form-control" name="availment" >
                                     </div>  
-                                    <div class="col-3">
+                                    <div class="col-md-3">
                                         <label for="gender" class="form-label">Sex</label>
                                         <select class="form-control" id="gender" name="gender" >
                                             <option value="">Select</option> 
@@ -402,7 +403,7 @@
                                             <option value="Female">Female</option>  
                                         </select>
                                     </div> 
-                                    <div class="col-3">
+                                    <div class="col-md-3">
                                         <label for="year_level" class="form-label">Year Level</label>
                                         <select class="form-control" name="year_level" >
                                             <option value="">Select</option> 
@@ -413,7 +414,7 @@
                                     </div>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <div class="col-9">
+                                    <div class="col-md-9">
                                         <label for="address" class="form-label">Address</label>
                                         <select class="form-control" name="address"   >
                                             <option value="">Select</option> 
@@ -424,7 +425,7 @@
                                     </div>  
                                 </div>
                                 <div class="row justify-content-center">
-                                    <div class="col-3">
+                                    <div class="col-md-3">
                                         <label for="app_no_year" class="form-label">App No</label> 
                                         <select class="form-control" name="appnoyear"   >
                                             <option value="">Select</option> 
@@ -437,24 +438,24 @@
                                             ?> 
                                         </select>   
                                     </div>  
-                                    <div class="col-2">
+                                    <div class="col-md-2">
                                         <label class="form-label">Semester </label>
                                         <input type="number" class="form-control semester" name="appnosem" readonly>
                                     </div> 
-                                    <div class="col-2">
+                                    <div class="col-md-2">
                                         <label for="from" class="form-label">From </label>
                                         <input type="number" class="form-control" id="from" name="appnoidfrom" >
                                     </div> 
-                                    <div class="col-2">
+                                    <div class="col-md-2">
                                         <label for="to" class="form-label">To </label>
                                         <input type="number" class="form-control" id="to" name="appnoidto" >
                                     </div>  
-                                </div> 
-                                <div class="row justify-content-center mt-3">
-                                    <div class="col-1">
-                                        <button type="submit" class="btn btn-primary btn-block rounded-pill">Generate</button> 
-                                    </div>   
-                                </div>    
+                                </div>   
+                                <div class="row justify-content-center">
+                                    <div class="col-1 mt-2">
+                                        <button type="submit" class="btn btn-primary  ">Generate</button> 
+                                    </div>  
+                                </div>  
                             </form>
                              
 

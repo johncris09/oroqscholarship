@@ -103,16 +103,16 @@
                 <div class="card-body">
                     <h4 class="header-title "><?= $page_title; ?></h4>
                     <p class="sub-header font-13">
-                        <code>Note: * is requiredfield</code>
+                        <code>Note: * is required field</code>
                     </p>
                     <ul class="nav nav-pills navtab-bg nav-justified">
                         <li class="nav-item ">
-                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link  active ">
+                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link   ">
                                 Senior High School Registration
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#college-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link  ">
+                            <a href="#college-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link  active">
                                 College Registration
                             </a>
                         </li>
@@ -123,12 +123,12 @@
                         </li>
                     </ul>
                     <div class="tab-content"> 
-                        <div class="tab-pane show active" id="senior-high-tab">  
+                        <div class="tab-pane show " id="senior-high-tab">  
                             <form id="senior-high-registration-form"  class="validation-form">
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-md-12">
                                         <div class="row justify-content-between">
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <div class="w-50">
                                                     <label for="" class="form-label">App No. </label> 
                                                     <div class="input-group mb-3"> 
@@ -143,7 +143,7 @@
                                                     </div>
                                                 </div> 
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label for="status" class="form-label">Status <?= $required_field; ?></label>
                                                 <h1 style="text-decoration: underline" class="text-danger">Pending</h1>
                                                 <input type="hidden" value="Pending" name="status"   readonly>
@@ -151,27 +151,27 @@
                                             </div>
                                         </div>
                                     </div>  
-                                    <div class="col-9">
+                                    <div class="col-md-9">
                                         <div class="row mt-3">
-                                            <div class="col-4">
+                                            <div class="col-md-4">
                                                 <label for="lastname" class="form-label">Last Name <?= $required_field; ?></label>
                                                 <input type="text" class="form-control text-capitalize"  name="lastname" required>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-md-4">
                                                 <label for="firstname" class="form-label">First Name <?= $required_field; ?></label>
                                                 <input type="text" class="form-control text-capitalize" name="firstname"  required>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-md-2">
                                                 <label for="middlename" class="form-label">M.I.</label>
                                                 <input type="text" class="form-control text-capitalize"   name="middlename">
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-md-2">
                                                 <label for="suffix" class="form-label">Suffix</label>
                                                 <input type="text" class="form-control text-capitalize" name="suffix">
                                             </div> 
                                         </div>
                                         <div class="row">
-                                            <div class="col-12">  
+                                            <div class="col-md-12">  
                                                 <label for="address" class="form-label">Address <?= $required_field; ?></label>
                                                 <select class="form-control" name="address"   required>
                                                     <option value="">Select</option> 
@@ -182,15 +182,15 @@
                                             </div>  
                                         </div>
                                         <div class="row">
-                                            <div class="col">
+                                            <div class="col-md-3">
                                                 <label for="birthdate"  class="form-label">Date of Birth <?= $required_field; ?></label>
                                                 <input type="date" class="form-control"   name="birthdate" required >
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-md-3">
                                                 <label for="age" class="form-label">Age <?= $required_field; ?></label>
                                                 <input type="number" class="form-control" name="age" readonly>
                                             </div>
-                                            <div class="col">
+                                            <div class="col-md-3">
                                                 <label for="civil_status" class="form-label">Civil Status <?= $required_field; ?></label>
                                                 <select class="form-control"  name="civil_status" required>
                                                     <option value="">Select</option> 
@@ -199,7 +199,7 @@
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
-                                            <div class="col">
+                                            <div class="col-md-3">
                                                 <label for="gender" class="form-label">Sex <?= $required_field; ?></label>
                                                 <select class="form-control" id="gender" name="gender" required>
                                                     <option value="">Select</option> 
@@ -209,28 +209,28 @@
                                             </div> 
                                         </div> 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label for="contact_no" class="form-label">Contact #</label>
                                                 <input type="text" class="form-control" name="contact_no" placeholder="0000 000 0000" data-toggle="input-mask" data-mask-format="0900 000 0000"  > 
                                                 <span class="font-13 text-muted">e.g "xxxx xxx xxxx"</span>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label for="ctc_no" class="form-label">CTC # <?= $required_field; ?></label>
                                                 <input type="text" class="form-control"   name="ctc_no" required>
                                             </div> 
                                         </div> 
                                         <div class="row" >
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label for="email" class="form-label">Facebook/Other</label>
                                                 <input type="text" class="form-control" name="email"  >
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label for="availment" class="form-label">Availment <?= $required_field; ?></label> 
                                                 <input type="number" min="1" max="8" step="1" class="form-control" name="availment" required >
                                             </div> 
                                         </div>
                                     </div>
-                                    <div class="col-3">   
+                                    <div class="col-md-3">   
                                         <div class="image_area"> 
                                             <label for="upload_image_shs">   
                                                 <input type="hidden" id="photo" name="image">
@@ -256,10 +256,10 @@
                                                     <div class="modal-body">
                                                         <div class="img-container">
                                                             <div class="row">
-                                                                <div class="col-8">
+                                                                <div class="col-md-8">
                                                                     <img src="" id="sample_image_shs" />
                                                                 </div>
-                                                                <div class="col-4">
+                                                                <div class="col-md-4">
                                                                     <div class="preview"></div>
                                                                 </div>
                                                             </div>
@@ -276,7 +276,7 @@
                                 </div>
                                 
                                 <div class="row g-3" >
-                                    <div class="col">   
+                                    <div class="col-md-6">   
                                         <div style="text-align:left;">
                                             <label for="school" class="form-label">School <?= $required_field; ?></label> 
                                             <?php
@@ -324,7 +324,7 @@
                                         </div>
                                         
                                     </div>
-                                    <div class="col"> 
+                                    <div class="col-md-6"> 
                                         <div style="text-align:left;">
                                             <label for="strand" class="form-label">Strand <?= $required_field; ?></label>  
                                             <?php
@@ -376,7 +376,7 @@
                                     </div>
                                 </div>
                                 <div class="row g-3" >
-                                    <div class="col">
+                                    <div class="col-md-4">
                                         <label for="grade_level" class="form-label">Grade Level <?= $required_field; ?></label>
                                         <select class="form-control"  name="grade_level"  required>
                                             <option value="">Select</option> 
@@ -385,7 +385,7 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-md-4">
                                         <label for="semester" class="form-label">Semester <?= $required_field; ?></label> 
                                         <select class="form-control shs"   name="semester"  required>
                                             <option value="">Select</option> 
@@ -401,7 +401,7 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </div> 
-                                    <div class="col">
+                                    <div class="col-md-4">
                                         <label for="school_year" class="form-label">SY <?= $required_field; ?></label> 
                                         <select class="form-control"   name="school_year"  required>
                                             
@@ -420,21 +420,21 @@
                                     </div> 
                                 </div>
                                 <div class="row g-3" >
-                                    <div class="col">
+                                    <div class="col-md-6">
                                         <label for="father_name" class="form-label">Father's  Name</label>
                                         <input type="text" class="form-control text-capitalize"   name="father_name" >
                                     </div>
-                                    <div class="col">
+                                    <div class="col-md-6">
                                         <label for="father_occupation" class="form-label">Occupation</label>
                                         <input type="text" class="form-control text-capitalize"  name="father_occupation" >
                                     </div> 
                                 </div>
                                 <div class="row g-3" >
-                                    <div class="col">
+                                    <div class="col-md-6">
                                         <label for="mother_name" class="form-label">Mother's  Name</label>
                                         <input type="text" class="form-control text-capitalize" name="mother_name" >
                                     </div>
-                                    <div class="col">
+                                    <div class="col-md-6">
                                         <label for="mother_occupation" class="form-label">Occupation</label>
                                         <input type="text" class="form-control text-capitalize"  name="mother_occupation" >
                                     </div> 
@@ -450,12 +450,12 @@
                                 </div>    
                             </form>  
                         </div>
-                        <div class="tab-pane" id="college-tab">   
+                        <div class="tab-pane active" id="college-tab">   
                             <form id="college-registration-form" class="validation-form">
                                 <div class="row">  
-                                    <div class="col-12">
+                                    <div class="col-md-12">
                                         <div class="row justify-content-between">
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <div class="w-50">
                                                     <label for="" class="form-label">App No. </label>   
                                                     <div class="input-group mb-3">
@@ -470,7 +470,7 @@
                                                     </div>
                                                 </div> 
                                             </div> 
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label for="status" class="form-label">Status <?= $required_field; ?></label>
                                                 <h1 style="text-decoration: underline" class="text-danger">Pending</h1>
                                                 <input type="hidden" value="Pending" name="status"   readonly>
@@ -480,27 +480,27 @@
                                     </div> 
                                 </div>  
                                 <div class="row"> 
-                                    <div class="col-9">
+                                    <div class="col-md-9">
                                         <div class="row">
-                                            <div class="col-4">
+                                            <div class="col-md-4">
                                                 <label for="lastname" class="form-label">Last Name <?= $required_field; ?></label>
                                                 <input type="text" class="form-control text-capitalize" name="lastname" required>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-md-4">
                                                 <label for="firstname" class="form-label">First Name <?= $required_field; ?></label>
                                                 <input type="text" class="form-control text-capitalize" name="firstname" required>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-md-2">
                                                 <label for="middlename" class="form-label">M.I.</label>
                                                 <input type="text" class="form-control text-capitalize" name="middlename">
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-md-2">
                                                 <label for="suffix" class="form-label">Suffix</label>
                                                 <input type="text" class="form-control text-capitalize" name="suffix">
                                             </div> 
                                         </div>
                                         <div class="row">
-                                            <div class="col-12">  
+                                            <div class="col-md-12">  
                                                 <label for="address" class="form-label">Address <?= $required_field; ?></label>
                                                 <select class="form-control" name="address"  required>
                                                     <option value="">Select</option> 
@@ -511,15 +511,15 @@
                                             </div>  
                                         </div>
                                         <div class="row">
-                                            <div class="col">
+                                            <div class="col-md-3">
                                                 <label for="birthdate"  class="form-label">Date of Birth <?= $required_field; ?></label>
                                                 <input type="date" class="form-control" name="birthdate" required >
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-md-3">
                                                 <label for="age" class="form-label">Age <?= $required_field; ?></label>
                                                 <input type="number" class="form-control" name="age"   readonly>
                                             </div>
-                                            <div class="col">
+                                            <div class="col-md-3">
                                                 <label for="civil_status" class="form-label">Civil Status <?= $required_field; ?></label>
                                                 <select class="form-control" name="civil_status"  required>
                                                     <option value="">Select</option> 
@@ -528,7 +528,7 @@
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
-                                            <div class="col">
+                                            <div class="col-md-3">
                                                 <label for="gender" class="form-label">Sex <?= $required_field; ?></label>
                                                 <select class="form-control" name="gender" required>
                                                     <option value="">Select</option> 
@@ -538,29 +538,29 @@
                                             </div> 
                                         </div> 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label for="contact_no" class="form-label">Contact #</label>
                                                 <input type="text" class="form-control"  name="contact_no" placeholder="0000 000 0000" data-toggle="input-mask" data-mask-format="0900 000 0000"  > 
                                                 <span class="font-13 text-muted">e.g "xxxx xxx xxxx"</span>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label for="" class="form-label">CTC # <?= $required_field; ?></label>
                                                 <input type="text" class="form-control"  name="ctc_no" required>
                                             </div> 
                                         </div> 
                                         <div class="row" >
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label for="email" class="form-label">Facebook/Other</label>
                                                 <input type="text" class="form-control" name="email"  >
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label for="availment" class="form-label">Availment <?= $required_field; ?></label> 
                                                 <input type="number" min="1" max="8" step="1" class="form-control" name="availment" required >
                                             </div> 
                                         </div>
                                     </div>  
                                     
-                                    <div class="col-3">   
+                                    <div class="col-md-3">   
                                         <div class="image_area"> 
                                             <label for="upload_image_college">  
                                                 <input type="hidden" id="photo" name="image">
@@ -586,10 +586,10 @@
                                                     <div class="modal-body">
                                                         <div class="img-container">
                                                             <div class="row">
-                                                                <div class="col-8">
+                                                                <div class="col-md-8">
                                                                     <img src="" id="sample_image_college" />
                                                                 </div>
-                                                                <div class="col-4">
+                                                                <div class="col-md-4">
                                                                     <div class="preview"></div>
                                                                 </div>
                                                             </div>
@@ -606,7 +606,7 @@
                                 </div>
                                     
                                 <div class="row g-3" >
-                                    <div class="col">  
+                                    <div class="col-md-6">  
                                         <div style="text-align:left;">
                                             <label for="" class="form-label">School <?= $required_field; ?></label>
                                             <?php
@@ -653,7 +653,7 @@
                                             </div>
                                         </div> 
                                     </div>
-                                    <div class="col">  
+                                    <div class="col-md-6">  
                                         <div style="text-align:left;">
                                             <label for="" class="form-label">Course <?= $required_field; ?></label>
                                             <?php
@@ -698,14 +698,14 @@
                                         </div> 
                                     </div> 
                                 </div> 
-                                <div class="row g-3" >
-                                    <div class="col">
+                                <div class="row" >
+                                    <div class="col-md-3">
                                         <label for="school_address" class="form-label">School Address </label> 
                                         <input type="text" class="form-control text-capitalize" name="school_address"  >
                                     </div>
                                 </div>
-                                <div class="row g-3" >
-                                    <div class="col">
+                                <div class="row" >
+                                    <div class="col-md-3">
                                         <label for="year_level" class="form-label">Year Level <?= $required_field; ?></label>
                                         <select class="form-control" name="year_level" required>
                                             <option value="">Select</option> 
@@ -714,7 +714,7 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-md-3">
                                         <label for="semester" class="form-label">Semester <?= $required_field; ?></label>
                                         <select class="form-control college"  name="semester" required>
                                             <option value="">Select</option> 
@@ -730,7 +730,7 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-md-3">
                                         <label for="units" class="form-label">Units <?= $required_field; ?></label>
                                         <input type="number" class="form-control" name="units" required>
                                     </div>
@@ -751,22 +751,22 @@
                                         </select>
                                     </div> 
                                 </div>
-                                <div class="row g-3" >
-                                    <div class="col">
+                                <div class="row " >
+                                    <div class="col-md-6">
                                         <label for="father_name" class="form-label">Father's  Name</label>
                                         <input type="text" class="form-control text-capitalize"   name="father_name" >
                                     </div>
-                                    <div class="col">
+                                    <div class="col-md-6">
                                         <label for="father_occupation" class="form-label">Occupation</label>
                                         <input type="text" class="form-control text-capitalize"  name="father_occupation" >
                                     </div> 
                                 </div>
-                                <div class="row g-3" >
-                                    <div class="col">
+                                <div class="row " >
+                                    <div class="col-md-6">
                                         <label for="mother_name" class="form-label">Mother's  Name</label>
                                         <input type="text" class="form-control text-capitalize" name="mother_name" >
                                     </div>
-                                    <div class="col">
+                                    <div class="col-md-6">
                                         <label for="mother_occupation" class="form-label">Occupation</label>
                                         <input type="text" class="form-control text-capitalize"  name="mother_occupation" >
                                     </div> 
@@ -786,9 +786,9 @@
                         <div class="tab-pane   " id="tvet-tab"> 
                             <form id="tvet-registration-form" class="validation-form">
                                 <div class="row"> 
-                                    <div class="col-12">
+                                    <div class="col-md-12">
                                         <div class="row justify-content-between">
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <div class="w-50">
                                                     <label for="" class="form-label">App No. </label>   
                                                     <div class="input-group mb-3">
@@ -803,7 +803,7 @@
                                                     </div>
                                                 </div> 
                                             </div>  
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label for="status" class="form-label">Status <?= $required_field; ?></label>
                                                 <h1 style="text-decoration: underline" class="text-danger">Pending</h1>
                                                 <input type="hidden" value="Pending" name="status"   readonly>
@@ -813,27 +813,27 @@
                                     </div> 
                                 </div>  
                                 <div class="row"> 
-                                    <div class="col-9">
+                                    <div class="col-md-9">
                                         <div class="row">
-                                            <div class="col-4">
+                                            <div class="col-md-4">
                                                 <label for="lastname" class="form-label">Last Name <?= $required_field; ?></label>
                                                 <input type="text" class="form-control text-capitalize" name="lastname" required>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-md-4">
                                                 <label for="firstname" class="form-label">First Name <?= $required_field; ?></label>
                                                 <input type="text" class="form-control text-capitalize" name="firstname" required>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-md-2">
                                                 <label for="middlename" class="form-label">M.I.</label>
                                                 <input type="text" class="form-control text-capitalize" name="middlename">
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-md-2">
                                                 <label for="suffix" class="form-label">Suffix</label>
                                                 <input type="text" class="form-control text-capitalize" name="suffix">
                                             </div> 
                                         </div>
                                         <div class="row">
-                                            <div class="col-12">  
+                                            <div class="col-md-12">  
                                                 <label for="address" class="form-label">Address <?= $required_field; ?></label>
                                                 <select class="form-control" name="address"  required>
                                                     <option value="">Select</option> 
@@ -848,7 +848,7 @@
                                                 <label for="birthdate"  class="form-label">Date of Birth <?= $required_field; ?></label>
                                                 <input type="date" class="form-control" name="birthdate" required >
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-md-2">
                                                 <label for="age" class="form-label">Age <?= $required_field; ?></label>
                                                 <input type="number" class="form-control" name="age"   readonly>
                                             </div>
@@ -871,28 +871,28 @@
                                             </div> 
                                         </div> 
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label for="contact_no" class="form-label">Contact #</label>
                                                 <input type="text" class="form-control"  name="contact_no" placeholder="0000 000 0000" data-toggle="input-mask" data-mask-format="0900 000 0000"  > 
                                                 <span class="font-13 text-muted">e.g "xxxx xxx xxxx"</span>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label for="" class="form-label">CTC # <?= $required_field; ?></label>
                                                 <input type="text" class="form-control"  name="ctc_no" required>
                                             </div> 
                                         </div> 
                                         <div class="row" >
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label for="email" class="form-label">Facebook/Other</label>
                                                 <input type="text" class="form-control" name="email"  >
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label for="availment" class="form-label">Availment <?= $required_field; ?></label>
                                                 <input type="number" min="1" max="8" step="1" class="form-control" name="availment" required >
                                             </div> 
                                         </div>
                                     </div> 
-                                    <div class="col-3">   
+                                    <div class="col-md-3">   
                                         <div class="image_area"> 
                                             <label for="upload_image_tvet">  
                                                 <input type="hidden" id="photo" name="image">
@@ -918,10 +918,10 @@
                                                     <div class="modal-body">
                                                         <div class="img-container">
                                                             <div class="row">
-                                                                <div class="col-8">
+                                                                <div class="col-md-8">
                                                                     <img src="" id="sample_image_tvet" />
                                                                 </div>
-                                                                <div class="col-4">
+                                                                <div class="col-md-4">
                                                                     <div class="preview"></div>
                                                                 </div>
                                                             </div>
@@ -1162,14 +1162,24 @@
             
             // get age using birthdate 
             $(document).on('change', 'input[name="birthdate"]', function(e){ 
-                var age     = moment().diff($(this).val(), 'years',false);    
+                var age     = moment().diff($(this).val(), 'years',false);  
+                
+                console.info(age)
                 var form_id = $(this).closest('form').attr('id') 
                 $('#'+form_id+' input[name="age"]').val(age)
             });
             
             // Input validation
             $(".validation-form").parsley()
+             
             
+
+
+
+            
+
+            
+
 
 
             //=============================================================================
@@ -1211,7 +1221,132 @@
                 var sem = ($(this).val() == 1) ? "1st" : "2nd"; 
                 $('select.shs[name=semester]').val(sem)
 
+            }) 
+
+            
+            // autofill
+            $('#senior-high-registration-form input[name=lastname], input[name=firstname] ').change(function(){ 
+
+                var lastname  = $('#senior-high-registration-form input[name = lastname]').val()
+                var firstname = $('#senior-high-registration-form input[name = firstname]').val() 
+                var name      = lastname + " " + firstname
+
+                $.ajax({
+                    url   : "registration/shs_autofill",
+                    method: "post",  
+                    data  : {
+                        search: name, 
+                    },           
+                    dataType: "json",
+                    success: function(data){    
+                        console.info(data)
+                        if(data.firstname.length === 0 || !data.firstname.trim()){ 
+                            $('#senior-high-registration-form input[name=firstname]').css({'background-color': ''})
+                        }else{ 
+                            $('#senior-high-registration-form input[name=firstname]').val(data.firstname).css({'background-color': '#FBF1D3'})
+                        }  
+                        if(data.middlename.length === 0 || !data.middlename.trim()){ 
+                            $('#senior-high-registration-form input[name=middlename]').css({'background-color': ''})
+                        }else{ 
+                            $('#senior-high-registration-form input[name=middlename]').val(data.middlename).css({'background-color': '#FBF1D3'})
+                        }  
+                        if(data.suffix.length === 0 || !data.suffix.trim()){ 
+                            $('#senior-high-registration-form input[name=suffix]').css({'background-color': ''})
+                        }else{ 
+                            $('#senior-high-registration-form input[name=suffix]').val(data.suffix).css({'background-color': '#FBF1D3'})
+                        }  
+                        if(data.address.length === 0 || !data.address.trim()){ 
+                            $('#senior-high-registration-form select[name=address]').css({'background-color': ''})
+                        }else{ 
+                            $('#senior-high-registration-form select[name=address]').val(data.address).css({'background-color': '#FBF1D3'})
+                        }   
+                        if(data.birthdate.length === 0 || !data.birthdate.trim()){ 
+                            $('#senior-high-registration-form input[name=birthdate]').css({'background-color': ''})
+                        }else{ 
+                            $('#senior-high-registration-form input[name=birthdate]').val(data.birthdate).css({'background-color': '#FBF1D3'})
+                        }   
+                        if(data.age.length === 0 || !data.age.trim()){ 
+                            $('#senior-high-registration-form input[name=age]').css({'background-color': ''})
+                        }else{ 
+                            $('#senior-high-registration-form input[name=age]').val(data.age).css({'background-color': '#FBF1D3'})
+                        }   
+                        if(data.civil_status.length === 0 || !data.civil_status.trim()){ 
+                            $('#senior-high-registration-form select[name=civil_status]').css({'background-color': ''})
+                        }else{ 
+                            $('#senior-high-registration-form select[name=civil_status]').val(data.civil_status).css({'background-color': '#FBF1D3'})
+                        } 
+                        if(data.gender.length === 0 || !data.gender.trim()){ 
+                            $('#senior-high-registration-form select[name=gender]').css({'background-color': ''})
+                        }else{ 
+                            $('#senior-high-registration-form select[name=gender]').val(data.gender).css({'background-color': '#FBF1D3'})
+                        }   
+                        if(data.contact_no.length === 0 || !data.contact_no.trim()){ 
+                            $('#senior-high-registration-form input[name=contact_no]').css({'background-color': ''})
+                        }else{ 
+                            $('#senior-high-registration-form input[name=contact_no]').val(data.contact_no).css({'background-color': '#FBF1D3'})
+                        }   
+                        if(data.ctc_no.length === 0 || !data.ctc_no.trim()){ 
+                            $('#senior-high-registration-form input[name=ctc_no]').css({'background-color': ''})
+                        }else{ 
+                            $('#senior-high-registration-form input[name=ctc_no]').val(data.ctc_no).css({'background-color': '#FBF1D3'})
+                        }    
+                        if(data.email_add.length === 0 || !data.email_add.trim()){ 
+                            $('#senior-high-registration-form input[name=email]').css({'background-color': ''})
+                        }else{ 
+                            $('#senior-high-registration-form input[name=email]').val(data.email_add).css({'background-color': '#FBF1D3'})
+                        }    
+                        if(data.course.length === 0 || !data.course.trim()){ 
+                            $('#senior-high-registration-form select[name=strand]').css({'background-color': ''})
+                        }else{ 
+                            $('#senior-high-registration-form select[name=strand]').val(data.course).css({'background-color': '#FBF1D3'})
+                        }       
+                        if(data.father_name.length === 0 || !data.father_name.trim()){ 
+                            $('#senior-high-registration-form input[name=father_name]').css({'background-color': ''})
+                        }else{ 
+                            $('#senior-high-registration-form input[name=father_name]').val(data.father_name).css({'background-color': '#FBF1D3'})
+                        }      
+                        if(data.father_occupation.length === 0 || !data.father_occupation.trim()){ 
+                            $('#senior-high-registration-form input[name=father_occupation]').css({'background-color': ''})
+                        }else{ 
+                            $('#senior-high-registration-form input[name=father_occupation]').val(data.father_occupation).css({'background-color': '#FBF1D3'})
+                        }       
+                        if(data.mother_name.length === 0 || !data.mother_name.trim()){ 
+                            $('#senior-high-registration-form input[name=mother_name]').css({'background-color': ''})
+                        }else{ 
+                            $('#senior-high-registration-form input[name=mother_name]').val(data.mother_name).css({'background-color': '#FBF1D3'})
+                        }      
+                        if(data.mother_occupation.length === 0 || !data.mother_occupation.trim()){ 
+                            $('#senior-high-registration-form input[name=mother_occupation]').css({'background-color': ''})
+                        }else{ 
+                            $('#senior-high-registration-form input[name=mother_occupation]').val(data.mother_occupation).css({'background-color': '#FBF1D3'})
+                        }     
+                        if(data.school.length === 0 || !data.school.trim()){ 
+                            $('#senior-high-registration-form select[name=school]').css({'background-color': ''})
+                        }else{ 
+                            $('#senior-high-registration-form select[name=school]').val(data.school).css({'background-color': '#FBF1D3'})
+                        }       
+                        if(data.school_address.length === 0 || !data.school_address.trim()){ 
+                            $('#senior-high-registration-form input[name=school_address]').css({'background-color': ''})
+                        }else{ 
+                            $('#senior-high-registration-form input[name=school_address]').val(data.school_address).css({'background-color': '#FBF1D3'})
+                        }    
+                        if(data.availment.length === 0 || !data.availment.trim()){ 
+                            $('#senior-high-registration-form input[name=availment]').css({'background-color': ''})
+                        }else{ 
+                            $('#senior-high-registration-form input[name=availment]').val(data.availment).css({'background-color': '#FBF1D3'})
+                        }     
+                        if(data.yearlevel.length === 0 || !data.yearlevel.trim()){ 
+                            $('#senior-high-registration-form select[name=grade_level]').css({'background-color': ''})
+                        }else{ 
+                            $('#senior-high-registration-form select[name=grade_level]').val(data.yearlevel).css({'background-color': '#FBF1D3'})
+                        }    
+                    },
+                    error: function (xhr, status, error) { 
+                        console.info(xhr.responseText);
+                    }
+                });
             })
+
 
             // Tippy
             tippy('#add-school-button', {
@@ -1520,6 +1655,132 @@
                 $('select.college[name=semester]').val(sem)
                 
             })
+
+            
+            
+            // autofill
+            $('#college-registration-form input[name=lastname], input[name=firstname] ').change(function(){ 
+
+                var lastname  = $('#college-registration-form input[name = lastname]').val()
+                var firstname = $('#college-registration-form input[name = firstname]').val() 
+                var name      = lastname + " " + firstname
+
+                $.ajax({
+                    url   : "registration/college_autofill",
+                    method: "post",  
+                    data  : {
+                        search: name, 
+                    },           
+                    dataType: "json",
+                    success: function(data){    
+                        console.info(data)
+                        if(data.firstname.length === 0 || !data.firstname.trim()){ 
+                            $('#college-registration-form input[name=firstname]').css({'background-color': ''})
+                        }else{ 
+                            $('#college-registration-form input[name=firstname]').val(data.firstname).css({'background-color': '#FBF1D3'})
+                        }  
+                        if(data.middlename.length === 0 || !data.middlename.trim()){ 
+                            $('#college-registration-form input[name=middlename]').css({'background-color': ''})
+                        }else{ 
+                            $('#college-registration-form input[name=middlename]').val(data.middlename).css({'background-color': '#FBF1D3'})
+                        }  
+                        if(data.suffix.length === 0 || !data.suffix.trim()){ 
+                            $('#college-registration-form input[name=suffix]').css({'background-color': ''})
+                        }else{ 
+                            $('#college-registration-form input[name=suffix]').val(data.suffix).css({'background-color': '#FBF1D3'})
+                        }  
+                        if(data.address.length === 0 || !data.address.trim()){ 
+                            $('#college-registration-form select[name=address]').css({'background-color': ''})
+                        }else{ 
+                            $('#college-registration-form select[name=address]').val(data.address).css({'background-color': '#FBF1D3'})
+                        }   
+                        if(data.birthdate.length === 0 || !data.birthdate.trim()){ 
+                            $('#college-registration-form input[name=birthdate]').css({'background-color': ''})
+                        }else{ 
+                            $('#college-registration-form input[name=birthdate]').val(data.birthdate).css({'background-color': '#FBF1D3'})
+                        }   
+                        if(data.age.length === 0 || !data.age.trim()){ 
+                            $('#college-registration-form input[name=age]').css({'background-color': ''})
+                        }else{ 
+                            $('#college-registration-form input[name=age]').val(data.age).css({'background-color': '#FBF1D3'})
+                        }   
+                        if(data.civil_status.length === 0 || !data.civil_status.trim()){ 
+                            $('#college-registration-form select[name=civil_status]').css({'background-color': ''})
+                        }else{ 
+                            $('#college-registration-form select[name=civil_status]').val(data.civil_status).css({'background-color': '#FBF1D3'})
+                        } 
+                        if(data.gender.length === 0 || !data.gender.trim()){ 
+                            $('#college-registration-form select[name=gender]').css({'background-color': ''})
+                        }else{ 
+                            $('#college-registration-form select[name=gender]').val(data.gender).css({'background-color': '#FBF1D3'})
+                        }   
+                        if(data.contact_no.length === 0 || !data.contact_no.trim()){ 
+                            $('#college-registration-form input[name=contact_no]').css({'background-color': ''})
+                        }else{ 
+                            $('#college-registration-form input[name=contact_no]').val(data.contact_no).css({'background-color': '#FBF1D3'})
+                        }   
+                        if(data.ctc_no.length === 0 || !data.ctc_no.trim()){ 
+                            $('#college-registration-form input[name=ctc_no]').css({'background-color': ''})
+                        }else{ 
+                            $('#college-registration-form input[name=ctc_no]').val(data.ctc_no).css({'background-color': '#FBF1D3'})
+                        }    
+                        if(data.email_add.length === 0 || !data.email_add.trim()){ 
+                            $('#college-registration-form input[name=email]').css({'background-color': ''})
+                        }else{ 
+                            $('#college-registration-form input[name=email]').val(data.email_add).css({'background-color': '#FBF1D3'})
+                        }    
+                        if(data.course.length === 0 || !data.course.trim()){ 
+                            $('#college-registration-form select[name=course]').css({'background-color': ''})
+                        }else{ 
+                            $('#college-registration-form select[name=course]').val(data.course).css({'background-color': '#FBF1D3'})
+                        }       
+                        if(data.father_name.length === 0 || !data.father_name.trim()){ 
+                            $('#college-registration-form input[name=father_name]').css({'background-color': ''})
+                        }else{ 
+                            $('#college-registration-form input[name=father_name]').val(data.father_name).css({'background-color': '#FBF1D3'})
+                        }      
+                        if(data.father_occupation.length === 0 || !data.father_occupation.trim()){ 
+                            $('#college-registration-form input[name=father_occupation]').css({'background-color': ''})
+                        }else{ 
+                            $('#college-registration-form input[name=father_occupation]').val(data.father_occupation).css({'background-color': '#FBF1D3'})
+                        }       
+                        if(data.mother_name.length === 0 || !data.mother_name.trim()){ 
+                            $('#college-registration-form input[name=mother_name]').css({'background-color': ''})
+                        }else{ 
+                            $('#college-registration-form input[name=mother_name]').val(data.mother_name).css({'background-color': '#FBF1D3'})
+                        }      
+                        if(data.mother_occupation.length === 0 || !data.mother_occupation.trim()){ 
+                            $('#college-registration-form input[name=mother_occupation]').css({'background-color': ''})
+                        }else{ 
+                            $('#college-registration-form input[name=mother_occupation]').val(data.mother_occupation).css({'background-color': '#FBF1D3'})
+                        }     
+                        if(data.school.length === 0 || !data.school.trim()){ 
+                            $('#college-registration-form select[name=school]').css({'background-color': ''})
+                        }else{ 
+                            $('#college-registration-form select[name=school]').val(data.school).css({'background-color': '#FBF1D3'})
+                        }       
+                        if(data.school_address.length === 0 || !data.school_address.trim()){ 
+                            $('#college-registration-form input[name=school_address]').css({'background-color': ''})
+                        }else{ 
+                            $('#college-registration-form input[name=school_address]').val(data.school_address).css({'background-color': '#FBF1D3'})
+                        }    
+                        if(data.availment.length === 0 || !data.availment.trim()){ 
+                            $('#college-registration-form input[name=availment]').css({'background-color': ''})
+                        }else{ 
+                            $('#college-registration-form input[name=availment]').val(data.availment).css({'background-color': '#FBF1D3'})
+                        }     
+                        if(data.yearlevel.length === 0 || !data.yearlevel.trim()){ 
+                            $('#college-registration-form select[name=grade_level]').css({'background-color': ''})
+                        }else{ 
+                            $('#college-registration-form select[name=grade_level]').val(data.yearlevel).css({'background-color': '#FBF1D3'})
+                        }    
+                    },
+                    error: function (xhr, status, error) { 
+                        console.info(xhr.responseText);
+                    }
+                });
+            })
+
             
             // Tippy
             tippy('#add-course-button', {
@@ -1809,6 +2070,130 @@
             })
 
   
+            
+            // autofill
+            $('#tvet-registration-form input[name=lastname], input[name=firstname] ').change(function(){ 
+
+                var lastname  = $('#tvet-registration-form input[name = lastname]').val()
+                var firstname = $('#tvet-registration-form input[name = firstname]').val() 
+                var name      = lastname + " " + firstname
+
+                $.ajax({
+                    url   : "registration/tvet_autofill",
+                    method: "post",  
+                    data  : {
+                        search: name, 
+                    },           
+                    dataType: "json",
+                    success: function(data){    
+                        console.info(data)
+                        if(data.firstname.length === 0 || !data.firstname.trim()){ 
+                            $('#tvet-registration-form input[name=firstname]').css({'background-color': ''})
+                        }else{ 
+                            $('#tvet-registration-form input[name=firstname]').val(data.firstname).css({'background-color': '#FBF1D3'})
+                        }  
+                        if(data.middlename.length === 0 || !data.middlename.trim()){ 
+                            $('#tvet-registration-form input[name=middlename]').css({'background-color': ''})
+                        }else{ 
+                            $('#tvet-registration-form input[name=middlename]').val(data.middlename).css({'background-color': '#FBF1D3'})
+                        }  
+                        if(data.suffix.length === 0 || !data.suffix.trim()){ 
+                            $('#tvet-registration-form input[name=suffix]').css({'background-color': ''})
+                        }else{ 
+                            $('#tvet-registration-form input[name=suffix]').val(data.suffix).css({'background-color': '#FBF1D3'})
+                        }  
+                        if(data.address.length === 0 || !data.address.trim()){ 
+                            $('#tvet-registration-form select[name=address]').css({'background-color': ''})
+                        }else{ 
+                            $('#tvet-registration-form select[name=address]').val(data.address).css({'background-color': '#FBF1D3'})
+                        }   
+                        if(data.birthdate.length === 0 || !data.birthdate.trim()){ 
+                            $('#tvet-registration-form input[name=birthdate]').css({'background-color': ''})
+                        }else{ 
+                            $('#tvet-registration-form input[name=birthdate]').val(data.birthdate).css({'background-color': '#FBF1D3'})
+                        }   
+                        if(data.age.length === 0 || !data.age.trim()){ 
+                            $('#tvet-registration-form input[name=age]').css({'background-color': ''})
+                        }else{ 
+                            $('#tvet-registration-form input[name=age]').val(data.age).css({'background-color': '#FBF1D3'})
+                        }   
+                        if(data.civil_status.length === 0 || !data.civil_status.trim()){ 
+                            $('#tvet-registration-form select[name=civil_status]').css({'background-color': ''})
+                        }else{ 
+                            $('#tvet-registration-form select[name=civil_status]').val(data.civil_status).css({'background-color': '#FBF1D3'})
+                        } 
+                        if(data.gender.length === 0 || !data.gender.trim()){ 
+                            $('#tvet-registration-form select[name=gender]').css({'background-color': ''})
+                        }else{ 
+                            $('#tvet-registration-form select[name=gender]').val(data.gender).css({'background-color': '#FBF1D3'})
+                        }   
+                        if(data.contact_no.length === 0 || !data.contact_no.trim()){ 
+                            $('#tvet-registration-form input[name=contact_no]').css({'background-color': ''})
+                        }else{ 
+                            $('#tvet-registration-form input[name=contact_no]').val(data.contact_no).css({'background-color': '#FBF1D3'})
+                        }   
+                        if(data.ctc_no.length === 0 || !data.ctc_no.trim()){ 
+                            $('#tvet-registration-form input[name=ctc_no]').css({'background-color': ''})
+                        }else{ 
+                            $('#tvet-registration-form input[name=ctc_no]').val(data.ctc_no).css({'background-color': '#FBF1D3'})
+                        }    
+                        if(data.email_add.length === 0 || !data.email_add.trim()){ 
+                            $('#tvet-registration-form input[name=email]').css({'background-color': ''})
+                        }else{ 
+                            $('#tvet-registration-form input[name=email]').val(data.email_add).css({'background-color': '#FBF1D3'})
+                        }    
+                        if(data.course.length === 0 || !data.course.trim()){ 
+                            $('#tvet-registration-form select[name=course]').css({'background-color': ''})
+                        }else{ 
+                            $('#tvet-registration-form select[name=course]').val(data.course).css({'background-color': '#FBF1D3'})
+                        }       
+                        if(data.father_name.length === 0 || !data.father_name.trim()){ 
+                            $('#tvet-registration-form input[name=father_name]').css({'background-color': ''})
+                        }else{ 
+                            $('#tvet-registration-form input[name=father_name]').val(data.father_name).css({'background-color': '#FBF1D3'})
+                        }      
+                        if(data.father_occupation.length === 0 || !data.father_occupation.trim()){ 
+                            $('#tvet-registration-form input[name=father_occupation]').css({'background-color': ''})
+                        }else{ 
+                            $('#tvet-registration-form input[name=father_occupation]').val(data.father_occupation).css({'background-color': '#FBF1D3'})
+                        }       
+                        if(data.mother_name.length === 0 || !data.mother_name.trim()){ 
+                            $('#tvet-registration-form input[name=mother_name]').css({'background-color': ''})
+                        }else{ 
+                            $('#tvet-registration-form input[name=mother_name]').val(data.mother_name).css({'background-color': '#FBF1D3'})
+                        }      
+                        if(data.mother_occupation.length === 0 || !data.mother_occupation.trim()){ 
+                            $('#tvet-registration-form input[name=mother_occupation]').css({'background-color': ''})
+                        }else{ 
+                            $('#tvet-registration-form input[name=mother_occupation]').val(data.mother_occupation).css({'background-color': '#FBF1D3'})
+                        }     
+                        if(data.school.length === 0 || !data.school.trim()){ 
+                            $('#tvet-registration-form select[name=school]').css({'background-color': ''})
+                        }else{ 
+                            $('#tvet-registration-form select[name=school]').val(data.school).css({'background-color': '#FBF1D3'})
+                        }       
+                        if(data.school_address.length === 0 || !data.school_address.trim()){ 
+                            $('#tvet-registration-form input[name=school_address]').css({'background-color': ''})
+                        }else{ 
+                            $('#tvet-registration-form input[name=school_address]').val(data.school_address).css({'background-color': '#FBF1D3'})
+                        }    
+                        if(data.availment.length === 0 || !data.availment.trim()){ 
+                            $('#tvet-registration-form input[name=availment]').css({'background-color': ''})
+                        }else{ 
+                            $('#tvet-registration-form input[name=availment]').val(data.availment).css({'background-color': '#FBF1D3'})
+                        }     
+                        if(data.yearlevel.length === 0 || !data.yearlevel.trim()){ 
+                            $('#tvet-registration-form select[name=grade_level]').css({'background-color': ''})
+                        }else{ 
+                            $('#tvet-registration-form select[name=grade_level]').val(data.yearlevel).css({'background-color': '#FBF1D3'})
+                        }    
+                    },
+                    error: function (xhr, status, error) { 
+                        console.info(xhr.responseText);
+                    }
+                });
+            })
+
             
             // Upload Image
             $('#upload_image_tvet').change(function(event){
