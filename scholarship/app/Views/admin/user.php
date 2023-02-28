@@ -112,8 +112,7 @@
                                     <?php endforeach; ?>
                                 </div>
                             </select> 
-                        </div>  
-                        
+                        </div>   
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
@@ -159,13 +158,43 @@
                             <input type="text" class="form-control" value="asdfasdfasd" name="username" required data-parsley-length="[8, 40]"   placeholder="Enter  username" />
                         </div>  
                         <div class="form-group">
-                            <label for="" class="form-label">Role Type <?= $required_field; ?></label> 
+                            <label for="" class="form-label">Role Type <?= $required_field; ?></label>  
                             <select name="group"  class="form-control"  required>
                                 <option value="">Select</option>
                                 <option value="superadmin">Super Admin</option>
-                                <option value="admin">Admin</option>  
-                            </select>  
+                                <option value="admin">Admin</option> 
+                                <option value="user">User</option>  
+                            </select>
                         </div>    
+                        <div class="form-group d-none scholarship-type">
+                            <label for="" class="form-label">Scholarship Type</label> 
+                            <select name="scholarship_type" class="form-control"  >
+                                <option value="">Select</option>
+                                <option value="shs">Senior Hig School</option>
+                                <option value="college">College</option> 
+                                <option value="tvet">Tvet</option>  
+                            </select>  
+                        </div>  
+                        <div class="form-group d-none school"> 
+                            <label for="" class="form-label">School</label> 
+                            <select class="form-control" name="school" >
+                                <option value="">Select</option> 
+                                <div class="shs-school d-none"> 
+                                    <?php foreach($school as $row):?> 
+                                        <?php if($row['SchoolName'] != ""):?> 
+                                            <option class="d-none" data-scholarship-type="shs" value="<?= $row['SchoolName']  ?>"><?= $row['SchoolName']  ?></option>  
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </div>
+                                <div class="college-tvet-school d-none">
+                                    <?php foreach($college_school as $row):?> 
+                                        <?php if($row['colSchoolName'] != ""):?> 
+                                            <option  class="d-none" data-scholarship-type="colege_tvet" value="<?= $row['colSchoolName']  ?>"><?= $row['colSchoolName']  ?></option>  
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </div>
+                            </select> 
+                        </div>   
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
@@ -237,6 +266,7 @@
 
                 if( val == ""){ 
                     $('.school').addClass('d-none') 
+                    $('select[name="school"]').val('')
                     $('select[name="school"] option[data-scholarship-type="shs"]').addClass('d-none')
                     $('select[name="school"] option[data-scholarship-type="colege_tvet"]').addClass('d-none')
 
@@ -407,6 +437,7 @@
                     method  : "get",
                     dataType: "json", 
                     success : function (data) {  
+                        console.info(data)
                         $('#update-user-form input[name="id"]').val(data.id)
                         $('#update-user-form input[name="firstname"]').val(data.firstname)
                         $('#update-user-form input[name="middlename"]').val(data.middlename)
@@ -414,6 +445,40 @@
                         $('#update-user-form input[name="email"]').val(data.email)
                         $('#update-user-form input[name="username"]').val(data.username) 
                         $('#update-user-form select[name="group"]').val(data.group)
+
+                        if(data.scholarship_type != ""){  
+                            
+                            if(data.scholarship_type == "shs"){
+                                $('#update-user-form select[name="school"]').val('') 
+                                $('#update-user-form select[name="school"] option[data-scholarship-type="shs"]').removeClass('d-none') 
+                                $('#update-user-form select[name="school"] option[data-scholarship-type="colege_tvet"]').addClass('d-none')  
+                            }
+                            if(data.scholarship_type == "college" || data.scholarship_type == "tvet"){  
+                                $('#update-user-form select[name="school"]').val('')
+                                $('#update-user-form select[name="school"] option[data-scholarship-type="colege_tvet"]').removeClass('d-none') 
+                                $('#update-user-form select[name="school"] option[data-scholarship-type="shs"]').addClass('d-none')  
+                            } 
+                            if( data.scholarship_type == ""){  
+                                $('#update-user-form select[name="school"] option[data-scholarship-type="shs"]').addClass('d-none')
+                                $('#update-user-form select[name="school"] option[data-scholarship-type="colege_tvet"]').addClass('d-none') 
+                            } 
+
+                            $('#update-user-form .scholarship-type').removeClass('d-none')
+                            $('#update-user-form select[name=scholarship_type]').val(data.scholarship_type)
+                        }else{ 
+                            $('#update-user-form .scholarship-type').addClass('d-none')
+                            $('#update-user-form select[name=scholarship_type]').val('')
+                        } 
+
+
+                        if(data.school == "" || data.school == null){  
+                            $('#update-user-form .school').addClass('d-none')
+                            $('#update-user-form .scholarship-type').addClass('d-none') 
+                            $('#update-user-form select[name=school]').val('')
+                        }else{ 
+                            $('#update-user-form .school').removeClass('d-none')
+                            $('#update-user-form select[name=school]').val(data.school)
+                        }
                     },
                     error   : function (xhr, status, error) { 
                         console.info(xhr.responseText);
@@ -431,7 +496,7 @@
                     method  : "post", 
                     data    : $("#update-user-form").serialize(),
                     dataType: "json", 
-                    success : function (data) {  
+                    success : function (data) {   
                         if(data.response){ 
                             Swal.fire({
                                 title: "Good job!",
