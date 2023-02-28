@@ -80,7 +80,7 @@ $routes->group('pending', ["filter" => "auth"],  function ($routes) {
     $routes->post('tvet_bulk_disapproved', 'TvetController::bulk_disapproved');
 });
 
-$routes->group('registration', ["filter" => "auth"],  function ($routes) {
+$routes->group('registration',  ["filter" => ["auth", "usernoaccess"]],  function ($routes) {
     $routes->get('/', 'ScholarRegistrationController::index');
     $routes->get('shs_app_no_id', 'ScholarRegistrationController::shs_app_no_id');
     $routes->post('shs_autofill', 'ScholarRegistrationController::shs_autofill');
@@ -99,7 +99,7 @@ $routes->group('registration', ["filter" => "auth"],  function ($routes) {
     $routes->post('tvet_latest_app_no_id', 'ScholarRegistrationController::get_tvet_latest_app_no_id');
     $routes->get('print/(:any)/(:any)', 'ScholarRegistrationController::print/$1/$2');
 });
-$routes->group('manage', ["filter" => "auth"] ,  function ($routes) {
+$routes->group('manage', ["filter" => ["auth", "usernoaccess"]],  function ($routes) {
     $routes->get('/', 'ManageApplicationController::index');
     $routes->get('get_shs_all_list', 'SeniorHighController::get_all');
     $routes->get('get_college_all_list', 'CollegeController::get_all');
@@ -116,7 +116,7 @@ $routes->group('manage', ["filter" => "auth"] ,  function ($routes) {
 });
 
 
-$routes->group('generate_report', ["filter" => "auth"],  function ($routes) {
+$routes->group('generate_report', ["filter" => ["auth", "usernoaccess"]],  function ($routes) {
     $routes->get('/', 'GenerateReportController::index');
     $routes->post('shs_report', 'SeniorHighController::get_report',);
     $routes->get('shs_print_preview', 'SeniorHighController::print_preview',);
@@ -128,15 +128,15 @@ $routes->group('generate_report', ["filter" => "auth"],  function ($routes) {
 
 
 
-$routes->group('generate_payroll' , ["filter" => "auth"] ,  function ($routes) {
-    $routes->get('/', 'GeneratePayrollController::index', ["filter" => "auth"]);
+$routes->group('generate_payroll' , ["filter" => ["auth", "usernoaccess"]],  function ($routes) {
+    $routes->get('/', 'GeneratePayrollController::index');
     $routes->post('shs_payroll', 'SeniorHighController::payroll_print_preview');
     $routes->post('college_payroll', 'CollegeController::payroll_print_preview');
     $routes->post('tvet_payroll', 'TvetController::payroll_print_preview');
 });
 
 
-$routes->group('manage_scholarship', ["filter" => "auth"] ,  function ($routes) {
+$routes->group('manage_scholarship', ["filter" => ["auth", "usernoaccess", "adminnoaccess"]],  function ($routes) {
     $routes->get('/', 'ManageScholarship::index');
     $routes->post('semester_closed', 'ManageScholarship::semester_closed');
     $routes->post('update_sy', 'ManageScholarship::update_sy');
@@ -145,7 +145,7 @@ $routes->group('manage_scholarship', ["filter" => "auth"] ,  function ($routes) 
 
 
 
-$routes->group('school', ["filter" => "auth"],  function ($routes) {
+$routes->group('school', ["filter" => ["auth", "usernoaccess", "adminnoaccess"]],  function ($routes) {
     $routes->get('/', 'SchoolController::index', );
     $routes->get('get_all', 'SchoolController::get_all');
     $routes->get('get/(:num)', 'SchoolController::get/$1');
@@ -154,7 +154,7 @@ $routes->group('school', ["filter" => "auth"],  function ($routes) {
     $routes->post('update', 'SchoolController::update');
 });
 
-$routes->group('collegeschool',   ["filter" => "auth"], function ($routes) {
+$routes->group('collegeschool', ["filter" => ["auth", "usernoaccess", "adminnoaccess"]], function ($routes) {
     $routes->get('/', 'CollegeSchoolController::index');
     $routes->get('get_all', 'CollegeSchoolController::get_all');
     $routes->get('get/(:num)', 'CollegeSchoolController::get/$1');
@@ -164,7 +164,7 @@ $routes->group('collegeschool',   ["filter" => "auth"], function ($routes) {
 });
 
 
-$routes->group('strand',  ["filter" => "auth"],  function ($routes) {
+$routes->group('strand', ["filter" => ["auth", "usernoaccess", "adminnoaccess"]],  function ($routes) {
     $routes->get('/', 'StrandController::index',);
     $routes->get('get_all', 'StrandController::get_all', );
     $routes->get('get/(:num)', 'StrandController::get/$1');
@@ -173,7 +173,7 @@ $routes->group('strand',  ["filter" => "auth"],  function ($routes) {
     $routes->post('update', 'StrandController::update');
 });
 
-$routes->group('course', ["filter" => "auth"],  function ($routes) {
+$routes->group('course', ["filter" => ["auth", "usernoaccess", "adminnoaccess"]],  function ($routes) {
     $routes->get('/', 'CourseController::index',);
     $routes->get('get_all', 'CourseController::get_all',);
     $routes->get('get/(:num)', 'CourseController::get/$1');
@@ -182,7 +182,7 @@ $routes->group('course', ["filter" => "auth"],  function ($routes) {
     $routes->post('update', 'CourseController::update');
 });
 
-$routes->group('user',  ["filter" => "auth"],  function ($routes) {
+$routes->group('user',  ["filter" => ["auth", "usernoaccess", "adminnoaccess"]],  function ($routes) {
     $routes->get('/', 'UserController::index',);
     $routes->get('get_all', 'UserController::get_all', );
     $routes->post('insert', 'UserController::insert');
