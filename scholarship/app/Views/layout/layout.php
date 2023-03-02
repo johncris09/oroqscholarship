@@ -293,12 +293,12 @@ $db = db_connect();
                                             <span> User </span>
                                         </a>
                                     </li>
-                                    <!-- <li>
-                                        <a href="<?= base_url('authlogin') ?>"> 
-                                            <i class="mdi mdi-web"></i>
-                                            <span> Auth Login </span>
+                                    <li>
+                                        <a href="<?= base_url('logs') ?>"> 
+                                            <i class="mdi mdi-view-headline"></i>
+                                            <span> User Logs </span>
                                         </a>
-                                    </li> -->
+                                    </li>
                             <?php
                                 } 
                             ?> 

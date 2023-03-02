@@ -193,6 +193,13 @@ $routes->group('user',  ["filter" => ["auth", "usernoaccess", "adminnoaccess"]],
     $routes->post('checkpassword', 'UserController::checkpassword');
 });
 
+
+
+$routes->group('logs',  ["filter" => ["auth", "usernoaccess", "adminnoaccess"]],  function ($routes) {
+    $routes->get('/', 'UserActivityController::index',); 
+});
+
+
 $routes->group('authlogin', ["filter" => "auth"], function ($routes) {
     $routes->get('/', 'AuthLoginController::index');
     $routes->get('get_all', 'AuthLoginController::get_all');
