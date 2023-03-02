@@ -23,25 +23,6 @@
                                 <th>Timestamp</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <?php 
-                                use CodeIgniter\Shield\Models\UserModel; 
-                                foreach ($logs as $log): ?>
-                                <tr> 
-                                    <td><?= $log->id ?></td>
-                                    <td>
-                                        <?php                    
-                                            $user      = new UserModel();
-                                            $user_info = $user->where('id',  $log->user_id)->first();
-                                            $name      = ucwords( $user_info->firstname ." ". $user_info->middlename ." ". $user_info->lastname );
-                                            echo $name; 
-                                        ?>
-                                    </td>
-                                    <td><?= $log->description ?></td>
-                                    <td><?= date('F d, Y h:i:s a', strtotime($log->created_at))  ?></td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
                     </table> 
                     
                 </div> <!-- end card body-->
@@ -62,7 +43,29 @@
 
             var table = $('#log-table').DataTable({
                 "scrollY"  : 450,
-                "scrollX"  : true,  
+                "scrollX"  : true, 
+                deferRender: true, 
+                "order": [[ 0, "desc" ]],
+                ajax       : {
+                    url: 'logs/get_all',   
+                },
+                columns: [  
+                    { data    : 'id' },  
+                    { data    : 'user_id' },
+                    { data    : 'description' }, 
+                    {
+                        data  : 'id',
+                        render: function(data, type, row, meta){  
+                            var date = moment( row.created_at);
+                            var formattedDate = date.format('MMMM D, Y hh:mm:ss a'); 
+                            return formattedDate;
+                        }
+                    }, 
+
+                ],
+                columnDefs: [
+                    { "targets": 0, "visible": false } // Hide the first column
+                ]
             }); 
 
 
