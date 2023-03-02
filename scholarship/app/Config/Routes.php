@@ -197,6 +197,7 @@ $routes->group('user',  ["filter" => ["auth", "usernoaccess", "adminnoaccess"]],
 
 $routes->group('logs',  ["filter" => ["auth", "usernoaccess", "adminnoaccess"]],  function ($routes) {
     $routes->get('/', 'UserActivityController::index',); 
+    $routes->get('get_all', 'UserActivityController::get_all',);
 });
 
 
