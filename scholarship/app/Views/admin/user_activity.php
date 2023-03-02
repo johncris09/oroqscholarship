@@ -7,10 +7,7 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-header bg-white">
-                    <div class=" float-end"> 
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-course-modal">Add New</button>
-                    </div>
+                <div class="card-header bg-white"> 
                     <h4 class="header-title"><?= $page_title; ?></h4>  
                 </div>
                 <div class="card-body">  
