@@ -91,7 +91,7 @@ $routes->group('registration',  ["filter" => ["auth", "usernoaccess"]],  functio
     $routes->post('insert_senior_high', 'ScholarRegistrationController::insert_senior_high_registration');
     $routes->post('insert_college', 'ScholarRegistrationController::insert_college_registration');
     $routes->post('insert_tvet', 'ScholarRegistrationController::insert_tvet_registration');
-    $routes->post('upload', 'ScholarRegistrationController::upload');
+    $routes->post('upload_photo', 'ScholarRegistrationController::upload_photo'); 
     $routes->post('upload_image', 'ScholarRegistrationController::upload_image');
     $routes->post('shs_update_image', 'ScholarRegistrationController::update_image');
     $routes->post('shs_latest_app_no_id', 'ScholarRegistrationController::get_shs_latest_app_no_id');
