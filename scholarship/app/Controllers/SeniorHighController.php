@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\ConfigModel;
 use App\Models\SeniorHighModel;
 use Config\Custom_config;
+use App\Models\UserActivityModel;
 
 class SeniorHighController extends BaseController
 {
@@ -26,20 +27,20 @@ class SeniorHighController extends BaseController
         }
 
         if (!empty($_GET['app_sem'])) {
-            $shs_data['AppNoSem'] = $_GET['app_sem'];
+            $shs_data['appnosem'] = $_GET['app_sem'];
         } else {
             $shs_data = [];
         }
 
         if (!empty($_GET['app_sy'])) {
-            $shs_data['AppSY'] = $_GET['app_sy'];
+            $shs_data['appsy'] = $_GET['app_sy'];
         } else {
             $shs_data = [];
         }
         if (empty($_GET['app_sy']) && empty($_GET['app_sem'])  && empty($_GET['view'])) {
             $shs_data = array(
-                'AppSY'    => $config['current_sy'],
-                'AppNoSem' => $config['current_sem'],
+                'appsy'    => $config['current_sy'],
+                'appnosem' => $config['current_sem'],
             );
         }
         $data["data"] = $this->senior_high->get_all($shs_data);
@@ -55,20 +56,20 @@ class SeniorHighController extends BaseController
         }
 
         if (!empty($_GET['app_sem'])) {
-            $shs_data['AppNoSem'] = $_GET['app_sem'];
+            $shs_data['appnosem'] = $_GET['app_sem'];
         } else {
             $shs_data = [];
         }
 
         if (!empty($_GET['app_sy'])) {
-            $shs_data['AppSY'] = $_GET['app_sy'];
+            $shs_data['appsy'] = $_GET['app_sy'];
         } else {
             $shs_data = [];
         }
         if (empty($_GET['app_sy']) && empty($_GET['app_sem'])  && empty($_GET['view'])) {
             $shs_data = array(
-                'AppSY'    => $config['current_sy'],
-                'AppNoSem' => $config['current_sem'],
+                'appsy'    => $config['current_sy'],
+                'appnosem' => $config['current_sem'],
             );
         }
         $res["data"] = $this->senior_high->get_pending_application($shs_data);
@@ -84,20 +85,20 @@ class SeniorHighController extends BaseController
         }
 
         if (!empty($_GET['app_sem'])) {
-            $shs_data['AppNoSem'] = $_GET['app_sem'];
+            $shs_data['appnosem'] = $_GET['app_sem'];
         } else {
             $shs_data = [];
         }
 
         if (!empty($_GET['app_sy'])) {
-            $shs_data['AppSY'] = $_GET['app_sy'];
+            $shs_data['appsy'] = $_GET['app_sy'];
         } else {
             $shs_data = [];
         }
         if (empty($_GET['app_sy']) && empty($_GET['app_sem'])  && empty($_GET['view'])) {
             $shs_data = array(
-                'AppSY'    => $config['current_sy'],
-                'AppNoSem' => $config['current_sem'],
+                'appsy'    => $config['current_sy'],
+                'appnosem' => $config['current_sem'],
             );
         }
         $res["data"] = $this->senior_high->get_approved_application($shs_data);
@@ -109,7 +110,7 @@ class SeniorHighController extends BaseController
         try {
             $id = $this->request->getPost('id');
             $data = [
-                'AppStatus' => $this->request->getPost('status'),
+                'appstatus' => $this->request->getPost('status'),
             ];
 
             $this->senior_high->update($id, $data);
@@ -133,34 +134,34 @@ class SeniorHighController extends BaseController
         try {
             $id   = $this->request->getPost('id');
             $data = [
-                'AppSY'         => $this->request->getPost('app_no_year'),
-                'AppNoSem'      => $this->request->getPost('app_no_sem'),
-                'AppNoID'       => $this->request->getPost('app_no_id'),
-                'AppStatus'     => $this->request->getPost('status'),
-                'AppLastName'   => trim($this->request->getPost('lastname')),
-                'AppFirstName'  => trim($this->request->getPost('firstname')),
-                'AppMidIn'      => trim($this->request->getPost('middlename')),
-                'AppSuffix'     => trim($this->request->getPost('suffix')),
-                'AppAddress'    => $this->request->getPost('address'),
-                'AppDOB'        => $this->request->getPost('birthdate'),
+                'appsy'         => $this->request->getPost('app_no_year'),
+                'appnosem'      => $this->request->getPost('app_no_sem'),
+                'appnoid'       => $this->request->getPost('app_no_id'),
+                'appstatus'     => $this->request->getPost('status'),
+                'lastname'   => trim($this->request->getPost('lastname')),
+                'firstname'  => trim($this->request->getPost('firstname')),
+                'middlename'      => trim($this->request->getPost('middlename')),
+                'suffix'     => trim($this->request->getPost('suffix')),
+                'address'    => $this->request->getPost('address'),
+                'birthdate'        => $this->request->getPost('birthdate'),
                 'AppAge'        => $this->request->getPost('age'),
-                'AppCivilStat'  => $this->request->getPost('civil_status'),
-                'AppGender'     => $this->request->getPost('gender'),
-                'AppContact'    => trim($this->request->getPost('contact_no')),
-                'AppCTC'        => trim($this->request->getPost('ctc_no')),
-                'AppEmailAdd'   => trim($this->request->getPost('email')),
-                'AppAvailment'  => trim($this->request->getPost('availment')),
-                'AppSchool'     => $this->request->getPost('school'),
-                'AppCourse'     => $this->request->getPost('strand'),
-                'AppYear'       => $this->request->getPost('grade_level'),
-                'AppSem'        => $this->request->getPost('semester'),
+                'civil_status'  => $this->request->getPost('civil_status'),
+                'gender'     => $this->request->getPost('gender'),
+                'contact_no'    => trim($this->request->getPost('contact_no')),
+                'ctc_no'        => trim($this->request->getPost('ctc_no')),
+                'email'   => trim($this->request->getPost('email')),
+                'availment'  => trim($this->request->getPost('availment')),
+                'school'     => $this->request->getPost('school'),
+                'course'     => $this->request->getPost('strand'),
+                'appyear'       => $this->request->getPost('grade_level'),
+                'appsem'        => $this->request->getPost('semester'),
                 'AppSy'         => $this->request->getPost('school_year'),
-                'AppFather'     => trim($this->request->getPost('father_name')),
-                'AppFatherOccu' => trim($this->request->getPost('father_occupation')),
-                'AppMother'     => trim($this->request->getPost('mother_name')),
-                'AppMotherOccu' => trim($this->request->getPost('mother_occupation')),
-                'AppManager'    => trim($this->request->getPost('manager')),
-                'AppImage'      => trim($this->request->getPost('image')),
+                'father_name'     => trim($this->request->getPost('father_name')),
+                'father_nameOccu' => trim($this->request->getPost('father_occupation')),
+                'mother_name'     => trim($this->request->getPost('mother_name')),
+                'mother_nameOccu' => trim($this->request->getPost('mother_occupation')),
+                'appmanager'    => trim($this->request->getPost('manager')),
+                'profile_photo'      => trim($this->request->getPost('image')),
             ];
 
 
@@ -169,6 +170,12 @@ class SeniorHighController extends BaseController
                 "response" => true,
                 "message"  => "Changes has been saved!",
             ];
+            
+            $activity_model = new UserActivityModel(); 
+            $name = ucwords($data['firstname'] . " " .  $data['middlename'] . " " .  $data['lastname'] . " " .  $data['suffix'] );
+            $activity_model->addLog(auth()->user()->id, 'Updated a senior high application of \''.$name.'\'');
+
+
         } catch (\Exception $e) {
             $res = [
                 "response" => false,
@@ -186,7 +193,7 @@ class SeniorHighController extends BaseController
         try {
             $id   = $this->request->getPost('id');
             $data = [
-                'AppManager' => $this->request->getPost('manager'),
+                'appmanager' => $this->request->getPost('manager'),
             ];
 
             $this->senior_high->update($id, $data);

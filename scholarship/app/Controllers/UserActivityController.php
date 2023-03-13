@@ -15,10 +15,9 @@ class UserActivityController extends BaseController
 
     
     public function get_all()
-    {
-        
+    { 
         $user_activity    = model('UserActivityModel');
-        $data['data'] = $user_activity->findAll();
+        $data['data'] = $user_activity->get_all();
         echo Json_encode($data);
     }
 

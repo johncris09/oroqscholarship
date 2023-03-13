@@ -57,21 +57,21 @@
                                 $counter = 1; 
                                 foreach($result as $row){ 
                                     if(in_array( $scholarship_type  ,['College', 'TVET'])){
-                                        $contact    = in_array($row->colContactNo, ["-", null, "None", "" ]) ? "": $row->colContactNo;
-                                        $name       = ucwords( $row->colLastName . ", "  . $row->colFirstName . " "  . $row->colMI . " " . " "  . $row->colSuffix) ; 
-                                        $address    = $row->colAddress;
-                                        $course     = $row->colCourse;
-                                        $year_level = $row->colYearLevel;
-                                        $school     = $row->colSchool;
-                                        $availment  = $row->colAvailment;
+                                        $contact    = in_array($row->contact_no, ["-", null, "None", "" ]) ? "": $row->contact_no;
+                                        $name       = ucwords( $row->lastname . ", "  . $row->firstname . " "  . $row->middlename . " " . " "  . $row->suffix) ; 
+                                        $address    = $row->address;
+                                        $course     = $row->course;
+                                        $year_level = $row->appyear;
+                                        $school     = $row->school;
+                                        $availment  = $row->availment;
                                     }else{
-                                        $contact    = in_array($row->AppContact, ["-", null, "None", "" ]) ? ""  : $row->AppContact;
-                                        $name       = ucwords( $row->AppLastName . ", "  . $row->AppFirstName . " "  . $row->AppMidIn . " " . " "  . $row->AppSuffix);
-                                        $address    = $row->AppAddress;
-                                        $course     = $row->AppCourse;
-                                        $year_level = $row->AppYear;
-                                        $school     = $row->AppSchool;
-                                        $availment  = $row->AppAvailment;
+                                        $contact    = in_array($row->contact_no, ["-", null, "None", "" ]) ? ""  : $row->contact_no;
+                                        $name       = ucwords( $row->lastname . ", "  . $row->firstname . " "  . $row->middlename . " " . " "  . $row->suffix);
+                                        $address    = $row->address;
+                                        $course     = $row->course;
+                                        $year_level = $row->appyear;
+                                        $school     = $row->school;
+                                        $availment  = $row->availment;
                                     }
                                     
                             ?>

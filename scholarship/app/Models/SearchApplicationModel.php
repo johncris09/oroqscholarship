@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class SearchApplicationModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'table_scholarregistration';
+    protected $table            = 'senior_high';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -42,78 +42,81 @@ class SearchApplicationModel extends Model
 
     public function search($data)
     {
-        $builder = $this->db->table('table_scholarregistration');
+        $builder = $this->db->table('senior_high');
         $builder->select('
-            table_scholarregistration.id as id, 
-            table_scholarregistration.AppLastName as lastname, 
-            table_scholarregistration.AppFirstName as firstname,
-            table_scholarregistration.AppMidIn as middlename,
-            table_scholarregistration.AppSuffix as suffix, 
-            table_scholarregistration.AppAvailment as availment, 
-            table_scholarregistration.AppSY as sy, 
-            table_scholarregistration.AppYear as yearlevel, 
-            table_scholarregistration.AppAddress as address, 
-            table_scholarregistration.AppSem as sem, 
-            table_scholarregistration.AppStatus as status, 
+            senior_high.id as id, 
+            senior_high.lastname as lastname, 
+            senior_high.firstname as firstname,
+            senior_high.middlename as middlename,
+            senior_high.suffix as suffix, 
+            senior_high.availment as availment, 
+            senior_high.appsy as sy, 
+            senior_high.appyear as yearlevel, 
+            senior_high.address as address, 
+            senior_high.appsem as sem, 
+            senior_high.appstatus as status, 
+            senior_high.school as school, 
             "senior high" AS source 
         '); 
-        $builder->like("table_scholarregistration.AppFirstName ", $data, "both"); 
-        $builder->orLike("table_scholarregistration.AppLastName ", $data, "both"); 
-        $builder->orLike("table_scholarregistration.AppMidIn", $data, "both"); 
-        $builder->orLike("table_scholarregistration.AppSuffix", $data, "both"); 
-        $builder->orLike("table_scholarregistration.AppSuffix", $data, "both"); 
-        $builder->orLike("CONCAT(table_scholarregistration.AppFirstName, ' ', table_scholarregistration.AppLastName)", $data, "both"); 
-        $builder->orLike("CONCAT(table_scholarregistration.AppLastName, ' ', table_scholarregistration.AppFirstName)", $data, "both"); 
+        $builder->like("senior_high.firstname ", $data, "both"); 
+        $builder->orLike("senior_high.lastname ", $data, "both"); 
+        $builder->orLike("senior_high.middlename", $data, "both"); 
+        $builder->orLike("senior_high.suffix", $data, "both"); 
+        $builder->orLike("senior_high.suffix", $data, "both"); 
+        $builder->orLike("CONCAT(senior_high.firstname, ' ', senior_high.lastname)", $data, "both"); 
+        $builder->orLike("CONCAT(senior_high.lastname, ' ', senior_high.firstname)", $data, "both"); 
 
         
         
         $builder->union(
             $this->db
-                ->table('table_collegeapp')
+                ->table('college')
                 ->select('
-                    table_collegeapp.id, 
-                    table_collegeapp.colLastName, 
-                    table_collegeapp.colFirstName,
-                    table_collegeapp.colMI,
-                    table_collegeapp.colSuffix, 
-                    table_collegeapp.colAvailment,  
-                    table_collegeapp.colSY,  
-                    table_collegeapp.colYearLevel,  
-                    table_collegeapp.colAddress, 
-                    table_collegeapp.colSem, 
-                    table_collegeapp.colAppStat, 
+                    college.id, 
+                    college.lastname, 
+                    college.firstname,
+                    college.middlename,
+                    college.suffix, 
+                    college.availment,  
+                    college.appsy,  
+                    college.appyear,  
+                    college.address, 
+                    college.appsem, 
+                    college.appstatus, 
+                    college.school,
                     "college" AS source 
                 ')
-                ->like("table_collegeapp.colFirstName", $data, "both")
-                ->orLike("table_collegeapp.colLastName", $data, "both")
-                ->orLike("table_collegeapp.colMI", $data, "both") 
-                ->orLike("CONCAT(table_collegeapp.colLastName, ' ', table_collegeapp.colLastName)", $data, "both")
-                ->orLike("CONCAT(table_collegeapp.colLastName, ' ', table_collegeapp.colLastName)", $data, "both")
+                ->like("college.firstname", $data, "both")
+                ->orLike("college.lastname", $data, "both")
+                ->orLike("college.middlename", $data, "both") 
+                ->orLike("CONCAT(college.lastname, ' ', college.lastname)", $data, "both")
+                ->orLike("CONCAT(college.lastname, ' ', college.lastname)", $data, "both")
         );
         
         $builder->union(
             $this->db
-                ->table('table_tvet')
+                ->table('tvet')
                 ->select('
-                    table_tvet.id, 
-                    table_tvet.colLastName, 
-                    table_tvet.colFirstName,
-                    table_tvet.colMI,
-                    table_tvet.colSuffix, 
-                    table_tvet.colAvailment,  
-                    table_tvet.colSY,  
-                    table_tvet.colYearLevel, 
-                    table_tvet.colAddress, 
-                    table_tvet.colSem, 
-                    table_tvet.colAppStat, 
+                    tvet.id, 
+                    tvet.lastname, 
+                    tvet.firstname,
+                    tvet.middlename,
+                    tvet.suffix, 
+                    tvet.availment,  
+                    tvet.appsy,  
+                    tvet.appyear, 
+                    tvet.address, 
+                    tvet.appsem, 
+                    tvet.appstatus, 
+                    tvet.school,
                     "tvet" AS source 
                 ')
-                ->like("table_tvet.colFirstName", $data, "both")
-                ->orLike("table_tvet.colLastName", $data, "both")
-                ->orLike("table_tvet.colMI", $data, "both")
-                ->orLike("table_tvet.colSuffix", $data, "both") 
-                ->orLike("CONCAT(table_tvet.colLastName, ' ', table_tvet.colLastName)", $data, "both")
-                ->orLike("CONCAT(table_tvet.colLastName, ' ', table_tvet.colLastName)", $data, "both")
+                ->like("tvet.firstname", $data, "both")
+                ->orLike("tvet.lastname", $data, "both")
+                ->orLike("tvet.middlename", $data, "both")
+                ->orLike("tvet.suffix", $data, "both") 
+                ->orLike("CONCAT(tvet.lastname, ' ', tvet.lastname)", $data, "both")
+                ->orLike("CONCAT(tvet.lastname, ' ', tvet.lastname)", $data, "both")
         );
  
         // Get the result
@@ -128,41 +131,41 @@ class SearchApplicationModel extends Model
     
     public function shs_autofill($data)
     {
-        $builder = $this->db->table('table_scholarregistration');
+        $builder = $this->db->table('senior_high');
         $builder->select('
-            table_scholarregistration.id as id, 
-            table_scholarregistration.AppLastName as lastname, 
-            table_scholarregistration.AppFirstName as firstname,
-            table_scholarregistration.AppMidIn as middlename, 
-            table_scholarregistration.AppSuffix as suffix,  
-            table_scholarregistration.AppSY as sy, 
-            table_scholarregistration.AppYear as yearlevel, 
-            table_scholarregistration.AppAddress as address, 
-            table_scholarregistration.AppDOB as birthdate,  
-            table_scholarregistration.AppAge as age,  
-            table_scholarregistration.AppCivilStat as civil_status,
-            table_scholarregistration.AppGender as gender, 
-            table_scholarregistration.AppContact as contact_no, 
-            table_scholarregistration.AppEmailAdd as email_add, 
-            table_scholarregistration.AppFather as father_name, 
-            table_scholarregistration.AppFatherOccu as father_occupation, 
-            table_scholarregistration.AppMother as mother_name, 
-            table_scholarregistration.AppMotherOccu as mother_occupation, 
-            table_scholarregistration.AppSem as sem, 
-            table_scholarregistration.AppSchool as school, 
-            table_scholarregistration.AppSchoolAddress as school_address, 
-            table_scholarregistration.AppStatus as status, 
-            table_scholarregistration.AppCTC as ctc_no, 
-            table_scholarregistration.AppAvailment as availment,   
-            table_scholarregistration.AppCourse as course, 
+            senior_high.id as id, 
+            senior_high.lastname as lastname, 
+            senior_high.firstname as firstname,
+            senior_high.middlename as middlename, 
+            senior_high.suffix as suffix,  
+            senior_high.appsy as sy, 
+            senior_high.appyear as yearlevel, 
+            senior_high.address as address, 
+            senior_high.birthdate as birthdate,  
+            senior_high.AppAge as age,  
+            senior_high.civil_status as civil_status,
+            senior_high.gender as gender, 
+            senior_high.contact_no as contact_no, 
+            senior_high.email as email_add, 
+            senior_high.father_name as father_name, 
+            senior_high.father_nameOccu as father_occupation, 
+            senior_high.mother_name as mother_name, 
+            senior_high.mother_nameOccu as mother_occupation, 
+            senior_high.appsem as sem, 
+            senior_high.school as school, 
+            senior_high.schoolAddress as school_address, 
+            senior_high.appstatus as status, 
+            senior_high.ctc_no as ctc_no, 
+            senior_high.availment as availment,   
+            senior_high.course as course, 
             "senior high" AS source 
         '); 
-        $builder->like("table_scholarregistration.AppFirstName ", $data, "both"); 
-        $builder->orLike("table_scholarregistration.AppLastName ", $data, "both"); 
-        $builder->orLike("table_scholarregistration.AppMidIn", $data, "both"); 
-        $builder->orLike("table_scholarregistration.AppSuffix", $data, "both");  
-        $builder->orLike("CONCAT(table_scholarregistration.AppFirstName, ' ', table_scholarregistration.AppLastName)", $data, "both"); 
-        $builder->orLike("CONCAT(table_scholarregistration.AppLastName, ' ', table_scholarregistration.AppFirstName)", $data, "both");
+        $builder->like("senior_high.firstname ", $data, "both"); 
+        $builder->orLike("senior_high.lastname ", $data, "both"); 
+        $builder->orLike("senior_high.middlename", $data, "both"); 
+        $builder->orLike("senior_high.suffix", $data, "both");  
+        $builder->orLike("CONCAT(senior_high.firstname, ' ', senior_high.lastname)", $data, "both"); 
+        $builder->orLike("CONCAT(senior_high.lastname, ' ', senior_high.firstname)", $data, "both");
         $builder->orderBy("id", "DESC"); 
  
         // Get the result
@@ -207,41 +210,41 @@ class SearchApplicationModel extends Model
 
     public function college_autofill($data)
     {
-        $builder = $this->db->table('table_collegeapp');
+        $builder = $this->db->table('college');
         $builder->select('
-            table_collegeapp.id as id, 
-            table_collegeapp.colLastName as lastname, 
-            table_collegeapp.colLastName as firstname,
-            table_collegeapp.colMI as middlename, 
-            table_collegeapp.colSuffix as suffix,  
-            table_collegeapp.colSY as sy, 
-            table_collegeapp.colYearLevel as yearlevel, 
-            table_collegeapp.colAddress as address, 
-            table_collegeapp.colDOB as birthdate,  
-            table_collegeapp.colAge as age,  
-            table_collegeapp.colCivilStat as civil_status,
-            table_collegeapp.colGender as gender, 
-            table_collegeapp.colGender as contact_no, 
-            table_collegeapp.colEmailAdd as email_add, 
-            table_collegeapp.colFathersName as father_name, 
-            table_collegeapp.colFatherOccu as father_occupation, 
-            table_collegeapp.colMothersName as mother_name, 
-            table_collegeapp.colMotherOccu as mother_occupation, 
-            table_collegeapp.colSem as sem, 
-            table_collegeapp.colSchool as school, 
-            table_collegeapp.colSchoolAddress as school_address, 
-            table_collegeapp.colAppStat as status, 
-            table_collegeapp.colCTC as ctc_no, 
-            table_collegeapp.colAvailment as availment,   
-            table_collegeapp.colCourse as course, 
+            college.id as id, 
+            college.lastname as lastname, 
+            college.lastname as firstname,
+            college.middlename as middlename, 
+            college.suffix as suffix,  
+            college.appsy as sy, 
+            college.appyear as yearlevel, 
+            college.address as address, 
+            college.colDOB as birthdate,  
+            college.colAge as age,  
+            college.civil_status as civil_status,
+            college.gender as gender, 
+            college.gender as contact_no, 
+            college.email as email_add, 
+            college.father_name as father_name, 
+            college.father_occupation as father_occupation, 
+            college.mother_name as mother_name, 
+            college.mother_occupation as mother_occupation, 
+            college.appsem as sem, 
+            college.school as school, 
+            college.schoolAddress as school_address, 
+            college.appstatus as status, 
+            college.ctc_no as ctc_no, 
+            college.availment as availment,   
+            college.course as course, 
             "senior high" AS source 
         '); 
-        $builder->like("table_collegeapp.colFirstName ", $data, "both"); 
-        $builder->orLike("table_collegeapp.colFirstName ", $data, "both"); 
-        $builder->orLike("table_collegeapp.colMI", $data, "both"); 
-        $builder->orLike("table_collegeapp.colSuffix", $data, "both");  
-        $builder->orLike("CONCAT(table_collegeapp.colFirstName, ' ', table_collegeapp.colFirstName)", $data, "both"); 
-        $builder->orLike("CONCAT(table_collegeapp.colFirstName, ' ', table_collegeapp.colFirstName)", $data, "both");
+        $builder->like("college.firstname ", $data, "both"); 
+        $builder->orLike("college.firstname ", $data, "both"); 
+        $builder->orLike("college.middlename", $data, "both"); 
+        $builder->orLike("college.suffix", $data, "both");  
+        $builder->orLike("CONCAT(college.firstname, ' ', college.firstname)", $data, "both"); 
+        $builder->orLike("CONCAT(college.firstname, ' ', college.firstname)", $data, "both");
         $builder->orderBy("id", "DESC"); 
  
         // Get the result
@@ -286,41 +289,41 @@ class SearchApplicationModel extends Model
 
     public function tvet_autofill($data)
     {
-        $builder = $this->db->table('table_tvet');
+        $builder = $this->db->table('tvet');
         $builder->select('
-            table_tvet.id as id, 
-            table_tvet.colLastName as lastname, 
-            table_tvet.colLastName as firstname,
-            table_tvet.colMI as middlename, 
-            table_tvet.colSuffix as suffix,  
-            table_tvet.colSY as sy, 
-            table_tvet.colYearLevel as yearlevel, 
-            table_tvet.colAddress as address, 
-            table_tvet.colDOB as birthdate,  
-            table_tvet.colAge as age,  
-            table_tvet.colCivilStat as civil_status,
-            table_tvet.colGender as gender, 
-            table_tvet.colGender as contact_no, 
-            table_tvet.colEmailAdd as email_add, 
-            table_tvet.colFathersName as father_name, 
-            table_tvet.colFatherOccu as father_occupation, 
-            table_tvet.colMothersName as mother_name, 
-            table_tvet.colMotherOccu as mother_occupation, 
-            table_tvet.colSem as sem, 
-            table_tvet.colSchool as school, 
-            table_tvet.colSchoolAddress as school_address, 
-            table_tvet.colAppStat as status, 
-            table_tvet.colCTC as ctc_no, 
-            table_tvet.colAvailment as availment,   
-            table_tvet.colCourse as course, 
+            tvet.id as id, 
+            tvet.lastname as lastname, 
+            tvet.lastname as firstname,
+            tvet.middlename as middlename, 
+            tvet.suffix as suffix,  
+            tvet.appsy as sy, 
+            tvet.appyear as yearlevel, 
+            tvet.address as address, 
+            tvet.colDOB as birthdate,  
+            tvet.colAge as age,  
+            tvet.civil_status as civil_status,
+            tvet.gender as gender, 
+            tvet.gender as contact_no, 
+            tvet.email as email_add, 
+            tvet.father_name as father_name, 
+            tvet.father_occupation as father_occupation, 
+            tvet.mother_name as mother_name, 
+            tvet.mother_occupation as mother_occupation, 
+            tvet.appsem as sem, 
+            tvet.school as school, 
+            tvet.schoolAddress as school_address, 
+            tvet.appstatus as status, 
+            tvet.ctc_no as ctc_no, 
+            tvet.availment as availment,   
+            tvet.course as course, 
             "senior high" AS source 
         '); 
-        $builder->like("table_tvet.colFirstName ", $data, "both"); 
-        $builder->orLike("table_tvet.colFirstName ", $data, "both"); 
-        $builder->orLike("table_tvet.colMI", $data, "both"); 
-        $builder->orLike("table_tvet.colSuffix", $data, "both");  
-        $builder->orLike("CONCAT(table_tvet.colFirstName, ' ', table_tvet.colFirstName)", $data, "both"); 
-        $builder->orLike("CONCAT(table_tvet.colFirstName, ' ', table_tvet.colFirstName)", $data, "both");
+        $builder->like("tvet.firstname ", $data, "both"); 
+        $builder->orLike("tvet.firstname ", $data, "both"); 
+        $builder->orLike("tvet.middlename", $data, "both"); 
+        $builder->orLike("tvet.suffix", $data, "both");  
+        $builder->orLike("CONCAT(tvet.firstname, ' ', tvet.firstname)", $data, "both"); 
+        $builder->orLike("CONCAT(tvet.firstname, ' ', tvet.firstname)", $data, "both");
         $builder->orderBy("id", "DESC"); 
  
         // Get the result

@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\ConfigModel;
 use App\Models\TvetModel;
 use Config\Custom_config;
+use App\Models\UserActivityModel;
 
 class TvetController extends BaseController
 {
@@ -27,20 +28,20 @@ class TvetController extends BaseController
         }
 
         if (!empty($_GET['app_sem'])) {
-            $tvet_data['colAppNoSem'] = $_GET['app_sem'];
+            $tvet_data['appnosem'] = $_GET['app_sem'];
         } else {
             $tvet_data = [];
         }
 
         if (!empty($_GET['app_sy'])) {
-            $tvet_data['colAppNoYear'] = $_GET['app_sy'];
+            $tvet_data['appnoyear'] = $_GET['app_sy'];
         } else {
             $tvet_data = [];
         }
         if (empty($_GET['app_sy']) && empty($_GET['app_sem'])  && empty($_GET['view'])) {
             $tvet_data = array(
-                'colSY'       => $config['current_sy'],
-                'colAppNoSem' => $config['current_sem'],
+                'appsy'       => $config['current_sy'],
+                'appnosem' => $config['current_sem'],
             );
         }
         $data["data"] = $this->tvet->get_all($tvet_data);
@@ -56,20 +57,20 @@ class TvetController extends BaseController
         }
 
         if (!empty($_GET['app_sem'])) {
-            $tvet_data['colAppNoSem'] = $_GET['app_sem'];
+            $tvet_data['appnosem'] = $_GET['app_sem'];
         } else {
             $tvet_data = [];
         }
 
         if (!empty($_GET['app_sy'])) {
-            $tvet_data['colAppNoYear'] = $_GET['app_sy'];
+            $tvet_data['appnoyear'] = $_GET['app_sy'];
         } else {
             $tvet_data = [];
         }
         if (empty($_GET['app_sy']) && empty($_GET['app_sem'])  && empty($_GET['view'])) {
             $tvet_data = array(
-                'colSY'       => $config['current_sy'],
-                'colAppNoSem' => $config['current_sem'],
+                'appsy'       => $config['current_sy'],
+                'appnosem' => $config['current_sem'],
             );
         }
         $res["data"] = $this->tvet->get_pending_application($tvet_data);
@@ -88,20 +89,20 @@ class TvetController extends BaseController
         }
 
         if (!empty($_GET['app_sem'])) {
-            $colelge_data['colAppNoSem'] = $_GET['app_sem'];
+            $colelge_data['appnosem'] = $_GET['app_sem'];
         } else {
             $colelge_data = [];
         }
 
         if (!empty($_GET['app_sy'])) {
-            $colelge_data['colAppNoYear'] = $_GET['app_sy'];
+            $colelge_data['appnoyear'] = $_GET['app_sy'];
         } else {
             $colelge_data = [];
         }
         if (empty($_GET['app_sy']) && empty($_GET['app_sem'])  && empty($_GET['view'])) {
             $colelge_data = array(
-                'colSY'       => $config['current_sy'],
-                'colAppNoSem' => $config['current_sem'],
+                'appsy'       => $config['current_sy'],
+                'appnosem' => $config['current_sem'],
             );
         }
         $res["data"] = $this->tvet->get_approved_application($colelge_data);
@@ -116,7 +117,7 @@ class TvetController extends BaseController
         try {
             $id   = $this->request->getPost('id');
             $data = [
-                'colAppStat' => $this->request->getPost('status'),
+                'appstatus' => $this->request->getPost('status'),
             ];
 
             $this->tvet->update($id, $data);
@@ -140,36 +141,36 @@ class TvetController extends BaseController
         try {
             $id   = $this->request->getPost('id');
             $data = [
-                "colAppNoYear"     => $this->request->getPost('app_no_year'),
-                "colAppNoSem"      => $this->request->getPost('app_no_sem'),
-                "colAppNoID"       => $this->request->getPost('app_no_id'),
-                "colAppStat"       => $this->request->getPost('status'),
-                "colFirstName"     => trim($this->request->getPost('firstname')),
-                "colMI"            => trim($this->request->getPost('middlename')),
-                "colLastName"      => trim($this->request->getPost('lastname')),
-                "colSuffix"        => trim($this->request->getPost('suffix')),
-                "colAddress"       => $this->request->getPost('address'),
+                "appnoyear"     => $this->request->getPost('app_no_year'),
+                "appnosem"      => $this->request->getPost('app_no_sem'),
+                "appnoid"       => $this->request->getPost('app_no_id'),
+                "appstatus"       => $this->request->getPost('status'),
+                "firstname"     => trim($this->request->getPost('firstname')),
+                "middlename"            => trim($this->request->getPost('middlename')),
+                "lastname"      => trim($this->request->getPost('lastname')),
+                "suffix"        => trim($this->request->getPost('suffix')),
+                "address"       => $this->request->getPost('address'),
                 "colDOB"           => $this->request->getPost('birthdate'),
                 "colAge"           => $this->request->getPost('age'),
-                "colCivilStat"     => $this->request->getPost('civil_status'),
-                "colGender"        => $this->request->getPost('gender'),
-                "colContactNo"     => trim($this->request->getPost('contact_no')),
-                "colCTC"           => trim($this->request->getPost('ctc_no')),
-                "colEmailAdd"      => trim($this->request->getPost('email')),
-                "colAvailment"     => trim($this->request->getPost('availment')),
-                "colSchool"        => $this->request->getPost('school'),
-                "colCourse"        => $this->request->getPost('course'),
-                "colYearLevel"     => $this->request->getPost('year_level'),
-                "colSem"           => $this->request->getPost('semester'),
-                "colSY"            => $this->request->getPost('school_year'),
-                "colFathersName"   => trim($this->request->getPost('father_name')),
-                "colFatherOccu"    => trim($this->request->getPost('father_occupation')),
-                "colMothersName"   => trim($this->request->getPost('mother_name')),
-                "colMotherOccu"    => trim($this->request->getPost('mother_occupation')),
-                "colManager"       => trim($this->request->getPost('manager')),
-                "colUnits"         => trim($this->request->getPost('units')),
-                "colSchoolAddress" => trim($this->request->getPost('school_address')),
-                'colImage'         => trim($this->request->getPost('image')),
+                "civil_status"     => $this->request->getPost('civil_status'),
+                "gender"        => $this->request->getPost('gender'),
+                "contact_no"     => trim($this->request->getPost('contact_no')),
+                "ctc_no"           => trim($this->request->getPost('ctc_no')),
+                "email"      => trim($this->request->getPost('email')),
+                "availment"     => trim($this->request->getPost('availment')),
+                "school"        => $this->request->getPost('school'),
+                "course"        => $this->request->getPost('course'),
+                "appyear"     => $this->request->getPost('year_level'),
+                "appsem"           => $this->request->getPost('semester'),
+                "appsy"            => $this->request->getPost('school_year'),
+                "father_name"   => trim($this->request->getPost('father_name')),
+                "father_occupation"    => trim($this->request->getPost('father_occupation')),
+                "mother_name"   => trim($this->request->getPost('mother_name')),
+                "mother_occupation"    => trim($this->request->getPost('mother_occupation')),
+                "appmanager"       => trim($this->request->getPost('manager')),
+                "unit"         => trim($this->request->getPost('units')),
+                "schoolAddress" => trim($this->request->getPost('school_address')),
+                'profile_photo'         => trim($this->request->getPost('image')),
             ];
 
 
@@ -178,6 +179,10 @@ class TvetController extends BaseController
                 "response" => true,
                 "message"  => "Changes has been saved!",
             ];
+
+            $activity_model = new UserActivityModel(); 
+            $name = ucwords($data['firstname'] . " " .  $data['middlename'] . " " .  $data['lastname'] . " " .  $data['suffix'] );
+            $activity_model->addLog(auth()->user()->id, 'Updated a tvet application of \''.$name.'\'');
         } catch (\Exception $e) {
             $res = [
                 "response" => false,
@@ -194,7 +199,7 @@ class TvetController extends BaseController
         try {
             $id   = $this->request->getPost('id');
             $data = [
-                'colManager' => $this->request->getPost('manager'),
+                'appmanager' => $this->request->getPost('manager'),
             ];
 
             $this->tvet->update($id, $data);

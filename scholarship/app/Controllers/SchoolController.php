@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\SchoolModel;
+use App\Models\UserActivityModel;
 use PHPUnit\Util\Json;
 
 class SchoolController extends BaseController
@@ -24,7 +25,7 @@ class SchoolController extends BaseController
     public function get_all()
     {
         $school       = new SchoolModel();
-        $data['data'] = $school->orderBy('SchoolName', 'asc')->findAll();
+        $data['data'] = $school->orderBy('school_name', 'asc')->findAll();
         echo Json_encode($data);
     }
 
@@ -42,9 +43,10 @@ class SchoolController extends BaseController
         try {
             $school = new SchoolModel();
             $data = [
-                'SchoolName' => ucwords(trim($this->request->getPost('school_name'))),
+                'school_name' => ucwords(trim($this->request->getPost('school_name'))),
+                'abbreviation' => ucwords(trim($this->request->getPost('abbreviation'))),
                 'address'    => ucwords(trim($this->request->getPost('address'))),
-                'Manager'    => $this->request->getPost('manager'),
+                'manager'    => $this->request->getPost('manager'),
             ];
 
             $res =  $school->save($data);
@@ -52,6 +54,12 @@ class SchoolController extends BaseController
                 "response" => true,
                 "message"  => "Data inserted successfully",
             ];
+
+
+            $activity_model = new UserActivityModel();
+            $school_name = $data['school_name'];
+            $activity_model->addLog(auth()->user()->id, 'Created a new senior high school name (\''.$school_name.'\')');
+
         } catch (\Exception $e) {
             $res = [
                 "response" => false,
@@ -67,10 +75,11 @@ class SchoolController extends BaseController
         try { 
             $school = new SchoolModel();
             $id     = $this->request->getPost('id'); 
-            $data   = [
-                'SchoolName' => ucwords(trim($this->request->getPost('school_name'))),
+            $data = [
+                'school_name' => ucwords(trim($this->request->getPost('school_name'))),
+                'abbreviation' => ucwords(trim($this->request->getPost('abbreviation'))),
                 'address'    => ucwords(trim($this->request->getPost('address'))),
-                'Manager'    => $this->request->getPost('manager'),
+                'manager'    => $this->request->getPost('manager'),
             ];
 
             $school->update($id, $data);
@@ -78,6 +87,13 @@ class SchoolController extends BaseController
                 "response" => true,
                 "message"  => "Data updated successfully",
             ];
+            
+
+            $activity_model = new UserActivityModel();
+            $school_name = $data['school_name'];
+            $activity_model->addLog(auth()->user()->id, 'Updated a new senior high school name (\''.$school_name.'\')');
+ 
+
         } catch (\Exception $e) {
             $res = [
                 "response" => false,
@@ -97,6 +113,12 @@ class SchoolController extends BaseController
                 "response" => true,
                 "message"  => "Data deleted successfully",
             ];
+
+            // Activty Log
+            $activity_model = new UserActivityModel(); 
+            $activity_model->addLog(auth()->user()->id, 'Deleted a senior high school with the id of \''.$id.'\'');
+ 
+
         } catch (\Exception $e) {
             $res = [
                 "response" => false,

@@ -16,9 +16,10 @@
                 <div class="card-body">  
                     <table id="school-table" class="table table-striped dt-responsive nowrap w-100">
                         <thead>
-                            <tr> 
+                            <tr>  
                                 <th>Action</th> 
                                 <th>School Name</th> 
+                                <th>Abbreviation</th> 
                                 <th>Address</th> 
                                 <th>Manager</th>
                             </tr>
@@ -43,6 +44,10 @@
                         <div class="form-group">
                             <label for="field-1" class="form-label">School Name <span class="text-danger">*</span></label>
                             <input type="text" name="school_name" class="form-control"  placeholder="School Name" required> 
+                        </div> 
+                        <div class="form-group">
+                            <label for="field-1" class="form-label">School Abbreviation <span class="text-danger">*</span></label>
+                            <input type="text" name="abbreviation" class="form-control"  placeholder="School Abbreviation"> 
                         </div> 
                         <div class="form-group">
                             <label for="field-1" class="form-label">School Address <span class="text-danger">*</span></label>
@@ -81,6 +86,10 @@
                         <div class="form-group">
                             <label for="field-1" class="form-label">School Name</label>
                             <input type="text" class="form-control" name="school_name"  placeholder="School Name" required> 
+                        </div> 
+                        <div class="form-group">
+                            <label for="field-1" class="form-label">School Abbreviation <span class="text-danger">*</span></label>
+                            <input type="text" name="abbreviation" class="form-control"  placeholder="School Abbreviation"> 
                         </div> 
                         <div class="form-group">
                             <label for="field-1" class="form-label">School Address <span class="text-danger">*</span></label>
@@ -134,10 +143,11 @@
                     url: 'collegeschool/get_all',  
                 },
                 columns    : [ 
-                    { data: 'ID' },  
-                    { data: 'colSchoolName' },  
+                    { data: 'id' },  
+                    { data: 'school_name' },  
+                    { data: 'abbreviation' },  
                     { data: 'address' },  
-                    { data: 'colManager' },  
+                    { data: 'manager' },  
                 ], 
                 columnDefs : [
                     {
@@ -150,11 +160,11 @@
                                     <div class="btn-group">\
                                         <button type="button" class="btn dropdown-toggle text-primary" data-bs-toggle="dropdown" aria-expanded="false"> <i class="mdi mdi-cog"></i>  <i class="mdi mdi-chevron-down"></i> </button>\
                                         <div class="dropdown-menu">\
-                                            <a data-id="'+row.ID+'" class="dropdown-item text-warning" href="#" id="edit-college-school-button">\
+                                            <a data-id="'+row.id+'" class="dropdown-item text-warning" href="#" id="edit-college-school-button">\
                                                 <i class="mdi mdi-grease-pencil"></i>\
                                                 <span class="nav-text">Edit Details</span>\
                                             </a>\
-                                            <a data-id="'+row.ID+'" class="dropdown-item text-danger" href="#" id="delete-college-school-button">\
+                                            <a data-id="'+row.id+'" class="dropdown-item text-danger" href="#" id="delete-college-school-button">\
                                                 <i class="mdi mdi-grease-pencil"></i>\
                                                 <span class="nav-text">Delete</span>\
                                             </a>\
@@ -213,10 +223,12 @@
                     method  : "get",
                     dataType: "json", 
                     success : function (data) {  
-                        $('#update-college-school-form input[name="id"]').val(data.ID)
-                        $('#update-college-school-form input[name="school_name"]').val(data.colSchoolName)
+                        console.info(data)
+                        $('#update-college-school-form input[name="id"]').val(data.id)
+                        $('#update-college-school-form input[name="school_name"]').val(data.school_name)
+                        $('#update-college-school-form input[name="abbreviation"]').val(data.abbreviation)
                         $('#update-college-school-form input[name="address"]').val(data.address)
-                        $('#update-college-school-form select[name="manager"]').val(data.colManager)
+                        $('#update-college-school-form select[name="manager"]').val(data.manager)
                     },
                     error   : function (xhr, status, error) { 
                         console.info(xhr.responseText);

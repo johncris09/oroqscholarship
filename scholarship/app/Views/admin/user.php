@@ -49,31 +49,31 @@
                         <code>Note: * is required field</code>
                         <div class="form-group">
                             <label for=" " class="form-label">First Name <?= $required_field; ?> </label>
-                            <input type="text" name="firstname"  value="asdfasdf"  class="form-control" required   placeholder="First Name" />
+                            <input type="text" name="firstname"  class="form-control" required   placeholder="First Name" />
                         </div>  
                         <div class="form-group">
                             <label for=" " class="form-label">Middle Name</label>
-                            <input type="text" name="middlename"  value="asdfasdf"  class="form-control" placeholder="Middle Name" />
+                            <input type="text" name="middlename"  class="form-control" placeholder="Middle Name" />
                         </div>    
                         <div class="form-group">
                             <label for=" " class="form-label">Last Name <?= $required_field; ?></label>
-                            <input type="text"  name="lastname" value="asdfasdf"  class="form-control" required   placeholder="Last Name" />
+                            <input type="text"  name="lastname" class="form-control" required   placeholder="Last Name" />
                         </div>  
                         <div class="form-group">
                             <label for=" " class="form-label">Email <?= $required_field; ?></label>
-                            <input type="email" class="form-control"  value="asdfasdf@asdf.asdf" name="email" required  parsley-type="email" placeholder="Enter a valid e-mail" />
+                            <input type="email" class="form-control"   name="email" required  parsley-type="email" placeholder="Enter a valid e-mail" />
                         </div>  
                         <div class="form-group">
                             <label for=" " class="form-label">Username <?= $required_field; ?></label>
-                            <input type="text" class="form-control" value="asdfasdf"  name="username" required data-parsley-length="[8, 40]"   placeholder="Enter  username" />
+                            <input type="text" class="form-control" name="username" required data-parsley-length="[8, 40]"   placeholder="Enter  username" />
                         </div> 
                         <div class="form-group">
                             <label for=" " class="form-label">Password <?= $required_field; ?></label>
-                            <input type="password" name="password"  value="asdfasdf" id="password" required data-parsley-type="alphanum" data-parsley-length="[8, 40]"  class="form-control"  placeholder="Password"  > 
+                            <input type="password" name="password" id="password" required data-parsley-type="alphanum" data-parsley-length="[8, 40]"  class="form-control"  placeholder="Password"  > 
                         </div> 
                         <div class="form-group">
                             <label for=" " class="form-label">Confirm Password <?= $required_field; ?></label>
-                            <input type="password" class="form-control" value="asdfasdf"  required data-parsley-equalto="#password" placeholder="Re-Type Password" />
+                            <input type="password" class="form-control" required data-parsley-equalto="#password" placeholder="Re-Type Password" />
                         </div>    
                         <div class="form-group">
                             <label for="" class="form-label">Role Type <?= $required_field; ?></label> 
@@ -99,15 +99,15 @@
                                 <option value="">Select</option> 
                                 <div class="shs-school d-none"> 
                                     <?php foreach($school as $row):?> 
-                                        <?php if($row['SchoolName'] != ""):?> 
-                                            <option class="d-none" data-scholarship-type="shs" value="<?= $row['SchoolName']  ?>"><?= $row['SchoolName']  ?></option>  
+                                        <?php if($row['school_name'] != ""):?> 
+                                            <option class="d-none" data-scholarship-type="shs" value="<?= $row['id']  ?>"><?= $row['school_name']  ?></option>  
                                         <?php endif; ?>
                                     <?php endforeach; ?>
                                 </div>
                                 <div class="college-tvet-school d-none">
                                     <?php foreach($college_school as $row):?> 
-                                        <?php if($row['colSchoolName'] != ""):?> 
-                                            <option  class="d-none" data-scholarship-type="colege_tvet" value="<?= $row['colSchoolName']  ?>"><?= $row['colSchoolName']  ?></option>  
+                                        <?php if($row['school_name'] != ""):?> 
+                                            <option  class="d-none" data-scholarship-type="colege_tvet" value="<?= $row['id']  ?>"><?= $row['school_name']  ?></option>  
                                         <?php endif; ?>
                                     <?php endforeach; ?>
                                 </div>
@@ -139,23 +139,23 @@
                         <input type="hidden" name="id"  class="form-control" required   />
                         <div class="form-group">
                             <label for=" " class="form-label">First Name <?= $required_field; ?></label>
-                            <input type="text" name="firstname" value="asdfasdfasd"  class="form-control" required   placeholder="First Name" />
+                            <input type="text" name="firstname"   class="form-control" required   placeholder="First Name" />
                         </div>  
                         <div class="form-group">
                             <label for=" " class="form-label">Middle Name</label>
-                            <input type="text" name="middlename" value="asdfasdfasd"  class="form-control"     placeholder="Middle Name" />
+                            <input type="text" name="middlename"   class="form-control"     placeholder="Middle Name" />
                         </div>    
                         <div class="form-group">
                             <label for=" " class="form-label">Last Name <?= $required_field; ?></label>
-                            <input type="text"  name="lastname" value="asdfasdfasd" class="form-control" required   placeholder="Last Name" />
+                            <input type="text"  name="lastname"  class="form-control" required   placeholder="Last Name" />
                         </div>  
                         <div class="form-group">
                             <label for=" " class="form-label">Email <?= $required_field; ?></label>
-                            <input type="email" class="form-control" value="asdfasdfasd@ashdjasd.com" name="email" required  parsley-type="email" placeholder="Enter a valid e-mail" />
+                            <input type="email" class="form-control"   name="email" required  parsley-type="email" placeholder="Enter a valid e-mail" />
                         </div>  
                         <div class="form-group">
                             <label for=" " class="form-label">Username <?= $required_field; ?></label>
-                            <input type="text" class="form-control" value="asdfasdfasd" name="username" required data-parsley-length="[8, 40]"   placeholder="Enter  username" />
+                            <input type="text" class="form-control"  name="username" required data-parsley-length="[8, 40]"   placeholder="Enter  username" />
                         </div>  
                         <div class="form-group">
                             <label for="" class="form-label">Role Type <?= $required_field; ?></label>  
@@ -181,15 +181,15 @@
                                 <option value="">Select</option> 
                                 <div class="shs-school d-none"> 
                                     <?php foreach($school as $row):?> 
-                                        <?php if($row['SchoolName'] != ""):?> 
-                                            <option class="d-none" data-scholarship-type="shs" value="<?= $row['SchoolName']  ?>"><?= $row['SchoolName']  ?></option>  
+                                        <?php if($row['school_name'] != ""):?> 
+                                            <option class="d-none" data-scholarship-type="shs" value="<?= $row['id']  ?>"><?= $row['school_name']  ?></option>  
                                         <?php endif; ?>
                                     <?php endforeach; ?>
                                 </div>
                                 <div class="college-tvet-school d-none">
                                     <?php foreach($college_school as $row):?> 
-                                        <?php if($row['colSchoolName'] != ""):?> 
-                                            <option  class="d-none" data-scholarship-type="colege_tvet" value="<?= $row['colSchoolName']  ?>"><?= $row['colSchoolName']  ?></option>  
+                                        <?php if($row['school_name'] != ""):?> 
+                                            <option  class="d-none" data-scholarship-type="colege_tvet" value="<?= $row['id']  ?>"><?= $row['school_name']  ?></option>  
                                         <?php endif; ?>
                                     <?php endforeach; ?>
                                 </div>
@@ -341,7 +341,7 @@
                     { data: 'username' }, 
                     { data: 'email' }, 
                     { data: 'group' }, 
-                    { data: 'scholarship_type' },
+                    { data: 'scholarship_type' }, 
                     { data: 'school' },
                     {
                         data  : 'created_at',
@@ -448,7 +448,7 @@
 
                         if(data.scholarship_type != ""){  
                             
-                            if(data.scholarship_type == "shs"){
+                            if(data.scholarship_type == "shs"){ 
                                 $('#update-user-form select[name="school"]').val('') 
                                 $('#update-user-form select[name="school"] option[data-scholarship-type="shs"]').removeClass('d-none') 
                                 $('#update-user-form select[name="school"] option[data-scholarship-type="colege_tvet"]').addClass('d-none')  
@@ -477,7 +477,7 @@
                             $('#update-user-form select[name=school]').val('')
                         }else{ 
                             $('#update-user-form .school').removeClass('d-none')
-                            $('#update-user-form select[name=school]').val(data.school)
+                            $('#update-user-form select[name=school]').val(data.school_id)
                         }
                     },
                     error   : function (xhr, status, error) { 

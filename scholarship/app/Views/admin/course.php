@@ -22,8 +22,7 @@
                                 <th>Manager</th>
                             </tr>
                         </thead> 
-                    </table>
-                    
+                    </table> 
                 </div> <!-- end card body-->
             </div> <!-- end card -->
         </div><!-- end col-->
@@ -130,9 +129,9 @@
                     url: 'course/get_all',  
                 }, 
                 columns    : [ 
-                    { data: 'ID' },  
-                    { data: 'colCourse' },  
-                    { data: 'colManager' },  
+                    { data: 'id' },  
+                    { data: 'course' },  
+                    { data: 'manager' },  
                 ], 
                 columnDefs : [
                     {
@@ -145,11 +144,11 @@
                                     <div class="btn-group">\
                                         <button type="button" class="btn dropdown-toggle text-primary" data-bs-toggle="dropdown" aria-expanded="false"> <i class="mdi mdi-cog"></i>  <i class="mdi mdi-chevron-down"></i> </button>\
                                         <div class="dropdown-menu">\
-                                            <a data-id="'+row.ID+'" class="dropdown-item text-warning" href="#" id="edit-course-button">\
+                                            <a data-id="'+row.id+'" class="dropdown-item text-warning" href="#" id="edit-course-button">\
                                                 <i class="mdi mdi-grease-pencil"></i>\
                                                 <span class="nav-text">Edit Details</span>\
                                             </a>\
-                                            <a data-id="'+row.ID+'" class="dropdown-item text-danger" href="#" id="delete-course-button">\
+                                            <a data-id="'+row.id+'" class="dropdown-item text-danger" href="#" id="delete-course-button">\
                                                 <i class="mdi mdi-grease-pencil"></i>\
                                                 <span class="nav-text">Delete</span>\
                                             </a>\
@@ -203,15 +202,15 @@
                 e.preventDefault(); 
                 $('#edit-course-modal').modal('show') 
 
-                var id = $(this).data('id')
+                var id = $(this).data('id') 
                 $.ajax({
                     url     : 'course/get/' + id,
                     method  : "get",
                     dataType: "json", 
                     success : function (data) {
-                        $('#update-course-form input[name="id"]').val(data.ID)
-                        $('#update-course-form input[name="course"]').val(data.colCourse)
-                        $('#update-course-form select[name="manager"]').val(data.colManager)
+                        $('#update-course-form input[name="id"]').val(data.id)
+                        $('#update-course-form input[name="course"]').val(data.course)
+                        $('#update-course-form select[name="manager"]').val(data.manager)
                     },
                     error   : function (xhr, status, error) { 
                         console.info(xhr.responseText);

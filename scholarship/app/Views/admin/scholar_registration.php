@@ -112,18 +112,18 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#college-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link  active">
+                            <a href="#college-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link  ">
                                 College Registration
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link   ">
+                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link  active ">
                                 TVET Registration
                             </a>
                         </li>
                     </ul>
                     <div class="tab-content"> 
-                        <div class="tab-pane show " id="senior-high-tab">  
+                        <div class="tab-pane  show  " id="senior-high-tab">  
                             <form id="senior-high-registration-form"  class="validation-form">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -175,8 +175,8 @@
                                                 <label for="address" class="form-label">Address <?= $required_field; ?></label>
                                                 <select class="form-control" name="address"   required>
                                                     <option value="">Select</option> 
-                                                    <?php foreach($barangay as $row):?> 
-                                                        <option value="<?= $row ?>"><?= $row ?></option>  
+                                                    <?php foreach($address as $row):?> 
+                                                        <option value="<?= $row['id'] ?>"><?= $row['barangay'] ?></option>  
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>  
@@ -292,8 +292,8 @@
                                         <select class="form-control" id="school" name="school" required>
                                             <option value="">Select</option> 
                                             <?php foreach($school as $row):?> 
-                                                <?php if($row['SchoolName'] != ""):?> 
-                                                    <option data-school-address="<?= $row['address']; ?>" value="<?= $row['SchoolName']  ?>"><?= $row['SchoolName']  ?></option>  
+                                                <?php if($row['school_name'] != ""):?> 
+                                                    <option data-school-address="<?= $row['address']; ?>" value="<?= $row['id']  ?>"><?= $row['school_name']  ?></option>  
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
                                         </select>     
@@ -340,8 +340,8 @@
                                         <select class="form-control"  name="strand" required>
                                             <option value="">Select</option> 
                                             <?php foreach($strand as $row):?> 
-                                                <?php if($row['Strand'] != ""):?> 
-                                                    <option value="<?= $row['Strand']  ?>"><?= $row['Strand']  ?></option>  
+                                                <?php if($row['strand'] != ""):?> 
+                                                    <option value="<?= $row['id']  ?>"><?= $row['strand']  ?></option>  
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
                                         </select> 
@@ -372,7 +372,7 @@
                                 <div class="row g-3" >
                                     <div class="col">
                                         <label for="school_address" class="form-label">School Address </label> 
-                                        <input type="text" class="form-control text-capitalize" name="school_address"  >
+                                        <input type="text" class="form-control text-capitalize" name="school_address" readonly >
                                     </div>
                                 </div>
                                 <div class="row g-3" >
@@ -450,7 +450,7 @@
                                 </div>    
                             </form>  
                         </div>
-                        <div class="tab-pane active" id="college-tab">   
+                        <div class="tab-pane " id="college-tab">   
                             <form id="college-registration-form" class="validation-form">
                                 <div class="row">  
                                     <div class="col-md-12">
@@ -504,8 +504,8 @@
                                                 <label for="address" class="form-label">Address <?= $required_field; ?></label>
                                                 <select class="form-control" name="address"  required>
                                                     <option value="">Select</option> 
-                                                    <?php foreach($barangay as $row):?> 
-                                                        <option value="<?= $row ?>"><?= $row ?></option>  
+                                                    <?php foreach($address as $row):?> 
+                                                        <option value="<?= $row['id'] ?>"><?= $row['barangay'] ?></option>  
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>  
@@ -622,8 +622,8 @@
                                         <select class="form-control" name="school" required>
                                             <option value="">Select</option> 
                                             <?php foreach($college_school as $row):?> 
-                                                <?php if($row['colSchoolName'] != ""):?> 
-                                                    <option data-school-address="<?= $row['address']  ?>" value="<?= $row['colSchoolName']  ?>"><?= $row['colSchoolName']  ?></option>  
+                                                <?php if($row['school_name'] != ""):?> 
+                                                    <option data-school-address="<?= $row['address']  ?>" value="<?= $row['id']  ?>"><?= $row['school_name']  ?></option>  
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
                                         </select> 
@@ -669,8 +669,8 @@
                                         <select class="form-control" name="course" required>
                                             <option value="">Select</option> 
                                             <?php foreach($course as $row):?> 
-                                                <?php if($row['colCourse'] != ""):?> 
-                                                    <option value="<?= $row['colCourse']  ?>"><?= $row['colCourse']  ?></option>  
+                                                <?php if($row['course'] != ""):?> 
+                                                    <option value="<?= $row['course']  ?>"><?= $row['course']  ?></option>  
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
                                         </select> 
@@ -699,9 +699,9 @@
                                     </div> 
                                 </div> 
                                 <div class="row" >
-                                    <div class="col-md-3">
+                                    <div class="col-md-12">
                                         <label for="school_address" class="form-label">School Address </label> 
-                                        <input type="text" class="form-control text-capitalize" name="school_address"  >
+                                        <input type="text" class="form-control text-capitalize" name="school_address" readonly >
                                     </div>
                                 </div>
                                 <div class="row" >
@@ -781,9 +781,8 @@
                                     ?>
                                 </div>    
                             </form>
-                        </div>
-                        
-                        <div class="tab-pane   " id="tvet-tab"> 
+                        </div> 
+                        <div class="tab-pane  active" id="tvet-tab"> 
                             <form id="tvet-registration-form" class="validation-form">
                                 <div class="row"> 
                                     <div class="col-md-12">
@@ -837,8 +836,8 @@
                                                 <label for="address" class="form-label">Address <?= $required_field; ?></label>
                                                 <select class="form-control" name="address"  required>
                                                     <option value="">Select</option> 
-                                                    <?php foreach($barangay as $row):?> 
-                                                        <option value="<?= $row ?>"><?= $row ?></option>  
+                                                    <?php foreach($address as $row):?> 
+                                                        <option value="<?= $row['id'] ?>"><?= $row['barangay'] ?></option>  
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>  
@@ -954,8 +953,8 @@
                                         <select class="form-control" name="school" required>
                                             <option value="">Select</option> 
                                             <?php foreach($college_school as $row):?> 
-                                                <?php if($row['colSchoolName'] != ""):?> 
-                                                    <option data-school-address="<?= $row['address']  ?>"  value="<?= $row['colSchoolName']  ?>"><?= $row['colSchoolName']  ?></option>  
+                                                <?php if($row['school_name'] != ""):?> 
+                                                    <option data-school-address="<?= $row['address']  ?>"  value="<?= $row['id']  ?>"><?= $row['school_name']  ?></option>  
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
                                         </select> 
@@ -1001,8 +1000,8 @@
                                         <select class="form-control" name="course" required>
                                             <option value="">Select</option> 
                                             <?php foreach($course as $row):?> 
-                                                <?php if($row['colCourse'] != ""):?> 
-                                                    <option value="<?= $row['colCourse']  ?>"><?= $row['colCourse']  ?></option>  
+                                                <?php if($row['course'] != ""):?> 
+                                                    <option value="<?= $row['course']  ?>"><?= $row['course']  ?></option>  
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
                                         </select> 
@@ -1032,7 +1031,7 @@
                                 <div class="row g-3" >
                                     <div class="col">
                                         <label for="school_address" class="form-label">School Address </label> 
-                                        <input type="text" class="form-control text-capitalize" name="school_address"  >
+                                        <input type="text" class="form-control text-capitalize" name="school_address"  readonly >
                                     </div>
                                 </div>
                                 <div class="row g-3" >
@@ -1225,127 +1224,127 @@
 
             
             // autofill
-            $('#senior-high-registration-form input[name=lastname], input[name=firstname] ').change(function(){ 
+            // $('#senior-high-registration-form input[name=lastname], input[name=firstname] ').change(function(){ 
 
-                var lastname  = $('#senior-high-registration-form input[name = lastname]').val()
-                var firstname = $('#senior-high-registration-form input[name = firstname]').val() 
-                var name      = lastname + " " + firstname
+            //     var lastname  = $('#senior-high-registration-form input[name = lastname]').val()
+            //     var firstname = $('#senior-high-registration-form input[name = firstname]').val() 
+            //     var name      = lastname + " " + firstname
 
-                $.ajax({
-                    url   : "registration/shs_autofill",
-                    method: "post",  
-                    data  : {
-                        search: name, 
-                    },           
-                    dataType: "json",
-                    success: function(data){    
-                        console.info(data)
-                        if(data.firstname.length === 0 || !data.firstname.trim()){ 
-                            $('#senior-high-registration-form input[name=firstname]').css({'background-color': ''})
-                        }else{ 
-                            $('#senior-high-registration-form input[name=firstname]').val(data.firstname).css({'background-color': '#FBF1D3'})
-                        }  
-                        if(data.middlename.length === 0 || !data.middlename.trim()){ 
-                            $('#senior-high-registration-form input[name=middlename]').css({'background-color': ''})
-                        }else{ 
-                            $('#senior-high-registration-form input[name=middlename]').val(data.middlename).css({'background-color': '#FBF1D3'})
-                        }  
-                        if(data.suffix.length === 0 || !data.suffix.trim()){ 
-                            $('#senior-high-registration-form input[name=suffix]').css({'background-color': ''})
-                        }else{ 
-                            $('#senior-high-registration-form input[name=suffix]').val(data.suffix).css({'background-color': '#FBF1D3'})
-                        }  
-                        if(data.address.length === 0 || !data.address.trim()){ 
-                            $('#senior-high-registration-form select[name=address]').css({'background-color': ''})
-                        }else{ 
-                            $('#senior-high-registration-form select[name=address]').val(data.address).css({'background-color': '#FBF1D3'})
-                        }   
-                        if(data.birthdate.length === 0 || !data.birthdate.trim()){ 
-                            $('#senior-high-registration-form input[name=birthdate]').css({'background-color': ''})
-                        }else{ 
-                            $('#senior-high-registration-form input[name=birthdate]').val(data.birthdate).css({'background-color': '#FBF1D3'})
-                        }   
-                        if(data.age.length === 0 || !data.age.trim()){ 
-                            $('#senior-high-registration-form input[name=age]').css({'background-color': ''})
-                        }else{ 
-                            $('#senior-high-registration-form input[name=age]').val(data.age).css({'background-color': '#FBF1D3'})
-                        }   
-                        if(data.civil_status.length === 0 || !data.civil_status.trim()){ 
-                            $('#senior-high-registration-form select[name=civil_status]').css({'background-color': ''})
-                        }else{ 
-                            $('#senior-high-registration-form select[name=civil_status]').val(data.civil_status).css({'background-color': '#FBF1D3'})
-                        } 
-                        if(data.gender.length === 0 || !data.gender.trim()){ 
-                            $('#senior-high-registration-form select[name=gender]').css({'background-color': ''})
-                        }else{ 
-                            $('#senior-high-registration-form select[name=gender]').val(data.gender).css({'background-color': '#FBF1D3'})
-                        }   
-                        if(data.contact_no.length === 0 || !data.contact_no.trim()){ 
-                            $('#senior-high-registration-form input[name=contact_no]').css({'background-color': ''})
-                        }else{ 
-                            $('#senior-high-registration-form input[name=contact_no]').val(data.contact_no).css({'background-color': '#FBF1D3'})
-                        }   
-                        if(data.ctc_no.length === 0 || !data.ctc_no.trim()){ 
-                            $('#senior-high-registration-form input[name=ctc_no]').css({'background-color': ''})
-                        }else{ 
-                            $('#senior-high-registration-form input[name=ctc_no]').val(data.ctc_no).css({'background-color': '#FBF1D3'})
-                        }    
-                        if(data.email_add.length === 0 || !data.email_add.trim()){ 
-                            $('#senior-high-registration-form input[name=email]').css({'background-color': ''})
-                        }else{ 
-                            $('#senior-high-registration-form input[name=email]').val(data.email_add).css({'background-color': '#FBF1D3'})
-                        }    
-                        if(data.course.length === 0 || !data.course.trim()){ 
-                            $('#senior-high-registration-form select[name=strand]').css({'background-color': ''})
-                        }else{ 
-                            $('#senior-high-registration-form select[name=strand]').val(data.course).css({'background-color': '#FBF1D3'})
-                        }       
-                        if(data.father_name.length === 0 || !data.father_name.trim()){ 
-                            $('#senior-high-registration-form input[name=father_name]').css({'background-color': ''})
-                        }else{ 
-                            $('#senior-high-registration-form input[name=father_name]').val(data.father_name).css({'background-color': '#FBF1D3'})
-                        }      
-                        if(data.father_occupation.length === 0 || !data.father_occupation.trim()){ 
-                            $('#senior-high-registration-form input[name=father_occupation]').css({'background-color': ''})
-                        }else{ 
-                            $('#senior-high-registration-form input[name=father_occupation]').val(data.father_occupation).css({'background-color': '#FBF1D3'})
-                        }       
-                        if(data.mother_name.length === 0 || !data.mother_name.trim()){ 
-                            $('#senior-high-registration-form input[name=mother_name]').css({'background-color': ''})
-                        }else{ 
-                            $('#senior-high-registration-form input[name=mother_name]').val(data.mother_name).css({'background-color': '#FBF1D3'})
-                        }      
-                        if(data.mother_occupation.length === 0 || !data.mother_occupation.trim()){ 
-                            $('#senior-high-registration-form input[name=mother_occupation]').css({'background-color': ''})
-                        }else{ 
-                            $('#senior-high-registration-form input[name=mother_occupation]').val(data.mother_occupation).css({'background-color': '#FBF1D3'})
-                        }     
-                        if(data.school.length === 0 || !data.school.trim()){ 
-                            $('#senior-high-registration-form select[name=school]').css({'background-color': ''})
-                        }else{ 
-                            $('#senior-high-registration-form select[name=school]').val(data.school).css({'background-color': '#FBF1D3'})
-                        }       
-                        if(data.school_address.length === 0 || !data.school_address.trim()){ 
-                            $('#senior-high-registration-form input[name=school_address]').css({'background-color': ''})
-                        }else{ 
-                            $('#senior-high-registration-form input[name=school_address]').val(data.school_address).css({'background-color': '#FBF1D3'})
-                        }    
-                        if(data.availment.length === 0 || !data.availment.trim()){ 
-                            $('#senior-high-registration-form input[name=availment]').css({'background-color': ''})
-                        }else{ 
-                            $('#senior-high-registration-form input[name=availment]').val(data.availment).css({'background-color': '#FBF1D3'})
-                        }     
-                        if(data.yearlevel.length === 0 || !data.yearlevel.trim()){ 
-                            $('#senior-high-registration-form select[name=grade_level]').css({'background-color': ''})
-                        }else{ 
-                            $('#senior-high-registration-form select[name=grade_level]').val(data.yearlevel).css({'background-color': '#FBF1D3'})
-                        }    
-                    },
-                    error: function (xhr, status, error) { 
-                        console.info(xhr.responseText);
-                    }
-                });
-            })
+            //     $.ajax({
+            //         url   : "registration/shs_autofill",
+            //         method: "post",  
+            //         data  : {
+            //             search: name, 
+            //         },           
+            //         dataType: "json",
+            //         success: function(data){    
+            //             console.info(data)
+            //             if(data.firstname.length === 0 || !data.firstname.trim()){ 
+            //                 $('#senior-high-registration-form input[name=firstname]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#senior-high-registration-form input[name=firstname]').val(data.firstname).css({'background-color': '#FBF1D3'})
+            //             }  
+            //             if(data.middlename.length === 0 || !data.middlename.trim()){ 
+            //                 $('#senior-high-registration-form input[name=middlename]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#senior-high-registration-form input[name=middlename]').val(data.middlename).css({'background-color': '#FBF1D3'})
+            //             }  
+            //             if(data.suffix.length === 0 || !data.suffix.trim()){ 
+            //                 $('#senior-high-registration-form input[name=suffix]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#senior-high-registration-form input[name=suffix]').val(data.suffix).css({'background-color': '#FBF1D3'})
+            //             }  
+            //             if(data.address.length === 0 || !data.address.trim()){ 
+            //                 $('#senior-high-registration-form select[name=address]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#senior-high-registration-form select[name=address]').val(data.address).css({'background-color': '#FBF1D3'})
+            //             }   
+            //             if(data.birthdate.length === 0 || !data.birthdate.trim()){ 
+            //                 $('#senior-high-registration-form input[name=birthdate]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#senior-high-registration-form input[name=birthdate]').val(data.birthdate).css({'background-color': '#FBF1D3'})
+            //             }   
+            //             if(data.age.length === 0 || !data.age.trim()){ 
+            //                 $('#senior-high-registration-form input[name=age]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#senior-high-registration-form input[name=age]').val(data.age).css({'background-color': '#FBF1D3'})
+            //             }   
+            //             if(data.civil_status.length === 0 || !data.civil_status.trim()){ 
+            //                 $('#senior-high-registration-form select[name=civil_status]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#senior-high-registration-form select[name=civil_status]').val(data.civil_status).css({'background-color': '#FBF1D3'})
+            //             } 
+            //             if(data.gender.length === 0 || !data.gender.trim()){ 
+            //                 $('#senior-high-registration-form select[name=gender]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#senior-high-registration-form select[name=gender]').val(data.gender).css({'background-color': '#FBF1D3'})
+            //             }   
+            //             if(data.contact_no.length === 0 || !data.contact_no.trim()){ 
+            //                 $('#senior-high-registration-form input[name=contact_no]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#senior-high-registration-form input[name=contact_no]').val(data.contact_no).css({'background-color': '#FBF1D3'})
+            //             }   
+            //             if(data.ctc_no.length === 0 || !data.ctc_no.trim()){ 
+            //                 $('#senior-high-registration-form input[name=ctc_no]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#senior-high-registration-form input[name=ctc_no]').val(data.ctc_no).css({'background-color': '#FBF1D3'})
+            //             }    
+            //             if(data.email_add.length === 0 || !data.email_add.trim()){ 
+            //                 $('#senior-high-registration-form input[name=email]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#senior-high-registration-form input[name=email]').val(data.email_add).css({'background-color': '#FBF1D3'})
+            //             }    
+            //             if(data.course.length === 0 || !data.course.trim()){ 
+            //                 $('#senior-high-registration-form select[name=strand]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#senior-high-registration-form select[name=strand]').val(data.course).css({'background-color': '#FBF1D3'})
+            //             }       
+            //             if(data.father_name.length === 0 || !data.father_name.trim()){ 
+            //                 $('#senior-high-registration-form input[name=father_name]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#senior-high-registration-form input[name=father_name]').val(data.father_name).css({'background-color': '#FBF1D3'})
+            //             }      
+            //             if(data.father_occupation.length === 0 || !data.father_occupation.trim()){ 
+            //                 $('#senior-high-registration-form input[name=father_occupation]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#senior-high-registration-form input[name=father_occupation]').val(data.father_occupation).css({'background-color': '#FBF1D3'})
+            //             }       
+            //             if(data.mother_name.length === 0 || !data.mother_name.trim()){ 
+            //                 $('#senior-high-registration-form input[name=mother_name]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#senior-high-registration-form input[name=mother_name]').val(data.mother_name).css({'background-color': '#FBF1D3'})
+            //             }      
+            //             if(data.mother_occupation.length === 0 || !data.mother_occupation.trim()){ 
+            //                 $('#senior-high-registration-form input[name=mother_occupation]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#senior-high-registration-form input[name=mother_occupation]').val(data.mother_occupation).css({'background-color': '#FBF1D3'})
+            //             }     
+            //             if(data.school.length === 0 || !data.school.trim()){ 
+            //                 $('#senior-high-registration-form select[name=school]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#senior-high-registration-form select[name=school]').val(data.school).css({'background-color': '#FBF1D3'})
+            //             }       
+            //             if(data.school_address.length === 0 || !data.school_address.trim()){ 
+            //                 $('#senior-high-registration-form input[name=school_address]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#senior-high-registration-form input[name=school_address]').val(data.school_address).css({'background-color': '#FBF1D3'})
+            //             }    
+            //             if(data.availment.length === 0 || !data.availment.trim()){ 
+            //                 $('#senior-high-registration-form input[name=availment]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#senior-high-registration-form input[name=availment]').val(data.availment).css({'background-color': '#FBF1D3'})
+            //             }     
+            //             if(data.yearlevel.length === 0 || !data.yearlevel.trim()){ 
+            //                 $('#senior-high-registration-form select[name=grade_level]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#senior-high-registration-form select[name=grade_level]').val(data.yearlevel).css({'background-color': '#FBF1D3'})
+            //             }    
+            //         },
+            //         error: function (xhr, status, error) { 
+            //             console.info(xhr.responseText);
+            //         }
+            //     });
+            // })
 
 
             // Tippy
@@ -1413,9 +1412,12 @@
                     reader.onloadend = function() { 
                         base64data = reader.result;   
                         $.ajax({
-                            url      : "registration/upload",
+                            url      : "registration/upload_photo",
                             method   : "POST",                	
-                            data     : {image: base64data},
+                            data     : {
+                                image: base64data,
+                                folder: "shs",
+                            },
                             dadtaType: "json",
                             success  : function(data){   
                                 image_data = data;
@@ -1438,10 +1440,9 @@
             });
 
             
-            $(document).on('change', 'select[name="school"]', function(e){ 
-                // $(this).val()
-                var address = $(this).find(': selected').data('schoolAddress')
-                var form    = $(this).closest("form").attr('id');  
+            $(document).on('change', 'select[name="school"]', function(e){  
+                var address = $(this).find(':selected').data('schoolAddress') 
+                var form    = $(this).closest("form").attr('id');   
                 $("#" +form + " input[name=school_address]").val(address)
             })
 
@@ -1459,6 +1460,7 @@
                     contentType: false, 
                     dataType   : "json", 
                     success    : function (data) {   
+                        console.info(data)
                         if(data.response){   
                             Swal.fire({
                                 title            : "Good job!",
@@ -1639,7 +1641,7 @@
                         app_sem : appSem,
                     },           
                     dataType: "json",
-                    success : function(data){
+                    success : function(data){ 
                         $('input.college[name="app_no_id"]').val(data) 
                     },
                     error: function (xhr, status, error) { 
@@ -1659,127 +1661,127 @@
             
             
             // autofill
-            $('#college-registration-form input[name=lastname], input[name=firstname] ').change(function(){ 
+            // $('#college-registration-form input[name=lastname], input[name=firstname] ').change(function(){ 
 
-                var lastname  = $('#college-registration-form input[name = lastname]').val()
-                var firstname = $('#college-registration-form input[name = firstname]').val() 
-                var name      = lastname + " " + firstname
+            //     var lastname  = $('#college-registration-form input[name = lastname]').val()
+            //     var firstname = $('#college-registration-form input[name = firstname]').val() 
+            //     var name      = lastname + " " + firstname
 
-                $.ajax({
-                    url   : "registration/college_autofill",
-                    method: "post",  
-                    data  : {
-                        search: name, 
-                    },           
-                    dataType: "json",
-                    success: function(data){    
-                        console.info(data)
-                        if(data.firstname.length === 0 || !data.firstname.trim()){ 
-                            $('#college-registration-form input[name=firstname]').css({'background-color': ''})
-                        }else{ 
-                            $('#college-registration-form input[name=firstname]').val(data.firstname).css({'background-color': '#FBF1D3'})
-                        }  
-                        if(data.middlename.length === 0 || !data.middlename.trim()){ 
-                            $('#college-registration-form input[name=middlename]').css({'background-color': ''})
-                        }else{ 
-                            $('#college-registration-form input[name=middlename]').val(data.middlename).css({'background-color': '#FBF1D3'})
-                        }  
-                        if(data.suffix.length === 0 || !data.suffix.trim()){ 
-                            $('#college-registration-form input[name=suffix]').css({'background-color': ''})
-                        }else{ 
-                            $('#college-registration-form input[name=suffix]').val(data.suffix).css({'background-color': '#FBF1D3'})
-                        }  
-                        if(data.address.length === 0 || !data.address.trim()){ 
-                            $('#college-registration-form select[name=address]').css({'background-color': ''})
-                        }else{ 
-                            $('#college-registration-form select[name=address]').val(data.address).css({'background-color': '#FBF1D3'})
-                        }   
-                        if(data.birthdate.length === 0 || !data.birthdate.trim()){ 
-                            $('#college-registration-form input[name=birthdate]').css({'background-color': ''})
-                        }else{ 
-                            $('#college-registration-form input[name=birthdate]').val(data.birthdate).css({'background-color': '#FBF1D3'})
-                        }   
-                        if(data.age.length === 0 || !data.age.trim()){ 
-                            $('#college-registration-form input[name=age]').css({'background-color': ''})
-                        }else{ 
-                            $('#college-registration-form input[name=age]').val(data.age).css({'background-color': '#FBF1D3'})
-                        }   
-                        if(data.civil_status.length === 0 || !data.civil_status.trim()){ 
-                            $('#college-registration-form select[name=civil_status]').css({'background-color': ''})
-                        }else{ 
-                            $('#college-registration-form select[name=civil_status]').val(data.civil_status).css({'background-color': '#FBF1D3'})
-                        } 
-                        if(data.gender.length === 0 || !data.gender.trim()){ 
-                            $('#college-registration-form select[name=gender]').css({'background-color': ''})
-                        }else{ 
-                            $('#college-registration-form select[name=gender]').val(data.gender).css({'background-color': '#FBF1D3'})
-                        }   
-                        if(data.contact_no.length === 0 || !data.contact_no.trim()){ 
-                            $('#college-registration-form input[name=contact_no]').css({'background-color': ''})
-                        }else{ 
-                            $('#college-registration-form input[name=contact_no]').val(data.contact_no).css({'background-color': '#FBF1D3'})
-                        }   
-                        if(data.ctc_no.length === 0 || !data.ctc_no.trim()){ 
-                            $('#college-registration-form input[name=ctc_no]').css({'background-color': ''})
-                        }else{ 
-                            $('#college-registration-form input[name=ctc_no]').val(data.ctc_no).css({'background-color': '#FBF1D3'})
-                        }    
-                        if(data.email_add.length === 0 || !data.email_add.trim()){ 
-                            $('#college-registration-form input[name=email]').css({'background-color': ''})
-                        }else{ 
-                            $('#college-registration-form input[name=email]').val(data.email_add).css({'background-color': '#FBF1D3'})
-                        }    
-                        if(data.course.length === 0 || !data.course.trim()){ 
-                            $('#college-registration-form select[name=course]').css({'background-color': ''})
-                        }else{ 
-                            $('#college-registration-form select[name=course]').val(data.course).css({'background-color': '#FBF1D3'})
-                        }       
-                        if(data.father_name.length === 0 || !data.father_name.trim()){ 
-                            $('#college-registration-form input[name=father_name]').css({'background-color': ''})
-                        }else{ 
-                            $('#college-registration-form input[name=father_name]').val(data.father_name).css({'background-color': '#FBF1D3'})
-                        }      
-                        if(data.father_occupation.length === 0 || !data.father_occupation.trim()){ 
-                            $('#college-registration-form input[name=father_occupation]').css({'background-color': ''})
-                        }else{ 
-                            $('#college-registration-form input[name=father_occupation]').val(data.father_occupation).css({'background-color': '#FBF1D3'})
-                        }       
-                        if(data.mother_name.length === 0 || !data.mother_name.trim()){ 
-                            $('#college-registration-form input[name=mother_name]').css({'background-color': ''})
-                        }else{ 
-                            $('#college-registration-form input[name=mother_name]').val(data.mother_name).css({'background-color': '#FBF1D3'})
-                        }      
-                        if(data.mother_occupation.length === 0 || !data.mother_occupation.trim()){ 
-                            $('#college-registration-form input[name=mother_occupation]').css({'background-color': ''})
-                        }else{ 
-                            $('#college-registration-form input[name=mother_occupation]').val(data.mother_occupation).css({'background-color': '#FBF1D3'})
-                        }     
-                        if(data.school.length === 0 || !data.school.trim()){ 
-                            $('#college-registration-form select[name=school]').css({'background-color': ''})
-                        }else{ 
-                            $('#college-registration-form select[name=school]').val(data.school).css({'background-color': '#FBF1D3'})
-                        }       
-                        if(data.school_address.length === 0 || !data.school_address.trim()){ 
-                            $('#college-registration-form input[name=school_address]').css({'background-color': ''})
-                        }else{ 
-                            $('#college-registration-form input[name=school_address]').val(data.school_address).css({'background-color': '#FBF1D3'})
-                        }    
-                        if(data.availment.length === 0 || !data.availment.trim()){ 
-                            $('#college-registration-form input[name=availment]').css({'background-color': ''})
-                        }else{ 
-                            $('#college-registration-form input[name=availment]').val(data.availment).css({'background-color': '#FBF1D3'})
-                        }     
-                        if(data.yearlevel.length === 0 || !data.yearlevel.trim()){ 
-                            $('#college-registration-form select[name=grade_level]').css({'background-color': ''})
-                        }else{ 
-                            $('#college-registration-form select[name=grade_level]').val(data.yearlevel).css({'background-color': '#FBF1D3'})
-                        }    
-                    },
-                    error: function (xhr, status, error) { 
-                        console.info(xhr.responseText);
-                    }
-                });
-            })
+            //     $.ajax({
+            //         url   : "registration/college_autofill",
+            //         method: "post",  
+            //         data  : {
+            //             search: name, 
+            //         },           
+            //         dataType: "json",
+            //         success: function(data){    
+            //             console.info(data)
+            //             if(data.firstname.length === 0 || !data.firstname.trim()){ 
+            //                 $('#college-registration-form input[name=firstname]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#college-registration-form input[name=firstname]').val(data.firstname).css({'background-color': '#FBF1D3'})
+            //             }  
+            //             if(data.middlename.length === 0 || !data.middlename.trim()){ 
+            //                 $('#college-registration-form input[name=middlename]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#college-registration-form input[name=middlename]').val(data.middlename).css({'background-color': '#FBF1D3'})
+            //             }  
+            //             if(data.suffix.length === 0 || !data.suffix.trim()){ 
+            //                 $('#college-registration-form input[name=suffix]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#college-registration-form input[name=suffix]').val(data.suffix).css({'background-color': '#FBF1D3'})
+            //             }  
+            //             if(data.address.length === 0 || !data.address.trim()){ 
+            //                 $('#college-registration-form select[name=address]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#college-registration-form select[name=address]').val(data.address).css({'background-color': '#FBF1D3'})
+            //             }   
+            //             if(data.birthdate.length === 0 || !data.birthdate.trim()){ 
+            //                 $('#college-registration-form input[name=birthdate]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#college-registration-form input[name=birthdate]').val(data.birthdate).css({'background-color': '#FBF1D3'})
+            //             }   
+            //             if(data.age.length === 0 || !data.age.trim()){ 
+            //                 $('#college-registration-form input[name=age]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#college-registration-form input[name=age]').val(data.age).css({'background-color': '#FBF1D3'})
+            //             }   
+            //             if(data.civil_status.length === 0 || !data.civil_status.trim()){ 
+            //                 $('#college-registration-form select[name=civil_status]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#college-registration-form select[name=civil_status]').val(data.civil_status).css({'background-color': '#FBF1D3'})
+            //             } 
+            //             if(data.gender.length === 0 || !data.gender.trim()){ 
+            //                 $('#college-registration-form select[name=gender]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#college-registration-form select[name=gender]').val(data.gender).css({'background-color': '#FBF1D3'})
+            //             }   
+            //             if(data.contact_no.length === 0 || !data.contact_no.trim()){ 
+            //                 $('#college-registration-form input[name=contact_no]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#college-registration-form input[name=contact_no]').val(data.contact_no).css({'background-color': '#FBF1D3'})
+            //             }   
+            //             if(data.ctc_no.length === 0 || !data.ctc_no.trim()){ 
+            //                 $('#college-registration-form input[name=ctc_no]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#college-registration-form input[name=ctc_no]').val(data.ctc_no).css({'background-color': '#FBF1D3'})
+            //             }    
+            //             if(data.email_add.length === 0 || !data.email_add.trim()){ 
+            //                 $('#college-registration-form input[name=email]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#college-registration-form input[name=email]').val(data.email_add).css({'background-color': '#FBF1D3'})
+            //             }    
+            //             if(data.course.length === 0 || !data.course.trim()){ 
+            //                 $('#college-registration-form select[name=course]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#college-registration-form select[name=course]').val(data.course).css({'background-color': '#FBF1D3'})
+            //             }       
+            //             if(data.father_name.length === 0 || !data.father_name.trim()){ 
+            //                 $('#college-registration-form input[name=father_name]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#college-registration-form input[name=father_name]').val(data.father_name).css({'background-color': '#FBF1D3'})
+            //             }      
+            //             if(data.father_occupation.length === 0 || !data.father_occupation.trim()){ 
+            //                 $('#college-registration-form input[name=father_occupation]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#college-registration-form input[name=father_occupation]').val(data.father_occupation).css({'background-color': '#FBF1D3'})
+            //             }       
+            //             if(data.mother_name.length === 0 || !data.mother_name.trim()){ 
+            //                 $('#college-registration-form input[name=mother_name]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#college-registration-form input[name=mother_name]').val(data.mother_name).css({'background-color': '#FBF1D3'})
+            //             }      
+            //             if(data.mother_occupation.length === 0 || !data.mother_occupation.trim()){ 
+            //                 $('#college-registration-form input[name=mother_occupation]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#college-registration-form input[name=mother_occupation]').val(data.mother_occupation).css({'background-color': '#FBF1D3'})
+            //             }     
+            //             if(data.school.length === 0 || !data.school.trim()){ 
+            //                 $('#college-registration-form select[name=school]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#college-registration-form select[name=school]').val(data.school).css({'background-color': '#FBF1D3'})
+            //             }       
+            //             if(data.school_address.length === 0 || !data.school_address.trim()){ 
+            //                 $('#college-registration-form input[name=school_address]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#college-registration-form input[name=school_address]').val(data.school_address).css({'background-color': '#FBF1D3'})
+            //             }    
+            //             if(data.availment.length === 0 || !data.availment.trim()){ 
+            //                 $('#college-registration-form input[name=availment]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#college-registration-form input[name=availment]').val(data.availment).css({'background-color': '#FBF1D3'})
+            //             }     
+            //             if(data.yearlevel.length === 0 || !data.yearlevel.trim()){ 
+            //                 $('#college-registration-form select[name=grade_level]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#college-registration-form select[name=grade_level]').val(data.yearlevel).css({'background-color': '#FBF1D3'})
+            //             }    
+            //         },
+            //         error: function (xhr, status, error) { 
+            //             console.info(xhr.responseText);
+            //         }
+            //     });
+            // })
 
             
             // Tippy
@@ -1844,9 +1846,12 @@
                         base64data = reader.result;  
 
                         $.ajax({
-                            url      : "registration/upload",
+                            url      : "registration/upload_photo",
                             method   : "POST",                	
-                            data     : {image: base64data},
+                            data     : {
+                                image: base64data, 
+                                folder: "college",
+                            },
                             dadtaType: "json",
                             success  : function(data){   
                                 $modal_college.modal('hide');
@@ -1880,6 +1885,7 @@
                     contentType: false, 
                     dataType   : "json",
                     success    : function (data) {
+                        console.info(data)
                         if(data.response){   
                             Swal.fire({
                                 title            : "Good job!",
@@ -2056,9 +2062,8 @@
                     },           
                     dataType: "json",
                     success: function(data){  
-                        
                         $('input.tvet[name="app_no_id"]').val(data) 
-                    }
+                    }, 
                 });
             }
 
@@ -2072,127 +2077,127 @@
   
             
             // autofill
-            $('#tvet-registration-form input[name=lastname], input[name=firstname] ').change(function(){ 
+            // $('#tvet-registration-form input[name=lastname], input[name=firstname] ').change(function(){ 
 
-                var lastname  = $('#tvet-registration-form input[name = lastname]').val()
-                var firstname = $('#tvet-registration-form input[name = firstname]').val() 
-                var name      = lastname + " " + firstname
+            //     var lastname  = $('#tvet-registration-form input[name = lastname]').val()
+            //     var firstname = $('#tvet-registration-form input[name = firstname]').val() 
+            //     var name      = lastname + " " + firstname
 
-                $.ajax({
-                    url   : "registration/tvet_autofill",
-                    method: "post",  
-                    data  : {
-                        search: name, 
-                    },           
-                    dataType: "json",
-                    success: function(data){    
-                        console.info(data)
-                        if(data.firstname.length === 0 || !data.firstname.trim()){ 
-                            $('#tvet-registration-form input[name=firstname]').css({'background-color': ''})
-                        }else{ 
-                            $('#tvet-registration-form input[name=firstname]').val(data.firstname).css({'background-color': '#FBF1D3'})
-                        }  
-                        if(data.middlename.length === 0 || !data.middlename.trim()){ 
-                            $('#tvet-registration-form input[name=middlename]').css({'background-color': ''})
-                        }else{ 
-                            $('#tvet-registration-form input[name=middlename]').val(data.middlename).css({'background-color': '#FBF1D3'})
-                        }  
-                        if(data.suffix.length === 0 || !data.suffix.trim()){ 
-                            $('#tvet-registration-form input[name=suffix]').css({'background-color': ''})
-                        }else{ 
-                            $('#tvet-registration-form input[name=suffix]').val(data.suffix).css({'background-color': '#FBF1D3'})
-                        }  
-                        if(data.address.length === 0 || !data.address.trim()){ 
-                            $('#tvet-registration-form select[name=address]').css({'background-color': ''})
-                        }else{ 
-                            $('#tvet-registration-form select[name=address]').val(data.address).css({'background-color': '#FBF1D3'})
-                        }   
-                        if(data.birthdate.length === 0 || !data.birthdate.trim()){ 
-                            $('#tvet-registration-form input[name=birthdate]').css({'background-color': ''})
-                        }else{ 
-                            $('#tvet-registration-form input[name=birthdate]').val(data.birthdate).css({'background-color': '#FBF1D3'})
-                        }   
-                        if(data.age.length === 0 || !data.age.trim()){ 
-                            $('#tvet-registration-form input[name=age]').css({'background-color': ''})
-                        }else{ 
-                            $('#tvet-registration-form input[name=age]').val(data.age).css({'background-color': '#FBF1D3'})
-                        }   
-                        if(data.civil_status.length === 0 || !data.civil_status.trim()){ 
-                            $('#tvet-registration-form select[name=civil_status]').css({'background-color': ''})
-                        }else{ 
-                            $('#tvet-registration-form select[name=civil_status]').val(data.civil_status).css({'background-color': '#FBF1D3'})
-                        } 
-                        if(data.gender.length === 0 || !data.gender.trim()){ 
-                            $('#tvet-registration-form select[name=gender]').css({'background-color': ''})
-                        }else{ 
-                            $('#tvet-registration-form select[name=gender]').val(data.gender).css({'background-color': '#FBF1D3'})
-                        }   
-                        if(data.contact_no.length === 0 || !data.contact_no.trim()){ 
-                            $('#tvet-registration-form input[name=contact_no]').css({'background-color': ''})
-                        }else{ 
-                            $('#tvet-registration-form input[name=contact_no]').val(data.contact_no).css({'background-color': '#FBF1D3'})
-                        }   
-                        if(data.ctc_no.length === 0 || !data.ctc_no.trim()){ 
-                            $('#tvet-registration-form input[name=ctc_no]').css({'background-color': ''})
-                        }else{ 
-                            $('#tvet-registration-form input[name=ctc_no]').val(data.ctc_no).css({'background-color': '#FBF1D3'})
-                        }    
-                        if(data.email_add.length === 0 || !data.email_add.trim()){ 
-                            $('#tvet-registration-form input[name=email]').css({'background-color': ''})
-                        }else{ 
-                            $('#tvet-registration-form input[name=email]').val(data.email_add).css({'background-color': '#FBF1D3'})
-                        }    
-                        if(data.course.length === 0 || !data.course.trim()){ 
-                            $('#tvet-registration-form select[name=course]').css({'background-color': ''})
-                        }else{ 
-                            $('#tvet-registration-form select[name=course]').val(data.course).css({'background-color': '#FBF1D3'})
-                        }       
-                        if(data.father_name.length === 0 || !data.father_name.trim()){ 
-                            $('#tvet-registration-form input[name=father_name]').css({'background-color': ''})
-                        }else{ 
-                            $('#tvet-registration-form input[name=father_name]').val(data.father_name).css({'background-color': '#FBF1D3'})
-                        }      
-                        if(data.father_occupation.length === 0 || !data.father_occupation.trim()){ 
-                            $('#tvet-registration-form input[name=father_occupation]').css({'background-color': ''})
-                        }else{ 
-                            $('#tvet-registration-form input[name=father_occupation]').val(data.father_occupation).css({'background-color': '#FBF1D3'})
-                        }       
-                        if(data.mother_name.length === 0 || !data.mother_name.trim()){ 
-                            $('#tvet-registration-form input[name=mother_name]').css({'background-color': ''})
-                        }else{ 
-                            $('#tvet-registration-form input[name=mother_name]').val(data.mother_name).css({'background-color': '#FBF1D3'})
-                        }      
-                        if(data.mother_occupation.length === 0 || !data.mother_occupation.trim()){ 
-                            $('#tvet-registration-form input[name=mother_occupation]').css({'background-color': ''})
-                        }else{ 
-                            $('#tvet-registration-form input[name=mother_occupation]').val(data.mother_occupation).css({'background-color': '#FBF1D3'})
-                        }     
-                        if(data.school.length === 0 || !data.school.trim()){ 
-                            $('#tvet-registration-form select[name=school]').css({'background-color': ''})
-                        }else{ 
-                            $('#tvet-registration-form select[name=school]').val(data.school).css({'background-color': '#FBF1D3'})
-                        }       
-                        if(data.school_address.length === 0 || !data.school_address.trim()){ 
-                            $('#tvet-registration-form input[name=school_address]').css({'background-color': ''})
-                        }else{ 
-                            $('#tvet-registration-form input[name=school_address]').val(data.school_address).css({'background-color': '#FBF1D3'})
-                        }    
-                        if(data.availment.length === 0 || !data.availment.trim()){ 
-                            $('#tvet-registration-form input[name=availment]').css({'background-color': ''})
-                        }else{ 
-                            $('#tvet-registration-form input[name=availment]').val(data.availment).css({'background-color': '#FBF1D3'})
-                        }     
-                        if(data.yearlevel.length === 0 || !data.yearlevel.trim()){ 
-                            $('#tvet-registration-form select[name=grade_level]').css({'background-color': ''})
-                        }else{ 
-                            $('#tvet-registration-form select[name=grade_level]').val(data.yearlevel).css({'background-color': '#FBF1D3'})
-                        }    
-                    },
-                    error: function (xhr, status, error) { 
-                        console.info(xhr.responseText);
-                    }
-                });
-            })
+            //     $.ajax({
+            //         url   : "registration/tvet_autofill",
+            //         method: "post",  
+            //         data  : {
+            //             search: name, 
+            //         },           
+            //         dataType: "json",
+            //         success: function(data){    
+            //             console.info(data)
+            //             if(data.firstname.length === 0 || !data.firstname.trim()){ 
+            //                 $('#tvet-registration-form input[name=firstname]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#tvet-registration-form input[name=firstname]').val(data.firstname).css({'background-color': '#FBF1D3'})
+            //             }  
+            //             if(data.middlename.length === 0 || !data.middlename.trim()){ 
+            //                 $('#tvet-registration-form input[name=middlename]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#tvet-registration-form input[name=middlename]').val(data.middlename).css({'background-color': '#FBF1D3'})
+            //             }  
+            //             if(data.suffix.length === 0 || !data.suffix.trim()){ 
+            //                 $('#tvet-registration-form input[name=suffix]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#tvet-registration-form input[name=suffix]').val(data.suffix).css({'background-color': '#FBF1D3'})
+            //             }  
+            //             if(data.address.length === 0 || !data.address.trim()){ 
+            //                 $('#tvet-registration-form select[name=address]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#tvet-registration-form select[name=address]').val(data.address).css({'background-color': '#FBF1D3'})
+            //             }   
+            //             if(data.birthdate.length === 0 || !data.birthdate.trim()){ 
+            //                 $('#tvet-registration-form input[name=birthdate]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#tvet-registration-form input[name=birthdate]').val(data.birthdate).css({'background-color': '#FBF1D3'})
+            //             }   
+            //             if(data.age.length === 0 || !data.age.trim()){ 
+            //                 $('#tvet-registration-form input[name=age]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#tvet-registration-form input[name=age]').val(data.age).css({'background-color': '#FBF1D3'})
+            //             }   
+            //             if(data.civil_status.length === 0 || !data.civil_status.trim()){ 
+            //                 $('#tvet-registration-form select[name=civil_status]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#tvet-registration-form select[name=civil_status]').val(data.civil_status).css({'background-color': '#FBF1D3'})
+            //             } 
+            //             if(data.gender.length === 0 || !data.gender.trim()){ 
+            //                 $('#tvet-registration-form select[name=gender]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#tvet-registration-form select[name=gender]').val(data.gender).css({'background-color': '#FBF1D3'})
+            //             }   
+            //             if(data.contact_no.length === 0 || !data.contact_no.trim()){ 
+            //                 $('#tvet-registration-form input[name=contact_no]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#tvet-registration-form input[name=contact_no]').val(data.contact_no).css({'background-color': '#FBF1D3'})
+            //             }   
+            //             if(data.ctc_no.length === 0 || !data.ctc_no.trim()){ 
+            //                 $('#tvet-registration-form input[name=ctc_no]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#tvet-registration-form input[name=ctc_no]').val(data.ctc_no).css({'background-color': '#FBF1D3'})
+            //             }    
+            //             if(data.email_add.length === 0 || !data.email_add.trim()){ 
+            //                 $('#tvet-registration-form input[name=email]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#tvet-registration-form input[name=email]').val(data.email_add).css({'background-color': '#FBF1D3'})
+            //             }    
+            //             if(data.course.length === 0 || !data.course.trim()){ 
+            //                 $('#tvet-registration-form select[name=course]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#tvet-registration-form select[name=course]').val(data.course).css({'background-color': '#FBF1D3'})
+            //             }       
+            //             if(data.father_name.length === 0 || !data.father_name.trim()){ 
+            //                 $('#tvet-registration-form input[name=father_name]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#tvet-registration-form input[name=father_name]').val(data.father_name).css({'background-color': '#FBF1D3'})
+            //             }      
+            //             if(data.father_occupation.length === 0 || !data.father_occupation.trim()){ 
+            //                 $('#tvet-registration-form input[name=father_occupation]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#tvet-registration-form input[name=father_occupation]').val(data.father_occupation).css({'background-color': '#FBF1D3'})
+            //             }       
+            //             if(data.mother_name.length === 0 || !data.mother_name.trim()){ 
+            //                 $('#tvet-registration-form input[name=mother_name]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#tvet-registration-form input[name=mother_name]').val(data.mother_name).css({'background-color': '#FBF1D3'})
+            //             }      
+            //             if(data.mother_occupation.length === 0 || !data.mother_occupation.trim()){ 
+            //                 $('#tvet-registration-form input[name=mother_occupation]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#tvet-registration-form input[name=mother_occupation]').val(data.mother_occupation).css({'background-color': '#FBF1D3'})
+            //             }     
+            //             if(data.school.length === 0 || !data.school.trim()){ 
+            //                 $('#tvet-registration-form select[name=school]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#tvet-registration-form select[name=school]').val(data.school).css({'background-color': '#FBF1D3'})
+            //             }       
+            //             if(data.school_address.length === 0 || !data.school_address.trim()){ 
+            //                 $('#tvet-registration-form input[name=school_address]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#tvet-registration-form input[name=school_address]').val(data.school_address).css({'background-color': '#FBF1D3'})
+            //             }    
+            //             if(data.availment.length === 0 || !data.availment.trim()){ 
+            //                 $('#tvet-registration-form input[name=availment]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#tvet-registration-form input[name=availment]').val(data.availment).css({'background-color': '#FBF1D3'})
+            //             }     
+            //             if(data.yearlevel.length === 0 || !data.yearlevel.trim()){ 
+            //                 $('#tvet-registration-form select[name=grade_level]').css({'background-color': ''})
+            //             }else{ 
+            //                 $('#tvet-registration-form select[name=grade_level]').val(data.yearlevel).css({'background-color': '#FBF1D3'})
+            //             }    
+            //         },
+            //         error: function (xhr, status, error) { 
+            //             console.info(xhr.responseText);
+            //         }
+            //     });
+            // })
 
             
             // Upload Image
@@ -2245,12 +2250,14 @@
                     var reader       = new FileReader();
                     reader.readAsDataURL(blob); 
                     reader.onloadend = function() {
-                        base64data = reader.result;  
-
+                        base64data = reader.result;
                         $.ajax({
-                            url      : "registration/upload",
+                            url      : "registration/upload_photo",
                             method   : "POST",                	
-                            data     : {image: base64data},
+                            data     : {
+                                image: base64data, 
+                                folder: "tvet",
+                            },
                             dadtaType: "json",
                             success  : function(data){  
                                 $modal_tvet.modal('hide');

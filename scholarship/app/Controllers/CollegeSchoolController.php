@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\CollegeSchoolModel;
+use App\Models\UserActivityModel;
 use PHPUnit\Util\Json;
 
 class CollegeSchoolController extends BaseController
@@ -19,7 +20,7 @@ class CollegeSchoolController extends BaseController
     public function get_all()
     {
         $school       = new CollegeSchoolModel();
-        $data['data'] = $school->orderBy('colSchoolName', 'asc')->findAll();
+        $data['data'] = $school->orderBy('school_name', 'asc')->findAll();
         echo Json_encode($data);
     }
 
@@ -37,9 +38,10 @@ class CollegeSchoolController extends BaseController
         try {
             $school = new CollegeSchoolModel();
             $data = [
-                'colSchoolName' => ucwords(trim($this->request->getPost('school_name'))),
-                'address'       => ucwords(trim($this->request->getPost('address'))),
-                'colManager'    => $this->request->getPost('manager'),
+                'school_name'  => ucwords(trim($this->request->getPost('school_name'))),
+                'abbreviation' => trim($this->request->getPost('abbreviation')),
+                'address'      => ucwords(trim($this->request->getPost('address'))),
+                'manager'      => $this->request->getPost('manager'),
             ];
 
             $res =  $school->save($data);
@@ -47,6 +49,13 @@ class CollegeSchoolController extends BaseController
                 "response" => true,
                 "message"  => "Data inserted successfully",
             ];
+
+            
+            $activity_model = new UserActivityModel();
+            $school_name = $data['school_name'];
+            $activity_model->addLog(auth()->user()->id, 'Created a new college school name (\''.$school_name.'\')');
+
+
         } catch (\Exception $e) {
             $res = [
                 "response" => false,
@@ -65,9 +74,10 @@ class CollegeSchoolController extends BaseController
             $id     = $this->request->getPost('id');
 
             $data = [
-                'colSchoolName' => ucwords(trim($this->request->getPost('school_name'))),
+                'school_name' => ucwords(trim($this->request->getPost('school_name'))), 
+                'abbreviation' => trim($this->request->getPost('abbreviation')),
                 'address'       => ucwords(trim($this->request->getPost('address'))),
-                'colManager'    => $this->request->getPost('manager'),
+                'manager'    => $this->request->getPost('manager'),
             ];
 
             $school->update($id, $data);
@@ -75,6 +85,12 @@ class CollegeSchoolController extends BaseController
                 "response" => true,
                 "message"  => "Data updated successfully",
             ];
+ 
+            $activity_model = new UserActivityModel();
+            $school_name = $data['school_name'];
+            $activity_model->addLog(auth()->user()->id, 'Updated a new college school name (\''.$school_name.'\')');
+ 
+
         } catch (\Exception $e) {
             $res = [
                 "response" => false,
@@ -93,7 +109,12 @@ class CollegeSchoolController extends BaseController
             $res = [
                 "response" => true,
                 "message"  => "Data deleted successfully",
-            ];
+            ]; 
+            // Activty Log
+            $activity_model = new UserActivityModel(); 
+            $activity_model->addLog(auth()->user()->id, 'Deleted a college school with the id of \''.$id.'\'');
+ 
+
         } catch (\Exception $e) {
             $res = [
                 "response" => false,

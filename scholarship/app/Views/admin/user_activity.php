@@ -44,11 +44,16 @@
                 deferRender: true, 
                 "order": [[ 0, "desc" ]],
                 ajax       : {
-                    url: 'logs/get_all',   
+                    url: 'logs/get_all', 
                 },
                 columns: [  
-                    { data    : 'id' },  
-                    { data    : 'user_id' },
+                    { data    : 'id' },   
+                    {
+                        data  : 'id',
+                        render: function(data, type, row, meta){  
+                            return row.firstname + " " + row.firstname  + " " + row.lastname
+                        }
+                    }, 
                     { data    : 'description' }, 
                     {
                         data  : 'id',

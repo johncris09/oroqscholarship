@@ -8,7 +8,7 @@ use CodeIgniter\Database\ConnectionInterface;
 class SeniorHighSchoolRegistrationModel extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'table_scholarregistration';
+    protected $table                = 'senior_high';
     protected $primaryKey           = 'id';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
@@ -16,33 +16,33 @@ class SeniorHighSchoolRegistrationModel extends Model
     protected $useSoftDeletes       = false;
     protected $protectFields        = true;
     protected $allowedFields        = [
-        "AppNoYear",
-        "AppNoID",
-        "AppNoSem",
-        "AppStatus",
-        "AppFirstName",
-        "AppMidIn",
-        "AppLastName",
-        "AppSuffix",
-        "AppAddress",
-        "AppDOB",
+        "appnoyear",
+        "appnoid",
+        "appnosem",
+        "appstatus",
+        "firstname",
+        "middlename",
+        "lastname",
+        "suffix",
+        "address",
+        "birthdate",
         "AppAge",
-        "AppCivilStat",
-        "AppGender",
-        "AppContact",
-        "AppCTC",
-        "AppEmailAdd",
-        "AppAvailment",
-        "AppSchool",
-        "AppCourse",
-        "AppYear",
-        "AppSem",
+        "civil_status",
+        "gender",
+        "contact_no",
+        "ctc_no",
+        "email",
+        "availment",
+        "school",
+        "course",
+        "appyear",
+        "appsem",
         "AppSy",
-        "AppFather",
-        "AppFatherOccu",
-        "AppMother",
-        "AppMotherOccu",
-        "AppManager"
+        "father_name",
+        "father_nameOccu",
+        "mother_name",
+        "mother_nameOccu",
+        "appmanager"
     ];
 
     // Dates

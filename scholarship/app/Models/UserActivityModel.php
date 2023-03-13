@@ -60,6 +60,15 @@ class UserActivityModel extends Model
         return $builder->orderBy('id', 'DESC')->get()->getResult();
     }
 
+    public function get_all(){
+        $builder = $this->db->table($this->table);
+        $builder->join('users', 'user_activity.user_id = users.id')->orderBy('user_activity.id', 'desc');
+        
+        return $builder->get()->getResult();
+
+
+    }
+
     public function deleteLogs($userId)
     {
         $this->where('user_id', $userId)->delete();

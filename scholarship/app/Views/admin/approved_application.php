@@ -13,7 +13,7 @@
 
                     <ul class="nav nav-pills navtab-bg nav-justified">
                         <li class="nav-item">
-                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active  ">
+                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link   ">
                                 Senior High School Approved List
                             </a>
                         </li>
@@ -23,16 +23,17 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link ">
+                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
                                 TVET Approved List
                             </a>
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane show active" id="senior-high-tab">   
+                        <div class="tab-pane show " id="senior-high-tab">   
                             <table id="senior-high-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>   
+                                        <th>ID</th>
                                         <th>Application ID</th>  
                                         <th>SY</th>
                                         <th>Name</th>  
@@ -48,7 +49,8 @@
                         <div class="tab-pane  " id="college-tab">
                             <table id="college-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
-                                    <tr>   
+                                    <tr>    
+                                        <th>ID</th>  
                                         <th>Application ID</th>  
                                         <th>SY</th>  
                                         <th>Name</th>  
@@ -61,7 +63,7 @@
                                 </thead> 
                             </table> 
                         </div> 
-                        <div class="tab-pane " id="tvet-tab"> 
+                        <div class="tab-pane active" id="tvet-tab"> 
                             <table id="tvet-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>   
@@ -111,6 +113,7 @@
                 "scrollY"  : 450,
                 "scrollX"  : true, 
                 deferRender: true, 
+                "order": [[ 0, "desc" ]],
                 ajax       : {
                     url   : 'approved/get_shs_approved_list',   
                     method: "get", 
@@ -119,22 +122,23 @@
                         app_sem: "<?php echo isset($_GET['app_sem']) ?  $_GET['app_sem']: ''?>",
                         app_sy : "<?php echo isset($_GET['app_sy']) ?  $_GET['app_sy']  : ''?>", 
                     },
-                }, 
+                },  
                 columns    : [ 
+                    { data: 'id',  }, 
                     {
-                        data  : 'ID',
+                        data  : 'id',
                         render: function(data, type, row, meta){ 
-                            return row.AppNoYear + "-" + row.AppNoSem + "-"  + row.AppNoID  
+                            return row.appnoyear + "-" + row.appnosem + "-"  + row.appnoid  
                         }
                     }, 
-                    { data: 'AppSY' }, 
+                    { data: 'appsy' }, 
                     {
-                        data  : 'ID', 
+                        data  : 'id', 
                         render: function(data, type, row, meta){ 
-                            var first_name  = row.AppFirstName.toLowerCase();
-                            var middle_name = row.AppMidIn.toLowerCase();
-                            var last_name   = row.AppLastName.toLowerCase();
-                            var suffix      = row.AppSuffix.toUpperCase();
+                            var first_name  = row.firstname.toLowerCase();
+                            var middle_name = row.middlename.toLowerCase();
+                            var last_name   = row.lastname.toLowerCase();
+                            var suffix      = row.suffix.toUpperCase();
 
                             return  first_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " " + 
                                     middle_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " "  + 
@@ -142,12 +146,15 @@
                                     suffix 
                         }
                     }, 
-                    { data: 'AppAddress' },  
-                    { data: 'AppCourse' },  
-                    { data: 'AppSchool' },  
-                    { data: 'AppYear' },  
-                    { data: 'AppStatus' },   
+                    { data: 'address' },  
+                    { data: 'course' },  
+                    { data: 'school' },  
+                    { data: 'appyear' },  
+                    { data: 'appstatus' },   
                 ],  
+                columnDefs: [
+                    { "targets": 0, "visible": false } // Hide the first column
+                ]
             });  
 
  
@@ -155,6 +162,7 @@
                 "scrollY"  : 450,
                 "scrollX"  : true, 
                 deferRender: true, 
+                "order": [[ 0, "desc" ]],
                 ajax       : {
                     url   : 'approved/get_college_approved_list',    
                     method: "get", 
@@ -165,22 +173,25 @@
                     },
                 },
                 columns    : [  
+                    { 
+                        data  : 'id' 
+                    },
                     {
-                        data  : 'ID',
+                        data  : 'id',
                         render: function(data, type, row, meta){ 
-                            return row.colAppNoYear + "-" + row.colAppNoSem + "-"  + row.colAppNoID  
+                            return row.appnoyear + "-" + row.appnosem + "-"  + row.appnoid  
                         }
                     }, 
                     { 
-                        data  : 'colSY' 
+                        data  : 'appsy' 
                     },
                     {
-                        data  : 'ID', 
+                        data  : 'id', 
                         render: function(data, type, row, meta){ 
-                            var first_name  = row.colFirstName.toLowerCase();
-                            var middle_name = row.colMI.toLowerCase();
-                            var last_name   = row.colLastName.toLowerCase();
-                            var suffix      = row.colSuffix.toUpperCase();
+                            var first_name  = row.firstname.toLowerCase();
+                            var middle_name = row.middlename.toLowerCase();
+                            var last_name   = row.lastname.toLowerCase();
+                            var suffix      = row.suffix.toUpperCase();
 
                             return  first_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " " + 
                                     middle_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " "  + 
@@ -188,18 +199,22 @@
                                     suffix 
                         }
                     },  
-                    { data: 'colAddress' },  
-                    { data: 'colCourse' },  
-                    { data: 'colSchool' },  
-                    { data: 'colYearLevel' },  
-                    { data: 'colAppStat' },   
+                    { data: 'address' },  
+                    { data: 'course' },  
+                    { data: 'school' },  
+                    { data: 'appyear' },  
+                    { data: 'appstatus' },   
                 ],  
+                columnDefs: [
+                    { "targets": 0, "visible": false } // Hide the first column
+                ]
             });  
 
             var tvet_table = $('#tvet-table').DataTable({
                 "scrollY"  : 450,
                 "scrollX"  : true, 
                 deferRender: true, 
+                "order": [[ 0, "desc" ]],
                 ajax       : {
                     url   : 'approved/get_tvet_approved_list',    
                     method: "get", 
@@ -210,22 +225,25 @@
                     },
                 }, 
                 columns    : [ 
+                    { 
+                        data  : 'id' 
+                    },
                     {
-                        data  : 'ID',
+                        data  : 'id',
                         render: function(data, type, row, meta){ 
-                            return row.colAppNoYear + "-" + row.colAppNoSem + "-"  + row.colAppNoID  
+                            return row.appnoyear + "-" + row.appnosem + "-"  + row.appnoid  
                         }
                     }, 
                     { 
-                        data: 'colSY' 
+                        data: 'appsy' 
                     },
                     {
-                        data  : 'ID',  
+                        data  : 'id',  
                         render: function(data, type, row, meta){ 
-                            var first_name  = row.colFirstName.toLowerCase();
-                            var middle_name = row.colMI.toLowerCase();
-                            var last_name   = row.colLastName.toLowerCase();
-                            var suffix      = row.colSuffix.toUpperCase();
+                            var first_name  = row.firstname.toLowerCase();
+                            var middle_name = row.middlename.toLowerCase();
+                            var last_name   = row.lastname.toLowerCase();
+                            var suffix      = row.suffix.toUpperCase();
 
                             return  first_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " " + 
                                     middle_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " "  + 
@@ -233,27 +251,30 @@
                                     suffix 
                         }
                     },  
-                    { data: 'colAddress' },  
-                    { data: 'colCourse' },  
-                    { data: 'colSchool' },  
-                    { data: 'colYearLevel' },  
-                    { data: 'colAppStat' },
+                    { data: 'address' },  
+                    { data: 'course' },  
+                    { data: 'school' },  
+                    { data: 'appyear' },  
+                    { data: 'appstatus' },
                 ],  
+                columnDefs: [
+                    { "targets": 0, "visible": false } // Hide the first column
+                ]
             });  
 
             
             $('#senior-high-table tbody').on( 'dblclick', 'tr', function () {
-                var id               = senior_high_table.row( this ).data()['ID']
+                var id               = senior_high_table.row( this ).data()['id']
                 window.location.href = "view/application/shs/" + id
             } );
             
             $('#college-table tbody').on( 'dblclick', 'tr', function () {
-                var id               = college_table.row( this ).data()['ID']
+                var id               = college_table.row( this ).data()['id']
                 window.location.href = "view/application/college/" + id
             } );
             
             $('#tvet-table tbody').on( 'dblclick', 'tr', function () {
-                var id               = tvet_table.row( this ).data()['ID']
+                var id               = tvet_table.row( this ).data()['id']
                 window.location.href = "view/application/tvet/" + id
             } );
 

@@ -35,19 +35,19 @@ class DashboardController extends BaseController
         } else {
             if (isset($_GET['app_sem'])) {
                 if (!empty($_GET['app_sem'])) {
-                    $shs_data['AppNoSem']             = $_GET['app_sem'];
-                    $college_tvet_data['colAppNoSem'] = $_GET['app_sem'];
+                    $shs_data['appnosem']             = $_GET['app_sem'];
+                    $college_tvet_data['appnosem'] = $_GET['app_sem'];
                 } else {
                     $shs_data = [];
                 }
             } else {
-                $shs_data['AppNoSem']             = $config['current_sem'];
+                $shs_data['appnosem']             = $config['current_sem'];
                 $shs_data['appsem']               = $config['current_sem'] == 1 ? "1st": "2nd";
-                $college_tvet_data['colAppNoSem'] = $config['current_sem'];
-                $college_tvet_data['colSem']      = $config['current_sem'] == 1 ? "1st" : "2nd";
+                $college_tvet_data['appnosem'] = $config['current_sem'];
+                $college_tvet_data['appsem']      = $config['current_sem'] == 1 ? "1st" : "2nd";
             }
-            $shs_data['AppSY']          = (isset($_GET['app_year'])) ? $_GET['app_year']: $config['current_sy'];
-            $college_tvet_data['colSY'] = (isset($_GET['app_year'])) ? $_GET['app_year']: $config['current_sy'];
+            $shs_data['appsy']          = (isset($_GET['app_year'])) ? $_GET['app_year']: $config['current_sy'];
+            $college_tvet_data['appsy'] = (isset($_GET['app_year'])) ? $_GET['app_year']: $config['current_sy'];
         }
         $data["page_title"]               = "Dashboard";
         $data['tot_approved_shs']         = $this->senior_high->count_application($shs_data); 

@@ -143,13 +143,13 @@
 				foreach(range($from, $to) as $num){
 					
 					$profile    = $result[$num-1];
-					$name       = ucwords( $profile->AppLastName . ", " . $profile->AppFirstName . " " . $profile->AppMidIn . " " . $profile->AppSuffix );
-					$address    = ucwords( $profile->AppAddress );
-					$strand     = $profile->AppCourse;
-					$year_level = $profile->AppYear;
-					$school     = $profile->AppSchool;
-					$availment  = $profile->AppAvailment;
-					$school     = $profile->AppSchool;
+					$name       = ucwords( $profile->lastname . ", " . $profile->firstname . " " . $profile->middlename . " " . $profile->suffix );
+					$address    = ucwords( $profile->address );
+					$strand     = $profile->course;
+					$year_level = $profile->appyear;
+					$school     = $profile->school;
+					$availment  = $profile->availment;
+					$school     = $profile->school;
 
 					if($num == $tot_record){
 			?>

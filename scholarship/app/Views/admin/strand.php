@@ -117,9 +117,9 @@
                     url: 'strand/get_all',  
                 }, 
                 columns: [ 
-                    { data: 'ID' },  
-                    { data: 'Strand' },  
-                    { data: 'Manager' },  
+                    { data: 'id' },  
+                    { data: 'strand' },  
+                    { data: 'manager' },  
                 ], 
                 columnDefs: [
                     {
@@ -132,11 +132,11 @@
                                     <div class="btn-group">\
                                         <button type="button" class="btn dropdown-toggle text-primary" data-bs-toggle="dropdown" aria-expanded="false"> <i class="mdi mdi-cog"></i>  <i class="mdi mdi-chevron-down"></i> </button>\
                                         <div class="dropdown-menu">\
-                                            <a data-id="'+row.ID+'" class="dropdown-item text-warning" href="#" id="edit-strand-button">\
+                                            <a data-id="'+row.id+'" class="dropdown-item text-warning" href="#" id="edit-strand-button">\
                                                 <i class="mdi mdi-grease-pencil"></i>\
                                                 <span class="nav-text">Edit Details</span>\
                                             </a>\
-                                            <a data-id="'+row.ID+'" class="dropdown-item text-danger" href="#" id="delete-strand-button">\
+                                            <a data-id="'+row.id+'" class="dropdown-item text-danger" href="#" id="delete-strand-button">\
                                                 <i class="mdi mdi-grease-pencil"></i>\
                                                 <span class="nav-text">Delete</span>\
                                             </a>\
@@ -197,9 +197,9 @@
                     method  : "get",
                     dataType: "json", 
                     success : function (data) {  
-                        $('#update-strand-form input[name="id"]').val(data.ID)
-                        $('#update-strand-form input[name="strand"]').val(data.Strand)
-                        $('#update-strand-form select[name="manager"]').val(data.Manager)
+                        $('#update-strand-form input[name="id"]').val(data.id)
+                        $('#update-strand-form input[name="strand"]').val(data.strand)
+                        $('#update-strand-form select[name="manager"]').val(data.manager)
                     },
                     error   : function (xhr, status, error) { 
                         console.info(xhr.responseText);

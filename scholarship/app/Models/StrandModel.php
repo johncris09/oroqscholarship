@@ -7,14 +7,14 @@ use CodeIgniter\Model;
 class StrandModel extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'table_strand';
+    protected $table                = 'strand';
     protected $primaryKey           = 'id';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
     protected $returnType           = 'array';
     protected $useSoftDeletes       = false;
     protected $protectFields        = true;
-    protected $allowedFields        = ['Strand', 'Manager'];
+    protected $allowedFields        = ['strand', 'manager'];
 
     // Dates
     protected $useTimestamps        = false;

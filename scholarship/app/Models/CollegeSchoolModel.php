@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class CollegeSchoolModel extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'table_colschool';
+    protected $table                = 'college_school';
     protected $primaryKey           = 'ID';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
@@ -15,9 +15,10 @@ class CollegeSchoolModel extends Model
     protected $useSoftDeletes       = false;
     protected $protectFields        = true;
     protected $allowedFields        = [
-        'colSchoolName',
+        'school_name',
+        'abbreviation',
         'address',
-        'colManager'
+        'manager'
     ];
 
     // Dates

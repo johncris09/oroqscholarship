@@ -8,7 +8,7 @@ use CodeIgniter\Database\ConnectionInterface;
 class CollegeRegistrationModel extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'table_collegeapp';
+    protected $table                = 'college';
     protected $primaryKey           = 'id';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
@@ -16,35 +16,33 @@ class CollegeRegistrationModel extends Model
     protected $useSoftDeletes       = false;
     protected $protectFields        = true;
     protected $allowedFields        = [
-        "colAppNoYear",
-        "colAppNoID",
-        "colAppNoSem",
-        "colAppStat",
-        "colFirstName",
-        "colMI",
-        "colLastName",
-        "colSuffix",
-        "colAddress",
-        "colDOB",
-        "colAge",
-        "colCivilStat",
-        "colGender",
-        "colContactNo",
-        "colCTC",
-        "colEmailAdd",
-        "colAvailment",
-        "colSchool",
-        "colCourse",
-        "colYearLevel",
-        "colSem",
-        "colSY",
-        "colFathersName",
-        "colFatherOccu",
-        "colMothersName",
-        "colMotherOccu",
-        "colManager",
-        "colUnits",
-        "colSchoolAddress"
+        'appnoyear',
+        'appnosem',
+        'appnoid',
+        'appstatus',
+        'lastname',
+        'firstname',
+        'middlename',
+        'suffix',
+        'address',
+        'birthdate',
+        'civil_status',
+        'gender',
+        'contact_no',
+        'ctc_no',
+        'email',
+        'availment',
+        'school',
+        'course',
+        'appyear',
+        'appsem',
+        'appsy',
+        'father_name',
+        'father_occupation',
+        'mother_name',
+        'mother_occupation',
+        'manager',
+        'profile_photo',
     ];
 
     // Dates

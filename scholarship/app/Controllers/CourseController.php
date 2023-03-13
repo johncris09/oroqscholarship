@@ -5,13 +5,14 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\CourseModel;
 use Config\Custom_config;
+use App\Models\UserActivityModel;
 
 class CourseController extends BaseController
 {
 
     public function index()
     {
-        $data["page_title"] = "Course";
+        $data["page_title"]     = "Course";
         $config                 = new Custom_config();
         $data['required_field'] = $config->requiredField; 
         return view('admin/course', $data);
@@ -21,7 +22,7 @@ class CourseController extends BaseController
     public function get_all()
     {
         $course                 = new CourseModel(); 
-        $data['data'] = $course->orderBy('colCourse', 'asc')->findAll(); 
+        $data['data'] = $course->orderBy('course', 'asc')->findAll(); 
         echo Json_encode($data);
     }
 
@@ -39,8 +40,8 @@ class CourseController extends BaseController
         try {
             $course = new CourseModel();
             $data = [
-                'colCourse'  => $this->request->getPost('course'),
-                'colManager' => $this->request->getPost('manager'),
+                'course'  => $this->request->getPost('course'),
+                'manager' => $this->request->getPost('manager'),
             ];
 
             $res =  $course->save($data);
@@ -48,6 +49,11 @@ class CourseController extends BaseController
                 "response" => true,
                 "message"  => "Data inserted successfully",
             ];
+
+            $activity_model = new UserActivityModel(); 
+            $course = $data['course'];
+            $activity_model->addLog(auth()->user()->id, 'Created a new course (\''.$course.'\')');
+
         } catch (\Exception $e) {
             $res = [
                 "response" => false,
@@ -66,8 +72,8 @@ class CourseController extends BaseController
             $course = new CourseModel();
             $id     = $this->request->getPost('id');
             $data = [
-                'colCourse'  => $this->request->getPost('course'),
-                'colManager' => $this->request->getPost('manager'),
+                'course'  => $this->request->getPost('course'),
+                'manager' => $this->request->getPost('manager'),
             ];
 
             $course->update($id, $data);
@@ -75,6 +81,12 @@ class CourseController extends BaseController
                 "response" => true,
                 "message"  => "Data updated successfully",
             ];
+
+            // Activty Log
+            $activity_model = new UserActivityModel();
+            $course = $data['course'];
+            $activity_model->addLog(auth()->user()->id, 'Updated a course of \''.$course.'\'');
+
         } catch (\Exception $e) {
             $res = [
                 "response" => false,
@@ -93,7 +105,12 @@ class CourseController extends BaseController
             $res = [
                 "response" => true,
                 "message"  => "Data deleted successfully",
-            ];
+            ]; 
+
+            // Activty Log
+            $activity_model = new UserActivityModel(); 
+            $activity_model->addLog(auth()->user()->id, 'Deleted a course with the id of \''.$id.'\'');
+ 
         } catch (\Exception $e) {
             $res = [
                 "response" => false,

@@ -242,8 +242,8 @@
                                         <select class="form-control" name="school" >
                                             <option value="">Select</option> 
                                             <?php foreach($college_school as $row):?> 
-                                                <?php if($row['colSchoolName'] != ""):?> 
-                                                    <option value="<?= $row['colSchoolName']  ?>"><?= $row['colSchoolName']  ?></option>  
+                                                <?php if($row['schoolName'] != ""):?> 
+                                                    <option value="<?= $row['schoolName']  ?>"><?= $row['schoolName']  ?></option>  
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
                                         </select>
@@ -354,8 +354,8 @@
                                         <select class="form-control" name="school" >
                                             <option value="">Select</option> 
                                             <?php foreach($college_school as $row):?> 
-                                                <?php if($row['colSchoolName'] != ""):?> 
-                                                    <option value="<?= $row['colSchoolName']  ?>"><?= $row['colSchoolName']  ?></option>  
+                                                <?php if($row['schoolName'] != ""):?> 
+                                                    <option value="<?= $row['schoolName']  ?>"><?= $row['schoolName']  ?></option>  
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
                                         </select>

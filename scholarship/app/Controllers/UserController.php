@@ -9,6 +9,7 @@ use CodeIgniter\Shield\Entities\User;
 use App\Models\SchoolModel;
 use Config\Custom_config;
 use App\Models\CollegeSchoolModel;
+use App\Models\UserActivityModel;
 
 class UserController extends BaseController
 {
@@ -18,9 +19,9 @@ class UserController extends BaseController
         $config             = new Custom_config(); 
         $school                 = new SchoolModel();
         $college_school         = new CollegeSchoolModel(); 
-        $data['school']         = $school->asArray()->orderBy('schoolname', 'ASC')->findAll();
-        $data['college_school'] = $college_school->asArray()->orderBy('colschoolname', 'ASC')->findAll();
-        $data['required_field'] = $config->requiredField; 
+        $data['school']         = $school->asArray()->orderBy('school_name', 'ASC')->findAll();
+        $data['college_school'] = $college_school->asArray()->orderBy('school_name', 'ASC')->findAll();
+        $data['required_field'] = $config->requiredField;  
         return view('admin/user', $data);
     }
 
@@ -29,9 +30,39 @@ class UserController extends BaseController
     {
         $user           = model('UserModel');
         $authgroup      = new AuthGroupModel();
-        $authidentities = new AuthIdentifierModel();
+        $authidentities = new AuthIdentifierModel();  
+        
+        $school_model = new SchoolModel(); 
+        $collge_school_model = new CollegeSchoolModel();
+        $school_name = "";
+        $school_id = "";
 
-        foreach ($user->asArray()->findall() as $row) {
+        foreach ($user->asArray()->orderBy('id', 'desc')->findall() as $row) { 
+            if($row['scholarship_type'] == "shs"){
+                $school = $school_model->find($row['school']);
+                $school_name = $school['school_name'];
+                $school_id = $school['id'];
+            } 
+ 
+            
+            if($row['scholarship_type'] == "college"){ 
+                $school = $collge_school_model->find($row['school']);
+                $school_name = $school['school_name'];
+                $school_id = $school['id'];
+            }
+
+            
+            if($row['scholarship_type'] == "tvet"){ 
+                $school = $collge_school_model->find($row['school']);
+                $school_name = $school['school_name'];
+                $school_id = $school['id'];
+            }
+
+            if($row['scholarship_type'] == ""){
+                $school_name = ""; 
+                $school_id = ""; 
+            }
+
             $data["data"][]   = [
                 "id"               => $row['id'], //id
                 "firstname"        => $row['firstname'], //firstname
@@ -41,7 +72,8 @@ class UserController extends BaseController
                 "created_at"       => $row['created_at'], //created_at
                 "active"           => $row['active'], //active
                 "scholarship_type" => $row['scholarship_type'], //scholarship_type
-                "school"           => $row['school'], //school
+                "school"           => $school_name, //school
+                "school_id"           => $school_id, //school id
                 "email"            => $authidentities
                     ->asArray()
                     ->where('user_id', $row['id'])
@@ -62,14 +94,48 @@ class UserController extends BaseController
         $authgroup      = new AuthGroupModel();
         $authidentities = new AuthIdentifierModel();
 
+
+        
+        $school_model = new SchoolModel(); 
+        $collge_school_model = new CollegeSchoolModel();
+        $school_name = "";
+        $school_id = "";
+
         foreach ($user->asArray()->where('id', $id)->findall() as $row) {
+            if($row['scholarship_type'] == "shs"){
+                $school = $school_model->find($row['school']);
+                $school_name = $school['school_name'];
+                $school_id = $school['id'];
+            } 
+ 
+            
+            if($row['scholarship_type'] == "college"){ 
+                $school = $collge_school_model->find($row['school']);
+                $school_name = $school['school_name'];
+                $school_id = $school['id'];
+            }
+
+            
+            if($row['scholarship_type'] == "tvet"){ 
+                $school = $collge_school_model->find($row['school']);
+                $school_name = $school['school_name'];
+                $school_id = $school['id'];
+            }
+
+            if($row['scholarship_type'] == ""){
+                $school_name = ""; 
+                $school_id = ""; 
+            }
             $data   = [
-                "id"         => $row['id'], //id
-                "firstname"  => $row['firstname'], //firstname
-                "middlename" => $row['middlename'], //middlename
-                "lastname"   => $row['lastname'], //lastname
-                "username"   => $row['username'], //username 
-                "email"      => $authidentities
+                "id"               => $row['id'], //id
+                "firstname"        => $row['firstname'], //firstname
+                "middlename"       => $row['middlename'], //middlename
+                "lastname"         => $row['lastname'], //lastname
+                "username"         => $row['username'], //username 
+                "scholarship_type" => $row['scholarship_type'], //scholarship_type
+                "school"           => $school_name, //school
+                "school_id"           => $school_id, //school id
+                "email"            => $authidentities
                     ->asArray()
                     ->where('user_id', $row['id'])
                     ->where('type ', 'email_password')
@@ -112,6 +178,13 @@ class UserController extends BaseController
                 "response" => true,
                 "message"  => "Data inserted successfully",
             ];
+
+            
+            $activity_model = new UserActivityModel();
+            $name = $_POST['firstname'] . " " .  $_POST['middlename'] . " " .  $_POST['lastname']  ;
+            $activity_model->addLog(auth()->user()->id, 'Created a new user name (\''.$name.'\')'); 
+
+
         } catch (\Exception $e) {
             $res = [
                 "response" => false,
@@ -133,6 +206,8 @@ class UserController extends BaseController
                 'middlename' => $this->request->getPost('middlename'),
                 'username'   => $this->request->getPost('username'),
                 'email'      => $this->request->getPost('email'),
+                'scholarship_type'      => $this->request->getPost('scholarship_type'),
+                'school'      => $this->request->getPost('school'), 
             ]);
             $users->save($user);
 
@@ -142,13 +217,18 @@ class UserController extends BaseController
                 "response" => true,
                 "message"  => "Data updated successfully",
             ];
+
+            
+            $activity_model = new UserActivityModel();
+            $name = $_POST['firstname'] . " " .  $_POST['middlename'] . " " .  $_POST['lastname']  ;
+            $activity_model->addLog(auth()->user()->id, 'Updated a  user name (\''.$name.'\')'); 
+
         } catch (\Exception $e) {
             $res = [
                 "response" => false,
                 "message"  => $e->getMessage(),
             ];
-        }
-
+        } 
         echo Json_encode($res);
     }
 
@@ -167,6 +247,11 @@ class UserController extends BaseController
                 "response" => true,
                 "message"  => "Password updated successfully",
             ];
+            
+            $activity_model = new UserActivityModel();
+            $name = $_POST['firstname'] . " " .  $_POST['middlename'] . " " .  $_POST['lastname']  ;
+            $activity_model->addLog(auth()->user()->id, 'Updated a password from user name (\''.$name.'\')'); 
+
         } catch (\Exception $e) {
             $res = [
                 "response" => false,
@@ -185,7 +270,11 @@ class UserController extends BaseController
             $res   = [
                 "response" => true,
                 "message"  => "Data deleted successfully",
-            ];
+            ]; 
+            
+            // Activty Log
+            $activity_model = new UserActivityModel(); 
+            $activity_model->addLog(auth()->user()->id, 'Deleted a user with the id of \''.$id.'\''); 
         } catch (\Exception $e) {
             $res = [
                 "response" => false,

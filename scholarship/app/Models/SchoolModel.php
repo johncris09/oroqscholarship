@@ -7,14 +7,14 @@ use CodeIgniter\Model;
 class SchoolModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table                = 'table_schoolname';
+    protected $table                = 'senior_high_school';
     protected $primaryKey           = 'id';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
     protected $returnType           = 'array';
     protected $useSoftDeletes       = false;
     protected $protectFields        = true;
-    protected $allowedFields        = ['SchoolName', 'Manager', 'address'];
+    protected $allowedFields        = ['school_name', 'abbreviation', 'manager', 'address'];
 
     // Dates
     protected $useTimestamps        = false;

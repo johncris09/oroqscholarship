@@ -12,7 +12,7 @@
 
 <?= $this->endSection() ?> 
 <?= $this->section('main') ?> 
-    <div class="row"> 
+    <div class="row">
         <div class="col-md-4 col-xl-4">
             <div class="widget-rounded-circle card bg-purple shadow-none">
                 <div class="card-body">

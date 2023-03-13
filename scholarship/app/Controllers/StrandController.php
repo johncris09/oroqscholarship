@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\StrandModel;
+use App\Models\UserActivityModel;
 use Config\Custom_config;
 
 class StrandController extends BaseController
@@ -40,8 +41,8 @@ class StrandController extends BaseController
         $strand = new StrandModel();
         try {
             $data = [
-                'Strand'  => $this->request->getPost('strand'),
-                'Manager' => $this->request->getPost('manager'),
+                'strand'  => $this->request->getPost('strand'),
+                'manager' => $this->request->getPost('manager'),
             ];
 
             $res =  $strand->save($data);
@@ -49,6 +50,11 @@ class StrandController extends BaseController
                 "response" => true,
                 "message"  => "Data inserted successfully",
             ];
+
+            $activity_model = new UserActivityModel()l
+            $strand = $data['strand'];
+            $activity_model->addLog(auth()->user()->id, 'Created a new strand (\''.$strand.'\')');
+
         } catch (\Exception $e) {
             $res = [
                 "response" => false,
@@ -65,8 +71,8 @@ class StrandController extends BaseController
             $strand = new StrandModel();
             $id     = $this->request->getPost('id');
             $data   = [
-                'Strand'  => $this->request->getPost('strand'),
-                'Manager' => $this->request->getPost('manager'),
+                'strand'  => $this->request->getPost('strand'),
+                'manager' => $this->request->getPost('manager'),
             ];
 
             $strand->update($id, $data);
@@ -74,6 +80,11 @@ class StrandController extends BaseController
                 "response" => true,
                 "message"  => "Data updated successfully",
             ];
+
+            // Activty Log
+            $activity_model = new UserActivityModel();
+            $course = $data['strand'];
+            $activity_model->addLog(auth()->user()->id, 'Updated a strand of \''.$strand.'\'');
         } catch (\Exception $e) {
             $res = [
                 "response" => false,
@@ -93,6 +104,11 @@ class StrandController extends BaseController
                 "response" => true,
                 "message"  => "Data deleted successfully",
             ];
+
+            // Activty Log
+            $activity_model = new UserActivityModel(); 
+            $activity_model->addLog(auth()->user()->id, 'Deleted a strand with the id of \''.$id.'\'');
+ 
         } catch (\Exception $e) {
             $res = [
                 "response" => false,

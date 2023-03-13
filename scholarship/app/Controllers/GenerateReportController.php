@@ -42,8 +42,8 @@ class GenerateReportController extends BaseController
         $data['grade_level']    = $config->gradeLevel;
         $data['school']         = $school->asArray()->orderBy('schoolname', 'ASC')->findAll();
         $data['strand']         = $strand->asArray()->orderBy('strand', 'ASC')->findAll();
-        $data['course']         = $course->asArray()->orderBy('colcourse', 'ASC')->findAll();
-        $data['college_school'] = $college_school->asArray()->orderBy('colschoolname', 'ASC')->findAll();
+        $data['course']         = $course->asArray()->orderBy('course', 'ASC')->findAll();
+        $data['college_school'] = $college_school->asArray()->orderBy('schoolname', 'ASC')->findAll();
         $data['year_level']     = $config->yearLevel;
         $data['sequence_year']  = $sequence->asArray()->where('Sys_ID', 1)->findAll()[0]['seq_year'];
         $data['seq_sem']        = $sequence->asArray()->where('Sys_ID', 1)->findAll()[0]['seq_sem'];

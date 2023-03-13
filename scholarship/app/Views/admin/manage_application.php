@@ -126,17 +126,17 @@
                     {
                         data  : 'ID',
                         render: function(data, type, row, meta){ 
-                            return row.AppNoYear + "-" + row.AppNoSem + "-"  + row.AppNoID  
+                            return row.appnoyear + "-" + row.appnosem + "-"  + row.appnoid  
                         }
                     }, 
-                    { data: 'AppSY' }, 
+                    { data: 'appsy' }, 
                     {
                         data  : 'ID', 
                         render: function(data, type, row, meta){ 
-                            var first_name  = row.AppFirstName.toLowerCase();
-                            var middle_name = row.AppMidIn.toLowerCase();
-                            var last_name   = row.AppLastName.toLowerCase();
-                            var suffix      = row.AppSuffix.toUpperCase();
+                            var first_name  = row.firstname.toLowerCase();
+                            var middle_name = row.middlename.toLowerCase();
+                            var last_name   = row.lastname.toLowerCase();
+                            var suffix      = row.suffix.toUpperCase();
 
                             return  first_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " " + 
                                     middle_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " "  + 
@@ -144,11 +144,11 @@
                                     suffix 
                         }
                     }, 
-                    { data: 'AppAddress' },  
-                    { data: 'AppCourse' },  
-                    { data: 'AppSchool' },  
-                    { data: 'AppYear' },  
-                    { data: 'AppStatus' },   
+                    { data: 'address' },  
+                    { data: 'course' },  
+                    { data: 'school' },  
+                    { data: 'appyear' },  
+                    { data: 'appstatus' },   
                 ],  
             });  
  
@@ -169,17 +169,17 @@
                     {
                         data  : 'ID',
                         render: function(data, type, row, meta){ 
-                            return row.colAppNoYear + "-" + row.colAppNoSem + "-"  + row.colAppNoID  
+                            return row.appnoyear + "-" + row.appnosem + "-"  + row.appnoid  
                         }
                     }, 
-                    { data: 'colSY' }, 
+                    { data: 'appsy' }, 
                     {
                         data  : 'ID',
                         render: function(data, type, row, meta){ 
-                            var first_name  = row.colFirstName.toLowerCase();
-                            var middle_name = row.colMI.toLowerCase();
-                            var last_name   = row.colLastName.toLowerCase();
-                            var suffix      = row.colSuffix.toUpperCase();
+                            var first_name  = row.firstname.toLowerCase();
+                            var middle_name = row.middlename.toLowerCase();
+                            var last_name   = row.lastname.toLowerCase();
+                            var suffix      = row.suffix.toUpperCase();
 
                             return  first_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " " + 
                                     middle_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " "  + 
@@ -187,11 +187,11 @@
                                     suffix 
                         }
                     }, 
-                    { data: 'colAddress' },  
-                    { data: 'colCourse' },  
-                    { data: 'colSchool' },  
-                    { data: 'colYearLevel' },  
-                    { data: 'colAppStat' },   
+                    { data: 'address' },  
+                    { data: 'course' },  
+                    { data: 'school' },  
+                    { data: 'appyear' },  
+                    { data: 'appstatus' },   
                 ], 
             });  
 
@@ -212,17 +212,17 @@
                     {
                         data  : 'ID',
                         render: function(data, type, row, meta){ 
-                            return row.colAppNoYear + "-" + row.colAppNoSem + "-"  + row.colAppNoID  
+                            return row.appnoyear + "-" + row.appnosem + "-"  + row.appnoid  
                         }
                     }, 
-                    { data: 'colSY' },  
+                    { data: 'appsy' },  
                     {
                         data  : 'ID', 
                         render: function(data, type, row, meta){ 
-                            var first_name  = row.colFirstName.toLowerCase();
-                            var middle_name = row.colMI.toLowerCase();
-                            var last_name   = row.colLastName.toLowerCase();
-                            var suffix      = row.colSuffix.toUpperCase();
+                            var first_name  = row.firstname.toLowerCase();
+                            var middle_name = row.middlename.toLowerCase();
+                            var last_name   = row.lastname.toLowerCase();
+                            var suffix      = row.suffix.toUpperCase();
 
                             return  first_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " " + 
                                     middle_name.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ") + " "  + 
@@ -230,11 +230,11 @@
                                     suffix 
                         }
                     }, 
-                    { data: 'colAddress' },  
-                    { data: 'colCourse' },  
-                    { data: 'colSchool' },  
-                    { data: 'colYearLevel' },  
-                    { data: 'colAppStat' },   
+                    { data: 'address' },  
+                    { data: 'course' },  
+                    { data: 'school' },  
+                    { data: 'appyear' },  
+                    { data: 'appstatus' },   
                 ],  
             });  
 

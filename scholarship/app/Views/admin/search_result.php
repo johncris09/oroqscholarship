@@ -15,6 +15,7 @@
                         <thead>
                             <tr> 
                                 <th>Name</th> 
+                                <th>School</th> 
                                 <th>Address</th>
                                 <th>Year Level</th>
                                 <th>Availment</th>
@@ -24,8 +25,12 @@
                                 <th>Source</th> 
                             </tr>
                         </thead> 
-                        <tbody>
+                        <tbody> 
                             <?php 
+                            $shs_school_model = new \App\Models\SchoolModel(); 
+                            $college_school_model = new \App\Models\CollegeSchoolModel();
+                            $school_name = "";
+
                             if(!empty($result)){
                                
                                 foreach($result as $row){
@@ -37,9 +42,21 @@
                                     $year_level = $row->yearlevel;
                                     $sem        = $row->sem;
                                     $status     = $row->status;
+                                    // $school     = $row->school;
+
+                                    if(strtolower($source) == "senior high"){
+                                        $school = $shs_school_model->find($row->school);
+                                        $school_name = $school['school_name'];
+                                    }
+
+                                    if(strtolower($source) == "college" || strtolower($source) == "tvet" ){
+                                        $school = $college_school_model->find($row->school);
+                                        $school_name = $school['school_name']; 
+                                    }
                             ?>
                                     <tr>
                                         <td><?php echo $name;  ?></td>
+                                        <td><?php echo $school_name;  ?></td>
                                         <td><?php echo $address;  ?></td>
                                         <td><?php echo $year_level;  ?></td>
                                         <td><?php echo $availment;  ?></td> 
