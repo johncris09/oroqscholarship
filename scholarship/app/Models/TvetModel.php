@@ -179,19 +179,29 @@ class TvetModel extends Model
         return $query;
     }
 
+    
     public function get_pending_application($data)
     {
-        $query = $this->builder
-            ->select('id, appsy, appnoyear, appnosem, appnoid, appstatus, firstname, middlename, lastname, suffix, address, course, school, appyear, ')
-            ->where('appstatus', 'Pending')
-            ->where('appmanager', 'Active')
-            ->where($data)
-            ->orderBy('appnoid', 'asc')
-            ->get()
-            ->getResult();
-        return $query;
-    }
 
+        $builder = $this->db->table('tvet'); 
+        $builder->join('college_school', 'tvet.school = college_school.id');
+        $builder->join('barangay', 'tvet.address = barangay.id'); 
+        $builder->where('tvet.appstatus', 'pending');  
+        $builder->where('appmanager', 'Active'); 
+        $builder->where($data);
+        $builder->select('
+            tvet.*,
+            barangay.barangay as address,
+            college_school.school_name as school_name,
+            college_school.address as school_address, 
+        ');
+        
+        // Get the results of the query
+        $results = $builder->get()->getResultArray();
+
+        return $results;
+    }
+ 
     public function get_approved_application($data)
     {
         $query = $this->builder
