@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<!-- App favicon -->
-	<link rel="shortcut icon" href="/img/favicon.ico">
+	<link rel="shortcut icon" href="<?php echo base_url('public/img/favicon.ico') ?>">
 	<style type="text/css">
 	/*! 
  * Base CSS for pdf2htmlEX
@@ -2929,10 +2929,10 @@
 					<div class="t m0 x2 h2 y8 ff1 fs0 fc0 sc0 ls2 ws5"> </div>
 				</div>
 				<div class="c x3 y9 w5 h6">
-					<div class="t m0 x4 h7 ya ff1 fs1 fc0 sc0 ls2 ws5"><?php echo $profile['AppAvailment']; ?>  </div>
+					<div class="t m0 x4 h7 ya ff1 fs1 fc0 sc0 ls2 ws5"><?php echo $profile['availment']; ?>  </div>
 				</div>
 				<div class="c x5 yb w5 h6">
-					<div class="t m0 x4 h7 ya ff1 fs1 fc0 sc0 ls2 ws5"><?php echo $profile['AppNoID']; ?>  </div>
+					<div class="t m0 x4 h7 ya ff1 fs1 fc0 sc0 ls2 ws5"><?php echo $profile['appnoid']; ?>  </div>
 				</div>
 				<div class="c x6 yc w6 h8">
 					<div class="t m0 x2 h2 yd ff1 fs0 fc0 sc0 ls2 ws5">AVAILMENT: </div>
@@ -2995,7 +2995,7 @@
 					<div class="t m0 x0 hb y13 ff2 fs2 fc0 sc0 ls2 ws5">Birthday (<span class="_ _0"></span>MM/DD/YYYY) </div>
 				</div>
 				<div class="c xf y21 we hf"> 
-					<img src="<?= !empty($profile['AppImage']) ?  base_url()."/". $profile['AppImage']  : base_url()."/public/img/blank-image.png" ?>"   
+					<img src="<?= !empty($profile['profile_photo']) ?  base_url()."/". $profile['profile_photo']  : base_url()."/public/img/blank-image.png" ?>"   
 						
 						/>
 					<!-- <div class="t m0 x2 h2 y22 ff1 fs0 fc0 sc0 ls2 ws5"> </div> -->
@@ -3007,7 +3007,7 @@
 					<div class="t m0 x0 hb y10 ff2 fs2 fc0 sc0 ls2 ws5">Date Signed </div>
 				</div>
 				<div class="c x12 y25 w10 ha">
-					<div class="t m0 x0 hb y10 ff2 fs2 fc0 sc0 ls2 ws5"><u><b><?php echo ucwords(  $profile['AppFirstName'] . " " .  $profile['AppMidIn'] . " " . $profile['AppLastName']  . " " . $profile['AppSuffix']); ?> </b></u></div>
+					<div class="t m0 x0 hb y10 ff2 fs2 fc0 sc0 ls2 ws5"><u><b><?php echo ucwords(  $profile['firstname'] . " " .  $profile['middlename'] . " " . $profile['lastname']  . " " . $profile['suffix']); ?> </b></u></div>
 				</div>
 				<div class="c x13 y26 w11 ha">
 					<div class="t m0 x0 hb y10 ff2 fs2 fc0 sc0 ls2 ws5"><u><b><?php echo date('F d, Y'); ?> </b></u> </div>
@@ -3085,7 +3085,7 @@
 					<div class="t m0 x20 h23 y10 ff3 fs5 fc0 sc0 ls2 ws5">Telefax: (088) 564-0764 Website: www.oroquietacity.gov.ph Email: infooroquieta@gmail.com<span class="fs6"> </span></div>
 				</div>
 				<div class="c x6 y4b w20 h24">
-					<div class="t m0 x21 h25 y4c ff7 fs7 fc0 sc0 ls2 ws5">I, (Name)  <u><b><?php echo ucwords(  $profile['AppFirstName'] . " " .  $profile['AppMidIn'] . " " . $profile['AppLastName']  . " " . $profile['AppSuffix']); ?> </b></u> , give my consent to the Cit<span class="_ _1"></span>y Scholarship<span class="_ _1"></span> Program Commit<span class="_ _1"></span>tee to assess </span>
+					<div class="t m0 x21 h25 y4c ff7 fs7 fc0 sc0 ls2 ws5">I, (Name)  <u><b><?php echo ucwords(  $profile['firstname'] . " " .  $profile['middlename'] . " " . $profile['lastname']  . " " . $profile['suffix']); ?> </b></u> , give my consent to the Cit<span class="_ _1"></span>y Scholarship<span class="_ _1"></span> Program Commit<span class="_ _1"></span>tee to assess </span>
 						</span>
 					</div>
 					<div class="t m0 x22 h25 y4d ff7 fs7 fc0 sc0 ls2 ws5">all records submit<span class="_ _1"></span>ted in relatio<span class="_ _1"></span>n to my scholarship appl<span class="_ _1"></span>ication. <span class="_ _1"></span> </div>
@@ -3097,55 +3097,70 @@
 					<div class="t m0 x0 h26 y53 ff7 fs7 fc0 sc0 ls2 ws5">I hereby certi<span class="_ _1"></span>fy that the above info<span class="_ _1"></span>rmatio<span class="_ _1"></span>n is true and corre<span class="_ _1"></span>ct to the best of my k<span class="_ _1"></span>nowledge and beli<span class="_ _1"></span>ef.<span class="_ _2"></span><span class="ff1 fs5"> </span></div>
 				</div>
 				<div class="c x8 y54 w21 h1d">
-					<div class="t m0 x4 h27 y55 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo ucwords($profile['AppLastName'] . ", " . $profile['AppFirstName'] . " " . $profile['AppMidIn'] . " " . $profile['AppSuffix']); ?>  </div>
+					<div class="t m0 x4 h27 y55 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo ucwords($profile['lastname'] . ", " . $profile['firstname'] . " " . $profile['middlename'] . " " . $profile['suffix']); ?>  </div>
 				</div>
 				<div class="c x1 y56 w22 h1d">
-					<div class="t m0 x4 h27 y55 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo ucwords($profile['AppAddress']); ?></div>
+					<div class="t m0 x4 h27 y55 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo ucwords($profile['address']); ?></div>
 				</div>
 				<div class="c x1 y57 w21 h1d">
-					<div class="t m0 x4 h27 y55 ff1 fs9 fc0 sc0 ls2 ws5"> <?php echo $profile['AppEmailAdd'] ; ?> </div>
+					<div class="t m0 x4 h27 y55 ff1 fs9 fc0 sc0 ls2 ws5"> <?php echo $profile['email'] ; ?> </div>
 				</div>
 				<div class="c x1 y58 w21 h1d">
-					<div class="t m0 x4 h27 y55 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo ucwords($profile['AppSchool']); ?> </div>
+					<div class="t m0 x4 h27 y55 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo ucwords($profile['school_name']); ?> </div>
 				</div>
 				<div class="c x1 y59 w21 h28">
-					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo  ucwords($profile['AppSchoolAddress']); ?>  </div>
+					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo  ucwords($profile['school_address']); ?>  </div>
 				</div>
 				<div class="c x8 y5a w21 h28">
-					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo  ucwords($profile['AppFather']); ?> </div>
+					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo  ucwords($profile['father_name']); ?> </div>
 				</div>
 				<div class="c x1 y5b w21 h1d">
-					<div class="t m0 x4 h27 y55 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo ucwords($profile['AppMother']); ?> </div>
+					<div class="t m0 x4 h27 y55 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo ucwords($profile['mother_name']); ?> </div>
 				</div>
 				<div class="c x25 y5a w23 h28">
-					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo  ucwords($profile['AppFatherOccu']); ?>  </div>
+					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo  ucwords($profile['father_occupation']); ?>  </div>
 				</div>
 				<div class="c x25 y5c w24 h28">
-					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo  ucwords($profile['AppMotherOccu']); ?>  </div>
+					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo  ucwords($profile['mother_occupation']); ?>  </div>
 				</div>
 				<div class="c x25 y5d w25 h28">
-					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo  ucwords($profile['AppCourse']); ?>  </div>
+					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo  ucwords($profile['course']); ?>  </div>
 				</div>
 				<div class="c x13 y5e w26 h1d">
-					<div class="t m0 x4 h27 y55 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo  ucwords($profile['AppYear']); ?> </div>
+					<div class="t m0 x4 h27 y55 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo  ucwords($profile['appyear']); ?> </div>
 				</div>
 				<div class="c x26 y5f w26 h28">
-					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo  ucwords($profile['AppSem']); ?>  </div>
+					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo  ucwords($profile['appsem']); ?>  </div>
 				</div>
 				<div class="c x25 y60 w27 h28">
-					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo $profile['AppSY']; ?> </div>
+					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo $profile['appsy']; ?> </div>
 				</div>
 				<div class="c x27 y57 w27 h1d">
-					<div class="t m0 x4 h27 y55 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo $profile['AppContact']; ?> </div>
+					<div class="t m0 x4 h27 y55 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo $profile['contact_no']; ?> </div>
 				</div>
 				<div class="c x18 y61 w27 h28">
-					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo $profile['AppCivilStat']; ?></div>
+					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo $profile['civil_status']; ?></div>
 				</div>
 				<div class="c x18 y62 w28 h28">
-					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo date('F/d/Y', strtotime( $profile['AppDOB'])) ?></div>
+					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo date('F d, Y', strtotime( $profile['birthdate'])) ?></div>
 				</div>
 				<div class="c x28 y56 w29 h28">
-					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls4 ws4"><?php echo $profile['AppAge']; ?></div>
+					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls4 ws4"> <?php  
+					// Set the birthdate string in yyyy-mm-dd format
+					$birthdate = date('Y-m-d', strtotime($profile['birthdate'])) ;
+
+					// Create a DateTime object from the birthdate string
+					$birthdateObj = new DateTime($birthdate);
+
+					// Get the current date as a DateTime object
+					$currentDateObj = new DateTime();
+
+					// Calculate the difference between the two dates in years
+					$age = $birthdateObj->diff($currentDateObj)->y;
+
+					// Print the person's age
+					echo  $age; 
+					?>  </div>
 				</div>
 				<div class="c x29 y63 w2a h1d">
 					<div class="t m0 x4 h7 y64 ff1 fs1 fc0 sc0 ls2 ws5">M </div>
@@ -3153,10 +3168,10 @@
 				<div class="c x2a y65 w2a h28">
 					<div class="t m0 x4 h7 y66 ff1 fs1 fc0 sc0 ls2 ws5"> F </div>
 				</div>
-				<div class="c x2b y67 w2b h29" <?php echo  strtolower($profile['AppGender']) == "male" ? "style='background-color: black !important; height: 7px; '" : ""; ?> >
+				<div class="c x2b y67 w2b h29" <?php echo  strtolower($profile['gender']) == "male" ? "style='background-color: black !important; height: 7px; '" : ""; ?> >
 					<div class="t m0 x4 h7 y68 ff1 fs1 fc0 sc0 ls2 ws5"> </div>
 				</div>
-				<div class="c x2c y69 w2b h29" <?php echo  strtolower($profile['AppGender']) == "female" ? "style='background-color: black !important; height: 7px; '" : ""; ?> >
+				<div class="c x2c y69 w2b h29" <?php echo  strtolower($profile['gender']) == "female" ? "style='background-color: black !important; height: 7px; '" : ""; ?> >
 					<div class="t m0 x4 h7 y68 ff1 fs1 fc0 sc0 ls2 ws5"> </div>
 				</div>
 				<div class="c x2d y6a w2c h2a">

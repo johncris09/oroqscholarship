@@ -8,7 +8,7 @@ use CodeIgniter\Database\ConnectionInterface;
 class SeniorHighModel extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'table_scholarregistration';
+    protected $table                = 'senior_high';
     protected $primaryKey           = 'id';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
@@ -16,35 +16,33 @@ class SeniorHighModel extends Model
     protected $useSoftDeletes       = false;
     protected $protectFields        = true;
     protected $allowedFields        = [
-        "AppNoYear",
-        "AppNoID",
-        "AppNoSem",
-        "AppStatus",
-        "AppFirstName",
-        "AppMidIn",
-        "AppLastName",
-        "AppSuffix",
-        "AppAddress",
-        "AppDOB",
-        "AppAge",
-        "AppCivilStat",
-        "AppGender",
-        "AppContact",
-        "AppCTC",
-        "AppEmailAdd",
-        "AppAvailment",
-        "AppSchool",
-        "AppCourse",
-        "AppSchoolAddress",
-        "AppYear",
-        "AppSem",
-        "AppSy",
-        "AppFather",
-        "AppFatherOccu",
-        "AppMother",
-        "AppMotherOccu",
-        "AppManager",
-        "AppImage"
+        'appnoyear',
+        'appnosem',
+        'appnoid',
+        'appstatus',
+        'lastname',
+        'firstname',
+        'middlename',
+        'suffix',
+        'address',
+        'birthdate',
+        'civil_status',
+        'gender',
+        'contact_no',
+        'ctc_no',
+        'email',
+        'availment',
+        'school',
+        'course',
+        'appyear',
+        'appsem',
+        'appsy',
+        'father_name',
+        'father_occupation',
+        'mother_name',
+        'mother_occupation',
+        'appmanager',
+        'profile_photo',
     ];
 
     // Dates
@@ -80,6 +78,26 @@ class SeniorHighModel extends Model
     }
 
 
+    public function get_applicant_details($id)
+    { 
+        $builder = $this->db->table('senior_high'); 
+        $builder->join('senior_high_school', 'senior_high.school = senior_high_school.id');
+        $builder->join('barangay', 'senior_high.address = barangay.id');
+        $builder->join('strand', 'senior_high.course = strand.id');  
+        $builder->where('senior_high.id', $id);
+        $builder->select('
+            senior_high.*,
+            barangay.barangay as address,
+            senior_high_school.school_name as school_name,
+            senior_high_school.address as school_address,
+            strand.strand as course,
+        ');
+
+        // Get the results of the query
+        $results = $builder->get()->getResultArray();
+
+        return $results[0];
+    }
 
     public function count()
     {
@@ -94,7 +112,7 @@ class SeniorHighModel extends Model
         $builder = $this->db
             ->table($this->table) 
             ->where($data)
-            ->where('AppManager', 'Active');
+            ->where('appmanager', 'Active');
         $query = $builder->countAllResults();
         return $query;
     }
@@ -105,10 +123,10 @@ class SeniorHighModel extends Model
     {
         $builder = $this->db
             ->table($this->table) 
-            ->like('AppStatus', 'approved', 'both' )
-            ->where('AppStatus !=', 'disapproved')
+            ->like('appstatus', 'approved', 'both' )
+            ->where('appstatus !=', 'disapproved')
             ->where($data)
-            ->where('AppManager', 'Active');
+            ->where('appmanager', 'Active');
         $query = $builder->countAllResults();
         return $query;
     }
@@ -120,9 +138,9 @@ class SeniorHighModel extends Model
     {
         $builder = $this->db
             ->table($this->table)  
-            ->where('AppStatus', 'disapproved')
+            ->where('appstatus', 'disapproved')
             ->where($data)
-            ->where('AppManager', 'Active');
+            ->where('appmanager', 'Active');
         $query = $builder->countAllResults();
         return $query; 
     } 
@@ -132,9 +150,9 @@ class SeniorHighModel extends Model
     {
         $builder = $this->db
             ->table($this->table)  
-            ->where('AppStatus', 'pending')
+            ->where('appstatus', 'pending')
             ->where($data)
-            ->where('AppManager', 'Active');
+            ->where('appmanager', 'Active');
         $query = $builder->countAllResults();
         return $query; 
     }
@@ -146,7 +164,7 @@ class SeniorHighModel extends Model
         $builder = $this->db
             ->table($this->table)
             ->where($data)
-            ->Where('(AppStatus = "Approved" or AppStatus = "Additional Approved")');
+            ->Where('(appstatus = "Approved" or appstatus = "Additional Approved")');
         $query = $builder->countAllResults();
         return $query;
     }
@@ -166,7 +184,7 @@ class SeniorHighModel extends Model
     public function get_all($data)
     {
         $query = $this->builder
-            ->select('ID, AppSY, AppNoYear, AppNoSem, AppNoID, AppStatus, AppFirstName, AppMidIn, AppLastName, AppSuffix, AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ')
+            ->select('ID, appsy, appnoyear, appnosem, appnoid, appstatus, firstname, middlename, lastname, suffix, address, course, school, appyear, appstatus, ')
             ->where($data)
             ->orderBy('id', 'desc')
             ->get()
@@ -177,11 +195,11 @@ class SeniorHighModel extends Model
     public function get_pending_application($data)
     {
         $query = $this->builder
-            ->select('ID, AppSY,AppNoYear, AppNoSem, AppNoID, AppStatus, AppFirstName, AppMidIn, AppLastName, AppSuffix, AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ')
-            ->where('AppStatus', 'Pending')
-            ->where('AppManager', 'Active')
+            ->select('ID, appsy,appnoyear, appnosem, appnoid, appstatus, firstname, middlename, lastname, suffix, address, course, school, appyear, appstatus, ')
+            ->where('appstatus', 'Pending')
+            ->where('appmanager', 'Active')
             ->where($data)
-            ->orderBy('AppNoID', 'asc')
+            ->orderBy('appnoid', 'asc')
             ->get()
             ->getResult();
         return $query;
@@ -190,11 +208,14 @@ class SeniorHighModel extends Model
     public function get_approved_application($data)
     {
         $query = $this->builder
-            ->select('ID, AppSY, AppNoYear, AppNoSem, AppNoID, AppStatus, AppFirstName, AppMidIn, AppLastName, AppSuffix, AppAddress, AppCourse, AppSchool, AppYear, AppStatus, ')
-            ->Where('(AppStatus = "Approved" or AppStatus = "Additional Approved")')
-            ->where('AppManager', 'Active')
+            ->select('senior_high.id, appsy, appnoyear, appnosem, appnoid, appstatus, firstname, middlename, lastname, suffix, barangay.barangay as address, strand.strand as course, senior_high_school.school_name as school, appyear, appstatus, ')
+            ->join('senior_high_school', 'senior_high.school = senior_high_school.id')
+            ->join('barangay', 'senior_high.address = barangay.id')
+            ->join('strand', 'senior_high.course = strand.id')
+            ->Where('(appstatus = "Approved" or appstatus = "Additional Approved")')
+            ->where('appmanager', 'Active')
             ->where($data)
-            ->orderBy('ID', 'asc')  
+            ->orderBy('senior_high.id', 'desc')  
             ->get()
             ->getResult();
         return $query;
@@ -206,17 +227,17 @@ class SeniorHighModel extends Model
     {
         $query_string =  ' 
             SELECT * 
-            FROM table_scholarregistration 
-            WHERE AppSchool LIKE "'.$school.'%"  
-            AND AppStatus LIKE "'.$status.'%"
-            AND AppSY LIKE "'.$sy.'%"  
-            AND AppSem LIKE "'.$sem.'%"  
-            AND AppAvailment LIKE "'.$availment.'%"
-            AND AppGender LIKE "'.$gender.'%"
-            AND AppYear LIKE "'.$year_level.'%"
-            AND AppAddress LIKE "'.$address.'%"  
-            AND AppManager = "Active"
-            ORDER BY AppLastName, AppFirstName and AppMidIn
+            FROM senior_high 
+            WHERE school LIKE "'.$school.'%"  
+            AND appstatus LIKE "'.$status.'%"
+            AND appsy LIKE "'.$sy.'%"  
+            AND appsem LIKE "'.$sem.'%"  
+            AND availment LIKE "'.$availment.'%"
+            AND gender LIKE "'.$gender.'%"
+            AND appyear LIKE "'.$year_level.'%"
+            AND address LIKE "'.$address.'%"  
+            AND appmanager = "Active"
+            ORDER BY lastname, firstname and middlename
         '; 
 
         $query = $this->db->query($query_string); 
@@ -227,21 +248,21 @@ class SeniorHighModel extends Model
     {
         $query_string =  ' 
             SELECT * 
-            FROM table_scholarregistration 
-            WHERE AppNoID BETWEEN "'.$appnoidfrom.'" 
+            FROM senior_high 
+            WHERE appnoid BETWEEN "'.$appnoidfrom.'" 
             AND "'.$appnoidto.'" 
-            HAVING AppNoYear LIKE "'.$appnoyear.'%"  
-            AND AppNoSem LIKE "'.$appnosem.'%" 
-            AND AppSchool LIKE "'.$school.'%" 
-            AND AppSem LIKE "'.$sem.'%" 
-            AND AppSY LIKE "'.$sy.'%"  
-            AND AppAvailment LIKE "'.$availment.'%"
-            AND AppGender LIKE "'.$gender.'%"
-            AND AppYear LIKE "'.$year_level.'%"
-            AND AppAddress LIKE "'.$address.'%"  
-            AND AppStatus LIKE "'.$status.'%"
-            AND AppManager="Active"
-            ORDER BY AppNoID
+            HAVING appnoyear LIKE "'.$appnoyear.'%"  
+            AND appnosem LIKE "'.$appnosem.'%" 
+            AND school LIKE "'.$school.'%" 
+            AND appsem LIKE "'.$sem.'%" 
+            AND appsy LIKE "'.$sy.'%"  
+            AND availment LIKE "'.$availment.'%"
+            AND gender LIKE "'.$gender.'%"
+            AND appyear LIKE "'.$year_level.'%"
+            AND address LIKE "'.$address.'%"  
+            AND appstatus LIKE "'.$status.'%"
+            AND appmanager="Active"
+            ORDER BY appnoid
         '; 
 
         $query = $this->db->query($query_string);
@@ -252,17 +273,17 @@ class SeniorHighModel extends Model
     {
         $query_string =  ' 
             SELECT * 
-            FROM table_scholarregistration 
-            WHERE AppSchool LIKE "'.$school.'%"  
-            AND AppSY LIKE "'.$sy.'%"  
-            AND AppSem LIKE "'.$sem.'%"  
-            AND AppAvailment LIKE "'.$availment.'%"
-            AND AppGender LIKE "'.$gender.'%"
-            AND AppYear LIKE "'.$year_level.'%"
-            AND AppAddress LIKE "'.$address.'%"  
-            AND (AppStatus = "Approved" or AppStatus = "Additional Approved")
-            AND AppManager = "Active"
-            ORDER BY AppLastName, AppFirstName and AppMidIn
+            FROM senior_high 
+            WHERE school LIKE "'.$school.'%"  
+            AND appsy LIKE "'.$sy.'%"  
+            AND appsem LIKE "'.$sem.'%"  
+            AND availment LIKE "'.$availment.'%"
+            AND gender LIKE "'.$gender.'%"
+            AND appyear LIKE "'.$year_level.'%"
+            AND address LIKE "'.$address.'%"  
+            AND (appstatus = "Approved" or appstatus = "Additional Approved")
+            AND appmanager = "Active"
+            ORDER BY lastname, firstname and middlename
         '; 
 
         $query = $this->db->query($query_string); 
@@ -275,22 +296,22 @@ class SeniorHighModel extends Model
     {
         $query_string =  ' 
             SELECT * 
-            FROM table_scholarregistration 
-            WHERE AppNoID BETWEEN "'.$appnoidfrom.'" 
+            FROM senior_high 
+            WHERE appnoid BETWEEN "'.$appnoidfrom.'" 
             AND "'.$appnoidto.'" 
-            HAVING AppNoYear LIKE "'.$appnoyear.'%"  
-            AND AppNoSem LIKE "'.$appnosem.'%" 
-            AND AppSchool LIKE "'.$school.'%" 
-            AND AppSem LIKE "'.$sem.'%" 
-            AND AppSY LIKE "'.$sy.'%"  
-            AND AppAvailment LIKE "'.$availment.'%"
-            AND AppGender LIKE "'.$gender.'%"
-            AND AppYear LIKE "'.$year_level.'%"
-            AND AppAddress LIKE "'.$address.'%"  
-            AND AppStatus LIKE "'.$status.'%"
-            AND (AppStatus = "Approved" or AppStatus = "Additional Approved")
-            AND AppManager="Active"
-            ORDER BY AppNoID
+            HAVING appnoyear LIKE "'.$appnoyear.'%"  
+            AND appnosem LIKE "'.$appnosem.'%" 
+            AND school LIKE "'.$school.'%" 
+            AND appsem LIKE "'.$sem.'%" 
+            AND appsy LIKE "'.$sy.'%"  
+            AND availment LIKE "'.$availment.'%"
+            AND gender LIKE "'.$gender.'%"
+            AND appyear LIKE "'.$year_level.'%"
+            AND address LIKE "'.$address.'%"  
+            AND appstatus LIKE "'.$status.'%"
+            AND (appstatus = "Approved" or appstatus = "Additional Approved")
+            AND appmanager="Active"
+            ORDER BY appnoid
         '; 
 
         $query = $this->db->query($query_string);
@@ -301,10 +322,10 @@ class SeniorHighModel extends Model
     public function get_tot_by_status($data)
     {
         $query = $this->builder
-            ->select('AppStatus as status, count(*) as total')
+            ->select('appstatus as status, count(*) as total')
             ->where($data)
-            ->where('AppStatus !=', "")
-            ->groupBy('AppStatus')
+            ->where('appstatus !=', "")
+            ->groupBy('appstatus')
             ->getCompiledSelect();
         //     ->get()
         //     ->getResult();
@@ -313,10 +334,10 @@ class SeniorHighModel extends Model
     public function get_tot_by_school($data)
     {
         $query = $this->builder
-            ->select('Appschool as school, count(*) as total')
+            ->select('school as school, count(*) as total')
             ->where($data)
-            ->where('Appschool !=', "")
-            ->groupBy('Appschool')
+            ->where('school !=', "")
+            ->groupBy('school')
             ->get()
             ->getResult();
         return $query;
@@ -326,9 +347,9 @@ class SeniorHighModel extends Model
     public function get_tot_by_barangay($barangay, $data)
     {
         $query = $this->builder
-            ->select('AppAddress as barangay, count(*) as total')
+            ->select('address as barangay, count(*) as total')
             ->where($data)
-            ->like('AppAddress', $barangay, 'both')
+            ->like('address', $barangay, 'both')
             ->get()
             ->getResult();
         return $query;
@@ -337,10 +358,10 @@ class SeniorHighModel extends Model
     public function get_tot_by_gender($data)
     {
         $query = $this->builder
-            ->select('AppGender as gender, count(*) as total')
-            ->where('AppGender != ', "")
+            ->select('gender as gender, count(*) as total')
+            ->where('gender != ', "")
             ->where($data)
-            ->groupBy('AppGender')
+            ->groupBy('gender')
             ->get()
             ->getResult();
         return $query;
@@ -350,9 +371,9 @@ class SeniorHighModel extends Model
     {
         $builder = $this->db
             ->table($this->table)
-            ->where(isset($data['sy']) ? "AppSY = '" . $data['sy'] . "'" : "AppManager = 'Active'")
-            ->where(isset($data['semester']) ? "AppNoSem = " . $data['semester'] : "AppManager = 'Active'")
-            ->where('AppStatus', 'approved');
+            ->where(isset($data['sy']) ? "appsy = '" . $data['sy'] . "'" : "appmanager = 'Active'")
+            ->where(isset($data['semester']) ? "appnosem = " . $data['semester'] : "appmanager = 'Active'")
+            ->where('appstatus', 'approved');
         $query = $builder->countAllResults();
         return $query;
     }
@@ -361,13 +382,13 @@ class SeniorHighModel extends Model
     {
         $builder = $this->db
             ->table($this->table)
-            ->select('AppNoID')
+            ->select('appnoid')
             ->limit(1)
             ->orderBy('id', 'DESC')
             ->where($data);
         $query = $builder->get();
         if ($query->getNumRows() > 0) {
-            return $query->getResultArray()[0]['AppNoID'];
+            return $query->getResultArray()[0]['appnoid'];
         }
         return 0;
     }
@@ -376,8 +397,8 @@ class SeniorHighModel extends Model
     {
         $query = $this->db
             ->table($this->table)
-            ->select('table_scholarregistration.AppGender as gender, count(table_scholarregistration.AppGender) as total')
-            ->groupBy('AppGender')
+            ->select('senior_high.gender as gender, count(senior_high.gender) as total')
+            ->groupBy('gender')
             ->get()
             ->getResult();
         return $query;

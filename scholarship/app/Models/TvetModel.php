@@ -8,7 +8,7 @@ use CodeIgniter\Database\ConnectionInterface;
 class TvetModel extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'table_tvet';
+    protected $table                = 'tvet';
     protected $primaryKey           = 'id';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
@@ -16,36 +16,34 @@ class TvetModel extends Model
     protected $useSoftDeletes       = false;
     protected $protectFields        = true;
     protected $allowedFields        = [
-        "colAppNoYear",
-        "colAppNoID",
-        "colAppNoSem",
-        "colAppStat",
-        "colFirstName",
-        "colMI",
-        "colLastName",
-        "colSuffix",
-        "colAddress",
-        "colDOB",
-        "colAge",
-        "colCivilStat",
-        "colGender",
-        "colContactNo",
-        "colCTC",
-        "colEmailAdd",
-        "colAvailment",
-        "colSchool",
-        "colCourse",
-        "colYearLevel",
-        "colSem",
-        "colSY",
-        "colFathersName",
-        "colFatherOccu",
-        "colMothersName",
-        "colMotherOccu",
-        "colManager",
-        "colUnits",
-        "colSchoolAddress",
-        "colImage"
+        'appnoyear',
+        'appnosem',
+        'appnoid',
+        'appstatus',
+        'lastname',
+        'firstname',
+        'middlename',
+        'suffix',
+        'address',
+        'birthdate',
+        'civil_status',
+        'gender',
+        'contact_no',
+        'ctc_no',
+        'email',
+        'availment',
+        'school',
+        'course',
+        'appyear',
+        'appsem',
+        'appsy',
+        'father_name',
+        'father_occupation',
+        'mother_name',
+        'mother_occupation',
+        'appmanager',
+        'unit',
+        'profile_photo',
     ];
 
     // Dates
@@ -82,6 +80,28 @@ class TvetModel extends Model
     }
 
 
+    
+    public function get_applicant_details($id)
+    { 
+        $builder = $this->db->table('tvet'); 
+        $builder->join('college_school', 'tvet.school = college_school.id');
+        $builder->join('barangay', 'tvet.address = barangay.id'); 
+        $builder->where('tvet.id', $id);
+        $builder->select('
+            tvet.*,
+            barangay.barangay as address,
+            college_school.school_name as school_name,
+            college_school.address as school_address, 
+        ');
+
+        // Get the results of the query
+        $results = $builder->get()->getResultArray();
+
+        return $results[0];
+    }
+    
+
+
 
     public function count()
     {
@@ -95,7 +115,7 @@ class TvetModel extends Model
         $builder = $this->db
             ->table($this->table) 
             ->where($data) 
-            ->where('colManager', 'Active');
+            ->where('appmanager', 'Active');
         $query = $builder->countAllResults();
         return $query;
     } 
@@ -106,10 +126,10 @@ class TvetModel extends Model
     {
         $builder = $this->db
             ->table($this->table) 
-            ->like('colAppStat', 'approved', 'both' )
-            ->where('colAppStat !=', 'disapproved')
+            ->like('appstatus', 'approved', 'both' )
+            ->where('appstatus !=', 'disapproved')
             ->where($data)
-            ->where('colManager', 'Active');
+            ->where('appmanager', 'Active');
         $query = $builder->countAllResults();
         return $query; 
     }
@@ -119,9 +139,9 @@ class TvetModel extends Model
     {
         $builder = $this->db
             ->table($this->table)  
-            ->where('colAppStat', 'disapproved')
+            ->where('appstatus', 'disapproved')
             ->where($data)
-            ->where('colManager', 'Active');
+            ->where('appmanager', 'Active');
         $query = $builder->countAllResults();
         return $query; 
     } 
@@ -131,9 +151,9 @@ class TvetModel extends Model
     {
         $builder = $this->db
             ->table($this->table)  
-            ->where('colAppStat', 'pending')
+            ->where('appstatus', 'pending')
             ->where($data)
-            ->where('colManager', 'Active');
+            ->where('appmanager', 'Active');
         $query = $builder->countAllResults();
         return $query; 
     }
@@ -143,7 +163,7 @@ class TvetModel extends Model
         $builder = $this->db
             ->table($this->table)
             ->where($data) 
-            ->Where('(colAppStat = "Approved" or colAppStat = "Additional Approved")');
+            ->Where('(appstatus = "Approved" or appstatus = "Additional Approved")');
         $query = $builder->countAllResults();
         return $query;
     }
@@ -151,9 +171,9 @@ class TvetModel extends Model
     public function get_all($data)
     {
         $query = $this->builder
-            ->select('ID, colSY, colAppNoYear, colAppNoSem, colAppNoID, colAppStat, colFirstName, colMI, colLastName, colSuffix, colAddress, colCourse, colSchool, colYearLevel, ')
+            ->select('ID, appsy, appnoyear, appnosem, appnoid, appstatus, firstname, middlename, lastname, suffix, address, course, school, appyear, ')
             ->where($data)
-            ->orderBy('colAppNoID', 'desc')
+            ->orderBy('appnoid', 'desc')
             ->get()
             ->getResult();
         return $query;
@@ -162,11 +182,11 @@ class TvetModel extends Model
     public function get_pending_application($data)
     {
         $query = $this->builder
-            ->select('ID, colSY, colAppNoYear, colAppNoSem, colAppNoID, colAppStat, colFirstName, colMI, colLastName, colSuffix, colAddress, colCourse, colSchool, colYearLevel, ')
-            ->where('colAppStat', 'Pending')
-            ->where('colManager', 'Active')
+            ->select('id, appsy, appnoyear, appnosem, appnoid, appstatus, firstname, middlename, lastname, suffix, address, course, school, appyear, ')
+            ->where('appstatus', 'Pending')
+            ->where('appmanager', 'Active')
             ->where($data)
-            ->orderBy('colAppNoID', 'asc')
+            ->orderBy('appnoid', 'asc')
             ->get()
             ->getResult();
         return $query;
@@ -175,11 +195,13 @@ class TvetModel extends Model
     public function get_approved_application($data)
     {
         $query = $this->builder
-            ->select('ID, colSY, colAppNoYear, colAppNoSem, colAppNoID, colAppStat, colFirstName, colMI, colLastName, colSuffix, colAddress, colCourse, colSchool, colYearLevel, ')
-            ->Where('(colAppStat = "Approved" or colAppStat = "Additional Approved")')
-            ->where('colManager', 'Active')
+            ->select('tvet.id, appsy, appnoyear, appnosem, appnoid, appstatus, firstname, middlename, lastname, suffix, barangay.barangay as address, course, college_school.school_name as school,, appyear, ')
+            ->join('college_school', 'tvet.school = college_school.id')
+            ->join('barangay', 'tvet.address = barangay.id') 
+            ->Where('(appstatus = "Approved" or appstatus = "Additional Approved")')
+            ->where('appmanager', 'Active')
             ->where($data)
-            ->orderBy('colAppNoID', 'asc')
+            ->orderBy('appnoid', 'asc')
             ->get()
             ->getResult();
         return $query;
@@ -192,17 +214,17 @@ class TvetModel extends Model
     {
         $query_string =  ' 
             SELECT * 
-            FROM table_tvet 
-            WHERE colSchool LIKE "'.$school.'%" 
-            AND colAppStat LIKE "'.$status.'%"
-            AND colSY LIKE "'.$sy.'%"  
-            AND colSem LIKE "'.$sem.'%"  
-            AND colAvailment LIKE "'.$availment.'%"
-            AND colGender LIKE "'.$gender.'%"
-            AND colYearLevel LIKE "'.$year_level.'%"
-            AND colAddress LIKE "'.$address.'%" 
-            AND colManager = "Active"
-            ORDER BY colLastName, colFirstName and colMI
+            FROM tvet 
+            WHERE school LIKE "'.$school.'%" 
+            AND appstatus LIKE "'.$status.'%"
+            AND appsy LIKE "'.$sy.'%"  
+            AND appsem LIKE "'.$sem.'%"  
+            AND availment LIKE "'.$availment.'%"
+            AND gender LIKE "'.$gender.'%"
+            AND appyear LIKE "'.$year_level.'%"
+            AND address LIKE "'.$address.'%" 
+            AND appmanager = "Active"
+            ORDER BY lastname, firstname and middlename
         '; 
 
         $query = $this->db->query($query_string);
@@ -215,21 +237,21 @@ class TvetModel extends Model
     {
         $query_string =  ' 
             SELECT * 
-            FROM table_tvet 
-            WHERE colAppnoID BETWEEN "'.$appnoidfrom.'" 
+            FROM tvet 
+            WHERE appnoid BETWEEN "'.$appnoidfrom.'" 
             AND "'.$appnoidto.'" 
-            HAVING colAppNoYear LIKE "'.$appnoyear.'%"  
-            AND colAppNoSem LIKE "'.$appnosem.'%" 
-            AND colSchool LIKE "'.$school.'%" 
-            AND colSem LIKE "'.$sem.'%" 
-            AND colSY LIKE "'.$sy.'%"  
-            AND colAvailment LIKE "'.$availment.'%"
-            AND colGender LIKE "'.$gender.'%"
-            AND colYearLevel LIKE "'.$year_level.'%"
-            AND colAddress LIKE "'.$address.'%" 
-            AND colAppStat LIKE "'.$status.'%"
-            AND colManager="Active"
-            ORDER BY colAppNoID
+            HAVING appnoyear LIKE "'.$appnoyear.'%"  
+            AND appnosem LIKE "'.$appnosem.'%" 
+            AND school LIKE "'.$school.'%" 
+            AND appsem LIKE "'.$sem.'%" 
+            AND appsy LIKE "'.$sy.'%"  
+            AND availment LIKE "'.$availment.'%"
+            AND gender LIKE "'.$gender.'%"
+            AND appyear LIKE "'.$year_level.'%"
+            AND address LIKE "'.$address.'%" 
+            AND appstatus LIKE "'.$status.'%"
+            AND appmanager="Active"
+            ORDER BY appnoid
         '; 
 
         $query = $this->db->query($query_string);
@@ -244,17 +266,17 @@ class TvetModel extends Model
     {
         $query_string =  ' 
             SELECT * 
-            FROM table_tvet 
-            WHERE colSchool LIKE "'.$school.'%"  
-            AND colSY LIKE "'.$sy.'%"  
-            AND colSem LIKE "'.$sem.'%"  
-            AND colAvailment LIKE "'.$availment.'%"
-            AND colGender LIKE "'.$gender.'%"
-            AND colYearLevel LIKE "'.$year_level.'%"
-            AND colAddress LIKE "'.$address.'%" 
-            AND (colAppStat = "Approved" or colAppStat = "Additional Approved")
-            AND colManager = "Active"
-            ORDER BY colLastName, colFirstName and colMI
+            FROM tvet 
+            WHERE school LIKE "'.$school.'%"  
+            AND appsy LIKE "'.$sy.'%"  
+            AND appsem LIKE "'.$sem.'%"  
+            AND availment LIKE "'.$availment.'%"
+            AND gender LIKE "'.$gender.'%"
+            AND appyear LIKE "'.$year_level.'%"
+            AND address LIKE "'.$address.'%" 
+            AND (appstatus = "Approved" or appstatus = "Additional Approved")
+            AND appmanager = "Active"
+            ORDER BY lastname, firstname and middlename
         '; 
 
         $query = $this->db->query($query_string);
@@ -268,21 +290,21 @@ class TvetModel extends Model
     {
         $query_string =  ' 
             SELECT * 
-            FROM table_tvet 
-            WHERE colAppnoID BETWEEN "'.$appnoidfrom.'" 
+            FROM tvet 
+            WHERE appnoid BETWEEN "'.$appnoidfrom.'" 
             AND "'.$appnoidto.'" 
-            HAVING colAppNoYear LIKE "'.$appnoyear.'%"  
-            AND colAppNoSem LIKE "'.$appnosem.'%" 
-            AND colSchool LIKE "'.$school.'%" 
-            AND colSem LIKE "'.$sem.'%" 
-            AND colSY LIKE "'.$sy.'%"  
-            AND colAvailment LIKE "'.$availment.'%"
-            AND colGender LIKE "'.$gender.'%"
-            AND colYearLevel LIKE "'.$year_level.'%"
-            AND colAddress LIKE "'.$address.'%"  
-            AND (colAppStat = "Approved" or colAppStat = "Additional Approved")
-            AND colManager="Active"
-            ORDER BY colAppNoID
+            HAVING appnoyear LIKE "'.$appnoyear.'%"  
+            AND appnosem LIKE "'.$appnosem.'%" 
+            AND school LIKE "'.$school.'%" 
+            AND appsem LIKE "'.$sem.'%" 
+            AND appsy LIKE "'.$sy.'%"  
+            AND availment LIKE "'.$availment.'%"
+            AND gender LIKE "'.$gender.'%"
+            AND appyear LIKE "'.$year_level.'%"
+            AND address LIKE "'.$address.'%"  
+            AND (appstatus = "Approved" or appstatus = "Additional Approved")
+            AND appmanager="Active"
+            ORDER BY appnoid
         '; 
 
         $query = $this->db->query($query_string);
@@ -294,9 +316,9 @@ class TvetModel extends Model
     public function get_tot_by_status($data)
     {
         $query = $this->builder
-            ->select('colAppStat as status, count(*) as total')
+            ->select('appstatus as status, count(*) as total')
             ->where($data)
-            ->groupBy('colAppStat')
+            ->groupBy('appstatus')
             ->get()
             ->getResult();
         return $query;
@@ -305,10 +327,10 @@ class TvetModel extends Model
     public function get_tot_by_school($data)
     {
         $query = $this->builder
-            ->select('colschool as school, count(*) as total')
-            ->where('colSchool !=', "")
+            ->select('school as school, count(*) as total')
+            ->where('school !=', "")
             ->where($data)
-            ->groupBy('colschool')
+            ->groupBy('school')
             ->get()
             ->getResult();
         return $query;
@@ -317,9 +339,9 @@ class TvetModel extends Model
     public function get_tot_by_barangay($barangay, $data)
     {
         $query = $this->builder
-            ->select('colAddress as barangay, count(*) as total')
+            ->select('address as barangay, count(*) as total')
             ->where($data)
-            ->like('colAddress', $barangay, 'both')
+            ->like('address', $barangay, 'both')
             ->get()
             ->getResult();
         return $query;
@@ -328,10 +350,10 @@ class TvetModel extends Model
     public function get_tot_by_gender($data)
     {
         $query = $this->builder
-            ->select('colGender as gender, count(*) as total')
-            ->where('colGender != ', "")
+            ->select('gender as gender, count(*) as total')
+            ->where('gender != ', "")
             ->where($data)
-            ->groupBy('colGender')
+            ->groupBy('gender')
             ->get()
             ->getResult();
         return $query;
@@ -341,9 +363,9 @@ class TvetModel extends Model
     {
         $builder = $this->db
             ->table($this->table)
-            ->where(isset($data['sy']) ? "colSY = '" . $data['sy'] . "'" : "colManager = 'Active'")
-            ->where(isset($data['semester']) ? "colAppNoSem = " . $data['semester'] : "colManager = 'Active'")
-            ->where('colAppStat', 'approved');
+            ->where(isset($data['sy']) ? "appsy = '" . $data['sy'] . "'" : "appmanager = 'Active'")
+            ->where(isset($data['semester']) ? "appnosem = " . $data['semester'] : "appmanager = 'Active'")
+            ->where('appstatus', 'approved');
         $query = $builder->countAllResults();
         return $query;
     }
@@ -352,13 +374,13 @@ class TvetModel extends Model
     {
         $builder = $this->db
             ->table($this->table)
-            ->select('colAppNoID')
+            ->select('appnoid')
             ->limit(1)
             ->orderBy('id', 'DESC')
             ->where($data);
         $query = $builder->get();
         if ($query->getNumRows() > 0) {
-            return $query->getResultArray()[0]['colAppNoID'];
+            return $query->getResultArray()[0]['appnoid'];
         }
         return 0;
     }
@@ -366,8 +388,8 @@ class TvetModel extends Model
     {
         $query = $this->db
             ->table($this->table)
-            ->select('colGender as gender, count(colGender) as total')
-            ->groupBy('colGender')
+            ->select('gender as gender, count(gender) as total')
+            ->groupBy('gender')
             ->get()
             ->getResult();
         return $query;
@@ -377,7 +399,7 @@ class TvetModel extends Model
     { 
         $query = $this->db
             ->table($this->table)
-            ->set('colAppStat', 'Disapproved')
+            ->set('appstatus', 'Disapproved')
             ->whereIn('id', $data)
             ->update();
         return $query;
