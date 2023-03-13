@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\AddressModel;
 use App\Models\CollegeModel;
 use App\Models\CollegeSchoolModel;
 use App\Models\CourseModel;
@@ -32,49 +33,34 @@ class ApprovedPendingApplicationController extends BaseController
 
 
     public function get_application()
-    {
+    { 
+
         $segment                = $this->uri->getSegments();
-        $id                     = $segment[3]; 
+        $id                     = $segment[3];  
         $data["page_title"]     = "Pending Application";
         $data['type']           = $segment[2];
-        $config                 = new Custom_config;
-        $school                 = new SchoolModel();
-        $course                 = new CourseModel();
-        $college_school         = new CollegeSchoolModel();
-        $strand                 = new StrandModel();
-        $sequence               = new SequenceModel();
-        $data['barangay']       = $config->barangay;
-        $data['semester']       = $config->semester;
+        $config                 = new Custom_config; 
         $data['civil_status']   = $config->civilStatus;
-        $data['required_field'] = $config->requiredField;
-        $data['grade_level']    = $config->gradeLevel;
-        $data['school']         = $school->asArray()->findAll();
-        $data['strand']         = $strand->asArray()->findAll();
-        $data['course']         = $course->asArray()->findAll();
-        $data['college_school'] = $college_school->asArray()->findAll();
-        $data['year_level']     = $config->yearLevel;
-        $data['sequence_year']  = $sequence->asArray()->where('Sys_ID', 1)->findAll()[0]['seq_year'];
-        $data['seq_sem']        = $sequence->asArray()->where('Sys_ID', 1)->findAll()[0]['seq_sem'];
-        $data['app_no_id']      = $this->senior_high->count() + 1;
-
-
+        $data['required_field'] = $config->requiredField; 
+        $segment                = $this->uri->getSegments();
+        $id                     = $segment[3]; 
         try {
-            if ($segment[2] == "shs") {
-                $data['profile'] = $this->senior_high->asArray()->where('id', $id)->findAll()[0];
+            if ($segment[2] == "shs") { 
+                $data['profile'] = $this->senior_high->get_applicant_details($id);
+                return view('admin/view_pending_application', $data);
             } else if ($segment[2] == "college") {
-                $data['profile']  = $this->college->asArray()->where('id', $id)->findAll()[0];
+                $data['profile']  = $this->college->get_applicant_details($id); 
+                return view('admin/view_pending_application', $data);
             } else if ($segment[2] == "tvet") {
-                $data['profile'] = $this->tvet->asArray()->where('id', $id)->findAll()[0];
+                $data['profile'] = $this->tvet->get_applicant_details($id);  
+                // print_r($data['profile']);
+                return view('admin/view_pending_application', $data);
             } else {
                 return redirect()->back();
             }
-
-            return view('admin/view_pending_application', $data);
         } catch (\Exception $e) {
-            // print_r($e->getMessage());
-            return redirect()->back();
-        } 
-
-        // throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            print_r($e->getMessage());
+        }
+ 
     }
 }
