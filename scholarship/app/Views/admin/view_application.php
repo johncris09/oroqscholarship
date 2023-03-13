@@ -672,7 +672,7 @@
                                     </select>  
                                 </div>
                                 <div class="col">
-                                    <label for="units" class="form-label">No. of Hourse <?= $required_field; ?></label>
+                                    <label for="units" class="form-label">No. of Hours <?= $required_field; ?></label>
                                     <input type="number" value="<?= $profile['unit'] ?>" class="form-control" name="units" required>
                                 </div>
                                 <div class="col">
