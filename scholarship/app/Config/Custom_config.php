@@ -89,8 +89,16 @@ class Custom_config extends BaseConfig
     public $scholar_status = [
         "Pending",
         "Approved",
+        "Additional Approved",
+        "Additional Approved 1",
+        "Additional Approved 2",
+        "Additional Approved 3",
+        "Additional Approved 4",
+        "Additional Approved 5",
+        "Additional Approved 6",
+        "Additional Approved 7",
+        "Additional Approved 8", 
         "Disapproved",
-        "Additional Approved"
     ];
  
     public $year_started = 2018;
