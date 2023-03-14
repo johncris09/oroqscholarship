@@ -10,8 +10,10 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title mb-4"><?= $page_title; ?></h4>
-
+                    <h4 class="header-title"><?= $page_title; ?></h4>
+                    <p class="sub-header font-13">
+                        <code>To see application details, double-click the chosen row.</code>
+                    </p> 
                     <ul class="nav nav-pills navtab-bg nav-justified">
                         <li class="nav-item">
                             <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active ">
