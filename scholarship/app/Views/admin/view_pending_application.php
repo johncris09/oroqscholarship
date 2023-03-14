@@ -649,6 +649,7 @@
                     input: "select",
                     inputOptions: { 
                         "Approved"             : "Approved",
+                        "Additional Approved": "Additional Approved",
                         "Additional Approved 1": "Additional Approved 1",
                         "Additional Approved 2": "Additional Approved 2",
                         "Additional Approved 3": "Additional Approved 3",
