@@ -193,6 +193,9 @@ $db = db_connect();
                                                         <li>
                                                             <a href="<?= base_url('manage') ?>">Delete/Edit Application</a>
                                                         </li> 
+                                                        <li>
+                                                            <a href="<?= base_url('archived') ?>">Archived Application</a>
+                                                        </li> 
                                                 <?php
                                                     }
                                                 ?>
