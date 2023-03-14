@@ -116,6 +116,14 @@ $routes->group('manage', ["filter" => ["auth", "usernoaccess"]],  function ($rou
 });
 
 
+$routes->group('archived', ["filter" => ["auth", "usernoaccess"]],  function ($routes) {
+    $routes->get('/', 'ArchivedApplicationController::index'); 
+    $routes->get('get_shs_archived_list', 'SeniorHighController::get_archived_application'); 
+    $routes->get('get_college_archived_list', 'CollegeController::get_archived_application'); 
+    $routes->get('get_tvet_archived_list', 'TvetController::get_archived_application');
+});
+
+
 $routes->group('generate_report', ["filter" => ["auth", "usernoaccess"]],  function ($routes) {
     $routes->get('/', 'GenerateReportController::index');
     $routes->post('shs_report', 'SeniorHighController::get_report',);
