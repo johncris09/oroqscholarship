@@ -252,53 +252,172 @@ class TvetModel extends Model
 
     
 
-    public function generate($school, $status, $sy, $sem, $availment, $gender, $year_level, $address )
-    {
-        $query_string =  ' 
-            SELECT * 
-            FROM tvet 
-            WHERE school LIKE "'.$school.'%" 
-            AND appstatus LIKE "'.$status.'%"
-            AND appsy LIKE "'.$sy.'%"  
-            AND appsem LIKE "'.$sem.'%"  
-            AND availment LIKE "'.$availment.'%"
-            AND gender LIKE "'.$gender.'%"
-            AND appyear LIKE "'.$year_level.'%"
-            AND address LIKE "'.$address.'%" 
-            AND appmanager = "Active"
-            ORDER BY lastname, firstname and middlename
-        '; 
+    public function generate(
+        $school,
+        $appstatus,
+        $appsy,
+        $appsem,
+        $availment,
+        $gender,
+        $appyear,
+        $address
+    )
+    { 
 
-        $query = $this->db->query($query_string);
+        $school    = isset($school) ? $school      : null;
+        $appstatus = isset($appstatus) ? $appstatus: null; 
+        $appsy     = isset($appsy) ? $appsy        : null; 
+        $appsem    = isset($appsem) ? $appsem      : null; 
+        $availment = isset($availment) ? $availment: null; 
+        $gender    = isset($gender) ? $gender      : null; 
+        $appyear   = isset($appyear) ? $appyear    : null; 
+        $address   = isset($address) ? $address    : null; 
+
+
+
+        $query = $this->db->table('tvet'); 
+        $query->join('college_school', 'tvet.school = college_school.id');
+        $query->join('barangay', 'tvet.address = barangay.id');  
+        $query->select('
+            tvet.*,
+            barangay.barangay as address,
+            barangay.id as address_id,
+            college_school.school_name as school_name,
+            college_school.address as school_address, 
+        ');
         
-        return $query->getResult(); 
+        
+
+        if (!empty($school)) {
+            $query->where('school', $school);
+        } 
+
+        if (!empty($appstatus)) {
+            $query->where('tvet.appstatus', $appstatus);
+        }
+        
+        if (!empty($appsy)) {
+            $query->where('tvet.appsy', $appsy);
+        }
+        
+        if (!empty($appsem)) {
+            $query->where('tvet.appsem', $appsem);
+        }
+
+        if (!empty($availment)) {
+            $query->where('tvet.availment', $availment);
+        }
+
+        if (!empty($gender)) {
+            $query->where('tvet.gender', $gender);
+        }
+
+        if (!empty($appyear)) {
+            $query->where('tvet.appyear', $appyear);
+        }
+        
+        if (!empty($address)) {
+            $query->where('tvet.address', $address);
+        }
+
+        $query->orderBy('lastname, firstname, middlename', 'asc');
+        $results = $query->get()->getResult();  
+
+        return $results; 
+
+
     }
 
 
-    public function between($appnoidfrom, $appnoidto, $appnoyear, $appnosem,  $school, $status, $sy, $sem, $availment, $gender, $year_level, $address )
+    public function between($appnoidfrom,
+        $appnoidto,
+        $appnoyear,
+        $appnosem,
+        $school,
+        $appstatus,
+        $appsy,
+        $appsem,
+        $availment,
+        $gender,
+        $appyear,
+        $address 
+    )
     {
-        $query_string =  ' 
-            SELECT * 
-            FROM tvet 
-            WHERE appnoid BETWEEN "'.$appnoidfrom.'" 
-            AND "'.$appnoidto.'" 
-            HAVING appnoyear LIKE "'.$appnoyear.'%"  
-            AND appnosem LIKE "'.$appnosem.'%" 
-            AND school LIKE "'.$school.'%" 
-            AND appsem LIKE "'.$sem.'%" 
-            AND appsy LIKE "'.$sy.'%"  
-            AND availment LIKE "'.$availment.'%"
-            AND gender LIKE "'.$gender.'%"
-            AND appyear LIKE "'.$year_level.'%"
-            AND address LIKE "'.$address.'%" 
-            AND appstatus LIKE "'.$status.'%"
-            AND appmanager="Active"
-            ORDER BY appnoid
-        '; 
-
-        $query = $this->db->query($query_string);
         
-        return $query->getResult(); 
+        $school    = isset($school) ? $school      : null;
+        $appstatus = isset($appstatus) ? $appstatus: null; 
+        $appsy     = isset($appsy) ? $appsy        : null; 
+        $appsem    = isset($appsem) ? $appsem      : null; 
+        $availment = isset($availment) ? $availment: null; 
+        $gender    = isset($gender) ? $gender      : null; 
+        $appyear   = isset($appyear) ? $appyear    : null; 
+        $address   = isset($address) ? $address    : null; 
+
+
+
+        $query = $this->db->table('tvet'); 
+        $query->join('college_school', 'tvet.school = college_school.id');
+        $query->join('barangay', 'tvet.address = barangay.id');  
+        $query->select('
+            tvet.*,
+            barangay.barangay as address,
+            barangay.id as address_id,
+            college_school.school_name as school_name,
+            college_school.address as school_address, 
+        ');
+        
+        
+        if (!empty($appnoidfrom)) {
+            $query->where('appnoid >=', $appnoidfrom);
+        }  
+        
+        if (!empty($appnoidto)) {
+            $query->where('appnoid <=', $appnoidto);
+        } 
+
+        if (!empty($appnoyear)) {
+            $query->where('appnoyear', $appnoyear);
+        } 
+        if (!empty($appnosem)) {
+            $query->where('appnosem', $appnosem);
+        }  
+        if (!empty($school)) {
+            $query->where('school', $school);
+        } 
+
+        if (!empty($appstatus)) {
+            $query->where('tvet.appstatus', $appstatus);
+        }
+        
+        if (!empty($appsy)) {
+            $query->where('tvet.appsy', $appsy);
+        }
+        
+        if (!empty($appsem)) {
+            $query->where('tvet.appsem', $appsem);
+        }
+
+        if (!empty($availment)) {
+            $query->where('tvet.availment', $availment);
+        }
+
+        if (!empty($gender)) {
+            $query->where('tvet.gender', $gender);
+        }
+
+        if (!empty($appyear)) {
+            $query->where('tvet.appyear', $appyear);
+        }
+        
+        if (!empty($address)) {
+            $query->where('tvet.address', $address);
+        }
+
+        $query->orderBy('lastname, firstname, middlename', 'asc');
+        $results = $query->get()->getResult();  
+
+        return $results;
+
     } 
 
 
