@@ -2,15 +2,9 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController;
-use App\Models\AddressModel;
-use App\Models\CollegeModel;
-use App\Models\CollegeSchoolModel;
-use App\Models\CourseModel;
-use App\Models\SchoolModel;
-use App\Models\SeniorHighModel;
-use App\Models\SequenceModel;
-use App\Models\StrandModel;
+use App\Controllers\BaseController; 
+use App\Models\CollegeModel; 
+use App\Models\SeniorHighModel; 
 use App\Models\TvetModel;
 use Config\Custom_config;
 
@@ -42,8 +36,7 @@ class ApprovedPendingApplicationController extends BaseController
         $config                 = new Custom_config; 
         $data['civil_status']   = $config->civilStatus;
         $data['required_field'] = $config->requiredField; 
-        $segment                = $this->uri->getSegments();
-        $id                     = $segment[3]; 
+        $segment                = $this->uri->getSegments(); 
         try {
             if ($segment[2] == "shs") { 
                 $data['profile'] = $this->senior_high->get_applicant_details($id);
