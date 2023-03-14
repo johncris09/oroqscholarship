@@ -90,6 +90,7 @@ class TvetModel extends Model
         $builder->select('
             tvet.*,
             barangay.barangay as address,
+            barangay.id as address_id,
             college_school.school_name as school_name,
             college_school.address as school_address, 
         ');
@@ -210,6 +211,28 @@ class TvetModel extends Model
 
         return $results;
     }
+
+    public function get_archived_application($data)
+    {
+
+        $builder = $this->db->table('tvet'); 
+        $builder->join('college_school', 'tvet.school = college_school.id');
+        $builder->join('barangay', 'tvet.address = barangay.id');  
+        $builder->where('appmanager', 'Archived'); 
+        $builder->where($data);
+        $builder->select('
+            tvet.*,
+            barangay.barangay as address,
+            college_school.school_name as school_name,
+            college_school.address as school_address, 
+        ');
+        
+        // Get the results of the query
+        $results = $builder->get()->getResultArray();
+
+        return $results;
+    }
+    
  
     public function get_approved_application($data)
     {

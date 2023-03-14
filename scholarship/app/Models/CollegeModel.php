@@ -91,6 +91,7 @@ class CollegeModel extends Model
         $builder->select('
             college.*,
             barangay.barangay as address,
+            barangay.id as address_id,
             college_school.school_name as school_name,
             college_school.address as school_address, 
         ');
@@ -204,6 +205,29 @@ class CollegeModel extends Model
         $builder->join('barangay', 'college.address = barangay.id'); 
         $builder->where('college.appstatus', 'pending');  
         $builder->where('appmanager', 'Active'); 
+        $builder->where($data);
+        $builder->select('
+            college.*,
+            barangay.barangay as address,
+            college_school.school_name as school_name,
+            college_school.address as school_address, 
+        ');
+        
+        // Get the results of the query
+        $results = $builder->get()->getResultArray();
+
+        return $results;
+    }
+
+    
+    
+    public function get_archived_application($data)
+    {
+
+        $builder = $this->db->table('college'); 
+        $builder->join('college_school', 'college.school = college_school.id');
+        $builder->join('barangay', 'college.address = barangay.id');  
+        $builder->where('appmanager', 'Archived'); 
         $builder->where($data);
         $builder->select('
             college.*,
