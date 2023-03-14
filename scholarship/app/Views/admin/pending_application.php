@@ -32,7 +32,7 @@
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane show active " id="senior-high-tab">   
+                        <div class="tab-pane show  active" id="senior-high-tab">   
                             <table id="senior-high-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>   
@@ -42,7 +42,7 @@
                                             <th></th> 
                                         <?php
                                             }
-                                        ?> 
+                                        ?>
                                         <th>Application ID</th>  
                                         <th>SY</th>  
                                         <th>Name</th>  
@@ -78,7 +78,7 @@
                                 </thead> 
                             </table> 
                         </div> 
-                        <div class="tab-pane " id="tvet-tab"> 
+                        <div class="tab-pane  " id="tvet-tab"> 
                             <table id="tvet-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>    
@@ -124,7 +124,7 @@
             $('#view-all').on('change', function(){
                 var that = this
                 if($(this).is(':checked')){ 
-                    // that.checked = false;   \
+                    // that.checked = false;  
                     window.location.href="?view=all"
                 }else{
                     window.location.href= "<?php  echo base_url('/') ?>"
@@ -148,19 +148,19 @@
                     <?php
                         if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
                     ?>  
-                        { data: 'ID' }, 
+                        { data: 'id' }, 
                     <?php
                         }
-                    ?> 
+                    ?>   
                     {
-                        data  : 'ID',
+                        data  : 'id',
                         render: function(data, type, row, meta){ 
                             return row.appnoyear + "-" + row.appnosem + "-"  + row.appnoid  
                         }
                     }, 
                     { data: 'appsy' },  
                     {
-                        data  : 'ID',
+                        data  : 'id',
                         render: function(data, type, row, meta){ 
                             var first_name  = row.firstname.toLowerCase();
                             var middle_name = row.middlename.toLowerCase();
@@ -175,7 +175,7 @@
                     }, 
                     { data: 'address' },  
                     { data: 'course' },  
-                    { data: 'school' },  
+                    { data: 'school_name' },  
                     { data: 'appyear' },  
                     { data: 'appstatus' },   
                 ],
@@ -193,7 +193,7 @@
                 select: {
                     style: 'multi'
                 },
-                order: [[1, 'asc']] , 
+                order: [[1, 'desc']] , 
                 dom: 'Bfrtip', 
                 buttons: [
                     {
@@ -309,19 +309,19 @@
                     <?php
                         if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
                     ?>  
-                        { data: 'ID' }, 
+                        { data: 'id' }, 
                     <?php
                         }
                     ?> 
                     {
-                        data  : 'ID',
+                        data  : 'id',
                         render: function(data, type, row, meta){ 
                             return row.appnoyear + "-" + row.appnosem + "-"  + row.appnoid  
                         }
                     },  
                     { data: 'appsy' },  
                     {
-                        data  : 'ID', 
+                        data  : 'id', 
                         render: function(data, type, row, meta){ 
                             var first_name  = row.firstname.toLowerCase();
                             var middle_name = row.middlename.toLowerCase();
@@ -336,7 +336,7 @@
                     }, 
                     { data: 'address' },  
                     { data: 'course' },  
-                    { data: 'school' },  
+                    { data: 'school_name' },  
                     { data: 'appyear' },  
                     { data: 'appstatus' },   
                 ],  
@@ -354,7 +354,7 @@
                 select: {
                     style: 'multi'
                 },
-                order: [[1, 'asc']] , 
+                order: [[1, 'desc']] , 
                 dom: 'Bfrtip', 
                 buttons: [
                     {
@@ -471,12 +471,12 @@
                     <?php
                         if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
                     ?>  
-                        { data: 'ID' }, 
+                        { data: 'id' }, 
                     <?php
                         }
                     ?> 
                     {
-                        data  : 'ID',
+                        data  : 'id',
                         render: function(data, type, row, meta){ 
                             return row.appnoyear + "-" + row.appnosem + "-"  + row.appnoid  
                         }
@@ -484,7 +484,7 @@
                     }, 
                     { data: 'appsy' },  
                     {
-                        data  : 'ID', 
+                        data  : 'id', 
                         render: function(data, type, row, meta){ 
                             var first_name  = row.firstname.toLowerCase();
                             var middle_name = row.middlename.toLowerCase();
@@ -499,7 +499,7 @@
                     }, 
                     { data: 'address' },  
                     { data: 'course' },  
-                    { data: 'school' },  
+                    { data: 'school_name' },  
                     { data: 'appyear' },  
                     { data: 'appstatus' },   
                 ],  
@@ -518,7 +518,7 @@
                 select: {
                     style: 'multi'
                 },
-                order: [[1, 'asc']] ,
+                order: [[1, 'desc']] ,
                 dom: 'Bfrtip', 
                 buttons: [
                     {
@@ -618,17 +618,17 @@
             });  
 
             $('#senior-high-table tbody').on( 'dblclick', 'tr', function () {
-                var id               = senior_high_table.row( this ).data()['ID']
+                var id               = senior_high_table.row( this ).data()['id']
                 window.location.href = "pending/application/shs/" + id
             } ); 
             
             $('#college-table tbody').on( 'dblclick', 'tr', function () {
-                var id               = college_table.row( this ).data()['ID']
+                var id               = college_table.row( this ).data()['id']
                 window.location.href = "pending/application/college/" + id
             } );
             
             $('#tvet-table tbody').on( 'dblclick', 'tr', function () {
-                var id               = tvet_table.row( this ).data()['ID']
+                var id               = tvet_table.row( this ).data()['id'] 
                 window.location.href = "pending/application/tvet/" + id
             } ); 
         });

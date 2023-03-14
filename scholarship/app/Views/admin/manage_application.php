@@ -34,6 +34,7 @@
                             <table id="senior-high-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>   
+                                        <th> ID</th>  
                                         <th>Application ID</th>  
                                         <th>SY</th>  
                                         <th>Name</th>  
@@ -50,6 +51,7 @@
                             <table id="college-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>   
+                                        <th> ID</th>  
                                         <th>Application ID</th>  
                                         <th>SY</th>  
                                         <th>Name</th>  
@@ -66,6 +68,7 @@
                             <table id="tvet-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>   
+                                        <th> ID</th>  
                                         <th>Application ID</th>  
                                         <th>SY</th>  
                                         <th>Name</th>  
@@ -123,15 +126,16 @@
                     },
                 },
                 columns: [  
+                    { data: 'id' }, 
                     {
-                        data  : 'ID',
+                        data  : 'id',
                         render: function(data, type, row, meta){ 
                             return row.appnoyear + "-" + row.appnosem + "-"  + row.appnoid  
                         }
                     }, 
                     { data: 'appsy' }, 
                     {
-                        data  : 'ID', 
+                        data  : 'id', 
                         render: function(data, type, row, meta){ 
                             var first_name  = row.firstname.toLowerCase();
                             var middle_name = row.middlename.toLowerCase();
@@ -146,10 +150,13 @@
                     }, 
                     { data: 'address' },  
                     { data: 'course' },  
-                    { data: 'school' },  
+                    { data: 'school_name' },  
                     { data: 'appyear' },  
                     { data: 'appstatus' },   
-                ],  
+                ], 
+                order: [[1, 'desc']] ,  
+                "columnDefs": [{ "targets": 0, "visible": false }]
+                
             });  
  
             var college_table = $('#college-table').DataTable({
@@ -166,15 +173,16 @@
                     },
                 },
                 columns: [  
+                    { data: 'id' }, 
                     {
-                        data  : 'ID',
+                        data  : 'id',
                         render: function(data, type, row, meta){ 
                             return row.appnoyear + "-" + row.appnosem + "-"  + row.appnoid  
                         }
                     }, 
                     { data: 'appsy' }, 
                     {
-                        data  : 'ID',
+                        data  : 'id',
                         render: function(data, type, row, meta){ 
                             var first_name  = row.firstname.toLowerCase();
                             var middle_name = row.middlename.toLowerCase();
@@ -193,6 +201,8 @@
                     { data: 'appyear' },  
                     { data: 'appstatus' },   
                 ], 
+                order: [[1, 'desc']] , 
+                "columnDefs": [{ "targets": 0, "visible": false }] 
             });  
 
             var tvet_table = $('#tvet-table').DataTable({
@@ -209,15 +219,16 @@
                     },
                 },
                 columns: [  
+                    { data: 'id' }, 
                     {
-                        data  : 'ID',
+                        data  : 'id',
                         render: function(data, type, row, meta){ 
                             return row.appnoyear + "-" + row.appnosem + "-"  + row.appnoid  
                         }
                     }, 
                     { data: 'appsy' },  
                     {
-                        data  : 'ID', 
+                        data  : 'id', 
                         render: function(data, type, row, meta){ 
                             var first_name  = row.firstname.toLowerCase();
                             var middle_name = row.middlename.toLowerCase();
@@ -236,22 +247,24 @@
                     { data: 'appyear' },  
                     { data: 'appstatus' },   
                 ],  
+                order: [[1, 'desc']] , 
+                "columnDefs": [{ "targets": 0, "visible": false }]
             });  
 
             
             
             $('#senior-high-table tbody').on( 'dblclick', 'tr', function () {
-                var id               = senior_high_table.row( this ).data()['ID']
+                var id               = senior_high_table.row( this ).data()['id']
                 window.location.href = "manage/application/shs/" + id
             } );
             
             $('#college-table tbody').on( 'dblclick', 'tr', function () {
-                var id               = college_table.row( this ).data()['ID']
+                var id               = college_table.row( this ).data()['id']
                 window.location.href = "manage/application/college/" + id
             } );
             
             $('#tvet-table tbody').on( 'dblclick', 'tr', function () {
-                var id               = tvet_table.row( this ).data()['ID']
+                var id               = tvet_table.row( this ).data()['id']
                 window.location.href = "manage/application/tvet/" + id
             } );
 

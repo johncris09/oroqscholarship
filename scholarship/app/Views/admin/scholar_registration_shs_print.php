@@ -3159,7 +3159,7 @@
 					$age = $birthdateObj->diff($currentDateObj)->y;
 
 					// Print the person's age
-					echo  $age; 
+					echo $age; 
 					?>  </div>
 				</div>
 				<div class="c x29 y63 w2a h1d">

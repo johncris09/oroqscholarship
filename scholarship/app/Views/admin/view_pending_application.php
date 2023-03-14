@@ -631,12 +631,7 @@
 <?= $this->section('pageScript') ?>
 
     <script>
-        $(document).ready(function() { 
-
-            
-            
-
-
+        $(document).ready(function() {  
 
             $('input').attr('readonly', true); 
             $('input').css("cursor","pointer"); 
