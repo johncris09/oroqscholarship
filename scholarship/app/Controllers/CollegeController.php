@@ -76,6 +76,37 @@ class CollegeController extends BaseController
         echo Json_encode($res);
     }
 
+    
+    public function get_archived_application()
+    {
+        $config       = $this->config_model->asArray()->where('id', 1)->findAll()[0];
+        $college_data = [];
+        if (!empty($_GET['view'])) {
+            $college_data = [];
+        }
+
+        if (!empty($_GET['app_sem'])) {
+            $college_data['appnosem'] = $_GET['app_sem'];
+        } else {
+            $college_data = [];
+        }
+
+        if (!empty($_GET['app_sy'])) {
+            $college_data['appsy'] = $_GET['app_sy'];
+        } else {
+            $college_data = [];
+        }
+        if (empty($_GET['app_sy']) && empty($_GET['app_sem'])  && empty($_GET['view'])) {
+            $college_data = array(
+                'appsy'       => $config['current_sy'],
+                'appnosem' => $config['current_sem'],
+            );
+        }
+        $res["data"] = $this->college->get_archived_application($college_data);
+        echo Json_encode($res);
+    }
+
+
 
     public function get_approved_application()
     {

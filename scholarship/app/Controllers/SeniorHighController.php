@@ -76,6 +76,36 @@ class SeniorHighController extends BaseController
         echo Json_encode($res);
     }
 
+    
+    public function get_archived_application()
+    {
+        $config   = $this->config_model->asArray()->where('id', 1)->findAll()[0];
+        $shs_data = [];
+        if (!empty($_GET['view'])) {
+            $shs_data = [];
+        }
+
+        if (!empty($_GET['app_sem'])) {
+            $shs_data['appnosem'] = $_GET['app_sem'];
+        } else {
+            $shs_data = [];
+        }
+
+        if (!empty($_GET['app_sy'])) {
+            $shs_data['appsy'] = $_GET['app_sy'];
+        } else {
+            $shs_data = [];
+        }
+        if (empty($_GET['app_sy']) && empty($_GET['app_sem'])  && empty($_GET['view'])) {
+            $shs_data = array(
+                'appsy'    => $config['current_sy'],
+                'appnosem' => $config['current_sem'],
+            );
+        }
+        $res["data"] = $this->senior_high->get_archived_application($shs_data);
+        echo Json_encode($res);
+    }
+
     public function get_approved_application()
     {
         $config   = $this->config_model->asArray()->where('id', 1)->findAll()[0];
@@ -155,7 +185,7 @@ class SeniorHighController extends BaseController
                 'course'     => $this->request->getPost('strand'),
                 'appyear'       => $this->request->getPost('grade_level'),
                 'appsem'        => $this->request->getPost('semester'),
-                'AppSy'         => $this->request->getPost('school_year'),
+                'appsy'         => $this->request->getPost('school_year'),
                 'father_name'     => trim($this->request->getPost('father_name')),
                 'father_nameOccu' => trim($this->request->getPost('father_occupation')),
                 'mother_name'     => trim($this->request->getPost('mother_name')),

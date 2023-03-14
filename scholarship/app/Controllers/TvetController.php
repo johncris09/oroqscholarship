@@ -79,6 +79,36 @@ class TvetController extends BaseController
 
 
 
+    public function get_archived_application()
+    {
+        $config    = $this->config_model->asArray()->where('id', 1)->findAll()[0];
+        $tvet_data = [];
+        if (!empty($_GET['view'])) {
+            $tvet_data = [];
+        }
+
+        if (!empty($_GET['app_sem'])) {
+            $tvet_data['appnosem'] = $_GET['app_sem'];
+        } else {
+            $tvet_data = [];
+        }
+
+        if (!empty($_GET['app_sy'])) {
+            $tvet_data['appnoyear'] = $_GET['app_sy'];
+        } else {
+            $tvet_data = [];
+        }
+        if (empty($_GET['app_sy']) && empty($_GET['app_sem'])  && empty($_GET['view'])) {
+            $tvet_data = array(
+                'appsy'       => $config['current_sy'],
+                'appnosem' => $config['current_sem'],
+            );
+        }
+        $res["data"] = $this->tvet->get_archived_application($tvet_data);
+        echo Json_encode($res);
+    }
+
+
 
     public function get_approved_application()
     {
