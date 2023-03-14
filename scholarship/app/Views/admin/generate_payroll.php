@@ -105,12 +105,12 @@
 
                     <ul class="nav nav-pills navtab-bg nav-justified">
                         <li class="nav-item">
-                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link  active  ">
+                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link    ">
                                 Senior High School
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#college-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link ">
+                            <a href="#college-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link active ">
                                 College
                             </a>
                         </li>
@@ -121,7 +121,7 @@
                         </li>
                     </ul>
                     <div class="tab-content"> 
-                        <div class="tab-pane show active " id="senior-high-tab">  
+                        <div class="tab-pane show  " id="senior-high-tab">  
                             <form target="_blank" action="generate_payroll/shs_payroll" method="post">
                                 <div class="row justify-content-center">
                                     <div class="col-md-9">  
@@ -129,8 +129,8 @@
                                         <select class="form-control" name="school" >
                                             <option value="">Select</option> 
                                             <?php foreach($college_school as $row):?> 
-                                                <?php if($row['schoolName'] != ""):?> 
-                                                    <option value="<?= $row['schoolName']  ?>"><?= $row['schoolName']  ?></option>  
+                                                <?php if($row['id'] != ""):?> 
+                                                    <option value="<?= $row['id']  ?>"><?= $row['school_name']  ?></option>  
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
                                         </select>
@@ -185,8 +185,8 @@
                                         <label for="address" class="form-label">Address</label>
                                         <select class="form-control" name="address"   >
                                             <option value="">Select</option> 
-                                            <?php foreach($barangay as $row):?> 
-                                                <option value="<?= $row ?>"><?= $row ?></option>  
+                                            <?php foreach($address as $row):?> 
+                                                <option value="<?= $row['id'] ?>"><?= $row['barangay'] ?></option>  
                                             <?php endforeach; ?>
                                         </select>
                                     </div>  
@@ -225,7 +225,7 @@
                                 </div>   
                             </form>
                         </div>
-                        <div class="tab-pane" id="college-tab">   
+                        <div class="tab-pane active" id="college-tab">   
                             <form  action="generate_payroll/college_payroll" method="post">
                                 <div class="row justify-content-center">
                                     <div class="col-md-9">  
@@ -233,8 +233,8 @@
                                         <select class="form-control" name="school" >
                                             <option value="">Select</option> 
                                             <?php foreach($college_school as $row):?> 
-                                                <?php if($row['schoolName'] != ""):?> 
-                                                    <option value="<?= $row['schoolName']  ?>"><?= $row['schoolName']  ?></option>  
+                                                <?php if($row['id'] != ""):?> 
+                                                    <option value="<?= $row['id']  ?>"><?= $row['school_name']  ?></option>  
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
                                         </select>
@@ -288,9 +288,9 @@
                                     <div class="col-md-9">
                                         <label for="address" class="form-label">Address</label>
                                         <select class="form-control" name="address"   >
-                                            <option value="">Select</option> 
-                                            <?php foreach($barangay as $row):?> 
-                                                <option value="<?= $row ?>"><?= $row ?></option>  
+                                            <option value="">Select</option>  
+                                            <?php foreach($address as $row):?> 
+                                                <option value="<?= $row['id'] ?>"><?= $row['barangay'] ?></option>  
                                             <?php endforeach; ?>
                                         </select>
                                     </div>  
@@ -338,8 +338,8 @@
                                         <select class="form-control" name="school" >
                                             <option value="">Select</option> 
                                             <?php foreach($college_school as $row):?> 
-                                                <?php if($row['schoolName'] != ""):?> 
-                                                    <option value="<?= $row['schoolName']  ?>"><?= $row['schoolName']  ?></option>  
+                                                <?php if($row['id'] != ""):?> 
+                                                    <option value="<?= $row['id']  ?>"><?= $row['school_name']  ?></option>  
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
                                         </select>
@@ -392,9 +392,9 @@
                                     <div class="col-md-9">
                                         <label for="address" class="form-label">Address</label>
                                         <select class="form-control" name="address"   >
-                                            <option value="">Select</option> 
-                                            <?php foreach($barangay as $row):?> 
-                                                <option value="<?= $row ?>"><?= $row ?></option>  
+                                            <option value="">Select</option>  
+                                            <?php foreach($address as $row):?> 
+                                                <option value="<?= $row['id'] ?>"><?= $row['barangay'] ?></option>  
                                             <?php endforeach; ?>
                                         </select>
                                     </div>  

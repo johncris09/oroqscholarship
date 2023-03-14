@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Controllers\BaseController;
+use App\Models\AddressModel;
 use App\Models\CollegeModel;
 use App\Models\CollegeSchoolModel;
 use App\Models\CourseModel;
@@ -31,6 +32,8 @@ class GeneratePayrollController extends BaseController
         $college_school         = new CollegeSchoolModel();
         $strand                 = new StrandModel();
         $sequence               = new SequenceModel(); 
+        $address = new AddressModel();
+        $data['address']        = $address->asArray()->findAll();
         $data['year_started']   = $config->year_started;  
         $data['barangay']       = $config->barangay; 
         $data['semester']       = $config->semester; 
@@ -38,10 +41,10 @@ class GeneratePayrollController extends BaseController
         $data['scholar_status'] = $config->scholar_status;  
         $data['required_field'] = $config->requiredField;  
         $data['grade_level']    = $config->gradeLevel;
-        $data['school']         = $school->asArray()->orderBy('schoolname', 'ASC')->findAll();
+        $data['school']         = $school->asArray()->orderBy('school_name', 'ASC')->findAll();
         $data['strand']         = $strand->asArray()->orderBy('strand', 'ASC')->findAll();
         $data['course']         = $course->asArray()->orderBy('course', 'ASC')->findAll();
-        $data['college_school'] = $college_school->asArray()->orderBy('schoolname', 'ASC')->findAll();
+        $data['college_school'] = $college_school->asArray()->orderBy('school_name', 'ASC')->findAll();
         $data['year_level']     = $config->yearLevel;
         $data['sequence_year']  = $sequence->asArray()->where('Sys_ID', 1)->findAll()[0]['seq_year'];
         $data['seq_sem']        = $sequence->asArray()->where('Sys_ID', 1)->findAll()[0]['seq_sem'];

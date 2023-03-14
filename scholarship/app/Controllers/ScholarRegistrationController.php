@@ -276,7 +276,7 @@ class ScholarRegistrationController extends BaseController
     {
         $data['page_title'] = "Page Title";
         $segment            = $this->uri->getSegments();
-    $id                 = $segment[3];
+        $id                 = $segment[3];
 
         try {
             if ($segment[2] == "shs") { 

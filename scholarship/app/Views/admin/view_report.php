@@ -62,15 +62,15 @@
                                         $address    = $row->address;
                                         $course     = $row->course;
                                         $year_level = $row->appyear;
-                                        $school     = $row->school;
+                                        $school     = $row->school_name;
                                         $availment  = $row->availment;
                                     }else{
                                         $contact    = in_array($row->contact_no, ["-", null, "None", "" ]) ? ""  : $row->contact_no;
                                         $name       = ucwords( $row->lastname . ", "  . $row->firstname . " "  . $row->middlename . " " . " "  . $row->suffix);
                                         $address    = $row->address;
-                                        $course     = $row->course;
+                                        $course     = $row->strand;
                                         $year_level = $row->appyear;
-                                        $school     = $row->school;
+                                        $school     = $row->school_name;
                                         $availment  = $row->availment;
                                     }
                                     

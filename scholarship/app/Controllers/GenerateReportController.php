@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\AddressModel;
 use App\Models\CollegeModel;
 use App\Models\CollegeSchoolModel;
 use App\Models\CourseModel;
@@ -31,19 +32,21 @@ class GenerateReportController extends BaseController
         $school                 = new SchoolModel();
         $course                 = new CourseModel();
         $college_school         = new CollegeSchoolModel();
+        $address = new AddressModel();
         $strand                 = new StrandModel();
         $sequence               = new SequenceModel();
         $data['year_started']   = $config->year_started;
         $data['barangay']       = $config->barangay;
+        $data['address']        = $address->asArray()->findAll();
         $data['semester']       = $config->semester;
         $data['civil_status']   = $config->civilStatus;
         $data['scholar_status'] = $config->scholar_status;
         $data['required_field'] = $config->requiredField;
         $data['grade_level']    = $config->gradeLevel;
-        $data['school']         = $school->asArray()->orderBy('schoolname', 'ASC')->findAll();
+        $data['school']         = $school->asArray()->orderBy('school_name', 'ASC')->findAll();
         $data['strand']         = $strand->asArray()->orderBy('strand', 'ASC')->findAll();
         $data['course']         = $course->asArray()->orderBy('course', 'ASC')->findAll();
-        $data['college_school'] = $college_school->asArray()->orderBy('schoolname', 'ASC')->findAll();
+        $data['college_school'] = $college_school->asArray()->orderBy('school_name', 'ASC')->findAll();
         $data['year_level']     = $config->yearLevel;
         $data['sequence_year']  = $sequence->asArray()->where('Sys_ID', 1)->findAll()[0]['seq_year'];
         $data['seq_sem']        = $sequence->asArray()->where('Sys_ID', 1)->findAll()[0]['seq_sem'];
