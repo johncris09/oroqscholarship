@@ -179,17 +179,28 @@ class SeniorHighModel extends Model
             return $this->asArray()->where('id', $id)->get()->getResult();
         }
     }
-
-
+ 
+    
     public function get_all($data)
     {
-        $query = $this->builder
-            ->select('ID, appsy, appnoyear, appnosem, appnoid, appstatus, firstname, middlename, lastname, suffix, address, course, school, appyear, appstatus, ')
-            ->where($data)
-            ->orderBy('id', 'desc')
-            ->get()
-            ->getResult();
-        return $query;
+
+        $builder = $this->db->table('senior_high'); 
+        $builder->join('senior_high_school', 'senior_high.school = senior_high_school.id');
+        $builder->join('barangay', 'senior_high.address = barangay.id');
+        $builder->join('strand', 'senior_high.course = strand.id'); 
+        $builder->where($data);
+        $builder->select('
+            senior_high.*,
+            barangay.barangay as address,
+            senior_high_school.school_name as school_name,
+            senior_high_school.address as school_address,
+            strand.strand as course,
+        ');
+        
+        // Get the results of the query
+        $results = $builder->get()->getResultArray();
+
+        return $results;
     }
 
     public function get_pending_application($data)

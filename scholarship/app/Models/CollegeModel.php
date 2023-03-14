@@ -172,18 +172,29 @@ class CollegeModel extends Model
         $query = $builder->countAllResults();
         return $query;
     }
+ 
 
-
+    
     public function get_all($data)
     {
-        $query = $this->builder
-            ->select('ID, appsy, appnoyear, appnosem, appnoid, appstatus, firstname, middlename, lastname, suffix, address, course, school, appyear, ')
-            ->where($data)
-            ->orderBy('appnoid', 'desc')
-            ->get()
-            ->getResult();
-        return $query;
-    } 
+
+        $builder = $this->db->table('college'); 
+        $builder->join('college_school', 'college.school = college_school.id');
+        $builder->join('barangay', 'college.address = barangay.id');  
+        $builder->where($data);
+        $builder->select('
+            college.*,
+            barangay.barangay as address,
+            college_school.school_name as school_name,
+            college_school.address as school_address, 
+        ');
+        
+        // Get the results of the query
+        $results = $builder->get()->getResultArray();
+
+        return $results;
+    }
+
     
     public function get_pending_application($data)
     {
