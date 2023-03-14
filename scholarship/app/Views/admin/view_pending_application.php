@@ -634,6 +634,10 @@
         $(document).ready(function() { 
 
             
+            
+
+
+
             $('input').attr('readonly', true); 
             $('input').css("cursor","pointer"); 
             $('select option:not(:selected)').prop('disabled', true);
@@ -646,23 +650,32 @@
                 var id     = $(this).data('id')
                 var method = $(this).data('method')  
                 Swal.fire({
-                    title             : "Approve Applicant?", 
-                    icon              : "question",
-                    showCancelButton  : !0,
-                    confirmButtonText : "Yes, Approve it!",
-                    cancelButtonText  : "No, cancel!",
-                    confirmButtonClass: "btn btn-success mt-2",
-                    cancelButtonClass : "btn btn-danger ms-2 mt-2",
-                    buttonsStyling    : !1
-                }).then(function(e) {  
-                    if(e.value){ 
+                    title: "Select an option",
+                    input: "select",
+                    inputOptions: { 
+                        "Approved"             : "Approved",
+                        "Additional Approved 1": "Additional Approved 1",
+                        "Additional Approved 2": "Additional Approved 2",
+                        "Additional Approved 3": "Additional Approved 3",
+                        "Additional Approved 4": "Additional Approved 4",
+                        "Additional Approved 5": "Additional Approved 5",
+                        "Additional Approved 6": "Additional Approved 6",
+                        "Additional Approved 7": "Additional Approved 7",
+                        "Additional Approved 8": "Additional Approved 8", 
+                    },
+                    showCancelButton: true,
+                    confirmButtonText: 'OK',
+                    cancelButtonText: 'Cancel'
+                }).then(function(result) {
+                    if(result.isConfirmed) {
+                        var selectedOption = result.value;
                         $.ajax({
                             url     : '<?php echo base_url("/pending") ?>/' + method,  
                             method  : "post",
                             dataType: "json", 
                             data    : {
                                 id : id,
-                                status : "Approved",
+                                status : selectedOption,
                             },  
                             success : function (data) { 
                                 
@@ -672,7 +685,7 @@
                                         text : data.message,
                                         icon : "success"
                                     }) 
-                                    $('.status').html('Approved')
+                                    $('.status').html(selectedOption)
                                     $('.status').removeClass('text-danger')
                                     $('.status').addClass('text-primary')
                                 }else{ 
@@ -687,10 +700,11 @@
                             error   : function (xhr, status, error) { 
                                 console.info(xhr.responseText);
                             }
-                        });  
-                     
+                        }); 
+
                     }
-                }) 
+                });
+                         
             });  
 
             
