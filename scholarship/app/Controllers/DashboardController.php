@@ -60,7 +60,7 @@ class DashboardController extends BaseController
         $data["college_gender"]           = $this->scholarship_college_gender($college_tvet_data);
         $data["tvet_gender"]              = $this->scholarship_tvet_gender($college_tvet_data);
         $data["scholarship_barangay"]     = $this->scholarship_barangay($shs_data, $college_tvet_data);
-        $data["shs_school"]               = $this->get_by_shs_school($shs_data, $college_tvet_data); 
+        $data["shs_school"]               = $this->get_by_shs_school($shs_data, $college_tvet_data);  
         $data["college_school"]           = $this->get_by_college_school($college_tvet_data);
         $data["tvet_school"]              = $this->get_by_tvet_school($college_tvet_data); 
         $data['total_gender']             = $this->get_total_gender($shs_data, $college_tvet_data);

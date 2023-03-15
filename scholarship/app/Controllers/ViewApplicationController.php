@@ -7,8 +7,7 @@ use App\Models\CollegeModel;
 use App\Models\CollegeSchoolModel;
 use App\Models\CourseModel;
 use App\Models\SchoolModel;
-use App\Models\SeniorHighModel;
-use App\Models\SequenceModel;
+use App\Models\SeniorHighModel; 
 use App\Models\StrandModel;
 use App\Models\TvetModel;
 use Config\Custom_config;
@@ -31,8 +30,7 @@ class ViewApplicationController extends BaseController
         $school                 = new SchoolModel();
         $course                 = new CourseModel();
         $college_school         = new CollegeSchoolModel();
-        $strand                 = new StrandModel();
-        $sequence               = new SequenceModel();
+        $strand                 = new StrandModel(); 
         $data['barangay']       = $config->barangay;
         $data['semester']       = $config->semester;
         $data['civil_status']   = $config->civilStatus;
@@ -42,9 +40,7 @@ class ViewApplicationController extends BaseController
         $data['strand']         = $strand->asArray()->findAll();
         $data['course']         = $course->asArray()->findAll();
         $data['college_school'] = $college_school->asArray()->findAll();
-        $data['year_level']     = $config->yearLevel;
-        $data['sequence_year']  = $sequence->asArray()->where('Sys_ID', 1)->findAll()[0]['seq_year'];
-        $data['seq_sem']        = $sequence->asArray()->where('Sys_ID', 1)->findAll()[0]['seq_sem'];
+        $data['year_level']     = $config->yearLevel; 
         $data['app_no_id']      = $this->senior_high->count() + 1;
         return view('admin/view_application', $data);
     }
@@ -60,8 +56,7 @@ class ViewApplicationController extends BaseController
         $school                 = new SchoolModel();
         $course                 = new CourseModel();
         $college_school         = new CollegeSchoolModel();
-        $strand                 = new StrandModel();
-        $sequence               = new SequenceModel();
+        $strand                 = new StrandModel(); 
         $data['barangay']       = $config->barangay;
         $data['semester']       = $config->semester;
         $data['civil_status']   = $config->civilStatus;
@@ -71,9 +66,7 @@ class ViewApplicationController extends BaseController
         $data['strand']         = $strand->asArray()->findAll();
         $data['course']         = $course->asArray()->findAll();
         $data['college_school'] = $college_school->asArray()->findAll();
-        $data['year_level']     = $config->yearLevel;
-        $data['sequence_year']  = $sequence->asArray()->where('Sys_ID', 1)->findAll()[0]['seq_year'];
-        $data['seq_sem']        = $sequence->asArray()->where('Sys_ID', 1)->findAll()[0]['seq_sem'];
+        $data['year_level']     = $config->yearLevel; 
         $data['app_no_id']      = $this->senior_high->count() + 1;
 
 

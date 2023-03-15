@@ -7,8 +7,7 @@ use App\Models\CollegeModel;
 use App\Models\CollegeSchoolModel;
 use App\Models\CourseModel;
 use App\Models\SchoolModel;
-use App\Models\SeniorHighModel;
-use App\Models\SequenceModel;
+use App\Models\SeniorHighModel; 
 use App\Models\StrandModel;
 use App\Models\TvetCourseModel;
 use App\Models\TvetModel;
@@ -32,8 +31,7 @@ class GeneratePayrollController extends BaseController
         $course                 = new CourseModel();
         $tvet_course            = new TvetCourseModel();
         $college_school         = new CollegeSchoolModel();
-        $strand                 = new StrandModel();
-        $sequence               = new SequenceModel(); 
+        $strand                 = new StrandModel(); 
         $address                = new AddressModel();
         $data['address']        = $address->asArray()->findAll();
         $data['year_started']   = $config->year_started;  
@@ -48,9 +46,7 @@ class GeneratePayrollController extends BaseController
         $data['course']         = $course->asArray()->orderBy('course', 'ASC')->findAll();
         $data['tvet_course']    = $tvet_course->asArray()->orderBy('course', 'ASC')->findAll();
         $data['college_school'] = $college_school->asArray()->orderBy('school_name', 'ASC')->findAll();
-        $data['year_level']     = $config->yearLevel;
-        $data['sequence_year']  = $sequence->asArray()->where('Sys_ID', 1)->findAll()[0]['seq_year'];
-        $data['seq_sem']        = $sequence->asArray()->where('Sys_ID', 1)->findAll()[0]['seq_sem'];
+        $data['year_level']     = $config->yearLevel; 
         $data['app_no_id']      = $this->senior_high_registration->count() + 1; 
         return view('admin/generate_payroll', $data);  
     }
