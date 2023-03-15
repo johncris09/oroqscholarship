@@ -319,7 +319,12 @@ class SeniorHighModel extends Model
         } 
 
         if (!empty($appstatus)) {
-            $query->where('senior_high.appstatus', $appstatus);
+            if(strtolower($appstatus) == "all approved"){ 
+                $query->like('senior_high.appstatus', 'approved', "both");
+                $query->where('senior_high.appstatus !=', 'disapproved'); 
+            }else{ 
+                $query->where('senior_high.appstatus', $appstatus);
+            }
         }
         
         if (!empty($appsy)) {
@@ -419,9 +424,15 @@ class SeniorHighModel extends Model
             $query->where('school', $school);
         } 
 
+        
         if (!empty($appstatus)) {
-            $query->where('senior_high.appstatus', $appstatus);
-        }
+            if(strtolower($appstatus) == "all approved"){ 
+                $query->like('senior_high.appstatus', 'approved', "both");
+                $query->where('senior_high.appstatus !=', 'disapproved'); 
+            }else{ 
+                $query->where('senior_high.appstatus', $appstatus);
+            }
+        } 
         
         if (!empty($appsy)) {
             $query->where('senior_high.appsy', $appsy);
@@ -496,11 +507,17 @@ class SeniorHighModel extends Model
 
         if (!empty($school)) {
             $query->where('school', $school);
-        } 
-
+        }  
+        
         if (!empty($appstatus)) {
-            $query->where('senior_high.appstatus', $appstatus);
+            if(strtolower($appstatus) == "all approved" || $appstatus == "" ){ 
+                $query->like('senior_high.appstatus', 'approved', "both");
+                $query->where('senior_high.appstatus !=', 'disapproved'); 
+            }else{ 
+                $query->where('senior_high.appstatus', $appstatus);
+            }
         }
+
         
         if (!empty($appsy)) {
             $query->where('senior_high.appsy', $appsy);
@@ -599,10 +616,15 @@ class SeniorHighModel extends Model
 
         if (!empty($school)) {
             $query->where('school', $school);
-        } 
-
+        }  
+        
         if (!empty($appstatus)) {
-            $query->where('senior_high.appstatus', $appstatus);
+            if(strtolower($appstatus) == "all approved" || $appstatus == "" ){ 
+                $query->like('senior_high.appstatus', 'approved', "both");
+                $query->where('senior_high.appstatus !=', 'disapproved'); 
+            }else{ 
+                $query->where('senior_high.appstatus', $appstatus);
+            }
         }
         
         if (!empty($appsy)) {

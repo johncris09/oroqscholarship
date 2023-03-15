@@ -297,12 +297,17 @@ class CollegeModel extends Model
 
         if (!empty($school)) {
             $query->where('school', $school);
-        } 
-
-        if (!empty($appstatus)) {
-            $query->where('college.appstatus', $appstatus);
-        }
+        }   
         
+        if (!empty($appstatus)) {
+            if(strtolower($appstatus) == "all approved"){ 
+                $query->like('college.appstatus', 'approved', "both");
+                $query->where('college.appstatus !=', 'disapproved'); 
+            }else{ 
+                $query->where('college.appstatus', $appstatus);
+            }
+        }
+
         if (!empty($appsy)) {
             $query->where('college.appsy', $appsy);
         }
@@ -401,9 +406,14 @@ class CollegeModel extends Model
         if (!empty($school)) {
             $query->where('school', $school);
         } 
-
+ 
         if (!empty($appstatus)) {
-            $query->where('college.appstatus', $appstatus);
+            if(strtolower($appstatus) == "all approved"){ 
+                $query->like('college.appstatus', 'approved', "both");
+                $query->where('college.appstatus !=', 'disapproved'); 
+            }else{ 
+                $query->where('college.appstatus', $appstatus);
+            }
         }
         
         if (!empty($appsy)) {
@@ -476,11 +486,17 @@ class CollegeModel extends Model
 
         if (!empty($school)) {
             $query->where('school', $school);
-        } 
-
-        if (!empty($appstatus)) {
-            $query->where('college.appstatus', $appstatus);
         }
+        
+        if (!empty($appstatus)) {
+            if(strtolower($appstatus) == "all approved" || $appstatus == "" ){ 
+                $query->like('college.appstatus', 'approved', "both");
+                $query->where('college.appstatus !=', 'disapproved'); 
+            }else{ 
+                $query->where('college.appstatus', $appstatus);
+            }
+        }
+
         
         if (!empty($appsy)) {
             $query->where('college.appsy', $appsy);
@@ -578,10 +594,15 @@ class CollegeModel extends Model
 
         if (!empty($school)) {
             $query->where('school', $school);
-        } 
-
+        }  
+        
         if (!empty($appstatus)) {
-            $query->where('college.appstatus', $appstatus);
+            if(strtolower($appstatus) == "all approved" || $appstatus == "" ){ 
+                $query->like('college.appstatus', 'approved', "both");
+                $query->where('college.appstatus !=', 'disapproved'); 
+            }else{ 
+                $query->where('college.appstatus', $appstatus);
+            }
         }
         
         if (!empty($appsy)) {

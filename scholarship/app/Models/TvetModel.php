@@ -296,10 +296,15 @@ class TvetModel extends Model
 
         if (!empty($school)) {
             $query->where('school', $school);
-        } 
-
+        }  
+ 
         if (!empty($appstatus)) {
-            $query->where('tvet.appstatus', $appstatus);
+            if(strtolower($appstatus) == "all approved"){ 
+                $query->like('tvet.appstatus', 'approved', "both");
+                $query->where('tvet.appstatus !=', 'disapproved'); 
+            }else{ 
+                $query->where('tvet.appstatus', $appstatus);
+            }
         }
         
         if (!empty($appsy)) {
@@ -390,10 +395,15 @@ class TvetModel extends Model
         }  
         if (!empty($school)) {
             $query->where('school', $school);
-        } 
-
+        }  
+ 
         if (!empty($appstatus)) {
-            $query->where('tvet.appstatus', $appstatus);
+            if(strtolower($appstatus) == "all approved"){ 
+                $query->like('tvet.appstatus', 'approved', "both");
+                $query->where('tvet.appstatus !=', 'disapproved'); 
+            }else{ 
+                $query->where('tvet.appstatus', $appstatus);
+            }
         }
         
         if (!empty($appsy)) {
@@ -469,10 +479,15 @@ class TvetModel extends Model
         if (!empty($school)) {
             $query->where('school', $school);
         } 
-
+ 
         if (!empty($appstatus)) {
-            $query->where('tvet.appstatus', $appstatus);
-        }
+            if(strtolower($appstatus) == "all approved" || $appstatus == "" ){ 
+                $query->like('tvet.appstatus', 'approved', "both");
+                $query->where('tvet.appstatus !=', 'disapproved'); 
+            }else{ 
+                $query->where('tvet.appstatus', $appstatus);
+            }
+        } 
         
         if (!empty($appsy)) {
             $query->where('tvet.appsy', $appsy);
@@ -560,11 +575,16 @@ class TvetModel extends Model
         }  
         if (!empty($school)) {
             $query->where('school', $school);
-        } 
-
+        }  
+ 
         if (!empty($appstatus)) {
-            $query->where('tvet.appstatus', $appstatus);
-        }
+            if(strtolower($appstatus) == "all approved" || $appstatus == "" ){ 
+                $query->like('tvet.appstatus', 'approved', "both");
+                $query->where('tvet.appstatus !=', 'disapproved'); 
+            }else{ 
+                $query->where('tvet.appstatus', $appstatus);
+            }
+        } 
         
         if (!empty($appsy)) {
             $query->where('tvet.appsy', $appsy);

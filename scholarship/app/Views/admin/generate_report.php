@@ -275,6 +275,7 @@
                                             <?php  foreach($scholar_status as $row){   ?> 
                                                 <option  value="<?= $row ?>"><?= $row ?></option>  
                                             <?php } ?> 
+                                            <option value="All Approved">All Approved</option>
                                         </select>  
                                     </div>
                                 </div> 
@@ -387,6 +388,7 @@
                                             <?php  foreach($scholar_status as $row){   ?> 
                                                 <option  value="<?= $row ?>"><?= $row ?></option>  
                                             <?php } ?> 
+                                            <option value="All Approved">All Approved</option>
                                         </select>  
                                     </div>
                                 </div> 

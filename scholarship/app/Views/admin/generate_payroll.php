@@ -105,12 +105,12 @@
 
                     <ul class="nav nav-pills navtab-bg nav-justified">
                         <li class="nav-item">
-                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link    ">
+                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active   ">
                                 Senior High School
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#college-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link active ">
+                            <a href="#college-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link  ">
                                 College
                             </a>
                         </li>
@@ -121,7 +121,7 @@
                         </li>
                     </ul>
                     <div class="tab-content"> 
-                        <div class="tab-pane show  " id="senior-high-tab">  
+                        <div class="tab-pane show  active" id="senior-high-tab">  
                             <form target="_blank" action="generate_payroll/shs_payroll" method="post">
                                 <div class="row justify-content-center">
                                     <div class="col-md-9">  
@@ -240,7 +240,7 @@
                                 </div>   
                             </form>
                         </div>
-                        <div class="tab-pane active" id="college-tab">   
+                        <div class="tab-pane " id="college-tab">   
                             <form  action="generate_payroll/college_payroll" method="post">
                                 <div class="row justify-content-center">
                                     <div class="col-md-9">  

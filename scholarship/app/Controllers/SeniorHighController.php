@@ -265,7 +265,7 @@ class SeniorHighController extends BaseController
             $res = $this->senior_high->generate($school, $status, $sy, $sem, $availment, $gender, $year_level, $address );
         }else{
             $res = $this->senior_high->between($appnoidfrom, $appnoidto, $appnoyear, $appnosem,  $school, $status, $sy, $sem, $availment, $gender, $year_level, $address );
-        } 
+        }
         $data['query_string'] = 'appnoidfrom='.$appnoidfrom.'&appnoidto='.$appnoidto.'&appnoyear='.$appnoyear.'&appnosem='.$appnosem.'&school='.$school.'&status='.$status.'&school_year='.$sy.'&sem='.$sem.'&availment='.$availment.'&gender='.$gender.'&year_level='.$year_level.'&address='.$address;
         $data["result"]       = $res;  
         return view('admin/view_report', $data); 
