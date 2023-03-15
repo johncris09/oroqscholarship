@@ -45,8 +45,7 @@ class ApprovedPendingApplicationController extends BaseController
                 $data['profile']  = $this->college->get_applicant_details($id); 
                 return view('admin/view_pending_application', $data);
             } else if ($segment[2] == "tvet") {
-                $data['profile'] = $this->tvet->get_applicant_details($id);  
-                // print_r($data['profile']);
+                $data['profile'] = $this->tvet->get_applicant_details($id);   
                 return view('admin/view_pending_application', $data);
             } else {
                 return redirect()->back();

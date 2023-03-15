@@ -51,7 +51,7 @@ class StrandController extends BaseController
                 "message"  => "Data inserted successfully",
             ];
 
-            $activity_model = new UserActivityModel()l
+            $activity_model = new UserActivityModel();
             $strand = $data['strand'];
             $activity_model->addLog(auth()->user()->id, 'Created a new strand (\''.$strand.'\')');
 

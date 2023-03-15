@@ -170,37 +170,37 @@ class TvetController extends BaseController
     {
         try {
             $id   = $this->request->getPost('id');
-            $data = [
-                "appnoyear"     => $this->request->getPost('app_no_year'),
-                "appnosem"      => $this->request->getPost('app_no_sem'),
-                "appnoid"       => $this->request->getPost('app_no_id'),
-                "appstatus"       => $this->request->getPost('status'),
-                "firstname"     => trim($this->request->getPost('firstname')),
-                "middlename"            => trim($this->request->getPost('middlename')),
-                "lastname"      => trim($this->request->getPost('lastname')),
-                "suffix"        => trim($this->request->getPost('suffix')),
-                "address"       => $this->request->getPost('address'),
-                "colDOB"           => $this->request->getPost('birthdate'),
-                "colAge"           => $this->request->getPost('age'),
-                "civil_status"     => $this->request->getPost('civil_status'),
-                "gender"        => $this->request->getPost('gender'),
-                "contact_no"     => trim($this->request->getPost('contact_no')),
-                "ctc_no"           => trim($this->request->getPost('ctc_no')),
-                "email"      => trim($this->request->getPost('email')),
-                "availment"     => trim($this->request->getPost('availment')),
-                "school"        => $this->request->getPost('school'),
-                "course"        => $this->request->getPost('course'),
-                "appyear"     => $this->request->getPost('year_level'),
-                "appsem"           => $this->request->getPost('semester'),
-                "appsy"            => $this->request->getPost('school_year'),
-                "father_name"   => trim($this->request->getPost('father_name')),
-                "father_occupation"    => trim($this->request->getPost('father_occupation')),
-                "mother_name"   => trim($this->request->getPost('mother_name')),
-                "mother_occupation"    => trim($this->request->getPost('mother_occupation')),
-                "appmanager"       => trim($this->request->getPost('manager')),
-                "unit"         => trim($this->request->getPost('units')),
-                "schoolAddress" => trim($this->request->getPost('school_address')),
-                'profile_photo'         => trim($this->request->getPost('image')),
+            $data                   =  [
+                "appnoyear"         => $this->request->getPost('app_no_year'),
+                "appnosem"          => $this->request->getPost('app_no_sem'),
+                "appnoid"           => $this->request->getPost('app_no_id'),
+                "appstatus"         => $this->request->getPost('status'),
+                "firstname"         => trim($this->request->getPost('firstname')),
+                "middlename"        => trim($this->request->getPost('middlename')),
+                "lastname"          => trim($this->request->getPost('lastname')),
+                "suffix"            => trim($this->request->getPost('suffix')),
+                "address"           => $this->request->getPost('address'),
+                "colDOB"            => $this->request->getPost('birthdate'),
+                "colAge"            => $this->request->getPost('age'),
+                "civil_status"      => $this->request->getPost('civil_status'),
+                "gender"            => $this->request->getPost('gender'),
+                "contact_no"        => trim($this->request->getPost('contact_no')),
+                "ctc_no"            => trim($this->request->getPost('ctc_no')),
+                "email"             => trim($this->request->getPost('email')),
+                "availment"         => trim($this->request->getPost('availment')),
+                "school"            => $this->request->getPost('school'),
+                "course"            => $this->request->getPost('course'),
+                "appyear"           => $this->request->getPost('year_level'),
+                "appsem"            => $this->request->getPost('semester'),
+                "appsy"             => $this->request->getPost('school_year'),
+                "father_name"       => trim($this->request->getPost('father_name')),
+                "father_occupation" => trim($this->request->getPost('father_occupation')),
+                "mother_name"       => trim($this->request->getPost('mother_name')),
+                "mother_occupation" => trim($this->request->getPost('mother_occupation')),
+                "appmanager"        => trim($this->request->getPost('manager')),
+                "unit"              => trim($this->request->getPost('units')),
+                "schoolAddress"     => trim($this->request->getPost('school_address')),
+                'profile_photo'     => trim($this->request->getPost('image')),
             ];
 
 
@@ -297,7 +297,6 @@ class TvetController extends BaseController
         $data["page_title"]       = "Generated Report"; 
         $data["scholarship_type"] = "TVET";
         $data['semester']         = $_GET['sem'];
-        $data['status']           = $_GET['status'];
         $data['school_year']      = $_GET['school_year']; 
 
         if($_GET['appnoidfrom'] == "" || $_GET['appnoidto']  == ""  ){ 
@@ -323,6 +322,7 @@ class TvetController extends BaseController
         $sy                       = $_POST['school_year']; 
         $availment                = $_POST['availment'];
         $gender                   = $_POST['gender'];
+        $status                   = $_POST['status'];
         $year_level               = $_POST['year_level'];
         $address                  = $_POST['address']; 
         $data["page_title"]       = "Generated Report"; 
@@ -330,13 +330,14 @@ class TvetController extends BaseController
         $data['semester']         = $_POST['sem']; 
         $data['school_year']      = $_POST['school_year'];
 
-        if($_POST['appnoidfrom'] == "" || $_POST['appnoidto']  == ""  ){ 
-            $res = $this->tvet->generate_payroll($school, $sy, $sem, $availment, $gender, $year_level, $address );
+        if($_POST['appnoidfrom'] == "" || $_POST['appnoidto']  == ""  ){  
+            $res = $this->tvet->generate_payroll($school, $status, $sy, $sem, $availment, $gender, $year_level, $address );
         }else{
-            $res = $this->tvet->between_payroll($appnoidfrom, $appnoidto, $appnoyear, $appnosem,  $school, $sy, $sem, $availment, $gender, $year_level, $address );
+            $res = $this->tvet->between_payroll($appnoidfrom, $appnoidto, $appnoyear, $appnosem,   $school, $status,  $sy, $sem, $availment, $gender, $year_level, $address );
         } 
+        
 
-        $data["result"]      = $res; 
+        $data["result"]      = $res;  
         $data['tot_record']  = count($data["result"]);
         $data['tot_page']    = ceil($data['tot_record']   / 20);
         $data['from']        = 1;
@@ -345,7 +346,8 @@ class TvetController extends BaseController
         if ($data['tot_record'] != 0) {
             return view('admin/tvet_payroll', $data);
         } else {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            echo "No Record Found";
+            // throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         } 
     }
 

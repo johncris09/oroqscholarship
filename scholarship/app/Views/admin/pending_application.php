@@ -16,7 +16,7 @@
                     </p>
                     <ul class="nav nav-pills navtab-bg nav-justified">
                         <li class="nav-item">
-                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active ">
+                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link  ">
                                 Senior High School Pending List
                             </a>
                         </li>
@@ -26,13 +26,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link ">
+                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
                                 TVET Pending List
                             </a>
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane show  active" id="senior-high-tab">   
+                        <div class="tab-pane show  " id="senior-high-tab">   
                             <table id="senior-high-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>   
@@ -70,7 +70,7 @@
                                         <th>SY</th>    
                                         <th>Name</th>  
                                         <th>Address</th>  
-                                        <th>Strand</th>  
+                                        <th>Course</th>  
                                         <th>School</th>  
                                         <th>Year Level</th>  
                                         <th>Application Status</th>  
@@ -78,7 +78,7 @@
                                 </thead> 
                             </table> 
                         </div> 
-                        <div class="tab-pane  " id="tvet-tab"> 
+                        <div class="tab-pane  active" id="tvet-tab"> 
                             <table id="tvet-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>    
@@ -93,7 +93,7 @@
                                         <th>SY</th>  
                                         <th>Name</th>  
                                         <th>Address</th>  
-                                        <th>Strand</th>  
+                                        <th>Course</th>  
                                         <th>School</th>  
                                         <th>Year Level</th>  
                                         <th>Application Status</th>  
@@ -498,7 +498,7 @@
                         }
                     }, 
                     { data: 'address' },  
-                    { data: 'course' },  
+                    { data: 'course_name' },  
                     { data: 'school_name' },  
                     { data: 'appyear' },  
                     { data: 'appstatus' },   

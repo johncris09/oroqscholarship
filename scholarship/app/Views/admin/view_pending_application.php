@@ -439,7 +439,7 @@
                                 </div> 
                             </div> 
                             <hr>
-                            <div class="row"> 
+                            <div class="row">  
                                 <div class="col-9">
                                     <div class="row"> 
                                         <div class="col-4">
@@ -546,7 +546,7 @@
                                 </div>
                                 <div class="col"> 
                                     <label for="" class="form-label">Course <?= $required_field; ?></label>
-                                    <input type="text" value="<?= $profile['course'] ?>" class="form-control" name="school" required>  
+                                    <input type="text" value="<?= $profile['course_name'] ?>" class="form-control" name="school" required>  
                                 </div> 
                             </div> 
                             <div class="row g-3" > 

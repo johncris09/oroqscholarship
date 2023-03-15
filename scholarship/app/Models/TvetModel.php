@@ -86,6 +86,7 @@ class TvetModel extends Model
         $builder = $this->db->table('tvet'); 
         $builder->join('college_school', 'tvet.school = college_school.id');
         $builder->join('barangay', 'tvet.address = barangay.id'); 
+        $builder->join('tvet_course', 'tvet.course = tvet_course.id'); 
         $builder->where('tvet.id', $id);
         $builder->select('
             tvet.*,
@@ -93,6 +94,7 @@ class TvetModel extends Model
             barangay.id as address_id,
             college_school.school_name as school_name,
             college_school.address as school_address, 
+            tvet_course.course as course_name,
         ');
 
         // Get the results of the query
@@ -196,6 +198,7 @@ class TvetModel extends Model
         $builder = $this->db->table('tvet'); 
         $builder->join('college_school', 'tvet.school = college_school.id');
         $builder->join('barangay', 'tvet.address = barangay.id'); 
+        $builder->join('tvet_course', 'tvet.course = tvet_course.id'); 
         $builder->where('tvet.appstatus', 'pending');  
         $builder->where('appmanager', 'Active'); 
         $builder->where($data);
@@ -204,6 +207,7 @@ class TvetModel extends Model
             barangay.barangay as address,
             college_school.school_name as school_name,
             college_school.address as school_address, 
+            tvet_course.course as course_name,
         ');
         
         // Get the results of the query
@@ -278,12 +282,14 @@ class TvetModel extends Model
         $query = $this->db->table('tvet'); 
         $query->join('college_school', 'tvet.school = college_school.id');
         $query->join('barangay', 'tvet.address = barangay.id');  
+        $query->join('tvet_course', 'tvet.course = tvet_course.id');  
         $query->select('
             tvet.*,
             barangay.barangay as address,
             barangay.id as address_id,
             college_school.school_name as school_name,
             college_school.address as school_address, 
+            tvet_course.course as course_name, 
         ');
         
         
@@ -329,7 +335,8 @@ class TvetModel extends Model
     }
 
 
-    public function between($appnoidfrom,
+    public function between(
+        $appnoidfrom,
         $appnoidto,
         $appnoyear,
         $appnosem,
@@ -418,62 +425,178 @@ class TvetModel extends Model
 
         return $results;
 
-    } 
+    }   
+
+
+    public function generate_payroll(
+        $school,
+        $appstatus,
+        $appsy,
+        $appsem,
+        $availment,
+        $gender,
+        $appyear,
+        $address
+    ) 
+    { 
+
+        $school    = isset($school) ? $school      : null;
+        $appstatus = isset($appstatus) ? $appstatus: null; 
+        $appsy     = isset($appsy) ? $appsy        : null; 
+        $appsem    = isset($appsem) ? $appsem      : null; 
+        $availment = isset($availment) ? $availment: null; 
+        $gender    = isset($gender) ? $gender      : null; 
+        $appyear   = isset($appyear) ? $appyear    : null; 
+        $address   = isset($address) ? $address    : null; 
 
 
 
-    
-    public function generate_payroll($school, $sy, $sem, $availment, $gender, $year_level, $address )
-    {
-        $query_string =  ' 
-            SELECT * 
-            FROM tvet 
-            WHERE school LIKE "'.$school.'%"  
-            AND appsy LIKE "'.$sy.'%"  
-            AND appsem LIKE "'.$sem.'%"  
-            AND availment LIKE "'.$availment.'%"
-            AND gender LIKE "'.$gender.'%"
-            AND appyear LIKE "'.$year_level.'%"
-            AND address LIKE "'.$address.'%" 
-            AND (appstatus = "Approved" or appstatus = "Additional Approved")
-            AND appmanager = "Active"
-            ORDER BY lastname, firstname and middlename
-        '; 
-
-        $query = $this->db->query($query_string);
+        $query = $this->db->table('tvet'); 
+        $query->join('college_school', 'tvet.school = college_school.id');
+        $query->join('barangay', 'tvet.address = barangay.id');  
+        $query->join('tvet_course', 'tvet.course = tvet_course.id');  
+        $query->select('
+            tvet.*,
+            barangay.barangay as address,
+            barangay.id as address_id,
+            college_school.school_name as school_name,
+            college_school.address as school_address, 
+            tvet_course.course as course_name, 
+        ');
         
-        return $query->getResult(); 
-    }
-
-
-    
-    public function between_payroll($appnoidfrom, $appnoidto, $appnoyear, $appnosem,  $school,  $sy, $sem, $availment, $gender, $year_level, $address )
-    {
-        $query_string =  ' 
-            SELECT * 
-            FROM tvet 
-            WHERE appnoid BETWEEN "'.$appnoidfrom.'" 
-            AND "'.$appnoidto.'" 
-            HAVING appnoyear LIKE "'.$appnoyear.'%"  
-            AND appnosem LIKE "'.$appnosem.'%" 
-            AND school LIKE "'.$school.'%" 
-            AND appsem LIKE "'.$sem.'%" 
-            AND appsy LIKE "'.$sy.'%"  
-            AND availment LIKE "'.$availment.'%"
-            AND gender LIKE "'.$gender.'%"
-            AND appyear LIKE "'.$year_level.'%"
-            AND address LIKE "'.$address.'%"  
-            AND (appstatus = "Approved" or appstatus = "Additional Approved")
-            AND appmanager="Active"
-            ORDER BY appnoid
-        '; 
-
-        $query = $this->db->query($query_string);
         
-        return $query->getResult(); 
-    }
-     
 
+        if (!empty($school)) {
+            $query->where('school', $school);
+        } 
+
+        if (!empty($appstatus)) {
+            $query->where('tvet.appstatus', $appstatus);
+        }
+        
+        if (!empty($appsy)) {
+            $query->where('tvet.appsy', $appsy);
+        }
+        
+        if (!empty($appsem)) {
+            $query->where('tvet.appsem', $appsem);
+        }
+
+        if (!empty($availment)) {
+            $query->where('tvet.availment', $availment);
+        }
+
+        if (!empty($gender)) {
+            $query->where('tvet.gender', $gender);
+        }
+
+        if (!empty($appyear)) {
+            $query->where('tvet.appyear', $appyear);
+        }
+        
+        if (!empty($address)) {
+            $query->where('tvet.address', $address);
+        }
+
+        $query->orderBy('lastname, firstname, middlename', 'asc');
+        $results = $query->get()->getResult();  
+
+        return $results; 
+
+
+    }
+    
+    public function between_payroll( 
+        $appnoidfrom,
+        $appnoidto,
+        $appnoyear,
+        $appnosem,
+        $school,
+        $appstatus,
+        $appsy,
+        $appsem,
+        $availment,
+        $gender,
+        $appyear,
+        $address 
+    )
+    {
+        $school    = isset($school) ? $school      : null;
+        $appstatus = isset($appstatus) ? $appstatus: null; 
+        $appsy     = isset($appsy) ? $appsy        : null; 
+        $appsem    = isset($appsem) ? $appsem      : null; 
+        $availment = isset($availment) ? $availment: null; 
+        $gender    = isset($gender) ? $gender      : null; 
+        $appyear   = isset($appyear) ? $appyear    : null; 
+        $address   = isset($address) ? $address    : null; 
+
+
+
+        $query = $this->db->table('tvet'); 
+        $query->join('college_school', 'tvet.school = college_school.id');
+        $query->join('barangay', 'tvet.address = barangay.id');  
+        $query->select('
+            tvet.*,
+            barangay.barangay as address,
+            barangay.id as address_id,
+            college_school.school_name as school_name,
+            college_school.address as school_address, 
+        ');
+        
+        
+        if (!empty($appnoidfrom)) {
+            $query->where('appnoid >=', $appnoidfrom);
+        }  
+        
+        if (!empty($appnoidto)) {
+            $query->where('appnoid <=', $appnoidto);
+        } 
+
+        if (!empty($appnoyear)) {
+            $query->where('appnoyear', $appnoyear);
+        } 
+        if (!empty($appnosem)) {
+            $query->where('appnosem', $appnosem);
+        }  
+        if (!empty($school)) {
+            $query->where('school', $school);
+        } 
+
+        if (!empty($appstatus)) {
+            $query->where('tvet.appstatus', $appstatus);
+        }
+        
+        if (!empty($appsy)) {
+            $query->where('tvet.appsy', $appsy);
+        }
+        
+        if (!empty($appsem)) {
+            $query->where('tvet.appsem', $appsem);
+        }
+
+        if (!empty($availment)) {
+            $query->where('tvet.availment', $availment);
+        }
+
+        if (!empty($gender)) {
+            $query->where('tvet.gender', $gender);
+        }
+
+        if (!empty($appyear)) {
+            $query->where('tvet.appyear', $appyear);
+        }
+        
+        if (!empty($address)) {
+            $query->where('tvet.address', $address);
+        }
+
+        $query->orderBy('lastname, firstname, middlename', 'asc');
+        $results = $query->get()->getResult();  
+
+        return $results;
+
+    }  
+    
     public function get_tot_by_status($data)
     {
         $query = $this->builder
@@ -483,26 +606,32 @@ class TvetModel extends Model
             ->get()
             ->getResult();
         return $query;
+    } 
+    
+    public function get_tot_by_school($data)
+    { 
+        $builder = $this->db->table('tvet');  
+        $builder->join('college_school', 'tvet.school = college_school.id');  
+        $builder->where($data);
+        $builder->select('
+            count(*) as total,
+            college_school.school_name as school, 
+        ');
+        $builder->groupBy('college_school.school_name'); 
+        
+        // Get the results of the query
+        $results = $builder->get()->getResult(); 
+
+        return $results;
     }
 
-    public function get_tot_by_school($data)
-    {
-        $query = $this->builder
-            ->select('school as school, count(*) as total')
-            ->where('school !=', "")
-            ->where($data)
-            ->groupBy('school')
-            ->get()
-            ->getResult();
-        return $query;
-    }
 
     public function get_tot_by_barangay($barangay, $data)
     {
         $query = $this->builder
             ->select('address as barangay, count(*) as total')
-            ->where($data)
-            ->like('address', $barangay, 'both')
+            ->where($data) 
+            ->where('address', $barangay)
             ->get()
             ->getResult();
         return $query;

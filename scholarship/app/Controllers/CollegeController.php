@@ -315,6 +315,7 @@ class CollegeController extends BaseController
         $appnosem                 = $_POST['appnosem'];
         $school                   = $_POST['school'];
         $sem                      = $_POST['sem'];
+        $status                   = $_POST['status'];
         $sy                       = $_POST['school_year']; 
         $availment                = $_POST['availment'];
         $gender                   = $_POST['gender'];
@@ -327,9 +328,9 @@ class CollegeController extends BaseController
 
 
         if($_POST['appnoidfrom'] == "" || $_POST['appnoidto']  == ""  ){ 
-            $res = $this->college->generate_payroll($school, $sy, $sem, $availment, $gender, $year_level, $address );
+            $res = $this->college->generate_payroll($school, $status, $sy, $sem, $availment, $gender, $year_level, $address );
         }else{
-            $res = $this->college->between_payroll($appnoidfrom, $appnoidto, $appnoyear, $appnosem,  $school, $sy, $sem, $availment, $gender, $year_level, $address );
+            $res = $this->college->between_payroll($appnoidfrom, $appnoidto, $appnoyear, $appnosem,   $school, $status,  $sy, $sem, $availment, $gender, $year_level, $address );
         } 
         
         $data["result"]      = $res; 

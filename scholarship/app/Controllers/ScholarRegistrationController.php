@@ -15,6 +15,7 @@ use App\Models\StrandModel;
 use App\Models\TvetModel;
 use Config\Custom_config;
 use App\Models\SearchApplicationModel;
+use App\Models\TvetCourseModel;
 use App\Models\UserActivityModel;
 
 class ScholarRegistrationController extends BaseController
@@ -37,10 +38,11 @@ class ScholarRegistrationController extends BaseController
         $config                 = new Custom_config;
         $school                 = new SchoolModel();
         $course                 = new CourseModel();
+        $tvet_course            = new TvetCourseModel();
         $college_school         = new CollegeSchoolModel();
         $strand                 = new StrandModel();
         $sequence               = new SequenceModel();
-        $address = new AddressModel();
+        $address                = new AddressModel();
         $data["config"]         = $this->config_model->asArray()->where('id', 1)->findAll()[0];
         $data['year_started']   = $config->year_started;
         $data['barangay']       = $config->barangay;
@@ -51,6 +53,7 @@ class ScholarRegistrationController extends BaseController
         $data['school']         = $school->asArray()->orderBy('school_name', 'ASC')->findAll();
         $data['strand']         = $strand->asArray()->orderBy('strand', 'ASC')->findAll();
         $data['course']         = $course->asArray()->orderBy('course', 'ASC')->findAll();
+        $data['tvet_course']    = $tvet_course->asArray()->orderBy('course', 'ASC')->findAll();
         $data['college_school'] = $college_school->asArray()->orderBy('school_name', 'ASC')->findAll();
         $data['year_level']     = $config->yearLevel;
         $data['sequence_year']  = $sequence->asArray()->where('Sys_ID', 1)->findAll()[0]['seq_year'];
@@ -283,14 +286,11 @@ class ScholarRegistrationController extends BaseController
                 $data['profile'] = $this->senior_high_registration->get_applicant_details($id);
                 return view('admin/scholar_registration_shs_print', $data);
             } else if ($segment[2] == "college") {
-                $data['profile']  = $this->college_registration->get_applicant_details($id);
-                 
-                // print_r($data['profile']);
-                return view('admin/scholar_registration_college_tvet_print', $data);
+                $data['profile']  = $this->college_registration->get_applicant_details($id); 
+                return view('admin/scholar_registration_college_print', $data);
             } else if ($segment[2] == "tvet") {
                 $data['profile'] = $this->tvet_registration->get_applicant_details($id);  
-                // print_r($data['profile']);
-                return view('admin/scholar_registration_college_tvet_print', $data);
+                return view('admin/scholar_registration_tvet_print', $data);
             } else {
                 return redirect()->back();
             }

@@ -53,14 +53,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
+                            <?php 
                                 $counter = 1; 
                                 foreach($result as $row){ 
                                     if(in_array( $scholarship_type  ,['College', 'TVET'])){
                                         $contact    = in_array($row->contact_no, ["-", null, "None", "" ]) ? "": $row->contact_no;
                                         $name       = ucwords( $row->lastname . ", "  . $row->firstname . " "  . $row->middlename . " " . " "  . $row->suffix) ; 
                                         $address    = $row->address;
-                                        $course     = $row->course;
                                         $year_level = $row->appyear;
                                         $school     = $row->school_name;
                                         $availment  = $row->availment;
@@ -73,6 +72,13 @@
                                         $school     = $row->school_name;
                                         $availment  = $row->availment;
                                     }
+
+                                    if(in_array( $scholarship_type  ,['TVET'])){ 
+                                        $course     = $row->course_name;
+                                    }else if(in_array( $scholarship_type  ,['College'])){
+                                        $course     = $row->course;
+                                    }
+                                    
                                     
                             ?>
                                 <tr>

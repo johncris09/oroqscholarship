@@ -147,9 +147,8 @@
 					$address    = ucwords( $profile->address );
 					$strand     = $profile->course;
 					$year_level = $profile->appyear;
-					$school     = $profile->school;
-					$availment  = $profile->availment;
-					$school     = $profile->school;
+					$school     = $profile->school_name;
+					$availment  = $profile->availment; 
 
 					if($num == $tot_record){
 			?>

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\AddressModel;
 use App\Models\CollegeModel;
 use App\Models\SeniorHighModel;
 use App\Models\TvetModel;
@@ -50,20 +51,18 @@ class DashboardController extends BaseController
             $college_tvet_data['appsy'] = (isset($_GET['app_year'])) ? $_GET['app_year']: $config['current_sy'];
         }
         $data["page_title"]               = "Dashboard";
-        $data['tot_approved_shs']         = $this->senior_high->count_application($shs_data); 
+        $data['tot_approved_shs']         = $this->senior_high->count_application($shs_data);  
         $data['tot_approved_college']     = $this->college->count_application($college_tvet_data); 
-        $data['tot_approved_tvet']        = $this->tvet->count_application($college_tvet_data); 
-
+        $data['tot_approved_tvet']        = $this->tvet->count_application($college_tvet_data);  
         $data["scholarship_status"]       = $this->scholarship_status($shs_data, $college_tvet_data);
-        $data["total_scholarship_status"] = $this->get_total_scholarship_status($shs_data, $college_tvet_data);
-        // print_r($data['total_scholarship_status']);
+        $data["total_scholarship_status"] = $this->get_total_scholarship_status($shs_data, $college_tvet_data); 
         $data["shs_gender"]               = $this->scholarship_shs_gender($shs_data);
         $data["college_gender"]           = $this->scholarship_college_gender($college_tvet_data);
         $data["tvet_gender"]              = $this->scholarship_tvet_gender($college_tvet_data);
         $data["scholarship_barangay"]     = $this->scholarship_barangay($shs_data, $college_tvet_data);
-        $data["shs_school"]               = $this->get_by_shs_school($shs_data, $college_tvet_data);
+        $data["shs_school"]               = $this->get_by_shs_school($shs_data, $college_tvet_data); 
         $data["college_school"]           = $this->get_by_college_school($college_tvet_data);
-        $data["tvet_school"]              = $this->get_by_tvet_school($college_tvet_data);
+        $data["tvet_school"]              = $this->get_by_tvet_school($college_tvet_data); 
         $data['total_gender']             = $this->get_total_gender($shs_data, $college_tvet_data);
         return view('admin/dashboard', $data);
     }
@@ -238,25 +237,50 @@ class DashboardController extends BaseController
 
 
     public function scholarship_barangay($shs_data, $college_tvet_data)
-    { 
-        $barangay = $this->custom_config->barangay;
+    {  
+        
+        $address                = new AddressModel();
+        
+        $barangay       = $address->asArray()->findAll();
+        // return $barangay;
         $data     = [];
-        foreach ($barangay as $brgy) {
-            $data['barangay'][] = $brgy; 
-            $shs                = $this->senior_high->get_tot_by_barangay($brgy, $shs_data);
+        foreach ($barangay as $row) {
+            $data['barangay'][] = $row['barangay'];
+            $shs                = $this->senior_high->get_tot_by_barangay($row['id'], $shs_data);
             foreach ($shs as $shs) {
                 $data['shs'][]  = $shs->total;
             }
-            $college  = $this->college->get_tot_by_barangay($brgy, $college_tvet_data);
+            $college  = $this->college->get_tot_by_barangay($row['id'], $college_tvet_data);
             foreach ($college as $college) {
                 $data['college'][]  = $college->total;
             }
-            $tvet  = $this->tvet->get_tot_by_barangay($brgy, $college_tvet_data);
+            $tvet  = $this->tvet->get_tot_by_barangay($row['id'], $college_tvet_data);
             foreach ($tvet as $tvet) {
                 $data['tvet'][]  = $tvet->total;
             }
+
         }
+
         return $data;
+        
+        // $barangay = $this->custom_config->barangay;
+        // $data     = [];
+        // foreach ($barangay as $brgy) {
+        //     $data['barangay'][] = $brgy; 
+        //     $shs                = $this->senior_high->get_tot_by_barangay($brgy, $shs_data);
+        //     foreach ($shs as $shs) {
+        //         $data['shs'][]  = $shs->total;
+        //     }
+        //     $college  = $this->college->get_tot_by_barangay($brgy, $college_tvet_data);
+        //     foreach ($college as $college) {
+        //         $data['college'][]  = $college->total;
+        //     }
+        //     $tvet  = $this->tvet->get_tot_by_barangay($brgy, $college_tvet_data);
+        //     foreach ($tvet as $tvet) {
+        //         $data['tvet'][]  = $tvet->total;
+        //     }
+        // }
+        // return $data;
     }
 
     public function filter()

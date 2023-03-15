@@ -317,6 +317,7 @@ class SeniorHighController extends BaseController
         $school                   = $_POST['school'];
         $sem                      = $_POST['sem'];
         $sy                       = $_POST['school_year']; 
+        $status                   = $_POST['status'];
         $availment                = $_POST['availment'];
         $gender                   = $_POST['gender'];
         $year_level               = $_POST['year_level'];
@@ -328,11 +329,11 @@ class SeniorHighController extends BaseController
 
 
         if($_POST['appnoidfrom'] == "" || $_POST['appnoidto']  == ""  ){ 
-            $res = $this->senior_high->generate_payroll($school, $sy, $sem, $availment, $gender, $year_level, $address );
+            $res = $this->senior_high->generate_payroll($school, $sy, $status, $sem, $availment, $gender, $year_level, $address );
         }else{
-            $res = $this->senior_high->between_payroll($appnoidfrom, $appnoidto, $appnoyear, $appnosem,  $school, $sy, $sem, $availment, $gender, $year_level, $address );
+            $res = $this->senior_high->between_payroll($appnoidfrom, $appnoidto, $appnoyear, $appnosem,  $school, $sy, $status, $sem, $availment, $gender, $year_level, $address );
         } 
-        
+         
         $data["result"]      = $res; 
         $data['tot_record']  = count($data["result"]);
         $data['tot_page']    = ceil($data['tot_record']   / 20);

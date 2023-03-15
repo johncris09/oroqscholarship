@@ -115,7 +115,7 @@ class SeniorHighModel extends Model
             ->table($this->table) 
             ->where($data)
             ->where('appmanager', 'Active');
-        $query = $builder->countAllResults();
+        $query = $builder->countAllResults(); 
         return $query;
     }
     
@@ -353,7 +353,8 @@ class SeniorHighModel extends Model
         return $results;  
     } 
 
-    public function between($appnoidfrom,
+    public function between(
+        $appnoidfrom,
         $appnoidto,
         $appnoyear,
         $appnosem,
@@ -453,54 +454,186 @@ class SeniorHighModel extends Model
         return $results;   
     } 
 
-    public function generate_payroll($school, $sy, $sem, $availment, $gender, $year_level, $address )
-    {
-        $query_string =  ' 
-            SELECT * 
-            FROM senior_high 
-            WHERE school LIKE "'.$school.'%"  
-            AND appsy LIKE "'.$sy.'%"  
-            AND appsem LIKE "'.$sem.'%"  
-            AND availment LIKE "'.$availment.'%"
-            AND gender LIKE "'.$gender.'%"
-            AND appyear LIKE "'.$year_level.'%"
-            AND address LIKE "'.$address.'%"  
-            AND (appstatus = "Approved" or appstatus = "Additional Approved")
-            AND appmanager = "Active"
-            ORDER BY lastname, firstname and middlename
-        '; 
 
-        $query = $this->db->query($query_string); 
-        return $query->getResult(); 
+    public function generate_payroll(
+        $school,
+        $appsy,
+        $appstatus,
+        $appsem,
+        $availment,
+        $gender,
+        $appyear,
+        $address 
+    )
+    {
+
+        $school    = isset($school) ? $school      : null;
+        $appstatus = isset($appstatus) ? $appstatus: null; 
+        $appsy     = isset($appsy) ? $appsy        : null; 
+        $appsem    = isset($appsem) ? $appsem      : null; 
+        $availment = isset($availment) ? $availment: null; 
+        $gender    = isset($gender) ? $gender      : null; 
+        $appyear   = isset($appyear) ? $appyear    : null; 
+        $address   = isset($address) ? $address    : null; 
+
+
+        
+        // define the query
+        $query = $this->db->table('senior_high'); 
+        $query->join('senior_high_school', 'senior_high.school = senior_high_school.id');
+        $query->join('barangay', 'senior_high.address = barangay.id');
+        $query->join('strand', 'senior_high.course = strand.id');
+        
+        $query->select('
+            senior_high.*,
+            barangay.barangay as address,
+            senior_high_school.school_name as school_name,
+            senior_high_school.address as school_address,
+            strand.strand as strand,
+        ');
+
+
+
+        if (!empty($school)) {
+            $query->where('school', $school);
+        } 
+
+        if (!empty($appstatus)) {
+            $query->where('senior_high.appstatus', $appstatus);
+        }
+        
+        if (!empty($appsy)) {
+            $query->where('senior_high.appsy', $appsy);
+        }
+        
+        if (!empty($appsem)) {
+            $query->where('senior_high.appsem', $appsem);
+        }
+
+        if (!empty($availment)) {
+            $query->where('senior_high.availment', $availment);
+        }
+
+        if (!empty($gender)) {
+            $query->where('senior_high.gender', $gender);
+        }
+
+        if (!empty($appyear)) {
+            $query->where('senior_high.appyear', $appyear);
+        }
+        
+        if (!empty($address)) {
+            $query->where('senior_high.address', $address);
+        }
+
+        $query->orderBy('lastname, firstname, middlename', 'asc');
+        $results = $query->get()->getResult(); 
+        // $results = $query->getCompiledSelect();
+
+        return $results;   
     } 
 
     
 
-    public function between_payroll($appnoidfrom, $appnoidto, $appnoyear, $appnosem,  $school, $status,$sy, $sem, $availment, $gender, $year_level, $address )
-    {
-        $query_string =  ' 
-            SELECT * 
-            FROM senior_high 
-            WHERE appnoid BETWEEN "'.$appnoidfrom.'" 
-            AND "'.$appnoidto.'" 
-            HAVING appnoyear LIKE "'.$appnoyear.'%"  
-            AND appnosem LIKE "'.$appnosem.'%" 
-            AND school LIKE "'.$school.'%" 
-            AND appsem LIKE "'.$sem.'%" 
-            AND appsy LIKE "'.$sy.'%"  
-            AND availment LIKE "'.$availment.'%"
-            AND gender LIKE "'.$gender.'%"
-            AND appyear LIKE "'.$year_level.'%"
-            AND address LIKE "'.$address.'%"  
-            AND appstatus LIKE "'.$status.'%"
-            AND (appstatus = "Approved" or appstatus = "Additional Approved")
-            AND appmanager="Active"
-            ORDER BY appnoid
-        '; 
 
-        $query = $this->db->query($query_string);
-        return $query->getResult(); 
-    } 
+    public function between_payroll(
+        $appnoidfrom,
+        $appnoidto,
+        $appnoyear,
+        $appnosem,
+        $school,
+        $appstatus,
+        $appsy,
+        $appsem,
+        $availment,
+        $gender,
+        $appyear,
+        $address 
+    )
+    { 
+        
+        $school    = isset($school) ? $school      : null;
+        $appstatus = isset($appstatus) ? $appstatus: null; 
+        $appsy     = isset($appsy) ? $appsy        : null; 
+        $appsem    = isset($appsem) ? $appsem      : null; 
+        $availment = isset($availment) ? $availment: null; 
+        $gender    = isset($gender) ? $gender      : null; 
+        $appyear   = isset($appyear) ? $appyear    : null; 
+        $address   = isset($address) ? $address    : null; 
+
+
+        
+        // define the query
+        $query = $this->db->table('senior_high'); 
+        $query->join('senior_high_school', 'senior_high.school = senior_high_school.id');
+        $query->join('barangay', 'senior_high.address = barangay.id');
+        $query->join('strand', 'senior_high.course = strand.id');
+        
+        $query->select('
+            senior_high.*,
+            barangay.barangay as address,
+            senior_high_school.school_name as school_name,
+            senior_high_school.address as school_address,
+            strand.strand as strand,
+        ');
+
+
+        
+        if (!empty($appnoidfrom)) {
+            $query->where('appnoid >=', $appnoidfrom);
+        } 
+
+        
+        if (!empty($appnoidto)) {
+            $query->where('appnoid <=', $appnoidto);
+        } 
+
+
+        if (!empty($appnoyear)) {
+            $query->where('appnoyear', $appnoyear);
+        } 
+
+        if (!empty($appnosem)) {
+            $query->where('appnosem', $appnosem);
+        }   
+
+        if (!empty($school)) {
+            $query->where('school', $school);
+        } 
+
+        if (!empty($appstatus)) {
+            $query->where('senior_high.appstatus', $appstatus);
+        }
+        
+        if (!empty($appsy)) {
+            $query->where('senior_high.appsy', $appsy);
+        }
+        
+        if (!empty($appsem)) {
+            $query->where('senior_high.appsem', $appsem);
+        }
+
+        if (!empty($availment)) {
+            $query->where('senior_high.availment', $availment);
+        }
+
+        if (!empty($gender)) {
+            $query->where('senior_high.gender', $gender);
+        }
+
+        if (!empty($appyear)) {
+            $query->where('senior_high.appyear', $appyear);
+        }
+        
+        if (!empty($address)) {
+            $query->where('senior_high.address', $address);
+        }
+
+        $query->orderBy('lastname, firstname, middlename', 'asc');
+        $results = $query->get()->getResult();  
+
+        return $results;   
+    }
 
 
     public function get_tot_by_status($data)
@@ -514,18 +647,27 @@ class SeniorHighModel extends Model
         //     ->get()
         //     ->getResult();
         return $query;
-    }
+    } 
+
+    
     public function get_tot_by_school($data)
-    {
-        $query = $this->builder
-            ->select('school as school, count(*) as total')
-            ->where($data)
-            ->where('school !=', "")
-            ->groupBy('school')
-            ->get()
-            ->getResult();
-        return $query;
+    { 
+        $builder = $this->db->table('senior_high'); 
+        $builder->join('senior_high_school', 'senior_high.school = senior_high_school.id'); 
+        $builder->where($data);
+        $builder->select('
+            senior_high_school.school_name as school, 
+            count(*) as total,
+        ');
+        $builder->groupBy('senior_high_school.school_name');
+        
+
+        // Get the results of the query
+        $results = $builder->get()->getResult(); 
+
+        return $results;
     }
+
 
 
     public function get_tot_by_barangay($barangay, $data)
@@ -533,7 +675,7 @@ class SeniorHighModel extends Model
         $query = $this->builder
             ->select('address as barangay, count(*) as total')
             ->where($data)
-            ->like('address', $barangay, 'both')
+            ->where('address', $barangay)
             ->get()
             ->getResult();
         return $query;

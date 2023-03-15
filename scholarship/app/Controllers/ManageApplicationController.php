@@ -11,6 +11,7 @@ use App\Models\SchoolModel;
 use App\Models\SeniorHighModel;
 use App\Models\SequenceModel;
 use App\Models\StrandModel;
+use App\Models\TvetCourseModel;
 use App\Models\TvetModel;
 use Config\Custom_config;
 
@@ -37,6 +38,7 @@ class ManageApplicationController extends BaseController
 
         $strand                 = new StrandModel(); 
         $course                 = new CourseModel();
+        $tvet_course            = new TvetCourseModel();
         $address                = new AddressModel();
         $college_school         = new CollegeSchoolModel();
         $config                 = new Custom_config; 
@@ -45,6 +47,7 @@ class ManageApplicationController extends BaseController
         $data["page_title"]     = "Manage Application";
         $data['year_started']   = $config->year_started;
         $data['course']         = $course->asArray()->findAll();
+        $data['tvet_course']    = $tvet_course->asArray()->findAll();
         $data['year_level']     = $config->yearLevel;
         $data['scholar_status'] = $config->scholar_status;
         $data['type']           = $segment[2];

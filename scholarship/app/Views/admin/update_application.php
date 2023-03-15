@@ -394,10 +394,7 @@
                                         </div>
                                     </div> 
                                 </div> 
-                                <div class="row g-3" >
-                                    <?php 
-                                        // print_r($profile);
-                                    ?>
+                                <div class="row g-3" > 
                                     <div class="col">
                                         <label for="school_address" class="form-label">School Address </label> 
                                         <input type="text" value="<?php echo $profile['school_address']; ?>" class="form-control text-capitalize" name="school_address" readonly >
@@ -546,8 +543,7 @@
                                             </div> 
                                         </div>
                                         <div class="row">
-                                            <div class="col-12">  
-                                                <?Php print_r($profile['address']) ?>
+                                            <div class="col-12">   
                                                 <label for="address" class="form-label">Address <?= $required_field; ?></label>
                                                 <select class="form-control" name="address"  required>
                                                     <option value="">Select</option> 
@@ -883,7 +879,7 @@
                             
                             <form id="tvet-form" class="validation-form">
                                 <div class="row">  
-                                    <div class="col-12">
+                                    <div class="col-12"> 
                                         <div class="row justify-content-between">
                                             <div class="col-6">
                                                 <label for="" class="form-label">App No. </label>
@@ -1134,14 +1130,14 @@
                                         <select class="form-control" name="course" required>
                                             <option value="">Select</option> 
                                             <?php 
-                                                foreach($course as $row){  
-                                                    if($row['course'] == $profile['course']){
+                                                foreach($tvet_course as $row){  
+                                                    if($row['id'] == $profile['course']){
                                                         $selected  = "selected";
                                                     }else{ 
                                                         $selected  = "";
                                                     }
                                             ?> 
-                                                <option <?= $selected ?> value="<?= $row['course']  ?>"><?= $row['course']  ?></option>  
+                                                <option <?= $selected ?> value="<?= $row['id']  ?>"><?= $row['course']  ?></option>  
                                             <?php } ?>  
                                         </select>   
                                         <!-- add modal form -->

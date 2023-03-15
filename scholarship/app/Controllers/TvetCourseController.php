@@ -2,26 +2,26 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController;
-use App\Models\CourseModel;
+use App\Controllers\BaseController; 
+use App\Models\TvetCourseModel;
 use Config\Custom_config;
 use App\Models\UserActivityModel;
 
-class CourseController extends BaseController
+class TvetCourseController extends BaseController
 {
 
     public function index()
     {
-        $data["page_title"]     = "College Course";
+        $data["page_title"]     = "Tvet Course";
         $config                 = new Custom_config();
         $data['required_field'] = $config->requiredField; 
-        return view('admin/course', $data);
+        return view('admin/tvet_course', $data);
     }
 
 
     public function get_all()
     {
-        $course                 = new CourseModel(); 
+        $course                 = new TvetCourseModel(); 
         $data['data'] = $course->orderBy('course', 'asc')->findAll(); 
         echo Json_encode($data);
     }
@@ -30,7 +30,7 @@ class CourseController extends BaseController
 
     public function get($id)
     {
-        $course = new CourseModel();
+        $course = new TvetCourseModel();
         $data   = $course->find($id);
         echo Json_encode($data);
     }
@@ -38,7 +38,7 @@ class CourseController extends BaseController
     public function insert()
     {
         try {
-            $course = new CourseModel();
+            $course = new TvetCourseModel();
             $data = [
                 'course'  => $this->request->getPost('course'),
                 'manager' => $this->request->getPost('manager'),
@@ -69,7 +69,7 @@ class CourseController extends BaseController
 
 
         try {
-            $course = new CourseModel();
+            $course = new TvetCourseModel();
             $id     = $this->request->getPost('id');
             $data = [
                 'course'  => $this->request->getPost('course'),
@@ -100,7 +100,7 @@ class CourseController extends BaseController
     public function delete($id)
     {
         try {
-            $course = new CourseModel();
+            $course = new TvetCourseModel();
             $course->delete($id);
             $res = [
                 "response" => true,

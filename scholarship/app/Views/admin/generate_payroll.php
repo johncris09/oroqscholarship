@@ -128,7 +128,7 @@
                                         <label for="school" class="form-label">School</label>
                                         <select class="form-control" name="school" >
                                             <option value="">Select</option> 
-                                            <?php foreach($college_school as $row):?> 
+                                            <?php foreach($school as $row):?> 
                                                 <?php if($row['id'] != ""):?> 
                                                     <option value="<?= $row['id']  ?>"><?= $row['school_name']  ?></option>  
                                                 <?php endif; ?>
@@ -137,7 +137,7 @@
                                     </div>  
                                 </div> 
                                 <div class="row justify-content-center">
-                                    <div class="col-md-5">   
+                                    <div class="col-md-3">   
                                         <label for="semester" class="form-label">Semester</label>
                                         <select class="form-control" name="sem"  >
                                             <option value="">Select</option> 
@@ -146,7 +146,7 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </div>  
-                                    <div class="col-md-4">   
+                                    <div class="col-md-3">  
                                         <label for="school_year" class="form-label">SY</label>
                                         <select class="form-control"   name="school_year"  >
                                             <option value="">Select</option> 
@@ -154,6 +154,21 @@
                                                 <option value="SY: <?=  ($year - 1) . "-" .  $year ?>">SY: <?= ($year - 1) . "-" .  $year  ?></option>
                                             <?php endforeach; ?>
                                         </select>
+                                    </div>
+                                    <div class="col-md-3">   
+                                        <label for="status" class="form-label">Status</label>
+                                        <select class="form-control"  name="status" >
+                                            <option value="">Select</option> 
+                                            <?php  foreach($scholar_status as $row){  
+                                                        if( ! in_array(strtolower($row), ['pending', 'disapproved'])){
+                                            ?>
+                                                            <option  value="<?= $row ?>"><?= $row ?></option>  
+                                            <?php 
+                                                        }
+                                                    } 
+                                            ?> 
+                                            <option value="All Approved">All Approved</option>
+                                        </select>  
                                     </div>
                                      
                                 </div> 
@@ -241,7 +256,7 @@
                                     </div>  
                                 </div> 
                                 <div class="row justify-content-center">
-                                    <div class="col-md-5">   
+                                    <div class="col-md-3">   
                                         <label for="semester" class="form-label">Semester</label>
                                         <select class="form-control" name="sem"  >
                                             <option value="">Select</option> 
@@ -250,7 +265,7 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </div>  
-                                    <div class="col-md-4">   
+                                    <div class="col-md-3">   
                                         <label for="school_year" class="form-label">SY</label>
                                         <select class="form-control"   name="school_year"  >
                                             <option value="">Select</option> 
@@ -259,7 +274,21 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-                                     
+                                    <div class="col-md-3">   
+                                        <label for="status" class="form-label">Status</label>
+                                        <select class="form-control"  name="status" >
+                                            <option value="">Select</option> 
+                                            <?php  foreach($scholar_status as $row){  
+                                                        if( ! in_array(strtolower($row), ['pending', 'disapproved'])){
+                                            ?>
+                                                            <option  value="<?= $row ?>"><?= $row ?></option>  
+                                            <?php 
+                                                        }
+                                                    } 
+                                            ?> 
+                                            <option value="All Approved">All Approved</option>
+                                        </select>  
+                                    </div> 
                                 </div> 
                                 <div class="row justify-content-center">
                                     <div class="col-md-3">
@@ -329,7 +358,7 @@
                                 </div>   
                             </form>
 
-                        </div> 
+                        </div>
                         <div class="tab-pane   " id="tvet-tab">  
                             <form action="generate_payroll/tvet_payroll" method="post">
                                 <div class="row justify-content-center">
@@ -346,7 +375,7 @@
                                     </div>  
                                 </div> 
                                 <div class="row justify-content-center">
-                                    <div class="col-md-5">   
+                                    <div class="col-md-3">  
                                         <label for="semester" class="form-label">Semester</label>
                                         <select class="form-control" name="sem"  >
                                             <option value="">Select</option> 
@@ -355,7 +384,7 @@
                                             <?php endforeach; ?>
                                         </select>
                                     </div>  
-                                    <div class="col-md-4">   
+                                    <div class="col-md-3">  
                                         <label for="school_year" class="form-label">SY</label>
                                         <select class="form-control"   name="school_year"  >
                                             <option value="">Select</option> 
@@ -363,6 +392,21 @@
                                                 <option value="SY: <?=  ($year - 1) . "-" .  $year ?>">SY: <?= ($year - 1) . "-" .  $year  ?></option>
                                             <?php endforeach; ?>
                                         </select>
+                                    </div> 
+                                    <div class="col-md-3">   
+                                        <label for="status" class="form-label">Status</label>
+                                        <select class="form-control"  name="status" >
+                                            <option value="">Select</option> 
+                                            <?php  foreach($scholar_status as $row){  
+                                                        if( ! in_array(strtolower($row), ['pending', 'disapproved'])){
+                                            ?>
+                                                            <option  value="<?= $row ?>"><?= $row ?></option>  
+                                            <?php 
+                                                        }
+                                                    } 
+                                            ?> 
+                                            <option value="All Approved">All Approved</option>
+                                        </select>  
                                     </div> 
                                 </div> 
                                 <div class="row justify-content-center">
