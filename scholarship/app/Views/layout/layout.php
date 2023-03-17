@@ -259,19 +259,29 @@ $db = db_connect();
                             <?php
                                 if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
                             ?>
-                                <li class="menu-title mt-1">Utilities</li>
-                                    <li> 
-                                        <a href="<?= base_url('course') ?>">  
-                                            <i class="mdi mdi-book-outline"></i>
-                                            <span> Course </span>
-                                        </a>
-                                    </li>
+                                <li class="menu-title mt-1">Utilities</li> 
                                     <li>
-                                        <a href="<?= base_url('strand') ?>"> 
+                                        <a href="#course" data-bs-toggle="collapse">
                                             <i class="mdi mdi-book-outline"></i>
-                                            <span> Strand </span>
+                                            <span> Strand/Course </span>
+                                            <span class="menu-arrow"></span>
                                         </a>
-                                    </li>
+                                        <div class="collapse" id="course">
+                                            <ul class="nav-second-level">
+                                                <li>
+                                                    <a href="<?= base_url('strand') ?>"> Strand </a>
+                                                </li>
+                                                <li>
+                                                    <a href="<?= base_url('course') ?>">college Course </a>
+                                                </li>
+                                                <li>
+                                                    <a href="<?= base_url('tvet_course') ?>">TVET Course </a>
+                                                </li> 
+                                            </ul>
+                                        </div>
+                                    </li> 
+
+
                                     <li>
                                         <a href="#school" data-bs-toggle="collapse">
                                             <i class="mdi mdi-cog-sync-outline"></i>
@@ -349,7 +359,7 @@ $db = db_connect();
                                 <div class="page-title-box">
                                     <h4 class="page-title"><?= !isset($page_title) ? "Dashboard" : $page_title; ?></h4>
                                     <?php
-                                        if( in_array(uri_string(), ["/", "approved", "pending", "manage"]) ){
+                                        if( in_array(uri_string(), ["/", "approved", "pending", "manage", "archived"]) ){
                                     ?>
                                         
                                             <div> 
