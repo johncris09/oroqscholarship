@@ -122,7 +122,7 @@
                     </ul>
                     <div class="tab-content"> 
                         <div class="tab-pane active" id="senior-high-tab">  
-                            <form target="_blank" action="generate_report/shs_report" method="post">
+                            <form  action="generate_report/shs_report" method="post">
                                 <div class="row justify-content-center">
                                     <div class="col-md-9">  
                                         <label for="school" class="form-label">School</label>
