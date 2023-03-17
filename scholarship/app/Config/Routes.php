@@ -37,7 +37,7 @@ $routes->set404Override();
 // route since we don't have to scan directories. 
 
 $routes->group('/', ["filter" => "auth"],  function ($routes) {
-    $routes->get('', 'DashboardController::index');
+    $routes->get('', 'DashboardController::index'); 
     $routes->get('scholarship_status', 'DashboardController::scholarship_status');
     $routes->get('get_by_shs_school', 'DashboardController::get_by_shs_school');
     $routes->get('get_by_college_school', 'DashboardController::get_by_college_school');
@@ -188,6 +188,16 @@ $routes->group('course', ["filter" => ["auth", "usernoaccess", "adminnoaccess"]]
     $routes->post('delete/(:num)', 'CourseController::delete/$1');
     $routes->post('insert', 'CourseController::insert');
     $routes->post('update', 'CourseController::update');
+});
+
+
+$routes->group('tvet_course', ["filter" => ["auth", "usernoaccess", "adminnoaccess"]],  function ($routes) {
+    $routes->get('/', 'TvetCourseController::index',);
+    $routes->get('get_all', 'TvetCourseController::get_all',);
+    $routes->get('get/(:num)', 'TvetCourseController::get/$1');
+    $routes->post('delete/(:num)', 'TvetCourseController::delete/$1');
+    $routes->post('insert', 'TvetCourseController::insert');
+    $routes->post('update', 'TvetCourseController::update');
 });
 
 $routes->group('user',  ["filter" => ["auth", "usernoaccess", "adminnoaccess"]],  function ($routes) {
