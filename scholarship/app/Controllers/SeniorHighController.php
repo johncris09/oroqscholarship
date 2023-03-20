@@ -343,7 +343,8 @@ class SeniorHighController extends BaseController
         if ($data['tot_record'] != 0) {
             return view('admin/shs_payroll', $data);
         } else {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            echo "No Record found.";
+            // throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }  
 
     } 

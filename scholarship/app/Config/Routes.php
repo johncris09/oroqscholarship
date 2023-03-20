@@ -171,6 +171,15 @@ $routes->group('collegeschool', ["filter" => ["auth", "usernoaccess", "adminnoac
     $routes->post('update', 'CollegeSchoolController::update');
 });
 
+$routes->group('tvetschool', ["filter" => ["auth", "usernoaccess", "adminnoaccess"]], function ($routes) {
+    $routes->get('/', 'TvetSchoolController::index');
+    $routes->get('get_all', 'TvetSchoolController::get_all');
+    $routes->get('get/(:num)', 'TvetSchoolController::get/$1');
+    $routes->post('delete/(:num)', 'TvetSchoolController::delete/$1');
+    $routes->post('insert', 'TvetSchoolController::insert');
+    $routes->post('update', 'TvetSchoolController::update');
+});
+
 
 $routes->group('strand', ["filter" => ["auth", "usernoaccess", "adminnoaccess"]],  function ($routes) {
     $routes->get('/', 'StrandController::index',);

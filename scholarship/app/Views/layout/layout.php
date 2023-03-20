@@ -291,10 +291,13 @@ $db = db_connect();
                                         <div class="collapse" id="school">
                                             <ul class="nav-second-level">
                                                 <li>
-                                                    <a href="<?= base_url('school') ?>">School Name(Senior High)</a>
+                                                    <a href="<?= base_url('school') ?>">Senior High School</a>
                                                 </li>
                                                 <li>
-                                                    <a href="<?= base_url('collegeschool') ?>">School Name(College)</a>
+                                                    <a href="<?= base_url('collegeschool') ?>">College School(College)</a>
+                                                </li> 
+                                                <li>
+                                                    <a href="<?= base_url('tvetschool') ?>">TVET School(College)</a>
                                                 </li> 
                                             </ul>
                                         </div>
