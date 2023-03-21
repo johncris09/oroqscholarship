@@ -77,31 +77,31 @@ class CollegeModel extends Model
     {
         $this->db       =&  $db;
         $this->builder  =   $db->table($this->table);
-    }
-
-
-    
+    } 
 
     public function get_applicant_details($id)
-    { 
-        $builder = $this->db->table('college'); 
-        $builder->join('college_school', 'college.school = college_school.id');
-        $builder->join('barangay', 'college.address = barangay.id'); 
-        $builder->where('college.id', $id);
-        $builder->select('
-            college.*,
-            barangay.barangay as address,
-            barangay.id as address_id,
-            college_school.school_name as school_name,
-            college_school.address as school_address, 
-        ');
+    {  
 
-        // Get the results of the query
-        $results = $builder->get()->getResultArray();
+        $query = $this->builder
+            ->select('
+                college.*,
+                barangay.barangay as address,
+                barangay.id as address_id,
+                college_school.school_name as school_name,
+                college_school.address as school_address, 
+                course.course as course_name,
+                
+            ')
+            ->join('college_school', 'college.school = college_school.id')
+            ->join('barangay', 'college.address = barangay.id')  
+            ->join('course', 'college.course = course.id')  
+            ->where('college.id', $id)
+            ->get()
+            ->getResultArray();
+        return $query[0];  
 
-        return $results[0];
-    }
-    
+
+    } 
 
 
     public function count()
@@ -178,86 +178,104 @@ class CollegeModel extends Model
     
     public function get_all($data)
     {
-
-        $builder = $this->db->table('college'); 
-        $builder->join('college_school', 'college.school = college_school.id');
-        $builder->join('barangay', 'college.address = barangay.id');  
-        $builder->where($data);
-        $builder->select('
-            college.*,
-            barangay.barangay as address,
-            college_school.school_name as school_name,
-            college_school.address as school_address, 
-        ');
-        
-        // Get the results of the query
-        $results = $builder->get()->getResultArray();
-
-        return $results;
+        $query = $this->builder
+            ->select('
+                college.*,
+                barangay.barangay as address,
+                college_school.school_name as school_name,
+                college_school.address as school_address,
+                course.course as course,
+            ')
+            ->join('college_school', 'college.school = college_school.id')
+            ->join('barangay', 'college.address = barangay.id')  
+            ->join('course', 'college.course = course.id')  
+            ->where($data)
+            ->orderBy('appnoid', 'asc')
+            ->get()
+            ->getResultArray();
+        return $query;  
+ 
     }
 
     
     public function get_pending_application($data)
-    {
-
-        $builder = $this->db->table('college'); 
-        $builder->join('college_school', 'college.school = college_school.id');
-        $builder->join('barangay', 'college.address = barangay.id'); 
-        $builder->where('college.appstatus', 'pending');  
-        $builder->where('appmanager', 'Active'); 
-        $builder->where($data);
-        $builder->select('
-            college.*,
-            barangay.barangay as address,
-            college_school.school_name as school_name,
-            college_school.address as school_address, 
-        ');
-        
-        // Get the results of the query
-        $results = $builder->get()->getResultArray();
-
-        return $results;
+    { 
+        $query = $this->builder
+            ->select('
+                college.*,
+                barangay.barangay as address,
+                college_school.school_name as school_name,
+                college_school.address as school_address, 
+                course.course as course_name
+            ')
+            ->join('college_school', 'college.school = college_school.id')
+            ->join('barangay', 'college.address = barangay.id')  
+            ->join('course', 'college.course = course.id') 
+            ->where('college.appstatus', 'pending')
+            ->where('appmanager', 'Active')
+            ->where($data)
+            ->orderBy('appnoid', 'asc')
+            ->get()
+            ->getResultArray();
+        return $query; 
     }
 
     
     
     public function get_archived_application($data)
     {
-
-        $builder = $this->db->table('college'); 
-        $builder->join('college_school', 'college.school = college_school.id');
-        $builder->join('barangay', 'college.address = barangay.id');  
-        $builder->where('appmanager', 'Archived'); 
-        $builder->where($data);
-        $builder->select('
-            college.*,
-            barangay.barangay as address,
-            college_school.school_name as school_name,
-            college_school.address as school_address, 
-        ');
-        
-        // Get the results of the query
-        $results = $builder->get()->getResultArray();
-
-        return $results;
+        $query = $this->builder
+            ->select('
+                college.*,
+                barangay.barangay as address,
+                college_school.school_name as school_name,
+                college_school.address as school_address,
+                course.course as course,
+            ')
+            ->join('college_school', 'college.school = college_school.id')
+            ->join('barangay', 'college.address = barangay.id')  
+            ->join('course', 'college.course = course.id')  
+            ->where('appmanager', 'Archived')
+            ->where($data)
+            ->orderBy('appnoid', 'asc')
+            ->get()
+            ->getResultArray();
+        return $query;  
     }
 
 
     public function get_approved_application($data)
     {
         $query = $this->builder
-            ->select('college.id, appsy, appnoyear, appnosem, appnoid, appstatus, firstname, middlename, lastname, suffix, barangay.barangay as address, course, college_school.school_name as school, appyear, ')
+            ->select('
+                college.id,
+                appsy,
+                appnoyear,
+                appnosem,
+                appnoid,
+                appstatus,
+                firstname,
+                middlename,
+                lastname,
+                suffix,
+                barangay.barangay as address,
+                course.course as course,
+                college_school.school_name as school,
+                appyear,'
+            )
             ->join('college_school', 'college.school = college_school.id')
-            ->join('barangay', 'college.address = barangay.id') 
-            ->Where('(appstatus = "Approved" or appstatus = "Additional Approved")')
+            ->join('barangay', 'college.address = barangay.id')  
+            ->join('course', 'college.course = course.id')
+            ->like('college.appstatus', 'approved', "both")
+            ->where('college.appstatus !=', 'disapproved')
             ->where('appmanager', 'Active')
             ->where($data)
             ->orderBy('appnoid', 'asc')
             ->get()
             ->getResult();
         return $query;
-    }
- 
+    } 
+
 
     public function generate(
         $school,
@@ -284,13 +302,15 @@ class CollegeModel extends Model
 
         $query = $this->db->table('college'); 
         $query->join('college_school', 'college.school = college_school.id');
-        $query->join('barangay', 'college.address = barangay.id');  
+        $query->join('barangay', 'college.address = barangay.id'); 
+        $query->join('course', 'college.course = course.id');
         $query->select('
             college.*,
             barangay.barangay as address,
             barangay.id as address_id,
             college_school.school_name as school_name,
             college_school.address as school_address, 
+            course.course as course,
         ');
         
         
@@ -332,6 +352,8 @@ class CollegeModel extends Model
             $query->where('college.address', $address);
         }
 
+
+        $query->where('appmanager', 'Active');
         $query->orderBy('lastname, firstname, middlename', 'asc');
         $results = $query->get()->getResult();  
 
@@ -375,12 +397,14 @@ class CollegeModel extends Model
         $query = $this->db->table('college'); 
         $query->join('college_school', 'college.school = college_school.id');
         $query->join('barangay', 'college.address = barangay.id');  
+        $query->join('course', 'college.course = course.id');
         $query->select('
             college.*,
             barangay.barangay as address,
             barangay.id as address_id,
             college_school.school_name as school_name,
             college_school.address as school_address, 
+            course.course as course,
         ');
         
         
@@ -440,6 +464,7 @@ class CollegeModel extends Model
             $query->where('college.address', $address);
         }
 
+        $query->where('appmanager', 'Active');
         $query->orderBy('lastname, firstname, middlename', 'asc');
         $results = $query->get()->getResult();  
 
@@ -473,13 +498,15 @@ class CollegeModel extends Model
 
         $query = $this->db->table('college'); 
         $query->join('college_school', 'college.school = college_school.id');
-        $query->join('barangay', 'college.address = barangay.id');  
+        $query->join('barangay', 'college.address = barangay.id'); 
+        $query->join('course', 'college.course = course.id');  
         $query->select('
             college.*,
             barangay.barangay as address,
             barangay.id as address_id,
             college_school.school_name as school_name,
             college_school.address as school_address, 
+            course.course as course,
         ');
         
         
@@ -522,6 +549,7 @@ class CollegeModel extends Model
             $query->where('college.address', $address);
         }
 
+        $query->where('appmanager', 'Active');
         $query->orderBy('lastname, firstname, middlename', 'asc');
         $results = $query->get()->getResult();  
 
@@ -563,13 +591,15 @@ class CollegeModel extends Model
 
         $query = $this->db->table('college'); 
         $query->join('college_school', 'college.school = college_school.id');
-        $query->join('barangay', 'college.address = barangay.id');  
+        $query->join('barangay', 'college.address = barangay.id'); 
+        $query->join('course', 'college.course = course.id');  
         $query->select('
             college.*,
             barangay.barangay as address,
             barangay.id as address_id,
             college_school.school_name as school_name,
             college_school.address as school_address, 
+            course.course as course,
         ');
         
         
@@ -629,6 +659,7 @@ class CollegeModel extends Model
             $query->where('college.address', $address);
         }
 
+        $query->where('appmanager', 'Active');
         $query->orderBy('lastname, firstname, middlename', 'asc');
         $results = $query->get()->getResult();  
 

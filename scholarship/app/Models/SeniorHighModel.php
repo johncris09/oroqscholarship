@@ -184,73 +184,68 @@ class SeniorHighModel extends Model
  
     
     public function get_all($data)
-    {
-
-        $builder = $this->db->table('senior_high'); 
-        $builder->join('senior_high_school', 'senior_high.school = senior_high_school.id');
-        $builder->join('barangay', 'senior_high.address = barangay.id');
-        $builder->join('strand', 'senior_high.course = strand.id'); 
-        $builder->where($data);
-        $builder->select('
-            senior_high.*,
-            barangay.barangay as address,
-            senior_high_school.school_name as school_name,
-            senior_high_school.address as school_address,
-            strand.strand as course,
-        ');
-        
-        // Get the results of the query
-        $results = $builder->get()->getResultArray();
-
-        return $results;
+    { 
+        $query = $this->builder
+            ->select('
+                senior_high.*,
+                barangay.barangay as address,
+                senior_high_school.school_name as school_name,
+                senior_high_school.address as school_address,
+                strand.strand as course,
+            ')
+            ->join('senior_high_school', 'senior_high.school = senior_high_school.id')
+            ->join('barangay', 'senior_high.address = barangay.id')  
+            ->join('strand', 'senior_high.course = strand.id')  
+            ->where($data)
+            ->orderBy('appnoid', 'asc')
+            ->get()
+            ->getResultArray();
+        return $query;  
     }
 
     public function get_pending_application($data)
-    {
-
-        $builder = $this->db->table('senior_high'); 
-        $builder->join('senior_high_school', 'senior_high.school = senior_high_school.id');
-        $builder->join('barangay', 'senior_high.address = barangay.id');
-        $builder->join('strand', 'senior_high.course = strand.id');  
-        $builder->where('senior_high.appstatus', 'pending');  
-        $builder->where('appmanager', 'Active'); 
-        $builder->where($data);
-        $builder->select('
-            senior_high.*,
-            barangay.barangay as address,
-            senior_high_school.school_name as school_name,
-            senior_high_school.address as school_address,
-            strand.strand as course,
-        ');
-        
-        // Get the results of the query
-        $results = $builder->get()->getResultArray();
-
-        return $results;
+    { 
+        $query = $this->builder
+            ->select('
+                senior_high.*,
+                barangay.barangay as address,
+                senior_high_school.school_name as school_name,
+                senior_high_school.address as school_address, 
+                strand.strand as course
+            ')
+            ->join('senior_high_school', 'senior_high.school = senior_high_school.id')
+            ->join('barangay', 'senior_high.address = barangay.id')  
+            ->join('strand', 'senior_high.course = strand.id') 
+            ->where('senior_high.appstatus', 'pending')
+            ->where('appmanager', 'Active')
+            ->where($data)
+            ->orderBy('appnoid', 'asc')
+            ->get()
+            ->getResultArray();
+        return $query;  
     }
 
     
     public function get_archived_application($data)
-    {
+    { 
+        $query = $this->builder
+            ->select('
+                senior_high.*,
+                barangay.barangay as address,
+                senior_high_school.school_name as school_name,
+                senior_high_school.address as school_address,
+                strand.strand as course,
+            ')
+            ->join('senior_high_school', 'senior_high.school = senior_high_school.id')
+            ->join('barangay', 'senior_high.address = barangay.id')  
+            ->join('strand', 'senior_high.course = strand.id')  
+            ->where('appmanager', 'Archived')
+            ->where($data)
+            ->orderBy('appnoid', 'asc')
+            ->get()
+            ->getResultArray();
+        return $query;  
 
-        $builder = $this->db->table('senior_high'); 
-        $builder->join('senior_high_school', 'senior_high.school = senior_high_school.id');
-        $builder->join('barangay', 'senior_high.address = barangay.id');
-        $builder->join('strand', 'senior_high.course = strand.id');   
-        $builder->where('appmanager', 'Archived'); 
-        $builder->where($data);
-        $builder->select('
-            senior_high.*,
-            barangay.barangay as address,
-            senior_high_school.school_name as school_name,
-            senior_high_school.address as school_address,
-            strand.strand as course,
-        ');
-        
-        // Get the results of the query
-        $results = $builder->get()->getResultArray();
-
-        return $results;
     }
 
 
@@ -259,9 +254,27 @@ class SeniorHighModel extends Model
     public function get_approved_application($data)
     {
         $query = $this->builder
-            ->select('senior_high.id, appsy, appnoyear, appnosem, appnoid, appstatus, firstname, middlename, lastname, suffix, barangay.barangay as address, strand.strand as course, senior_high_school.school_name as school, appyear, appstatus, ')
+            ->select('
+                senior_high.id,
+                appsy,
+                appnoyear,
+                appnosem,
+                appnoid,
+                appstatus,
+                firstname,
+                middlename,
+                lastname,
+                suffix,
+                barangay.barangay as address,
+                strand.strand as course,
+                senior_high_school.school_name as school,
+                appyear,
+                appstatus'
+            )
             ->join('senior_high_school', 'senior_high.school = senior_high_school.id')
             ->join('barangay', 'senior_high.address = barangay.id')
+            ->like('senior_high.appstatus', 'approved', "both")
+            ->where('senior_high.appstatus !=', 'disapproved')
             ->join('strand', 'senior_high.course = strand.id')
             ->Where('(appstatus = "Approved" or appstatus = "Additional Approved")')
             ->where('appmanager', 'Active')
@@ -351,6 +364,7 @@ class SeniorHighModel extends Model
             $query->where('senior_high.address', $address);
         }
 
+        $query->where('appmanager', 'Active');
         $query->orderBy('lastname, firstname, middlename', 'asc');
         $results = $query->get()->getResult(); 
         // $results = $query->getCompiledSelect();
@@ -458,6 +472,7 @@ class SeniorHighModel extends Model
             $query->where('senior_high.address', $address);
         }
 
+        $query->where('appmanager', 'Active');
         $query->orderBy('lastname, firstname, middlename', 'asc');
         $results = $query->get()->getResult(); 
         // $results = $query->getCompiledSelect();
@@ -543,6 +558,7 @@ class SeniorHighModel extends Model
             $query->where('senior_high.address', $address);
         }
 
+        $query->where('appmanager', 'Active');
         $query->orderBy('lastname, firstname, middlename', 'asc');
         $results = $query->get()->getResult(); 
         // $results = $query->getCompiledSelect();
@@ -651,6 +667,7 @@ class SeniorHighModel extends Model
             $query->where('senior_high.address', $address);
         }
 
+        $query->where('appmanager', 'Active');
         $query->orderBy('lastname, firstname, middlename', 'asc');
         $results = $query->get()->getResult();  
 

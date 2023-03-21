@@ -344,7 +344,7 @@
                                 </div>
                                 <div class="col">
                                     <label for="" class="form-label">Course <?= $required_field; ?></label>
-                                    <input type="text" value="<?= $profile['course'] ?>" class="form-control" name="course" required>  
+                                    <input type="text" value="<?= $profile['course_name'] ?>" class="form-control" name="course" required>  
                                 </div> 
                             </div> 
                             <div class="row g-3" >

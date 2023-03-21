@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\AddressModel;
 use App\Models\CollegeModel;
 use App\Models\CollegeSchoolModel;
+use App\Models\TvetSchoolModel;
 use App\Models\ConfigModel;
 use App\Models\CourseModel;
 use App\Models\SchoolModel;
@@ -39,6 +40,7 @@ class ScholarRegistrationController extends BaseController
         $course                 = new CourseModel();
         $tvet_course            = new TvetCourseModel();
         $college_school         = new CollegeSchoolModel();
+        $tvet_school            = new TvetSchoolModel();
         $strand                 = new StrandModel(); 
         $address                = new AddressModel();
         $data["config"]         = $this->config_model->asArray()->where('id', 1)->findAll()[0];
@@ -53,6 +55,7 @@ class ScholarRegistrationController extends BaseController
         $data['course']         = $course->asArray()->orderBy('course', 'ASC')->findAll();
         $data['tvet_course']    = $tvet_course->asArray()->orderBy('course', 'ASC')->findAll();
         $data['college_school'] = $college_school->asArray()->orderBy('school_name', 'ASC')->findAll();
+        $data['tvet_school']    = $tvet_school->asArray()->orderBy('school_name', 'ASC')->findAll();
         $data['year_level']     = $config->yearLevel; 
         $data['address']        = $address->asArray()->findAll();
         $data['app_no_id']      = $this->senior_high_registration->count() + 1;
@@ -283,9 +286,11 @@ class ScholarRegistrationController extends BaseController
                 return view('admin/scholar_registration_shs_print', $data);
             } else if ($segment[2] == "college") {
                 $data['profile']  = $this->college_registration->get_applicant_details($id); 
+                // print_r($data['profile'] ); 
                 return view('admin/scholar_registration_college_print', $data);
             } else if ($segment[2] == "tvet") {
-                $data['profile'] = $this->tvet_registration->get_applicant_details($id);  
+                $data['profile'] = $this->tvet_registration->get_applicant_details($id);
+                 
                 return view('admin/scholar_registration_tvet_print', $data);
             } else {
                 return redirect()->back();

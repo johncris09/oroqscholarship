@@ -82,25 +82,27 @@ class TvetModel extends Model
 
     
     public function get_applicant_details($id)
-    { 
-        $builder = $this->db->table('tvet'); 
-        $builder->join('college_school', 'tvet.school = college_school.id');
-        $builder->join('barangay', 'tvet.address = barangay.id'); 
-        $builder->join('tvet_course', 'tvet.course = tvet_course.id'); 
-        $builder->where('tvet.id', $id);
-        $builder->select('
-            tvet.*,
-            barangay.barangay as address,
-            barangay.id as address_id,
-            college_school.school_name as school_name,
-            college_school.address as school_address, 
-            tvet_course.course as course_name,
-        ');
+    {  
 
-        // Get the results of the query
-        $results = $builder->get()->getResultArray();
+        $query = $this->builder
+            ->select('
+                tvet.*,
+                barangay.barangay as address,
+                barangay.id as address_id,
+                tvet_school.school_name as school_name,
+                tvet_school.address as school_address, 
+                tvet_course.course as course_name,
+                
+            ')
+            ->join('tvet_school', 'tvet.school = tvet_school.id')
+            ->join('barangay', 'tvet.address = barangay.id')  
+            ->join('tvet_course', 'tvet.course = tvet_course.id')  
+            ->where('tvet.id', $id)
+            ->get()
+            ->getResultArray();
+        return $query[0];  
 
-        return $results[0];
+
     }
     
 
@@ -173,88 +175,103 @@ class TvetModel extends Model
     
     public function get_all($data)
     {
-
-        $builder = $this->db->table('tvet'); 
-        $builder->join('college_school', 'tvet.school = college_school.id');
-        $builder->join('barangay', 'tvet.address = barangay.id');  
-        $builder->where($data);
-        $builder->select('
-            tvet.*,
-            barangay.barangay as address,
-            college_school.school_name as school_name,
-            college_school.address as school_address, 
-        ');
-        
-        // Get the results of the query
-        $results = $builder->get()->getResultArray();
-
-        return $results;
+        $query = $this->builder
+            ->select('
+                tvet.*,
+                barangay.barangay as address,
+                tvet_school.school_name as school_name,
+                tvet_school.address as school_address,
+                tvet_course.course as course,
+            ')
+            ->join('tvet_school', 'tvet.school = tvet_school.id')
+            ->join('barangay', 'tvet.address = barangay.id')  
+            ->join('tvet_course', 'tvet.course = tvet_course.id')  
+            ->where($data)
+            ->orderBy('appnoid', 'asc')
+            ->get()
+            ->getResultArray();
+        return $query;  
+ 
     }
 
     
     public function get_pending_application($data)
     {
 
-        $builder = $this->db->table('tvet'); 
-        $builder->join('college_school', 'tvet.school = college_school.id');
-        $builder->join('barangay', 'tvet.address = barangay.id'); 
-        $builder->join('tvet_course', 'tvet.course = tvet_course.id'); 
-        $builder->where('tvet.appstatus', 'pending');  
-        $builder->where('appmanager', 'Active'); 
-        $builder->where($data);
-        $builder->select('
-            tvet.*,
-            barangay.barangay as address,
-            college_school.school_name as school_name,
-            college_school.address as school_address, 
-            tvet_course.course as course_name,
-        ');
-        
-        // Get the results of the query
-        $results = $builder->get()->getResultArray();
-
-        return $results;
+        $query = $this->builder
+            ->select('
+                tvet.*,
+                barangay.barangay as address,
+                tvet_school.school_name as school_name,
+                tvet_school.address as school_address, 
+                tvet_course.course as course_name
+            ')
+            ->join('tvet_school', 'tvet.school = tvet_school.id')
+            ->join('barangay', 'tvet.address = barangay.id')  
+            ->join('tvet_course', 'tvet.course = tvet_course.id') 
+            ->where('tvet.appstatus', 'pending')
+            ->where('appmanager', 'Active')
+            ->where($data)
+            ->orderBy('appnoid', 'asc')
+            ->get()
+            ->getResultArray();
+        return $query;  
     }
 
     public function get_archived_application($data)
-    {
-
-        $builder = $this->db->table('tvet'); 
-        $builder->join('college_school', 'tvet.school = college_school.id');
-        $builder->join('barangay', 'tvet.address = barangay.id');  
-        $builder->where('appmanager', 'Archived'); 
-        $builder->where($data);
-        $builder->select('
-            tvet.*,
-            barangay.barangay as address,
-            college_school.school_name as school_name,
-            college_school.address as school_address, 
-        ');
-        
-        // Get the results of the query
-        $results = $builder->get()->getResultArray();
-
-        return $results;
+    { 
+        $query = $this->builder
+            ->select('
+                tvet.*,
+                barangay.barangay as address,
+                tvet_school.school_name as school_name,
+                tvet_school.address as school_address,
+                tvet_course.course as course,
+            ')
+            ->join('tvet_school', 'tvet.school = tvet_school.id')
+            ->join('barangay', 'tvet.address = barangay.id')  
+            ->join('tvet_course', 'tvet.course = tvet_course.id')  
+            ->where('appmanager', 'Archived')
+            ->where($data)
+            ->orderBy('appnoid', 'asc')
+            ->get()
+            ->getResultArray();
+        return $query;  
     }
+
     
  
     public function get_approved_application($data)
     {
         $query = $this->builder
-            ->select('tvet.id, appsy, appnoyear, appnosem, appnoid, appstatus, firstname, middlename, lastname, suffix, barangay.barangay as address, course, college_school.school_name as school,, appyear, ')
-            ->join('college_school', 'tvet.school = college_school.id')
+            ->select('
+                tvet.id,
+                appsy,
+                appnoyear,
+                appnosem,
+                appnoid,
+                appstatus,
+                firstname,
+                middlename,
+                lastname,
+                suffix,
+                barangay.barangay as address,
+                course.course as course,
+                tvet_school.school_name as school,
+                appyear'
+            )
+            ->join('tvet_school', 'tvet.school = tvet_school.id')
             ->join('barangay', 'tvet.address = barangay.id') 
-            ->Where('(appstatus = "Approved" or appstatus = "Additional Approved")')
+            ->join('course', 'tvet.course = course.id')
+            ->like('tvet.appstatus', 'approved', "both")
+            ->where('tvet.appstatus !=', 'disapproved')
             ->where('appmanager', 'Active')
             ->where($data)
             ->orderBy('appnoid', 'asc')
             ->get()
             ->getResult();
         return $query;
-    } 
-    
-
-    
+    }  
 
     public function generate(
         $school,
@@ -331,6 +348,7 @@ class TvetModel extends Model
             $query->where('tvet.address', $address);
         }
 
+        $query->where('appmanager', 'Active');
         $query->orderBy('lastname, firstname, middlename', 'asc');
         $results = $query->get()->getResult();  
 
@@ -430,6 +448,7 @@ class TvetModel extends Model
             $query->where('tvet.address', $address);
         }
 
+        $query->where('appmanager', 'Active');
         $query->orderBy('lastname, firstname, middlename', 'asc');
         $results = $query->get()->getResult();  
 
@@ -513,6 +532,7 @@ class TvetModel extends Model
             $query->where('tvet.address', $address);
         }
 
+        $query->where('appmanager', 'Active');
         $query->orderBy('lastname, firstname, middlename', 'asc');
         $results = $query->get()->getResult();  
 
@@ -610,6 +630,7 @@ class TvetModel extends Model
             $query->where('tvet.address', $address);
         }
 
+        $query->where('appmanager', 'Active');
         $query->orderBy('lastname, firstname, middlename', 'asc');
         $results = $query->get()->getResult();  
 

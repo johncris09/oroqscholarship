@@ -176,7 +176,7 @@
                               $contact    = in_array($row->contact_no, ["-", null, "None", "" ]) ? "": $row->contact_no;
                               $name       = ucwords( $row->lastname . ", "  . $row->firstname . " "  . $row->middlename  . " " . " "  . $row->suffix) ; 
                               $address    = $row->address;
-                              $course     = $row->course;
+                              $course     = $row->course_name;
                               $year_level = $row->appyear;
                               $school     = $row->school_name;
                               $availment  = $row->availment;

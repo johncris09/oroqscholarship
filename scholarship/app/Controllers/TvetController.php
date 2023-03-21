@@ -274,7 +274,7 @@ class TvetController extends BaseController
         } 
 
         $data['query_string'] = 'appnoidfrom='.$appnoidfrom.'&appnoidto='.$appnoidto.'&appnoyear='.$appnoyear.'&appnosem='.$appnosem.'&school='.$school.'&status='.$status.'&school_year='.$sy.'&sem='.$sem.'&availment='.$availment.'&gender='.$gender.'&year_level='.$year_level.'&address='.$address;
-        $data["result"]       = $res;  
+        $data["result"]       = $res;   
         return view('admin/view_report', $data);  
     }
 
@@ -297,6 +297,7 @@ class TvetController extends BaseController
         $data["page_title"]       = "Generated Report"; 
         $data["scholarship_type"] = "TVET";
         $data['semester']         = $_GET['sem'];
+        $data['status']           = $_GET['status'];
         $data['school_year']      = $_GET['school_year']; 
 
         if($_GET['appnoidfrom'] == "" || $_GET['appnoidto']  == ""  ){ 

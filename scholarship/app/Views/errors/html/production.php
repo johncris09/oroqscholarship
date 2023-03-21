@@ -46,7 +46,7 @@
                                     <h4 class="  mt-4">SITE IS UNDER MAINTENANCE</h4>
                                     <p class="text-muted">We're improving the system and will return soon.</a></p>
 
-                                    <a href="<?php echo base_url(); ?>" class="btn btn-primary waves-effect waves-light mt-3">Return Home</a>
+                                    <!-- <a href="<?php echo base_url(); ?>" class="btn btn-primary waves-effect waves-light mt-3">Return Home</a> -->
                                 </div>
 
                             </div> <!-- end card-body -->

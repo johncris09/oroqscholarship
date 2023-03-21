@@ -42,7 +42,7 @@
                                             <h1 style="text-decoration: underline"> <?= $profile['appnoyear'] ?> - <?=  $profile['appnosem'] ?> -  <?= $profile['appnoid'] ?></span> </h1> 
                                         </div>
                                         <div class="col-6">
-                                            <label for="status" class="form-label">Status <?= $required_field; ?></label>
+                                            <label for="status" class="form-label">Status</label>
                                             <h1 style="text-decoration: underline" ><?= $profile['appstatus']; ?></h1> 
                                         </div>
                                     </div>
@@ -51,203 +51,134 @@
                                 <div class="col-9">
                                     <div class="row mt-3">
                                         <div class="col-4">
-                                            <label for="lastname" class="form-label">Last Name <?= $required_field; ?></label>
-                                            <input type="text" value="<?= $profile['lastname'] ?>" class="form-control text-capitalize"  name="lastname" required>
+                                            <label for="lastname" class="form-label">Last Name</label>
+                                            <input type="text" value="<?= $profile['lastname'] ?>" class="form-control text-capitalize"   >
                                         </div>
                                         <div class="col-4">
-                                            <label for="firstname" class="form-label">First Name <?= $required_field; ?></label>
-                                            <input type="text" value="<?= $profile['firstname'] ?>" class="form-control text-capitalize" name="firstname"  required>
+                                            <label for="firstname" class="form-label">First Name</label>
+                                            <input type="text" value="<?= $profile['firstname'] ?>" class="form-control text-capitalize" >
                                         </div>
                                         <div class="col-2">
                                             <label for="middlename" class="form-label">M.I.</label>
-                                            <input type="text" value="<?= $profile['middlename'] ?>" class="form-control text-capitalize"   name="middlename">
+                                            <input type="text" value="<?= $profile['middlename'] ?>" class="form-control text-capitalize"   >
                                         </div>
                                         <div class="col-2">
                                             <label for="suffix" class="form-label">Suffix</label>
-                                            <input type="text" value="<?= $profile['suffix'] ?>" class="form-control text-capitalize" name="suffix">
+                                            <input type="text" value="<?= $profile['suffix'] ?>" class="form-control text-capitalize" >
                                         </div> 
                                     </div>
                                     <div class="row">
                                         <div class="col-12">  
-                                            <label for="address" class="form-label">Address <?= $required_field; ?></label>
-                                            <select class="form-control" name="address"   required>
-                                                <option value="">Select</option> 
-                                                <?php 
-                                                    foreach($barangay as $row){
-                                                        if($row == $profile['address']){
-                                                            $selected  = "selected";
-                                                        }else{ 
-                                                            $selected  = "";
-                                                        }
-                                                ?> 
-                                                    <option <?= $selected ?> value="<?= $row ?>"><?= $row ?></option>  
-                                                <?php } ?>
-                                            </select>
+                                            <label for="address" class="form-label">Address</label>
+                                            <input type="text" value="<?= $profile['address'] ?>" class="form-control text-capitalize" > 
                                         </div>  
                                     </div>
                                     <div class="row">
                                         <div class="col"> 
-                                            <label for="birthdate"  class="form-label">Date of Birth <?= $required_field; ?></label>
-                                            <input type="text" value="<?= $profile['birthdate'] ?>"  class="form-control"   name="birthdate" required >
+                                            <label for="birthdate"  class="form-label">Date of Birth</label>
+                                            <input type="text" value="<?= $profile['birthdate'] ?>"  class="form-control"    >
                                         </div>
                                         <div class="col-2">
-                                            <label for="age" class="form-label">Age <?= $required_field; ?></label>
-                                            <input type="number" value="<?= $profile['AppAge'] ?>" class="form-control" name="age" readonly>
+                                            <?php  
+                                                // Set the birthdate string in yyyy-mm-dd format
+                                                $birthdate = date('Y-m-d', strtotime($profile['birthdate'])) ; 
+                                                
+                                                // Create a DateTime object from the birthdate string
+                                                $birthdateObj = new DateTime($birthdate);
+
+                                                // Get the current date as a DateTime object
+                                                $currentDateObj = new DateTime();
+
+                                                // Calculate the difference between the two dates in years
+                                                $age = $birthdateObj->diff($currentDateObj)->y;
+
+                                            ?>
+                                            
+                                            <label for="age" class="form-label">Age</label>
+                                            <input type="number" value="<?= $age; ?>" class="form-control"  readonly>
+                                        </div>
+                                        <div class="col"> 
+                                            <label for="civil_status" class="form-label">Civil Status</label>
+                                            <input type="text" value="<?= $profile['civil_status']; ?>" class="form-control"   readonly> 
                                         </div>
                                         <div class="col">
-                                            <label for="civil_status" class="form-label">Civil Status <?= $required_field; ?></label>
-                                            <select class="form-control"  name="civil_status" required>
-                                                <option value="">Select</option> 
-                                                <?php 
-                                                    foreach($civil_status as $row){
-                                                        if($row == $profile['civil_status']){
-                                                            $selected  = "selected";
-                                                        }else{ 
-                                                            $selected  = "";
-                                                        }
-                                                ?> 
-                                                    <option <?= $selected ?> value="<?= $row ?>"><?= $row ?></option>  
-                                                <?php } ?> 
-                                            </select>
-                                        </div>
-                                        <div class="col">
-                                            <label for="gender" class="form-label">Sex <?= $required_field; ?></label>
-                                            <select class="form-control" id="gender" name="gender" required>
-                                                <option value="">Select</option> 
-                                                <option <?= strtolower($profile['gender'])=="male" ? "selected" : ""; ?>  value="Male">Male</option>
-                                                <option <?= strtolower($profile['gender'])=="female" ? "selected" : ""; ?> value="Female">Female</option>  
-                                            </select>
+                                            <label for="gender" class="form-label">Sex</label>
+                                            <input type="text" value="<?= $profile['gender']; ?>" class="form-control"   readonly>  
                                         </div> 
                                     </div> 
                                     <div class="row">
                                         <div class="col-6">
                                             <label for="contact_no" class="form-label">Contact #</label>
-                                            <input type="text" value="<?= $profile['contact_no'] ?>" class="form-control"   name="contact_no">
+                                            <input type="text" value="<?= $profile['contact_no'] ?>" class="form-control"   >
                                         </div>
                                         <div class="col-6">
-                                            <label for="ctc_no" class="form-label">CTC # <?= $required_field; ?></label>
-                                            <input type="text" value="<?= $profile['ctc_no'] ?>" class="form-control"   name="ctc_no" required>
+                                            <label for="ctc_no" class="form-label">CTC #</label>
+                                            <input type="text" value="<?= $profile['ctc_no'] ?>" class="form-control"  >
                                         </div> 
                                     </div> 
                                     <div class="row" >
                                         <div class="col-6">
                                             <label for="email" class="form-label">Facebook/Other</label>
-                                            <input type="text" value="<?= $profile['email'] ?>" class="form-control" name="email"  >
+                                            <input type="text" value="<?= $profile['email'] ?>" class="form-control" >
                                         </div>
                                         <div class="col-6">
-                                            <label for="availment" class="form-label">Availment <?= $required_field; ?></label>
-                                            <input type="number" value="<?= $profile['availment'] ?>" class="form-control" name="availment" required>
+                                            <label for="availment" class="form-label">Availment</label>
+                                            <input type="number" value="<?= $profile['availment'] ?>" class="form-control"  >
                                         </div> 
                                     </div>
                                 </div>
                                 <div class="col-3">    
                                     <img src="<?= !empty($profile['profile_photo']) ? base_url(). "/".  $profile['profile_photo']  : base_url()."/public/img/select-image.png" ?>"  class="rounded mx-auto d-block" alt="Profile Photo"   />   
                                 </div>
-                            </div>
-                            
+                            </div> 
                             <div class="row g-3" >
                                 <div class="col">
-                                    <label for="school" class="form-label">School <?= $required_field; ?></label>
-                                    <select class="form-control" id="school" name="school" required>
-                                        <option value="">Select</option> 
-                                        <?php 
-                                            foreach($school as $row){  
-                                                if($row['SchoolName'] == $profile['school']){
-                                                    $selected  = "selected";
-                                                }else{ 
-                                                    $selected  = "";
-                                                }
-                                        ?> 
-                                            <option <?= $selected ?> value="<?= $row['SchoolName']  ?>"><?= $row['SchoolName']  ?></option>  
-                                        <?php } ?>  
-                                    </select>
+                                    <label for="school" class="form-label">School</label>
+                                    <input type="text" value="<?= $profile['school_name'] ?>" class="form-control"   > 
                                 </div>
                                 <div class="col">
-                                    <label for="strand" class="form-label">Strand <?= $required_field; ?></label>
-                                    <select class="form-control"  name="strand" required>
-                                        <option value="">Select</option> 
-                                        <?php 
-                                            foreach($strand as $row){  
-                                                if($row['Strand'] == $profile['course']){
-                                                    $selected  = "selected";
-                                                }else{ 
-                                                    $selected  = "";
-                                                }
-                                        ?>   
-                                            <option <?= $selected ?> value="<?= $row['Strand']  ?>"><?= $row['Strand']  ?></option>  
-                                        <?php } ?>   
-                                    </select>
+                                    <label for="strand" class="form-label">Strand</label>
+                                    <input type="text" value="<?= $profile['course'] ?>" class="form-control"   >  
                                 </div> 
-                            </div>
+                            </div> 
                             <div class="row g-3" >
                                 <div class="col">
-                                    <label for="grade_level" class="form-label">Grade Level <?= $required_field; ?></label>
-                                    <select class="form-control"  name="grade_level"  required>
-                                        <option value="">Select</option>  
-                                        <?php 
-                                            foreach($grade_level as $row){  
-                                                if($row  == $profile['appyear']){
-                                                    $selected  = "selected";
-                                                }else{ 
-                                                    $selected  = "";
-                                                }
-                                        ?>   
-                                            <option <?= $selected ?> value="<?= $row   ?>"><?= $row  ?></option>  
-                                        <?php } ?>   
-                                    </select>
+                                    <label for="school_address" class="form-label">School Address </label> 
+                                    <input type="text" value="<?= $profile['school_address'] ?>" class="form-control"   >  
+                                </div>
+                            </div> 
+                            <div class="row g-3" >
+                                <div class="col">
+                                    <label for="grade_level" class="form-label">Grade Level</label>
+                                    <input type="text" value="<?= $profile['appyear'] ?>" class="form-control"   >   
                                 </div>
                                 <div class="col">
-                                    <label for="semester" class="form-label">Semester <?= $required_field; ?></label>
-                                    <select class="form-control"   name="semester"  required>
-                                        <option value="">Select</option>  
-                                        <?php 
-                                            foreach($semester as $row){  
-                                                if($row  == $profile['appsem']){
-                                                    $selected  = "selected";
-                                                }else{ 
-                                                    $selected  = "";
-                                                }
-                                        ?>   
-                                            <option <?= $selected ?> value="<?= $row   ?>"><?= $row  ?></option>  
-                                        <?php } ?>   
-                                    </select>
+                                    <label for="semester" class="form-label">Semester</label>
+                                    <input type="text" value="<?= $profile['appsem'] ?>" class="form-control"   >    
                                 </div> 
                                 <div class="col">
-                                    <label for="school_year" class="form-label">SY <?= $required_field; ?></label>
-                                    <select class="form-control"   name="school_year"  required>
-                                        <option value="">Select</option> 
-                                        <?php 
-                                            foreach(range(2017, date('Y')) as $year){  
-                                                $sy   ="SY: " . $year . "-" . ($year + 1);
-                                                if($sy  == $profile['appsy']){
-                                                    $selected  = "selected";
-                                                }else{ 
-                                                    $selected  = "";
-                                                }
-                                        ?>  
-                                            <option <?= $selected ?> value="SY: <?= $year . "-" . ($year + 1)?>">SY: <?= $year . "-" . ($year + 1)?></option>
-                                        <?php } ?>  
-                                    </select>
+                                    <label for="school_year" class="form-label">SY</label>
+                                    <input type="text" value="<?= $profile['appsy'] ?>" class="form-control"   >  
                                 </div> 
                             </div>
                             <div class="row g-3" >
                                 <div class="col">
                                     <label for="father_name" class="form-label">Father's  Name</label>
-                                    <input type="text" value="<?= $profile['father_name'] ?>" class="form-control text-capitalize"   name="father_name" >
+                                    <input type="text" value="<?= $profile['father_name'] ?>" class="form-control text-capitalize"   >
                                 </div>
                                 <div class="col">
                                     <label for="father_occupation" class="form-label">Occupation</label>
-                                    <input type="text" value="<?= $profile['father_nameOccu'] ?>" class="form-control text-capitalize"  name="father_occupation" >
+                                    <input type="text" value="<?= $profile['father_occupation'] ?>" class="form-control text-capitalize"  >
                                 </div> 
                             </div>
                             <div class="row g-3" >
                                 <div class="col">
                                     <label for="mother_name" class="form-label">Mother's  Name</label>
-                                    <input type="text" value="<?= $profile['mother_name'] ?>" class="form-control text-capitalize" name="mother_name" >
+                                    <input type="text" value="<?= $profile['mother_name'] ?>" class="form-control text-capitalize"  >
                                 </div>
                                 <div class="col">
                                     <label for="mother_occupation" class="form-label">Occupation</label>
-                                    <input type="text" value="<?= $profile['mother_nameOccu'] ?>" class="form-control text-capitalize"  name="mother_occupation" >
+                                    <input type="text" value="<?= $profile['mother_occupation'] ?>" class="form-control text-capitalize"   >
                                 </div> 
                             </div>  
                         </form>    
@@ -264,7 +195,7 @@
                                             <h1 style="text-decoration: underline"> <?= $profile['appnoyear'] ?> - <?=  $profile['appnosem'] ?> -  <?= $profile['appnoid'] ?></span> </h1> 
                                         </div>
                                         <div class="col-6">
-                                            <label for="status" class="form-label">Status <?= $required_field; ?></label>
+                                            <label for="status" class="form-label">Status</label>
                                             <h1 style="text-decoration: underline" ><?= $profile['appstatus']; ?></h1> 
                                         </div>
                                     </div>
@@ -275,92 +206,78 @@
                                 <div class="col-9">
                                     <div class="row">
                                         <div class="col-4">
-                                            <label for="lastname" class="form-label">Last Name <?= $required_field; ?></label>
-                                            <input type="text" value="<?= $profile['lastname']; ?>" class="form-control text-capitalize" name="lastname" required>
+                                            <label for="lastname" class="form-label">Last Name</label>
+                                            <input type="text" value="<?= $profile['lastname']; ?>" class="form-control text-capitalize"  >
                                         </div>
                                         <div class="col-4">
-                                            <label for="firstname" class="form-label">First Name <?= $required_field; ?></label>
-                                            <input type="text" value="<?= $profile['firstname']; ?>" class="form-control text-capitalize" name="firstname" required>
+                                            <label for="firstname" class="form-label">First Name</label>
+                                            <input type="text" value="<?= $profile['firstname']; ?>" class="form-control text-capitalize">
                                         </div>
                                         <div class="col-2">
                                             <label for="middlename" class="form-label">M.I.</label>
-                                            <input type="text" value="<?= $profile['middlename']; ?>" class="form-control text-capitalize" name="middlename">
+                                            <input type="text" value="<?= $profile['middlename']; ?>" class="form-control text-capitalize" >
                                         </div>
                                         <div class="col-2">
                                             <label for="suffix" class="form-label">Suffix</label>
-                                            <input type="text" value="<?= $profile['suffix']; ?>" class="form-control text-capitalize" name="suffix">
+                                            <input type="text" value="<?= $profile['suffix']; ?>" class="form-control text-capitalize" >
                                         </div> 
                                     </div>
                                     <div class="row"> 
                                         <div class="col-12">  
-                                            <label for="address" class="form-label">Address <?= $required_field; ?></label>
-                                            <select class="form-control" name="address"   required>
-                                                <option value="">Select</option> 
-                                                <?php 
-                                                    foreach($barangay as $row){
-                                                        if($row == $profile['address']){
-                                                            $selected  = "selected";
-                                                        }else{ 
-                                                            $selected  = "";
-                                                        }
-                                                ?> 
-                                                    <option <?= $selected ?> value="<?= $row ?>"><?= $row ?></option>  
-                                                <?php } ?>
-                                            </select>
+                                            <label for="address" class="form-label">Address</label>
+                                            <input type="text" value="<?= $profile['address']; ?>" class="form-control text-capitalize" > 
                                         </div>  
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                            <label for="birthdate"  class="form-label">Date of Birth <?= $required_field; ?></label>
-                                            <input type="text"  value="<?= $profile['colDOB'] ?>"  class="form-control" name="birthdate" required >
+                                            <label for="birthdate"  class="form-label">Date of Birth</label>
+                                            <input type="text"  value="<?= $profile['birthdate'] ?>"  class="form-control"  >
                                         </div>
-                                        <div class="col-2">
-                                            <label for="age" class="form-label">Age <?= $required_field; ?></label>
-                                            <input type="number" value="<?= $profile['colAge'] ?>" class="form-control" name="age"   readonly>
-                                        </div>
-                                        <div class="col">
-                                            <label for="civil_status" class="form-label">Civil Status <?= $required_field; ?></label>
-                                            <select class="form-control"  name="civil_status" required>
-                                                <option value="">Select</option> 
-                                                <?php 
-                                                    foreach($civil_status as $row){
-                                                        if($row == $profile['civil_status']){
-                                                            $selected  = "selected";
-                                                        }else{ 
-                                                            $selected  = "";
-                                                        }
-                                                ?> 
-                                                    <option <?= $selected ?> value="<?= $row ?>"><?= $row ?></option>  
-                                                <?php } ?> 
-                                            </select> 
+                                        <div class="col-2"> 
+                                            <?php  
+                                                // Set the birthdate string in yyyy-mm-dd format
+                                                $birthdate = date('Y-m-d', strtotime($profile['birthdate'])) ; 
+                                                
+                                                // Create a DateTime object from the birthdate string
+                                                $birthdateObj = new DateTime($birthdate);
+
+                                                // Get the current date as a DateTime object
+                                                $currentDateObj = new DateTime();
+
+                                                // Calculate the difference between the two dates in years
+                                                $age = $birthdateObj->diff($currentDateObj)->y;
+
+                                            ?>
+                                            <label for="age" class="form-label">Age</label>
+                                            <input type="number" value="<?= $age; ?>" class="form-control"    readonly>
                                         </div>
                                         <div class="col">
-                                            <label for="gender" class="form-label">Sex <?= $required_field; ?></label>
-                                            <select class="form-control" id="gender" name="gender" required>
-                                                <option value="">Select</option> 
-                                                <option <?= strtolower($profile['gender'])=="male" ? "selected" : ""; ?>  value="Male">Male</option>
-                                                <option <?= strtolower($profile['gender'])=="female" ? "selected" : ""; ?> value="Female">Female</option>  
-                                            </select> 
+                                            <label for="civil_status" class="form-label">Civil Status</label>
+                                            <input type="text" value="<?= $profile['civil_status']; ?>" class="form-control text-capitalize" >  
+                                        </div>
+                                        <div class="col">
+                                            <label for="gender" class="form-label">Sex</label>
+                                            <input type="text" value="<?= $profile['gender']; ?>" class="form-control text-capitalize" >   
                                         </div> 
                                     </div> 
                                     <div class="row">
                                         <div class="col-6">
                                             <label for="contact_no" class="form-label">Contact #</label>
-                                            <input type="text" value="<?= $profile['contact_no'] ?>" class="form-control"   name="contact_no">
+                                            <input type="text" value="<?= $profile['contact_no'] ?>" class="form-control"   >
                                         </div>
                                         <div class="col-6">
-                                            <label for="ctc_no" class="form-label">CTC # <?= $required_field; ?></label>
-                                            <input type="text" value="<?= $profile['ctc_no'] ?>" class="form-control"   name="ctc_no" required>
+                                            <label for="ctc_no" class="form-label">CTC #</label>
+                                            <input type="text" value="<?= $profile['ctc_no'] ?>" class="form-control"  >
                                         </div> 
                                     </div> 
                                     <div class="row" >
                                         <div class="col-6">
                                             <label for="email" class="form-label">Facebook/Other</label>
-                                            <input type="text" value="<?= $profile['email'] ?>" class="form-control" name="email"  >
+                                            <input type="text" value="<?= $profile['email'] ?>" class="form-control" >
                                         </div>
                                         <div class="col-6">
-                                            <label for="availment" class="form-label">Availment <?= $required_field; ?></label>
-                                            <input type="number" value="<?= $profile['availment'] ?>" class="form-control" name="availment" required>
+                                            <label for="availment" class="form-label">Availment</label>
+                                            <input type="number" value="<?= $profile['availment'] ?>" class="form-control"  >
                                         </div> 
                                     </div> 
                                 </div>
@@ -371,117 +288,56 @@
                                 
                             <div class="row g-3" >
                                 <div class="col">
-                                    <label for="" class="form-label">School <?= $required_field; ?></label>
-                                    <select class="form-control" id="school" name="school" required>
-                                        <option value="">Select</option> 
-                                        <?php 
-                                            foreach($college_school as $row){  
-                                                if($row['schoolName'] == $profile['school']){
-                                                    $selected  = "selected";
-                                                }else{ 
-                                                    $selected  = "";
-                                                }
-                                        ?> 
-                                            <option <?= $selected ?> value="<?= $row['schoolName']  ?>"><?= $row['schoolName']  ?></option>  
-                                        <?php } ?>  
-                                    </select> 
+                                    <label for="" class="form-label">School</label>
+                                    <input type="text" value="<?= $profile['school']; ?>" class="form-control text-capitalize" >    
                                 </div>
                                 <div class="col">
-                                    <label for="" class="form-label">Course <?= $required_field; ?></label>
-                                    <select class="form-control" name="course" required>
-                                        <option value="">Select</option> 
-                                        <?php 
-                                            foreach($course as $row){  
-                                                if($row['course'] == $profile['course']){
-                                                    $selected  = "selected";
-                                                }else{ 
-                                                    $selected  = "";
-                                                }
-                                        ?> 
-                                            <option <?= $selected ?> value="<?= $row['course']  ?>"><?= $row['course']  ?></option>  
-                                        <?php } ?>  
-                                    </select> 
+                                    <label for="" class="form-label">Course</label>
+                                    <input type="text" value="<?= $profile['course']; ?>" class="form-control text-capitalize" >  
                                 </div> 
                             </div> 
                             <div class="row g-3" >
-                                <div class="col">
+                                <div class="col"> 
                                     <label for="school_address" class="form-label">School Address </label> 
-                                    <input type="text" value="<?= $profile['schoolAddress'] ?>" class="form-control text-capitalize" name="school_address"  >
+                                    <input type="text" value="<?= $profile['school_address'] ?>" class="form-control text-capitalize"   >
                                 </div>
                             </div>
                             <div class="row g-3" >
                                 <div class="col">
-                                    <label for="year_level" class="form-label">Year Level <?= $required_field; ?></label>
-                                    <select class="form-control" name="year_level" required>
-                                        <option value="">Select</option> 
-                                        <?php 
-                                            foreach($year_level as $row){  
-                                                if($row == $profile['appyear']){
-                                                    $selected  = "selected";
-                                                }else{ 
-                                                    $selected  = "";
-                                                }
-                                        ?> 
-                                            <option <?= $selected ?> value="<?= $row  ?>"><?= $row  ?></option>  
-                                        <?php } ?>  
-                                    </select>  
+                                    <label for="year_level" class="form-label">Year Level</label>
+                                    <input type="text" value="<?= $profile['appyear']; ?>" class="form-control text-capitalize" >     
                                 </div>
                                 <div class="col">
-                                    <label for="semester" class="form-label">Semester <?= $required_field; ?></label>
-                                    <select class="form-control"  name="semester" required>
-                                        <option value="">Select</option> 
-                                        <?php 
-                                            foreach($semester as $row){  
-                                                if($row == $profile['appsem']){
-                                                    $selected  = "selected";
-                                                }else{ 
-                                                    $selected  = "";
-                                                }
-                                        ?> 
-                                            <option <?= $selected ?> value="<?= $row  ?>"><?= $row  ?></option>  
-                                        <?php } ?>  
-                                    </select>  
+                                    <label for="semester" class="form-label">Semester</label>
+                                    <input type="text" value="<?= $profile['appsem']; ?>" class="form-control text-capitalize" >  
                                 </div>
                                 <div class="col">
-                                    <label for="units" class="form-label">Units <?= $required_field; ?></label>
-                                    <input type="number" value="<?= $profile['unit'] ?>" class="form-control" name="units" required>
+                                    <label for="units" class="form-label">Units</label>
+                                    <input type="number" value="<?= $profile['unit'] ?>" class="form-control"  >
                                 </div>
                                 <div class="col">
-                                    <label for="" class="form-label">SY <?= $required_field; ?></label>
-                                    <select class="form-control" name="school_year" required> 
-                                        <option value="">Select</option> 
-                                        <?php 
-                                            foreach(range(2017, date('Y')) as $year){  
-                                                $sy   ="SY: " . $year . "-" . ($year + 1);
-                                                if($sy  == $profile['appsy']){
-                                                    $selected  = "selected";
-                                                }else{ 
-                                                    $selected  = "";
-                                                }
-                                        ?>  
-                                            <option <?= $selected ?> value="SY: <?= $year . "-" . ($year + 1)?>">SY: <?= $year . "-" . ($year + 1)?></option>
-                                        <?php } ?>  
-                                    </select> 
+                                    <label for="" class="form-label">SY</label>
+                                    <input type="text" value="<?= $profile['appsy']; ?>" class="form-control text-capitalize" >   
                                 </div> 
                             </div>
                             <div class="row g-3" >
                                 <div class="col">
                                     <label for="father_name" class="form-label">Father's  Name</label>
-                                    <input type="text" value="<?= $profile['father_name'] ?>"  class="form-control text-capitalize"   name="father_name" >
+                                    <input type="text" value="<?= $profile['father_name'] ?>"  class="form-control text-capitalize"   >
                                 </div>
                                 <div class="col">
                                     <label for="father_occupation" class="form-label">Occupation</label>
-                                    <input type="text" value="<?= $profile['father_occupation'] ?>"  class="form-control text-capitalize"  name="father_occupation" >
+                                    <input type="text" value="<?= $profile['father_occupation'] ?>"  class="form-control text-capitalize"  >
                                 </div> 
                             </div>
                             <div class="row g-3" >
                                 <div class="col">
                                     <label for="mother_name" class="form-label">Mother's  Name</label>
-                                    <input type="text" value="<?= $profile['mother_name'] ?>"  class="form-control text-capitalize" name="mother_name" >
+                                    <input type="text" value="<?= $profile['mother_name'] ?>"  class="form-control text-capitalize"  >
                                 </div>
                                 <div class="col">
                                     <label for="mother_occupation" class="form-label">Occupation</label>
-                                    <input type="text" value="<?= $profile['mother_occupation'] ?>"  class="form-control text-capitalize"  name="mother_occupation" >
+                                    <input type="text" value="<?= $profile['mother_occupation'] ?>"  class="form-control text-capitalize"   >
                                 </div> 
                             </div>    
                         </form>
@@ -499,7 +355,7 @@
                                             <h1 style="text-decoration: underline"> <?= $profile['appnoyear'] ?> - <?=  $profile['appnosem'] ?> -  <?= $profile['appnoid'] ?></span> </h1> 
                                         </div>
                                         <div class="col-6">
-                                            <label for="status" class="form-label">Status <?= $required_field; ?></label>
+                                            <label for="status" class="form-label">Status</label>
                                             <h1 style="text-decoration: underline" ><?= $profile['appstatus']; ?></h1> 
                                         </div>
                                     </div>
@@ -510,92 +366,78 @@
                                 <div class="col-9">
                                     <div class="row"> 
                                         <div class="col-4">
-                                            <label for="lastname" class="form-label">Last Name <?= $required_field; ?></label>
-                                            <input type="text" value="<?= $profile['lastname']; ?>" class="form-control text-capitalize" name="lastname" required>
+                                            <label for="lastname" class="form-label">Last Name</label>
+                                            <input type="text" value="<?= $profile['lastname']; ?>" class="form-control text-capitalize"  >
                                         </div>
                                         <div class="col-4">
-                                            <label for="firstname" class="form-label">First Name <?= $required_field; ?></label>
-                                            <input type="text" value="<?= $profile['firstname']; ?>" class="form-control text-capitalize" name="firstname" required>
+                                            <label for="firstname" class="form-label">First Name</label>
+                                            <input type="text" value="<?= $profile['firstname']; ?>" class="form-control text-capitalize">
                                         </div>
                                         <div class="col-2">
                                             <label for="middlename" class="form-label">M.I.</label>
-                                            <input type="text" value="<?= $profile['middlename']; ?>" class="form-control text-capitalize" name="middlename">
+                                            <input type="text" value="<?= $profile['middlename']; ?>" class="form-control text-capitalize" >
                                         </div>
                                         <div class="col-2">
                                             <label for="suffix" class="form-label">Suffix</label>
-                                            <input type="text" value="<?= $profile['suffix']; ?>" class="form-control text-capitalize" name="suffix">
+                                            <input type="text" value="<?= $profile['suffix']; ?>" class="form-control text-capitalize" >
                                         </div>  
                                     </div>
                                     <div class="row"> 
                                         <div class="col-12">  
-                                            <label for="address" class="form-label">Address <?= $required_field; ?></label>
-                                            <select class="form-control" name="address"   required>
-                                                <option value="">Select</option> 
-                                                <?php 
-                                                    foreach($barangay as $row){
-                                                        if($row == $profile['address']){
-                                                            $selected  = "selected";
-                                                        }else{ 
-                                                            $selected  = "";
-                                                        }
-                                                ?> 
-                                                    <option <?= $selected ?> value="<?= $row ?>"><?= $row ?></option>  
-                                                <?php } ?>
-                                            </select>
+                                            <label for="address" class="form-label">Address</label>
+                                            <input type="text" value="<?= $profile['address']; ?>" class="form-control text-capitalize" > 
                                         </div>  
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                            <label for="birthdate"  class="form-label">Date of Birth <?= $required_field; ?></label>
-                                            <input type="text"  value="<?= $profile['colDOB'] ?>"  class="form-control" name="birthdate" required >
+                                            <label for="birthdate"  class="form-label">Date of Birth</label>
+                                            <input type="text"  value="<?= $profile['birthdate'] ?>"  class="form-control"  >
                                         </div>
-                                        <div class="col-2">
-                                            <label for="age" class="form-label">Age <?= $required_field; ?></label>
-                                            <input type="number" value="<?= $profile['colAge'] ?>" class="form-control" name="age"   readonly>
-                                        </div>
-                                        <div class="col">
-                                            <label for="civil_status" class="form-label">Civil Status <?= $required_field; ?></label>
-                                            <select class="form-control"  name="civil_status" required>
-                                                <option value="">Select</option> 
-                                                <?php 
-                                                    foreach($civil_status as $row){
-                                                        if($row == $profile['civil_status']){
-                                                            $selected  = "selected";
-                                                        }else{ 
-                                                            $selected  = "";
-                                                        }
-                                                ?> 
-                                                    <option <?= $selected ?> value="<?= $row ?>"><?= $row ?></option>  
-                                                <?php } ?> 
-                                            </select> 
+                                        <div class="col-2"> 
+                                            <?php  
+                                                // Set the birthdate string in yyyy-mm-dd format
+                                                $birthdate = date('Y-m-d', strtotime($profile['birthdate'])) ; 
+                                                
+                                                // Create a DateTime object from the birthdate string
+                                                $birthdateObj = new DateTime($birthdate);
+
+                                                // Get the current date as a DateTime object
+                                                $currentDateObj = new DateTime();
+
+                                                // Calculate the difference between the two dates in years
+                                                $age = $birthdateObj->diff($currentDateObj)->y;
+
+                                            ?>
+                                            <label for="age" class="form-label">Age</label>
+                                            <input type="number" value="<?= $age ?>" class="form-control"    readonly>
                                         </div>
                                         <div class="col">
-                                            <label for="gender" class="form-label">Sex <?= $required_field; ?></label>
-                                            <select class="form-control" id="gender" name="gender" required>
-                                                <option value="">Select</option> 
-                                                <option <?= strtolower($profile['gender'])=="male" ? "selected" : ""; ?>  value="Male">Male</option>
-                                                <option <?= strtolower($profile['gender'])=="female" ? "selected" : ""; ?> value="Female">Female</option>  
-                                            </select> 
+                                            <label for="civil_status" class="form-label">Civil Status</label>
+                                            <input type="text" value="<?= $profile['civil_status']; ?>" class="form-control text-capitalize" >  
+                                        </div>
+                                        <div class="col">
+                                            <label for="gender" class="form-label">Sex</label>
+                                            <input type="text" value="<?= $profile['gender']; ?>" class="form-control text-capitalize" >  
                                         </div> 
                                     </div> 
                                     <div class="row">
                                         <div class="col-6">
                                             <label for="contact_no" class="form-label">Contact #</label>
-                                            <input type="text" value="<?= $profile['contact_no'] ?>" class="form-control"   name="contact_no">
+                                            <input type="text" value="<?= $profile['contact_no'] ?>" class="form-control"   >
                                         </div>
                                         <div class="col-6">
-                                            <label for="ctc_no" class="form-label">CTC # <?= $required_field; ?></label>
-                                            <input type="text" value="<?= $profile['ctc_no'] ?>" class="form-control"   name="ctc_no" required>
+                                            <label for="ctc_no" class="form-label">CTC #</label>
+                                            <input type="text" value="<?= $profile['ctc_no'] ?>" class="form-control"  >
                                         </div> 
                                     </div> 
                                     <div class="row" >
                                         <div class="col-6">
                                             <label for="email" class="form-label">Facebook/Other</label>
-                                            <input type="text" value="<?= $profile['email'] ?>" class="form-control" name="email"  >
+                                            <input type="text" value="<?= $profile['email'] ?>" class="form-control" >
                                         </div>
                                         <div class="col-6">
-                                            <label for="availment" class="form-label">Availment <?= $required_field; ?></label>
-                                            <input type="number" value="<?= $profile['availment'] ?>" class="form-control" name="availment" required>
+                                            <label for="availment" class="form-label">Availment</label>
+                                            <input type="number" value="<?= $profile['availment'] ?>" class="form-control"  >
                                         </div> 
                                     </div> 
                                 </div>
@@ -606,111 +448,50 @@
                                 
                             <div class="row g-3" >
                                 <div class="col">
-                                    <label for="" class="form-label">School <?= $required_field; ?></label>
-                                    <select class="form-control" id="school" name="school" required>
-                                        <option value="">Select</option> 
-                                        <?php 
-                                            foreach($college_school as $row){  
-                                                if($row['schoolName'] == $profile['school']){
-                                                    $selected  = "selected";
-                                                }else{ 
-                                                    $selected  = "";
-                                                }
-                                        ?> 
-                                            <option <?= $selected ?> value="<?= $row['schoolName']  ?>"><?= $row['schoolName']  ?></option>  
-                                        <?php } ?>  
-                                    </select> 
+                                    <label for="" class="form-label">School</label> 
+                                    <input type="text" value="<?= $profile['school_name']; ?>" class="form-control text-capitalize" >   
                                 </div>
                                 <div class="col"> 
-                                    <label for="" class="form-label">Course <?= $required_field; ?></label>
-                                    <select class="form-control" name="course" required>
-                                        <option value="">Select</option> 
-                                        <?php 
-                                            foreach($course as $row){  
-                                                if($row['course'] == $profile['course']){
-                                                    $selected  = "selected";
-                                                }else{ 
-                                                    $selected  = "";
-                                                }
-                                        ?> 
-                                            <option <?= $selected ?> value="<?= $row['course']  ?>"><?= $row['course']  ?></option>  
-                                        <?php } ?>  
-                                    </select> 
+                                    <label for="" class="form-label">Course</label>
+                                    <input type="text" value="<?= $profile['course']; ?>" class="form-control text-capitalize" >    
                                 </div> 
                             </div> 
                             <div class="row g-3" > 
                                 <div class="col">
-                                    <label for="year_level" class="form-label">Year Level <?= $required_field; ?></label>
-                                    <select class="form-control" name="year_level" required>
-                                        <option value="">Select</option> 
-                                        <?php 
-                                            foreach($year_level as $row){  
-                                                if($row == $profile['appyear']){
-                                                    $selected  = "selected";
-                                                }else{ 
-                                                    $selected  = "";
-                                                }
-                                        ?> 
-                                            <option <?= $selected ?> value="<?= $row  ?>"><?= $row  ?></option>  
-                                        <?php } ?>  
-                                    </select>  
+                                    <label for="year_level" class="form-label">Year Level</label>
+                                    <input type="text" value="<?= $profile['appyear']; ?>" class="form-control text-capitalize" >    
                                 </div>
                                 <div class="col">
-                                    <label for="semester" class="form-label">Semester <?= $required_field; ?></label>
-                                    <select class="form-control"  name="semester" required>
-                                        <option value="">Select</option> 
-                                        <?php 
-                                            foreach($semester as $row){  
-                                                if($row == $profile['appsem']){
-                                                    $selected  = "selected";
-                                                }else{ 
-                                                    $selected  = "";
-                                                }
-                                        ?> 
-                                            <option <?= $selected ?> value="<?= $row  ?>"><?= $row  ?></option>  
-                                        <?php } ?>  
-                                    </select>  
+                                    <label for="semester" class="form-label">Semester</label>
+                                    <input type="text" value="<?= $profile['appsem']; ?>" class="form-control text-capitalize" >  
                                 </div>
                                 <div class="col">
-                                    <label for="units" class="form-label">No. of Hours <?= $required_field; ?></label>
-                                    <input type="number" value="<?= $profile['unit'] ?>" class="form-control" name="units" required>
+                                    <label for="units" class="form-label">No. of Hours</label>
+                                    <input type="number" value="<?= $profile['unit'] ?>" class="form-control"  >
                                 </div>
                                 <div class="col">
-                                    <label for="" class="form-label">SY <?= $required_field; ?></label>
-                                    <select class="form-control" name="school_year" required> 
-                                        <option value="">Select</option> 
-                                        <?php 
-                                            foreach(range(2017, date('Y')) as $year){  
-                                                $sy   ="SY: " . $year . "-" . ($year + 1);
-                                                if($sy  == $profile['appsy']){
-                                                    $selected  = "selected";
-                                                }else{ 
-                                                    $selected  = "";
-                                                }
-                                        ?>  
-                                            <option <?= $selected ?> value="SY: <?= $year . "-" . ($year + 1)?>">SY: <?= $year . "-" . ($year + 1)?></option>
-                                        <?php } ?>  
-                                    </select> 
+                                    <label for="" class="form-label">SY</label>
+                                    <input type="text" value="<?= $profile['appsy']; ?>" class="form-control text-capitalize" >  
                                 </div>
                             </div>
                             <div class="row g-3" >
                                 <div class="col">
                                     <label for="father_name" class="form-label">Father's  Name</label>
-                                    <input type="text" value="<?= $profile['father_name'] ?>"  class="form-control text-capitalize"   name="father_name" >
+                                    <input type="text" value="<?= $profile['father_name'] ?>"  class="form-control text-capitalize"   >
                                 </div>
                                 <div class="col">
                                     <label for="father_occupation" class="form-label">Occupation</label>
-                                    <input type="text" value="<?= $profile['father_occupation'] ?>"  class="form-control text-capitalize"  name="father_occupation" >
+                                    <input type="text" value="<?= $profile['father_occupation'] ?>"  class="form-control text-capitalize"  >
                                 </div> 
                             </div>
                             <div class="row g-3" >
                                 <div class="col">
                                     <label for="mother_name" class="form-label">Mother's  Name</label>
-                                    <input type="text" value="<?= $profile['mother_name'] ?>"  class="form-control text-capitalize" name="mother_name" >
+                                    <input type="text" value="<?= $profile['mother_name'] ?>"  class="form-control text-capitalize"  >
                                 </div>
                                 <div class="col">
                                     <label for="mother_occupation" class="form-label">Occupation</label>
-                                    <input type="text" value="<?= $profile['mother_occupation'] ?>"  class="form-control text-capitalize"  name="mother_occupation" >
+                                    <input type="text" value="<?= $profile['mother_occupation'] ?>"  class="form-control text-capitalize"   >
                                 </div> 
                             </div>  
                         </form> 
@@ -738,106 +519,7 @@
             $('input').css("cursor","pointer"); 
             $('select option:not(:selected)').prop('disabled', true);
             $('select').attr("style", "pointer-events: none;"); 
-
-
-            $(document).ready(function() {
-                $(".validation-form").parsley()
-            }), $(function() {
-                $("#demo-form").parsley().on("field:validated", function() {
-                    var e = 0 === $(".parsley-error").length;
-                    $(".alert-info").toggleClass("d-none", !e), $(".alert-warning").toggleClass("d-none", e)
-                }).on("form:submit", function() {
-                    return !1
-                })
-            }); 
  
-            $(document).on('change', '#formFileShs', function(e){   
-
-                var validExtensions = ["jpg","pdf","jpeg","gif","png", "jfif"]
-                var file            = $(this).val().split('.').pop();
-                if (validExtensions.indexOf(file) == -1) { 
-                    Swal.fire({
-                        title: "Upload Error!",
-                        text : "Only formats are allowed: "+validExtensions.join(', '),
-                        icon : "error"
-                    }) 
-                }else{
-                    frameShs.src = URL.createObjectURL(event.target.files[0]);
-                } 
-            }); 
-
-            $(document).on('click', '#clearImageShs', function(e){ 
-                
-                document.getElementById('formFileShs').value = null;
-                frameShs.src = "<?=base_url()?>/public/img/select-image.png";
-            }); 
-            
-            $(document).on('change', '#formFileCollege', function(e){  
-
-                var validExtensions = ["jpg","pdf","jpeg","gif","png", "jfif"]
-                var file            = $(this).val().split('.').pop();
-                if (validExtensions.indexOf(file) == -1) { 
-                    Swal.fire({
-                        title: "Upload Error!",
-                        text : "Only formats are allowed: "+validExtensions.join(', '),
-                        icon : "error"
-                    }) 
-                }else{
-                    frameCollege.src = URL.createObjectURL(event.target.files[0]);
-                } 
-            }); 
-
-            $(document).on('click', '#clearImageCollege', function(e){ 
-                
-                document.getElementById('formFileShs').value = null;
-                frameCollege.src = "<?=base_url()?>/public/img/select-image.png";
-            });
-
-            
-            $(document).on('change', '#formFileTvet', function(e){  
-
-                var validExtensions = ["jpg","pdf","jpeg","gif","png", "jfif"]
-                var file            = $(this).val().split('.').pop();
-                if (validExtensions.indexOf(file) == -1) { 
-                    Swal.fire({
-                        title:"Upload Error!",
-                        text: "Only formats are allowed : "+validExtensions.join(', '),
-                        icon:"error"
-                    }) 
-                }else{
-                    frameTvet.src = URL.createObjectURL(event.target.files[0]);
-                } 
-            }); 
-            $(document).on('click', '#clearImageTvet', function(e){ 
-
-                document.getElementById('formFileShs').value = null;
-                frameTvet.src = "<?=base_url()?>/public/img/select-image.png";
-            });
-             
-            // get age using birthdate 
-            $(document).on('change', 'input[name="birthdate"]', function(e){ 
-                var age     = moment().diff($(this).val(), 'years',false);    
-                var form_id = $(this).closest('form').attr('id') 
-                $('#'+form_id+' input[name="age"]').val(age)
-            });
-
-            shs_app_no_id();
-
-            function shs_app_no_id(){
-                $.ajax({
-                    url     : '/registration/shs_app_no_id',
-                    method  : "get",
-                    dataType: "json", 
-                    success : function (data) {   
-                        $('#senior-high-registration-form input[name="app_no_id"]').val(data)   // shs_app_no_id
-                        $('#senior-high-registration-form #app_no_id').html(data)               // shs_app_no_id 
-                    },
-                    error   : function (xhr, status, error) { 
-                        console.info(xhr.responseText);
-                    }
-                }); 
-            } 
-
         });
     </script>
 

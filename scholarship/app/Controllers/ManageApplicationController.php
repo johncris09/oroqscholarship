@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\AddressModel;
 use App\Models\CollegeModel;
 use App\Models\CollegeSchoolModel;
+use App\Models\TvetSchoolModel;
 use App\Models\CourseModel;
 use App\Models\SchoolModel;
 use App\Models\SeniorHighModel; 
@@ -40,6 +41,7 @@ class ManageApplicationController extends BaseController
         $tvet_course            = new TvetCourseModel();
         $address                = new AddressModel();
         $college_school         = new CollegeSchoolModel();
+        $tvet_school            = new TvetSchoolModel();
         $config                 = new Custom_config; 
         $school                 = new SchoolModel(); 
         $segment                = $this->uri->getSegments(); 
@@ -53,10 +55,11 @@ class ManageApplicationController extends BaseController
         $data['semester']       = $config->semester;
         $data['civil_status']   = $config->civilStatus;
         $data['required_field'] = $config->requiredField;  
-        $id                     = $segment[3]; 
-        $data['college_school'] = $college_school->asArray()->findAll();
+        $id                     = $segment[3];  
         $data['address']        = $address->asArray()->findAll();
-        $data['school']         = $school->asArray()->findAll();
+        $data['school']         = $school->asArray()->orderBy('school_name', 'ASC')->findAll();
+        $data['college_school'] = $college_school->asArray()->orderBy('school_name', 'ASC')->findAll();
+        $data['tvet_school']    = $tvet_school->asArray()->orderBy('school_name', 'ASC')->findAll();
         $data['strand']         = $strand->asArray()->findAll();
         $data['grade_level']    = $config->gradeLevel;
 

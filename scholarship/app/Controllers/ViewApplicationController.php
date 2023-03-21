@@ -72,18 +72,19 @@ class ViewApplicationController extends BaseController
 
         try {
             if ($segment[2] == "shs") {
-                $data['profile'] = $this->senior_high->asArray()->where('id', $id)->findAll()[0];
+                $data['profile'] = $this->senior_high->get_applicant_details($id);
             } else if ($segment[2] == "college") {
-                $data['profile']  = $this->college->asArray()->where('id', $id)->findAll()[0];
+                $data['profile']  = $this->college->get_applicant_details($id);
             } else if ($segment[2] == "tvet") {
-                $data['profile'] = $this->tvet->asArray()->where('id', $id)->findAll()[0];
+                $data['profile'] = $this->tvet->get_applicant_details($id);
             } else {
                 return redirect()->back();
             }
 
             return view('admin/view_application', $data);
         } catch (\Exception $e) {
-            return redirect()->back();
+            // return redirect()->back();
+            print_r($e->getMessage());
         }
 
 

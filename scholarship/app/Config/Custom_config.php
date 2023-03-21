@@ -59,9 +59,9 @@ class Custom_config extends BaseConfig
     ];
 
     public $civilStatus = [
-        "SINGLE",
-        "MARRIED",
-        "WIDOWED"
+        "Single",
+        "Married",
+        "Widowed"
     ];
 
     public $gradeLevel = [

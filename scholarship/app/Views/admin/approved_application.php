@@ -13,7 +13,7 @@
 
                     <ul class="nav nav-pills navtab-bg nav-justified">
                         <li class="nav-item">
-                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link   ">
+                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active  ">
                                 Senior High School Approved List
                             </a>
                         </li>
@@ -23,13 +23,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
+                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link ">
                                 TVET Approved List
                             </a>
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane show " id="senior-high-tab">   
+                        <div class="tab-pane show active" id="senior-high-tab">   
                             <table id="senior-high-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>   
@@ -59,14 +59,16 @@
                                         <th>School</th>  
                                         <th>Year Level</th>  
                                         <th>Application Status</th>  
-                                    </tr>
+                                    </tr>  
+
                                 </thead> 
                             </table> 
                         </div> 
-                        <div class="tab-pane active" id="tvet-tab"> 
+                        <div class="tab-pane " id="tvet-tab"> 
                             <table id="tvet-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>   
+                                        <th>ID</th>  
                                         <th>Application ID</th> 
                                         <th>SY</th> 
                                         <th>Name</th>  

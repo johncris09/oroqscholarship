@@ -3109,19 +3109,19 @@
 					<div class="t m0 x4 h27 y55 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo ucwords($profile['school_name']); ?> </div>
 				</div>
 				<div class="c x1 y59 w21 h28">
-					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo  ucwords($profile['school_address']); ?>  </div>
+					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo (!$profile['school_address'] == "" ? ucwords($profile['school_address']) : ""); ?>  </div>
 				</div>
 				<div class="c x8 y5a w21 h28">
-					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo  ucwords($profile['father_name']); ?> </div>
+					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo (!$profile['father_name'] == "" ? ucwords($profile['father_name']) : ""); ?> </div>
 				</div>
 				<div class="c x1 y5b w21 h1d">
-					<div class="t m0 x4 h27 y55 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo ucwords($profile['mother_name']); ?> </div>
+					<div class="t m0 x4 h27 y55 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo (!$profile['mother_name'] == "" ? ucwords($profile['mother_name']) : ""); ?></div>
 				</div>
 				<div class="c x25 y5a w23 h28">
-					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo  ucwords($profile['father_occupation']); ?>  </div>
+					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo (!$profile['father_occupation'] == "" ? ucwords($profile['father_occupation']) : ""); ?> </div>
 				</div>
 				<div class="c x25 y5c w24 h28">
-					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo  ucwords($profile['mother_occupation']); ?>  </div>
+					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo (!$profile['mother_occupation'] == "" ? ucwords($profile['mother_occupation']) : ""); ?> </div>
 				</div>
 				<div class="c x25 y5d w25 h28">
 					<div class="t m0 x4 h27 y37 ff1 fs9 fc0 sc0 ls2 ws5"><?php echo  ucwords($profile['course']); ?>  </div>

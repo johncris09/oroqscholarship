@@ -242,8 +242,8 @@
                                                 <input type="text" value="<?= $profile['email'] ?>" class="form-control" name="email"  >
                                             </div>
                                             <div class="col-6">
-                                                <label for="availment" class="form-label">Availment <?= $required_field; ?></label>
-                                                <input type="number"  value="<?= $profile['availment'] ?>" class="form-control" name="availment" required>
+                                                <label for="availment" class="form-label">Availment <?= $required_field; ?></label> 
+                                                <input type="number"  value="<?= $profile['availment'] ?>"  min="1" max="4" step="1" class="form-control" name="availment" required >
                                             </div> 
                                         </div>
                                     </div>
@@ -299,9 +299,9 @@
                                             <?php
                                                 if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
                                             ?>   
-                                                    <span style="float:right;">
+                                                    <!-- <span style="float:right;">
                                                         <button type="button" id="add-school-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm my-1" data-bs-toggle="modal" data-bs-target="#add-new-shs-school-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New School </button>
-                                                    </span>
+                                                    </span> -->
                                             <?php 
                                                 }
                                             ?>
@@ -349,9 +349,9 @@
                                             <?php
                                                 if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
                                             ?>    
-                                                    <span style="float:right;">
+                                                    <!-- <span style="float:right;">
                                                         <button type="button" id="add-strand-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm my-1" data-bs-toggle="modal" data-bs-target="#add-new-shs-strand-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New Strand</button>
-                                                    </span> 
+                                                    </span>  -->
                                             <?php 
                                                 }
                                             ?>
@@ -626,8 +626,8 @@
                                                 <input type="text"  value="<?= $profile['email'] ?>"  class="form-control" name="email"  >
                                             </div>
                                             <div class="col-6">
-                                                <label for="availment" class="form-label">Availment <?= $required_field; ?></label>
-                                                <input type="number"  value="<?= $profile['availment'] ?>"   class="form-control" name="availment" required>
+                                                <label for="availment" class="form-label">Availment <?= $required_field; ?></label> 
+                                                <input type="number"  value="<?= $profile['availment'] ?>"  min="1" max="8" step="1" class="form-control" name="availment" required >
                                             </div> 
                                         </div>
                                     </div> 
@@ -683,9 +683,9 @@
                                             <?php
                                                 if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
                                             ?>     
-                                                    <span style="float:right;">
+                                                    <!-- <span style="float:right;">
                                                         <button type="button" id="add-school-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#add-new-college-school-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New School</button>
-                                                    </span>
+                                                    </span> -->
                                             <?php 
                                                 }
                                             ?>
@@ -732,9 +732,9 @@
                                             <?php
                                                 if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
                                             ?>     
-                                                    <span style="float:right;">
+                                                    <!-- <span style="float:right;">
                                                         <button type="button" id="add-course-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#add-new-college-course-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New Course</button> 
-                                                    </span>
+                                                    </span> -->
                                             <?php 
                                                 }
                                             ?> 
@@ -743,13 +743,13 @@
                                             <option value="">Select</option> 
                                             <?php 
                                                 foreach($course as $row){  
-                                                    if($row['course'] == $profile['course']){
+                                                    if($row['id'] == $profile['course']){
                                                         $selected  = "selected";
                                                     }else{ 
                                                         $selected  = "";
                                                     }
                                             ?> 
-                                                <option <?= $selected ?> value="<?= $row['course']  ?>"><?= $row['course']  ?></option>  
+                                                <option <?= $selected ?> value="<?= $row['id']  ?>"><?= $row['course']  ?></option>  
                                             <?php } ?>  
                                         </select> 
                                         <!-- add modal form -->
@@ -1014,8 +1014,8 @@
                                                 <input type="text"  value="<?= $profile['email'] ?>"  class="form-control" name="email"  >
                                             </div>
                                             <div class="col-6">
-                                                <label for="availment" class="form-label">Availment <?= $required_field; ?></label>
-                                                <input type="number"  value="<?= $profile['availment'] ?>"   class="form-control" name="availment" required>
+                                                <label for="availment" class="form-label">Availment <?= $required_field; ?></label> 
+                                                <input type="number"  value="<?= $profile['availment'] ?>"  min="1" max="8" step="1" class="form-control" name="availment" required >
                                             </div> 
                                         </div>
                                     </div>
@@ -1072,9 +1072,9 @@
                                             <?php
                                                 if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
                                             ?>     
-                                                    <span style="float:right;">
+                                                    <!-- <span style="float:right;">
                                                         <button type="button" id="add-course-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm my-1" data-bs-toggle="modal" data-bs-target="#add-new-tvet-school-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New School</button>  
-                                                    </span>
+                                                    </span> -->
                                             <?php 
                                                 }
                                             ?>
@@ -1082,7 +1082,7 @@
                                         <select class="form-control" name="school" required>
                                             <option value="">Select</option> 
                                             <?php 
-                                                foreach($college_school as $row){  
+                                                foreach($tvet_school as $row){  
                                                     if($row['id'] == $profile['school']){
                                                         $selected  = "selected";
                                                     }else{ 
@@ -1120,9 +1120,9 @@
                                             <?php
                                                 if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
                                             ?>      
-                                                    <span style="float:right;">
+                                                    <!-- <span style="float:right;">
                                                         <button type="button" id="add-course-button"  class="btn btn-outline-primary rounded-pill waves-effect waves-light btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#add-new-tvet-course-modal"> <i class="mdi mdi-plus" aria-hidden="true"></i> Add New Course </button> 
-                                                    </span>
+                                                    </span> -->
                                             <?php 
                                                 }
                                             ?>

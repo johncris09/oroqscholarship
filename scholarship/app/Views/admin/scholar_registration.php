@@ -226,7 +226,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="availment" class="form-label">Availment <?= $required_field; ?></label> 
-                                                <input type="number" min="1" max="8" step="1" class="form-control" name="availment" required >
+                                                <input type="number" min="1" max="4" step="1" class="form-control" name="availment" required >
                                             </div> 
                                         </div>
                                     </div>
@@ -952,7 +952,7 @@
                                         </div> 
                                         <select class="form-control" name="school" required>
                                             <option value="">Select</option> 
-                                            <?php foreach($college_school as $row):?> 
+                                            <?php foreach($tvet_school as $row):?> 
                                                 <?php if($row['school_name'] != ""):?> 
                                                     <option data-school-address="<?= $row['address']  ?>"  value="<?= $row['id']  ?>"><?= $row['school_name']  ?></option>  
                                                 <?php endif; ?>
