@@ -67,6 +67,7 @@ class StrandController extends BaseController
 
     public function update()
     {
+ 
         try {
             $strand = new StrandModel();
             $id     = $this->request->getPost('id');
@@ -84,7 +85,7 @@ class StrandController extends BaseController
             // Activty Log
             $activity_model = new UserActivityModel();
             $course = $data['strand'];
-            $activity_model->addLog(auth()->user()->id, 'Updated a strand of \''.$strand.'\'');
+            $activity_model->addLog(auth()->user()->id, 'Updated a strand of \''.$course.'\'');
         } catch (\Exception $e) {
             $res = [
                 "response" => false,

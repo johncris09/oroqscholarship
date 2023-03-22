@@ -186,6 +186,17 @@
                     method  : "post", 
                     data    : $("#add-new-tvet-school-form").serialize(),
                     dataType: "json", 
+                    beforeSend: function(xhr) {
+                        Swal.fire({
+                            title: '<img src="<?php echo base_url('/public/img/logo-sm.png') ?>" style="max-width:50px; max-height:50px" />', 
+                            text: 'Please wait...',
+                            allowOutsideClick: false,
+                            showConfirmButton: false,
+                            onOpen: function() {
+                                swal.showLoading();
+                            }
+                        });
+                    },  
                     success : function (data) {  
                         if(data.response){ 
                             Swal.fire({
@@ -246,6 +257,17 @@
                     method  : "post", 
                     data    : $("#update-tvet-school-form").serialize(),
                     dataType: "json", 
+                    beforeSend: function(xhr) {
+                        Swal.fire({
+                            title: '<img src="<?php echo base_url('/public/img/logo-sm.png') ?>" style="max-width:50px; max-height:50px" />', 
+                            text: 'Please wait...',
+                            allowOutsideClick: false,
+                            showConfirmButton: false,
+                            onOpen: function() {
+                                swal.showLoading();
+                            }
+                        });
+                    }, 
                     success : function (data) { 
                         if(data.response){ 
                             Swal.fire({
@@ -313,6 +335,17 @@
                                                     url     : 'tvetschool/delete/' + id,
                                                     method  : "post",  
                                                     dataType: "json", 
+                                                    beforeSend: function(xhr) {
+                                                        Swal.fire({
+                                                            title: '<img src="<?php echo base_url('/public/img/logo-sm.png') ?>" style="max-width:50px; max-height:50px" />', 
+                                                            text: 'Please wait...',
+                                                            allowOutsideClick: false,
+                                                            showConfirmButton: false,
+                                                            onOpen: function() {
+                                                                swal.showLoading();
+                                                            }
+                                                        });
+                                                    }, 
                                                     success : function (data) {  
                                                         if(data.response){ 
                                                             Swal.fire({

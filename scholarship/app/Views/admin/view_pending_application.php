@@ -669,6 +669,17 @@
                             url     : '<?php echo base_url("/pending") ?>/' + method,  
                             method  : "post",
                             dataType: "json", 
+                            beforeSend: function(xhr) {
+                                Swal.fire({
+                                    title: '<img src="<?php echo base_url('/public/img/logo-sm.png') ?>" style="max-width:50px; max-height:50px" />', 
+                                    text: 'Please wait...',
+                                    allowOutsideClick: false,
+                                    showConfirmButton: false,
+                                    onOpen: function() {
+                                        swal.showLoading();
+                                    }
+                                });
+                            },
                             data    : {
                                 id : id,
                                 status : selectedOption,
@@ -724,7 +735,18 @@
                         $.ajax({
                             url     : '<?php echo base_url("/pending") ?>/' + method,
                             method  : "post",
-                            dataType: "json", 
+                            dataType: "json",
+                            beforeSend: function(xhr) {
+                                Swal.fire({
+                                    title: '<img src="<?php echo base_url('/public/img/logo-sm.png') ?>" style="max-width:50px; max-height:50px" />', 
+                                    text: 'Please wait...',
+                                    allowOutsideClick: false,
+                                    showConfirmButton: false,
+                                    onOpen: function() {
+                                        swal.showLoading();
+                                    }
+                                });
+                            }, 
                             data    : {
                                 id    : id,
                                 status: "Disapproved",

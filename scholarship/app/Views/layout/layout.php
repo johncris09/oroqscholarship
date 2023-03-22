@@ -42,7 +42,7 @@ $db = db_connect();
 		<!-- icons -->
         <?= link_tag('public/css/icons.min.css'); ?>  
         
-        <?= $this->renderSection('pageStyle') ?> 
+        <?= $this->renderSection('pageStyle') ?>  
 
          
 
@@ -53,6 +53,7 @@ $db = db_connect();
 
         <!-- Begin page -->
         <div id="wrapper">
+             
             <!-- Topbar Start -->
             <div class="navbar-custom">
                 <div class="container-fluid">
@@ -294,10 +295,10 @@ $db = db_connect();
                                                     <a href="<?= base_url('school') ?>">Senior High School</a>
                                                 </li>
                                                 <li>
-                                                    <a href="<?= base_url('collegeschool') ?>">College School(College)</a>
+                                                    <a href="<?= base_url('collegeschool') ?>">College School</a>
                                                 </li> 
                                                 <li>
-                                                    <a href="<?= base_url('tvetschool') ?>">TVET School(College)</a>
+                                                    <a href="<?= base_url('tvetschool') ?>">TVET School</a>
                                                 </li> 
                                             </ul>
                                         </div>

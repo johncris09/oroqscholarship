@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\AuthGroupModel;
 use App\Models\AuthIdentifierModel;
 use CodeIgniter\Shield\Entities\User;
+use App\Models\TvetSchoolModel;
 use App\Models\SchoolModel;
 use Config\Custom_config;
 use App\Models\CollegeSchoolModel;
@@ -15,12 +16,14 @@ class UserController extends BaseController
 {
     public function index()
     {
-        $data["page_title"] = "User";
-        $config             = new Custom_config(); 
+        $data["page_title"]     = "User";
+        $config                 = new Custom_config(); 
         $school                 = new SchoolModel();
         $college_school         = new CollegeSchoolModel(); 
+        $tvet_school            = new TvetSchoolModel();
         $data['school']         = $school->asArray()->orderBy('school_name', 'ASC')->findAll();
         $data['college_school'] = $college_school->asArray()->orderBy('school_name', 'ASC')->findAll();
+        $data['tvet_school']    = $tvet_school->asArray()->orderBy('school_name', 'ASC')->findAll();
         $data['required_field'] = $config->requiredField;  
         return view('admin/user', $data);
     }
@@ -34,6 +37,7 @@ class UserController extends BaseController
         
         $school_model = new SchoolModel(); 
         $collge_school_model = new CollegeSchoolModel();
+        $tvet_school_model = new TvetSchoolModel();
         $school_name = "";
         $school_id = "";
 
@@ -53,7 +57,7 @@ class UserController extends BaseController
 
             
             if($row['scholarship_type'] == "tvet"){ 
-                $school = $collge_school_model->find($row['school']);
+                $school = $tvet_school_model->find($row['school']);
                 $school_name = $school['school_name'];
                 $school_id = $school['id'];
             }
@@ -73,7 +77,7 @@ class UserController extends BaseController
                 "active"           => $row['active'], //active
                 "scholarship_type" => $row['scholarship_type'], //scholarship_type
                 "school"           => $school_name, //school
-                "school_id"           => $school_id, //school id
+                "school_id"        => $school_id, //school id
                 "email"            => $authidentities
                     ->asArray()
                     ->where('user_id', $row['id'])
@@ -98,6 +102,7 @@ class UserController extends BaseController
         
         $school_model = new SchoolModel(); 
         $collge_school_model = new CollegeSchoolModel();
+        $tvet_school_model = new TvetSchoolModel();
         $school_name = "";
         $school_id = "";
 
@@ -115,12 +120,12 @@ class UserController extends BaseController
                 $school_id = $school['id'];
             }
 
-            
             if($row['scholarship_type'] == "tvet"){ 
-                $school = $collge_school_model->find($row['school']);
+                $school = $tvet_school_model->find($row['school']);
                 $school_name = $school['school_name'];
                 $school_id = $school['id'];
             }
+
 
             if($row['scholarship_type'] == ""){
                 $school_name = ""; 

@@ -4,10 +4,9 @@
 
 
 <?= $this->section('main') ?>
-    <div class="row">
-
+    <div class="row">  
         <div class="col-12">
-            <div class="card">
+            <div class="card"> 
                 <div class="card-header bg-white">
                     <div class=" float-end"> 
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-new-strand-modal">Add New</button>
@@ -107,8 +106,11 @@
 
 <?= $this->section('pageScript') ?>
 
-    <script>
-        $(document).ready(function() { 
+    <script> 
+        
+        $(document).ready(function() {
+
+
             var table = $('#strand-table').DataTable({
                 "scrollY"  : 450,
                 "scrollX"  : true, 
@@ -158,9 +160,19 @@
                     url     : 'strand/insert',
                     method  : "post", 
                     data    : $("#add-new-strand-form").serialize(),
-                    dataType: "json", 
-                    success : function (data) {  
-                        console.info(data)
+                    dataType: "json",  
+                    beforeSend: function(xhr) {
+                        Swal.fire({
+                            title: '<img src="<?php echo base_url('/public/img/logo-sm.png') ?>" style="max-width:50px; max-height:50px" />', 
+                            text: 'Please wait...',
+                            allowOutsideClick: false,
+                            showConfirmButton: false,
+                            onOpen: function() {
+                                swal.showLoading();
+                            }
+                        });
+                    },  
+                    success : function (data) {
                         if(data.response){ 
                             Swal.fire({
                                 title: "Good job!",
@@ -195,7 +207,7 @@
                 $.ajax({
                     url     : 'strand/get/' + id,
                     method  : "get",
-                    dataType: "json", 
+                    dataType: "json",   
                     success : function (data) {  
                         $('#update-strand-form input[name="id"]').val(data.id)
                         $('#update-strand-form input[name="strand"]').val(data.strand)
@@ -216,8 +228,20 @@
                     url     : 'strand/update',
                     method  : "post", 
                     data    : $("#update-strand-form").serialize(),
-                    dataType: "json", 
+                    dataType: "json",  
+                    beforeSend: function(xhr) {
+                        Swal.fire({
+                            title: '<img src="<?php echo base_url('/public/img/logo-sm.png') ?>" style="max-width:50px; max-height:50px" />', 
+                            text: 'Please wait...',
+                            allowOutsideClick: false,
+                            showConfirmButton: false,
+                            onOpen: function() {
+                                swal.showLoading();
+                            }
+                        });
+                    },  
                     success : function (data) { 
+                        console.info(data)   
                         if(data.response){ 
                             Swal.fire({
                                 title: "Good job!",
@@ -284,6 +308,17 @@
                                                     url     : 'strand/delete/' + id,
                                                     method  : "post",  
                                                     dataType: "json", 
+                                                    beforeSend: function(xhr) {
+                                                        Swal.fire({
+                                                            title: '<img src="<?php echo base_url('/public/img/logo-sm.png') ?>" style="max-width:50px; max-height:50px" />', 
+                                                            text: 'Please wait...',
+                                                            allowOutsideClick: false,
+                                                            showConfirmButton: false,
+                                                            onOpen: function() {
+                                                                swal.showLoading();
+                                                            }
+                                                        });
+                                                    },  
                                                     success : function (data) {  
                                                         if(data.response){ 
                                                             Swal.fire({

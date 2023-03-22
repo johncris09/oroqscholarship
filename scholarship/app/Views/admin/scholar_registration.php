@@ -1458,7 +1458,18 @@
                     data       : formData,
                     processData: false,
                     contentType: false, 
-                    dataType   : "json", 
+                    dataType   : "json",  
+                    beforeSend: function(xhr) {
+                        Swal.fire({
+                            title: '<img src="<?php echo base_url('/public/img/logo-sm.png') ?>" style="max-width:50px; max-height:50px" />', 
+                            text: 'Please wait...',
+                            allowOutsideClick: false,
+                            showConfirmButton: false,
+                            onOpen: function() {
+                                swal.showLoading();
+                            }
+                        });
+                    },
                     success    : function (data) {   
                         console.info(data)
                         if(data.response){   
@@ -1883,7 +1894,18 @@
                     data       : formData,
                     processData: false,
                     contentType: false, 
-                    dataType   : "json",
+                    dataType   : "json", 
+                    beforeSend: function(xhr) {
+                        Swal.fire({
+                            title: '<img src="<?php echo base_url('/public/img/logo-sm.png') ?>" style="max-width:50px; max-height:50px" />', 
+                            text: 'Please wait...',
+                            allowOutsideClick: false,
+                            showConfirmButton: false,
+                            onOpen: function() {
+                                swal.showLoading();
+                            }
+                        });
+                    },
                     success    : function (data) {
                         console.info(data)
                         if(data.response){   
@@ -2292,6 +2314,17 @@
                     processData: false,
                     contentType: false, 
                     dataType   : "json", 
+                    beforeSend: function(xhr) {
+                        Swal.fire({
+                            title: '<img src="<?php echo base_url('/public/img/logo-sm.png') ?>" style="max-width:50px; max-height:50px" />', 
+                            text: 'Please wait...',
+                            allowOutsideClick: false,
+                            showConfirmButton: false,
+                            onOpen: function() {
+                                swal.showLoading();
+                            }
+                        });
+                    }, 
                     success    : function (data) {   
                         if(data.response){   
                             Swal.fire({

@@ -75,7 +75,18 @@
                                 data  : {
                                     semester_closed: 1, 
                                 }, 
-                                dataType: "json",
+                                dataType: "json", 
+                                beforeSend: function(xhr) {
+                                    Swal.fire({
+                                        title: '<img src="<?php echo base_url('/public/img/logo-sm.png') ?>" style="max-width:50px; max-height:50px" />', 
+                                        text: 'Please wait...',
+                                        allowOutsideClick: false,
+                                        showConfirmButton: false,
+                                        onOpen: function() {
+                                            swal.showLoading();
+                                        }
+                                    });
+                                },
                                 success : function(data){
                                     if(data.response){ 
                                         Swal.fire({
@@ -111,7 +122,18 @@
                                 data  : {
                                     semester_closed: 0, 
                                 }, 
-                                dataType: "json",
+                                dataType: "json", 
+                                beforeSend: function(xhr) {
+                                    Swal.fire({
+                                        title: '<img src="<?php echo base_url('/public/img/logo-sm.png') ?>" style="max-width:50px; max-height:50px" />', 
+                                        text: 'Please wait...',
+                                        allowOutsideClick: false,
+                                        showConfirmButton: false,
+                                        onOpen: function() {
+                                            swal.showLoading();
+                                        }
+                                    });
+                                },
                                 success : function(data){
                                     if(data.response){ 
                                         Swal.fire({
@@ -143,7 +165,18 @@
                     data  : {
                         current_sy: school_year 
                     }, 
-                    dataType: "json",
+                    dataType: "json", 
+                    beforeSend: function(xhr) {
+                        Swal.fire({
+                            title: '<img src="<?php echo base_url('/public/img/logo-sm.png') ?>" style="max-width:50px; max-height:50px" />', 
+                            text: 'Please wait...',
+                            allowOutsideClick: false,
+                            showConfirmButton: false,
+                            onOpen: function() {
+                                swal.showLoading();
+                            }
+                        });
+                    },
                     success: function(data){  
                         if(data.response){ 
                             Swal.fire({
@@ -169,7 +202,18 @@
                     data  : {
                         current_sem: sem 
                     }, 
-                    dataType: "json",
+                    dataType: "json", 
+                    beforeSend: function(xhr) {
+                        Swal.fire({
+                            title: '<img src="<?php echo base_url('/public/img/logo-sm.png') ?>" style="max-width:50px; max-height:50px" />', 
+                            text: 'Please wait...',
+                            allowOutsideClick: false,
+                            showConfirmButton: false,
+                            onOpen: function() {
+                                swal.showLoading();
+                            }
+                        });
+                    },
                     success: function(data){  
                         if(data.response){ 
                             Swal.fire({

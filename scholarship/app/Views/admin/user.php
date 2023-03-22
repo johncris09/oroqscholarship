@@ -104,10 +104,17 @@
                                         <?php endif; ?>
                                     <?php endforeach; ?>
                                 </div>
-                                <div class="college-tvet-school d-none">
+                                <div class="college-school d-none">
                                     <?php foreach($college_school as $row):?> 
                                         <?php if($row['school_name'] != ""):?> 
-                                            <option  class="d-none" data-scholarship-type="colege_tvet" value="<?= $row['id']  ?>"><?= $row['school_name']  ?></option>  
+                                            <option  class="d-none" data-scholarship-type="college" value="<?= $row['id']  ?>"><?= $row['school_name']  ?></option>  
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </div>
+                                <div class="tvet-school d-none">
+                                    <?php foreach($tvet_school as $row):?> 
+                                        <?php if($row['school_name'] != ""):?> 
+                                            <option  class="d-none" data-scholarship-type="tvet" value="<?= $row['id']  ?>"><?= $row['school_name']  ?></option>  
                                         <?php endif; ?>
                                     <?php endforeach; ?>
                                 </div>
@@ -186,10 +193,17 @@
                                         <?php endif; ?>
                                     <?php endforeach; ?>
                                 </div>
-                                <div class="college-tvet-school d-none">
+                                <div class="college-school d-none">
                                     <?php foreach($college_school as $row):?> 
                                         <?php if($row['school_name'] != ""):?> 
-                                            <option  class="d-none" data-scholarship-type="colege_tvet" value="<?= $row['id']  ?>"><?= $row['school_name']  ?></option>  
+                                            <option  class="d-none" data-scholarship-type="college" value="<?= $row['id']  ?>"><?= $row['school_name']  ?></option>  
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </div>
+                                <div class="tvet-school d-none">
+                                    <?php foreach($tvet_school as $row):?> 
+                                        <?php if($row['school_name'] != ""):?> 
+                                            <option  class="d-none" data-scholarship-type="tvet" value="<?= $row['id']  ?>"><?= $row['school_name']  ?></option>  
                                         <?php endif; ?>
                                     <?php endforeach; ?>
                                 </div>
@@ -254,21 +268,34 @@
                 if(val == "shs"){
                     $('select[name="school"]').val('') 
                     $('select[name="school"] option[data-scholarship-type="shs"]').removeClass('d-none') 
-                    $('select[name="school"] option[data-scholarship-type="colege_tvet"]').addClass('d-none') 
+                    $('select[name="school"] option[data-scholarship-type="college"]').addClass('d-none')  
+                    $('select[name="school"] option[data-scholarship-type="tvet"]').addClass('d-none') 
  
                 }
                 if(val == "college" || val == "tvet"){  
                     $('select[name="school"]').val('')
-                    $('select[name="school"] option[data-scholarship-type="colege_tvet"]').removeClass('d-none') 
+                    $('select[name="school"] option[data-scholarship-type="college"]').removeClass('d-none') 
                     $('select[name="school"] option[data-scholarship-type="shs"]').addClass('d-none') 
+                    $('select[name="school"] option[data-scholarship-type="tvet"]').addClass('d-none') 
                      
                 }
+
+                
+                if( val == "tvet"){  
+                    $('select[name="school"]').val('')
+                    $('select[name="school"] option[data-scholarship-type="tvet"]').removeClass('d-none') 
+                    $('select[name="school"] option[data-scholarship-type="shs"]').addClass('d-none') 
+                    $('select[name="school"] option[data-scholarship-type="college"]').addClass('d-none') 
+                     
+                }
+
 
                 if( val == ""){ 
                     $('.school').addClass('d-none') 
                     $('select[name="school"]').val('')
                     $('select[name="school"] option[data-scholarship-type="shs"]').addClass('d-none')
-                    $('select[name="school"] option[data-scholarship-type="colege_tvet"]').addClass('d-none')
+                    $('select[name="school"] option[data-scholarship-type="college"]').addClass('d-none')
+                    $('select[name="school"] option[data-scholarship-type="tvet"]').addClass('d-none') 
 
                 }
             })
@@ -392,6 +419,17 @@
                     method  : "post", 
                     data    : $("#add-new-user-form").serialize(),
                     dataType: "json", 
+                    beforeSend: function(xhr) {
+                        Swal.fire({
+                            title: '<img src="<?php echo base_url('/public/img/logo-sm.png') ?>" style="max-width:50px; max-height:50px" />', 
+                            text: 'Please wait...',
+                            allowOutsideClick: false,
+                            showConfirmButton: false,
+                            onOpen: function() {
+                                swal.showLoading();
+                            }
+                        });
+                    },  
                     success : function (data) {  
                         if(data.response){ 
                             Swal.fire({
@@ -436,8 +474,7 @@
                     url     : 'user/get/' + id,
                     method  : "get",
                     dataType: "json", 
-                    success : function (data) {  
-                        console.info(data)
+                    success : function (data) {   
                         $('#update-user-form input[name="id"]').val(data.id)
                         $('#update-user-form input[name="firstname"]').val(data.firstname)
                         $('#update-user-form input[name="middlename"]').val(data.middlename)
@@ -451,16 +488,24 @@
                             if(data.scholarship_type == "shs"){ 
                                 $('#update-user-form select[name="school"]').val('') 
                                 $('#update-user-form select[name="school"] option[data-scholarship-type="shs"]').removeClass('d-none') 
-                                $('#update-user-form select[name="school"] option[data-scholarship-type="colege_tvet"]').addClass('d-none')  
+                                $('#update-user-form select[name="school"] option[data-scholarship-type="college"]').addClass('d-none') 
+                                $('#update-user-form select[name="school"] option[data-scholarship-type="tvet"]').addClass('d-none')  
                             }
                             if(data.scholarship_type == "college" || data.scholarship_type == "tvet"){  
                                 $('#update-user-form select[name="school"]').val('')
-                                $('#update-user-form select[name="school"] option[data-scholarship-type="colege_tvet"]').removeClass('d-none') 
+                                $('#update-user-form select[name="school"] option[data-scholarship-type="college"]').removeClass('d-none') 
                                 $('#update-user-form select[name="school"] option[data-scholarship-type="shs"]').addClass('d-none')  
+                                $('#update-user-form select[name="school"] option[data-scholarship-type="tvet"]').addClass('d-none') 
+                            } 
+                            if(data.scholarship_type == "tvet"){  
+                                $('#update-user-form select[name="school"]').val('')
+                                $('#update-user-form select[name="school"] option[data-scholarship-type="tvet"]').removeClass('d-none') 
+                                $('#update-user-form select[name="school"] option[data-scholarship-type="shs"]').addClass('d-none')  
+                                $('#update-user-form select[name="school"] option[data-scholarship-type="college"]').addClass('d-none')  
                             } 
                             if( data.scholarship_type == ""){  
                                 $('#update-user-form select[name="school"] option[data-scholarship-type="shs"]').addClass('d-none')
-                                $('#update-user-form select[name="school"] option[data-scholarship-type="colege_tvet"]').addClass('d-none') 
+                                $('#update-user-form select[name="school"] option[data-scholarship-type="college"]').addClass('d-none') 
                             } 
 
                             $('#update-user-form .scholarship-type').removeClass('d-none')
@@ -496,6 +541,17 @@
                     method  : "post", 
                     data    : $("#update-user-form").serialize(),
                     dataType: "json", 
+                    beforeSend: function(xhr) {
+                        Swal.fire({
+                            title: '<img src="<?php echo base_url('/public/img/logo-sm.png') ?>" style="max-width:50px; max-height:50px" />', 
+                            text: 'Please wait...',
+                            allowOutsideClick: false,
+                            showConfirmButton: false,
+                            onOpen: function() {
+                                swal.showLoading();
+                            }
+                        });
+                    },  
                     success : function (data) {   
                         if(data.response){ 
                             Swal.fire({
@@ -529,6 +585,17 @@
                     method  : "post", 
                     data    : $("#update-password-form").serialize(),
                     dataType: "json", 
+                    beforeSend: function(xhr) {
+                        Swal.fire({
+                            title: '<img src="<?php echo base_url('/public/img/logo-sm.png') ?>" style="max-width:50px; max-height:50px" />', 
+                            text: 'Please wait...',
+                            allowOutsideClick: false,
+                            showConfirmButton: false,
+                            onOpen: function() {
+                                swal.showLoading();
+                            }
+                        });
+                    },  
                     success : function (data) {   
                         if(data.response){ 
                             Swal.fire({
@@ -596,6 +663,17 @@
                                                     url     : 'user/delete/' + id,
                                                     method  : "post",  
                                                     dataType: "json", 
+                                                    beforeSend: function(xhr) {
+                                                        Swal.fire({
+                                                            title: '<img src="<?php echo base_url('/public/img/logo-sm.png') ?>" style="max-width:50px; max-height:50px" />', 
+                                                            text: 'Please wait...',
+                                                            allowOutsideClick: false,
+                                                            showConfirmButton: false,
+                                                            onOpen: function() {
+                                                                swal.showLoading();
+                                                            }
+                                                        });
+                                                    },  
                                                     success : function (data) {  
                                                         if(data.response){ 
                                                             Swal.fire({
