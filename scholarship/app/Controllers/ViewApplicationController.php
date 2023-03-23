@@ -82,9 +82,9 @@ class ViewApplicationController extends BaseController
             }
 
             return view('admin/view_application', $data);
-        } catch (\Exception $e) {
-            // return redirect()->back();
-            print_r($e->getMessage());
+        } catch (\Exception $e) { 
+            // print_r($e->getMessage());
+            echo "No Record Found!";
         }
 
 

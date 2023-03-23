@@ -89,18 +89,20 @@ class CollegeModel extends Model
                 barangay.id as address_id,
                 college_school.school_name as school_name,
                 college_school.address as school_address, 
-                course.course as course_name,
-                
+                course.course as course_name, 
             ')
             ->join('college_school', 'college.school = college_school.id')
             ->join('barangay', 'college.address = barangay.id')  
             ->join('course', 'college.course = course.id')  
-            ->where('college.id', $id)
-            ->get()
-            ->getResultArray();
-        return $query[0];  
-
-
+            ->where('college.id', $id);
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "college"){
+                $school = auth()->user()->school; 
+                $query->where('college.school', $school);
+            }
+        }
+        $result = $query->get()->getResultArray();
+        return $result[0];
     } 
 
 
@@ -113,57 +115,78 @@ class CollegeModel extends Model
     
     public function count_application($data)
     {
-        $builder = $this->db
+        $query = $this->db
             ->table($this->table) 
-            ->where($data) 
-            ->where('appmanager', 'Active');
-        $query = $builder->countAllResults();
-        return $query;
+            ->where($data); 
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "college"){
+                $school = auth()->user()->school; 
+                $query->where('school', $school);
+            }
+        } 
+        $query->where('appmanager', 'Active'); 
+        $result = $query->countAllResults();
+        return $result;
     }
 
 
     
-    // Approved 
+    // Approved
     public function get_tot_approved($data)
     {
-        $builder = $this->db
+        $query = $this->db
             ->table($this->table) 
             ->like('appstatus', 'approved', 'both' )
             ->where('appstatus !=', 'disapproved')
-            ->where($data)
-            ->where('appmanager', 'Active');
-        $query = $builder->countAllResults();
-        return $query;
-    }
-
+            ->where($data);
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "college"){
+                $school = auth()->user()->school; 
+                $query->where('school', $school);
+            }
+        } 
+        $query->where('appmanager', 'Active');
+        $result = $query->countAllResults();
+        return $result; 
+    } 
     
     // Disapproved
     public function get_tot_disapproved($data)
-    {
-        $builder = $this->db
-            ->table($this->table)  
+    { 
+        $query = $this->db
+            ->table($this->table) 
             ->where('appstatus', 'disapproved')
-            ->where($data)
-            ->where('appmanager', 'Active');
-        $query = $builder->countAllResults();
-        return $query; 
+            ->where($data);
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "college"){
+                $school = auth()->user()->school; 
+                $query->where('school', $school);
+            }
+        } 
+        $query->where('appmanager', 'Active');
+        $result = $query->countAllResults();
+        return $result; 
     } 
 
     // Pending
     public function get_tot_pending($data)
-    {
-        $builder = $this->db
-            ->table($this->table)  
+    { 
+        $query = $this->db
+            ->table($this->table) 
             ->where('appstatus', 'pending')
-            ->where($data)
-            ->where('appmanager', 'Active');
-        $query = $builder->countAllResults();
-        return $query; 
+            ->where($data);
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "college"){
+                $school = auth()->user()->school; 
+                $query->where('school', $school);
+            }
+        } 
+        $query->where('appmanager', 'Active');
+        $result = $query->countAllResults();
+        return $result;
+        
     }
-
-
-
-
+ 
     public function count_approved($data)
     {
         $builder = $this->db
@@ -213,11 +236,18 @@ class CollegeModel extends Model
             ->join('course', 'college.course = course.id') 
             ->where('college.appstatus', 'pending')
             ->where('appmanager', 'Active')
-            ->where($data)
-            ->orderBy('appnoid', 'asc')
-            ->get()
-            ->getResultArray();
-        return $query; 
+            ->where($data);
+            
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "college"){
+                $school = auth()->user()->school; 
+                $query->where('school', $school);
+            }
+        } 
+        $query->where('appmanager', 'Active'); 
+        $query->orderBy('appnoid', 'asc'); 
+        $result = $query->get()->getResult(); 
+        return $result;
     }
 
     
@@ -269,11 +299,17 @@ class CollegeModel extends Model
             ->like('college.appstatus', 'approved', "both")
             ->where('college.appstatus !=', 'disapproved')
             ->where('appmanager', 'Active')
-            ->where($data)
-            ->orderBy('appnoid', 'asc')
-            ->get()
-            ->getResult();
-        return $query;
+            ->where($data); 
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "college"){
+                $school = auth()->user()->school; 
+                $query->where('school', $school);
+            }
+        } 
+        $query->where('appmanager', 'Active'); 
+        $query->orderBy('appnoid', 'asc'); 
+        $result = $query->get()->getResult(); 
+        return $result;
     } 
 
 
@@ -683,21 +719,22 @@ class CollegeModel extends Model
     
     
     public function get_tot_by_school($data)
-    { 
-        $builder = $this->db->table('college');  
-        $builder->join('college_school', 'college.school = college_school.id');  
-        $builder->where($data);
-        $builder->select('
-            count(*) as total,
-            college_school.school_name as school, 
-        ');
-        $builder->groupBy('college_school.school_name'); 
+    {  
+        $query = $this->db->table('college')
+            ->join('college_school', 'college.school = college_school.id')
+            ->select('
+                college_school.school_name as school, 
+                count(*) as total,
+            ')
+            ->where($data)
+            ->where('appmanager', 'Active')
+            ->groupBy('college_school.school_name'); 
 
         // Get the results of the query
-        $results = $builder->get()->getResult(); 
+        $results = $query->get()->getResult(); 
 
         return $results;
-    }
+    }  
 
 
 
@@ -714,15 +751,23 @@ class CollegeModel extends Model
 
 
     public function get_tot_by_gender($data)
-    {
-        $query = $this->builder
+    { 
+        $query = $this->db
+            ->table($this->table) 
             ->select('gender as gender, count(*) as total')
-            ->where('gender != ', "")
-            ->where($data)
-            ->groupBy('gender')
-            ->get()
-            ->getResult();
-        return $query;
+            ->where('gender != ', "") 
+            ->where($data);
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "college"){
+                $school = auth()->user()->school; 
+                $query->where('school', $school);
+            }
+        } 
+        $query->where('appmanager', 'Active');
+        $query->groupBy('gender');
+        $result = $query->get()->getResult();
+        return $result; 
+
     }
 
     public function filter($data)
@@ -772,5 +817,42 @@ class CollegeModel extends Model
             ->update();
         return $query;
     }
+
+    
+    
+    public function search_name($data)
+    {  
+        $query = $this->builder
+            ->select('
+                college.*,
+                barangay.barangay as address,
+                barangay.id as address_id,
+                college_school.school_name as school_name,
+                college_school.address as school_address, 
+                course.course as course, 
+                "college" AS source 
+            ')
+            ->join('college_school', 'college.school = college_school.id')
+            ->join('barangay', 'college.address = barangay.id')  
+            ->join('course', 'college.course = course.id') ;
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "college"){
+                $school = auth()->user()->school; 
+                $query->where('college.school', $school);
+            }
+        } 
+        $query->groupStart()
+            ->like("college.firstname ", $data, "both") 
+            ->orLike("college.lastname ", $data, "both") 
+            ->orLike("college.middlename", $data, "both") 
+            ->orLike("college.suffix", $data, "both")  
+            ->orLike("CONCAT(college.firstname, ' ', college.lastname)", $data, "both") 
+            ->orLike("CONCAT(college.lastname, ' ', college.firstname)", $data, "both")
+        ->groupEnd(); 
+        $query->orderBy('firstname, lastname, middlename', 'asc');
+        $result = $query->get()->getResult();  
+        return $result; 
+    } 
+
 
 }

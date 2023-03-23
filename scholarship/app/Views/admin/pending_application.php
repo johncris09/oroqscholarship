@@ -14,97 +14,177 @@
                     <p class="sub-header font-13">
                         <code>To see application details, double-click the chosen row.</code>
                     </p>
-                    <ul class="nav nav-pills navtab-bg nav-justified">
-                        <li class="nav-item">
-                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active ">
-                                Senior High School Pending List
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#college-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link  ">
-                                College Pending List
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link ">
-                                TVET Pending List
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane show active " id="senior-high-tab">   
-                            <table id="senior-high-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
-                                <thead>
-                                    <tr>   
-                                        <?php
-                                            if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
-                                        ?>  
-                                            <th></th> 
-                                        <?php
-                                            }
-                                        ?>
-                                        <th>Application ID</th>  
-                                        <th>SY</th>  
-                                        <th>Name</th>  
-                                        <th>Address</th>  
-                                        <th>Strand</th>  
-                                        <th>School</th>  
-                                        <th>Grade Level</th>  
-                                        <th>Application Status</th>  
-                                    </tr>
-                                </thead> 
-                            </table> 
-                        </div>
-                        <div class="tab-pane  " id="college-tab">
-                            <table id="college-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
-                                <thead>
-                                    <tr>    
-                                        <?php
-                                            if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
-                                        ?>  
-                                            <th></th> 
-                                        <?php
-                                            }
-                                        ?>   
-                                        <th>Application ID</th> 
-                                        <th>SY</th>    
-                                        <th>Name</th>  
-                                        <th>Address</th>  
-                                        <th>Course</th>  
-                                        <th>School</th>  
-                                        <th>Year Level</th>  
-                                        <th>Application Status</th>  
-                                    </tr>
-                                </thead> 
-                            </table> 
-                        </div> 
-                        <div class="tab-pane   " id="tvet-tab"> 
-                            <table id="tvet-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
-                                <thead>
-                                    <tr>    
-                                        <?php
-                                            if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
-                                        ?>  
-                                            <th></th> 
-                                        <?php
-                                            }
-                                        ?>    
-                                        <th>Application ID</th>  
-                                        <th>SY</th>  
-                                        <th>Name</th>  
-                                        <th>Address</th>  
-                                        <th>Course</th>  
-                                        <th>School</th>  
-                                        <th>Year Level</th>  
-                                        <th>Application Status</th>  
-                                    </tr>
-                                </thead> 
-                            </table> 
-                        </div>
-                    </div>
+                    <?php    
+                        if(in_array( strtolower(auth()->user()->groups[0]), ["superadmin", "admin", "user"])){ 
+                            if(auth()->user()->scholarship_type == "shs"){   
+                    ?>
+                                <table id="senior-high-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
+                                    <thead>
+                                        <tr>   
+                                            <?php
+                                                if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                                            ?>  
+                                                <th></th> 
+                                            <?php
+                                                }
+                                            ?>
+                                            <th>Application ID</th>  
+                                            <th>SY</th>  
+                                            <th>Name</th>  
+                                            <th>Address</th>  
+                                            <th>Strand</th>  
+                                            <th>School</th>  
+                                            <th>Grade Level</th>  
+                                            <th>Application Status</th>  
+                                        </tr>
+                                    </thead> 
+                                </table> 
+                    <?php 
+                            }else    if(auth()->user()->scholarship_type == "college"){
+                    ?>
+                                <table id="college-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
+                                    <thead>
+                                        <tr>    
+                                            <?php
+                                                if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                                            ?>  
+                                                <th></th> 
+                                            <?php
+                                                }
+                                            ?>   
+                                            <th>Application ID</th> 
+                                            <th>SY</th>    
+                                            <th>Name</th>  
+                                            <th>Address</th>  
+                                            <th>Course</th>  
+                                            <th>School</th>  
+                                            <th>Year Level</th>  
+                                            <th>Application Status</th>  
+                                        </tr>
+                                    </thead> 
+                                </table> 
+                    <?php 
+                            }else    if(auth()->user()->scholarship_type == "tvet"){
+                    ?>
+                                <table id="tvet-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
+                                    <thead>
+                                        <tr>    
+                                            <?php
+                                                if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                                            ?>  
+                                                <th></th> 
+                                            <?php
+                                                }
+                                            ?>    
+                                            <th>Application ID</th>  
+                                            <th>SY</th>  
+                                            <th>Name</th>  
+                                            <th>Address</th>  
+                                            <th>Course</th>  
+                                            <th>School</th>  
+                                            <th>Year Level</th>  
+                                            <th>Application Status</th>  
+                                        </tr>
+                                    </thead> 
+                                </table> 
+                    <?php 
+                            }else{  
+                    ?>
+                                <ul class="nav nav-pills navtab-bg nav-justified">
+                                    <li class="nav-item">
+                                        <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active ">
+                                            Senior High School Pending List
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#college-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link  ">
+                                            College Pending List
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link ">
+                                            TVET Pending List
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane show active " id="senior-high-tab">   
+                                        <table id="senior-high-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
+                                            <thead>
+                                                <tr>   
+                                                    <?php
+                                                        if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                                                    ?>  
+                                                        <th></th> 
+                                                    <?php
+                                                        }
+                                                    ?>
+                                                    <th>Application ID</th>  
+                                                    <th>SY</th>  
+                                                    <th>Name</th>  
+                                                    <th>Address</th>  
+                                                    <th>Strand</th>  
+                                                    <th>School</th>  
+                                                    <th>Grade Level</th>  
+                                                    <th>Application Status</th>  
+                                                </tr>
+                                            </thead> 
+                                        </table> 
+                                    </div>
+                                    <div class="tab-pane  " id="college-tab">
+                                        <table id="college-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
+                                            <thead>
+                                                <tr>    
+                                                    <?php
+                                                        if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                                                    ?>  
+                                                        <th></th> 
+                                                    <?php
+                                                        }
+                                                    ?>   
+                                                    <th>Application ID</th> 
+                                                    <th>SY</th>    
+                                                    <th>Name</th>  
+                                                    <th>Address</th>  
+                                                    <th>Course</th>  
+                                                    <th>School</th>  
+                                                    <th>Year Level</th>  
+                                                    <th>Application Status</th>  
+                                                </tr>
+                                            </thead> 
+                                        </table> 
+                                    </div> 
+                                    <div class="tab-pane   " id="tvet-tab"> 
+                                        <table id="tvet-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
+                                            <thead>
+                                                <tr>    
+                                                    <?php
+                                                        if( in_array( strtolower(auth()->user()->groups[0]), ["superadmin"])){
+                                                    ?>  
+                                                        <th></th> 
+                                                    <?php
+                                                        }
+                                                    ?>    
+                                                    <th>Application ID</th>  
+                                                    <th>SY</th>  
+                                                    <th>Name</th>  
+                                                    <th>Address</th>  
+                                                    <th>Course</th>  
+                                                    <th>School</th>  
+                                                    <th>Year Level</th>  
+                                                    <th>Application Status</th>  
+                                                </tr>
+                                            </thead> 
+                                        </table> 
+                                    </div>
+                                </div>
+                    <?php 
+                            }
+                        }
+                    ?>
                 </div>
-            </div> <!-- end card-->
-        </div> <!-- end col --> 
+            </div> 
+        </div> 
     </div>
     
 

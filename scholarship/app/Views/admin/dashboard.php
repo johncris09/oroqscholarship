@@ -13,87 +13,235 @@
 <?= $this->endSection() ?> 
 <?= $this->section('main') ?> 
     <div class="row"> 
-        <div class="col-md-4 col-xl-4">
-            <div class="widget-rounded-circle card bg-purple shadow-none">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="avatar-lg rounded-circle bg-soft-light">
-                                <i class="mdi mdi-school-outline font-22 avatar-title text-white"></i>
+        <?php 
+            if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){ 
+                if(auth()->user()->scholarship_type == "shs"){
+        ?>
+                    <div class="col-md-12 col-xl-12">
+                        <div class="widget-rounded-circle card bg-purple shadow-none">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="avatar-lg rounded-circle bg-soft-light">
+                                            <i class="mdi mdi-school-outline font-22 avatar-title text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="text-end">
+                                            <h2 id="shs_total" class="text-white mt-2"><?= $tot_approved_shs; ?> </h2>
+                                            <p class="text-white   text-truncate">Senior High School</p>
+                                        </div>
+                                    </div>
+                                </div> 
                             </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end">
-                                <h2 id="shs_total" class="text-white mt-2"><?= $tot_approved_shs; ?> </h2>
-                                <p class="text-white   text-truncate">Senior High School</p>
-                            </div>
-                        </div>
-                    </div> <!-- end row-->
-                </div>
-            </div> <!-- end widget-rounded-circle-->
-        </div> <!-- end col-->
-
-        <div class="col-md-4 col-xl-4">
-            <div class="widget-rounded-circle card bg-info shadow-none">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="avatar-lg rounded-circle bg-soft-light">
-                                <i class="mdi mdi-school font-22 avatar-title text-white"></i>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end">
-                                <h2  id="college_total"  class="text-white mt-2"><?= $tot_approved_college; ?></h2>
-                                <p class="text-white   text-truncate">College</p>
-                            </div>
-                        </div>
-                    </div> <!-- end row-->
-                </div>
-            </div> <!-- end widget-rounded-circle-->
-        </div> <!-- end col-->
-
-        <div class="col-md-4 col-xl-4">
-            <div class="widget-rounded-circle card bg-pink shadow-none">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="avatar-lg rounded-circle bg-soft-light">
-                                <i class="fe-shuffle font-22 avatar-title text-white"></i>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end">
-                                <h2  id="tvet_total"  class="text-white mt-2"><?= $tot_approved_tvet; ?></h2>
-                                <p class="text-white   text-truncate">TVET</p>
-                            </div>
-                        </div>
-                    </div> <!-- end row-->
-                </div>
-            </div> <!-- end widget-rounded-circle-->
-        </div>   
-    </div> <!-- end col-->
-
-    
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="card card-status"> 
-                <div class="card-header bg-white">  
-                    <div class="card-widgets">
-                        <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
-                        <a data-bs-toggle="collapse" href="#cardCollpasebystatus" role="button" aria-expanded="false" aria-controls="cardCollpasebystatus"><i class="mdi mdi-minus"></i></a>
-                        <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                        </div> 
                     </div> 
-                    <h4 class="header-title  ">Scholarship Status Chart</h4>
-                </div>
-                <div class="card-body">   
-                    <div id="cardCollpasebystatus" class="collapse show" dir="ltr">
-                        <div id="scholarship-status-chart" class="apex-charts" data-colors="#348cd4,#f06292,#ced4da"></div>
-                    </div>  
+        <?php
+                    
+
+                }else if(auth()->user()->scholarship_type == "college"){ 
+        ?>
+                    <div class="col-md-12 col-xl-12">
+                        <div class="widget-rounded-circle card bg-info shadow-none">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="avatar-lg rounded-circle bg-soft-light">
+                                            <i class="mdi mdi-school font-22 avatar-title text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="text-end">
+                                            <h2  id="college_total"  class="text-white mt-2"><?= $tot_approved_college; ?></h2>
+                                            <p class="text-white   text-truncate">College</p>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div> 
+                    </div> 
+        <?php
+
+                }else if(auth()->user()->scholarship_type == "tvet"){ 
+        ?>
+                    <div class="col-md-12 col-xl-12">
+                        <div class="widget-rounded-circle card bg-pink shadow-none">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="avatar-lg rounded-circle bg-soft-light">
+                                            <i class="fe-shuffle font-22 avatar-title text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="text-end">
+                                            <h2  id="tvet_total"  class="text-white mt-2"><?= $tot_approved_tvet; ?></h2>
+                                            <p class="text-white   text-truncate">TVET</p>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div> 
+                    </div>
+        <?php 
+                } else { 
+        ?>
+                    <div class="col-md-4 col-xl-4">
+                        <div class="widget-rounded-circle card bg-purple shadow-none">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="avatar-lg rounded-circle bg-soft-light">
+                                            <i class="mdi mdi-school-outline font-22 avatar-title text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="text-end">
+                                            <h2 id="shs_total" class="text-white mt-2"><?= $tot_approved_shs; ?> </h2>
+                                            <p class="text-white   text-truncate">Senior High School</p>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div> 
+                    </div> 
+
+                    <div class="col-md-4 col-xl-4">
+                        <div class="widget-rounded-circle card bg-info shadow-none">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="avatar-lg rounded-circle bg-soft-light">
+                                            <i class="mdi mdi-school font-22 avatar-title text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="text-end">
+                                            <h2  id="college_total"  class="text-white mt-2"><?= $tot_approved_college; ?></h2>
+                                            <p class="text-white   text-truncate">College</p>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div> 
+                    </div> 
+
+                    <div class="col-md-4 col-xl-4">
+                        <div class="widget-rounded-circle card bg-pink shadow-none">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="avatar-lg rounded-circle bg-soft-light">
+                                            <i class="fe-shuffle font-22 avatar-title text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="text-end">
+                                            <h2  id="tvet_total"  class="text-white mt-2"><?= $tot_approved_tvet; ?></h2>
+                                            <p class="text-white   text-truncate">TVET</p>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div> 
+                    </div>
+        <?php  
+                }
+            } else { 
+        ?>
+                <div class="col-md-4 col-xl-4">
+                    <div class="widget-rounded-circle card bg-purple shadow-none">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="avatar-lg rounded-circle bg-soft-light">
+                                        <i class="mdi mdi-school-outline font-22 avatar-title text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-end">
+                                        <h2 id="shs_total" class="text-white mt-2"><?= $tot_approved_shs; ?> </h2>
+                                        <p class="text-white   text-truncate">Senior High School</p>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </div> 
                 </div> 
-            </div> 
-        </div> 
-    </div>
+
+                <div class="col-md-4 col-xl-4">
+                    <div class="widget-rounded-circle card bg-info shadow-none">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="avatar-lg rounded-circle bg-soft-light">
+                                        <i class="mdi mdi-school font-22 avatar-title text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-end">
+                                        <h2  id="college_total"  class="text-white mt-2"><?= $tot_approved_college; ?></h2>
+                                        <p class="text-white   text-truncate">College</p>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </div> 
+                </div> 
+
+                <div class="col-md-4 col-xl-4">
+                    <div class="widget-rounded-circle card bg-pink shadow-none">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="avatar-lg rounded-circle bg-soft-light">
+                                        <i class="fe-shuffle font-22 avatar-title text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-end">
+                                        <h2  id="tvet_total"  class="text-white mt-2"><?= $tot_approved_tvet; ?></h2>
+                                        <p class="text-white   text-truncate">TVET</p>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </div> 
+                </div>
+        <?php
+            }
+        ?> 
+    </div> 
+
+    <?php 
+    
+    if(in_array( strtolower(auth()->user()->groups[0]), ["superadmin", "admin", "user"])){ 
+        if(empty(auth()->user()->scholarship_type)){  
+    ?>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card card-status"> 
+                        <div class="card-header bg-white">  
+                            <div class="card-widgets">
+                                <a href="javascript: void(0);" data-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                                <a data-bs-toggle="collapse" href="#cardCollpasebystatus" role="button" aria-expanded="false" aria-controls="cardCollpasebystatus"><i class="mdi mdi-minus"></i></a>
+                                <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
+                            </div> 
+                            <h4 class="header-title  ">Scholarship Status Chart</h4>
+                        </div>
+                        <div class="card-body">   
+                            <div id="cardCollpasebystatus" class="collapse show" dir="ltr">
+                                <div id="scholarship-status-chart" class="apex-charts" data-colors="#348cd4,#f06292,#ced4da"></div>
+                            </div>  
+                        </div> 
+                    </div> 
+                </div> 
+            </div>
+    <?php
+        }
+    } 
+    ?>
 
     
     <div class="row">
@@ -129,55 +277,76 @@
                     <h4 class="header-title  ">Scholarship by Gender Chart</h4>
                 </div>
                 
-                <div class="row">
-                    <div class="col-md-4 col-xl-4">
-                        <div class="card-header bg-white">   
-                            <h4 class="header-title  ">Senior High School</h4>
-                        </div>
-                        <div class="card-body">   
-                            <div id="cardCollpasebygender" class="collapse show" dir="ltr">
-                                <div id="shs-gender-chart" class="apex-charts" data-colors="#348cd4,#f06292,#ced4da"></div>
-                            </div>  
-                        </div> 
-                    </div>
-                    
-                    <div class="col-md-4 col-xl-4">
-                        <div class="card-header bg-white">   
-                            <h4 class="header-title  ">College</h4>
-                        </div>
-                        <div class="card-body">   
-                            <div id="cardCollpasebygender" class="collapse show" dir="ltr">
-                                <div id="college-gender-chart"  class="apex-charts" data-colors="#348cd4,#f06292,#ced4da"></div>
-                            </div>  
-                        </div> 
-                    </div>
-                    <div class="col-md-4 col-xl-4">
-                        <div class="card-header bg-white">   
-                            <h4 class="header-title  ">TVET</h4>
-                        </div>
-                        <div class="card-body">   
-                            <div id="cardCollpasebygender" class="collapse show" dir="ltr">
-                                <div id="tvet-gender-chart" class="apex-charts" data-colors="#348cd4,#f06292,#ced4da"></div>
-                            </div>  
-                        </div> 
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="col-md-12 col-xl-12">
-                        <div class="card-header bg-white">   
-                            <h4 class="header-title  text-center">Total Gender</h4>
-                        </div>
-                        <div class="card-body">    
-                            <div id="cardCollpasebygender" class="collapse show" dir="ltr">
-                                <div id="total-gender-chart" class="apex-charts" data-colors="#348cd4,#f06292,#ced4da"></div>
-                            </div>  
-                        </div> 
-                    </div>
-                     
-                </div>
+                <?php
+                                
+                        if(in_array( strtolower(auth()->user()->groups[0]), ["superadmin", "admin", "user"])){ 
+                            if(in_array(auth()->user()->scholarship_type, ["shs", "college", "tvet"])){  
+                ?>
+                                <div class="row">
+                                    <div class="col-md-12 col-xl-12">
+                                        <div class="card-header bg-white">   
+                                            <h4 class="header-title  text-center">Total Gender</h4>
+                                        </div>
+                                        <div class="card-body">    
+                                            <div id="cardCollpasebygender" class="collapse show" dir="ltr">
+                                                <div id="total-gender-chart" class="apex-charts" data-colors="#348cd4,#f06292,#ced4da"></div>
+                                            </div>  
+                                        </div> 
+                                    </div> 
+                                </div>
+                <?php
+                            }else {
+                ?>
+                                <div class="row">
+                                    <div class="col-md-4 col-xl-4">
+                                        <div class="card-header bg-white">   
+                                            <h4 class="header-title  ">Senior High School</h4>
+                                        </div>
+                                        <div class="card-body">   
+                                            <div id="cardCollpasebygender" class="collapse show" dir="ltr">
+                                                <div id="shs-gender-chart" class="apex-charts" data-colors="#348cd4,#f06292,#ced4da"></div>
+                                            </div>  
+                                        </div> 
+                                    </div>
+                                    
+                                    <div class="col-md-4 col-xl-4">
+                                        <div class="card-header bg-white">   
+                                            <h4 class="header-title  ">College</h4>
+                                        </div>
+                                        <div class="card-body">   
+                                            <div id="cardCollpasebygender" class="collapse show" dir="ltr">
+                                                <div id="college-gender-chart"  class="apex-charts" data-colors="#348cd4,#f06292,#ced4da"></div>
+                                            </div>  
+                                        </div> 
+                                    </div>
+                                    <div class="col-md-4 col-xl-4">
+                                        <div class="card-header bg-white">   
+                                            <h4 class="header-title  ">TVET</h4>
+                                        </div>
+                                        <div class="card-body">   
+                                            <div id="cardCollpasebygender" class="collapse show" dir="ltr">
+                                                <div id="tvet-gender-chart" class="apex-charts" data-colors="#348cd4,#f06292,#ced4da"></div>
+                                            </div>  
+                                        </div> 
+                                    </div>
+                                </div>
 
-                
+                                <div class="row">
+                                    <div class="col-md-12 col-xl-12">
+                                        <div class="card-header bg-white">   
+                                            <h4 class="header-title  text-center">Total Gender</h4>
+                                        </div>
+                                        <div class="card-body">    
+                                            <div id="cardCollpasebygender" class="collapse show" dir="ltr">
+                                                <div id="total-gender-chart" class="apex-charts" data-colors="#348cd4,#f06292,#ced4da"></div>
+                                            </div>  
+                                        </div> 
+                                    </div> 
+                                </div>
+                <?php
+                            }
+                        } 
+                ?>   
             </div> 
         </div> 
         
@@ -204,6 +373,11 @@
         </div> 
     </div>  
 
+    <?php
+                                
+        if(in_array( strtolower(auth()->user()->groups[0]), ["superadmin", "admin", "user"])){ 
+            if(!auth()->user()->scholarship_type == "shs"){ 
+    ?>
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
@@ -214,46 +388,47 @@
                         <a href="javascript: void(0);" data-toggle="remove"><i class="mdi mdi-close"></i></a>
                     </div> 
                     <h4 class="header-title  ">Scholarship by School Chart</h4>
-                </div>
-                
-                <div class="row">
-                    <div class="col-md-6 col-xl-6">
-                        <div class="card-header bg-white">   
-                            <h4 class="header-title  ">Senior High School</h4>
+                    <div class="row"> 
+                        <div class="col-md-6 col-xl-6">
+                            <div class="card-header bg-white">   
+                                <h4 class="header-title  ">Senior High School</h4>
+                            </div>
+                            <div class="card-body">   
+                                <div id="cardCollpasebyschool" class="collapse show" dir="ltr">
+                                    <div id="shs-school-chart" class="apex-charts" data-colors="#348cd4,#f06292,#ced4da"></div>
+                                </div>  
+                            </div> 
                         </div>
-                        <div class="card-body">   
-                            <div id="cardCollpasebyschool" class="collapse show" dir="ltr">
-                                <div id="shs-school-chart" class="apex-charts" data-colors="#348cd4,#f06292,#ced4da"></div>
-                            </div>  
-                        </div> 
-                    </div>
-                    <div class="col-md-6 col-xl-6">
-                        <div class="card-header bg-white">   
-                            <h4 class="header-title  ">TVET</h4>
+                        <div class="col-md-6 col-xl-6">
+                            <div class="card-header bg-white">   
+                                <h4 class="header-title  ">TVET</h4>
+                            </div>
+                            <div class="card-body">   
+                                <div id="cardCollpasebyschool" class="collapse show" dir="ltr">
+                                    <div id="tvet-school-chart" class="apex-charts" data-colors="#348cd4,#f06292,#ced4da"></div>
+                                </div>  
+                            </div> 
                         </div>
-                        <div class="card-body">   
-                            <div id="cardCollpasebyschool" class="collapse show" dir="ltr">
-                                <div id="tvet-school-chart" class="apex-charts" data-colors="#348cd4,#f06292,#ced4da"></div>
-                            </div>  
-                        </div> 
-                    </div>
-                    
-                    <div class="col-md-12 col-xl-12">
-                        <div class="card-header bg-white">   
-                            <h4 class="header-title  ">College</h4>
+                        
+                        <div class="col-md-12 col-xl-12">
+                            <div class="card-header bg-white">   
+                                <h4 class="header-title  ">College</h4>
+                            </div>
+                            <div class="card-body">   
+                                <div id="cardCollpasebyschool" class="collapse show" dir="ltr">
+                                    <div id="college-school-chart"  class="apex-charts" data-colors="#348cd4,#f06292,#ced4da"></div>
+                                </div>  
+                            </div> 
                         </div>
-                        <div class="card-body">   
-                            <div id="cardCollpasebyschool" class="collapse show" dir="ltr">
-                                <div id="college-school-chart"  class="apex-charts" data-colors="#348cd4,#f06292,#ced4da"></div>
-                            </div>  
-                        </div> 
-                    </div>
-                </div>
-                
+                    </div> 
+                </div> 
             </div> 
-        </div> 
-        
+        </div>  
     </div>
+    <?php        
+                } 
+            }
+    ?>
 
  
 <?= $this->endSection() ?>
@@ -546,7 +721,7 @@
                     colors: ['transparent']
                 },
                 xaxis: {
-                    categories: ['Senior High School', 'College', 'TVET'],
+                    categories: ['Senior High School', 'College', 'TVET'], 
                 },
                 yaxis: {
                     title: {
@@ -641,20 +816,59 @@
 
             //=============================================================================
             //  Scholarship by Barangay Chart
-            //============================================================================= 
-
+            //=============================================================================  
             var scholarship_barangay = {
-                colors: ['#F76E11', '#FF99D7', '#3B3486'],
-                series: [{
-                    name: 'Senior High School',
-                    data: <?php echo json_encode($scholarship_barangay['shs']); ?>
-                }, {
-                    name: 'College',
-                    data: <?php echo json_encode($scholarship_barangay['college']); ?>
-                }, {
-                    name: 'TVET',
-                    data: <?php echo json_encode($scholarship_barangay['tvet']); ?>
-                }],
+                colors: [
+                    
+                    <?php  
+                        if(in_array( strtolower(auth()->user()->groups[0]), ["superadmin", "admin", "user"])){ 
+                            if(auth()->user()->scholarship_type == "shs"){ 
+                                echo "'#F76E11'";
+                            }else if(auth()->user()->scholarship_type == "college"){  
+                                echo "'#FF99D7'";
+                            }else if(auth()->user()->scholarship_type == "tvet"){  
+                                echo "'#3B3486'";
+                            }else { 
+                                echo "'#F76E11', '#FF99D7', '#3B3486'";
+                            }
+                        } 
+                    ?> 
+                ],
+                series: [
+                    <?php  
+                        if(in_array( strtolower(auth()->user()->groups[0]), ["superadmin", "admin", "user"])){ 
+                            if(auth()->user()->scholarship_type == "shs"){ 
+                                echo " {
+                                    name: 'Senior High School',
+                                    data: ".json_encode($scholarship_barangay['shs'])."
+                                }";
+                            }else if(auth()->user()->scholarship_type == "college"){ 
+                                echo " {
+                                    name: 'College',
+                                    data: ".json_encode($scholarship_barangay['college'])."
+                                }";
+                            }else if(auth()->user()->scholarship_type == "tvet"){  
+                                echo " {
+                                    name: 'TVET',
+                                    data: ".json_encode($scholarship_barangay['tvet'])."
+                                }";
+
+                            }else { 
+                                echo "
+                                {
+                                    name: 'Senior High School',
+                                    data: ".json_encode($scholarship_barangay['shs'])."
+                                }, {
+                                    name: 'College',
+                                    data: ".json_encode($scholarship_barangay['college'])."
+                                }, {
+                                    name: 'TVET',
+                                    data: ".json_encode($scholarship_barangay['tvet'])."
+                                }";
+                            }
+                        } 
+                    ?>
+                ],
                 chart: {
                     type  : 'bar',
                     height: 1500
@@ -662,7 +876,16 @@
                 plotOptions: {
                     bar: {
                         horizontal : false,
-                        columnWidth: '50%',
+                        columnWidth:  
+                        <?php  
+                            if(in_array( strtolower(auth()->user()->groups[0]), ["superadmin", "admin", "user"])){ 
+                                if(in_array( auth()->user()->scholarship_type, ["shs", "college", "tvet"])){ 
+                                    echo "'100%'"; 
+                                }else { 
+                                    echo "'50%'"; 
+                                }
+                            } 
+                        ?>,
                         endingShape: 'rounded'
                     },
                 },

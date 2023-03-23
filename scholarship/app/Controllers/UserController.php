@@ -253,9 +253,8 @@ class UserController extends BaseController
                 "message"  => "Password updated successfully",
             ];
             
-            $activity_model = new UserActivityModel();
-            $name = $_POST['firstname'] . " " .  $_POST['middlename'] . " " .  $_POST['lastname']  ;
-            $activity_model->addLog(auth()->user()->id, 'Updated a password from user name (\''.$name.'\')'); 
+            $activity_model = new UserActivityModel(); 
+            $activity_model->addLog(auth()->user()->id, 'Updated a password from user id (\''.$this->request->getPost('id').'\')'); 
 
         } catch (\Exception $e) {
             $res = [

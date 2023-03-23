@@ -8,83 +8,145 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
-                <div class="card-body">
-                    <h4 class="header-title mb-4"><?= $page_title; ?></h4>
+                <div class="card-body"> 
+                    <h4 class="header-title mb-4"><?= $page_title; ?></h4> 
+                    <?php    
+                        if(in_array( strtolower(auth()->user()->groups[0]), ["superadmin", "admin", "user"])){ 
+                            if(auth()->user()->scholarship_type == "shs"){
+                    ?> 
+                                <table id="senior-high-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
+                                    <thead>
+                                        <tr>   
+                                            <th>ID</th>
+                                            <th>Application ID</th>  
+                                            <th>SY</th>
+                                            <th>Name</th>  
+                                            <th>Address</th>  
+                                            <th>Strand</th>  
+                                            <th>School</th>  
+                                            <th>Grade Level</th>  
+                                            <th>Application Status</th>  
+                                        </tr>
+                                    </thead> 
+                                </table> 
+                    <?php
+                            }else    if(auth()->user()->scholarship_type == "college"){
+                    ?> 
+                                <table id="college-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
+                                    <thead>
+                                        <tr>    
+                                            <th>ID</th>  
+                                            <th>Application ID</th>  
+                                            <th>SY</th>  
+                                            <th>Name</th>  
+                                            <th>Address</th>  
+                                            <th>Strand</th>  
+                                            <th>School</th>  
+                                            <th>Year Level</th>  
+                                            <th>Application Status</th>  
+                                        </tr>  
 
-                    <ul class="nav nav-pills navtab-bg nav-justified">
-                        <li class="nav-item">
-                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active  ">
-                                Senior High School Approved List
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#college-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link  ">
-                                College Approved List
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link ">
-                                TVET Approved List
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane show active" id="senior-high-tab">   
-                            <table id="senior-high-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
-                                <thead>
-                                    <tr>   
-                                        <th>ID</th>
-                                        <th>Application ID</th>  
-                                        <th>SY</th>
-                                        <th>Name</th>  
-                                        <th>Address</th>  
-                                        <th>Strand</th>  
-                                        <th>School</th>  
-                                        <th>Grade Level</th>  
-                                        <th>Application Status</th>  
-                                    </tr>
-                                </thead> 
-                            </table> 
-                        </div>
-                        <div class="tab-pane  " id="college-tab">
-                            <table id="college-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
-                                <thead>
-                                    <tr>    
-                                        <th>ID</th>  
-                                        <th>Application ID</th>  
-                                        <th>SY</th>  
-                                        <th>Name</th>  
-                                        <th>Address</th>  
-                                        <th>Strand</th>  
-                                        <th>School</th>  
-                                        <th>Year Level</th>  
-                                        <th>Application Status</th>  
-                                    </tr>  
+                                    </thead> 
+                                </table> 
+                    <?php
+                            }else    if(auth()->user()->scholarship_type == "tvet"){
+                    ?> 
+                                <table id="tvet-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
+                                    <thead>
+                                        <tr>   
+                                            <th>ID</th>  
+                                            <th>Application ID</th> 
+                                            <th>SY</th> 
+                                            <th>Name</th>  
+                                            <th>Address</th>  
+                                            <th>Strand</th>  
+                                            <th>School</th>  
+                                            <th>Year Level</th>  
+                                            <th>Application Status</th>  
+                                        </tr>
+                                    </thead> 
+                                </table> 
+                    <?php
+                            }else{
+                    ?>   
+                                <ul class="nav nav-pills navtab-bg nav-justified">
+                                    <li class="nav-item">
+                                        <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active  ">
+                                            Senior High School Approved List
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#college-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link  ">
+                                            College Approved List
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#tvet-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link ">
+                                            TVET Approved List
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane show active" id="senior-high-tab">   
+                                        <table id="senior-high-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
+                                            <thead>
+                                                <tr>   
+                                                    <th>ID</th>
+                                                    <th>Application ID</th>  
+                                                    <th>SY</th>
+                                                    <th>Name</th>  
+                                                    <th>Address</th>  
+                                                    <th>Strand</th>  
+                                                    <th>School</th>  
+                                                    <th>Grade Level</th>  
+                                                    <th>Application Status</th>  
+                                                </tr>
+                                            </thead> 
+                                        </table> 
+                                    </div>
+                                    <div class="tab-pane  " id="college-tab">
+                                        <table id="college-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
+                                            <thead>
+                                                <tr>    
+                                                    <th>ID</th>  
+                                                    <th>Application ID</th>  
+                                                    <th>SY</th>  
+                                                    <th>Name</th>  
+                                                    <th>Address</th>  
+                                                    <th>Strand</th>  
+                                                    <th>School</th>  
+                                                    <th>Year Level</th>  
+                                                    <th>Application Status</th>  
+                                                </tr>  
 
-                                </thead> 
-                            </table> 
-                        </div> 
-                        <div class="tab-pane " id="tvet-tab"> 
-                            <table id="tvet-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
-                                <thead>
-                                    <tr>   
-                                        <th>ID</th>  
-                                        <th>Application ID</th> 
-                                        <th>SY</th> 
-                                        <th>Name</th>  
-                                        <th>Address</th>  
-                                        <th>Strand</th>  
-                                        <th>School</th>  
-                                        <th>Year Level</th>  
-                                        <th>Application Status</th>  
-                                    </tr>
-                                </thead> 
-                            </table> 
-                        </div>
-                    </div>
+                                            </thead> 
+                                        </table> 
+                                    </div> 
+                                    <div class="tab-pane " id="tvet-tab"> 
+                                        <table id="tvet-table" style="cursor:pointer" class="table table-striped dt-responsive nowrap w-100">
+                                            <thead>
+                                                <tr>   
+                                                    <th>ID</th>  
+                                                    <th>Application ID</th> 
+                                                    <th>SY</th> 
+                                                    <th>Name</th>  
+                                                    <th>Address</th>  
+                                                    <th>Strand</th>  
+                                                    <th>School</th>  
+                                                    <th>Year Level</th>  
+                                                    <th>Application Status</th>  
+                                                </tr>
+                                            </thead> 
+                                        </table> 
+                                    </div>
+                                </div>
+                    <?php
+                            }
+                        }
+                    ?>
                 </div>
-            </div> <!-- end card-->
-        </div> <!-- end col --> 
+            </div> 
+        </div> 
     </div>
     
 
@@ -102,7 +164,7 @@
             $('#view-all').on('change', function(){
                 var that = this
                 if($(this).is(':checked')){ 
-                    // that.checked = false;   \
+                    // that.checked = false;   
                     window.location.href="?view=all"
                 }else{
                     window.location.href= "<?php  echo base_url('/approved') ?>"

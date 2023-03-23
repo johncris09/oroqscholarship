@@ -80,26 +80,30 @@ class SeniorHighModel extends Model
 
     public function get_applicant_details($id)
     { 
-        $builder = $this->db->table('senior_high'); 
-        $builder->join('senior_high_school', 'senior_high.school = senior_high_school.id');
-        $builder->join('barangay', 'senior_high.address = barangay.id');
-        $builder->join('strand', 'senior_high.course = strand.id');  
-        $builder->where('senior_high.id', $id);
-        $builder->select('
-            senior_high.*,
-            barangay.barangay as address,
-            barangay.id as address_id,
-            senior_high_school.school_name as school_name,
-            senior_high_school.address as school_address,
-            strand.strand as course,
-            strand.id as course_id,
-        ');
+          
+        $query = $this->builder
+            ->select('
+                senior_high.*,
+                barangay.barangay as address,
+                barangay.id as address_id,
+                senior_high_school.school_name as school_name,
+                senior_high_school.address as school_address, 
+                strand.strand as strand_name, 
+            ')
+            ->join('senior_high_school', 'senior_high.school = senior_high_school.id')
+            ->join('barangay', 'senior_high.address = barangay.id')  
+            ->join('strand', 'senior_high.course = strand.id')  
+            ->where('senior_high.id', $id); 
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "college"){
+                $school = auth()->user()->school; 
+                $query->where('senior_high.school', $school);
+            }
+        }  
+        $result = $query->get()->getResultArray();
+        return $result[0];  
+    } 
 
-        // Get the results of the query
-        $results = $builder->get()->getResultArray();
-
-        return $results[0];
-    }
 
     public function count()
     {
@@ -111,52 +115,77 @@ class SeniorHighModel extends Model
 
     public function count_application($data)
     {
-        $builder = $this->db
+        $query = $this->db
             ->table($this->table) 
-            ->where($data)
-            ->where('appmanager', 'Active');
-        $query = $builder->countAllResults(); 
-        return $query;
+            ->where($data);
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "shs"){
+                $school = auth()->user()->school; 
+                $query->where('school', $school);
+            }
+        }   
+        $query->where('appmanager', 'Active');
+        $result = $query->countAllResults(); 
+        return $result;   
     }
     
     
     // Approved
     public function get_tot_approved($data)
     {
-        $builder = $this->db
+        $query = $this->db
             ->table($this->table) 
             ->like('appstatus', 'approved', 'both' )
             ->where('appstatus !=', 'disapproved')
-            ->where($data)
-            ->where('appmanager', 'Active');
-        $query = $builder->countAllResults();
-        return $query;
+            ->where($data);
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "shs"){
+                $school = auth()->user()->school; 
+                $query->where('school', $school);
+            }
+        } 
+        $query->where('appmanager', 'Active');
+        $result = $query->countAllResults();
+        return $result; 
     }
 
     
     
     // Disapproved
     public function get_tot_disapproved($data)
-    {
-        $builder = $this->db
-            ->table($this->table)  
+    { 
+        $query = $this->db
+            ->table($this->table) 
             ->where('appstatus', 'disapproved')
-            ->where($data)
-            ->where('appmanager', 'Active');
-        $query = $builder->countAllResults();
-        return $query; 
+            ->where($data);
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "shs"){
+                $school = auth()->user()->school; 
+                $query->where('school', $school);
+            }
+        } 
+        $query->where('appmanager', 'Active');
+        $result = $query->countAllResults();
+        return $result; 
     } 
 
     // Pending
     public function get_tot_pending($data)
-    {
-        $builder = $this->db
-            ->table($this->table)  
+    { 
+        $query = $this->db
+            ->table($this->table) 
             ->where('appstatus', 'pending')
-            ->where($data)
-            ->where('appmanager', 'Active');
-        $query = $builder->countAllResults();
-        return $query; 
+            ->where($data);
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "shs"){
+                $school = auth()->user()->school; 
+                $query->where('school', $school);
+            }
+        } 
+        $query->where('appmanager', 'Active');
+        $result = $query->countAllResults();
+        return $result;
+        
     }
 
 
@@ -218,11 +247,17 @@ class SeniorHighModel extends Model
             ->join('strand', 'senior_high.course = strand.id') 
             ->where('senior_high.appstatus', 'pending')
             ->where('appmanager', 'Active')
-            ->where($data)
-            ->orderBy('appnoid', 'asc')
-            ->get()
-            ->getResultArray();
-        return $query;  
+            ->where($data); 
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "tvet"){
+                $school = auth()->user()->school; 
+                $query->where('school', $school);
+            }
+        } 
+        $query->where('appmanager', 'Active'); 
+        $query->orderBy('appnoid', 'asc'); 
+        $result = $query->get()->getResult(); 
+        return $result;
     }
 
     
@@ -278,15 +313,20 @@ class SeniorHighModel extends Model
             ->join('strand', 'senior_high.course = strand.id')
             ->Where('(appstatus = "Approved" or appstatus = "Additional Approved")')
             ->where('appmanager', 'Active')
-            ->where($data)
-            ->orderBy('senior_high.id', 'desc')  
-            ->get()
-            ->getResult();
-        return $query;
-    }  
+            ->where($data);
+            
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "shs"){
+                $school = auth()->user()->school; 
+                $query->where('school', $school);
+            }
+        } 
+        $query->where('appmanager', 'Active'); 
+        $query->orderBy('appnoid', 'asc'); 
+        $result = $query->get()->getResult(); 
+        return $result;
+    }
     
-    
-
     public function generate(
         $school,
         $appstatus,
@@ -691,18 +731,18 @@ class SeniorHighModel extends Model
     
     public function get_tot_by_school($data)
     { 
-        $builder = $this->db->table('senior_high'); 
-        $builder->join('senior_high_school', 'senior_high.school = senior_high_school.id'); 
-        $builder->where($data);
-        $builder->select('
-            senior_high_school.school_name as school, 
-            count(*) as total,
-        ');
-        $builder->groupBy('senior_high_school.school_name');
-        
+        $query = $this->db->table('senior_high')
+            ->join('senior_high_school', 'senior_high.school = senior_high_school.id')
+            ->select('
+                senior_high_school.school_name as school, 
+                count(*) as total,
+            ')
+            ->where($data)
+            ->where('appmanager', 'Active')
+            ->groupBy('senior_high_school.school_name'); 
 
         // Get the results of the query
-        $results = $builder->get()->getResult(); 
+        $results = $query->get()->getResult(); 
 
         return $results;
     }
@@ -722,14 +762,21 @@ class SeniorHighModel extends Model
 
     public function get_tot_by_gender($data)
     {
-        $query = $this->builder
+        $query = $this->db
+            ->table($this->table) 
             ->select('gender as gender, count(*) as total')
-            ->where('gender != ', "")
-            ->where($data)
-            ->groupBy('gender')
-            ->get()
-            ->getResult();
-        return $query;
+            ->where('gender != ', "") 
+            ->where($data);
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "shs"){
+                $school = auth()->user()->school; 
+                $query->where('school', $school);
+            }
+        } 
+        $query->where('appmanager', 'Active');
+        $query->groupBy('gender');
+        $result = $query->get()->getResult();
+        return $result; 
     }
 
     public function filter($data)
@@ -779,5 +826,41 @@ class SeniorHighModel extends Model
             ->update();
         return $query;
     }
+
+    
+    public function search_name($data)
+    {  
+        $query = $this->builder
+            ->select('
+                senior_high.*,
+                barangay.barangay as address,
+                barangay.id as address_id,
+                senior_high_school.school_name as school_name,
+                senior_high_school.address as school_address, 
+                strand.strand as course, 
+                "senior high" AS source 
+            ')
+            ->join('senior_high_school', 'senior_high.school = senior_high_school.id')
+            ->join('barangay', 'senior_high.address = barangay.id')  
+            ->join('strand', 'senior_high.course = strand.id') ;
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "shs"){
+                $school = auth()->user()->school; 
+                $query->where('senior_high.school', $school);
+            }
+        } 
+        $query->groupStart()
+            ->like("senior_high.firstname ", $data, "both") 
+            ->orLike("senior_high.lastname ", $data, "both") 
+            ->orLike("senior_high.middlename", $data, "both") 
+            ->orLike("senior_high.suffix", $data, "both")  
+            ->orLike("CONCAT(senior_high.firstname, ' ', senior_high.lastname)", $data, "both") 
+            ->orLike("CONCAT(senior_high.lastname, ' ', senior_high.firstname)", $data, "both")
+        ->groupEnd(); 
+        $query->orderBy('firstname, lastname, middlename', 'asc');
+        $result = $query->get()->getResult();  
+        return $result; 
+    } 
+
 
 }

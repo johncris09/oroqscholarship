@@ -618,8 +618,8 @@
                     }
                 ?>    
                 </div>
-            </div> <!-- end card-->
-        </div> <!-- end col --> 
+            </div> 
+        </div> 
     </div>
     
 

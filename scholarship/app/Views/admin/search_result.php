@@ -16,6 +16,7 @@
                             <tr> 
                                 <th>Name</th> 
                                 <th>School</th> 
+                                <th>Course</th>
                                 <th>Address</th>
                                 <th>Year Level</th>
                                 <th>Availment</th>
@@ -37,12 +38,12 @@
                                     $name       = ucwords( $row->lastname. ", "  . $row->firstname . " "  . $row->middlename . " " . " "  . $row->suffix); 
                                     $source     = strtoupper($row->source);
                                     $availment  = $row->availment;
-                                    $sy         = $row->sy;
+                                    $sy         = $row->appsy;
                                     $address    = ucwords($row->address);
-                                    $year_level = $row->yearlevel;
-                                    $sem        = $row->sem;
-                                    $status     = $row->status;
-                                    // $school     = $row->school;
+                                    $year_level = $row->appyear;
+                                    $sem        = $row->appsem;
+                                    $status     = $row->appstatus;
+                                    $course     = $row->course;
 
                                     if(strtolower($source) == "senior high"){
                                         $school = $shs_school_model->find($row->school);
@@ -57,6 +58,7 @@
                                     <tr>
                                         <td><?php echo $name;  ?></td>
                                         <td><?php echo $school_name;  ?></td>
+                                        <td><?php echo $course;  ?></td>
                                         <td><?php echo $address;  ?></td>
                                         <td><?php echo $year_level;  ?></td>
                                         <td><?php echo $availment;  ?></td> 
@@ -70,7 +72,7 @@
                             }else{
                             ?>
                                 <tr>
-                                    <td colspan="8" class="text-center">No result</td>
+                                    <td colspan="10" class="text-center">No result</td>
                                 </tr>
                             <?php
                             }

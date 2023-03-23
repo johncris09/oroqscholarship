@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use CodeIgniter\Database\ConnectionInterface;
 
 class SearchApplicationModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'senior_high';
+    protected $table            = 'senior_high';  
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -40,6 +41,20 @@ class SearchApplicationModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
+
+    
+    protected $db;
+
+    public function __construct(ConnectionInterface &$db)
+    {
+        $this->db      =&   $db;
+        $this->builder =    $db->table($this->table);
+    }
+     
+
+
+ 
+
     public function search($data)
     {
         $builder = $this->db->table('senior_high');
@@ -66,8 +81,6 @@ class SearchApplicationModel extends Model
         $builder->orLike("CONCAT(senior_high.firstname, ' ', senior_high.lastname)", $data, "both"); 
         $builder->orLike("CONCAT(senior_high.lastname, ' ', senior_high.firstname)", $data, "both"); 
 
-        
-        
         $builder->union(
             $this->db
                 ->table('college')
@@ -89,8 +102,8 @@ class SearchApplicationModel extends Model
                 ->like("college.firstname", $data, "both")
                 ->orLike("college.lastname", $data, "both")
                 ->orLike("college.middlename", $data, "both") 
-                ->orLike("CONCAT(college.lastname, ' ', college.lastname)", $data, "both")
-                ->orLike("CONCAT(college.lastname, ' ', college.lastname)", $data, "both")
+                ->orLike("CONCAT(college.firstname, ' ', college.lastname)", $data, "both")
+                ->orLike("CONCAT(college.lastname, ' ', college.firstname)", $data, "both")
         );
         
         $builder->union(
@@ -115,17 +128,16 @@ class SearchApplicationModel extends Model
                 ->orLike("tvet.lastname", $data, "both")
                 ->orLike("tvet.middlename", $data, "both")
                 ->orLike("tvet.suffix", $data, "both") 
-                ->orLike("CONCAT(tvet.lastname, ' ', tvet.lastname)", $data, "both")
-                ->orLike("CONCAT(tvet.lastname, ' ', tvet.lastname)", $data, "both")
+                ->orLike("CONCAT(tvet.firstname, ' ', tvet.lastname)", $data, "both")
+                ->orLike("CONCAT(tvet.lastname, ' ', tvet.firstname)", $data, "both")
         );
  
         // Get the result
-        $query = $builder->get();
+        $result = $builder->get()->getResult();
         // $query = $builder->getCompiledSelect();
 
         // Return the result
-        return $query->getResult();
-        // return $query; 
+        return $result; 
     }
 
     

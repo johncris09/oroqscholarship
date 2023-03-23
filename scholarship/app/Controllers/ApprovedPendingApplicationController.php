@@ -51,7 +51,8 @@ class ApprovedPendingApplicationController extends BaseController
                 return redirect()->back();
             }
         } catch (\Exception $e) {
-            print_r($e->getMessage());
+            // print_r($e->getMessage());
+            echo "No Record Found!";
         }
  
     }

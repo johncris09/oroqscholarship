@@ -91,19 +91,21 @@ class TvetModel extends Model
                 barangay.id as address_id,
                 tvet_school.school_name as school_name,
                 tvet_school.address as school_address, 
-                tvet_course.course as course_name,
-                
+                course.course as course_name, 
             ')
             ->join('tvet_school', 'tvet.school = tvet_school.id')
             ->join('barangay', 'tvet.address = barangay.id')  
-            ->join('tvet_course', 'tvet.course = tvet_course.id')  
-            ->where('tvet.id', $id)
-            ->get()
-            ->getResultArray();
-        return $query[0];  
-
-
-    }
+            ->join('course', 'tvet.course = course.id')  
+            ->where('tvet.id', $id);
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "tvet"){
+                $school = auth()->user()->school; 
+                $query->where('tvet.school', $school);
+            }
+        }
+        $result = $query->get()->getResultArray();
+        return $result[0];
+    } 
     
 
 
@@ -113,54 +115,81 @@ class TvetModel extends Model
         $builder = $this->db->table($this->table);
         $query = $builder->countAllResults();
         return $query;
-    } 
+    }  
 
     public function count_application($data)
     {
-        $builder = $this->db
+        $query = $this->db
             ->table($this->table) 
-            ->where($data) 
-            ->where('appmanager', 'Active');
-        $query = $builder->countAllResults();
-        return $query;
-    } 
+            ->where($data); 
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "tvet"){
+                $school = auth()->user()->school; 
+                $query->where('school', $school);
+            }
+        } 
+        $query->where('appmanager', 'Active'); 
+        $result = $query->countAllResults();
+        return $result;
+    }
+
     
 
     // Approved
     public function get_tot_approved($data)
     {
-        $builder = $this->db
+        $query = $this->db
             ->table($this->table) 
             ->like('appstatus', 'approved', 'both' )
             ->where('appstatus !=', 'disapproved')
-            ->where($data)
-            ->where('appmanager', 'Active');
-        $query = $builder->countAllResults();
-        return $query; 
+            ->where($data);
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "tvet"){
+                $school = auth()->user()->school; 
+                $query->where('school', $school);
+            }
+        } 
+        $query->where('appmanager', 'Active');
+        $result = $query->countAllResults();
+        return $result; 
     }
 
+    
     // Disapproved
     public function get_tot_disapproved($data)
-    {
-        $builder = $this->db
-            ->table($this->table)  
+    { 
+        $query = $this->db
+            ->table($this->table) 
             ->where('appstatus', 'disapproved')
-            ->where($data)
-            ->where('appmanager', 'Active');
-        $query = $builder->countAllResults();
-        return $query; 
+            ->where($data);
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "tvet"){
+                $school = auth()->user()->school; 
+                $query->where('school', $school);
+            }
+        } 
+        $query->where('appmanager', 'Active');
+        $result = $query->countAllResults();
+        return $result; 
     } 
 
     // Pending
     public function get_tot_pending($data)
-    {
-        $builder = $this->db
-            ->table($this->table)  
+    { 
+        $query = $this->db
+            ->table($this->table) 
             ->where('appstatus', 'pending')
-            ->where($data)
-            ->where('appmanager', 'Active');
-        $query = $builder->countAllResults();
-        return $query; 
+            ->where($data);
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "tvet"){
+                $school = auth()->user()->school; 
+                $query->where('school', $school);
+            }
+        } 
+        $query->where('appmanager', 'Active');
+        $result = $query->countAllResults();
+        return $result;
+        
     }
  
     public function count_approved($data)
@@ -211,11 +240,17 @@ class TvetModel extends Model
             ->join('tvet_course', 'tvet.course = tvet_course.id') 
             ->where('tvet.appstatus', 'pending')
             ->where('appmanager', 'Active')
-            ->where($data)
-            ->orderBy('appnoid', 'asc')
-            ->get()
-            ->getResultArray();
-        return $query;  
+            ->where($data); 
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "tvet"){
+                $school = auth()->user()->school; 
+                $query->where('school', $school);
+            }
+        } 
+        $query->where('appmanager', 'Active'); 
+        $query->orderBy('appnoid', 'asc'); 
+        $result = $query->get()->getResult(); 
+        return $result;
     }
 
     public function get_archived_application($data)
@@ -266,10 +301,16 @@ class TvetModel extends Model
             ->like('tvet.appstatus', 'approved', "both")
             ->where('tvet.appstatus !=', 'disapproved')
             ->where('appmanager', 'Active')
-            ->where($data)
-            ->orderBy('appnoid', 'asc')
-            ->get()
-            ->getResult();
+            ->where($data); 
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "college"){
+                $school = auth()->user()->school; 
+                $query->where('school', $school);
+            }
+        } 
+        $query->where('appmanager', 'Active'); 
+        $query->orderBy('appnoid', 'asc'); 
+        $result = $query->get()->getResult(); 
         return $query;
     }  
 
@@ -650,20 +691,22 @@ class TvetModel extends Model
     } 
     
     public function get_tot_by_school($data)
-    { 
-        $builder = $this->db->table('tvet');  
-        $builder->join('college_school', 'tvet.school = college_school.id');  
-        $builder->where($data);
-        $builder->select('
-            count(*) as total,
-            college_school.school_name as school, 
-        ');
-        $builder->groupBy('college_school.school_name'); 
-        
-        // Get the results of the query
-        $results = $builder->get()->getResult(); 
+    {  
+        $query = $this->db->table('tvet')
+            ->join('tvet_school', 'tvet.school = tvet_school.id')
+            ->select('
+                tvet_school.school_name as school, 
+                count(*) as total,
+            ')
+            ->where($data)
+            ->where('appmanager', 'Active')
+            ->groupBy('tvet_school.school_name'); 
 
-        return $results;
+        // Get the results of the query
+        $result = $query->get()->getResult(); 
+
+        return $result;
+
     }
 
 
@@ -679,15 +722,23 @@ class TvetModel extends Model
     }
 
     public function get_tot_by_gender($data)
-    {
-        $query = $this->builder
+    {  
+        $query = $this->db
+            ->table($this->table) 
             ->select('gender as gender, count(*) as total')
-            ->where('gender != ', "")
-            ->where($data)
-            ->groupBy('gender')
-            ->get()
-            ->getResult();
-        return $query;
+            ->where('gender != ', "") 
+            ->where($data);
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "tvet"){
+                $school = auth()->user()->school; 
+                $query->where('school', $school);
+            }
+        } 
+        $query->where('appmanager', 'Active');
+        $query->groupBy('gender');
+        $result = $query->get()->getResult();
+        return $result; 
+
     }
 
     public function filter($data)
@@ -735,4 +786,41 @@ class TvetModel extends Model
             ->update();
         return $query;
     }
+
+    
+    
+    public function search_name($data)
+    {  
+        $query = $this->builder
+            ->select('
+                tvet.*,
+                barangay.barangay as address,
+                barangay.id as address_id,
+                tvet_school.school_name as school_name,
+                tvet_school.address as school_address, 
+                course.course as course, 
+                "tvet" AS source 
+            ')
+            ->join('tvet_school', 'tvet.school = tvet_school.id')
+            ->join('barangay', 'tvet.address = barangay.id')  
+            ->join('course', 'tvet.course = course.id') ;
+        if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+            if(auth()->user()->scholarship_type == "tvet"){
+                $school = auth()->user()->school; 
+                $query->where('tvet.school', $school);
+            }
+        } 
+        $query->groupStart()
+            ->like("tvet.firstname ", $data, "both") 
+            ->orLike("tvet.lastname ", $data, "both") 
+            ->orLike("tvet.middlename", $data, "both") 
+            ->orLike("tvet.suffix", $data, "both")  
+            ->orLike("CONCAT(tvet.firstname, ' ', tvet.lastname)", $data, "both") 
+            ->orLike("CONCAT(tvet.lastname, ' ', tvet.firstname)", $data, "both")
+        ->groupEnd(); 
+        $query->orderBy('firstname, lastname, middlename', 'asc');
+        $result = $query->get()->getResult(); 
+        return $result; 
+    } 
+
 }

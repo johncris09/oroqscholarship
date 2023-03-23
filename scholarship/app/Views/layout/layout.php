@@ -82,12 +82,19 @@ $db = db_connect();
                             </form>
                         </div>
                     </li>
+            
+                    <?php
+                        if( !in_array( strtolower(auth()->user()->groups[0]), ["user"])){
+                    ?>    
+                        <li class="dropdown d-none d-lg-inline-block">
+                            <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" href="<?= base_url('registration') ?>">
+                                <i class="fe-plus noti-icon"></i> New Applicant
+                            </a>
+                        </li>    
+                    <?php
+                        }
+                    ?> 
 
-                    <li class="dropdown d-none d-lg-inline-block">
-                        <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" href="<?= base_url('registration') ?>">
-                            <i class="fe-plus noti-icon"></i> New Applicant
-                        </a>
-                    </li> 
                     <li class="dropdown d-none d-lg-inline-block"> 
                         <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" href="#">
                                 Scholarship Status: <i class="mdi mdi-checkbox-blank-circle text-<?php echo ($config['semester_closed']) ? "danger" : "success" ?>"></i>
@@ -172,8 +179,7 @@ $db = db_connect();
                                             <i class="fe-airplay"></i>
                                             <span> Dashboard </span>
                                         </a>
-                                    </li>  
-
+                                    </li>   
                                     <li>
                                         <a href="#shsmanage" data-bs-toggle="collapse">
                                             <i class="mdi mdi-cog-sync-outline"></i>

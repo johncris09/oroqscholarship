@@ -51,19 +51,20 @@ class DashboardController extends BaseController
             $college_tvet_data['appsy'] = (isset($_GET['app_year'])) ? $_GET['app_year']: $config['current_sy'];
         }
         $data["page_title"]               = "Dashboard";
-        $data['tot_approved_shs']         = $this->senior_high->count_application($shs_data);  
+        $data['tot_approved_shs']         = $this->senior_high->count_application($shs_data); 
         $data['tot_approved_college']     = $this->college->count_application($college_tvet_data); 
         $data['tot_approved_tvet']        = $this->tvet->count_application($college_tvet_data);  
-        $data["scholarship_status"]       = $this->scholarship_status($shs_data, $college_tvet_data);
+        $data["scholarship_status"]       = $this->scholarship_status($shs_data, $college_tvet_data); 
         $data["total_scholarship_status"] = $this->get_total_scholarship_status($shs_data, $college_tvet_data); 
         $data["shs_gender"]               = $this->scholarship_shs_gender($shs_data);
         $data["college_gender"]           = $this->scholarship_college_gender($college_tvet_data);
         $data["tvet_gender"]              = $this->scholarship_tvet_gender($college_tvet_data);
         $data["scholarship_barangay"]     = $this->scholarship_barangay($shs_data, $college_tvet_data);
+
         $data["shs_school"]               = $this->get_by_shs_school($shs_data, $college_tvet_data);  
         $data["college_school"]           = $this->get_by_college_school($college_tvet_data);
         $data["tvet_school"]              = $this->get_by_tvet_school($college_tvet_data); 
-        $data['total_gender']             = $this->get_total_gender($shs_data, $college_tvet_data);
+        $data['total_gender']             = $this->get_total_gender($shs_data, $college_tvet_data);  
         return view('admin/dashboard', $data);
     }
 
@@ -98,18 +99,44 @@ class DashboardController extends BaseController
 
     public function get_total_scholarship_status($shs_data, $college_tvet_data)
     {
+        
+        $shs_approved        = 0;
+        $shs_disapproved     = 0;
+        $shs_pending         = 0; 
+        $college_approved    = 0;
+        $college_disapproved = 0;
+        $college_pending     = 0; 
+        $tvet_approved       = 0;
+        $tvet_disapproved    = 0;
+        $tvet_pending        = 0;
 
-        $shs_approved        = $this->senior_high->get_tot_approved($shs_data);
-        $shs_disapproved     = $this->senior_high->get_tot_disapproved($shs_data);
-        $shs_pending         = $this->senior_high->get_tot_pending($shs_data);
-
-        $college_approved    = $this->college->get_tot_approved($college_tvet_data);
-        $college_disapproved = $this->college->get_tot_disapproved($college_tvet_data);
-        $college_pending     = $this->college->get_tot_pending($college_tvet_data);
-
-        $tvet_approved       = $this->tvet->get_tot_approved($college_tvet_data);
-        $tvet_disapproved    = $this->tvet->get_tot_disapproved($college_tvet_data);
-        $tvet_pending        = $this->tvet->get_tot_pending($college_tvet_data); 
+        if(in_array( strtolower(auth()->user()->groups[0]), ["superadmin", "admin", "user"])){ 
+            if(auth()->user()->scholarship_type == "shs"){ 
+                $shs_approved        = $this->senior_high->get_tot_approved($shs_data);
+                $shs_disapproved     = $this->senior_high->get_tot_disapproved($shs_data);
+                $shs_pending         = $this->senior_high->get_tot_pending($shs_data); 
+            }else if(auth()->user()->scholarship_type == "college"){ 
+                $college_approved    = $this->college->get_tot_approved($college_tvet_data);
+                $college_disapproved = $this->college->get_tot_disapproved($college_tvet_data);
+                $college_pending     = $this->college->get_tot_pending($college_tvet_data);
+            }else if(auth()->user()->scholarship_type == "tvet"){ 
+                $tvet_approved       = $this->tvet->get_tot_approved($college_tvet_data);
+                $tvet_disapproved    = $this->tvet->get_tot_disapproved($college_tvet_data);
+                $tvet_pending        = $this->tvet->get_tot_pending($college_tvet_data); 
+            }else { 
+                $shs_approved        = $this->senior_high->get_tot_approved($shs_data);
+                $shs_disapproved     = $this->senior_high->get_tot_disapproved($shs_data);
+                $shs_pending         = $this->senior_high->get_tot_pending($shs_data);
+        
+                $college_approved    = $this->college->get_tot_approved($college_tvet_data);
+                $college_disapproved = $this->college->get_tot_disapproved($college_tvet_data);
+                $college_pending     = $this->college->get_tot_pending($college_tvet_data);
+        
+                $tvet_approved       = $this->tvet->get_tot_approved($college_tvet_data);
+                $tvet_disapproved    = $this->tvet->get_tot_disapproved($college_tvet_data);
+                $tvet_pending        = $this->tvet->get_tot_pending($college_tvet_data);
+            }
+        } 
  
         $data = [
             [
@@ -133,35 +160,64 @@ class DashboardController extends BaseController
     public function get_total_gender($shs_data, $college_tvet_data)
     {
 
-        $shs     = $this->senior_high->get_tot_by_gender($shs_data);
+        $shs     = $this->senior_high->get_tot_by_gender($shs_data); 
         $college = $this->college->get_tot_by_gender($college_tvet_data);
         $tvet    = $this->tvet->get_tot_by_gender($college_tvet_data); 
-        $male    = $female = 0;
-
-        foreach ($shs as $row) {
-            if (strtolower($row->gender) == "male") {
-                $male += $row->total;
-            }
-            if (strtolower($row->gender) == "female") {
-                $female += $row->total;
-            }
-        }
-
-        foreach ($college as $row) {
-            if (strtolower($row->gender) == "male") {
-                $male += $row->total;
-            }
-            if (strtolower($row->gender) == "female") {
-                $female += $row->total;
-            }
-        }
-
-        foreach ($tvet as $row) {
-            if (strtolower($row->gender) == "male") {
-                $male += $row->total;
-            }
-            if (strtolower($row->gender) == "female") {
-                $female += $row->total;
+        $male    = $female = 0; 
+        
+        if(in_array( strtolower(auth()->user()->groups[0]), ["superadmin", "admin", "user"])){ 
+            if(auth()->user()->scholarship_type == "shs"){  
+                foreach ($shs as $row) {
+                    if (strtolower($row->gender) == "male") {
+                        $male += $row->total;
+                    }
+                    if (strtolower($row->gender) == "female") {
+                        $female += $row->total;
+                    }
+                }
+            }else if(auth()->user()->scholarship_type == "college"){  
+                foreach ($college as $row) {
+                    if (strtolower($row->gender) == "male") {
+                        $male += $row->total;
+                    }
+                    if (strtolower($row->gender) == "female") {
+                        $female += $row->total;
+                    }
+                }
+            }else if(auth()->user()->scholarship_type == "tvet"){  
+                foreach ($tvet as $row) {
+                    if (strtolower($row->gender) == "male") {
+                        $male += $row->total;
+                    }
+                    if (strtolower($row->gender) == "female") {
+                        $female += $row->total;
+                    }
+                }
+            }else {   
+                foreach ($shs as $row) {
+                    if (strtolower($row->gender) == "male") {
+                        $male += $row->total;
+                    }
+                    if (strtolower($row->gender) == "female") {
+                        $female += $row->total;
+                    }
+                } 
+                foreach ($college as $row) {
+                    if (strtolower($row->gender) == "male") {
+                        $male += $row->total;
+                    }
+                    if (strtolower($row->gender) == "female") {
+                        $female += $row->total;
+                    }
+                } 
+                foreach ($tvet as $row) {
+                    if (strtolower($row->gender) == "male") {
+                        $male += $row->total;
+                    }
+                    if (strtolower($row->gender) == "female") {
+                        $female += $row->total;
+                    }
+                } 
             }
         }
 
@@ -239,48 +295,44 @@ class DashboardController extends BaseController
     public function scholarship_barangay($shs_data, $college_tvet_data)
     {  
         
-        $address                = new AddressModel();
-        
-        $barangay       = $address->asArray()->findAll();
-        // return $barangay;
+        $address  = new AddressModel(); 
+        $barangay = $address->asArray()->findAll(); 
         $data     = [];
-        foreach ($barangay as $row) {
+        foreach ($barangay as $row) { 
             $data['barangay'][] = $row['barangay'];
-            $shs                = $this->senior_high->get_tot_by_barangay($row['id'], $shs_data);
-            foreach ($shs as $shs) {
-                $data['shs'][]  = $shs->total;
-            }
-            $college  = $this->college->get_tot_by_barangay($row['id'], $college_tvet_data);
-            foreach ($college as $college) {
-                $data['college'][]  = $college->total;
-            }
-            $tvet  = $this->tvet->get_tot_by_barangay($row['id'], $college_tvet_data);
-            foreach ($tvet as $tvet) {
-                $data['tvet'][]  = $tvet->total;
-            }
-
-        }
-
-        return $data;
-        
-        // $barangay = $this->custom_config->barangay;
-        // $data     = [];
-        // foreach ($barangay as $brgy) {
-        //     $data['barangay'][] = $brgy; 
-        //     $shs                = $this->senior_high->get_tot_by_barangay($brgy, $shs_data);
-        //     foreach ($shs as $shs) {
-        //         $data['shs'][]  = $shs->total;
-        //     }
-        //     $college  = $this->college->get_tot_by_barangay($brgy, $college_tvet_data);
-        //     foreach ($college as $college) {
-        //         $data['college'][]  = $college->total;
-        //     }
-        //     $tvet  = $this->tvet->get_tot_by_barangay($brgy, $college_tvet_data);
-        //     foreach ($tvet as $tvet) {
-        //         $data['tvet'][]  = $tvet->total;
-        //     }
-        // }
-        // return $data;
+            if(in_array( strtolower(auth()->user()->groups[0]), ["superadmin", "admin", "user"])){ 
+                if(auth()->user()->scholarship_type == "shs"){ 
+                    $shs = $this->senior_high->get_tot_by_barangay($row['id'], $shs_data);
+                    foreach ($shs as $shs) {
+                        $data['shs'][]  = $shs->total;
+                    }
+                }else if(auth()->user()->scholarship_type == "college"){  
+                    $college  = $this->college->get_tot_by_barangay($row['id'], $college_tvet_data);
+                    foreach ($college as $college) {
+                        $data['college'][]  = $college->total;
+                    }
+                }else if(auth()->user()->scholarship_type == "tvet"){  
+                    $tvet  = $this->tvet->get_tot_by_barangay($row['id'], $college_tvet_data);
+                    foreach ($tvet as $tvet) {
+                        $data['tvet'][]  = $tvet->total;
+                    }
+                }else {  
+                    $shs = $this->senior_high->get_tot_by_barangay($row['id'], $shs_data);
+                    foreach ($shs as $shs) {
+                        $data['shs'][]  = $shs->total;
+                    }
+                    $college  = $this->college->get_tot_by_barangay($row['id'], $college_tvet_data);
+                    foreach ($college as $college) {
+                        $data['college'][]  = $college->total;
+                    }
+                    $tvet  = $this->tvet->get_tot_by_barangay($row['id'], $college_tvet_data);
+                    foreach ($tvet as $tvet) {
+                        $data['tvet'][]  = $tvet->total;
+                    }
+                }
+            }  
+        } 
+        return $data; 
     }
 
     public function filter()
