@@ -3,12 +3,11 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
-use CodeIgniter\Database\ConnectionInterface;
 
 class SearchApplicationModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'senior_high';  
+    protected $table            = 'senior_high';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -43,102 +42,111 @@ class SearchApplicationModel extends Model
 
 
     
-    protected $db;
-
-    public function __construct(ConnectionInterface &$db)
-    {
-        $this->db      =&   $db;
-        $this->builder =    $db->table($this->table);
-    }
-     
-
-
- 
-
-    public function search($data)
+    public function search_name($data)
     {
         $builder = $this->db->table('senior_high');
-        $builder->select('
+        $builder->select(' 
             senior_high.id as id, 
-            senior_high.lastname as lastname, 
-            senior_high.firstname as firstname,
-            senior_high.middlename as middlename,
-            senior_high.suffix as suffix, 
-            senior_high.availment as availment, 
-            senior_high.appsy as sy, 
-            senior_high.appyear as yearlevel, 
-            senior_high.address as address, 
-            senior_high.appsem as sem, 
-            senior_high.appstatus as status, 
-            senior_high.school as school, 
-            "senior high" AS source 
-        '); 
-        $builder->like("senior_high.firstname ", $data, "both"); 
-        $builder->orLike("senior_high.lastname ", $data, "both"); 
-        $builder->orLike("senior_high.middlename", $data, "both"); 
-        $builder->orLike("senior_high.suffix", $data, "both"); 
-        $builder->orLike("senior_high.suffix", $data, "both"); 
-        $builder->orLike("CONCAT(senior_high.firstname, ' ', senior_high.lastname)", $data, "both"); 
-        $builder->orLike("CONCAT(senior_high.lastname, ' ', senior_high.firstname)", $data, "both"); 
-
+            senior_high.lastname, 
+            senior_high.firstname,
+            senior_high.middlename,
+            senior_high.suffix, 
+            senior_high.availment, 
+            senior_high.appsy, 
+            senior_high.appyear, 
+            barangay.barangay as address, 
+            senior_high.appsem, 
+            senior_high.appstatus, 
+            senior_high_school.school_name as school_name, 
+            strand.strand as course, 
+            "senior high" AS source  ')
+            ->join('senior_high_school', 'senior_high.school = senior_high_school.id')
+            ->join('barangay', 'senior_high.address = barangay.id')  
+            ->join('strand', 'senior_high.course = strand.id') ;
+        
+        $builder->groupStart()
+            ->like("senior_high.firstname ", $data, "both") 
+            ->orLike("senior_high.lastname ", $data, "both") 
+            ->orLike("senior_high.middlename", $data, "both") 
+            ->orLike("senior_high.suffix", $data, "both")  
+            ->orLike("CONCAT(senior_high.firstname, ' ', senior_high.lastname)", $data, "both") 
+            ->orLike("CONCAT(senior_high.lastname, ' ', senior_high.firstname)", $data, "both")
+        ->groupEnd();
+        
+        
         $builder->union(
             $this->db
                 ->table('college')
-                ->select('
-                    college.id, 
+                ->select(' 
+                    college.id as id, 
                     college.lastname, 
                     college.firstname,
                     college.middlename,
                     college.suffix, 
-                    college.availment,  
-                    college.appsy,  
-                    college.appyear,  
-                    college.address, 
+                    college.availment, 
+                    college.appsy, 
+                    college.appyear, 
+                    barangay.barangay as address, 
                     college.appsem, 
                     college.appstatus, 
-                    college.school,
-                    "college" AS source 
+                    college_school.school_name as school_name, 
+                    course.course as course, 
+                    "college" AS source  
                 ')
-                ->like("college.firstname", $data, "both")
-                ->orLike("college.lastname", $data, "both")
-                ->orLike("college.middlename", $data, "both") 
-                ->orLike("CONCAT(college.firstname, ' ', college.lastname)", $data, "both")
-                ->orLike("CONCAT(college.lastname, ' ', college.firstname)", $data, "both")
+                ->join('college_school', 'college.school = college_school.id')
+                ->join('barangay', 'college.address = barangay.id')  
+                ->join('course', 'college.course = course.id')
+                ->groupStart()
+                    ->like("college.firstname ", $data, "both") 
+                    ->orLike("college.lastname ", $data, "both") 
+                    ->orLike("college.middlename", $data, "both") 
+                    ->orLike("college.suffix", $data, "both")  
+                    ->orLike("CONCAT(college.firstname, ' ', college.lastname)", $data, "both") 
+                    ->orLike("CONCAT(college.lastname, ' ', college.firstname)", $data, "both")
+                ->groupEnd() 
         );
+        
+        
         
         $builder->union(
             $this->db
                 ->table('tvet')
-                ->select('
-                    tvet.id, 
+                ->select(' 
+                    tvet.id as id, 
                     tvet.lastname, 
                     tvet.firstname,
                     tvet.middlename,
                     tvet.suffix, 
-                    tvet.availment,  
-                    tvet.appsy,  
+                    tvet.availment, 
+                    tvet.appsy, 
                     tvet.appyear, 
-                    tvet.address, 
+                    barangay.barangay as address, 
                     tvet.appsem, 
                     tvet.appstatus, 
-                    tvet.school,
-                    "tvet" AS source 
+                    tvet_school.school_name as school_name, 
+                    tvet_course.course as course, 
+                    "tvet" AS source  
                 ')
-                ->like("tvet.firstname", $data, "both")
-                ->orLike("tvet.lastname", $data, "both")
-                ->orLike("tvet.middlename", $data, "both")
-                ->orLike("tvet.suffix", $data, "both") 
-                ->orLike("CONCAT(tvet.firstname, ' ', tvet.lastname)", $data, "both")
-                ->orLike("CONCAT(tvet.lastname, ' ', tvet.firstname)", $data, "both")
-        );
+                ->join('tvet_school', 'tvet.school = tvet_school.id')
+                ->join('barangay', 'tvet.address = barangay.id')  
+                ->join('tvet_course', 'tvet.course = tvet_course.id')
+                ->groupStart()
+                    ->like("tvet.firstname ", $data, "both") 
+                    ->orLike("tvet.lastname ", $data, "both") 
+                    ->orLike("tvet.middlename", $data, "both") 
+                    ->orLike("tvet.suffix", $data, "both")  
+                    ->orLike("CONCAT(tvet.firstname, ' ', tvet.lastname)", $data, "both") 
+                    ->orLike("CONCAT(tvet.lastname, ' ', tvet.firstname)", $data, "both") 
+                ->groupEnd() 
+        ); 
  
         // Get the result
-        $result = $builder->get()->getResult();
-        // $query = $builder->getCompiledSelect();
+        $query = $builder->get()->getResult(); 
 
         // Return the result
-        return $result; 
+        return $query; 
     }
+ 
 
     
     public function shs_autofill($data)

@@ -37,11 +37,11 @@ class SearchApplicationController extends BaseController
             }else if(auth()->user()->scholarship_type == "tvet"){ 
                 $data['result']     = $this->tvet->search_name($search);
             }else { 
-                $data['result']     = $this->search_model->search($search);  
+                $data['result']     = $this->search_model->search_name($search);  
             }
         }   
         $data['for']        = $search;  
-        $data["page_title"] = "Search Result"; 
+        $data["page_title"] = "Search Result";  
         return view('admin/search_result', $data);
     }
 
