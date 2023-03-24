@@ -24,7 +24,7 @@ download it manually
 Then run this command:
 
 $ composer install
-$ npm update
+$ composer update
 
 ```
 
