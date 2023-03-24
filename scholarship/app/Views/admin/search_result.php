@@ -27,11 +27,7 @@
                             </tr>
                         </thead> 
                         <tbody> 
-                            <?php 
-                            $shs_school_model = new \App\Models\SchoolModel(); 
-                            $college_school_model = new \App\Models\CollegeSchoolModel();
-                            $school_name = "";
-
+                            <?php   
                             if(!empty($result)){
                                
                                 foreach($result as $row){
@@ -43,17 +39,8 @@
                                     $year_level = $row->appyear;
                                     $sem        = $row->appsem;
                                     $status     = $row->appstatus;
-                                    $course     = $row->course;
-
-                                    if(strtolower($source) == "senior high"){
-                                        $school = $shs_school_model->find($row->school);
-                                        $school_name = $school['school_name'];
-                                    }
-
-                                    if(strtolower($source) == "college" || strtolower($source) == "tvet" ){
-                                        $school = $college_school_model->find($row->school);
-                                        $school_name = $school['school_name']; 
-                                    }
+                                    $school_name     = $row->school_name;
+                                    $course     = $row->course; 
                             ?>
                                     <tr>
                                         <td><?php echo $name;  ?></td>
