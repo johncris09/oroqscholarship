@@ -13,7 +13,7 @@
                     <h4 class="header-title mb-4"><?= $page_title; ?></h4> 
                     <ul class="nav nav-pills navtab-bg nav-justified">
                         <li class="nav-item">
-                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active ">
+                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link  active">
                                 Senior High School Pending List
                             </a>
                         </li>
@@ -53,7 +53,7 @@
                                         <th>SY</th>    
                                         <th>Name</th>  
                                         <th>Address</th>  
-                                        <th>Strand</th>  
+                                        <th>Course</th>  
                                         <th>School</th>  
                                         <th>Year Level</th>  
                                         <th>Application Status</th>  
@@ -69,7 +69,7 @@
                                         <th>SY</th>  
                                         <th>Name</th>  
                                         <th>Address</th>  
-                                        <th>Strand</th>  
+                                        <th>Course</th>  
                                         <th>School</th>  
                                         <th>Year Level</th>  
                                         <th>Application Status</th>  
@@ -112,7 +112,7 @@
                 "scrollX"  : true, 
                 deferRender: true, 
                 ajax       : {
-                    url   : 'pending/get_shs_pending_list',   
+                    url   : 'archived/get_shs_archived_list',   
                     method: "get", 
                     data  : {
                         view    : "<?php echo isset($_GET['view']) ?  $_GET['view']        : ''?>",
@@ -155,7 +155,7 @@
                 "scrollX"  : true, 
                 deferRender: true, 
                 ajax       : {
-                    url   : 'pending/get_college_pending_list',  
+                    url   : 'archived/get_college_archived_list',  
                     method: "get", 
                     data  : {
                         view    : "<?php echo isset($_GET['view']) ?  $_GET['view']        : ''?>",
@@ -199,7 +199,7 @@
                 "scrollX"  : true, 
                 deferRender: true, 
                 ajax: {
-                    url   : 'pending/get_tvet_pending_list',   
+                    url   : 'archived/get_tvet_archived_list',   
                     method: "get", 
                     data  : {
                         view    : "<?php echo isset($_GET['view']) ?  $_GET['view']        : ''?>",
