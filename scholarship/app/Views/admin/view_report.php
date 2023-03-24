@@ -58,7 +58,7 @@
                                 foreach($result as $row){ 
                                     if(in_array( $scholarship_type  ,['College', 'TVET'])){
                                         $contact    = in_array($row->contact_no, ["-", null, "None", "" ]) ? "": $row->contact_no;
-                                        $name       = ucwords( $row->lastname . ", "  . $row->firstname . " "  . $row->middlename . " " . " "  . $row->suffix) ; 
+                                        $name       = ucwords( $row->lastname . ", "  . $row->firstname . " "  . $row->middlename. " " . " "  . $row->suffix) ; 
                                         $address    = $row->address;
                                         $year_level = $row->appyear;
                                         $school     = $row->school_name;

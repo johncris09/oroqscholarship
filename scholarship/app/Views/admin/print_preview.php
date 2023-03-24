@@ -170,19 +170,19 @@
               </thead>
               <tbody> 
                   <?php
-                      $counter = 1; 
+                      $counter = 1;  
                       foreach($result as $row){ 
                           if(in_array( $scholarship_type  ,['College', 'TVET'])){
                               $contact    = in_array($row->contact_no, ["-", null, "None", "" ]) ? "": $row->contact_no;
-                              $name       = ucwords( $row->lastname . ", "  . $row->firstname . " "  . $row->middlename  . " " . " "  . $row->suffix) ; 
+                              $name       = ucwords( $row->lastname . ", "  . $row->firstname . " "  . (!empty($row->middlename) ? $row->middlename[0]  : "") . ". " . " "  . $row->suffix ); 
                               $address    = $row->address;
-                              $course     = $row->course_name;
+                              $course     = $row->course;
                               $year_level = $row->appyear;
                               $school     = $row->school_name;
                               $availment  = $row->availment;
                           }else{
                               $contact    = in_array($row->contact_no, ["-", null, "None", "" ]) ? ""  : $row->contact_no; 
-                              $name       = ucwords( $row->lastname . ", "  . $row->firstname . " "  . $row->middlename. " " . " "  . $row->suffix ); 
+                              $name       = ucwords( $row->lastname . ", "  . $row->firstname . " "  . (!empty($row->middlename) ? $row->middlename[0]  : "") . ". " . " "  . $row->suffix ); 
                               $address    = $row->address;
                               $course     = $row->strand;
                               $year_level = $row->appyear;
