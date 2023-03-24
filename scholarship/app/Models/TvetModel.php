@@ -299,8 +299,7 @@ class TvetModel extends Model
             ->join('barangay', 'tvet.address = barangay.id') 
             ->join('course', 'tvet.course = course.id')
             ->like('tvet.appstatus', 'approved', "both")
-            ->where('tvet.appstatus !=', 'disapproved')
-            ->where('appmanager', 'Active')
+            ->where('tvet.appstatus !=', 'disapproved') 
             ->where($data); 
         if(in_array( strtolower(auth()->user()->groups[0]), ["user"])){
             if(auth()->user()->scholarship_type == "college"){
@@ -310,8 +309,8 @@ class TvetModel extends Model
         } 
         $query->where('appmanager', 'Active'); 
         $query->orderBy('appnoid', 'asc'); 
-        $result = $query->get()->getResult(); 
-        return $query;
+        $result = $query->get()->getResult();  
+        return $result;
     }  
 
     public function generate(
