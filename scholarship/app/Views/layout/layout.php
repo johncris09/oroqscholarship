@@ -322,6 +322,12 @@ $db = db_connect();
                                             <span> User Logs </span>
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="<?= base_url('backup') ?>"> 
+                                            <i class="mdi mdi-database"></i>
+                                            <span> Databae Back Up</span>
+                                        </a>
+                                    </li>
                             <?php
                                 } 
                             ?> 
@@ -344,15 +350,15 @@ $db = db_connect();
                         </ul>
 
                     </div>
-                    <!-- End Sidebar -->
+                    
 
                     <div class="clearfix"></div>
 
                 </div>
-                <!-- Sidebar -left -->
+                
 
             </div>
-            <!-- Left Sidebar End -->
+            
 
             <!-- ============================================================== -->
             <!-- Start Page Content here -->
@@ -388,25 +394,12 @@ $db = db_connect();
                                                             <form id="advance-filter-form" action="" method="get"> 
                                                                 <div class="modal-body ">
                                                                     <div class="form-group">
-                                                                        <label for="application-year" class="form-label">Application Year</label>
-                                                                        <!-- <select name="app_year" class="form-select" id="application-year"> 
-                                                                            <?php  
-                                                                                foreach(range(date('Y') + 1, $year_started) as $year){ 
-                                                                            ?>
-                                                                                    <option value="<?php echo $year; ?>"><?php echo $year; ?></option>
-                                                                            <?php
-
-                                                                                }
-                                                                            ?> 
-                                                                        </select> -->
+                                                                        <label for="application-year" class="form-label">Application Year</label> 
                                                                         <select class="form-select" name="app_sy" id="application-sy"> 
                                                                             <?php foreach(range(date('Y') + 1, $year_started) as $year):?>  
                                                                                 <option value="SY: <?=  ($year - 1) . "-" .  $year ?>">SY: <?= ($year - 1) . "-" .  $year  ?></option>
                                                                             <?php endforeach; ?>
-                                                                        </select>
-
-                                                                        
-                                                                    
+                                                                        </select> 
                                                                     </div>  
                                                                     <div class="form-group">
                                                                         <label for=" " class="form-label">Semester</label>
@@ -424,24 +417,7 @@ $db = db_connect();
                                                             </form>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <!-- <form id="filter-form" class="validation-form" > 
-                                                    <div class="input-group "> 
-                                                        <select name="sy" class="form-control">
-                                                            <option value="">School Year</option>
-                                                            <?php foreach(range(2017, date('Y')) as $year):?>  
-                                                                <option value="SY: <?= $year . "-" . ($year + 1)?>">SY: <?= $year . "-" . ($year + 1)?></option>
-                                                            <?php endforeach; ?>
-                                                        </select> 
-                                                        <span class="input-group-text"> - </span>
-                                                        <select name="semester" class="form-control">
-                                                            <option value="">Semester</option>
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                        </select>   
-                                                        <button class="btn btn-primary" type="submit" > <i class="mdi mdi-magnify"></i> Filter</button>
-                                                    </div> 
-                                                </form>-->
+                                                </div> 
                                                
                                             </div>
                                     <?php
