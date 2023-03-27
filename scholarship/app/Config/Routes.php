@@ -227,6 +227,14 @@ $routes->group('logs',  ["filter" => ["auth", "usernoaccess", "adminnoaccess"]],
     $routes->get('get_all', 'UserActivityController::get_all',);
 });
 
+$routes->group('backup',  ["filter" => ["auth", "usernoaccess", "adminnoaccess"]],  function ($routes) {
+    $routes->get('/', 'DatabaseBackupController::index');  
+    $routes->get('backup', 'DatabaseBackupController::backup');  
+    $routes->get('files', 'DatabaseBackupController::get_all_files');
+    $routes->get('download/(:any)', 'DatabaseBackupController::download/$1');
+
+    
+});
 
 $routes->group('authlogin', ["filter" => "auth"], function ($routes) {
     $routes->get('/', 'AuthLoginController::index');
