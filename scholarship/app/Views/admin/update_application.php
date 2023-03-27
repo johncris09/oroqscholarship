@@ -180,7 +180,7 @@
                                         <div class="row">
                                             <div class="col"> 
                                                 <label for="birthdate"  class="form-label">Date of Birth <?= $required_field; ?></label>
-                                                <input type="date" value="<?= date("Y-m-d", strtotime($profile['birthdate'])) ?>" class="form-control"   name="birthdate" required >
+                                                <input type="text" value="<?= date("Y-m-d", strtotime($profile['birthdate'])) ?>" class="form-control"   name="birthdate" required >
                                             </div>
                                             <div class="col-2">
                                                 <?php  
@@ -563,7 +563,7 @@
                                         <div class="row">
                                             <div class="col">
                                                 <label for="birthdate"  class="form-label">Date of Birth <?= $required_field; ?></label>
-                                                <input type="date" value="<?= date("Y-m-d", strtotime($profile['birthdate'])) ?>" class="form-control" name="birthdate" required >
+                                                <input type="text" value="<?= date("Y-m-d", strtotime($profile['birthdate'])) ?>" class="form-control" name="birthdate" required >
                                             </div>
                                             <div class="col-2">
                                                 <?php  
@@ -951,7 +951,7 @@
                                         <div class="row">
                                             <div class="col">
                                                 <label for="birthdate"  class="form-label">Date of Birth <?= $required_field; ?></label>
-                                                <input type="date" value="<?= date("Y-m-d", strtotime($profile['birthdate'])) ?>" class="form-control" name="birthdate" required >
+                                                <input type="text" value="<?= date("Y-m-d", strtotime($profile['birthdate'])) ?>" class="form-control" name="birthdate" required >
                                             </div>
                                             <div class="col-2">
                                                 <?php  

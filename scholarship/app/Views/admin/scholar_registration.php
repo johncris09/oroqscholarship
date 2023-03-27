@@ -184,7 +184,7 @@
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <label for="birthdate"  class="form-label">Date of Birth <?= $required_field; ?></label>
-                                                <input type="date" class="form-control"   name="birthdate" required >
+                                                <input type="text" class="form-control"   name="birthdate" required >
                                             </div>
                                             <div class="col-md-3">
                                                 <label for="age" class="form-label">Age <?= $required_field; ?></label>
@@ -513,7 +513,7 @@
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <label for="birthdate"  class="form-label">Date of Birth <?= $required_field; ?></label>
-                                                <input type="date" class="form-control" name="birthdate" required >
+                                                <input type="text" class="form-control" name="birthdate" required >
                                             </div>
                                             <div class="col-md-3">
                                                 <label for="age" class="form-label">Age <?= $required_field; ?></label>
@@ -845,7 +845,7 @@
                                         <div class="row">
                                             <div class="col">
                                                 <label for="birthdate"  class="form-label">Date of Birth <?= $required_field; ?></label>
-                                                <input type="date" class="form-control" name="birthdate" required >
+                                                <input type="text" class="form-control" name="birthdate" required >
                                             </div>
                                             <div class="col-md-2">
                                                 <label for="age" class="form-label">Age <?= $required_field; ?></label>

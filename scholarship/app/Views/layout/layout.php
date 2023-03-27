@@ -32,6 +32,7 @@ $db = db_connect();
 		<link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet"/>
         <link href="https://cdn.jsdelivr.net/gh/loadingio/ldLoader@v1.0.0/dist/ldld.min.css">
         <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css" rel="stylesheet" />
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
         
         <!-- App css -->
         <?= link_tag('public/css/bootstrap.min.css'); ?>
@@ -495,8 +496,13 @@ $db = db_connect();
         <script src="http://malsup.github.io/jquery.blockUI.js"></script>
         <script src="https://cdn.jsdelivr.net/gh/loadingio/ldLoader@v1.0.0/dist/ldld.min.js"></script> 
         <?= script_tag('public/assets/jquery-mask-plugin/jquery.mask.min.js'); ?> 
-        <script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
-                        
+        <script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script> 
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>  
+        <script>
+            $( function() {
+                $( "input[name=birthdate]" ).datepicker();
+            } );
+        </script>
         <?= $this->renderSection('pageScript') ?> 
 
         
