@@ -305,7 +305,7 @@ class ScholarRegistrationController extends BaseController
         
         $config = $this->config_model->asArray()->where('id', 1)->findAll()[0]; 
         $data   = array(
-            "appnoyear" => $this->request->getPost('app_year'),
+            // "appnoyear" => $this->request->getPost('app_year'),
             "appnosem"  => $this->request->getPost('app_sem'),
             "appsy"     => $config['current_sy'],
             "appsem"    => ($this->request->getPost('app_sem') == 1) ? "1st": "2nd",
@@ -320,7 +320,7 @@ class ScholarRegistrationController extends BaseController
     {
         $config = $this->config_model->asArray()->where('id', 1)->findAll()[0]; 
         $data   = array(
-            "appnoyear " => $this->request->getPost('app_year'),
+            // "appnoyear " => $this->request->getPost('app_year'),
             "appnosem"   => $this->request->getPost('app_sem'),
             "appsy"         => $config['current_sy'],
             "appsem"        => ($this->request->getPost('app_sem') == 1) ? "1st": "2nd",
@@ -335,7 +335,7 @@ class ScholarRegistrationController extends BaseController
     {
         $config = $this->config_model->asArray()->where('id', 1)->findAll()[0]; 
         $data   = array(
-            "appnoyear " => $this->request->getPost('app_year'),
+            // "appnoyear " => $this->request->getPost('app_year'),
             "appnosem"   => $this->request->getPost('app_sem'),
             "appsy"         => $config['current_sy'],
             "appsem"        => ($this->request->getPost('app_sem') == 1) ? "1st" : "2nd",
