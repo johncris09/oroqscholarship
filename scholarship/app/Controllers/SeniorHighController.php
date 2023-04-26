@@ -242,7 +242,7 @@ class SeniorHighController extends BaseController
 
 
     public function get_report()
-    { 
+    {  
         $appnoidfrom              = $_POST['appnoidfrom'];
         $appnoidto                = $_POST['appnoidto'];
         $appnoyear                = $_POST['appnoyear'];
@@ -268,6 +268,7 @@ class SeniorHighController extends BaseController
         }
         $data['query_string'] = 'appnoidfrom='.$appnoidfrom.'&appnoidto='.$appnoidto.'&appnoyear='.$appnoyear.'&appnosem='.$appnosem.'&school='.$school.'&status='.$status.'&school_year='.$sy.'&sem='.$sem.'&availment='.$availment.'&gender='.$gender.'&year_level='.$year_level.'&address='.$address;
         $data["result"]       = $res;  
+        $data["column"]       = $_POST['shs_column'];  
         return view('admin/view_report', $data); 
     }
 
@@ -299,6 +300,7 @@ class SeniorHighController extends BaseController
             $res = $this->senior_high->between($appnoidfrom, $appnoidto, $appnoyear, $appnosem,  $school, $status, $sy, $sem, $availment, $gender, $year_level, $address );
         }
         $data["result"] = $res;  
+        $data['column'] = explode(', ', $_GET['column']); 
         return view('admin/print_preview', $data);  
     }
 

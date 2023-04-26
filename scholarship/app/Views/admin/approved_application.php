@@ -281,7 +281,7 @@
                 "order": [[ 0, "desc" ]],
                 ajax       : {
                     url   : 'approved/get_tvet_approved_list',    
-                    method: "get", 
+                    method: "get",  
                     data  : {
                         view   : "<?php echo isset($_GET['view']) ?  $_GET['view']      : ''?>",
                         app_sem: "<?php echo isset($_GET['app_sem']) ?  $_GET['app_sem']: ''?>",

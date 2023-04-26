@@ -105,12 +105,12 @@
 
                     <ul class="nav nav-pills navtab-bg nav-justified">
                         <li class="nav-item">
-                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link active">
+                            <a href="#senior-high-tab" data-bs-toggle="tab" aria-expanded="true" class="nav-link ">
                                 Senior High School
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#college-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link   ">
+                            <a href="#college-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link active  ">
                                 College
                             </a>
                         </li>
@@ -121,8 +121,8 @@
                         </li>
                     </ul>
                     <div class="tab-content"> 
-                        <div class="tab-pane active" id="senior-high-tab">  
-                            <form  action="generate_report/shs_report" method="post">
+                        <div class="tab-pane " id="senior-high-tab">  
+                            <form  action="generate_report/shs_report" method="post" target="_blank">
                                 <div class="row justify-content-center">
                                     <div class="col-md-9">  
                                         <label for="school" class="form-label">School</label>
@@ -227,6 +227,61 @@
                                         <input type="number" class="form-control" id="to" name="appnoidto" >
                                     </div>   
                                 </div>   
+                                <hr>
+                                <div class="row justify-content-center">
+                                    <div class="col-md-9"> 
+                                        <h4>Select column to display</h4>
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="shs_column[]" type="checkbox" value="no" id="shs-column-no" checked>
+                                            <label class="form-check-label" for="shs-column-no">
+                                                No.
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="shs_column[]" type="checkbox" value="name" id="shs-column-name" checked>
+                                            <label class="form-check-label" for="shs-column-name">
+                                                Name
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="shs_column[]" type="checkbox" value="address" id="shs-column-address" checked>
+                                            <label class="form-check-label" for="shs-column-address">
+                                                Address
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="shs_column[]" type="checkbox" value="strand" id="shs-column-strand" checked>
+                                            <label class="form-check-label" for="shs-column-strand">
+                                                Strand
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="shs_column[]" type="checkbox" value="year_level" id="shs-column-yearlevel" checked>
+                                            <label class="form-check-label" for="shs-column-yearlevel">
+                                                Year Level
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="shs_column[]" type="checkbox" value="school" id="shs-column-school" checked>
+                                            <label class="form-check-label" for="shs-column-school">
+                                                School
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="shs_column[]" type="checkbox" value="contact_number" id="shs-column-contactnumber" checked>
+                                            <label class="form-check-label" for="shs-column-contactnumber">
+                                                Contact Number
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="shs_column[]" type="checkbox" value="availment" id="shs-column-availment" checked>
+                                            <label class="form-check-label" for="shs-column-availment">
+                                                Availment
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>   
+                                
                                 <div class="row justify-content-center">
                                     <div class="col-1 mt-2">
                                         <button type="submit" class="btn btn-primary  ">Generate</button> 
@@ -234,7 +289,7 @@
                                 </div>  
                             </form>
                         </div>
-                        <div class="tab-pane   " id="college-tab">   
+                        <div class="tab-pane  active " id="college-tab">   
                             <form  action="generate_report/college_report" method="post">
                                 <div class="row justify-content-center">
                                     <div class="col-md-9">  
@@ -340,6 +395,61 @@
                                         <input type="number" class="form-control" id="to" name="appnoidto" >
                                     </div>  
                                 </div>  
+                                  
+                                <hr>
+                                <div class="row justify-content-center">
+                                    <div class="col-md-9"> 
+                                        <h4>Select column to display</h4>
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="college_column[]" type="checkbox" value="no" id="college-column-no" checked>
+                                            <label class="form-check-label" for="college-column-no">
+                                                No.
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="college_column[]" type="checkbox" value="name" id="college-column-name" checked>
+                                            <label class="form-check-label" for="college-column-name">
+                                                Name
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="college_column[]" type="checkbox" value="address" id="college-column-address" checked>
+                                            <label class="form-check-label" for="college-column-address">
+                                                Address
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="college_column[]" type="checkbox" value="strand" id="college-column-strand" checked>
+                                            <label class="form-check-label" for="college-column-strand">
+                                                Strand
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="college_column[]" type="checkbox" value="year_level" id="college-column-yearlevel" checked>
+                                            <label class="form-check-label" for="college-column-yearlevel">
+                                                Year Level
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="college_column[]" type="checkbox" value="school" id="college-column-school" checked>
+                                            <label class="form-check-label" for="college-column-school">
+                                                School
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="college_column[]" type="checkbox" value="contact_number" id="college-column-contactnumber" checked>
+                                            <label class="form-check-label" for="college-column-contactnumber">
+                                                Contact Number
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="college_column[]" type="checkbox" value="availment" id="college-column-availment" checked>
+                                            <label class="form-check-label" for="college-column-availment">
+                                                Availment
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>   
                                 <div class="row justify-content-center">
                                     <div class="col-1 mt-2">
                                         <button type="submit" class="btn btn-primary  ">Generate</button> 
@@ -453,14 +563,66 @@
                                         <input type="number" class="form-control" id="to" name="appnoidto" >
                                     </div>  
                                 </div>   
+                                
+                                <div class="row justify-content-center">
+                                    <div class="col-md-9"> 
+                                        <h4>Select column to display</h4>
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="tvet_column[]" type="checkbox" value="no" id="tvet-column-no" checked>
+                                            <label class="form-check-label" for="tvet-column-no">
+                                                No.
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="tvet_column[]" type="checkbox" value="name" id="tvet-column-name" checked>
+                                            <label class="form-check-label" for="tvet-column-name">
+                                                Name
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="tvet_column[]" type="checkbox" value="address" id="tvet-column-address" checked>
+                                            <label class="form-check-label" for="tvet-column-address">
+                                                Address
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="tvet_column[]" type="checkbox" value="strand" id="tvet-column-strand" checked>
+                                            <label class="form-check-label" for="tvet-column-strand">
+                                                Strand
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="tvet_column[]" type="checkbox" value="year_level" id="tvet-column-yearlevel" checked>
+                                            <label class="form-check-label" for="tvet-column-yearlevel">
+                                                Year Level
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="tvet_column[]" type="checkbox" value="school" id="tvet-column-school" checked>
+                                            <label class="form-check-label" for="tvet-column-school">
+                                                School
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="tvet_column[]" type="checkbox" value="contact_number" id="tvet-column-contactnumber" checked>
+                                            <label class="form-check-label" for="tvet-column-contactnumber">
+                                                Contact Number
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="tvet_column[]" type="checkbox" value="availment" id="tvet-column-availment" checked>
+                                            <label class="form-check-label" for="tvet-column-availment">
+                                                Availment
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div> 
                                 <div class="row justify-content-center">
                                     <div class="col-1 mt-2">
                                         <button type="submit" class="btn btn-primary  ">Generate</button> 
                                     </div>  
                                 </div>  
-                            </form>
-                             
-
+                            </form>  
                         </div>
                     </div>
                 </div>

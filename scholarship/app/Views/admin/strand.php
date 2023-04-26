@@ -22,8 +22,7 @@
                                 <th>Manager</th>
                             </tr>
                         </thead> 
-                    </table>
-                    
+                    </table> 
                 </div> <!-- end card body-->
             </div> <!-- end card -->
         </div><!-- end col-->

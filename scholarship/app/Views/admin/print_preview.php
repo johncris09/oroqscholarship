@@ -138,8 +138,7 @@
       <span>Printed on: <?= date('F j, Y') ?></span>
     </p> 
 
-  </div>
-
+  </div> 
   <table>
 
     <thead>
@@ -153,19 +152,27 @@
 
     <tbody>
       <tr>
-        <td> 
+        <td>  
           <div class="page" style="line-height: 3; ">
             <table class="table" id="report" style="width: 100%;">
               <thead >
-                  <tr class="text-nowrap">
-                      <th>No.</th>
-                      <th>Name</th>
-                      <th>Address</th>
-                      <th><?= in_array( $scholarship_type  ,['College', 'TVET']) ? "Course" :  "Strand" ?></th>
-                      <th>Year Level</th>
-                      <th>School</th>
-                      <th>Contact No.</th>
-                      <th>Availment</th>
+                  <tr class="text-nowrap"> 
+                      <?php echo in_array("no", $column) ? "<th>No.</th>"  : ""  ?>
+                      <?php echo in_array("name", $column) ? "<th>Name</th>"  : ""  ?>
+                      <?php echo in_array("address", $column) ? "<th>Address</th>"  : ""  ?> 
+                      <?php 
+                          if(in_array('strand', $column)){ 
+                              if(in_array( $scholarship_type  ,['College', 'TVET'])){
+                                  echo  "<th>Course</th>" ;
+                              }else{ 
+                                  echo  "<th>Strand</th>" ;
+                              }
+                          }
+                      ?>
+                      <?php echo in_array("year_level", $column) ? "<th>Year Level</th>"  : ""  ?>
+                      <?php echo in_array("school", $column) ? "<th>School</th>"  : ""  ?> 
+                      <?php echo in_array("contact_number", $column) ? "<th>Contact No.</th>"  : ""  ?>  
+                      <?php echo in_array("availment", $column) ? "<th>Availment</th>"  : ""  ?> 
                   </tr>
               </thead>
               <tbody> 
@@ -192,17 +199,16 @@
                           
                   ?>
                       <tr> 
-                          <tr >
-                              <td><?= $counter++; ?></td>
-                              <td><?= $name ?></td> 
-                              <td><?= $address ?></td> 
-                              <td><?= $course ?></td> 
-                              <td><?= $year_level ?></td> 
-                              <td><?= $school ?></td> 
-                              <td><?= $contact ?></td> 
-                              <td><?= $availment ?></td> 
-                          </tr>
-                          
+                        <tr> 
+                            <?php echo in_array("no", $column) ? "<td>".$counter++."</td>"  : ""  ?>
+                            <?php echo in_array("name", $column) ? "<td>".$name."</td>"  : ""  ?> 
+                            <?php echo in_array("address", $column) ? "<td>".$address."</td>"  : ""  ?>  
+                            <?php echo in_array("strand", $column) ? "<td>".$course."</td>"  : ""  ?>  
+                            <?php echo in_array("year_level", $column) ? "<td>".$year_level."</td>"  : ""  ?> 
+                            <?php echo in_array("school", $column) ? "<td>".$school."</td>"  : ""  ?> 
+                            <?php echo in_array("contact_number", $column) ? "<td>".$contact."</td>"  : ""  ?> 
+                            <?php echo in_array("availment", $column) ? "<td>".$availment."</td>"  : ""  ?>  
+                        </tr> 
                       </tr>
                       
                   <?php   } ?> 
