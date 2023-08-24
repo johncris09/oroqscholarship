@@ -8,6 +8,7 @@ use App\Models\SearchApplicationModel;
 use App\Models\SeniorHighModel;
 use App\Models\TvetModel;
 
+#[\AllowDynamicProperties]
 class SearchApplicationController extends BaseController
 {
 

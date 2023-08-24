@@ -8,6 +8,7 @@ use App\Models\TvetModel;
 use Config\Custom_config;
 use App\Models\UserActivityModel;
 
+#[\AllowDynamicProperties]
 class TvetController extends BaseController
 {
 
@@ -357,6 +358,12 @@ class TvetController extends BaseController
     public function bulk_disapproved()
     {  
         $res = $this->tvet->bulk_disapproved($_POST['applicant_id']);
+        echo Json_encode($res);
+    }
+
+    public function bulk_approved()
+    {  
+        $res = $this->tvet->bulk_approved($_POST['status'], $_POST['applicant_id']);
         echo Json_encode($res);
     }
 }

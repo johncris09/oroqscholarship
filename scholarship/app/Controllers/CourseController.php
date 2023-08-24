@@ -7,6 +7,7 @@ use App\Models\CourseModel;
 use Config\Custom_config;
 use App\Models\UserActivityModel;
 
+#[\AllowDynamicProperties]
 class CourseController extends BaseController
 {
 

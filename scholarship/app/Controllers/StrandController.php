@@ -7,6 +7,7 @@ use App\Models\StrandModel;
 use App\Models\UserActivityModel;
 use Config\Custom_config;
 
+#[\AllowDynamicProperties]
 class StrandController extends BaseController
 {
 

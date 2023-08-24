@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\UserActivityModel;
 
+#[\AllowDynamicProperties]
 class UserActivityController extends BaseController
 {
     public function index()

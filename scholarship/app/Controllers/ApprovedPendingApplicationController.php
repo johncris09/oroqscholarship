@@ -7,6 +7,7 @@ use App\Models\CollegeModel;
 use App\Models\SeniorHighModel; 
 use App\Models\TvetModel;
 use Config\Custom_config;
+#[\AllowDynamicProperties]
 
 class ApprovedPendingApplicationController extends BaseController
 {

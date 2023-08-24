@@ -8,6 +8,7 @@ use App\Models\CollegeModel;
 use Config\Custom_config;
 use App\Models\UserActivityModel;
 
+#[\AllowDynamicProperties]
 class CollegeController extends BaseController
 {
 
@@ -353,6 +354,12 @@ class CollegeController extends BaseController
     public function bulk_disapproved()
     {  
         $res = $this->college->bulk_disapproved($_POST['applicant_id']);
+        echo Json_encode($res);
+    }
+
+    public function bulk_approved()
+    {  
+        $res = $this->college->bulk_approved($_POST['status'], $_POST['applicant_id']);
         echo Json_encode($res);
     }
 

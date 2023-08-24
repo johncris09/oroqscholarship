@@ -7,6 +7,7 @@ use App\Models\TvetCourseModel;
 use Config\Custom_config;
 use App\Models\UserActivityModel;
 
+#[\AllowDynamicProperties]
 class TvetCourseController extends BaseController
 {
 

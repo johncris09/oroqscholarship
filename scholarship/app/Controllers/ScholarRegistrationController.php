@@ -18,6 +18,7 @@ use App\Models\SearchApplicationModel;
 use App\Models\TvetCourseModel;
 use App\Models\UserActivityModel;
 
+#[\AllowDynamicProperties]
 class ScholarRegistrationController extends BaseController
 {
 

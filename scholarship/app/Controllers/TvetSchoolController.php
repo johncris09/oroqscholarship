@@ -7,6 +7,7 @@ use App\Models\TvetSchoolModel;
 use App\Models\UserActivityModel;
 use PHPUnit\Util\Json;
 
+#[\AllowDynamicProperties]
 class TvetSchoolController extends BaseController
 {
 

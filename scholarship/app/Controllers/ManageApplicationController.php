@@ -15,6 +15,7 @@ use App\Models\TvetCourseModel;
 use App\Models\TvetModel;
 use Config\Custom_config;
 
+#[\AllowDynamicProperties]
 class ManageApplicationController extends BaseController
 {
 

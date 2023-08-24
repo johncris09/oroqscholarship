@@ -14,6 +14,7 @@ use App\Models\TvetCourseModel;
 use App\Models\TvetModel;
 use Config\Custom_config;
 
+#[\AllowDynamicProperties]
 class GenerateReportController extends BaseController
 {
     public function __construct()

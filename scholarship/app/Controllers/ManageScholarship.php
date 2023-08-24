@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\ConfigModel;
 use Config\Custom_config;
 
+#[\AllowDynamicProperties]
 class ManageScholarship extends BaseController
 {
     public function __construct()

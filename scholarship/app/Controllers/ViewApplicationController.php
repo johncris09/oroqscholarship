@@ -12,6 +12,7 @@ use App\Models\StrandModel;
 use App\Models\TvetModel;
 use Config\Custom_config;
 
+#[\AllowDynamicProperties]
 class ViewApplicationController extends BaseController
 {
     public function __construct()

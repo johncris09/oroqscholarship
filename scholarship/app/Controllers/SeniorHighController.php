@@ -8,6 +8,7 @@ use App\Models\SeniorHighModel;
 use Config\Custom_config;
 use App\Models\UserActivityModel;
 
+#[\AllowDynamicProperties]
 class SeniorHighController extends BaseController
 {
 
@@ -354,6 +355,12 @@ class SeniorHighController extends BaseController
     public function bulk_disapproved()
     {  
         $res = $this->senior_high->bulk_disapproved($_POST['applicant_id']);
+        echo Json_encode($res);
+    }
+
+    public function bulk_approved()
+    {  
+        $res = $this->senior_high->bulk_approved($_POST['status'], $_POST['applicant_id']);
         echo Json_encode($res);
     }
 }

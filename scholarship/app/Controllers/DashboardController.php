@@ -8,7 +8,7 @@ use App\Models\CollegeModel;
 use App\Models\SeniorHighModel;
 use App\Models\TvetModel;
 use App\Models\ConfigModel;
-
+#[\AllowDynamicProperties]
 class DashboardController extends BaseController
 {
 

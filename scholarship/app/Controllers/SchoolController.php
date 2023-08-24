@@ -7,6 +7,7 @@ use App\Models\SchoolModel;
 use App\Models\UserActivityModel;
 use PHPUnit\Util\Json;
 
+#[\AllowDynamicProperties]
 class SchoolController extends BaseController
 {
 

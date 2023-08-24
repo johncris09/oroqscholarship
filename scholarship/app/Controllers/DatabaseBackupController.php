@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use PHPUnit\Util\Filesystem;
 
+#[\AllowDynamicProperties]
 class DatabaseBackupController extends BaseController
 { 
     public function index()

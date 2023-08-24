@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\CollegeModel;
 use App\Models\SeniorHighModel;
 use App\Models\TvetModel;
+#[\AllowDynamicProperties]
 
 class ApprovedApplicationController extends BaseController
 {

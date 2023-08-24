@@ -12,6 +12,7 @@ use Config\Custom_config;
 use App\Models\CollegeSchoolModel;
 use App\Models\UserActivityModel;
 
+#[\AllowDynamicProperties]
 class UserController extends BaseController
 {
     public function index()
