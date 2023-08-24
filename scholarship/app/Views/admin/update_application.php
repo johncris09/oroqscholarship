@@ -361,7 +361,7 @@
                                             <option value="">Select</option> 
                                             <?php 
                                                 foreach($strand as $row){  
-                                                    if($row['id'] == $profile['course_id']){
+                                                    if($row['id'] == $profile['course']){
                                                         $selected  = "selected";
                                                     }else{ 
                                                         $selected  = "";
@@ -439,14 +439,14 @@
                                             <option value="">Select</option> 
                                             <?php foreach(range(date('Y') + 1, $year_started) as $year):?>  
                                                 <?Php 
-                                                    $sy   ="SY: " . $year . "-" . ($year + 1);
+                                                    $sy = "SY: " . $year-1 . "-" . ($year);
                                                     if($sy  == $profile['appsy']){
                                                         $selected  = "selected";
                                                     }else{ 
                                                         $selected  = "";
                                                     }
                                                 ?>
-                                                <option <?= $selected ?> value="SY: <?=  ($year - 1) . "-" .  $year ?>">SY: <?= ($year - 1) . "-" .  $year  ?></option>
+                                                <option <?= $selected ?> value="<?=  $sy ?>"><?=  $sy ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>  
@@ -819,20 +819,20 @@
                                         <input type="number" value="<?= $profile['unit'] ?>" class="form-control" name="units" required>
                                     </div> 
                                     <div class="col">
-                                        <label for="school_year" class="form-label">SY <?= $required_field; ?></label> 
+                                        <label for="school_year" class="form-label">SY <?= $profile['appsy']; ?> <?= $required_field; ?></label> 
                                         <select class="form-control"   name="school_year"  required>
                                             
                                             <option value="">Select</option> 
                                             <?php foreach(range(date('Y') + 1, $year_started) as $year):?>  
                                                 <?Php 
-                                                    $sy   ="SY: " . $year . "-" . ($year + 1);
+                                                    $sy = "SY: " . $year-1 . "-" . ($year);
                                                     if($sy  == $profile['appsy']){
                                                         $selected  = "selected";
                                                     }else{ 
                                                         $selected  = "";
                                                     }
                                                 ?>
-                                                <option <?= $selected ?> value="SY: <?=  ($year - 1) . "-" .  $year ?>">SY: <?= ($year - 1) . "-" .  $year  ?></option>
+                                                <option <?= $selected ?> value="<?=  $sy ?>"><?=  $sy ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div> 
@@ -1213,14 +1213,14 @@
                                             <option value="">Select</option> 
                                             <?php foreach(range(date('Y') + 1, $year_started) as $year):?>  
                                                 <?Php 
-                                                    $sy   ="SY: " . $year . "-" . ($year + 1);
+                                                    $sy = "SY: " . $year-1 . "-" . ($year);
                                                     if($sy  == $profile['appsy']){
                                                         $selected  = "selected";
                                                     }else{ 
                                                         $selected  = "";
                                                     }
                                                 ?>
-                                                <option <?= $selected ?> value="SY: <?=  ($year - 1) . "-" .  $year ?>">SY: <?= ($year - 1) . "-" .  $year  ?></option>
+                                                <option <?= $selected ?> value="<?=  $sy ?>"><?=  $sy ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div> 
