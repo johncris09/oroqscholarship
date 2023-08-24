@@ -787,6 +787,16 @@ class TvetModel extends Model
     }
 
     
+
+    public function bulk_approved($status, $application_id)
+    { 
+        $query = $this->db
+            ->table($this->table)
+            ->set('appstatus', $status)
+            ->whereIn('id', $application_id)
+            ->update();
+        return $query;
+    }
     
     public function search_name($data)
     {  
